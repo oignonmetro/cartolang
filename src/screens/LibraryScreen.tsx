@@ -300,14 +300,10 @@ function UnitCard({
           color={tone.css}
         />
         <span className="flex-1">
-          <span className="flex items-center gap-2">
-            <span className="text-base leading-tight font-extrabold">{unit.title}</span>
-            {unit.level && (
-              <span className={`rounded-full ${tone.soft} px-2 py-0.5 text-[0.6rem] font-black ${tone.text}`}>
-                {unit.level}
-              </span>
-            )}
-          </span>
+          {/* `unit.level` (B2.1/B2.2) reste dans les données mais n'est plus
+              affiché : c'était une convention maison, pas une échelle
+              officielle, et son badge prêtait à confusion avec le CECRL. */}
+          <span className="text-base leading-tight font-extrabold">{unit.title}</span>
           {unit.subtitle && <span className="mt-0.5 block text-xs text-ink-soft">{unit.subtitle}</span>}
           <span className="mt-0.5 block text-xs text-ink-faint">
             {unit.lessons.length} leçons · {countLabel(unit.kind, mastery.total)}
