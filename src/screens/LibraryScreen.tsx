@@ -229,7 +229,10 @@ function TrackSummary({
   onReview: () => void
 }) {
   return (
-    <section className="card-3d flex flex-col gap-3 px-5 py-4">
+    // Pas de `card-3d` ici : ce bloc n'est pas cliquable, et lui donner la
+    // même carte blanche à ombre que les unités en dessous laissait croire
+    // le contraire. Le fond teinté signale un panneau d'ensemble, pas une ligne.
+    <section className={`flex flex-col gap-3 rounded-2xl ${tone.soft} px-5 py-4`}>
       <div className="flex items-start gap-4">
         <ProgressRing
           ratio={total === 0 ? 0 : known / total}
@@ -238,6 +241,7 @@ function TrackSummary({
           color={tone.css}
         />
         <div className="flex-1">
+          <p className={`text-[0.65rem] font-black uppercase tracking-wide ${tone.text}`}>Vue d'ensemble</p>
           <h2 className="text-base leading-tight font-extrabold">{track.title}</h2>
           <p className="text-xs text-ink-soft">{masteredLabel(track.kind, known, total)}</p>
           {track.subtitle && <p className="mt-0.5 text-xs text-ink-faint">{track.subtitle}</p>}
@@ -245,10 +249,12 @@ function TrackSummary({
       </div>
 
       {due > 0 && (
+        // Fond blanc, pas `tone.soft` : le panneau parent est maintenant teinté,
+        // et un bouton de la même teinte s'y fondrait au lieu de ressortir.
         <button
           type="button"
           onClick={onReview}
-          className={`flex items-center gap-2 rounded-2xl border-2 ${tone.border} ${tone.soft} px-4 py-2.5 text-left`}
+          className={`flex items-center gap-2 rounded-2xl border-2 ${tone.border} bg-paper px-4 py-2.5 text-left shadow-sm`}
         >
           <StarIcon filled size={18} className={tone.text} />
           <span className="flex-1 text-sm font-extrabold">
