@@ -4,9 +4,11 @@ Application mobile d'apprentissage des langues, hors-ligne, en français.
 Des flashcards, des exercices d'application, et une révision espacée qui fait
 revenir au bon moment ce qui est fragile.
 
-Cours actif : **anglais B2 pour francophones**, de B2 débutant à B2 confirmé —
-188 éléments répartis en trois pistes (vocabulaire, grammaire, conjugaison)
-que l'apprenant parcourt librement.
+Trois niveaux d'anglais pour francophones, choisis depuis un sélecteur en
+un clic (le badge drapeau + niveau en haut de l'écran) : **B1** et **C1** en
+squelette (prêts à recevoir du contenu), **B2** pleinement écrit — 188
+éléments répartis en trois pistes (vocabulaire, grammaire, conjugaison) que
+l'apprenant parcourt librement, dans l'ordre qu'il veut.
 
 Le moteur est générique : un cours n'est qu'un jeu de fichiers YAML.
 
@@ -14,7 +16,7 @@ Le moteur est générique : un cours n'est qu'un jeu de fichiers YAML.
 
 | | |
 |---|---|
-| Cours | anglais B2 (`fr-en-b2`) ; le cours grand débutant `fr-en` est archivé |
+| Cours | B1, B2, C1 (`fr-en-b1/b2/c1`) ; B2 par défaut, seul rempli pour l'instant. Le cours grand débutant `fr-en` est archivé |
 | Agencements | `library` — pistes en onglets, accès libre ; `path` — parcours guidé |
 | Vocabulaire | flashcard auto-évaluée, association de paires, phrase à trou, saisie clavier |
 | Grammaire | rappel de cours, phrase à trou avec banque de formes puis au clavier |

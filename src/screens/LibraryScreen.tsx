@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
 import type { LibraryCourse, Track, Unit } from '@/content/schema'
@@ -14,7 +14,10 @@ import {
 } from '@/engine/progress'
 import { dueCards } from '@/engine/srs'
 import { useProgress } from '@/store/progressStore'
+import { useCourse } from '@/content/CourseProvider'
+import { availableCourses } from '@/content/loader'
 import { ProgressRing } from '@/components/ProgressRing'
+import { CoursePicker } from '@/components/CoursePicker'
 import { BoltIcon, ChevronLeftIcon, FlameIcon, StarIcon, UnitIcon } from '@/components/icons'
 
 /**
@@ -72,6 +75,7 @@ const TRACK_TONES: Record<string, { text: string; bg: string; soft: string; bord
 
 export function LibraryScreen({ course }: { course: LibraryCourse }) {
   const navigate = useNavigate()
+  const { manifest, switchCourse } = useCourse()
   const lessons = useProgress((state) => state.lessons)
   const cards = useProgress((state) => state.cards)
   const xp = useProgress((state) => state.xp)
@@ -79,6 +83,16 @@ export function LibraryScreen({ course }: { course: LibraryCourse }) {
 
   const [activeTrackId, setActiveTrackId] = useState(course.tracks[0]!.id)
   const [openUnitId, setOpenUnitId] = useState<string | null>(null)
+  const [pickerOpen, setPickerOpen] = useState(false)
+  const pickableCourses = useMemo(() => availableCourses(manifest), [manifest])
+
+  // `course` change de référence quand on bascule de niveau : l'onglet et
+  // l'accordéon ouverts se réinitialisent plutôt que de garder l'état
+  // (potentiellement incohérent) du cours précédent.
+  useEffect(() => {
+    setActiveTrackId(course.tracks[0]!.id)
+    setOpenUnitId(null)
+  }, [course.id])
 
   const track = course.tracks.find((candidate) => candidate.id === activeTrackId) ?? course.tracks[0]!
   const tone = TRACK_TONES[track.color] ?? TRACK_TONES.teal
@@ -103,8 +117,13 @@ export function LibraryScreen({ course }: { course: LibraryCourse }) {
     <div className="mx-auto flex min-h-dvh w-full max-w-md flex-col">
       <header className="sticky top-0 z-20 border-b-2 border-line bg-cream/95 backdrop-blur">
         <div className="flex items-center justify-between gap-3 px-4 py-3">
-          <div className="flex items-center gap-2">
-            <span className="text-2xl" aria-label={course.name}>
+          <button
+            type="button"
+            onClick={() => setPickerOpen(true)}
+            aria-label={`${course.name} — changer de niveau`}
+            className="flex items-center gap-2 rounded-full py-1 pr-2 pl-1 transition-colors hover:bg-ink/5 active:bg-ink/10"
+          >
+            <span className="text-2xl" aria-hidden>
               {course.flag}
             </span>
             {course.level && (
@@ -112,7 +131,8 @@ export function LibraryScreen({ course }: { course: LibraryCourse }) {
                 {course.level}
               </span>
             )}
-          </div>
+            <ChevronLeftIcon size={14} className="-rotate-90 text-ink-faint" />
+          </button>
           <div className="flex items-center gap-4 text-sm font-extrabold">
             <span className="flex items-center gap-1 text-coral">
               <FlameIcon size={20} /> {currentStreak}
@@ -147,20 +167,35 @@ export function LibraryScreen({ course }: { course: LibraryCourse }) {
           onReview={() => navigate(`/revision?piste=${track.id}`)}
         />
 
-        {track.units.map((unit) => (
-          <UnitCard
-            key={unit.id}
-            unit={unit}
-            tone={tone}
-            open={openUnitId === unit.id}
-            onToggle={() => setOpenUnitId((current) => (current === unit.id ? null : unit.id))}
-            mastery={unitMastery(unit, cards)}
-            lessonLevel={(lessonId) => lessons[lessonId]?.level ?? 0}
-            lessonMastery={(lesson) => lessonMastery(lesson, cards)}
-            onOpenLesson={(lessonId) => navigate(`/lecon/${lessonId}`)}
-          />
-        ))}
+        {track.units.length === 0 ? (
+          <EmptyTrack tone={tone} />
+        ) : (
+          track.units.map((unit) => (
+            <UnitCard
+              key={unit.id}
+              unit={unit}
+              tone={tone}
+              open={openUnitId === unit.id}
+              onToggle={() => setOpenUnitId((current) => (current === unit.id ? null : unit.id))}
+              mastery={unitMastery(unit, cards)}
+              lessonLevel={(lessonId) => lessons[lessonId]?.level ?? 0}
+              lessonMastery={(lesson) => lessonMastery(lesson, cards)}
+              onOpenLesson={(lessonId) => navigate(`/lecon/${lessonId}`)}
+            />
+          ))
+        )}
       </main>
+
+      <AnimatePresence>
+        {pickerOpen && (
+          <CoursePicker
+            courses={pickableCourses}
+            activeId={course.id}
+            onSelect={switchCourse}
+            onClose={() => setPickerOpen(false)}
+          />
+        )}
+      </AnimatePresence>
     </div>
   )
 }
@@ -208,6 +243,23 @@ function TrackTabs({
         )
       })}
     </div>
+  )
+}
+
+/** Piste sans la moindre unité : le niveau existe, son contenu arrive encore. */
+function EmptyTrack({ tone }: { tone: (typeof TRACK_TONES)[string] }) {
+  return (
+    <section
+      className={`flex flex-col items-center gap-3 rounded-2xl border-2 border-dashed ${tone.border} px-6 py-10 text-center`}
+    >
+      <span className={`flex h-12 w-12 items-center justify-center rounded-full ${tone.soft} ${tone.text}`}>
+        <UnitIcon name="clock" size={24} />
+      </span>
+      <p className="text-sm font-extrabold text-ink">Cette piste est en préparation</p>
+      <p className="max-w-xs text-xs text-ink-soft">
+        Les premières leçons arrivent bientôt. En attendant, une autre piste ou un autre niveau vous attend.
+      </p>
+    </section>
   )
 }
 

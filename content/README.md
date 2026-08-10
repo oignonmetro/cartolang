@@ -138,12 +138,29 @@ lessons: …
 Une unité oubliée dans `course.yaml`, ou référencée sans fichier, fait échouer
 la validation : le contenu ne peut pas contenir de trou.
 
+## Publier le squelette d'un niveau avant son contenu
+
+Une piste (`kind: library`) peut avoir `units: []` — aucune unité. L'écran
+affiche alors un état « à venir » pour cette piste plutôt qu'une page vide qui
+ressemblerait à un bug. C'est ainsi que les niveaux B1 et C1 existent déjà
+dans le sélecteur, prêts à être remplis leçon par leçon plus tard sans qu'il y
+ait de nouvel écran à construire.
+
+## Le cours proposé par défaut
+
+Un seul cours devrait porter `default: true` dans son `course.yaml` : c'est
+celui que l'app ouvre tant que l'apprenant n'a rien choisi lui-même via le
+sélecteur de niveau (le badge drapeau + niveau, en haut de l'écran). Sans ce
+marqueur explicite, le premier cours par ordre alphabétique de dossier ferait
+office de défaut — ce qui a réellement affiché un niveau vide en premier avant
+que ce champ n'existe. Aujourd'hui c'est `fr-en-b2` qui le porte.
+
 ## Archiver un cours
 
 `status: archived` dans `course.yaml` retire le cours de la sélection sans rien
 supprimer : le contenu reste versionné et validé par la CI, et il suffit de
 repasser le champ à `available` pour le remettre en service. Un apprenant qui
-avait ce cours sélectionné bascule automatiquement sur un cours disponible.
+avait ce cours sélectionné bascule automatiquement sur le cours par défaut.
 
 La compilation échoue si **tous** les cours sont archivés.
 

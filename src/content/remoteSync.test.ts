@@ -39,6 +39,7 @@ function manifestWith(version: number): Manifest {
         flag: '🇬🇧',
         layout: 'library',
         status: 'available',
+        default: false,
         version,
         file: 'fr-en-b2.json',
         itemCount: 1,
@@ -56,6 +57,7 @@ function courseWith(version: number): Course {
     known: 'fr',
     flag: '🇬🇧',
     status: 'available',
+    default: false,
     version,
     layout: 'library',
     tracks: [
@@ -163,6 +165,7 @@ describe('synchronisation du contenu distant', () => {
           flag: '🇩🇪',
           layout: 'library',
           status: 'available',
+          default: false,
           version: 2,
           file: 'autre-cours.json',
           itemCount: 1,

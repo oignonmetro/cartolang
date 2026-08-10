@@ -142,7 +142,13 @@ export const unitSchema = z.object({
   lessons: z.array(lessonSchema).min(1),
 })
 
-/** Une piste de l'agencement `library` : un onglet de l'écran d'accueil. */
+/**
+ * Une piste de l'agencement `library` : un onglet de l'écran d'accueil.
+ *
+ * `units` peut être vide : c'est ce qui permet de publier le squelette d'un
+ * niveau (ses trois pistes, ses couleurs) avant d'y avoir écrit la moindre
+ * leçon. L'écran affiche alors un état « à venir » pour cette piste.
+ */
 export const trackSchema = z.object({
   id: slug,
   title: z.string().min(1),
@@ -150,7 +156,7 @@ export const trackSchema = z.object({
   kind: lessonKindSchema,
   color: unitColorSchema.default('teal'),
   icon: z.string().default('book'),
-  units: z.array(unitSchema).min(1),
+  units: z.array(unitSchema),
 })
 
 export const sectionSchema = z.object({
@@ -178,6 +184,14 @@ const courseBase = {
    * reste versionné, validé par la CI, et réactivable en changeant ce champ.
    */
   status: z.enum(['available', 'archived']).default('available'),
+  /**
+   * Cours proposé en premier tant que l'apprenant n'a rien choisi. Sans ce
+   * marqueur explicite, le premier cours disponible par ordre alphabétique
+   * de dossier ferait office de défaut — imprévisible, et faux dès qu'un
+   * cours plus riche existe à côté d'un squelette vide. Au plus un cours
+   * devrait le porter ; s'il y en a plusieurs, le premier rencontré gagne.
+   */
+  default: z.boolean().default(false),
   /** Incrémentée à chaque publication de contenu ; sert aux mises à jour. */
   version: z.number().int().positive(),
 }
@@ -234,6 +248,9 @@ export const manifestEntrySchema = z.object({
   tagline: z.string().optional(),
   layout: z.enum(['path', 'library']),
   status: z.enum(['available', 'archived']),
+  // `.default(false)`, pas requis : un manifeste mis en cache avant
+  // l'ajout de ce champ (voir `contentCache.ts`) doit rester lisible.
+  default: z.boolean().default(false),
   version: z.number().int().positive(),
   file: z.string(),
   itemCount: z.number().int().nonnegative(),

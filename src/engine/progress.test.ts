@@ -23,6 +23,7 @@ const COURSE: PathCourse = {
   known: 'fr',
   flag: '🇬🇧',
   status: 'available',
+  default: false,
   version: 1,
   layout: 'path',
   sections: [

@@ -36,6 +36,7 @@ const MANIFEST: Manifest = {
       flag: '🇬🇧',
       layout: 'library',
       status: 'available',
+      default: false,
       version: 2,
       file: 'fr-en-b2.json',
       itemCount: 10,
@@ -51,6 +52,7 @@ const COURSE: Course = {
   known: 'fr',
   flag: '🇬🇧',
   status: 'available',
+  default: false,
   version: 2,
   layout: 'library',
   tracks: [

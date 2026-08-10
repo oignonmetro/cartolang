@@ -19,6 +19,10 @@ flag: 🇬🇧
 level: B2
 tagline: De B2 débutant à B2 confirmé — vocabulaire, grammaire, conjugaison.
 status: available
+# Cours proposé par défaut : c'est le seul qui a du contenu pour l'instant,
+# les squelettes B1 et C1 ne doivent pas passer devant lui par accident
+# d'ordre alphabétique de dossier.
+default: true
 layout: library
 version: 1
 
