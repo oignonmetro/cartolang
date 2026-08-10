@@ -2,7 +2,9 @@ import { useMemo, useState } from 'react'
 import { Navigate, useNavigate, useParams } from 'react-router-dom'
 import { useCourse } from '@/content/CourseProvider'
 import { buildLessonSession } from '@/engine/exercises'
-import { findLesson, levelOf, type SessionOutcome } from '@/engine/progress'
+import { seedFrom } from '@/engine/rng'
+import { findLesson } from '@/content/course'
+import { levelOf, type SessionOutcome } from '@/engine/progress'
 import { useProgress } from '@/store/progressStore'
 import { SessionScreen } from './SessionScreen'
 import { SessionResult } from './SessionResult'
@@ -27,7 +29,7 @@ export function LessonRoute() {
 
   const entry = useMemo(() => findLesson(course, lessonId), [course, lessonId])
   const exercises = useMemo(
-    () => (entry ? buildLessonSession(`${entry.lesson.id}#${attempt}`, entry.lesson.vocab, level) : []),
+    () => (entry ? buildLessonSession(entry.lesson, level, seedFrom(entry.lesson.id, level, attempt)) : []),
     [entry, attempt, level],
   )
 
@@ -51,7 +53,10 @@ export function LessonRoute() {
 
   return (
     <SessionScreen
-      key={attempt}
+      // La file d'exercices est un état interne de la session : passer d'une
+      // leçon à l'autre sans changer de route doit repartir de zéro, sinon
+      // l'ancienne file resterait affichée.
+      key={`${lessonId}#${attempt}`}
       title={entry.lesson.title}
       exercises={exercises}
       onQuit={() => navigate('/', { replace: true })}

@@ -1,0 +1,170 @@
+id: g4
+title: Articulation et emphase
+subtitle: Connecteurs, inversion, mise en relief
+icon: cup
+color: violet
+level: B2.2
+
+lessons:
+  - id: g4-l1
+    title: Connecteurs de concession et de cause
+    notes: |
+      Le sens est proche, la construction ne l'est pas — c'est là que se logent
+      la plupart des fautes à ce niveau.
+      — Suivi d'une proposition (sujet + verbe) : although, even though, whereas, since.
+      — Suivi d'un groupe nominal : despite, in spite of, because of, due to.
+      — En tête de phrase, seul et suivi d'une virgule : however, nevertheless, therefore.
+      « Despite that he came » est faux ; « despite the fact that he came » est correct mais lourd.
+    points:
+      - id: g4-conn-1
+        sentence: ___ the heavy rain, the match went ahead.
+        answer: Despite
+        alt:
+          - In spite of
+        options:
+          - Despite
+          - Although
+          - Even though
+          - However
+        translation: Malgré la forte pluie, le match a eu lieu.
+        explanation: "Devant un groupe nominal : despite / in spite of, sans « of » pour despite."
+
+      - id: g4-conn-2
+        sentence: ___ it was raining heavily, the match went ahead.
+        answer: Although
+        alt:
+          - Even though
+          - Though
+        options:
+          - Although
+          - Despite
+          - In spite of
+          - Because of
+        translation: Bien qu'il pleuve à verse, le match a eu lieu.
+        explanation: "Devant une proposition complète : although / even though."
+
+      - id: g4-conn-3
+        sentence: The plan is expensive; ___, it remains the safest option.
+        answer: however
+        alt:
+          - nevertheless
+          - nonetheless
+        options:
+          - however
+          - although
+          - despite
+          - whereas
+        translation: Le plan est coûteux ; cependant, il reste l'option la plus sûre.
+        explanation: Adverbe de liaison entre deux propositions indépendantes, encadré par un point-virgule et une virgule.
+      - id: g4-conn-4
+        sentence: The flight was cancelled ___ a technical fault.
+        answer: due to
+        alt:
+          - because of
+          - owing to
+        options:
+          - due to
+          - because
+          - although
+          - so that
+        translation: Le vol a été annulé en raison d'une panne technique.
+        explanation: "Cause suivie d'un groupe nominal : due to / because of."
+
+      - id: g4-conn-5
+        sentence: Sales rose in the north, ___ they fell sharply in the south.
+        answer: whereas
+        alt:
+          - while
+        options:
+          - whereas
+          - despite
+          - therefore
+          - unless
+        translation: Les ventes ont augmenté au nord, tandis qu'elles ont chuté au sud.
+        explanation: "Contraste entre deux propositions parallèles : whereas / while."
+
+      - id: g4-conn-6
+        sentence: Take an umbrella ___ it rains later.
+        answer: in case
+        options:
+          - in case
+          - if
+          - unless
+          - so that
+        translation: Prends un parapluie au cas où il pleuvrait plus tard.
+        explanation: « In case » anticipe une éventualité ; « if » poserait une condition, ce qui n'est pas le sens ici.
+
+  - id: g4-l2
+    title: Inversion et mise en relief
+    notes: |
+      Placer un élément négatif ou restrictif en tête de phrase force l'inversion
+      sujet-auxiliaire, comme dans une question. C'est un marqueur de registre
+      soutenu, fréquent à l'écrit.
+      — Never had I seen such a mess.
+      — Not only did she apologise, she also paid for the damage.
+      — Only after the meeting did we understand.
+      Autre outil d'emphase : la phrase clivée, qui met un élément en relief.
+      — It was Marie who signed the letter. / What we need is more time.
+    points:
+      - id: g4-emph-1
+        sentence: Never ___ such a badly organised event.
+        answer: have I seen
+        options:
+          - have I seen
+          - I have seen
+          - did I saw
+          - I saw
+        translation: Jamais je n'ai vu un événement aussi mal organisé.
+        explanation: « Never » en tête impose l'inversion auxiliaire-sujet.
+      - id: g4-emph-2
+        sentence: Not only ___ late, but he had also forgotten the file.
+        answer: was he
+        options:
+          - was he
+          - he was
+          - did he was
+          - he had been
+        translation: Non seulement il était en retard, mais il avait aussi oublié le dossier.
+        explanation: « Not only » en tête déclenche également l'inversion.
+      - id: g4-emph-3
+        sentence: Rarely ___ a candidate this well prepared.
+        answer: do we meet
+        options:
+          - do we meet
+          - we meet
+          - we do meet
+          - are we meet
+        translation: Nous rencontrons rarement un candidat aussi bien préparé.
+        explanation: Avec un verbe lexical au présent, l'inversion se fait sur l'auxiliaire « do ».
+      - id: g4-emph-4
+        sentence: ___ was Marie who signed the letter, not her brother.
+        answer: It
+        options:
+          - It
+          - There
+          - That
+          - This
+        translation: C'est Marie qui a signé la lettre, pas son frère.
+        explanation: "Phrase clivée : « It is / was… who / that… »."
+
+      - id: g4-emph-5
+        sentence: ___ we need is more time, not more money.
+        answer: What
+        options:
+          - What
+          - That
+          - Which
+          - It
+        translation: Ce dont nous avons besoin, c'est de plus de temps, pas de plus d'argent.
+        explanation: "Pseudo-clivée : « What… is… » met en relief le groupe placé après le verbe."
+
+      - id: g4-emph-6
+        sentence: Only after the audit ___ the scale of the problem.
+        answer: did we realise
+        options:
+          - did we realise
+          - we realised
+          - we did realise
+          - had we realised
+        translation: Ce n'est qu'après l'audit que nous avons mesuré l'ampleur du problème.
+        explanation: « Only + complément » en tête entraîne l'inversion sur l'auxiliaire.

@@ -1,13 +1,14 @@
-import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from 'react'
+import { createContext, useContext, useEffect, useState, type ReactNode } from 'react'
 import type { Course } from './schema'
-import { indexVocab, loadCourse, loadManifest, type VocabLocation } from './loader'
+import { indexItems, type ItemLocation } from './course'
+import { availableCourses, loadCourse, loadManifest } from './loader'
 import { Mascot } from '@/components/Mascot'
 
 /** Cours actif, chargé une fois au démarrage et partagé par tous les écrans. */
 
 interface CourseContextValue {
   course: Course
-  vocabById: Map<string, VocabLocation>
+  itemsById: Map<string, ItemLocation>
 }
 
 const CourseContext = createContext<CourseContextValue | null>(null)
@@ -24,13 +25,16 @@ export function CourseProvider({ children }: { children: ReactNode }) {
     async function load() {
       try {
         const manifest = await loadManifest()
+        // Un cours archivé ne doit plus être proposé, même s'il était
+        // sélectionné par le passé : on retombe alors sur le cours courant.
+        const offered = availableCourses(manifest)
         const wanted = localStorage.getItem(SELECTED_COURSE_KEY)
-        const entry = manifest.courses.find((item) => item.id === wanted) ?? manifest.courses[0]
+        const entry = offered.find((item) => item.id === wanted) ?? offered[0]
         if (!entry) throw new Error('Aucun cours disponible.')
         const course = await loadCourse(entry.id)
         if (cancelled) return
         localStorage.setItem(SELECTED_COURSE_KEY, course.id)
-        setValue({ course, vocabById: indexVocab(course) })
+        setValue({ course, itemsById: indexItems(course) })
       } catch (cause) {
         if (!cancelled) setError((cause as Error).message)
       }
@@ -68,10 +72,4 @@ export function useCourse(): CourseContextValue {
   const value = useContext(CourseContext)
   if (!value) throw new Error('useCourse doit être utilisé sous <CourseProvider>.')
   return value
-}
-
-/** Cartes de révision échues, associées à leur mot. */
-export function useVocabLookup() {
-  const { vocabById } = useCourse()
-  return useMemo(() => (id: string) => vocabById.get(id)?.vocab ?? null, [vocabById])
 }

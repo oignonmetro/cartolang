@@ -1,14 +1,22 @@
-# Cours d'anglais pour francophones.
+# Cours d'anglais débutant — ARCHIVÉ.
+#
+# `status: archived` retire le cours de la sélection sans rien supprimer :
+# le contenu reste versionné et validé par la CI, et il suffit de repasser
+# ce champ à `available` pour le remettre en service.
 #
 # Ce fichier ne contient que les métadonnées et l'ordre du parcours.
 # Chaque unité vit dans son propre fichier : units/<id>.yaml
 # Après modification : `npm run content:check` pour valider.
 
 id: fr-en
-name: Anglais
+name: Anglais — grand débutant
 learning: en
 known: fr
 flag: 🇬🇧
+level: A1
+tagline: Les tout premiers mots, en parcours guidé.
+status: archived
+layout: path
 version: 1
 
 sections:

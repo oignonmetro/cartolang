@@ -1,0 +1,232 @@
+id: v3
+title: Société et actualité
+subtitle: Lire la presse sans dictionnaire
+icon: compass
+color: teal
+level: B2.2
+
+lessons:
+  - id: v3-l1
+    title: Politique et institutions
+    vocab:
+      - id: b2-policy
+        term: policy
+        translation: politique
+        alt:
+          - ligne de conduite
+        pos: nom
+        hint: "Faux ami : la politique comme domaine se dit « politics »."
+
+        example:
+          text: The new policy takes effect in April.
+          translation: La nouvelle politique entre en vigueur en avril.
+      - id: b2-to-enforce
+        term: to enforce
+        translation: faire appliquer
+        alt:
+          - faire respecter
+        pos: verbe
+        gap: enforces
+        example:
+          text: The rules exist but nobody enforces them.
+          translation: Les règles existent mais personne ne les fait appliquer.
+      - id: b2-to-repeal
+        term: to repeal
+        translation: abroger
+        pos: verbe
+        example:
+          text: Parliament voted to repeal the law.
+          translation: Le Parlement a voté l'abrogation de la loi.
+      - id: b2-accountability
+        term: accountability
+        translation: reddition de comptes
+        alt:
+          - responsabilité
+        pos: nom
+        example:
+          text: Voters are demanding greater accountability.
+          translation: Les électeurs exigent davantage de reddition de comptes.
+      - id: b2-turnout
+        term: turnout
+        translation: taux de participation
+        alt:
+          - participation
+        pos: nom
+        example:
+          text: Turnout was unusually high this year.
+          translation: La participation a été exceptionnellement forte cette année.
+      - id: b2-grassroots
+        term: grassroots
+        translation: de terrain
+        alt:
+          - militant de base
+        pos: adjectif
+        example:
+          text: The campaign began as a grassroots movement.
+          translation: La campagne a commencé comme un mouvement de terrain.
+      - id: b2-to-lobby
+        term: to lobby
+        translation: faire pression
+        pos: verbe
+        gap: lobbied
+        example:
+          text: Farmers lobbied hard against the reform.
+          translation: Les agriculteurs ont fait fortement pression contre la réforme.
+      - id: b2-loophole
+        term: loophole
+        translation: faille juridique
+        alt:
+          - vide juridique
+        pos: nom
+        example:
+          text: The bill closes an obvious loophole.
+          translation: Le projet de loi comble une faille juridique évidente.
+
+  - id: v3-l2
+    title: Économie et société
+    vocab:
+      - id: b2-livelihood
+        term: livelihood
+        translation: moyens de subsistance
+        alt:
+          - gagne-pain
+        pos: nom
+        example:
+          text: Fishing is their only livelihood.
+          translation: La pêche est leur seul gagne-pain.
+      - id: b2-inequality
+        term: inequality
+        translation: inégalité
+        pos: nom
+        example:
+          text: Regional inequality has widened since 2010.
+          translation: L'inégalité régionale s'est creusée depuis 2010.
+      - id: b2-affordable
+        term: affordable
+        translation: abordable
+        pos: adjectif
+        example:
+          text: The city lacks affordable housing.
+          translation: La ville manque de logements abordables.
+      - id: b2-to-thrive
+        term: to thrive
+        translation: prospérer
+        alt:
+          - s'épanouir
+        pos: verbe
+        example:
+          text: Small shops thrive in this neighbourhood.
+          translation: Les petits commerces prospèrent dans ce quartier.
+      - id: b2-to-lag-behind
+        term: to lag behind
+        translation: être à la traîne
+        alt:
+          - accuser un retard
+        pos: verbe
+        example:
+          text: Wages lag behind inflation.
+          translation: Les salaires sont à la traîne derrière l'inflation.
+      - id: b2-welfare
+        term: welfare
+        translation: protection sociale
+        alt:
+          - aide sociale
+          - bien-être
+        pos: nom
+        example:
+          text: Welfare spending rose by four per cent.
+          translation: Les dépenses de protection sociale ont augmenté de quatre pour cent.
+      - id: b2-widespread
+        term: widespread
+        translation: généralisé
+        alt:
+          - répandu
+        pos: adjectif
+        example:
+          text: The practice is widespread but rarely discussed.
+          translation: La pratique est répandue mais rarement évoquée.
+      - id: b2-to-tackle
+        term: to tackle
+        translation: s'attaquer à
+        alt:
+          - aborder
+        pos: verbe
+        gap: tackled
+        example:
+          text: No government has seriously tackled the issue.
+          translation: Aucun gouvernement ne s'est sérieusement attaqué à la question.
+
+  - id: v3-l3
+    title: Environnement
+    vocab:
+      - id: b2-to-offset
+        term: to offset
+        translation: compenser
+        alt:
+          - contrebalancer
+        pos: verbe
+        example:
+          text: Planting trees does not offset the emissions.
+          translation: Planter des arbres ne compense pas les émissions.
+      - id: b2-landfill
+        term: landfill
+        translation: décharge
+        alt:
+          - enfouissement
+        pos: nom
+        example:
+          text: Most of it still ends up in landfill.
+          translation: L'essentiel finit encore en décharge.
+      - id: b2-to-phase-out
+        term: to phase out
+        translation: supprimer progressivement
+        alt:
+          - abandonner progressivement
+        pos: verbe
+        example:
+          text: The country will phase out coal by 2035.
+          translation: Le pays supprimera progressivement le charbon d'ici 2035.
+      - id: b2-drought
+        term: drought
+        translation: sécheresse
+        pos: nom
+        example:
+          text: The region has suffered three years of drought.
+          translation: La région a subi trois années de sécheresse.
+      - id: b2-depletion
+        term: depletion
+        translation: épuisement
+        alt:
+          - raréfaction
+        pos: nom
+        example:
+          text: Groundwater depletion is now critical.
+          translation: L'épuisement des nappes phréatiques est désormais critique.
+      - id: b2-resilient
+        term: resilient
+        translation: résilient
+        alt:
+          - robuste
+        pos: adjectif
+        example:
+          text: Older varieties are more resilient to heat.
+          translation: Les variétés anciennes sont plus résilientes à la chaleur.
+      - id: b2-far-reaching
+        term: far-reaching
+        translation: de grande portée
+        alt:
+          - lourd de conséquences
+        pos: adjectif
+        example:
+          text: The decision had far-reaching consequences.
+          translation: La décision a eu des conséquences de grande portée.
+      - id: b2-to-curb
+        term: to curb
+        translation: freiner
+        alt:
+          - endiguer
+          - juguler
+        pos: verbe
+        example:
+          text: The measures aim to curb urban sprawl.
+          translation: Les mesures visent à freiner l'étalement urbain.

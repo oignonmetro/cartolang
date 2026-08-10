@@ -1,0 +1,87 @@
+id: c3
+title: Modaux et voix passive
+subtitle: Les formes composées à ne pas confondre
+icon: book
+color: sky
+level: B2.2
+
+lessons:
+  - id: c3-l1
+    title: Modaux à l'infinitif passé
+    notes: |
+      Modal + have + participe passé : la forme qui permet de raisonner ou de
+      regretter après coup. Le modal ne se conjugue jamais, « have » non plus.
+      — must have left : il a dû partir (déduction)
+      — should have left : il aurait dû partir (reproche)
+      — could have left : il aurait pu partir (possibilité non réalisée)
+      À l'oral, « have » se réduit à /əv/, d'où la faute fréquente « should of ».
+    verbs:
+      - verb: to leave
+        translation: partir
+        tense: modal + infinitif passé
+        note: La forme reste identique quelle que soit la personne.
+        forms:
+          - id: c3-leave-must
+            person: déduction (must)
+            answer: must have left
+          - id: c3-leave-should
+            person: reproche (should)
+            answer: should have left
+          - id: c3-leave-could
+            person: possibilité (could)
+            answer: could have left
+          - id: c3-leave-cannot
+            person: déduction négative (can't)
+            answer: cannot have left
+            alt:
+              - can't have left
+      - verb: to know
+        translation: savoir
+        tense: modal + infinitif passé
+        note: "« I should have known » est une tournure très courante."
+        forms:
+          - id: c3-know-should
+            person: reproche (should)
+            answer: should have known
+          - id: c3-know-might
+            person: possibilité (might)
+            answer: might have known
+
+  - id: c3-l2
+    title: Le passif aux temps composés
+    notes: |
+      Le passif se forme avec « be » au temps voulu, suivi du participe passé.
+      C'est donc « be » qui porte toute la conjugaison.
+      — Présent : is written — Prétérit : was written
+      — Present perfect : has been written — Past perfect : had been written
+      — Futur : will be written — Modal : must be written
+      Le passif continu existe au présent et au prétérit : is being written.
+    verbs:
+      - verb: to write (passif)
+        translation: être écrit
+        tense: passif, temps composés
+        note: Seul « be » change ; le participe « written » reste identique.
+        forms:
+          - id: c3-write-pass-present
+            person: présent (it)
+            answer: is written
+          - id: c3-write-pass-past
+            person: prétérit (it)
+            answer: was written
+          - id: c3-write-pass-perfect
+            person: present perfect (it)
+            answer: has been written
+          - id: c3-write-pass-future
+            person: futur (it)
+            answer: will be written
+      - verb: to build (passif)
+        translation: être construit
+        tense: passif, formes continues
+        note: build / built / built.
+        forms:
+          - id: c3-build-pass-cont
+            person: présent continu (it)
+            answer: is being built
+          - id: c3-build-pass-pastperf
+            person: past perfect (it)
+            answer: had been built

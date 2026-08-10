@@ -1,7 +1,8 @@
 import { useMemo, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useCourse } from '@/content/CourseProvider'
-import { dayKey, displayedStreak, levelFromXp, lessonsOf } from '@/engine/progress'
+import { itemsOfCourse } from '@/content/course'
+import { dayKey, displayedStreak, levelFromXp } from '@/engine/progress'
 import { cardStrength, dueCards } from '@/engine/srs'
 import { useProgress } from '@/store/progressStore'
 import { Button } from '@/components/Button'
@@ -28,10 +29,7 @@ export function ProfileScreen() {
   const { level, into, span } = levelFromXp(state.xp)
   const cards = useMemo(() => Object.values(state.cards), [state.cards])
   const due = useMemo(() => dueCards(cards, Date.now()).length, [cards])
-  const totalVocab = useMemo(
-    () => lessonsOf(course).reduce((total, entry) => total + entry.lesson.vocab.length, 0),
-    [course],
-  )
+  const totalItems = useMemo(() => itemsOfCourse(course).length, [course])
 
   const breakdown = useMemo(() => {
     const counts = Object.fromEntries(STRENGTHS.map((key) => [key, 0])) as Record<(typeof STRENGTHS)[number], number>
@@ -93,10 +91,10 @@ export function ProfileScreen() {
       </section>
 
       <section className="card-3d px-5 py-5">
-        <h2 className="text-sm font-extrabold uppercase tracking-wide text-ink-faint">Vocabulaire</h2>
+        <h2 className="text-sm font-extrabold uppercase tracking-wide text-ink-faint">Contenu travaillé</h2>
         <p className="mt-1 text-2xl font-black">
           {cards.length}
-          <span className="text-base font-bold text-ink-faint"> / {totalVocab} mots rencontrés</span>
+          <span className="text-base font-bold text-ink-faint"> / {totalItems} éléments rencontrés</span>
         </p>
 
         <div className="mt-4 flex h-4 overflow-hidden rounded-full bg-line">

@@ -1,0 +1,101 @@
+id: c2
+title: Formes continues et perfectives
+subtitle: Insister sur la durée et le bilan
+icon: cup
+color: sky
+level: B2.2
+
+lessons:
+  - id: c2-l1
+    title: Present perfect continu
+    notes: |
+      Have / has been + verbe-ing. La forme continue insiste sur la durée ou sur
+      l'activité elle-même, la forme simple sur le résultat ou la quantité.
+      — I have been reading all afternoon. (l'activité et sa durée)
+      — I have read three chapters. (le résultat chiffré)
+      Les verbes d'état (know, believe, own, belong) refusent la forme continue.
+    verbs:
+      - verb: to work
+        translation: travailler
+        tense: present perfect continu
+        note: "Souvent accompagné de « for » (durée) ou « since » (point de départ)."
+        forms:
+          - id: c2-work-ppc-1
+            person: I / you / we / they
+            answer: have been working
+            alt:
+              - "'ve been working"
+          - id: c2-work-ppc-3
+            person: he / she / it
+            answer: has been working
+            alt:
+              - "'s been working"
+      - verb: to wait
+        translation: attendre
+        tense: present perfect continu
+        note: L'attente dure encore au moment où l'on parle.
+        forms:
+          - id: c2-wait-ppc-1
+            person: I / you / we / they
+            answer: have been waiting
+          - id: c2-wait-ppc-3
+            person: he / she / it
+            answer: has been waiting
+      - verb: to live
+        translation: habiter
+        tense: present perfect continu
+        note: "« I have been living here for ten years » — et j'y habite toujours."
+        forms:
+          - id: c2-live-ppc-1
+            person: I / you / we / they
+            answer: have been living
+          - id: c2-live-ppc-3
+            person: he / she / it
+            answer: has been living
+
+  - id: c2-l2
+    title: Past perfect continu et futur antérieur
+    notes: |
+      Deux temps de bilan, l'un tourné vers le passé, l'autre vers l'avenir.
+      — Past perfect continu : had been + -ing. Durée avant un moment passé.
+        She had been driving for six hours when the storm hit.
+      — Futur antérieur : will have + participe. Bilan à une date future.
+        By June we will have finished the migration.
+      Le futur antérieur continu existe aussi : will have been working.
+    verbs:
+      - verb: to drive
+        translation: conduire
+        tense: past perfect continu
+        note: "Une seule forme pour toutes les personnes : had been + -ing."
+
+        forms:
+          - id: c2-drive-ppcont
+            person: toutes personnes
+            answer: had been driving
+          - id: c2-drive-past
+            person: prétérit
+            answer: drove
+      - verb: to finish
+        translation: terminer
+        tense: futur antérieur
+        note: Souvent introduit par « by » + date.
+        forms:
+          - id: c2-finish-fp-1
+            person: I / you / we / they
+            answer: will have finished
+            alt:
+              - "'ll have finished"
+          - id: c2-finish-fp-3
+            person: he / she / it
+            answer: will have finished
+      - verb: to run
+        translation: courir
+        tense: formes composées
+        note: run / ran / run — le participe est identique à la base.
+        forms:
+          - id: c2-run-past
+            person: prétérit
+            answer: ran
+          - id: c2-run-fpc
+            person: futur antérieur continu
+            answer: will have been running

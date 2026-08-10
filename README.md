@@ -1,19 +1,25 @@
 # Cartolang
 
-Application mobile d'apprentissage du vocabulaire, hors-ligne, en français.
-Un chemin de leçons façon plateau de jeu, des flashcards, et une révision
-espacée qui fait revenir les mots fragiles au bon moment.
+Application mobile d'apprentissage des langues, hors-ligne, en français.
+Des flashcards, des exercices d'application, et une révision espacée qui fait
+revenir au bon moment ce qui est fragile.
 
-Premier cours : **anglais pour francophones**, 5 unités, 20 leçons, 120 mots.
-Le moteur est générique — un cours n'est qu'un jeu de fichiers YAML.
+Cours actif : **anglais B2 pour francophones**, de B2 débutant à B2 confirmé —
+188 éléments répartis en trois pistes (vocabulaire, grammaire, conjugaison)
+que l'apprenant parcourt librement.
+
+Le moteur est générique : un cours n'est qu'un jeu de fichiers YAML.
 
 ## État
 
 | | |
 |---|---|
-| Cours | français → anglais (extensible) |
-| Exercices | flashcard auto-évaluée, association de paires, phrase à trou, saisie clavier |
-| Progression | 3 étoiles par leçon, déblocage linéaire, révision espacée (SM-2) |
+| Cours | anglais B2 (`fr-en-b2`) ; le cours grand débutant `fr-en` est archivé |
+| Agencements | `library` — pistes en onglets, accès libre ; `path` — parcours guidé |
+| Vocabulaire | flashcard auto-évaluée, association de paires, phrase à trou, saisie clavier |
+| Grammaire | rappel de cours, phrase à trou avec banque de formes puis au clavier |
+| Conjugaison | association personnes/formes, puis production de mémoire |
+| Progression | révision espacée (SM-2), 3 étoiles par leçon, anneaux de maîtrise |
 | Motivation | série de jours, XP et niveaux, objectif quotidien |
 | Hors-ligne | total — contenu, polices et interface embarqués |
 | Cibles | PWA sur GitHub Pages, APK Android via Capacitor |
@@ -31,10 +37,12 @@ npm run typecheck
 npm run build        # valide le contenu, vérifie les types, compile
 ```
 
-## Ajouter du vocabulaire
+## Ajouter du contenu
 
-Tout se passe dans `content/`, en YAML, sans toucher au code.
-Voir **[content/README.md](content/README.md)** pour le format et les règles.
+Tout se passe dans `content/`, en YAML, sans toucher au code : vocabulaire,
+points de grammaire et tableaux de conjugaison ont chacun leur format.
+Voir **[content/README.md](content/README.md)** pour les règles complètes,
+et pour archiver ou réactiver un cours.
 
 ```bash
 npm run content:check   # valide (identifiants, doublons, phrases d'exemple)
@@ -68,11 +76,11 @@ automatiquement sur un tag `v*`), et l'attache à la release.
 content/          les cours, en YAML — la seule chose à éditer pour du contenu
 tools/content/    validation et compilation YAML → JSON
 tools/icons/      génération des icônes (web et lanceur Android) depuis le SVG
-src/content/      schéma (zod), chargement, texte partagé
+src/content/      schéma (zod), accès au contenu, chargement, texte partagé
 src/engine/       logique pure et testée : SRS, exercices, progression
 src/store/        état de l'apprenant, persisté localement
-src/components/   mascotte, boutons en relief, exercices
-src/screens/      chemin, session, résultat, profil
+src/components/   mascotte, boutons en relief, anneaux, exercices
+src/screens/      bibliothèque, chemin, session, résultat, profil
 android/          projet Capacitor
 ```
 

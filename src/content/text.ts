@@ -33,3 +33,21 @@ export function findTerm(sentence: string, term: string): TermSplit | null {
 export function containsTerm(sentence: string, term: string): boolean {
   return findTerm(sentence, term) !== null
 }
+
+/**
+ * Localise, dans une phrase d'exemple, la portion à masquer pour l'exercice
+ * à trou.
+ *
+ * Les verbes sont listés à l'infinitif (« to step down ») mais apparaissent
+ * conjugués dans les exemples (« will step down »). On essaie donc le terme
+ * complet, puis sa forme nue sans « to ». Quand la conjugaison est irrégulière
+ * (« fell through »), l'auteur donne la forme exacte via le champ `gap`.
+ */
+export function findVocabGap(sentence: string, term: string, gap?: string): TermSplit | null {
+  const candidates = gap ? [gap] : [term, term.replace(/^to\s+/i, '')]
+  for (const candidate of candidates) {
+    const found = findTerm(sentence, candidate)
+    if (found) return found
+  }
+  return null
+}

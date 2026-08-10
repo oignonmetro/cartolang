@@ -1,0 +1,172 @@
+id: g1
+title: Hypothèse et irréel
+subtitle: Conditionnels, souhaits, regrets
+icon: compass
+color: violet
+level: B2.1
+
+lessons:
+  - id: g1-l1
+    title: Le conditionnel mixte
+    notes: |
+      Le conditionnel mixte relie une hypothèse passée à une conséquence présente.
+      Les deux moitiés ne sont pas au même temps, et c'est là que ça se joue.
+      — Hypothèse passée : If + past perfect (had + participe passé)
+      — Conséquence présente : would + base verbale
+      If I had accepted the offer, I would be in Berlin now.
+      L'ordre inverse existe aussi : une hypothèse présente peut expliquer un fait passé.
+      — If she were more careful, she would not have lost the file.
+    points:
+      - id: g1-mixed-1
+        sentence: If I had taken that job, I ___ in Berlin now.
+        answer: would be
+        options:
+          - would be
+          - would have been
+          - will be
+          - had been
+        translation: Si j'avais accepté ce poste, je serais à Berlin maintenant.
+        explanation: "Hypothèse passée (had taken) mais conséquence dans le présent : would + base verbale."
+
+      - id: g1-mixed-2
+        sentence: If she were less impulsive, she ___ that message yesterday.
+        answer: would not have sent
+        alt:
+          - wouldn't have sent
+        options:
+          - would not have sent
+          - would not send
+          - had not sent
+          - will not send
+        translation: Si elle était moins impulsive, elle n'aurait pas envoyé ce message hier.
+        explanation: "Trait de caractère permanent (if she were) mais conséquence passée : would have + participe."
+
+      - id: g1-mixed-3
+        sentence: If we had left earlier, we ___ stuck in traffic right now.
+        answer: would not be
+        alt:
+          - wouldn't be
+        options:
+          - would not be
+          - would not have been
+          - had not been
+          - are not
+        translation: Si nous étions partis plus tôt, nous ne serions pas coincés dans les bouchons en ce moment.
+        explanation: « Right now » impose la conséquence au présent, malgré l'hypothèse au passé.
+      - id: g1-mixed-4
+        sentence: If he ___ so much last night, he would feel fine today.
+        answer: had not drunk
+        alt:
+          - hadn't drunk
+        options:
+          - had not drunk
+          - did not drink
+          - would not drink
+          - has not drunk
+        translation: S'il n'avait pas tant bu hier soir, il se sentirait bien aujourd'hui.
+        explanation: "La cause est passée : past perfect dans la subordonnée."
+
+      - id: g1-mixed-5
+        sentence: If I spoke Japanese, I ___ that contract last year.
+        answer: would have won
+        options:
+          - would have won
+          - would win
+          - had won
+          - won
+        translation: Si je parlais japonais, j'aurais remporté ce contrat l'an dernier.
+        explanation: Compétence durable au présent, résultat manqué dans le passé.
+      - id: g1-mixed-6
+        sentence: They would be much richer today if they ___ the company.
+        answer: had not sold
+        alt:
+          - hadn't sold
+        options:
+          - had not sold
+          - did not sell
+          - would not sell
+          - have not sold
+        translation: Ils seraient bien plus riches aujourd'hui s'ils n'avaient pas vendu l'entreprise.
+        explanation: "L'ordre est inversé mais la logique reste : conséquence présente, cause passée."
+
+
+  - id: g1-l2
+    title: Souhaits et regrets
+    notes: |
+      « Wish » et « if only » expriment le décalage entre ce qui est et ce qu'on
+      voudrait. Le temps recule d'un cran par rapport au réel.
+      — Regret sur le présent : wish + prétérit → I wish I knew.
+      — Regret sur le passé : wish + past perfect → I wish I had known.
+      — Reproche ou irritation : wish + would → I wish you would listen.
+      Attention : « I wish I would » est impossible ; pour soi-même on utilise « could ».
+    points:
+      - id: g1-wish-1
+        sentence: I wish I ___ her phone number.
+        answer: knew
+        options:
+          - knew
+          - know
+          - had known
+          - would know
+        translation: Si seulement je connaissais son numéro.
+        explanation: "Regret sur une situation présente : prétérit après « wish »."
+
+      - id: g1-wish-2
+        sentence: I wish I ___ you before signing.
+        answer: had asked
+        options:
+          - had asked
+          - asked
+          - would ask
+          - have asked
+        translation: J'aurais aimé te demander avant de signer.
+        explanation: "Regret sur une action passée et achevée : past perfect."
+
+      - id: g1-wish-3
+        sentence: I wish you ___ interrupting me.
+        answer: would stop
+        options:
+          - would stop
+          - stopped
+          - had stopped
+          - will stop
+        translation: J'aimerais que tu arrêtes de m'interrompre.
+        explanation: "Irritation contre un comportement répété d'autrui : wish + would."
+
+      - id: g1-wish-4
+        sentence: If only it ___ raining, we could go out.
+        answer: were not
+        alt:
+          - weren't
+          - was not
+          - wasn't
+        options:
+          - were not
+          - had not been
+          - would not be
+          - is not
+        translation: Si seulement il ne pleuvait pas, nous pourrions sortir.
+        explanation: "« If only » fonctionne comme « wish » : présent irréel au prétérit."
+
+      - id: g1-wish-5
+        sentence: She wishes she ___ speak in public without panicking.
+        answer: could
+        options:
+          - could
+          - would
+          - can
+          - will
+        translation: Elle aimerait pouvoir parler en public sans paniquer.
+        explanation: "Pour un souhait sur sa propre capacité, « would » est impossible : on emploie « could »."
+
+      - id: g1-wish-6
+        sentence: I wish we ___ that flat when it was still affordable.
+        answer: had bought
+        options:
+          - had bought
+          - bought
+          - would buy
+          - have bought
+        translation: J'aurais aimé qu'on achète cet appartement quand il était encore abordable.
+        explanation: "Occasion manquée dans le passé : past perfect."
+

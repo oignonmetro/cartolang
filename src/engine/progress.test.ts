@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import type { Course, Vocab } from '@/content/schema'
+import type { PathCourse, Vocab } from '@/content/schema'
 import {
   buildPath,
   bumpStreak,
@@ -16,13 +16,15 @@ function vocab(id: string): Vocab {
   return { id, term: id, translation: id, alt: [] }
 }
 
-const COURSE: Course = {
+const COURSE: PathCourse = {
   id: 'fr-en',
   name: 'Anglais',
   learning: 'en',
   known: 'fr',
   flag: '🇬🇧',
+  status: 'available',
   version: 1,
+  layout: 'path',
   sections: [
     {
       id: 's1',
@@ -33,9 +35,10 @@ const COURSE: Course = {
           title: 'Unité 1',
           icon: 'book',
           color: 'teal',
+          kind: 'vocab',
           lessons: [
-            { id: 'l1', title: 'A', vocab: [vocab('a')] },
-            { id: 'l2', title: 'B', vocab: [vocab('b')] },
+            { kind: 'vocab', id: 'l1', title: 'A', vocab: [vocab('a')] },
+            { kind: 'vocab', id: 'l2', title: 'B', vocab: [vocab('b')] },
           ],
         },
         {
@@ -43,7 +46,8 @@ const COURSE: Course = {
           title: 'Unité 2',
           icon: 'book',
           color: 'violet',
-          lessons: [{ id: 'l3', title: 'C', vocab: [vocab('c')] }],
+          kind: 'vocab',
+          lessons: [{ kind: 'vocab', id: 'l3', title: 'C', vocab: [vocab('c')] }],
         },
       ],
     },
