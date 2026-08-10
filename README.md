@@ -66,9 +66,25 @@ automatiquement sur un tag `v*`), et l'attache à la release.
 
 - **GitHub Pages** — chaque push sur `main` publie le site. Activer une fois
   Pages sur « GitHub Actions » dans les réglages du dépôt.
-- **Mises à jour** — le service worker télécharge la version suivante en
-  arrière-plan et propose de l'appliquer. C'est aussi le canal des mises à jour
-  de contenu : incrémenter `version:` dans `course.yaml` suffit.
+
+### Mises à jour : deux canaux distincts
+
+- **Web (PWA)** — le service worker détecte la nouvelle version, la télécharge
+  en arrière-plan et propose de l'appliquer (`UpdatePrompt.tsx`). Comme la PWA
+  est servie directement depuis GitHub Pages, ce canal couvre à la fois le
+  code et le contenu : incrémenter `version:` dans `course.yaml` suffit.
+
+- **APK** — le code (JS/CSS) est figé dans le binaire au moment du build ; le
+  faire changer demande de reconstruire et redistribuer l'APK, il n'y a pas
+  de contournement à ça. Le **contenu des cours**, en revanche, se met à jour
+  sans réinstallation : au démarrage, si l'app tourne en natif et qu'un
+  réseau est disponible, elle vérifie en tâche de fond si GitHub Pages
+  propose une version plus récente d'un cours, la télécharge et l'enregistre
+  en local (`src/content/remoteSync.ts` + `contentCache.ts`). Le nouveau
+  contenu est utilisé dès le prochain démarrage de l'app — rien à publier sur
+  un store, incrémenter `version:` et pousser sur `main` suffit. Entièrement
+  best-effort : hors-ligne ou origine injoignable, l'app continue sur le
+  contenu déjà en cache, ou à défaut celui embarqué dans l'APK.
 
 ## Architecture
 

@@ -1,4 +1,5 @@
 import { courseSchema, manifestSchema, type Course, type Manifest, type ManifestEntry } from './schema'
+import { cachedCourse, cachedManifest } from './contentCache'
 
 /**
  * Chargement des cours.
@@ -40,4 +41,18 @@ export async function loadCourse(courseId: string): Promise<Course> {
  */
 export function availableCourses(manifest: Manifest): ManifestEntry[] {
   return manifest.courses.filter((entry) => entry.status === 'available')
+}
+
+/**
+ * Manifeste à utiliser : le cache local (alimenté par `remoteSync.ts` dans
+ * l'APK) s'il existe, sinon celui embarqué dans le build. Le cache est
+ * toujours le plus frais par construction — voir `contentCache.ts`.
+ */
+export async function resolveManifest(): Promise<Manifest> {
+  return cachedManifest() ?? loadManifest()
+}
+
+/** Même logique que `resolveManifest`, pour un cours donné. */
+export async function resolveCourse(courseId: string): Promise<Course> {
+  return cachedCourse(courseId) ?? loadCourse(courseId)
 }

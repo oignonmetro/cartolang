@@ -1,7 +1,8 @@
 import { createContext, useContext, useEffect, useState, type ReactNode } from 'react'
 import type { Course } from './schema'
 import { indexItems, type ItemLocation } from './course'
-import { availableCourses, loadCourse, loadManifest } from './loader'
+import { availableCourses, resolveCourse, resolveManifest } from './loader'
+import { syncContentFromRemote } from './remoteSync'
 import { Mascot } from '@/components/Mascot'
 
 /** Cours actif, chargé une fois au démarrage et partagé par tous les écrans. */
@@ -24,14 +25,14 @@ export function CourseProvider({ children }: { children: ReactNode }) {
 
     async function load() {
       try {
-        const manifest = await loadManifest()
+        const manifest = await resolveManifest()
         // Un cours archivé ne doit plus être proposé, même s'il était
         // sélectionné par le passé : on retombe alors sur le cours courant.
         const offered = availableCourses(manifest)
         const wanted = localStorage.getItem(SELECTED_COURSE_KEY)
         const entry = offered.find((item) => item.id === wanted) ?? offered[0]
         if (!entry) throw new Error('Aucun cours disponible.')
-        const course = await loadCourse(entry.id)
+        const course = await resolveCourse(entry.id)
         if (cancelled) return
         localStorage.setItem(SELECTED_COURSE_KEY, course.id)
         setValue({ course, itemsById: indexItems(course) })
@@ -41,6 +42,11 @@ export function CourseProvider({ children }: { children: ReactNode }) {
     }
 
     void load()
+    // Volontairement non attendue : la synchronisation ne doit jamais
+    // retarder l'affichage de la session en cours. Elle prépare, en tâche de
+    // fond, le contenu qui sera utilisé au *prochain* démarrage — voir
+    // `remoteSync.ts` pour le détail du mécanisme et ses garanties.
+    void syncContentFromRemote()
     return () => {
       cancelled = true
     }
