@@ -1,0 +1,22 @@
+# Cours d'anglais pour francophones.
+#
+# Ce fichier ne contient que les métadonnées et l'ordre du parcours.
+# Chaque unité vit dans son propre fichier : units/<id>.yaml
+# Après modification : `npm run content:check` pour valider.
+
+id: fr-en
+name: Anglais
+learning: en
+known: fr
+flag: 🇬🇧
+version: 1
+
+sections:
+  - id: s1
+    title: Section 1 — Les bases
+    units:
+      - u1
+      - u2
+      - u3
+      - u4
+      - u5

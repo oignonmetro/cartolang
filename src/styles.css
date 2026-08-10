@@ -1,0 +1,112 @@
+@import 'tailwindcss';
+
+/* Police auto-hébergée : aucun appel réseau, l'app reste jouable hors-ligne. */
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 400 900;
+  font-display: swap;
+  src: url('./assets/fonts/nunito-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329,
+    U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 400 900;
+  font-display: swap;
+  src: url('./assets/fonts/nunito-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF,
+    U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+@theme {
+  --font-sans: 'Nunito', ui-rounded, 'Segoe UI', system-ui, sans-serif;
+
+  --color-ink: #23253c;
+  --color-ink-soft: #5d6183;
+  --color-ink-faint: #9aa0bd;
+  --color-cream: #fff8ee;
+  --color-paper: #ffffff;
+  --color-line: #e7e2d8;
+
+  /* Chaque teinte a une ombre plus sombre : c'est elle qui donne le relief. */
+  --color-teal: #14b8a6;
+  --color-teal-deep: #0b8b7d;
+  --color-violet: #7c6bf0;
+  --color-violet-deep: #5a48cc;
+  --color-coral: #ff6b57;
+  --color-coral-deep: #d4432f;
+  --color-amber: #ffc93c;
+  --color-amber-deep: #d69c04;
+  --color-sky: #38bdf8;
+  --color-sky-deep: #0c92cf;
+
+  --color-success: #34c759;
+  --color-success-deep: #1f9b41;
+  --color-error: #ff5a5a;
+  --color-error-deep: #cc3232;
+
+  --radius-blob: 1.75rem;
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    @apply bg-cream text-ink font-sans antialiased;
+    overscroll-behavior-y: none;
+  }
+
+  /* Zone sûre des téléphones à encoche, utile une fois empaqueté en APK. */
+  #root {
+    min-height: 100dvh;
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  button {
+    touch-action: manipulation;
+  }
+}
+
+@layer components {
+  /*
+   * Bouton en relief : une face colorée posée sur une tranche plus sombre.
+   * L'appui écrase la tranche, ce qui donne la sensation d'une touche physique.
+   */
+  .btn-3d {
+    @apply relative inline-flex items-center justify-center gap-2 rounded-2xl px-6 py-3
+           font-extrabold uppercase tracking-wide select-none
+           transition-[transform,box-shadow] duration-75 active:translate-y-[4px];
+    box-shadow: 0 4px 0 0 var(--btn-shadow, transparent);
+  }
+
+  .btn-3d:active {
+    box-shadow: 0 0 0 0 var(--btn-shadow, transparent);
+  }
+
+  .btn-3d:disabled {
+    @apply cursor-not-allowed opacity-40 active:translate-y-0;
+    box-shadow: 0 4px 0 0 var(--btn-shadow, transparent);
+  }
+
+  .card-3d {
+    @apply rounded-blob border-2 border-line bg-paper;
+    box-shadow: 0 4px 0 0 var(--color-line);
+  }
+}
+
+/* Le confetti et les rebonds disparaissent si le système demande moins d'animation. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

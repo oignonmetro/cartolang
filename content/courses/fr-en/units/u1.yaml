@@ -1,0 +1,206 @@
+id: u1
+title: Dire bonjour et se présenter
+subtitle: Les tout premiers mots
+icon: wave
+color: teal
+
+lessons:
+  - id: u1-l1
+    title: Salutations
+    vocab:
+      - id: hello
+        term: hello
+        translation: bonjour
+        pos: expression
+        example:
+          text: Hello, my name is Anna.
+          translation: Bonjour, je m'appelle Anna.
+      - id: hi
+        term: hi
+        translation: salut
+        pos: expression
+        hint: Plus familier que « hello ».
+        example:
+          text: Hi, how are you?
+          translation: Salut, comment ça va ?
+      - id: goodbye
+        term: goodbye
+        translation: au revoir
+        alt:
+          - adieu
+        pos: expression
+        example:
+          text: Goodbye, see you tomorrow.
+          translation: Au revoir, à demain.
+      - id: please
+        term: please
+        translation: s'il te plaît
+        alt:
+          - s'il vous plaît
+          - s'il te plait
+          - s'il vous plait
+        pos: expression
+        example:
+          text: A coffee, please.
+          translation: Un café, s'il vous plaît.
+      - id: thank-you
+        term: thank you
+        translation: merci
+        pos: expression
+        example:
+          text: Thank you for your help.
+          translation: Merci pour ton aide.
+      - id: sorry
+        term: sorry
+        translation: désolé
+        alt:
+          - pardon
+          - désolée
+        pos: adjectif
+        example:
+          text: Sorry, I am late.
+          translation: Désolé, je suis en retard.
+
+  - id: u1-l2
+    title: Qui suis-je ?
+    vocab:
+      - id: i
+        term: I
+        translation: je
+        pos: pronom
+        example:
+          text: I am a student.
+          translation: Je suis étudiant.
+      - id: you
+        term: you
+        translation: tu
+        alt:
+          - vous
+        pos: pronom
+        example:
+          text: You are very kind.
+          translation: Tu es très gentil.
+      - id: name
+        term: name
+        translation: nom
+        alt:
+          - prénom
+        pos: nom
+        example:
+          text: My name is Paul.
+          translation: Mon nom est Paul.
+      - id: my
+        term: my
+        translation: mon
+        alt:
+          - ma
+          - mes
+        example:
+          text: My sister lives in London.
+          translation: Ma sœur habite à Londres.
+      - id: to-be
+        term: to be
+        translation: être
+        pos: verbe
+        example:
+          text: To be happy is enough.
+          translation: Être heureux suffit.
+      - id: nice
+        term: nice
+        translation: sympathique
+        alt:
+          - gentil
+          - agréable
+        pos: adjectif
+        example:
+          text: Your friend is very nice.
+          translation: Ton ami est très sympathique.
+
+  - id: u1-l3
+    title: Oui, non, peut-être
+    vocab:
+      - id: yes
+        term: 'yes'
+        translation: oui
+        example:
+          text: Yes, I understand.
+          translation: Oui, je comprends.
+      - id: no
+        term: 'no'
+        translation: non
+        example:
+          text: No, thank you.
+          translation: Non, merci.
+      - id: maybe
+        term: maybe
+        translation: peut-être
+        pos: adverbe
+        example:
+          text: Maybe tomorrow.
+          translation: Peut-être demain.
+      - id: not
+        term: not
+        translation: ne pas
+        alt:
+          - pas
+        pos: adverbe
+        example:
+          text: I do not know.
+          translation: Je ne sais pas.
+      - id: to-understand
+        term: to understand
+        translation: comprendre
+        pos: verbe
+        example:
+          text: I want to understand this word.
+          translation: Je veux comprendre ce mot.
+      - id: to-speak
+        term: to speak
+        translation: parler
+        pos: verbe
+        example:
+          text: I would like to speak English.
+          translation: J'aimerais parler anglais.
+
+  - id: u1-l4
+    title: Poser une question
+    vocab:
+      - id: what
+        term: what
+        translation: quoi
+        alt:
+          - que
+          - qu'est-ce que
+        example:
+          text: What is your name?
+          translation: Quel est ton nom ?
+      - id: who
+        term: who
+        translation: qui
+        example:
+          text: Who is that woman?
+          translation: Qui est cette femme ?
+      - id: where
+        term: where
+        translation: où
+        example:
+          text: Where do you live?
+          translation: Où habites-tu ?
+      - id: when
+        term: when
+        translation: quand
+        example:
+          text: When does the film start?
+          translation: Quand commence le film ?
+      - id: why
+        term: why
+        translation: pourquoi
+        example:
+          text: Why are you sad?
+          translation: Pourquoi es-tu triste ?
+      - id: how
+        term: how
+        translation: comment
+        example:
+          text: How do you say this?
+          translation: Comment dit-on ceci ?

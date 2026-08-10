@@ -1,0 +1,10 @@
+Nunito (variable, sous-ensembles latin et latin-ext) — Vernon Adams, Cyreal,
+Jacques Le Bailly. Distribué sous SIL Open Font License 1.1.
+
+Les fichiers .woff2 de ce dossier sont les sous-ensembles latin de la version
+variable publiée sur Google Fonts (v32). Ils sont embarqués dans le dépôt pour
+que l'application fonctionne entièrement hors-ligne, sans appel réseau vers
+fonts.gstatic.com.
+
+Texte complet de la licence : https://openfontlicense.org/
+Source : https://fonts.google.com/specimen/Nunito

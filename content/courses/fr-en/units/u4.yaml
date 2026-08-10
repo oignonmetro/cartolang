@@ -1,0 +1,202 @@
+id: u4
+title: Compter et dire le temps
+subtitle: Nombres, jours, moments
+icon: clock
+color: amber
+
+lessons:
+  - id: u4-l1
+    title: Les nombres
+    vocab:
+      - id: one
+        term: one
+        translation: un
+        pos: nombre
+        example:
+          text: I only need one ticket.
+          translation: Je n'ai besoin que d'un billet.
+      - id: two
+        term: two
+        translation: deux
+        pos: nombre
+        example:
+          text: We have two children.
+          translation: Nous avons deux enfants.
+      - id: three
+        term: three
+        translation: trois
+        pos: nombre
+        example:
+          text: The film lasts three hours.
+          translation: Le film dure trois heures.
+      - id: ten
+        term: ten
+        translation: dix
+        pos: nombre
+        example:
+          text: There are ten people in the room.
+          translation: Il y a dix personnes dans la pièce.
+      - id: hundred
+        term: hundred
+        translation: cent
+        pos: nombre
+        example:
+          text: The book costs one hundred euros.
+          translation: Le livre coûte cent euros.
+      - id: number
+        term: number
+        translation: numéro
+        alt:
+          - nombre
+        pos: nom
+        example:
+          text: What is your phone number?
+          translation: Quel est ton numéro de téléphone ?
+
+  - id: u4-l2
+    title: Les jours
+    vocab:
+      - id: day
+        term: day
+        translation: jour
+        alt:
+          - journée
+        pos: nom
+        example:
+          text: Have a good day.
+          translation: Passe une bonne journée.
+      - id: week
+        term: week
+        translation: semaine
+        pos: nom
+        example:
+          text: I am on holiday next week.
+          translation: Je suis en vacances la semaine prochaine.
+      - id: today
+        term: today
+        translation: aujourd'hui
+        pos: adverbe
+        example:
+          text: Today is Monday.
+          translation: Aujourd'hui, c'est lundi.
+      - id: tomorrow
+        term: tomorrow
+        translation: demain
+        pos: adverbe
+        example:
+          text: See you tomorrow morning.
+          translation: À demain matin.
+      - id: yesterday
+        term: yesterday
+        translation: hier
+        pos: adverbe
+        example:
+          text: Yesterday was very cold.
+          translation: Hier, il faisait très froid.
+      - id: monday
+        term: Monday
+        translation: lundi
+        pos: nom
+        example:
+          text: The shop is closed on Monday.
+          translation: Le magasin est fermé le lundi.
+
+  - id: u4-l3
+    title: Les moments de la journée
+    vocab:
+      - id: morning
+        term: morning
+        translation: matin
+        alt:
+          - matinée
+        pos: nom
+        example:
+          text: I read the news every morning.
+          translation: Je lis les nouvelles chaque matin.
+      - id: evening
+        term: evening
+        translation: soir
+        alt:
+          - soirée
+        pos: nom
+        example:
+          text: We are free this evening.
+          translation: Nous sommes libres ce soir.
+      - id: night
+        term: night
+        translation: nuit
+        pos: nom
+        example:
+          text: The city is quiet at night.
+          translation: La ville est calme la nuit.
+      - id: hour
+        term: hour
+        translation: heure
+        pos: nom
+        example:
+          text: The train leaves in one hour.
+          translation: Le train part dans une heure.
+      - id: early
+        term: early
+        translation: tôt
+        pos: adverbe
+        example:
+          text: She always wakes up early.
+          translation: Elle se réveille toujours tôt.
+      - id: late
+        term: late
+        translation: tard
+        alt:
+          - en retard
+        pos: adverbe
+        example:
+          text: They arrived very late.
+          translation: Ils sont arrivés très tard.
+
+  - id: u4-l4
+    title: La routine
+    vocab:
+      - id: always
+        term: always
+        translation: toujours
+        pos: adverbe
+        example:
+          text: He is always on time.
+          translation: Il est toujours à l'heure.
+      - id: often
+        term: often
+        translation: souvent
+        pos: adverbe
+        example:
+          text: We often walk after dinner.
+          translation: Nous marchons souvent après le dîner.
+      - id: never
+        term: never
+        translation: jamais
+        pos: adverbe
+        example:
+          text: I never drink coffee at night.
+          translation: Je ne bois jamais de café le soir.
+      - id: now
+        term: now
+        translation: maintenant
+        pos: adverbe
+        example:
+          text: We have to leave now.
+          translation: Nous devons partir maintenant.
+      - id: to-wait
+        term: to wait
+        translation: attendre
+        pos: verbe
+        example:
+          text: You will have to wait ten minutes.
+          translation: Tu devras attendre dix minutes.
+      - id: to-start
+        term: to start
+        translation: commencer
+        alt:
+          - démarrer
+        pos: verbe
+        example:
+          text: The lesson is going to start.
+          translation: La leçon va commencer.

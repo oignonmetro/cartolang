@@ -1,0 +1,226 @@
+id: u2
+title: Les gens autour de toi
+subtitle: Famille, amis, descriptions
+icon: people
+color: violet
+
+lessons:
+  - id: u2-l1
+    title: La famille
+    vocab:
+      - id: mother
+        term: mother
+        translation: mère
+        alt:
+          - maman
+        pos: nom
+        example:
+          text: My mother works in a hospital.
+          translation: Ma mère travaille dans un hôpital.
+      - id: father
+        term: father
+        translation: père
+        alt:
+          - papa
+        pos: nom
+        example:
+          text: His father is a teacher.
+          translation: Son père est professeur.
+      - id: sister
+        term: sister
+        translation: sœur
+        alt:
+          - soeur
+        pos: nom
+        example:
+          text: My sister is ten years old.
+          translation: Ma sœur a dix ans.
+      - id: brother
+        term: brother
+        translation: frère
+        alt:
+          - frere
+        pos: nom
+        example:
+          text: I have a brother in Ireland.
+          translation: J'ai un frère en Irlande.
+      - id: child
+        term: child
+        translation: enfant
+        pos: nom
+        example:
+          text: The child is playing outside.
+          translation: L'enfant joue dehors.
+      - id: parents
+        term: parents
+        translation: parents
+        pos: nom
+        example:
+          text: My parents live near the sea.
+          translation: Mes parents habitent près de la mer.
+
+  - id: u2-l2
+    title: Les gens
+    vocab:
+      - id: man
+        term: man
+        translation: homme
+        pos: nom
+        example:
+          text: That man is my neighbour.
+          translation: Cet homme est mon voisin.
+      - id: woman
+        term: woman
+        translation: femme
+        pos: nom
+        example:
+          text: The woman on the left is my boss.
+          translation: La femme à gauche est ma cheffe.
+      - id: friend
+        term: friend
+        translation: ami
+        alt:
+          - amie
+          - copain
+        pos: nom
+        example:
+          text: She is my best friend.
+          translation: C'est ma meilleure amie.
+      - id: neighbour
+        term: neighbour
+        translation: voisin
+        alt:
+          - voisine
+        pos: nom
+        hint: Orthographe britannique ; « neighbor » aux États-Unis.
+        example:
+          text: Our neighbour has two dogs.
+          translation: Notre voisin a deux chiens.
+      - id: people
+        term: people
+        translation: gens
+        alt:
+          - personnes
+        pos: nom
+        example:
+          text: There are many people here.
+          translation: Il y a beaucoup de gens ici.
+      - id: everybody
+        term: everybody
+        translation: tout le monde
+        example:
+          text: Everybody is waiting for you.
+          translation: Tout le monde t'attend.
+
+  - id: u2-l3
+    title: Décrire quelqu'un
+    vocab:
+      - id: tall
+        term: tall
+        translation: grand
+        alt:
+          - grande
+        pos: adjectif
+        example:
+          text: Her brother is very tall.
+          translation: Son frère est très grand.
+      - id: small
+        term: small
+        translation: petit
+        alt:
+          - petite
+        pos: adjectif
+        example:
+          text: They live in a small house.
+          translation: Ils habitent dans une petite maison.
+      - id: young
+        term: young
+        translation: jeune
+        pos: adjectif
+        example:
+          text: The teacher is quite young.
+          translation: Le professeur est assez jeune.
+      - id: old
+        term: old
+        translation: vieux
+        alt:
+          - vieille
+          - âgé
+        pos: adjectif
+        example:
+          text: This old man walks every morning.
+          translation: Ce vieil homme marche chaque matin.
+      - id: happy
+        term: happy
+        translation: heureux
+        alt:
+          - heureuse
+          - content
+        pos: adjectif
+        example:
+          text: I am happy to see you.
+          translation: Je suis heureux de te voir.
+      - id: tired
+        term: tired
+        translation: fatigué
+        alt:
+          - fatiguée
+        pos: adjectif
+        example:
+          text: We are tired after the trip.
+          translation: Nous sommes fatigués après le voyage.
+
+  - id: u2-l4
+    title: Ce qu'on fait ensemble
+    vocab:
+      - id: to-live
+        term: to live
+        translation: habiter
+        alt:
+          - vivre
+        pos: verbe
+        example:
+          text: They want to live in the countryside.
+          translation: Ils veulent habiter à la campagne.
+      - id: to-work
+        term: to work
+        translation: travailler
+        pos: verbe
+        example:
+          text: I have to work on Saturday.
+          translation: Je dois travailler samedi.
+      - id: to-know
+        term: to know
+        translation: connaître
+        alt:
+          - savoir
+          - connaitre
+        pos: verbe
+        example:
+          text: I would like to know your sister.
+          translation: J'aimerais connaître ta sœur.
+      - id: to-love
+        term: to love
+        translation: aimer
+        alt:
+          - adorer
+        pos: verbe
+        example:
+          text: To love is to listen.
+          translation: Aimer, c'est écouter.
+      - id: together
+        term: together
+        translation: ensemble
+        pos: adverbe
+        example:
+          text: We often travel together.
+          translation: Nous voyageons souvent ensemble.
+      - id: alone
+        term: alone
+        translation: seul
+        alt:
+          - seule
+        pos: adjectif
+        example:
+          text: He lives alone in the city.
+          translation: Il vit seul en ville.

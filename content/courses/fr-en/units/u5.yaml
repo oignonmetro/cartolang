@@ -1,0 +1,211 @@
+id: u5
+title: Se déplacer en ville
+subtitle: Lieux, direction, transports
+icon: compass
+color: sky
+
+lessons:
+  - id: u5-l1
+    title: Les lieux
+    vocab:
+      - id: city
+        term: city
+        translation: ville
+        pos: nom
+        example:
+          text: This city never sleeps.
+          translation: Cette ville ne dort jamais.
+      - id: street
+        term: street
+        translation: rue
+        pos: nom
+        example:
+          text: Their house is on this street.
+          translation: Leur maison est dans cette rue.
+      - id: shop
+        term: shop
+        translation: magasin
+        alt:
+          - boutique
+        pos: nom
+        example:
+          text: The shop closes at seven.
+          translation: Le magasin ferme à sept heures.
+      - id: station
+        term: station
+        translation: gare
+        alt:
+          - station
+        pos: nom
+        example:
+          text: The station is behind the church.
+          translation: La gare est derrière l'église.
+      - id: hotel
+        term: hotel
+        translation: hôtel
+        alt:
+          - hotel
+        pos: nom
+        example:
+          text: Our hotel is near the river.
+          translation: Notre hôtel est près de la rivière.
+      - id: home
+        term: home
+        translation: maison
+        alt:
+          - chez soi
+          - foyer
+        pos: nom
+        example:
+          text: I am going home.
+          translation: Je rentre à la maison.
+
+  - id: u5-l2
+    title: Se repérer
+    vocab:
+      - id: left
+        term: left
+        translation: gauche
+        example:
+          text: Turn left after the bridge.
+          translation: Tourne à gauche après le pont.
+      - id: right
+        term: right
+        translation: droite
+        example:
+          text: The bakery is on the right.
+          translation: La boulangerie est à droite.
+      - id: near
+        term: near
+        translation: près
+        alt:
+          - proche
+        pos: préposition
+        example:
+          text: We live near the park.
+          translation: Nous habitons près du parc.
+      - id: far
+        term: far
+        translation: loin
+        pos: adverbe
+        example:
+          text: Is the museum far from here?
+          translation: Le musée est-il loin d'ici ?
+      - id: here
+        term: here
+        translation: ici
+        pos: adverbe
+        example:
+          text: Please wait here.
+          translation: Attends ici, s'il te plaît.
+      - id: there
+        term: there
+        translation: là-bas
+        alt:
+          - là
+        pos: adverbe
+        example:
+          text: My car is over there.
+          translation: Ma voiture est là-bas.
+
+  - id: u5-l3
+    title: Les transports
+    vocab:
+      - id: car
+        term: car
+        translation: voiture
+        pos: nom
+        example:
+          text: Their car is very old.
+          translation: Leur voiture est très vieille.
+      - id: train
+        term: train
+        translation: train
+        pos: nom
+        example:
+          text: The train is late again.
+          translation: Le train est encore en retard.
+      - id: bus
+        term: bus
+        translation: bus
+        alt:
+          - autobus
+        pos: nom
+        example:
+          text: I take the bus to work.
+          translation: Je prends le bus pour aller au travail.
+      - id: bike
+        term: bike
+        translation: vélo
+        alt:
+          - bicyclette
+        pos: nom
+        example:
+          text: She goes to school by bike.
+          translation: Elle va à l'école à vélo.
+      - id: ticket
+        term: ticket
+        translation: billet
+        alt:
+          - ticket
+        pos: nom
+        example:
+          text: I lost my ticket.
+          translation: J'ai perdu mon billet.
+      - id: to-walk
+        term: to walk
+        translation: marcher
+        pos: verbe
+        example:
+          text: It is nice to walk in the morning.
+          translation: C'est agréable de marcher le matin.
+
+  - id: u5-l4
+    title: Partir et arriver
+    vocab:
+      - id: to-go
+        term: to go
+        translation: aller
+        pos: verbe
+        example:
+          text: I want to go to Scotland.
+          translation: Je veux aller en Écosse.
+      - id: to-come
+        term: to come
+        translation: venir
+        pos: verbe
+        example:
+          text: Are you going to come with us?
+          translation: Vas-tu venir avec nous ?
+      - id: to-leave
+        term: to leave
+        translation: partir
+        alt:
+          - quitter
+        pos: verbe
+        example:
+          text: We have to leave before noon.
+          translation: Nous devons partir avant midi.
+      - id: to-arrive
+        term: to arrive
+        translation: arriver
+        pos: verbe
+        example:
+          text: The plane is about to arrive.
+          translation: L'avion est sur le point d'arriver.
+      - id: trip
+        term: trip
+        translation: voyage
+        alt:
+          - trajet
+        pos: nom
+        example:
+          text: Have a good trip!
+          translation: Bon voyage !
+      - id: slowly
+        term: slowly
+        translation: lentement
+        pos: adverbe
+        example:
+          text: Could you speak more slowly?
+          translation: Pourriez-vous parler plus lentement ?

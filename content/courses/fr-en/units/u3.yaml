@@ -1,0 +1,202 @@
+id: u3
+title: Manger et commander
+subtitle: Au café, au restaurant
+icon: cup
+color: coral
+
+lessons:
+  - id: u3-l1
+    title: Boissons
+    vocab:
+      - id: water
+        term: water
+        translation: eau
+        pos: nom
+        example:
+          text: A glass of water, please.
+          translation: Un verre d'eau, s'il vous plaît.
+      - id: coffee
+        term: coffee
+        translation: café
+        pos: nom
+        example:
+          text: I drink coffee every morning.
+          translation: Je bois du café tous les matins.
+      - id: tea
+        term: tea
+        translation: thé
+        pos: nom
+        example:
+          text: She prefers tea with milk.
+          translation: Elle préfère le thé avec du lait.
+      - id: milk
+        term: milk
+        translation: lait
+        pos: nom
+        example:
+          text: There is no milk left.
+          translation: Il ne reste plus de lait.
+      - id: wine
+        term: wine
+        translation: vin
+        pos: nom
+        example:
+          text: This wine comes from Italy.
+          translation: Ce vin vient d'Italie.
+      - id: to-drink
+        term: to drink
+        translation: boire
+        pos: verbe
+        example:
+          text: I need to drink something cold.
+          translation: J'ai besoin de boire quelque chose de froid.
+
+  - id: u3-l2
+    title: Nourriture
+    vocab:
+      - id: bread
+        term: bread
+        translation: pain
+        pos: nom
+        example:
+          text: We buy bread every day.
+          translation: Nous achetons du pain tous les jours.
+      - id: cheese
+        term: cheese
+        translation: fromage
+        pos: nom
+        example:
+          text: This cheese is from Normandy.
+          translation: Ce fromage vient de Normandie.
+      - id: apple
+        term: apple
+        translation: pomme
+        pos: nom
+        example:
+          text: An apple a day is a good habit.
+          translation: Une pomme par jour est une bonne habitude.
+      - id: meat
+        term: meat
+        translation: viande
+        pos: nom
+        example:
+          text: He does not eat meat.
+          translation: Il ne mange pas de viande.
+      - id: fish
+        term: fish
+        translation: poisson
+        pos: nom
+        example:
+          text: The fish here is excellent.
+          translation: Le poisson est excellent ici.
+      - id: to-eat
+        term: to eat
+        translation: manger
+        pos: verbe
+        example:
+          text: We are going to eat at eight.
+          translation: Nous allons manger à huit heures.
+
+  - id: u3-l3
+    title: Au restaurant
+    vocab:
+      - id: restaurant
+        term: restaurant
+        translation: restaurant
+        pos: nom
+        example:
+          text: This restaurant opens at noon.
+          translation: Ce restaurant ouvre à midi.
+      - id: table
+        term: table
+        translation: table
+        pos: nom
+        example:
+          text: A table for two, please.
+          translation: Une table pour deux, s'il vous plaît.
+      - id: menu
+        term: menu
+        translation: carte
+        alt:
+          - menu
+        pos: nom
+        example:
+          text: Could I see the menu?
+          translation: Puis-je voir la carte ?
+      - id: bill
+        term: bill
+        translation: addition
+        alt:
+          - note
+        pos: nom
+        hint: « Check » aux États-Unis.
+        example:
+          text: The bill, please.
+          translation: L'addition, s'il vous plaît.
+      - id: to-order
+        term: to order
+        translation: commander
+        pos: verbe
+        example:
+          text: We are ready to order.
+          translation: Nous sommes prêts à commander.
+      - id: to-pay
+        term: to pay
+        translation: payer
+        pos: verbe
+        example:
+          text: I would like to pay by card.
+          translation: Je voudrais payer par carte.
+
+  - id: u3-l4
+    title: Goûts et quantités
+    vocab:
+      - id: good
+        term: good
+        translation: bon
+        alt:
+          - bonne
+          - bien
+        pos: adjectif
+        example:
+          text: This soup is really good.
+          translation: Cette soupe est vraiment bonne.
+      - id: bad
+        term: bad
+        translation: mauvais
+        alt:
+          - mauvaise
+        pos: adjectif
+        example:
+          text: The service was bad.
+          translation: Le service était mauvais.
+      - id: hot
+        term: hot
+        translation: chaud
+        alt:
+          - chaude
+        pos: adjectif
+        example:
+          text: Careful, the plate is hot.
+          translation: Attention, l'assiette est chaude.
+      - id: cold
+        term: cold
+        translation: froid
+        alt:
+          - froide
+        pos: adjectif
+        example:
+          text: My soup is cold.
+          translation: Ma soupe est froide.
+      - id: a-little
+        term: a little
+        translation: un peu
+        example:
+          text: Just a little sugar, please.
+          translation: Juste un peu de sucre, s'il vous plaît.
+      - id: too-much
+        term: too much
+        translation: trop
+        example:
+          text: That is too much salt.
+          translation: Cela fait trop de sel.
