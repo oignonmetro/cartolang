@@ -1,9 +1,10 @@
+import { useId } from 'react'
 import { motion } from 'framer-motion'
 
 /**
- * Kartu, la mascotte : un petit explorateur rond, dessiné en SVG pour rester
- * net à toutes les tailles et léger dans l'APK. Les expressions changent en
- * échangeant les yeux et la bouche ; le corps, lui, ne bouge pas.
+ * Kartu, la mascotte : une petite tortue, dessinée en SVG pour rester nette
+ * à toutes les tailles et légère dans l'APK. Les expressions changent en
+ * échangeant les yeux et la bouche ; la carapace, elle, ne bouge pas.
  */
 
 export type MascotMood = 'idle' | 'happy' | 'sad' | 'cheer' | 'think'
@@ -14,11 +15,32 @@ interface MascotProps {
   className?: string
 }
 
-const BODY = '#14b8a6'
-const BODY_DARK = '#0b8b7d'
-const BELLY = '#ffe9c9'
-const HAT = '#ff6b57'
-const HAT_DARK = '#d4432f'
+const SKIN = '#3ecfb8'
+const SKIN_DARK = '#249d89'
+const SHELL = '#0c8a7c'
+const SHELL_DEEP = '#075f56'
+const BLUSH = '#ff6b57'
+
+const SHELL_PATH = 'M14 96 A46 40 0 0 1 106 96 L106 118 A46 22 0 0 1 14 118 Z'
+
+/** Petit hexagone (sommet en haut), pour le motif en écailles de la carapace. */
+function hexPath(cx: number, cy: number, r: number): string {
+  const points = Array.from({ length: 6 }, (_, i) => {
+    const angle = (Math.PI / 180) * (60 * i - 90)
+    const x = (cx + r * Math.cos(angle)).toFixed(1)
+    const y = (cy + r * Math.sin(angle)).toFixed(1)
+    return `${x} ${y}`
+  })
+  return `M${points[0]} L${points[1]} L${points[2]} L${points[3]} L${points[4]} L${points[5]} Z`
+}
+
+const SHELL_SCUTES = [
+  hexPath(60, 101, 13),
+  hexPath(33, 107, 10.5),
+  hexPath(87, 107, 10.5),
+  hexPath(47, 119, 9.5),
+  hexPath(73, 119, 9.5),
+]
 
 function Eyes({ mood }: { mood: MascotMood }) {
   if (mood === 'happy' || mood === 'cheer') {
@@ -79,6 +101,7 @@ function Mouth({ mood }: { mood: MascotMood }) {
 }
 
 export function Mascot({ mood = 'idle', size = 120, className }: MascotProps) {
+  const clipId = useId()
   const animation =
     mood === 'cheer'
       ? { y: [0, -10, 0], rotate: [0, -4, 4, 0] }
@@ -88,9 +111,9 @@ export function Mascot({ mood = 'idle', size = 120, className }: MascotProps) {
 
   return (
     <motion.svg
-      viewBox="0 0 120 130"
+      viewBox="0 0 120 150"
       width={size}
-      height={(size * 130) / 120}
+      height={(size * 150) / 120}
       className={className}
       role="img"
       aria-label="Kartu, la mascotte"
@@ -102,36 +125,45 @@ export function Mascot({ mood = 'idle', size = 120, className }: MascotProps) {
         ease: 'easeInOut',
       }}
     >
+      <defs>
+        <clipPath id={clipId}>
+          <path d={SHELL_PATH} />
+        </clipPath>
+      </defs>
+
       {/* Ombre portée */}
-      <ellipse cx="60" cy="122" rx="30" ry="6" fill="#23253c" opacity="0.12" />
+      <ellipse cx="60" cy="142" rx="30" ry="6" fill="#23253c" opacity="0.12" />
 
-      {/* Pieds */}
-      <ellipse cx="46" cy="113" rx="11" ry="7" fill={BODY_DARK} />
-      <ellipse cx="74" cy="113" rx="11" ry="7" fill={BODY_DARK} />
+      {/* Queue, en dessous de la carapace, tout juste visible */}
+      <ellipse cx="60" cy="127" rx="5.5" ry="6" fill={SKIN} />
 
-      {/* Corps */}
-      <path d="M26 66 a34 34 0 0 1 68 0 v20 a34 30 0 0 1 -68 0z" fill={BODY} />
-      <ellipse cx="60" cy="88" rx="20" ry="17" fill={BELLY} />
+      {/* Pattes arrière */}
+      <ellipse cx="38" cy="124" rx="11" ry="8" fill={SKIN_DARK} transform="rotate(12 38 124)" />
+      <ellipse cx="82" cy="124" rx="11" ry="8" fill={SKIN_DARK} transform="rotate(-12 82 124)" />
 
-      {/* Bras */}
-      <ellipse cx="22" cy="80" rx="8" ry="12" fill={BODY_DARK} transform="rotate(-15 22 80)" />
-      <ellipse cx="98" cy="80" rx="8" ry="12" fill={BODY_DARK} transform="rotate(15 98 80)" />
+      {/* Pattes avant, en palette, dépassant sous les bords de la carapace */}
+      <ellipse cx="12" cy="100" rx="10" ry="14" fill={SKIN_DARK} transform="rotate(-25 12 100)" />
+      <ellipse cx="108" cy="100" rx="10" ry="14" fill={SKIN_DARK} transform="rotate(25 108 100)" />
+
+      {/* Carapace : dôme large, sommet caché derrière la tête, motif en écailles */}
+      <path d={SHELL_PATH} fill={SHELL} />
+      <g clipPath={`url(#${clipId})`}>
+        {SHELL_SCUTES.map((scute) => (
+          <path key={scute} d={scute} fill={SHELL_DEEP} fillOpacity="0.28" stroke={SHELL_DEEP} strokeWidth="2" strokeOpacity="0.6" strokeLinejoin="round" />
+        ))}
+      </g>
+      <path d={SHELL_PATH} fill="none" stroke={SHELL_DEEP} strokeWidth="3" opacity="0.4" />
 
       {/* Tête */}
-      <circle cx="60" cy="55" r="34" fill={BODY} />
-      <circle cx="60" cy="55" r="34" fill="none" stroke={BODY_DARK} strokeWidth="2" opacity="0.35" />
-
-      {/* Casquette d'explorateur */}
-      <path d="M28 40 a32 32 0 0 1 64 0 z" fill={HAT} />
-      <path d="M24 40 h72 a4 4 0 0 1 0 8 h-72 a4 4 0 0 1 0 -8z" fill={HAT_DARK} />
-      <circle cx="60" cy="18" r="5" fill={HAT_DARK} />
+      <circle cx="60" cy="55" r="34" fill={SKIN} />
+      <circle cx="60" cy="55" r="34" fill="none" stroke={SKIN_DARK} strokeWidth="2" opacity="0.35" />
 
       <Eyes mood={mood} />
       <Mouth mood={mood} />
 
       {/* Joues */}
-      <ellipse cx="36" cy="66" rx="6" ry="4" fill={HAT} opacity="0.35" />
-      <ellipse cx="84" cy="66" rx="6" ry="4" fill={HAT} opacity="0.35" />
+      <ellipse cx="36" cy="66" rx="6" ry="4" fill={BLUSH} opacity="0.35" />
+      <ellipse cx="84" cy="66" rx="6" ry="4" fill={BLUSH} opacity="0.35" />
     </motion.svg>
   )
 }
