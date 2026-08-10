@@ -21,7 +21,9 @@ const SHELL = '#0c8a7c'
 const SHELL_DEEP = '#075f56'
 const BLUSH = '#ff6b57'
 
-const SHELL_PATH = 'M14 96 A46 40 0 0 1 106 96 L106 118 A46 22 0 0 1 14 118 Z'
+// Carapace resserrée (par rapport à la première version) pour laisser de la
+// place aux pattes de part et d'autre, sans qu'elles soient recouvertes.
+const SHELL_PATH = 'M20 92 A40 36 0 0 1 100 92 L100 114 A40 20 0 0 1 20 114 Z'
 
 /** Petit hexagone (sommet en haut), pour le motif en écailles de la carapace. */
 function hexPath(cx: number, cy: number, r: number): string {
@@ -35,12 +37,51 @@ function hexPath(cx: number, cy: number, r: number): string {
 }
 
 const SHELL_SCUTES = [
-  hexPath(60, 101, 13),
-  hexPath(33, 107, 10.5),
-  hexPath(87, 107, 10.5),
-  hexPath(47, 119, 9.5),
-  hexPath(73, 119, 9.5),
+  hexPath(60, 98, 12),
+  hexPath(35, 103, 9.5),
+  hexPath(85, 103, 9.5),
+  hexPath(48, 114, 8.5),
+  hexPath(72, 114, 8.5),
 ]
+
+/**
+ * Trois petites marques de doigts à la pointe d'une patte, dans le repère
+ * local de la patte (avant rotation). `direction` pointe vers l'extérieur :
+ * -1 vers le haut (pattes avant), 1 vers le bas (pattes arrière).
+ */
+function Toes({
+  x,
+  y,
+  spacing,
+  tickLength,
+  direction,
+}: {
+  x: number
+  y: number
+  spacing: number
+  tickLength: number
+  direction: 1 | -1
+}) {
+  const end = y + direction * tickLength
+  return (
+    <g stroke={SHELL_DEEP} strokeWidth="1.8" strokeLinecap="round" opacity="0.55">
+      <path d={`M${x - spacing} ${y} L${x - spacing} ${end}`} />
+      <path d={`M${x} ${y} L${x} ${end}`} />
+      <path d={`M${x + spacing} ${y} L${x + spacing} ${end}`} />
+    </g>
+  )
+}
+
+/** Une patte : palette arrondie + marques de doigts, dans un repère local
+ * pivoté et translaté par le composant appelant. */
+function Leg({ rx, ry, toeY, direction }: { rx: number; ry: number; toeY: number; direction: 1 | -1 }) {
+  return (
+    <>
+      <ellipse cx="0" cy="0" rx={rx} ry={ry} fill={SKIN_DARK} />
+      <Toes x={0} y={toeY} spacing={rx * 0.5} tickLength={5} direction={direction} />
+    </>
+  )
+}
 
 function Eyes({ mood }: { mood: MascotMood }) {
   if (mood === 'happy' || mood === 'cheer') {
@@ -135,17 +176,9 @@ export function Mascot({ mood = 'idle', size = 120, className }: MascotProps) {
       <ellipse cx="60" cy="142" rx="30" ry="6" fill="#23253c" opacity="0.12" />
 
       {/* Queue, en dessous de la carapace, tout juste visible */}
-      <ellipse cx="60" cy="127" rx="5.5" ry="6" fill={SKIN} />
+      <ellipse cx="60" cy="122" rx="5.5" ry="6" fill={SKIN} />
 
-      {/* Pattes arrière */}
-      <ellipse cx="38" cy="124" rx="11" ry="8" fill={SKIN_DARK} transform="rotate(12 38 124)" />
-      <ellipse cx="82" cy="124" rx="11" ry="8" fill={SKIN_DARK} transform="rotate(-12 82 124)" />
-
-      {/* Pattes avant, en palette, dépassant sous les bords de la carapace */}
-      <ellipse cx="12" cy="100" rx="10" ry="14" fill={SKIN_DARK} transform="rotate(-25 12 100)" />
-      <ellipse cx="108" cy="100" rx="10" ry="14" fill={SKIN_DARK} transform="rotate(25 108 100)" />
-
-      {/* Carapace : dôme large, sommet caché derrière la tête, motif en écailles */}
+      {/* Carapace : dôme, sommet caché derrière la tête, motif en écailles */}
       <path d={SHELL_PATH} fill={SHELL} />
       <g clipPath={`url(#${clipId})`}>
         {SHELL_SCUTES.map((scute) => (
@@ -153,6 +186,20 @@ export function Mascot({ mood = 'idle', size = 120, className }: MascotProps) {
         ))}
       </g>
       <path d={SHELL_PATH} fill="none" stroke={SHELL_DEEP} strokeWidth="3" opacity="0.4" />
+
+      {/* Pattes, dessinées après la carapace pour bien s'y accrocher et rester visibles */}
+      <g transform="translate(15 90) rotate(-32)">
+        <Leg rx={10} ry={16} toeY={-16} direction={-1} />
+      </g>
+      <g transform="translate(105 90) rotate(32)">
+        <Leg rx={10} ry={16} toeY={-16} direction={-1} />
+      </g>
+      <g transform="translate(25 120) rotate(20)">
+        <Leg rx={12} ry={9} toeY={9} direction={1} />
+      </g>
+      <g transform="translate(95 120) rotate(-20)">
+        <Leg rx={12} ry={9} toeY={9} direction={1} />
+      </g>
 
       {/* Tête */}
       <circle cx="60" cy="55" r="34" fill={SKIN} />
