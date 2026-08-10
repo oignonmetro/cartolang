@@ -30,7 +30,7 @@ export function SessionResult({
         animate={{ scale: 1, opacity: 1 }}
         transition={{ type: 'spring', stiffness: 260, damping: 18 }}
       >
-        <Mascot mood={passed ? 'cheer' : 'sad'} size={150} />
+        <Mascot mood={passed ? 'cheer' : 'disappointed'} size={150} />
       </motion.div>
 
       <h1 className="text-3xl font-black">

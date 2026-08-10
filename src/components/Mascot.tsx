@@ -7,7 +7,7 @@ import { motion } from 'framer-motion'
  * échangeant les yeux et la bouche ; la carapace, elle, ne bouge pas.
  */
 
-export type MascotMood = 'idle' | 'happy' | 'sad' | 'cheer' | 'think'
+export type MascotMood = 'idle' | 'happy' | 'disappointed' | 'reassuring' | 'cheer' | 'think'
 
 interface MascotProps {
   mood?: MascotMood
@@ -44,43 +44,10 @@ const SHELL_SCUTES = [
   hexPath(72, 114, 8.5),
 ]
 
-/**
- * Trois petites marques de doigts à la pointe d'une patte, dans le repère
- * local de la patte (avant rotation). `direction` pointe vers l'extérieur :
- * -1 vers le haut (pattes avant), 1 vers le bas (pattes arrière).
- */
-function Toes({
-  x,
-  y,
-  spacing,
-  tickLength,
-  direction,
-}: {
-  x: number
-  y: number
-  spacing: number
-  tickLength: number
-  direction: 1 | -1
-}) {
-  const end = y + direction * tickLength
-  return (
-    <g stroke={SHELL_DEEP} strokeWidth="1.8" strokeLinecap="round" opacity="0.55">
-      <path d={`M${x - spacing} ${y} L${x - spacing} ${end}`} />
-      <path d={`M${x} ${y} L${x} ${end}`} />
-      <path d={`M${x + spacing} ${y} L${x + spacing} ${end}`} />
-    </g>
-  )
-}
-
-/** Une patte : palette arrondie + marques de doigts, dans un repère local
- * pivoté et translaté par le composant appelant. */
-function Leg({ rx, ry, toeY, direction }: { rx: number; ry: number; toeY: number; direction: 1 | -1 }) {
-  return (
-    <>
-      <ellipse cx="0" cy="0" rx={rx} ry={ry} fill={SKIN_DARK} />
-      <Toes x={0} y={toeY} spacing={rx * 0.5} tickLength={5} direction={direction} />
-    </>
-  )
+/** Une patte : simple palette arrondie, dans le repère local pivoté et
+ * translaté par le composant appelant. */
+function Leg({ rx, ry }: { rx: number; ry: number }) {
+  return <ellipse cx="0" cy="0" rx={rx} ry={ry} fill={SKIN_DARK} />
 }
 
 function Eyes({ mood }: { mood: MascotMood }) {
@@ -94,13 +61,28 @@ function Eyes({ mood }: { mood: MascotMood }) {
     )
   }
 
-  if (mood === 'sad') {
+  if (mood === 'disappointed') {
+    // Sourcils inquiets (pointe intérieure relevée) plutôt qu'en colère,
+    // et un regard qui fuit légèrement vers le bas.
     return (
       <>
-        <circle cx="47" cy="55" r="5" fill="#23253c" />
-        <circle cx="73" cy="55" r="5" fill="#23253c" />
-        <path d="M39 45 l14 5" stroke="#23253c" strokeWidth="3.5" strokeLinecap="round" />
-        <path d="M81 45 l-14 5" stroke="#23253c" strokeWidth="3.5" strokeLinecap="round" />
+        <circle cx="47" cy="55" r="5.5" fill="#23253c" />
+        <circle cx="45.5" cy="56.5" r="1.6" fill="#fff" />
+        <circle cx="73" cy="55" r="5.5" fill="#23253c" />
+        <circle cx="71.5" cy="56.5" r="1.6" fill="#fff" />
+        <path d="M39 47 Q46 43 53 45" stroke="#23253c" strokeWidth="3.2" strokeLinecap="round" fill="none" />
+        <path d="M81 47 Q74 43 67 45" stroke="#23253c" strokeWidth="3.2" strokeLinecap="round" fill="none" />
+      </>
+    )
+  }
+
+  if (mood === 'reassuring') {
+    // Un clin d'œil chaleureux : un œil fermé et souriant, l'autre ouvert.
+    return (
+      <>
+        <path d="M40 52 q7 -7 14 0" stroke="#23253c" strokeWidth="4" strokeLinecap="round" fill="none" />
+        <circle cx="73" cy="53" r="6.5" fill="#23253c" />
+        <circle cx="75.5" cy="50.5" r="2.2" fill="#fff" />
       </>
     )
   }
@@ -129,11 +111,12 @@ function Mouth({ mood }: { mood: MascotMood }) {
   if (mood === 'cheer') {
     return <path d="M50 66 q10 14 20 0 q-10 5 -20 0z" fill="#23253c" />
   }
-  if (mood === 'happy') {
+  if (mood === 'happy' || mood === 'reassuring') {
     return <path d="M52 66 q8 9 16 0" stroke="#23253c" strokeWidth="4" strokeLinecap="round" fill="none" />
   }
-  if (mood === 'sad') {
-    return <path d="M52 70 q8 -8 16 0" stroke="#23253c" strokeWidth="4" strokeLinecap="round" fill="none" />
+  if (mood === 'disappointed') {
+    // Une moue légère et résignée, pas des larmes.
+    return <path d="M54 67 q6 -3 12 0" stroke="#23253c" strokeWidth="3.5" strokeLinecap="round" fill="none" />
   }
   if (mood === 'think') {
     return <path d="M54 68 h10" stroke="#23253c" strokeWidth="4" strokeLinecap="round" />
@@ -146,7 +129,7 @@ export function Mascot({ mood = 'idle', size = 120, className }: MascotProps) {
   const animation =
     mood === 'cheer'
       ? { y: [0, -10, 0], rotate: [0, -4, 4, 0] }
-      : mood === 'sad'
+      : mood === 'disappointed'
         ? { y: [0, 3, 0], rotate: 0 }
         : { y: [0, -4, 0], rotate: 0 }
 
@@ -189,16 +172,16 @@ export function Mascot({ mood = 'idle', size = 120, className }: MascotProps) {
 
       {/* Pattes, dessinées après la carapace pour bien s'y accrocher et rester visibles */}
       <g transform="translate(15 90) rotate(-32)">
-        <Leg rx={10} ry={16} toeY={-16} direction={-1} />
+        <Leg rx={10} ry={16} />
       </g>
       <g transform="translate(105 90) rotate(32)">
-        <Leg rx={10} ry={16} toeY={-16} direction={-1} />
+        <Leg rx={10} ry={16} />
       </g>
       <g transform="translate(25 120) rotate(20)">
-        <Leg rx={12} ry={9} toeY={9} direction={1} />
+        <Leg rx={12} ry={9} />
       </g>
       <g transform="translate(95 120) rotate(-20)">
-        <Leg rx={12} ry={9} toeY={9} direction={1} />
+        <Leg rx={12} ry={9} />
       </g>
 
       {/* Tête */}

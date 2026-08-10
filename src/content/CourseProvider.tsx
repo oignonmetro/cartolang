@@ -45,7 +45,7 @@ export function CourseProvider({ children }: { children: ReactNode }) {
   if (error) {
     return (
       <div className="flex min-h-dvh flex-col items-center justify-center gap-4 p-8 text-center">
-        <Mascot mood="sad" size={110} />
+        <Mascot mood="reassuring" size={110} />
         <h1 className="text-xl font-extrabold">Le cours n'a pas pu être chargé</h1>
         <p className="max-w-sm text-sm text-ink-soft">{error}</p>
       </div>
