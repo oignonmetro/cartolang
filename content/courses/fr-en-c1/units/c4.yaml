@@ -64,7 +64,7 @@ lessons:
       - verb: to let
         translation: laisser
         tense: let + objet + base verbale
-        note: let / let / let — invariable, et jamais suivi de « to ».
+        note: "let / let / let : invariable, et jamais suivi de « to »."
         forms:
           - id: c4-let-pres
             person: présent
@@ -85,8 +85,8 @@ lessons:
         I saw him leaving. Je l'ai vu qui partait.
 
       La même construction `have` + objet + participe qui sert au causatif
-      exprime aussi ce qu'on **subit**, sans l'avoir voulu. Seul le contexte
-      distingue les deux.
+      exprime aussi ce qu'on **subit**, sans l'avoir voulu. __Seul le contexte
+      distingue les deux__.
 
       — I had my bag stolen. Je me suis fait voler mon sac.
 

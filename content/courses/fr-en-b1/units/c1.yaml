@@ -12,9 +12,9 @@ lessons:
       Un verbe irrégulier, ce sont **trois colonnes** à savoir ensemble : base,
       prétérit, participe passé. Les deux dernières se confondent souvent.
 
-      — Le **prétérit** s'emploie seul, pour un fait passé et daté.
+      — Le **prétérit** s'emploie seul, pour un fait __passé et daté__.
         I wrote the report yesterday. J'ai rédigé le rapport hier.
-      — Le **participe passé** sert à tous les temps composés, jamais seul.
+      — Le **participe passé** sert à tous les temps composés, __jamais seul__.
         I have written three reports this week. (`have` + participe)
 
       ! Un participe ne se conjugue pas tout seul : « I written » n'existe pas.
@@ -76,7 +76,7 @@ lessons:
         aujourd'hui.
         I have seen her twice this week. (la semaine court toujours)
 
-      ! Un repère daté — `yesterday`, `in 2019`, `last month` — interdit le
+      ! Un repère daté (`yesterday`, `in 2019`, `last month`) interdit le
       present perfect.
     verbs:
       - verb: to see

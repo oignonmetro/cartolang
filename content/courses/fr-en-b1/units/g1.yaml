@@ -19,7 +19,7 @@ lessons:
       — Présent continu : rendez-vous pris, arrangement daté.
         We're having dinner with Paul on Friday. (la table est réservée)
 
-      Les horaires officiels — trains, cinémas, cours — prennent le présent
+      Les __horaires officiels__ (trains, cinémas, cours) prennent le présent
       simple : The train leaves at 6:04.
     points:
       - id: g1-fut-1
@@ -90,8 +90,9 @@ lessons:
   - id: g1-l2
     title: Le futur après when, if et as soon as
     notes: |
-      Après une conjonction de temps ou de condition, l'anglais met **le présent**
-      là où le français met un futur. C'est une des fautes les plus tenaces.
+      Après une conjonction __de temps ou de condition__, l'anglais met **le
+      présent** là où le français met un futur. C'est une des fautes les plus
+      tenaces.
 
       — Conjonctions concernées : `when`, `as soon as`, `until`, `before`,
         `after`, `the moment`, `if`.
@@ -100,7 +101,7 @@ lessons:
       ! Jamais « as soon as I will arrive » ni « if it will rain » : la
       subordonnée reste au présent, quoi qu'en dise le français.
 
-      La proposition principale, elle, garde bien son `will`.
+      __La proposition principale__, elle, garde bien son `will`.
     points:
       - id: g1-when-1
         sentence: I will call you as soon as I ___ .

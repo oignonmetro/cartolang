@@ -96,7 +96,8 @@ lessons:
       Deux limites bornent cette mécanique.
 
       — Le past perfect ne recule pas davantage : il est **déjà au bout**.
-      — Si le fait reste vrai au moment où l'on parle, le recul devient facultatif.
+      — Si le fait __reste vrai au moment où l'on parle__, le recul devient
+        facultatif.
         He explained that water boils at 100°C. (toujours vrai aujourd'hui)
     points:
       - id: g4-shift-1

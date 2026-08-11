@@ -15,7 +15,7 @@ lessons:
         alt:
           - postulat
         pos: nom
-        hint: "Au pluriel, « premises » désigne des locaux — sens sans rapport."
+        hint: "Au pluriel, « premises » désigne des locaux, sens sans rapport."
         example:
           text: The whole model rests on a shaky premise.
           translation: Tout le modèle repose sur une prémisse fragile.

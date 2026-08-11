@@ -17,7 +17,7 @@ lessons:
       — Passif : This house was built in 1920.
 
       On l'emploie quand l'auteur de l'action est **inconnu, évident ou sans
-      intérêt** — ce qui est très fréquent dans la langue écrite.
+      intérêt**, ce qui est très fréquent dans la langue écrite.
 
       ! Ne confondez pas le participe passé avec le prétérit : on dit
       `was built`, jamais « was build » ni « was builded ».
@@ -25,7 +25,7 @@ lessons:
       - verb: to make
         translation: fabriquer
         tense: passif, singulier
-        note: make / made / made — le participe est identique au prétérit.
+        note: "make / made / made : le participe est identique au prétérit."
         forms:
           - id: c4-make-pres-pass
             person: présent passif
@@ -47,7 +47,7 @@ lessons:
       - verb: to write
         translation: écrire
         tense: passif, singulier
-        note: write / wrote / written — attention au participe irrégulier.
+        note: "write / wrote / written : attention au participe irrégulier."
         forms:
           - id: c4-write-pres-pass
             person: présent passif

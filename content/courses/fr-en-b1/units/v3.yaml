@@ -203,7 +203,7 @@ lessons:
           - gérer
         pos: verbe
         gap: managed
-        hint: "Deux sens : diriger, et réussir à faire — « manage to » annonce le second."
+        hint: "Deux sens : diriger, et réussir à faire ; « manage to » annonce le second."
         example:
           text: I managed to finish on time.
           translation: J'ai réussi à finir à temps.

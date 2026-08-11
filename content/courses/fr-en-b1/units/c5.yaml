@@ -16,7 +16,7 @@ lessons:
       — Interrogatif : Does she work here ? (et non « Does she works »)
       — Négatif : She does not work here.
 
-      Trois familles échappent à cette règle et se retournent toutes seules.
+      Trois familles __échappent à cette règle__ et se retournent toutes seules.
 
       — `be` : Is she here ? / She is not here.
       — Les modaux : Can she swim ? / She cannot swim.
@@ -69,7 +69,7 @@ lessons:
     title: Le passé
     notes: |
       Au passé, la mécanique est identique, mais **c'est `did` qui porte le
-      temps** — et le verbe repart à la base verbale, sans marque de passé.
+      temps**, et le verbe repart à la base verbale, sans marque de passé.
 
       — Affirmatif : She worked late.
       — Interrogatif : Did she work late ?

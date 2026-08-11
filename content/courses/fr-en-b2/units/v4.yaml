@@ -34,7 +34,7 @@ lessons:
         alt:
           - test
         pos: nom
-        hint: "L'essai, mais aussi le procès — « on trial » veut dire jugé."
+        hint: "L'essai, mais aussi le procès ; « on trial » veut dire jugé."
         example:
           text: The drug failed its second trial.
           translation: Le médicament a échoué à son deuxième essai.

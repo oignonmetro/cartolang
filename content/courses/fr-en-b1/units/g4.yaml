@@ -25,8 +25,8 @@ lessons:
       — `few` / `little` : __il n'y en a presque pas__, c'est un manque.
         We have little time. Nous n'avons guère de temps.
 
-      Enfin `some` va aux phrases affirmatives et aux offres, `any` aux
-      négatives et aux questions ouvertes.
+      Enfin `some` va aux phrases __affirmatives__ et aux __offres__, `any` aux
+      __négatives__ et aux __questions ouvertes__.
     points:
       - id: g4-quant-1
         sentence: There is not ___ milk left.

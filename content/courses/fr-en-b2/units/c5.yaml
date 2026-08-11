@@ -58,7 +58,7 @@ lessons:
       - verb: to bring up
         translation: soulever une question
         tense: verbe à particule irrégulier
-        note: bring / brought / brought — prétérit et participe identiques.
+        note: "bring / brought / brought : prétérit et participe identiques."
         forms:
           - id: c5-bringup-past
             person: prétérit
@@ -81,10 +81,10 @@ lessons:
         look after the children / look after them
 
       Aucune règle ne permet de deviner à quelle famille appartient un verbe :
-      les inséparables sont en général ceux qui portent une préposition
+      les inséparables sont en général __ceux qui portent une préposition__
       (`look after`, `run into`, `get over`).
 
-      ! Avec un séparable, le pronom passe **toujours** au milieu — c'est la
+      ! Avec un séparable, le pronom passe **toujours** au milieu : c'est la
       faute la plus visible sur ce point.
     verbs:
       - verb: to turn down
