@@ -1,7 +1,8 @@
-import { useMemo, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useCourse } from '@/content/CourseProvider'
 import { itemsOfCourse } from '@/content/course'
+import { installedAppVersion } from '@/content/appUpdate'
 import { dayKey, displayedStreak, levelFromXp } from '@/engine/progress'
 import { cardStrength, dueCards } from '@/engine/srs'
 import { useProgress } from '@/store/progressStore'
@@ -24,6 +25,11 @@ export function ProfileScreen() {
   const state = useProgress()
   const [message, setMessage] = useState<string | null>(null)
   const fileInput = useRef<HTMLInputElement>(null)
+  const [appVersion, setAppVersion] = useState<{ versionName: string; build: string } | null>(null)
+
+  useEffect(() => {
+    void installedAppVersion().then(setAppVersion)
+  }, [])
 
   const today = dayKey(Date.now())
   const { level, into, span } = levelFromXp(state.xp)
@@ -177,7 +183,9 @@ export function ProfileScreen() {
           Réinitialiser
         </Button>
         <p className="text-center text-xs text-ink-faint">
-          {course.name} · contenu v{course.version}
+          {appVersion
+            ? `Cartolang v${appVersion.versionName} (${appVersion.build})`
+            : `${course.name} · contenu v${course.version}`}
         </p>
       </section>
     </div>

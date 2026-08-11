@@ -52,6 +52,21 @@ export async function downloadAndInstallUpdate(url: string): Promise<DownloadOut
   }
 }
 
+/**
+ * Version réellement installée (utile pour distinguer un APK d'un autre en
+ * cours de dépannage — `checkForAppUpdate` compare à celle-ci, mais ne
+ * l'expose pas). `null` sur le web, où la notion d'APK n'existe pas.
+ */
+export async function installedAppVersion(): Promise<{ versionName: string; build: string } | null> {
+  if (!Capacitor.isNativePlatform()) return null
+  try {
+    const info = await App.getInfo()
+    return { versionName: info.version, build: info.build }
+  } catch {
+    return null
+  }
+}
+
 export async function checkForAppUpdate(): Promise<AppUpdate | null> {
   if (!Capacitor.isNativePlatform()) return null
 
