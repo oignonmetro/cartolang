@@ -34,7 +34,7 @@ tracks:
 
   - id: grammaire
     title: Grammaire
-    subtitle: Les structures de base à consolider avant le B2
+    subtitle: Comparatifs, conditionnels et quantifieurs
     kind: grammar
     color: violet
     icon: compass

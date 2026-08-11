@@ -312,9 +312,7 @@ function TrackSummary({
           className={`flex items-center gap-2 rounded-2xl border-2 ${tone.border} bg-paper px-4 py-2.5 text-left shadow-sm`}
         >
           <StarIcon filled size={18} className={tone.text} />
-          <span className="flex-1 text-sm font-extrabold">
-            {due} à réviser dans cette piste
-          </span>
+          <span className="flex-1 text-sm font-extrabold">{countLabel(track.kind, due)} à réviser</span>
           <span className={`text-xs font-black uppercase ${tone.text}`}>Réviser</span>
         </button>
       )}
