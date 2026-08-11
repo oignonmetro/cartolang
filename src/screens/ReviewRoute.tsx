@@ -55,7 +55,7 @@ export function ReviewRoute() {
 
   if (exercises.length === 0) {
     return (
-      <div className="flex min-h-dvh flex-col items-center justify-center gap-5 px-8 text-center">
+      <div className="flex min-h-full flex-col items-center justify-center gap-5 px-8 text-center">
         <Mascot mood="happy" size={130} />
         <h1 className="text-2xl font-black">Rien à réviser</h1>
         <p className="max-w-xs text-sm text-ink-soft">

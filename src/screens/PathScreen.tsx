@@ -30,7 +30,7 @@ export function PathScreen({ course }: { course: PathCourse }) {
   const groups = useMemo(() => groupByUnit(path), [path])
 
   return (
-    <div className="mx-auto flex min-h-dvh w-full max-w-md flex-col">
+    <div className="mx-auto flex min-h-full w-full max-w-md flex-col">
       <header className="sticky top-0 z-10 flex items-center justify-between gap-3 border-b-2 border-line bg-cream/95 px-4 py-3 backdrop-blur">
         <span className="text-2xl" aria-label={course.name}>
           {course.flag}

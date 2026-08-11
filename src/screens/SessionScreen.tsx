@@ -116,7 +116,9 @@ export function SessionScreen({ title, exercises, onQuit, onFinish }: SessionScr
   if (!current) return null
 
   return (
-    <div className="flex min-h-dvh flex-col">
+    // `h-full overflow-hidden`, pas `min-h-full` : une leçon ne doit jamais
+    // pouvoir défiler, le contenu est conçu pour tenir dans l'écran.
+    <div className="flex h-full flex-col overflow-hidden">
       <header className="flex items-center gap-3 px-4 py-3">
         <button
           type="button"

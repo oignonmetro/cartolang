@@ -114,7 +114,7 @@ export function LibraryScreen({ course }: { course: LibraryCourse }) {
   }, [trackItemIds, cards])
 
   return (
-    <div className="mx-auto flex min-h-dvh w-full max-w-md flex-col">
+    <div className="mx-auto flex min-h-full w-full max-w-md flex-col">
       <header className="sticky top-0 z-20 border-b-2 border-line bg-cream/95 backdrop-blur">
         <div className="flex items-center justify-between gap-3 px-4 py-3">
           <button

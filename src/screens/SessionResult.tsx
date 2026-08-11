@@ -24,7 +24,7 @@ export function SessionResult({
   const accuracy = Math.round(accuracyOf(outcome) * 100)
 
   return (
-    <div className="flex min-h-dvh flex-col items-center justify-center gap-6 px-6 py-10 text-center">
+    <div className="flex min-h-full flex-col items-center justify-center gap-6 px-6 py-10 text-center">
       <motion.div
         initial={{ scale: 0.7, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}

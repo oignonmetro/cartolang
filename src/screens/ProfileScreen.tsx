@@ -64,7 +64,7 @@ export function ProfileScreen() {
   }
 
   return (
-    <div className="mx-auto flex min-h-dvh w-full max-w-md flex-col gap-5 px-4 pt-4 pb-16">
+    <div className="mx-auto flex min-h-full w-full max-w-md flex-col gap-5 px-4 pt-4 pb-16">
       <header className="flex items-center gap-2">
         <button
           type="button"
