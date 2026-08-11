@@ -8,7 +8,10 @@ import type { CardState } from './srs'
 /**
  * Génération des exercices d'une session.
  *
- * Pour le vocabulaire, quatre familles choisies avec l'auteur du projet :
+ * Pour le vocabulaire, cinq familles choisies avec l'auteur du projet :
+ *   - `intro`     : présentation d'un mot nouveau, avec auto-évaluation en trois
+ *                   boutons — tout est déjà visible, inutile de le redemander
+ *                   aussitôt dans une flashcard séparée ;
  *   - `flashcard` : la carte classique, avec auto-évaluation en trois boutons ;
  *   - `match`     : relier des mots à leurs traductions ;
  *   - `cloze`     : compléter une phrase, au clavier ou en piochant dans une banque ;
@@ -112,13 +115,12 @@ const BANK_SIZE = 4
 
 /** Les exercices qui présentent sans évaluer : ils ne comptent pas dans le score. */
 export function isPresentation(exercise: Exercise): boolean {
-  return exercise.kind === 'intro' || exercise.kind === 'rule'
+  return exercise.kind === 'rule'
 }
 
 /** Les éléments dont dépend un exercice : ce sont eux qui reçoivent la note. */
 export function itemIdsOf(exercise: Exercise): string[] {
   switch (exercise.kind) {
-    case 'intro':
     case 'rule':
       return []
     case 'match':
@@ -204,10 +206,7 @@ function buildVocabSession(vocab: readonly Vocab[], level: number, seed: number)
   const words = shuffle(vocab, rng)
 
   if (level <= 0) {
-    const discovery = words.flatMap((word): Exercise[] => [
-      { kind: 'intro', id: `intro:${word.id}`, vocab: word },
-      { kind: 'flashcard', id: `flash:${word.id}`, vocab: word, direction: 'to-known' },
-    ])
+    const discovery = words.map((word): IntroExercise => ({ kind: 'intro', id: `intro:${word.id}`, vocab: word }))
     const clozes = words
       .map((word) => clozeFor(word, words, rng))
       .filter((exercise): exercise is ClozeExercise => exercise !== null)

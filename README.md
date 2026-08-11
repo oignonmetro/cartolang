@@ -76,17 +76,26 @@ automatiquement sur un tag `v*`), et l'attache à la release.
   est servie directement depuis GitHub Pages, ce canal couvre à la fois le
   code et le contenu : incrémenter `version:` dans `course.yaml` suffit.
 
-- **APK** — le code (JS/CSS) est figé dans le binaire au moment du build ; le
-  faire changer demande de reconstruire et redistribuer l'APK, il n'y a pas
-  de contournement à ça. Le **contenu des cours**, en revanche, se met à jour
-  sans réinstallation : au démarrage, si l'app tourne en natif et qu'un
-  réseau est disponible, elle vérifie en tâche de fond si GitHub Pages
-  propose une version plus récente d'un cours, la télécharge et l'enregistre
-  en local (`src/content/remoteSync.ts` + `contentCache.ts`). Le nouveau
-  contenu est utilisé dès le prochain démarrage de l'app — rien à publier sur
-  un store, incrémenter `version:` et pousser sur `main` suffit. Entièrement
+- **APK** — le **contenu des cours** se met à jour sans réinstallation : au
+  démarrage, si l'app tourne en natif et qu'un réseau est disponible, elle
+  vérifie en tâche de fond si GitHub Pages propose une version plus récente
+  d'un cours, la télécharge et l'enregistre en local
+  (`src/content/remoteSync.ts` + `contentCache.ts`). Le nouveau contenu est
+  utilisé dès le prochain démarrage — rien à publier sur un store,
+  incrémenter `version:` et pousser sur `main` suffit. Entièrement
   best-effort : hors-ligne ou origine injoignable, l'app continue sur le
   contenu déjà en cache, ou à défaut celui embarqué dans l'APK.
+
+  Le **code** (JS/CSS), lui, est figé dans le binaire au moment du build et ne
+  peut pas s'installer tout seul — Android exige toujours une confirmation de
+  l'utilisateur pour un paquet en dehors d'un store. L'app vérifie donc aussi,
+  au démarrage natif, si `app-version.json` sur GitHub Pages annonce un
+  `versionCode` plus récent que celui installé (`src/content/appUpdate.ts`),
+  et propose alors de télécharger le nouvel APK dans un bandeau
+  (`AppUpdateBanner.tsx`) — un tap ouvre le navigateur système, l'installation
+  reste un geste volontaire. `app-version.json` est republié automatiquement
+  par `.github/workflows/android.yml` à chaque tag `v*`, avec le même
+  `versionCode` que celui gravé dans l'APK correspondant.
 
 ## Architecture
 

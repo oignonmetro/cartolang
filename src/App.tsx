@@ -5,6 +5,7 @@ import { LessonRoute } from '@/screens/LessonRoute'
 import { ReviewRoute } from '@/screens/ReviewRoute'
 import { ProfileScreen } from '@/screens/ProfileScreen'
 import { UpdatePrompt } from '@/components/UpdatePrompt'
+import { AppUpdateBanner } from '@/components/AppUpdateBanner'
 
 /**
  * Routage par ancre (`#/...`) : c'est le seul mode qui fonctionne à la fois
@@ -23,6 +24,7 @@ export default function App() {
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
         <UpdatePrompt />
+        <AppUpdateBanner />
       </CourseProvider>
     </HashRouter>
   )

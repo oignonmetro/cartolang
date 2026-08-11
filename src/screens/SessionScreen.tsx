@@ -148,7 +148,9 @@ export function SessionScreen({ title, exercises, onQuit, onFinish }: SessionScr
             transition={{ duration: 0.18 }}
             className="flex flex-1 flex-col"
           >
-            {current.kind === 'intro' && <VocabIntro exercise={current} onNext={() => advance(false)} />}
+            {current.kind === 'intro' && (
+              <VocabIntro exercise={current} onRate={(rating) => answer(current, rating !== 'again', rating)} />
+            )}
             {current.kind === 'flashcard' && (
               <Flashcard
                 exercise={current}

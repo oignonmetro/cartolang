@@ -23,8 +23,9 @@ import { cachedManifest, writeCachedCourse, writeCachedManifest } from './conten
  */
 
 // Doit correspondre à la publication de .github/workflows/pages.yml
-// (APP_BASE = "/<nom du dépôt>/").
-const REMOTE_BASE = 'https://oignonmetro.github.io/cartolang/'
+// (APP_BASE = "/<nom du dépôt>/"). Réexporté pour `appUpdate.ts`, qui vérifie
+// depuis la même origine si une nouvelle version de l'app est disponible.
+export const REMOTE_BASE = 'https://oignonmetro.github.io/cartolang/'
 const REMOTE_TIMEOUT_MS = 8000
 
 async function fetchRemoteJson(path: string): Promise<unknown> {

@@ -43,18 +43,16 @@ function kinds(session: Exercise[]): string[] {
 }
 
 describe('session de leçon', () => {
-  it('présente chaque mot avant de le tester au niveau 0', () => {
+  it('présente et note chaque mot en un seul écran au niveau 0', () => {
+    // La présentation montre déjà tout (terme, traduction, exemple) : une
+    // flashcard séparée juste après ne testerait rien de plus, elle ne ferait
+    // que répéter ce qui vient d'être lu. L'auto-évaluation est donc portée
+    // par l'écran de présentation lui-même.
     const session = buildLessonSession(lessonOf('u1-l1', LESSON), 0)
     const intros = session.filter((exercise) => exercise.kind === 'intro')
     expect(intros).toHaveLength(LESSON.length)
-
     for (const intro of intros) {
-      const introIndex = session.indexOf(intro)
-      const tested = session.findIndex(
-        (exercise, index) =>
-          index > introIndex && exercise.kind !== 'intro' && itemIdsOf(exercise).includes(intro.vocab.id),
-      )
-      expect(tested).toBeGreaterThan(introIndex)
+      expect(itemIdsOf(intro)).toEqual([intro.vocab.id])
     }
   })
 

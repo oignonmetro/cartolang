@@ -1,10 +1,19 @@
 import { motion } from 'framer-motion'
 import type { IntroExercise } from '@/engine/exercises'
+import type { Rating } from '@/engine/srs'
 import { Button } from '@/components/Button'
 import { Mascot } from '@/components/Mascot'
 
-/** Présentation d'un mot nouveau, avant tout test. */
-export function VocabIntro({ exercise, onNext }: { exercise: IntroExercise; onNext: () => void }) {
+/**
+ * Présentation d'un mot nouveau, avec auto-évaluation immédiate.
+ *
+ * Tout est déjà affiché (terme, traduction, exemple) : redemander la même
+ * information une seconde fois dans une flashcard séparée juste après ne
+ * teste rien, ça ne fait que répéter ce qu'on vient de lire. L'auto-évaluation
+ * porte donc ici sur la première impression — mot connu, incertain, ou
+ * franchement nouveau — et amorce directement la révision espacée.
+ */
+export function VocabIntro({ exercise, onRate }: { exercise: IntroExercise; onRate: (rating: Rating) => void }) {
   const { vocab } = exercise
 
   return (
@@ -32,9 +41,17 @@ export function VocabIntro({ exercise, onNext }: { exercise: IntroExercise; onNe
         )}
       </motion.div>
 
-      <Button block onClick={onNext}>
-        Compris
-      </Button>
+      <div className="grid grid-cols-3 gap-2">
+        <Button tone="error" onClick={() => onRate('again')} className="text-xs">
+          Nouveau
+        </Button>
+        <Button tone="amber" onClick={() => onRate('hard')} className="text-xs">
+          Incertain
+        </Button>
+        <Button tone="success" onClick={() => onRate('good')} className="text-xs">
+          Je savais
+        </Button>
+      </div>
     </div>
   )
 }
