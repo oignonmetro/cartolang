@@ -1,8 +1,9 @@
-# Cours d'anglais B1 pour francophones — SQUELETTE, sans contenu pour l'instant.
+# Cours d'anglais B1 pour francophones.
 #
 # Structure identique au cours B2 (content/courses/fr-en-b2/) : trois pistes
-# en accès libre, chacune vide (`units: []`). L'écran affiche un état
-# « à venir » tant qu'aucune unité n'est ajoutée.
+# en accès libre. Vocabulaire et conjugaison ont chacun une première unité
+# (reprise depuis B2, où son niveau réel était trop bas) ; grammaire est
+# encore vide (`units: []`), l'écran y affiche un état « à venir ».
 #
 # Pour amorcer une piste : créer content/courses/fr-en-b1/units/<id>.yaml,
 # puis référencer son id dans la liste `units:` correspondante ci-dessous.
@@ -17,16 +18,17 @@ level: B1
 tagline: De B1 débutant à B1 confirmé — vocabulaire, grammaire, conjugaison.
 status: available
 layout: library
-version: 1
+version: 2
 
 tracks:
   - id: vocabulaire
     title: Vocabulaire
-    subtitle: À venir
+    subtitle: Sentiments, caractère et relations du quotidien
     kind: vocab
     color: teal
     icon: book
-    units: []
+    units:
+      - v1
 
   - id: grammaire
     title: Grammaire
@@ -38,8 +40,9 @@ tracks:
 
   - id: conjugaison
     title: Conjugaison
-    subtitle: À venir
+    subtitle: Prétérit, present perfect et past perfect
     kind: conjugation
     color: sky
     icon: clock
-    units: []
+    units:
+      - c1

@@ -24,7 +24,7 @@ status: available
 # d'ordre alphabétique de dossier.
 default: true
 layout: library
-version: 1
+version: 2
 
 tracks:
   - id: vocabulaire
@@ -37,7 +37,6 @@ tracks:
       - v1
       - v2
       - v3
-      - v4
 
   - id: grammaire
     title: Grammaire
@@ -58,6 +57,5 @@ tracks:
     color: sky
     icon: clock
     units:
-      - c1
       - c2
       - c3

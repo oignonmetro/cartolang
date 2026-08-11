@@ -1,8 +1,10 @@
-# Cours d'anglais C1 pour francophones — SQUELETTE, sans contenu pour l'instant.
+# Cours d'anglais C1 pour francophones.
 #
 # Structure identique au cours B2 (content/courses/fr-en-b2/) : trois pistes
-# en accès libre, chacune vide (`units: []`). L'écran affiche un état
-# « à venir » tant qu'aucune unité n'est ajoutée.
+# en accès libre. Grammaire a une première unité (reprise depuis B2, où son
+# niveau réel — inversion et mise en relief — dépassait le B2) ; vocabulaire
+# et conjugaison sont encore vides (`units: []`), l'écran y affiche un état
+# « à venir ».
 #
 # Pour amorcer une piste : créer content/courses/fr-en-c1/units/<id>.yaml,
 # puis référencer son id dans la liste `units:` correspondante ci-dessous.
@@ -17,7 +19,7 @@ level: C1
 tagline: De C1 débutant à C1 confirmé — vocabulaire, grammaire, conjugaison.
 status: available
 layout: library
-version: 1
+version: 2
 
 tracks:
   - id: vocabulaire
@@ -30,11 +32,12 @@ tracks:
 
   - id: grammaire
     title: Grammaire
-    subtitle: À venir
+    subtitle: Inversion, mise en relief et registre soutenu
     kind: grammar
     color: violet
     icon: compass
-    units: []
+    units:
+      - g1
 
   - id: conjugaison
     title: Conjugaison

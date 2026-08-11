@@ -1,6 +1,6 @@
 id: g4
-title: Articulation et emphase
-subtitle: Connecteurs, inversion, mise en relief
+title: Connecteurs de discours
+subtitle: Concession, cause et enchaînement logique
 icon: cup
 color: violet
 level: B2.2
@@ -93,78 +93,3 @@ lessons:
           - so that
         translation: Prends un parapluie au cas où il pleuvrait plus tard.
         explanation: « In case » anticipe une éventualité ; « if » poserait une condition, ce qui n'est pas le sens ici.
-
-  - id: g4-l2
-    title: Inversion et mise en relief
-    notes: |
-      Placer un élément négatif ou restrictif en tête de phrase force l'inversion
-      sujet-auxiliaire, comme dans une question. C'est un marqueur de registre
-      soutenu, fréquent à l'écrit.
-      — Never had I seen such a mess.
-      — Not only did she apologise, she also paid for the damage.
-      — Only after the meeting did we understand.
-      Autre outil d'emphase : la phrase clivée, qui met un élément en relief.
-      — It was Marie who signed the letter. / What we need is more time.
-    points:
-      - id: g4-emph-1
-        sentence: Never ___ such a badly organised event.
-        answer: have I seen
-        options:
-          - have I seen
-          - I have seen
-          - did I saw
-          - I saw
-        translation: Jamais je n'ai vu un événement aussi mal organisé.
-        explanation: « Never » en tête impose l'inversion auxiliaire-sujet.
-      - id: g4-emph-2
-        sentence: Not only ___ late, but he had also forgotten the file.
-        answer: was he
-        options:
-          - was he
-          - he was
-          - did he was
-          - he had been
-        translation: Non seulement il était en retard, mais il avait aussi oublié le dossier.
-        explanation: « Not only » en tête déclenche également l'inversion.
-      - id: g4-emph-3
-        sentence: Rarely ___ a candidate this well prepared.
-        answer: do we meet
-        options:
-          - do we meet
-          - we meet
-          - we do meet
-          - are we meet
-        translation: Nous rencontrons rarement un candidat aussi bien préparé.
-        explanation: Avec un verbe lexical au présent, l'inversion se fait sur l'auxiliaire « do ».
-      - id: g4-emph-4
-        sentence: ___ was Marie who signed the letter, not her brother.
-        answer: It
-        options:
-          - It
-          - There
-          - That
-          - This
-        translation: C'est Marie qui a signé la lettre, pas son frère.
-        explanation: "Phrase clivée : « It is / was… who / that… »."
-
-      - id: g4-emph-5
-        sentence: ___ we need is more time, not more money.
-        answer: What
-        options:
-          - What
-          - That
-          - Which
-          - It
-        translation: Ce dont nous avons besoin, c'est de plus de temps, pas de plus d'argent.
-        explanation: "Pseudo-clivée : « What… is… » met en relief le groupe placé après le verbe."
-
-      - id: g4-emph-6
-        sentence: Only after the audit ___ the scale of the problem.
-        answer: did we realise
-        options:
-          - did we realise
-          - we realised
-          - we did realise
-          - had we realised
-        translation: Ce n'est qu'après l'audit que nous avons mesuré l'ampleur du problème.
-        explanation: « Only + complément » en tête entraîne l'inversion sur l'auxiliaire.
