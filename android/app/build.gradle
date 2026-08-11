@@ -16,7 +16,23 @@ android {
             ignoreAssetsPattern = '!.svn:!.git:!.ds_store:!*.scc:.*:!CVS:!thumbs.db:!picasa.ini:!*~'
         }
     }
+    // Sans ceci, chaque exécution de CI (machine neuve à chaque fois) génère
+    // sa propre clé de debug aléatoire : deux builds successifs sont alors
+    // signés différemment, et Android refuse d'installer le second par-dessus
+    // le premier (« Application non installée »). Une clé fixe, versionnée,
+    // permet à chaque release de mettre à jour la précédente normalement.
+    signingConfigs {
+        debug {
+            storeFile file('../debug.keystore')
+            storePassword 'android'
+            keyAlias 'androiddebugkey'
+            keyPassword 'android'
+        }
+    }
     buildTypes {
+        debug {
+            signingConfig signingConfigs.debug
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
