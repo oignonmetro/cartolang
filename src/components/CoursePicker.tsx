@@ -67,14 +67,9 @@ export function CoursePicker({
                   {entry.flag}
                 </span>
                 <span className="flex-1">
-                  <span className="flex items-center gap-2">
-                    <span className="text-sm font-extrabold">{entry.name}</span>
-                    {entry.level && (
-                      <span className="rounded-full bg-ink px-2 py-0.5 text-[0.6rem] font-black tracking-wide text-white">
-                        {entry.level}
-                      </span>
-                    )}
-                  </span>
+                  {/* Pas de badge de niveau ici : `entry.name` ("Anglais B1") le
+                      porte déjà, un second badge ne ferait que le répéter. */}
+                  <span className="text-sm font-extrabold">{entry.name}</span>
                   {entry.tagline && <span className="mt-0.5 block text-xs text-ink-soft">{entry.tagline}</span>}
                 </span>
                 {entry.id === activeId ? (
