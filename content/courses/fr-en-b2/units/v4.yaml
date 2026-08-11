@@ -34,6 +34,7 @@ lessons:
         alt:
           - test
         pos: nom
+        hint: "L'essai, mais aussi le procès — « on trial » veut dire jugé."
         example:
           text: The drug failed its second trial.
           translation: Le médicament a échoué à son deuxième essai.
@@ -44,7 +45,6 @@ lessons:
           - conclusions
         pos: nom
         hint: Toujours au pluriel quand il s'agit des résultats d'une étude.
-
         example:
           text: The findings were published in March.
           translation: Les résultats ont été publiés en mars.
@@ -204,7 +204,6 @@ lessons:
           - perturbateur
         pos: adjectif
         hint: Sens économique, souvent mélioratif en anglais des affaires.
-
         example:
           text: The model proved disruptive for the whole industry.
           translation: Le modèle a bouleversé tout le secteur.

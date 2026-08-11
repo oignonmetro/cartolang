@@ -132,6 +132,7 @@ lessons:
       - id: b2-albeit
         term: albeit
         translation: quoique
+        pos: conjonction
         alt:
           - bien que
         hint: Registre soutenu, suivi d'un adjectif ou d'un groupe, jamais d'une proposition complète.

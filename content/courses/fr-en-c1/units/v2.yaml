@@ -44,7 +44,6 @@ lessons:
           - omission
         pos: nom
         hint: "Deux sens opposés selon le contexte : la surveillance, ou l'oubli."
-
         example:
           text: Parliamentary oversight remains weak.
           translation: Le contrôle parlementaire reste faible.
@@ -78,6 +77,7 @@ lessons:
         term: precedent
         translation: précédent
         pos: nom
+        hint: "Le nom se prononce autrement que l'adjectif « preceding »."
         example:
           text: The ruling sets a dangerous precedent.
           translation: La décision crée un précédent dangereux.
@@ -181,6 +181,7 @@ lessons:
         alt:
           - situation bloquée
         pos: nom
+        hint: "Vient des échecs, où le pat bloque la partie sans la faire perdre."
         example:
           text: Talks ended in complete stalemate.
           translation: Les pourparlers se sont achevés sur une impasse totale.
@@ -209,7 +210,6 @@ lessons:
           - sanction
         pos: nom
         hint: "Comme verbe, « to sanction » signifie au contraire autoriser."
-
         example:
           text: A further sanction was imposed in June.
           translation: Une sanction supplémentaire a été imposée en juin.

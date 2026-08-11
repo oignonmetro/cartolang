@@ -47,6 +47,7 @@ lessons:
           - céder
         pos: verbe
         gap: yielded
+        hint: "Trois sens selon le contexte : produire, céder le passage, rapporter."
         example:
           text: The survey yielded unexpected results.
           translation: L'enquête a produit des résultats inattendus.
@@ -57,6 +58,7 @@ lessons:
           - mériter
         pos: verbe
         gap: warrants
+        hint: "Le nom « a warrant » est tout autre chose : un mandat de justice."
         example:
           text: The claim warrants closer scrutiny.
           translation: L'affirmation justifie un examen plus attentif.
@@ -101,19 +103,19 @@ lessons:
           - prudent
         pos: adjectif
         hint: "Faux ami : rien à voir avec « une tentative », qui se dit « an attempt »."
-
         example:
           text: These are tentative conclusions at best.
           translation: Ce sont au mieux des conclusions provisoires.
-      - id: c1-compelling
-        term: compelling
-        translation: convaincant
+      - id: c1-cogent
+        term: cogent
+        translation: rigoureux
         alt:
-          - irrésistible
+          - implacable
         pos: adjectif
+        hint: "Plus étroit que « compelling » : la force vient de la logique, pas de l'émotion."
         example:
-          text: She made a compelling case for reform.
-          translation: Elle a présenté un argumentaire convaincant en faveur de la réforme.
+          text: She made a cogent case for reform.
+          translation: Elle a présenté un argumentaire rigoureux en faveur de la réforme.
       - id: c1-questionable
         term: questionable
         translation: contestable
@@ -177,7 +179,6 @@ lessons:
           - jusqu'ici
         pos: adverbe
         hint: Registre écrit et formel ; à l'oral on dirait « until now ».
-
         example:
           text: The document was hitherto unknown to historians.
           translation: Le document était jusqu'à présent inconnu des historiens.
@@ -187,6 +188,7 @@ lessons:
         alt:
           - malgré
         pos: préposition
+        hint: "Peut aussi suivre le groupe qu'il régit : « these objections notwithstanding »."
         example:
           text: Notwithstanding these reservations, the plan went ahead.
           translation: Malgré ces réserves, le plan a été mis en œuvre.
@@ -207,17 +209,16 @@ lessons:
         example:
           text: The evidence was deemed insufficient.
           translation: Les preuves ont été jugées insuffisantes.
-      - id: c1-albeit
-        term: albeit
-        translation: quoique
+      - id: c1-whereby
+        term: whereby
+        translation: par lequel
         alt:
-          - bien que
-        pos: conjonction
-        hint: Suivi d'un adjectif ou d'un groupe, jamais d'une proposition complète.
-
+          - au moyen duquel
+        pos: pronom
+        hint: Relie un dispositif à son mécanisme ; très fréquent dans les textes juridiques.
         example:
-          text: Growth resumed, albeit slowly.
-          translation: La croissance a repris, quoique lentement.
+          text: They signed an agreement whereby costs are shared.
+          translation: Ils ont signé un accord par lequel les coûts sont partagés.
       - id: c1-thereby
         term: thereby
         translation: ce faisant

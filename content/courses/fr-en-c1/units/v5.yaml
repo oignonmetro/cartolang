@@ -26,7 +26,6 @@ lessons:
           - dérivatif
         pos: adjectif
         hint: "Reproche courant : l'œuvre imite sans rien inventer."
-
         example:
           text: The score is derivative but competent.
           translation: La musique est sans originalité mais bien faite.
@@ -103,6 +102,7 @@ lessons:
         alt:
           - images
         pos: nom
+        hint: "Indénombrable : jamais « imageries »."
         example:
           text: The imagery is drawn from folklore.
           translation: L'imagerie est puisée dans le folklore.
@@ -165,6 +165,7 @@ lessons:
         term: acclaim
         translation: éloges
         pos: nom
+        hint: "Indénombrable, et presque toujours accompagné de « critical »."
         example:
           text: The book met with immediate critical acclaim.
           translation: Le livre a immédiatement reçu les éloges de la critique.
@@ -174,6 +175,7 @@ lessons:
         alt:
           - traverser le temps
         pos: verbe
+        hint: "Intransitif, durer ; transitif, subir — « to endure hardship »."
         example:
           text: Few works endure this long.
           translation: Peu d'œuvres perdurent aussi longtemps.
@@ -183,6 +185,7 @@ lessons:
         alt:
           - canon
         pos: nom
+        hint: "Un seul n : « cannon » avec deux n est la pièce d'artillerie."
         example:
           text: The play entered the canon within a decade.
           translation: La pièce est entrée au canon en une décennie.

@@ -48,7 +48,6 @@ lessons:
         translation: respirer
         pos: verbe
         hint: Le verbe prend un e final, le nom « breath » non.
-
         example:
           text: Breathe slowly and count to five.
           translation: Respirez lentement et comptez jusqu'à cinq.
@@ -74,7 +73,6 @@ lessons:
         translation: rendez-vous
         pos: nom
         hint: Rendez-vous professionnel ou médical ; « a date » est amoureux.
-
         example:
           text: I have an appointment at four.
           translation: J'ai un rendez-vous à seize heures.
@@ -145,6 +143,7 @@ lessons:
         alt:
           - addition
         pos: nom
+        hint: "La facture, mais aussi l'addition au restaurant et un projet de loi."
         example:
           text: The electricity bill arrived this morning.
           translation: La facture d'électricité est arrivée ce matin.
@@ -157,7 +156,6 @@ lessons:
         translation: attendre avec impatience
         pos: expression
         hint: Toujours suivi d'un nom ou d'un verbe en -ing, jamais d'un infinitif.
-
         example:
           text: I look forward to the weekend.
           translation: J'attends le week-end avec impatience.
@@ -174,7 +172,6 @@ lessons:
         pos: expression
         gap: used to
         hint: "« Be used to » = habitude ; « used to » seul = ancienne habitude révolue."
-
         example:
           text: She is used to getting up early.
           translation: Elle est habituée à se lever tôt.
@@ -220,7 +217,6 @@ lessons:
           - au bout du compte
         pos: adverbe
         hint: "Faux ami : « éventuellement » se dit « possibly »."
-
         example:
           text: They eventually agreed on a date.
           translation: Ils se sont finalement mis d'accord sur une date.

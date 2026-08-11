@@ -16,7 +16,6 @@ lessons:
           - ligne de conduite
         pos: nom
         hint: "Faux ami : la politique comme domaine se dit « politics »."
-
         example:
           text: The new policy takes effect in April.
           translation: La nouvelle politique entre en vigueur en avril.

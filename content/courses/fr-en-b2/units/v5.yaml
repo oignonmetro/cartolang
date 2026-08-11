@@ -41,7 +41,6 @@ lessons:
         pos: verbe
         gap: broadcast
         hint: broadcast / broadcast / broadcast, invariable au passé.
-
         example:
           text: The debate was broadcast live on Sunday.
           translation: Le débat a été diffusé en direct dimanche.
@@ -83,6 +82,7 @@ lessons:
         term: plot
         translation: intrigue
         pos: nom
+        hint: "L'intrigue, mais aussi un complot, et une parcelle de terrain."
         example:
           text: The plot is needlessly complicated.
           translation: L'intrigue est inutilement compliquée.
@@ -91,7 +91,6 @@ lessons:
         translation: distribution
         pos: nom
         hint: Le mot désigne l'ensemble des interprètes, pas un seul.
-
         example:
           text: The cast is excellent from start to finish.
           translation: La distribution est excellente du début à la fin.
@@ -111,6 +110,7 @@ lessons:
         alt:
           - compte rendu
         pos: nom
+        hint: "Faux ami : une revue au sens de magazine se dit « a magazine »."
         example:
           text: The review was harsh but fair.
           translation: La critique était dure mais juste.
@@ -121,7 +121,6 @@ lessons:
           - spectateurs
         pos: nom
         hint: "Faux ami : rien à voir avec l'audience d'un tribunal."
-
         example:
           text: The audience stayed until the very end.
           translation: Le public est resté jusqu'au bout.
@@ -203,10 +202,11 @@ lessons:
           translation: Le choix s'est révélé profondément controversé.
       - id: b2-legacy
         term: legacy
-        translation: héritage
+        translation: postérité
         alt:
-          - postérité
+          - héritage
         pos: nom
+        hint: "Ce qu'une œuvre laisse derrière elle ; « heritage » est collectif et patrimonial."
         example:
           text: His legacy is still fiercely debated.
           translation: Son héritage est encore âprement débattu.

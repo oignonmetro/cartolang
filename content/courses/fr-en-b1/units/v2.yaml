@@ -16,7 +16,6 @@ lessons:
           - voyage
         pos: nom
         hint: "« Journey » est le trajet ; « trip » est le déplacement dans son ensemble."
-
         example:
           text: The journey takes about two hours.
           translation: Le trajet dure environ deux heures.
@@ -33,6 +32,7 @@ lessons:
         term: delay
         translation: retard
         pos: nom
+        hint: "Faux ami : un « délai » accordé se dit « a deadline » ou « time »."
         example:
           text: The delay was caused by bad weather.
           translation: Le retard était dû au mauvais temps.
@@ -48,7 +48,6 @@ lessons:
         translation: bagages
         pos: nom
         hint: "Indénombrable : « a luggage » n'existe pas, on dit « a piece of luggage »."
-
         example:
           text: Leave your luggage at the desk.
           translation: Laissez vos bagages à l'accueil.
@@ -93,6 +92,7 @@ lessons:
         translation: réserver
         pos: verbe
         gap: booked
+        hint: "Comme verbe, réserver ; le livre, c'est le nom « a book »."
         example:
           text: We booked a room online.
           translation: Nous avons réservé une chambre en ligne.
@@ -179,7 +179,6 @@ lessons:
           - souvenir
         pos: nom
         hint: "Uniquement l'objet rapporté : le souvenir en mémoire se dit « memory »."
-
         example:
           text: She bought a souvenir for her sister.
           translation: Elle a acheté un souvenir pour sa sœur.

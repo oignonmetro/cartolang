@@ -33,7 +33,6 @@ lessons:
           - paie
         pos: nom
         hint: "« Wage » se paie souvent à l'heure ou à la semaine ; « salary » au mois."
-
         example:
           text: The wage is paid every Friday.
           translation: Le salaire est versé tous les vendredis.
@@ -43,6 +42,7 @@ lessons:
         alt:
           - service
         pos: nom
+        hint: "Ici la période de travail ; le mot dit aussi un décalage."
         example:
           text: She works the night shift twice a week.
           translation: Elle travaille de nuit deux fois par semaine.
@@ -76,7 +76,6 @@ lessons:
         pos: verbe
         gap: earns
         hint: "« Earn » pour un revenu mérité ; « win » pour une compétition."
-
         example:
           text: He earns enough to live comfortably.
           translation: Il gagne assez pour vivre confortablement.
@@ -90,6 +89,7 @@ lessons:
         alt:
           - licence
         pos: nom
+        hint: "Aussi le degré d'un thermomètre ou d'un angle."
         example:
           text: She has a degree in biology.
           translation: Elle a un diplôme de biologie.
@@ -100,7 +100,6 @@ lessons:
           - suivre
         pos: verbe
         hint: "Faux ami : « attendre » se dit « to wait »."
-
         example:
           text: I attend classes every morning.
           translation: J'assiste aux cours tous les matins.
@@ -109,7 +108,6 @@ lessons:
         translation: devoirs
         pos: nom
         hint: "Indénombrable : jamais « homeworks »."
-
         example:
           text: The homework took me two hours.
           translation: Les devoirs m'ont pris deux heures.
@@ -133,7 +131,6 @@ lessons:
         pos: verbe
         gap: passed
         hint: "Faux ami : « passer un examen » se dit « to take an exam »."
-
         example:
           text: She passed the exam without difficulty.
           translation: Elle a réussi l'examen sans difficulté.
@@ -148,6 +145,7 @@ lessons:
         term: term
         translation: trimestre
         pos: nom
+        hint: "Faux ami : le terme d'un contrat se dit plutôt « end » ou « expiry »."
         example:
           text: The autumn term starts in September.
           translation: Le trimestre d'automne commence en septembre.
@@ -202,6 +200,7 @@ lessons:
           - gérer
         pos: verbe
         gap: managed
+        hint: "Deux sens : diriger, et réussir à faire — « manage to » annonce le second."
         example:
           text: I managed to finish on time.
           translation: J'ai réussi à finir à temps.

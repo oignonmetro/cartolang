@@ -89,7 +89,6 @@ lessons:
         translation: ordre du jour
         pos: nom
         hint: "Faux ami : un agenda de rendez-vous se dit « diary » ou « calendar »."
-
         example:
           text: That point is not on the agenda.
           translation: Ce point n'est pas à l'ordre du jour.

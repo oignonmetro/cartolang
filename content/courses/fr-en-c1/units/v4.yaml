@@ -15,6 +15,7 @@ lessons:
         alt:
           - postulat
         pos: nom
+        hint: "Au pluriel, « premises » désigne des locaux — sens sans rapport."
         example:
           text: The whole model rests on a shaky premise.
           translation: Tout le modèle repose sur une prémisse fragile.
@@ -95,23 +96,27 @@ lessons:
         example:
           text: Nothing in the record can substantiate that reading.
           translation: Rien dans le dossier ne peut étayer cette lecture.
-      - id: c1-to-refute
-        term: to refute
-        translation: réfuter
-        pos: verbe
-        gap: refutes
-        example:
-          text: The second chapter refutes that objection.
-          translation: Le deuxième chapitre réfute cette objection.
-      - id: c1-caveat
-        term: caveat
-        translation: réserve
+      - id: c1-to-rebut
+        term: to rebut
+        translation: réfuter point par point
         alt:
-          - mise en garde
-        pos: nom
+          - répliquer à
+        pos: verbe
+        gap: rebuts
+        hint: "Plus procédural que « refute » : on répond à chaque argument dans l'ordre."
         example:
-          text: One caveat deserves mention here.
-          translation: Une réserve mérite d'être mentionnée ici.
+          text: The second chapter rebuts that objection.
+          translation: Le deuxième chapitre réfute point par point cette objection.
+      - id: c1-proviso
+        term: proviso
+        translation: condition restrictive
+        alt:
+          - clause
+        pos: nom
+        hint: "Un « caveat » met en garde ; un « proviso » pose une condition."
+        example:
+          text: The offer stands, with one proviso.
+          translation: L'offre tient, à une condition près.
       - id: c1-to-conflate
         term: to conflate
         translation: confondre
@@ -130,7 +135,6 @@ lessons:
         pos: verbe
         gap: qualify
         hint: Sens distinct de « se qualifier » ; ici, atténuer une affirmation.
-
         example:
           text: I would qualify that statement considerably.
           translation: Je nuancerais considérablement cette affirmation.
@@ -143,16 +147,16 @@ lessons:
         example:
           text: The link between the two remains tenuous.
           translation: Le lien entre les deux reste ténu.
-      - id: c1-to-concede-a-point
-        term: to concede
-        translation: concéder
+      - id: c1-to-concur
+        term: to concur
+        translation: abonder dans le sens
         alt:
-          - admettre
+          - souscrire à
         pos: verbe
-        gap: concedes
+        hint: "Registre soutenu de « agree » ; se construit avec « with »."
         example:
-          text: Even the author concedes this much.
-          translation: L'auteur lui-même le concède.
+          text: Most historians concur with that reading.
+          translation: La plupart des historiens abondent dans le sens de cette lecture.
       - id: c1-compelling-evidence
         term: corroborate
         translation: corroborer
@@ -174,15 +178,16 @@ lessons:
         example:
           text: By and large, the evidence supports this view.
           translation: Dans l'ensemble, les données confortent cette thèse.
-      - id: c1-arguably
-        term: arguably
-        translation: sans doute
+      - id: c1-ostensibly
+        term: ostensibly
+        translation: en apparence
         alt:
-          - on peut soutenir que
+          - officiellement
         pos: adverbe
+        hint: "Faux ami : ne veut pas dire « ostensiblement », mais annonce un décalage entre l'affiché et le réel."
         example:
-          text: This is arguably the strongest chapter.
-          translation: C'est sans doute le chapitre le plus solide.
+          text: The visit was ostensibly a private one.
+          translation: La visite était en apparence privée.
       - id: c1-to-a-large-extent
         term: to a large extent
         translation: dans une large mesure

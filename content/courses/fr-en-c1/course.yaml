@@ -17,7 +17,7 @@ level: C1
 tagline: "De C1 débutant à C1 confirmé : vocabulaire, grammaire, conjugaison."
 status: available
 layout: library
-version: 4
+version: 5
 
 tracks:
   - id: vocabulaire
@@ -57,3 +57,4 @@ tracks:
       - c2
       - c3
       - c4
+      - c5

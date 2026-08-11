@@ -1,0 +1,121 @@
+id: c6
+title: Habitudes révolues
+subtitle: Used to, would, be used to — trois formes voisines
+icon: clock
+color: sky
+level: B2.1
+
+lessons:
+  - id: c6-l1
+    title: Used to et would
+    notes: |
+      Deux façons de dire ce qui se répétait autrefois, et **une différence
+      que le français ne marque pas** : son imparfait couvre les deux.
+
+      — `used to` + base verbale : une habitude **ou un état** aujourd'hui révolu.
+        I used to live in Lyon. J'habitais Lyon (ce n'est plus le cas).
+      — `would` + base verbale : une habitude **répétée**, jamais un état.
+        Every summer we would spend a month there.
+
+      `would` suppose un cadre passé déjà posé : on ne commence pas un récit
+      par lui.
+
+      ! `would` refuse les états. « I would live in Lyon » ne veut pas dire
+      que j'y habitais ; seul `used to` le permet.
+    verbs:
+      - verb: to live
+        translation: habiter
+        tense: used to
+        note: "État révolu : seul « used to » convient."
+        forms:
+          - id: c6-live-used-aff
+            person: affirmatif
+            answer: used to live
+          - id: c6-live-used-neg
+            person: négatif
+            answer: did not use to live
+            alt:
+              - didn't use to live
+      - verb: to smoke
+        translation: fumer
+        tense: used to
+        note: "Après « did », on écrit « use to » sans -d."
+        forms:
+          - id: c6-smoke-used-q
+            person: interrogatif
+            answer: did you use to smoke
+          - id: c6-smoke-used-aff
+            person: affirmatif
+            answer: used to smoke
+      - verb: to spend
+        translation: passer du temps
+        tense: would, habitude répétée
+        note: Interchangeable avec « used to » quand il s'agit d'une action.
+        forms:
+          - id: c6-spend-would
+            person: habitude répétée
+            answer: would spend
+          - id: c6-spend-past
+            person: prétérit simple
+            answer: spent
+
+  - id: c6-l2
+    title: Be used to et get used to
+    notes: |
+      Un seul mot change, et le sens bascule complètement. Ici `used` n'est
+      plus un passé mais **un adjectif**, et ce qui suit se met en -ing.
+
+      — `used to` + base verbale : c'était le cas autrefois.
+        I used to work at night. Je travaillais de nuit, autrefois.
+      — `be used to` + -ing : j'y suis habitué, c'est acquis.
+        I am used to working at night. Le travail de nuit ne me gêne plus.
+      — `get used to` + -ing : je m'y habitue, c'est en cours.
+        I am getting used to working at night.
+
+      ! La forme du verbe suivant tranche à elle seule : base verbale après
+      `used to`, forme en -ing après `be` ou `get used to`.
+    verbs:
+      - verb: to work (après used to)
+        translation: travailler
+        tense: la forme qui suit
+        note: "C'est ici que tout se joue : -ing ou base verbale."
+        forms:
+          - id: c6-work-bare
+            person: après « used to » seul
+            answer: used to work
+          - id: c6-work-ing
+            person: après « be used to »
+            answer: used to working
+      - verb: to be used to
+        translation: être habitué à
+        tense: état acquis
+        note: "« Be » se conjugue normalement, « used to » ne bouge pas."
+        forms:
+          - id: c6-beused-pres
+            person: présent, je
+            answer: am used to
+          - id: c6-beused-past
+            person: prétérit
+            answer: was used to
+      - verb: to get used to
+        translation: s'habituer à
+        tense: processus en cours
+        note: "« Get » marque le passage d'un état à l'autre."
+        forms:
+          - id: c6-getused-pres
+            person: présent
+            answer: get used to
+          - id: c6-getused-perf
+            person: present perfect
+            answer: have got used to
+      - verb: to travel
+        translation: voyager
+        tense: après get used to
+        note: Le verbe qui suit prend toujours -ing.
+        forms:
+          - id: c6-travel-getused
+            person: après « get used to »
+            answer: get used to travelling
+          - id: c6-travel-getused-past
+            person: prétérit
+            answer: got used to travelling
