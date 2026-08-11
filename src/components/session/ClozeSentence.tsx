@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
 import type { ClozeExercise } from '@/engine/exercises'
-import { normalizeAnswer } from '@/engine/exercises'
+import { normalizeForm } from '@/engine/exercises'
 import { Button } from '@/components/Button'
 
 /**
@@ -31,7 +31,7 @@ export function ClozeSentence({
   const filled = value.trim().length > 0
 
   function check(candidate: string) {
-    const correct = normalizeAnswer(candidate) === normalizeAnswer(sentence.match)
+    const correct = normalizeForm(candidate) === normalizeForm(sentence.match)
     setValue(candidate)
     setChecked(correct)
   }

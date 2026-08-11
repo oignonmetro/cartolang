@@ -150,9 +150,9 @@ lessons:
           translation: Cette position est devenue intenable.
       - id: c1-plausible
         term: plausible
-        translation: plausible
+        translation: vraisemblable
         alt:
-          - vraisemblable
+          - plausible
         pos: adjectif
         example:
           text: It remains the most plausible explanation.

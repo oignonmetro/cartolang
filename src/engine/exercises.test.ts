@@ -332,4 +332,21 @@ describe('correction grammaire et conjugaison', () => {
     expect(matchesAnswer('has seen', [], 'have seen')).toBe(false)
     expect(matchesAnswer('has seen', [], '')).toBe(false)
   })
+
+  it('distingue l’article et le « to », qui font l’objet de l’exercice', () => {
+    // Régression : la comparaison lâche du vocabulaire retirait l'article et
+    // le « to », si bien qu'une leçon sur « little » vs « a little » acceptait
+    // les deux, et qu'un leurre comme « the shorter » passait pour correct.
+    expect(matchesAnswer('little', [], 'a little')).toBe(false)
+    expect(matchesAnswer('shorter', [], 'the shorter')).toBe(false)
+    expect(matchesAnswer('to postpone', [], 'postpone')).toBe(false)
+    // Une variante réellement acceptable reste déclarée par l'auteur.
+    expect(matchesAnswer('boils', ['boiled'], 'boiled')).toBe(true)
+  })
+
+  it('reste souple sur l’article pour le vocabulaire', () => {
+    const vocab: Vocab = { id: 'w', term: 'to tackle', translation: "s'attaquer à", alt: [] }
+    expect(isAnswerCorrect(vocab, 'to-learning', 'tackle')).toBe(true)
+    expect(isAnswerCorrect(vocab, 'to-learning', 'to tackle')).toBe(true)
+  })
 })

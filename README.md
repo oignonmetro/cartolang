@@ -6,9 +6,9 @@ revenir au bon moment ce qui est fragile.
 
 Trois niveaux d'anglais pour francophones — **B1**, **B2**, **C1** — choisis
 depuis un sélecteur en un clic (le badge drapeau + niveau en haut de l'écran).
-Chacun est structuré de la même façon : onze unités réparties sur trois pistes
-(vocabulaire, grammaire, conjugaison) que l'apprenant parcourt librement, dans
-l'ordre qu'il veut. Environ 570 éléments en tout.
+Chacun est structuré de la même façon : quatorze unités réparties sur trois
+pistes (vocabulaire, grammaire, conjugaison) que l'apprenant parcourt
+librement, dans l'ordre qu'il veut. Environ 720 éléments en tout.
 
 Le moteur est générique : un cours n'est qu'un jeu de fichiers YAML.
 

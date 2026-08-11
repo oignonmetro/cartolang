@@ -1,0 +1,209 @@
+id: v5
+title: Manger et faire ses courses
+subtitle: Au restaurant, au marché, aux fourneaux
+icon: cup
+color: teal
+level: B1
+
+lessons:
+  - id: v5-l1
+    title: Au restaurant
+    vocab:
+      - id: b1-starter
+        term: starter
+        translation: entrée
+        pos: nom
+        hint: "En anglais américain on dit plutôt « appetizer »."
+
+        example:
+          text: The starter was better than the main course.
+          translation: L'entrée était meilleure que le plat principal.
+      - id: b1-main-course
+        term: main course
+        translation: plat principal
+        pos: nom
+        example:
+          text: The main course took twenty minutes to arrive.
+          translation: Le plat principal a mis vingt minutes à arriver.
+      - id: b1-to-order
+        term: to order
+        translation: commander
+        pos: verbe
+        gap: ordered
+        example:
+          text: We ordered far too much food.
+          translation: Nous avons commandé beaucoup trop à manger.
+      - id: b1-tip
+        term: tip
+        translation: pourboire
+        alt:
+          - conseil
+        pos: nom
+        example:
+          text: The tip is not included in the price.
+          translation: Le pourboire n'est pas compris dans le prix.
+      - id: b1-tasty
+        term: tasty
+        translation: savoureux
+        pos: adjectif
+        example:
+          text: The soup was surprisingly tasty.
+          translation: La soupe était étonnamment savoureuse.
+      - id: b1-waiter
+        term: waiter
+        translation: serveur
+        pos: nom
+        example:
+          text: The waiter brought the wrong dish.
+          translation: Le serveur a apporté le mauvais plat.
+      - id: b1-dish
+        term: dish
+        translation: plat
+        alt:
+          - assiette
+        pos: nom
+        example:
+          text: This dish is a local speciality.
+          translation: Ce plat est une spécialité locale.
+      - id: b1-to-be-starving
+        term: to be starving
+        translation: mourir de faim
+        pos: expression
+        gap: starving
+        example:
+          text: I am starving after that walk.
+          translation: Je meurs de faim après cette marche.
+
+  - id: v5-l2
+    title: Faire les courses
+    vocab:
+      - id: b1-grocery
+        term: grocery
+        translation: épicerie
+        pos: nom
+        example:
+          text: The grocery on the corner opens early.
+          translation: L'épicerie du coin ouvre tôt.
+      - id: b1-trolley
+        term: trolley
+        translation: chariot
+        alt:
+          - caddie
+        pos: nom
+        example:
+          text: The trolley was already full.
+          translation: Le chariot était déjà plein.
+      - id: b1-checkout
+        term: checkout
+        translation: caisse
+        pos: nom
+        example:
+          text: There was a long queue at the checkout.
+          translation: Il y avait une longue file à la caisse.
+      - id: b1-receipt
+        term: receipt
+        translation: ticket de caisse
+        alt:
+          - reçu
+        pos: nom
+        hint: Le p ne se prononce pas.
+
+        example:
+          text: Keep the receipt for the guarantee.
+          translation: Gardez le ticket de caisse pour la garantie.
+      - id: b1-bargain
+        term: bargain
+        translation: bonne affaire
+        pos: nom
+        example:
+          text: That coat was a real bargain.
+          translation: Ce manteau était une vraie bonne affaire.
+      - id: b1-to-run-errands
+        term: to run errands
+        translation: faire des courses
+        pos: expression
+        gap: run errands
+        example:
+          text: I run errands on Saturday mornings.
+          translation: Je fais mes courses le samedi matin.
+      - id: b1-fresh
+        term: fresh
+        translation: frais
+        pos: adjectif
+        example:
+          text: The bread is fresh from this morning.
+          translation: Le pain est frais de ce matin.
+      - id: b1-aisle
+        term: aisle
+        translation: rayon
+        alt:
+          - allée
+        pos: nom
+        example:
+          text: Milk is in the third aisle.
+          translation: Le lait est dans le troisième rayon.
+
+  - id: v5-l3
+    title: Cuisiner
+    vocab:
+      - id: b1-recipe
+        term: recipe
+        translation: recette
+        pos: nom
+        example:
+          text: The recipe calls for four eggs.
+          translation: La recette demande quatre œufs.
+      - id: b1-to-chop
+        term: to chop
+        translation: couper en morceaux
+        alt:
+          - hacher
+        pos: verbe
+        example:
+          text: Chop the onions finely.
+          translation: Coupez les oignons finement.
+      - id: b1-to-boil
+        term: to boil
+        translation: faire bouillir
+        pos: verbe
+        example:
+          text: Boil the water before adding the pasta.
+          translation: Faites bouillir l'eau avant d'ajouter les pâtes.
+      - id: b1-to-bake
+        term: to bake
+        translation: cuire au four
+        pos: verbe
+        gap: bakes
+        example:
+          text: She bakes bread every Sunday.
+          translation: Elle fait du pain tous les dimanches.
+      - id: b1-ingredient
+        term: ingredient
+        translation: ingrédient
+        pos: nom
+        example:
+          text: One ingredient is missing from the list.
+          translation: Il manque un ingrédient dans la liste.
+      - id: b1-tablespoon
+        term: tablespoon
+        translation: cuillère à soupe
+        pos: nom
+        example:
+          text: Add one tablespoon of olive oil.
+          translation: Ajoutez une cuillère à soupe d'huile d'olive.
+      - id: b1-leftovers
+        term: leftovers
+        translation: restes
+        pos: nom
+        hint: Toujours au pluriel.
+
+        example:
+          text: We ate the leftovers for lunch.
+          translation: Nous avons mangé les restes au déjeuner.
+      - id: b1-to-taste
+        term: to taste
+        translation: goûter
+        pos: verbe
+        example:
+          text: Taste it before adding salt.
+          translation: Goûte avant d'ajouter du sel.

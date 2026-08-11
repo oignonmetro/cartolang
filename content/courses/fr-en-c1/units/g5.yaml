@@ -1,0 +1,168 @@
+id: g5
+title: Nominalisation
+subtitle: Le style dense de l'écrit formel
+icon: clock
+color: violet
+level: C1
+
+lessons:
+  - id: g5-l1
+    title: Du verbe au nom
+    notes: |
+      L'écrit formel anglais **préfère le nom au verbe**. Là où l'oral dit
+      « prices rose sharply », le rapport écrira « the sharp rise in prices ».
+      C'est le premier réflexe à acquérir pour écrire dense.
+
+      — -tion / -sion : decide → decision, publish → publication
+      — -ment : develop → development, judge → judgement
+      — -ance / -ence : appear → appearance, refer → reference
+      — -al : arrive → arrival, refuse → refusal
+      — -ure : fail → failure, depart → departure
+
+      Certains noms ne prennent aucun suffixe et se confondent avec le verbe :
+      `a rise`, `a change`, `a claim`, `a decline`.
+
+      ! Attention au piège `rise` / `raise` : le nom courant est `a rise`,
+      formé sur le verbe intransitif.
+    points:
+      - id: g5-nom-1
+        sentence: Prices rose sharply. → The sharp ___ in prices alarmed analysts.
+        answer: rise
+        options:
+          - rise
+          - raise
+          - rising
+          - risen
+        translation: La forte hausse des prix a inquiété les analystes.
+        explanation: "Nom sans suffixe, formé sur l'intransitif : a rise."
+      - id: g5-nom-2
+        sentence: They decided quickly. → The ___ was taken in a single afternoon.
+        answer: decision
+        options:
+          - decision
+          - deciding
+          - decidement
+          - decisiveness
+        translation: La décision a été prise en une seule après-midi.
+        explanation: "Suffixe -sion sur un verbe en -de : decide → decision."
+      - id: g5-nom-3
+        sentence: The company failed to comply. → Its ___ to comply led to a fine.
+        answer: failure
+        options:
+          - failure
+          - failing
+          - failment
+          - fail
+        translation: Son manquement à se conformer a entraîné une amende.
+        explanation: "Suffixe -ure : fail → failure."
+      - id: g5-nom-4
+        sentence: He arrived late. → His late ___ delayed the whole panel.
+        answer: arrival
+        options:
+          - arrival
+          - arrivement
+          - arriving
+          - arrivance
+        translation: Son arrivée tardive a retardé toute la table ronde.
+        explanation: "Suffixe -al, fréquent sur les verbes de mouvement : arrive → arrival."
+      - id: g5-nom-5
+        sentence: They analysed the data. → Their ___ of the data is convincing.
+        answer: analysis
+        options:
+          - analysis
+          - analyse
+          - analysation
+          - analysing
+        translation: Leur analyse des données est convaincante.
+        explanation: Nom d'origine grecque, au pluriel irrégulier « analyses ».
+      - id: g5-nom-6
+        sentence: The minister resigned. → Her ___ took everyone by surprise.
+        answer: resignation
+        options:
+          - resignation
+          - resignment
+          - resigning
+          - resignal
+        translation: Sa démission a pris tout le monde de court.
+        explanation: "Suffixe -ation : resign → resignation."
+
+  - id: g5-l2
+    title: Comprimer une proposition
+    notes: |
+      Une fois le nom obtenu, on peut **remplacer toute une subordonnée par un
+      groupe nominal**. La phrase se raccourcit et monte d'un cran en registre.
+
+      — After the committee had met, … → `Following the meeting`, …
+      — Because costs increased, … → `Because of the increase in costs`, …
+      — When they arrive, … → `On arrival`, …
+      — Since he was absent, … → `In his absence`, …
+
+      Le procédé a une limite : il **efface le sujet et le temps**. Réservez-le
+      aux cas où l'un et l'autre vont de soi.
+
+      ! N'enchaînez pas trois groupes nominaux de suite : le texte devient
+      illisible, défaut classique de la prose administrative.
+    points:
+      - id: g5-comp-1
+        sentence: The committee met. → ___ the meeting, no decision was announced.
+        answer: Following
+        options:
+          - Following
+          - Followed
+          - Follow
+          - To follow
+        translation: À la suite de la réunion, aucune décision n'a été annoncée.
+        explanation: « Following » + nom remplace une subordonnée de temps.
+      - id: g5-comp-2
+        sentence: Costs increased. → The plan was dropped ___ the increase in costs.
+        answer: because of
+        alt:
+          - owing to
+          - due to
+        options:
+          - because of
+          - because
+          - since
+          - as
+        translation: Le plan a été abandonné en raison de la hausse des coûts.
+        explanation: Devant un groupe nominal, « because » seul est impossible.
+      - id: g5-comp-3
+        sentence: When guests arrive, they sign in. → ___ arrival, guests are asked to sign in.
+        answer: On
+        options:
+          - On
+          - At
+          - In
+          - By
+        translation: À leur arrivée, les invités sont priés de signer le registre.
+        explanation: "Formule figée : « on arrival », sans article."
+      - id: g5-comp-4
+        sentence: He was absent. → In his ___, the deputy chaired the session.
+        answer: absence
+        options:
+          - absence
+          - absent
+          - absentness
+          - absenting
+        translation: En son absence, l'adjoint a présidé la séance.
+        explanation: « In his absence » comprime une subordonnée de cause.
+      - id: g5-comp-5
+        sentence: They refused to sign. → Their ___ to sign ended the talks.
+        answer: refusal
+        options:
+          - refusal
+          - refuse
+          - refusement
+          - refusing
+        translation: Leur refus de signer a mis fin aux pourparlers.
+        explanation: "Suffixe -al : refuse → refusal, comme arrive → arrival."
+      - id: g5-comp-6
+        sentence: The law was published. → ___ of the law was delayed until June.
+        answer: Publication
+        options:
+          - Publication
+          - Publishing
+          - Publishment
+          - Publish
+        translation: La publication de la loi a été repoussée à juin.
+        explanation: Le nom en tête de phrase porte le sujet, sans article ici.

@@ -1,0 +1,108 @@
+id: c4
+title: Le passif
+subtitle: Quand le sujet subit l'action
+icon: people
+color: sky
+level: B1
+
+lessons:
+  - id: c4-l1
+    title: Présent et prétérit passifs
+    notes: |
+      Le passif se construit toujours de la même façon : **`be` au temps voulu
+      + participe passé**. C'est `be` qui porte tout le travail, le participe
+      ne bouge jamais.
+
+      — Actif : Someone built this house in 1920.
+      — Passif : This house was built in 1920.
+
+      On l'emploie quand l'auteur de l'action est **inconnu, évident ou sans
+      intérêt** — ce qui est très fréquent dans la langue écrite.
+
+      ! Ne confondez pas le participe passé avec le prétérit : on dit
+      `was built`, jamais « was build » ni « was builded ».
+    verbs:
+      - verb: to make
+        translation: fabriquer
+        tense: passif, singulier
+        note: make / made / made — le participe est identique au prétérit.
+        forms:
+          - id: c4-make-pres-pass
+            person: présent passif
+            answer: is made
+          - id: c4-make-past-pass
+            person: prétérit passif
+            answer: was made
+      - verb: to build
+        translation: construire
+        tense: passif, pluriel
+        note: "Au pluriel, seul « be » change : are / were."
+        forms:
+          - id: c4-build-pres-pass
+            person: présent passif
+            answer: are built
+          - id: c4-build-past-pass
+            person: prétérit passif
+            answer: were built
+      - verb: to write
+        translation: écrire
+        tense: passif, singulier
+        note: write / wrote / written — attention au participe irrégulier.
+        forms:
+          - id: c4-write-pres-pass
+            person: présent passif
+            answer: is written
+          - id: c4-write-past-pass
+            person: prétérit passif
+            answer: was written
+
+  - id: c4-l2
+    title: Le passif aux autres temps
+    notes: |
+      Une fois la mécanique acquise, elle **se transpose à tous les temps** :
+      on conjugue `be`, et le participe reste identique.
+
+      — Futur : will be + participe.
+        The results will be sent tomorrow.
+      — Present perfect : has / have been + participe.
+        The letter has been sent.
+      — Avec un modal : modal + be + participe.
+        The engine can be repaired.
+
+      L'agent, quand on tient à le nommer, s'introduit par `by`.
+
+      — The novel was written by a teacher.
+    verbs:
+      - verb: to send
+        translation: envoyer
+        tense: passif composé
+        note: send / sent / sent.
+        forms:
+          - id: c4-send-fut-pass
+            person: futur passif
+            answer: will be sent
+          - id: c4-send-perf-pass
+            person: present perfect passif
+            answer: has been sent
+      - verb: to repair
+        translation: réparer
+        tense: passif avec modal
+        note: "Après un modal, « be » reste à la base verbale."
+        forms:
+          - id: c4-repair-modal-pass
+            person: passif avec « can »
+            answer: can be repaired
+          - id: c4-repair-inf-pass
+            person: passif à l'infinitif
+            answer: to be repaired
+      - verb: to invite
+        translation: inviter
+        tense: passif, pluriel
+        note: Verbe régulier ; le participe se termine simplement par -d.
+        forms:
+          - id: c4-invite-past-pass
+            person: prétérit passif
+            answer: were invited
+          - id: c4-invite-pres-pass
+            person: présent passif
+            answer: are invited

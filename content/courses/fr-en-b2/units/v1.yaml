@@ -159,9 +159,9 @@ lessons:
           translation: Le résumé minimise le coût du retard.
       - id: b2-nuance
         term: nuance
-        translation: nuance
+        translation: subtilité
         alt:
-          - subtilité
+          - nuance
         pos: nom
         example:
           text: The translation loses much of the nuance.

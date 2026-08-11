@@ -72,6 +72,23 @@ const courseFileSchema = z.discriminatedUnion('layout', [
 
 class ContentError extends Error {}
 
+/**
+ * Signalements qui n'invalident pas le contenu mais méritent un regard.
+ * Une traduction identique au terme, par exemple : défendable pour un
+ * grand débutant (« bus » est le même mot), douteux au-delà.
+ */
+const warnings: string[] = []
+
+function warn(where: string, message: string) {
+  warnings.push(`${where} : ${message}`)
+}
+
+function reportWarnings() {
+  if (warnings.length === 0) return
+  console.log(`\n${warnings.length} remarque(s) :`)
+  for (const line of warnings) console.log(`  · ${line}`)
+}
+
 function fail(file: string, message: string): never {
   throw new ContentError(`${file}\n    ${message}`)
 }
@@ -228,6 +245,17 @@ function checkVocabLesson(lesson: VocabLesson, problems: string[]) {
     if (seen.has(key)) problems.push(`leçon "${lesson.id}" : le terme "${vocab.term}" apparaît deux fois`)
     seen.add(key)
 
+    // Une carte « motif → motif » n'enseigne rien, et l'association afficherait
+    // le même mot dans les deux colonnes. Défendable pour un grand débutant,
+    // douteux au-delà : on signale sans bloquer.
+    if (vocab.term.trim().toLowerCase() === vocab.translation.trim().toLowerCase()) {
+      warn(
+        `mot "${vocab.id}"`,
+        `traduction identique au terme ("${vocab.term}") ; une traduction qui ` +
+          'informe, avec la forme identique dans `alt`, ferait une meilleure carte',
+      )
+    }
+
     if (vocab.example && !findVocabGap(vocab.example.text, vocab.term, vocab.gap)) {
       problems.push(
         `mot "${vocab.id}" : la phrase d'exemple ne contient ni "${vocab.term}" ni sa forme nue ; ` +
@@ -334,6 +362,7 @@ function main() {
   }
 
   if (checkOnly) {
+    reportWarnings()
     console.log('\nContenu valide.')
     return
   }
@@ -343,6 +372,7 @@ function main() {
     writeFileSync(join(outDir, `${course.id}.json`), JSON.stringify(course), 'utf8')
   }
   writeFileSync(join(outDir, 'manifest.json'), JSON.stringify(manifest, null, 2), 'utf8')
+  reportWarnings()
   console.log(`\nÉcrit dans public/content/`)
 }
 

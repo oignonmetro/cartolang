@@ -375,10 +375,15 @@ export function splitGap(sentence: string): { before: string; after: string } {
   return { before: sentence.slice(0, at), after: sentence.slice(at + GAP.length) }
 }
 
-/** Vérifie une réponse de grammaire ou de conjugaison. */
+/**
+ * Vérifie une réponse de grammaire ou de conjugaison.
+ *
+ * Comparaison stricte sur l'article et le « to » : les variantes réellement
+ * acceptables se déclarent dans `alt`, elles ne se devinent pas.
+ */
 export function matchesAnswer(expected: string, alt: readonly string[], value: string): boolean {
-  const given = normalizeAnswer(value)
-  return given.length > 0 && [expected, ...alt].some((candidate) => normalizeAnswer(candidate) === given)
+  const given = normalizeForm(value)
+  return given.length > 0 && [expected, ...alt].some((candidate) => normalizeForm(candidate) === given)
 }
 
 /** Nombre d'éléments distincts qu'une leçon fera travailler. */
@@ -407,12 +412,8 @@ function sharesVocab(a: Exercise, b: Exercise): boolean {
   return itemIdsOf(b).some((id) => idsA.has(id))
 }
 
-/**
- * Comparaison d'une réponse saisie au clavier.
- * On ignore la casse, les accents, la ponctuation et les articles courants :
- * l'exercice porte sur le vocabulaire, pas sur l'orthographe du français.
- */
-export function normalizeAnswer(value: string): string {
+/** Casse, accents, ponctuation : ce qu'on ignore dans tous les cas. */
+function normalizeCore(value: string): string {
   return value
     .trim()
     .toLowerCase()
@@ -420,10 +421,34 @@ export function normalizeAnswer(value: string): string {
     .replace(/[\u0300-\u036f]/g, '')
     .replace(/[.,!?;:"“”()]/g, '')
     .replace(/[’‘]/g, "'")
-    .replace(/^(le |la |les |l'|un |une |des |to |the |a |an )/, '')
+}
+
+function collapse(value: string): string {
+  return value
     .replace(/'/g, '')
     .replace(/\s+/g, ' ')
     .trim()
+}
+
+/**
+ * Forme exacte attendue — grammaire, conjugaison, phrase à trou.
+ *
+ * Ici l'article et le « to » de l'infinitif ne sont pas du bruit : ils sont
+ * souvent l'objet même de l'exercice. Les ignorer reviendrait à accepter
+ * « a little » là où la leçon enseigne « little », ou « postpone » là où elle
+ * enseigne « to postpone » — soit exactement la distinction qu'on évalue.
+ */
+export function normalizeForm(value: string): string {
+  return collapse(normalizeCore(value))
+}
+
+/**
+ * Réponse de vocabulaire saisie au clavier.
+ * On ignore en plus les articles courants et le « to » de l'infinitif :
+ * l'exercice porte sur le mot, pas sur son déterminant.
+ */
+export function normalizeAnswer(value: string): string {
+  return collapse(normalizeCore(value).replace(/^(le |la |les |l'|un |une |des |to |the |a |an )/, ''))
 }
 
 export function isAnswerCorrect(vocab: Vocab, direction: Direction, value: string): boolean {

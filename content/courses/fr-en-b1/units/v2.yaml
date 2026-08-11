@@ -174,7 +174,9 @@ lessons:
           translation: Nous nous sommes perdus deux fois en chemin.
       - id: b1-souvenir
         term: souvenir
-        translation: souvenir
+        translation: objet souvenir
+        alt:
+          - souvenir
         pos: nom
         hint: "Uniquement l'objet rapporté : le souvenir en mémoire se dit « memory »."
 

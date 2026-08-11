@@ -1,0 +1,139 @@
+id: c4
+title: Faire faire et laisser faire
+subtitle: Causatif, perception, et ce qu'on subit
+icon: people
+color: sky
+level: C1
+
+lessons:
+  - id: c4-l1
+    title: Le causatif
+    notes: |
+      Pour dire qu'on **fait faire** quelque chose par quelqu'un d'autre,
+      l'anglais n'a pas de verbe unique : il place le participe passé après
+      l'objet.
+
+      — `have` + objet + participe : le tour neutre.
+        We had the car repaired. Nous avons fait réparer la voiture.
+      — `get` + objet + participe : même sens, registre plus familier.
+        We got the car repaired.
+
+      Deux autres verbes disent la contrainte et la permission, et tous deux
+      se construisent **sans `to`**.
+
+      — `make` + objet + base verbale : contraindre.
+        They made him wait. Ils l'ont fait attendre.
+      — `let` + objet + base verbale : autoriser.
+        They let her go. Ils l'ont laissée partir.
+
+      ! Au passif, `make` retrouve son `to` : `He was made to wait`.
+    verbs:
+      - verb: to have (causatif)
+        translation: faire faire
+        tense: have + objet + participe
+        note: "L'ordre ne varie jamais : have + objet + participe passé."
+        forms:
+          - id: c4-have-caus-pres
+            person: présent
+            answer: have the car repaired
+          - id: c4-have-caus-past
+            person: prétérit
+            answer: had the car repaired
+      - verb: to get (causatif)
+        translation: faire faire
+        tense: get + objet + participe
+        note: Même construction que « have », registre plus courant à l'oral.
+        forms:
+          - id: c4-get-caus-pres
+            person: présent
+            answer: get the car repaired
+          - id: c4-get-caus-past
+            person: prétérit
+            answer: got the car repaired
+      - verb: to make
+        translation: contraindre
+        tense: make + objet + base verbale
+        note: "Sans « to » à l'actif, avec « to » au passif."
+        forms:
+          - id: c4-make-caus-past
+            person: prétérit actif
+            answer: made him wait
+          - id: c4-make-caus-pass
+            person: prétérit passif
+            answer: was made to wait
+      - verb: to let
+        translation: laisser
+        tense: let + objet + base verbale
+        note: let / let / let — invariable, et jamais suivi de « to ».
+        forms:
+          - id: c4-let-pres
+            person: présent
+            answer: let her go
+          - id: c4-let-neg
+            person: présent négatif
+            answer: do not let her go
+
+  - id: c4-l2
+    title: Perception et désagrément subi
+    notes: |
+      Les verbes de perception distinguent, par la forme qui les suit, **une
+      action vue en entier d'une action saisie en cours**.
+
+      — base verbale : l'action complète, du début à la fin.
+        I saw him leave. Je l'ai vu partir (il est parti).
+      — verbe en -ing : l'action en train de se dérouler.
+        I saw him leaving. Je l'ai vu qui partait.
+
+      La même construction `have` + objet + participe qui sert au causatif
+      exprime aussi ce qu'on **subit**, sans l'avoir voulu. Seul le contexte
+      distingue les deux.
+
+      — I had my bag stolen. Je me suis fait voler mon sac.
+
+      ! `help` accepte les deux formes : `helped me move` et `helped me to
+      move` sont également corrects.
+    verbs:
+      - verb: to see (perception)
+        translation: voir
+        tense: see + objet + forme verbale
+        note: La base verbale dit le tout, le -ing dit le déroulement.
+        forms:
+          - id: c4-see-bare
+            person: action complète
+            answer: saw him leave
+          - id: c4-see-ing
+            person: action en cours
+            answer: saw him leaving
+      - verb: to hear (perception)
+        translation: entendre
+        tense: hear + objet + forme verbale
+        note: Même opposition que pour « see ».
+        forms:
+          - id: c4-hear-bare
+            person: action complète
+            answer: heard her say it
+          - id: c4-hear-ing
+            person: action en cours
+            answer: heard her saying it
+      - verb: to have (subi)
+        translation: subir
+        tense: have + objet + participe
+        note: Même forme que le causatif ; c'est le sens qui les sépare.
+        forms:
+          - id: c4-have-suffer-past
+            person: prétérit
+            answer: had my bag stolen
+          - id: c4-have-suffer-perf
+            person: present perfect
+            answer: have had my bag stolen
+      - verb: to help
+        translation: aider
+        tense: help + objet + infinitif
+        note: Les deux constructions coexistent, sans différence de sens.
+        forms:
+          - id: c4-help-to
+            person: avec « to »
+            answer: helped me to move
+          - id: c4-help-bare
+            person: sans « to »
+            answer: helped me move

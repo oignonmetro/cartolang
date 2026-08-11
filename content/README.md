@@ -219,6 +219,10 @@ proposent la mise à jour au prochain démarrage avec du réseau.
 ## Ce que la validation vérifie
 
 - identifiants uniques (éléments et leçons) sur tout le cours ;
+- traduction distincte du terme — signalée en remarque, pas bloquante :
+  une carte « motif → motif » n'enseigne rien et l'association afficherait le
+  même mot des deux côtés. Donnez une traduction qui informe, et gardez la
+  forme identique dans `alt` ;
 - nom de fichier d'unité cohérent avec son `id` ;
 - toute unité référencée existe, et toute unité existante est référencée ;
 - au moins 4 mots par leçon de vocabulaire, 3 points par leçon de grammaire,

@@ -204,7 +204,9 @@ lessons:
           translation: Les deux camps ont tenté de désamorcer la crise.
       - id: c1-sanction
         term: sanction
-        translation: sanction
+        translation: mesure punitive
+        alt:
+          - sanction
         pos: nom
         hint: "Comme verbe, « to sanction » signifie au contraire autoriser."
 
