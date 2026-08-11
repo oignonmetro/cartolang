@@ -13,7 +13,7 @@ lessons:
       l'activité elle-même, la forme simple sur le résultat ou la quantité.
       — I have been reading all afternoon. (l'activité et sa durée)
       — I have read three chapters. (le résultat chiffré)
-      Les verbes d'état (know, believe, own, belong) refusent la forme continue.
+      ! Les verbes d'état (know, believe, own, belong) refusent la forme continue.
     verbs:
       - verb: to work
         translation: travailler

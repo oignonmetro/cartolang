@@ -14,7 +14,8 @@ lessons:
       — Suivi d'une proposition (sujet + verbe) : although, even though, whereas, since.
       — Suivi d'un groupe nominal : despite, in spite of, because of, due to.
       — En tête de phrase, seul et suivi d'une virgule : however, nevertheless, therefore.
-      « Despite that he came » est faux ; « despite the fact that he came » est correct mais lourd.
+      ! « Despite that he came » est faux ; « despite the fact that he came »
+      est correct, mais lourd.
     points:
       - id: g4-conn-1
         sentence: ___ the heavy rain, the match went ahead.

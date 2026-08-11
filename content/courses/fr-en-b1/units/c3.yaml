@@ -60,11 +60,16 @@ lessons:
     notes: |
       « Will » est un modal comme les autres : une seule forme pour toutes les
       personnes, base verbale nue derrière.
-      — I will go, she will go — jamais « she wills » ni « will to go ».
-      « Be going to », lui, se conjugue vraiment, puisque « be » se conjugue :
-      am / is / are going to.
+
+      — I will go, she will go.
+      — « Be going to » se conjugue vraiment, puisque « be » se conjugue.
+        I am going to go, she is going to go, we are going to go.
+
       La contraction 'll est la forme parlée normale, et « won't » est la
       négation de « will ».
+
+      ! Jamais de -s ni de « to » derrière un modal : « she wills » et
+      « will to go » sont fautifs.
     verbs:
       - verb: to go
         translation: aller

@@ -51,10 +51,16 @@ lessons:
     title: Le passif aux temps composés
     notes: |
       Le passif se forme avec « be » au temps voulu, suivi du participe passé.
-      C'est donc « be » qui porte toute la conjugaison.
-      — Présent : is written — Prétérit : was written
-      — Present perfect : has been written — Past perfect : had been written
-      — Futur : will be written — Modal : must be written
+      C'est donc « be » qui porte toute la conjugaison, et le participe qui ne
+      bouge jamais.
+
+      — Présent : is written
+      — Prétérit : was written
+      — Present perfect : has been written
+      — Past perfect : had been written
+      — Futur : will be written
+      — Modal : must be written
+
       Le passif continu existe au présent et au prétérit : is being written.
     verbs:
       - verb: to write (passif)

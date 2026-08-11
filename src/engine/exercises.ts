@@ -68,6 +68,8 @@ export interface RuleExercise {
   id: string
   title: string
   notes: string
+  /** Nature de la leçon : l'écran s'accorde à la couleur de sa piste. */
+  topic: 'grammar' | 'conjugation'
 }
 
 export interface GrammarGapExercise {
@@ -270,7 +272,7 @@ function buildGrammarSession(
   // Le rappel de cours n'apparaît qu'à la découverte : au-delà, il donnerait
   // la réponse avant même la question.
   const preamble: Exercise[] =
-    level <= 0 && notes ? [{ kind: 'rule', id: `rule:${lessonId}`, title, notes }] : []
+    level <= 0 && notes ? [{ kind: 'rule', id: `rule:${lessonId}`, title, notes, topic: 'grammar' }] : []
 
   return [...preamble, ...gaps]
 }
@@ -289,7 +291,7 @@ function buildConjugationSession(
 ): Exercise[] {
   const rng = createRng(seed)
   const preamble: Exercise[] =
-    level <= 0 && notes ? [{ kind: 'rule', id: `rule:${lessonId}`, title, notes }] : []
+    level <= 0 && notes ? [{ kind: 'rule', id: `rule:${lessonId}`, title, notes, topic: 'conjugation' }] : []
 
   const matches = verbs
     .filter((verb) => verb.forms.length >= 2)

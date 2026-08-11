@@ -84,8 +84,10 @@ lessons:
       — the shortest, the most interesting, the best, the worst
       Pour dire l'égalité, on encadre l'adjectif : as + adjectif + as.
       — She is as tall as her mother. / It is not as expensive as I feared.
-      « Much », « far » et « a lot » renforcent un comparatif ; « very » ne le
-      peut pas : « very better » est faux, « much better » est correct.
+      « Much », « far » et « a lot » renforcent un comparatif.
+
+      ! « Very » ne renforce pas un comparatif : « very better » est faux,
+      « much better » est correct.
     points:
       - id: g2-sup-1
         sentence: It is one of ___ museums in Europe. (big)

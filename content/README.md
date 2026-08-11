@@ -86,10 +86,41 @@ l'exercice d'association ne peut pas se construire.
       explanation: Hypothèse passée mais conséquence présente.
 ```
 
-Dans `notes`, une ligne commençant par `—` est mise en valeur comme exemple.
 Quand `options` est fourni, l'exercice se joue en choisissant parmi ces formes
 au premier passage, puis au clavier ensuite ; sans `options`, il est au clavier
 d'emblée. Une leçon a besoin d'au moins trois points.
+
+### Écrire un rappel de cours (`notes`)
+
+`notes` est du texte brut, mais quatre conventions structurent l'affichage.
+Elles valent aussi bien pour la grammaire que pour la conjugaison.
+
+```yaml
+notes: |
+  Les modaux ne se conjuguent pas : pas de -s à la troisième personne,
+  pas de « to » après eux, et pas d'auxiliaire « do » à la négation.
+
+  — can → could, will → would, may → might.
+  — must : pas de passé propre, on emploie « had to ».
+    I had to leave early.
+
+  ! « She cans » et « she can to swim » sont fautifs.
+```
+
+| Écriture | Rendu |
+|---|---|
+| lignes qui se suivent | un seul paragraphe — repliez librement à 80 colonnes |
+| ligne vide | sépare deux paragraphes |
+| `— …` | une règle, dans un panneau teinté ; les règles voisines forment une liste |
+| `— étiquette : …` | l'étiquette passe en gras coloré (jusqu'à ~48 caractères) |
+| ligne indentée sous une règle | l'exemple de cette règle, en italique |
+| `! …` | un piège, encadré en ambre |
+
+Le premier paragraphe est l'attaque du rappel : il s'affiche plus grand et
+plus sombre. Écrivez-y l'idée directrice, et laissez les détails aux règles.
+
+Un commentaire final entre parenthèses est automatiquement mis en retrait :
+`— I will call you as soon as I arrive. (jamais « as soon as I will arrive »)`.
 
 ## Ajouter un tableau de conjugaison (`kind: conjugation`)
 

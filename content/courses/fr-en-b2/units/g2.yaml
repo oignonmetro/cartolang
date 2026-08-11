@@ -14,8 +14,8 @@ lessons:
       — Certitude positive : must have → He must have forgotten.
       — Certitude négative : can't have / couldn't have → She can't have seen us.
       — Possibilité : may / might / could have → They might have left already.
-      Attention : « mustn't have » n'exprime pas la déduction négative ;
-      c'est « can't have » qui joue ce rôle.
+      ! « Mustn't have » n'exprime pas la déduction négative : c'est
+      « can't have » qui joue ce rôle.
     points:
       - id: g2-deduce-1
         sentence: The lights are off; they ___ already gone home.
