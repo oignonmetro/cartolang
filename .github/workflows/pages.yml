@@ -4,6 +4,14 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+  # Un commit poussé avec le `GITHUB_TOKEN` d'un autre workflow (ici, celui
+  # d'android.yml qui republie `public/app-version.json` sur un tag) ne
+  # déclenche pas `push` — restriction anti-boucle de GitHub Actions. Ce
+  # second déclencheur comble le trou : il réagit à la fin d'android.yml,
+  # quel que soit l'événement qui l'a lancé.
+  workflow_run:
+    workflows: ["APK Android"]
+    types: [completed]
 
 permissions:
   contents: read
@@ -17,9 +25,15 @@ concurrency:
 
 jobs:
   build:
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
     steps:
+      # `ref: main` explicite : sur un déclenchement `workflow_run`, le
+      # checkout par défaut ne pointe pas forcément sur le dernier commit de
+      # main. On veut toujours publier la pointe actuelle de la branche.
       - uses: actions/checkout@v4
+        with:
+          ref: main
 
       - uses: actions/setup-node@v4
         with:
