@@ -107,7 +107,7 @@ lessons:
       - verb: to mean
         translation: signifier / avoir l'intention
         tense: sens selon la forme
-        note: mean / meant / meant — attention au prétérit irrégulier.
+        note: "mean / meant / meant : attention au prétérit irrégulier."
         forms:
           - id: c4-mean-ger
             person: impliquer, entraîner

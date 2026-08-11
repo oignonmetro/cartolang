@@ -37,8 +37,8 @@ lessons:
           - une situation sans issue
         pos: expression
         example:
-          text: No experience without a job, no job without experience — a catch-22.
-          translation: Pas d'expérience sans emploi, pas d'emploi sans expérience — un cercle vicieux.
+          text: "No experience without a job, no job without experience: a catch-22."
+          translation: "Pas d'expérience sans emploi, pas d'emploi sans expérience : un cercle vicieux."
       - id: c1-to-be-a-grey-area
         term: a grey area
         translation: une zone floue

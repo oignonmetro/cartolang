@@ -56,7 +56,7 @@ lessons:
           - few
           - a few
         translation: Nous avons peu de temps, alors dépêchons-nous.
-        explanation: Sans article, « little » est négatif — c'est ce que confirme la suite de la phrase.
+        explanation: "Sans article, « little » est négatif : c'est ce que confirme la suite de la phrase."
       - id: g4-quant-5
         sentence: Would you like ___ coffee?
         answer: some
@@ -98,7 +98,7 @@ lessons:
           - many
           - a few
         translation: J'ai besoin d'informations sur la formation.
-        explanation: « Information » est indénombrable — ni « an information » ni « informations ».
+        explanation: "« Information » est indénombrable : ni « an information » ni « informations »."
       - id: g4-count-2
         sentence: How ___ luggage are you taking?
         answer: much

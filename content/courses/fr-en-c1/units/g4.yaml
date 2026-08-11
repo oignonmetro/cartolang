@@ -48,7 +48,7 @@ lessons:
           - to
           - with
         translation: Il a accusé l'agence d'avoir dissimulé des preuves.
-        explanation: "« Accuse somebody of doing » — préposition « of » obligatoire."
+        explanation: "« Accuse somebody of doing » : préposition « of » obligatoire."
       - id: g4-report-4
         sentence: The report ___ that the risk had been underestimated.
         answer: pointed out
@@ -78,7 +78,7 @@ lessons:
           - to
           - about
         translation: Ils se sont excusés d'avoir induit les actionnaires en erreur.
-        explanation: "« Apologise for doing » — la préposition est « for »."
+        explanation: "« Apologise for doing » : la préposition est « for »."
 
   - id: g4-l2
     title: Concordance et déplacement des repères

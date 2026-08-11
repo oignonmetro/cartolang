@@ -17,17 +17,17 @@ lessons:
       Les horaires officiels (trains, cinémas, cours) prennent le présent simple.
     points:
       - id: g1-fut-1
-        sentence: Look at those clouds — it ___ rain.
+        sentence: Look at those clouds; it ___ rain.
         answer: is going to
         options:
           - is going to
           - will
           - rains
           - is raining
-        translation: Regarde ces nuages — il va pleuvoir.
+        translation: Regarde ces nuages, il va pleuvoir.
         explanation: Un indice visible dans le présent appelle « be going to », pas « will ».
       - id: g1-fut-2
-        sentence: That bag looks heavy — I ___ help you.
+        sentence: That bag looks heavy; I ___ help you.
         answer: will
         alt:
           - "'ll"
@@ -36,7 +36,7 @@ lessons:
           - am going to
           - go to
           - would
-        translation: Ce sac a l'air lourd — je vais t'aider.
+        translation: Ce sac a l'air lourd, je vais t'aider.
         explanation: "Décision prise au moment où l'on parle : « will »."
       - id: g1-fut-3
         sentence: We ___ dinner with Paul on Friday; the table is booked.
@@ -49,14 +49,14 @@ lessons:
         translation: Nous dînons avec Paul vendredi ; la table est réservée.
         explanation: "Arrangement déjà pris et daté : présent continu."
       - id: g1-fut-4
-        sentence: She ___ study medicine — she has already applied.
+        sentence: She ___ study medicine; she has already applied.
         answer: is going to
         options:
           - is going to
           - will
           - studies
           - would
-        translation: Elle va étudier la médecine — elle a déjà déposé sa candidature.
+        translation: Elle va étudier la médecine, elle a déjà déposé sa candidature.
         explanation: "Intention formée avant le moment de parole : « be going to »."
       - id: g1-fut-5
         sentence: The last train ___ at 6:04 every evening.

@@ -6,7 +6,7 @@
 # Ce que C1 ajoute au B2 : la précision lexicale et le registre soutenu là
 # où B2 se contente d'être correct, l'idiomatique qui ne se traduit pas mot
 # à mot, les tournures d'emphase et d'atténuation de l'écrit, et les formes
-# verbales rares — subjonctif, irréguliers littéraires, aspects composés.
+# verbales rares : subjonctif, irréguliers littéraires, aspects composés.
 
 id: fr-en-c1
 name: Anglais C1
@@ -14,7 +14,7 @@ learning: en
 known: fr
 flag: 🇬🇧
 level: C1
-tagline: De C1 débutant à C1 confirmé — vocabulaire, grammaire, conjugaison.
+tagline: "De C1 débutant à C1 confirmé : vocabulaire, grammaire, conjugaison."
 status: available
 layout: library
 version: 3

@@ -44,7 +44,7 @@ lessons:
       - verb: to live
         translation: habiter
         tense: present perfect continu
-        note: "« I have been living here for ten years » — et j'y habite toujours."
+        note: "« I have been living here for ten years », et j'y habite toujours."
         forms:
           - id: c2-live-ppc-1
             person: I / you / we / they
@@ -91,7 +91,7 @@ lessons:
       - verb: to run
         translation: courir
         tense: formes composées
-        note: run / ran / run — le participe est identique à la base.
+        note: "run / ran / run : le participe est identique à la base."
         forms:
           - id: c2-run-past
             person: prétérit

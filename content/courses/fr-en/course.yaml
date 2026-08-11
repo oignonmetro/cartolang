@@ -1,4 +1,4 @@
-# Cours d'anglais débutant — ARCHIVÉ.
+# Cours d'anglais débutant, archivé.
 #
 # `status: archived` retire le cours de la sélection sans rien supprimer :
 # le contenu reste versionné et validé par la CI, et il suffit de repasser
@@ -9,7 +9,7 @@
 # Après modification : `npm run content:check` pour valider.
 
 id: fr-en
-name: Anglais — grand débutant
+name: Anglais, grand débutant
 learning: en
 known: fr
 flag: 🇬🇧
@@ -21,7 +21,7 @@ version: 1
 
 sections:
   - id: s1
-    title: Section 1 — Les bases
+    title: "Section 1 : Les bases"
     units:
       - u1
       - u2

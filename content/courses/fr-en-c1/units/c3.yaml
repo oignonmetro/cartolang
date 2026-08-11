@@ -54,7 +54,7 @@ lessons:
       - verb: to speak
         translation: parler
         tense: formes perfectives composées
-        note: speak / spoke / spoken — le participe porte toute la construction.
+        note: "speak / spoke / spoken : le participe porte toute la construction."
         forms:
           - id: c3-speak-cp
             person: conditionnel passé
@@ -90,7 +90,7 @@ lessons:
       - verb: to build
         translation: construire
         tense: passif composé
-        note: build / built / built — participe identique au prétérit.
+        note: "build / built / built : participe identique au prétérit."
         forms:
           - id: c3-build-fp-pass
             person: futur antérieur passif
@@ -112,7 +112,7 @@ lessons:
       - verb: to take
         translation: prendre
         tense: passif composé
-        note: "« A decision has been taken » — collocation à retenir telle quelle."
+        note: "« A decision has been taken » : collocation à retenir telle quelle."
         forms:
           - id: c3-take-pp-pass
             person: present perfect passif

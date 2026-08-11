@@ -18,14 +18,14 @@ lessons:
       c'est « can't have » qui joue ce rôle.
     points:
       - id: g2-deduce-1
-        sentence: The lights are off — they ___ already gone home.
+        sentence: The lights are off; they ___ already gone home.
         answer: must have
         options:
           - must have
           - can have
           - should have
           - must
-        translation: Les lumières sont éteintes — ils ont dû rentrer.
+        translation: Les lumières sont éteintes, ils ont dû rentrer.
         explanation: "Déduction quasi certaine à partir d'un indice : must + have + participe."
 
       - id: g2-deduce-2
@@ -55,14 +55,14 @@ lessons:
         explanation: "Simple possibilité : might / may / could + have + participe."
 
       - id: g2-deduce-4
-        sentence: You ___ told me earlier — I would have changed my plans.
+        sentence: You ___ told me earlier; I would have changed my plans.
         answer: should have
         options:
           - should have
           - must have
           - can have
           - would have
-        translation: Tu aurais dû me le dire plus tôt — j'aurais changé mes plans.
+        translation: Tu aurais dû me le dire plus tôt, j'aurais changé mes plans.
         explanation: "Reproche sur une action non faite : should + have + participe."
 
       - id: g2-deduce-5
@@ -101,7 +101,7 @@ lessons:
       « didn't need to » laisse entendre qu'elle n'a pas été faite.
     points:
       - id: g2-oblig-1
-        sentence: You ___ touch that wire — it is live.
+        sentence: You ___ touch that wire; it is live.
         answer: must not
         alt:
           - mustn't
@@ -110,7 +110,7 @@ lessons:
           - do not have to
           - need not
           - should not have
-        translation: Tu ne dois pas toucher ce fil — il est sous tension.
+        translation: Tu ne dois pas toucher ce fil, il est sous tension.
         explanation: "Interdiction formelle : mustn't."
 
       - id: g2-oblig-2
@@ -129,7 +129,7 @@ lessons:
         explanation: "Absence d'obligation, pas interdiction : don't have to."
 
       - id: g2-oblig-3
-        sentence: We ___ hurried — the train was delayed anyway.
+        sentence: We ___ hurried; the train was delayed anyway.
         answer: need not have
         alt:
           - needn't have
@@ -138,7 +138,7 @@ lessons:
           - did not need to
           - must not have
           - should not
-        translation: Nous n'avions pas besoin de nous presser — le train avait du retard de toute façon.
+        translation: Nous n'avions pas besoin de nous presser, le train avait du retard de toute façon.
         explanation: "« Needn't have » : l'action a bien été faite, et pour rien."
 
       - id: g2-oblig-4

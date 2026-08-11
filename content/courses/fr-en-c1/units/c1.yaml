@@ -53,7 +53,7 @@ lessons:
       - verb: to have
         translation: avoir
         tense: subjonctif présent
-        note: "« that he have » — forme rare mais correcte après insist, demand."
+        note: "« that he have » : forme rare mais correcte après insist, demand."
         forms:
           - id: c1-have-subj
             person: subjonctif, il / elle
@@ -97,7 +97,7 @@ lessons:
       - verb: to leave
         translation: partir
         tense: après « it is time »
-        note: "« It is time we left » — prétérit malgré le sens présent."
+        note: "« It is time we left » : prétérit malgré le sens présent."
         forms:
           - id: c1-leave-time
             person: après « it is time we »
