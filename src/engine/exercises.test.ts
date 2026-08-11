@@ -75,8 +75,35 @@ describe('session de leçon', () => {
     const guided = buildLessonSession(lessonOf('u1-l1', LESSON), 1).filter((e) => e.kind === 'cloze')
     const free = buildLessonSession(lessonOf('u1-l1', LESSON), 2).filter((e) => e.kind === 'cloze')
     expect(guided.length).toBeGreaterThan(0)
-    expect(guided.every((e) => e.bank !== null && e.bank.includes(e.vocab.term))).toBe(true)
+    // La banque doit contenir une case qui vaut réellement la réponse, au
+    // sens où l'écran la valide — pas seulement le terme de dictionnaire.
+    expect(
+      guided.every(
+        (e) => e.bank !== null && e.bank.some((w) => normalizeAnswer(w) === normalizeAnswer(e.sentence.match)),
+      ),
+    ).toBe(true)
     expect(free.every((e) => e.bank === null)).toBe(true)
+  })
+
+  it('propose la forme fléchie, pas l’infinitif, quand le mot est irrégulier', () => {
+    // Régression : la banque offrait « to fall out » alors que la phrase
+    // attend « fell out », ce qui rendait l'exercice impossible à réussir.
+    const irregular: Vocab[] = [
+      { ...word('fall-out', 'to fall out', 'se brouiller', 'The brothers fell out over money.'), gap: 'fell out' },
+      { ...word('book', 'to book', 'réserver', 'We booked a room online.'), gap: 'booked' },
+      word('landlord', 'landlord', 'propriétaire', 'The landlord raised the rent.'),
+      word('rent', 'rent', 'loyer', 'The rent is due today.'),
+      word('cosy', 'cosy', 'douillet', 'The room is small but cosy.'),
+    ]
+    const guided = buildLessonSession(lessonOf('u2-l1', irregular), 1).filter((e) => e.kind === 'cloze')
+    expect(guided.length).toBeGreaterThan(0)
+    for (const exercise of guided) {
+      expect(exercise.bank).not.toBeNull()
+      expect(exercise.bank!.some((w) => normalizeAnswer(w) === normalizeAnswer(exercise.sentence.match))).toBe(true)
+      // et une seule case doit être correcte
+      const correct = exercise.bank!.filter((w) => normalizeAnswer(w) === normalizeAnswer(exercise.sentence.match))
+      expect(correct).toHaveLength(1)
+    }
   })
 
   it('est déterministe à graine égale, différente d’un niveau à l’autre', () => {

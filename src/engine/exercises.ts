@@ -132,20 +132,38 @@ export function itemIdsOf(exercise: Exercise): string[] {
   }
 }
 
-function clozeFor(vocab: Vocab, bank: string[] | null): ClozeExercise | null {
+/**
+ * Forme sous laquelle un mot apparaît réellement dans une phrase : la forme
+ * fléchie donnée par l'auteur (`gap`) quand elle existe, sinon le terme
+ * débarrassé de son « to » d'infinitif.
+ */
+function surfaceForm(vocab: Vocab): string {
+  return vocab.gap ?? vocab.term.replace(/^to\s+/i, '')
+}
+
+/**
+ * Phrase à trou. La banque, quand il y en a une, est construite autour de la
+ * portion réellement masquée : proposer « to book » alors que la phrase
+ * attend « booked » rendrait l'exercice impossible à réussir.
+ */
+function clozeFor(vocab: Vocab, pool: readonly Vocab[] | null, rng: Rng): ClozeExercise | null {
   if (!vocab.example) return null
   const sentence = findVocabGap(vocab.example.text, vocab.term, vocab.gap)
   if (!sentence) return null
+  const bank = pool ? buildBank(sentence.match, vocab, pool, rng) : null
   return { kind: 'cloze', id: `cloze:${vocab.id}`, vocab, sentence, bank }
 }
 
-function buildBank(vocab: Vocab, pool: readonly Vocab[], rng: Rng): string[] {
+function buildBank(match: string, vocab: Vocab, pool: readonly Vocab[], rng: Rng): string[] {
   const distractors = sample(
     pool.filter((item) => item.id !== vocab.id),
     BANK_SIZE - 1,
     rng,
-  ).map((item) => item.term)
-  return shuffle([vocab.term, ...distractors], rng)
+  )
+    .map(surfaceForm)
+    // Un leurre qui vaudrait la réponse offrirait deux bonnes cases.
+    .filter((word) => normalizeAnswer(word) !== normalizeAnswer(match))
+  return shuffle([match, ...distractors], rng)
 }
 
 function matchRounds(pool: readonly Vocab[], rounds: number, rng: Rng): MatchExercise[] {
@@ -189,7 +207,7 @@ function buildVocabSession(vocab: readonly Vocab[], level: number, seed: number)
       { kind: 'flashcard', id: `flash:${word.id}`, vocab: word, direction: 'to-known' },
     ])
     const clozes = words
-      .map((word) => clozeFor(word, buildBank(word, words, rng)))
+      .map((word) => clozeFor(word, words, rng))
       .filter((exercise): exercise is ClozeExercise => exercise !== null)
     return [...discovery, ...matchRounds(words, 1, rng), ...sample(clozes, 3, rng)]
   }
@@ -204,7 +222,7 @@ function buildVocabSession(vocab: readonly Vocab[], level: number, seed: number)
       }),
     )
     const clozes = words
-      .map((word) => clozeFor(word, buildBank(word, words, rng)))
+      .map((word) => clozeFor(word, words, rng))
       .filter((exercise): exercise is ClozeExercise => exercise !== null)
     const typed = sample(words, 3, rng).map(
       (word): TypeExercise => ({ kind: 'type', id: `type:${word.id}`, vocab: word, direction: 'to-known' }),
@@ -213,7 +231,7 @@ function buildVocabSession(vocab: readonly Vocab[], level: number, seed: number)
   }
 
   const clozes = words
-    .map((word) => clozeFor(word, null))
+    .map((word) => clozeFor(word, null, rng))
     .filter((exercise): exercise is ClozeExercise => exercise !== null)
   const typed = words.map(
     (word): TypeExercise => ({ kind: 'type', id: `type:${word.id}`, vocab: word, direction: 'to-learning' }),
@@ -335,11 +353,11 @@ export function buildReviewSession(
 
     const vocab = item.vocab
     if (solid) {
-      const cloze = clozeFor(vocab, null)
+      const cloze = clozeFor(vocab, null, rng)
       if (cloze && rng() < 0.5) return cloze
       return { kind: 'type', id: `type:${vocab.id}`, vocab, direction: 'to-learning' }
     }
-    const cloze = clozeFor(vocab, buildBank(vocab, vocabPool, rng))
+    const cloze = clozeFor(vocab, vocabPool, rng)
     if (cloze && rng() < 0.4) return cloze
     return { kind: 'flashcard', id: `flash:${vocab.id}`, vocab, direction: 'to-known' }
   })
