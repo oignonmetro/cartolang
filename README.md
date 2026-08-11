@@ -5,10 +5,11 @@ Des flashcards, des exercices d'application, et une révision espacée qui fait
 revenir au bon moment ce qui est fragile.
 
 Trois niveaux d'anglais pour francophones, choisis depuis un sélecteur en
-un clic (le badge drapeau + niveau en haut de l'écran) : **B1** et **C1** en
-squelette (prêts à recevoir du contenu), **B2** pleinement écrit — 188
-éléments répartis en trois pistes (vocabulaire, grammaire, conjugaison) que
-l'apprenant parcourt librement, dans l'ordre qu'il veut.
+un clic (le badge drapeau + niveau en haut de l'écran) : **B2** est le plus
+fourni (138 éléments sur ses trois pistes), **B1** et **C1** démarrent avec
+une première unité chacun et le reste encore en squelette, prêt à recevoir
+du contenu. Dans chaque cours, l'apprenant parcourt les pistes (vocabulaire,
+grammaire, conjugaison) librement, dans l'ordre qu'il veut.
 
 Le moteur est générique : un cours n'est qu'un jeu de fichiers YAML.
 
@@ -16,7 +17,7 @@ Le moteur est générique : un cours n'est qu'un jeu de fichiers YAML.
 
 | | |
 |---|---|
-| Cours | B1, B2, C1 (`fr-en-b1/b2/c1`) ; B2 par défaut, seul rempli pour l'instant. Le cours grand débutant `fr-en` est archivé |
+| Cours | B1, B2, C1 (`fr-en-b1/b2/c1`) ; B2 par défaut, le plus rempli, B1 et C1 amorcés et complétés progressivement. Le cours grand débutant `fr-en` est archivé |
 | Agencements | `library` — pistes en onglets, accès libre ; `path` — parcours guidé |
 | Vocabulaire | flashcard auto-évaluée, association de paires, phrase à trou, saisie clavier |
 | Grammaire | rappel de cours, phrase à trou avec banque de formes puis au clavier |
