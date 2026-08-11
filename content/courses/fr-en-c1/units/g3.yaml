@@ -9,12 +9,16 @@ lessons:
   - id: g3-l1
     title: Les marqueurs de prudence
     notes: |
-      L'anglais académique et journalistique affirme rarement sans filet. Un
-      C1 se reconnaît à sa maîtrise de ces atténuateurs.
+      L'anglais académique et journalistique **affirme rarement sans filet**. Un
+      C1 se reconnaît moins à son vocabulaire qu'à sa façon de doser ses
+      affirmations.
+
       — Modaux affaiblis : may, might, could + base verbale.
       — Verbes de tendance : tend to, appear to, seem to.
-      — Adverbes : arguably, seemingly, largely, broadly, to some extent.
+        Prices tend to rise in the autumn. (une tendance, pas une loi)
+      — Adverbes : arguably, seemingly, largely, broadly.
       — Tournures impersonnelles : it would appear that, it is widely held that.
+
       ! Trop d'atténuation affaiblit le propos : l'enjeu est le dosage, pas
       l'accumulation.
     points:
@@ -86,13 +90,16 @@ lessons:
   - id: g3-l2
     title: Distance, rumeur et responsabilité
     notes: |
-      Pour rapporter sans endosser, l'anglais dispose du passif impersonnel et
-      de quelques tournures spécialisées.
-      — It is said / believed / thought that he resigned.
-      — He is said to have resigned. (même sens, sujet remonté)
-      — Reportedly, allegedly, supposedly en tête ou en incise.
-      « Allegedly » est le mot du journalisme judiciaire : il signale une
-      accusation non tranchée, et protège juridiquement celui qui écrit.
+      Pour rapporter **sans endosser**, l'anglais dispose du passif impersonnel et
+      de quelques adverbes spécialisés.
+
+      — `It is said / believed / thought that…` + proposition.
+        It is believed that the minister knew.
+      — Même sens, sujet remonté : `He is said to have resigned.`
+      — Adverbes de phrase : `reportedly`, `allegedly`, `supposedly`.
+
+      `allegedly` est le mot du journalisme judiciaire : il signale une
+      accusation **non tranchée**, et protège juridiquement celui qui écrit.
     points:
       - id: g3-report-1
         sentence: It ___ that the minister knew of the report.

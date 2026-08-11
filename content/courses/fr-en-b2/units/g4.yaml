@@ -9,13 +9,20 @@ lessons:
   - id: g4-l1
     title: Connecteurs de concession et de cause
     notes: |
-      Le sens est proche, la construction ne l'est pas : c'est là que se logent
-      la plupart des fautes à ce niveau.
-      — Suivi d'une proposition (sujet + verbe) : although, even though, whereas, since.
-      — Suivi d'un groupe nominal : despite, in spite of, because of, due to.
-      — En tête de phrase, seul et suivi d'une virgule : however, nevertheless, therefore.
-      ! « Despite that he came » est faux ; « despite the fact that he came »
-      est correct, mais lourd.
+      Ces connecteurs ont des sens voisins mais **des constructions
+      incompatibles**. C'est là que se logent la plupart des fautes à ce niveau.
+
+      — Suivis d'une **proposition** (sujet + verbe) : although, even though,
+        whereas, since.
+        Although it was raining, the match went ahead.
+      — Suivis d'un **groupe nominal** : despite, in spite of, because of,
+        due to.
+        Despite the rain, the match went ahead.
+      — **Seuls en tête de phrase**, suivis d'une virgule : however,
+        nevertheless, therefore.
+
+      ! « Despite that he came » est faux ; « despite the fact that he came » est
+      correct, mais lourd.
     points:
       - id: g4-conn-1
         sentence: ___ the heavy rain, the match went ahead.
@@ -98,14 +105,18 @@ lessons:
   - id: g4-l2
     title: But, conséquence et conclusion
     notes: |
-      L'autre moitié de l'articulation logique : dire pourquoi on agit, et ce
-      qui s'ensuit. Là encore, la faute vient de la construction, pas du sens.
-      — But visé, suivi d'un verbe : to, in order to, so as to.
-      — But visé, suivi d'une proposition : so that + sujet + modal.
-      — Conséquence, en tête de proposition : therefore, thus, hence, consequently.
-      — Conséquence, en incise après le verbe : as a result, accordingly.
-      « So as to » et « in order to » se nient en insérant « not » avant « to » :
-      in order not to disturb.
+      L'autre moitié de l'articulation logique : dire **pourquoi** on agit, et
+      **ce qui s'ensuit**. Là encore, la faute vient de la construction.
+
+      — But visé, devant un **verbe** : to, in order to, so as to.
+        She left early so as to avoid the traffic.
+      — But visé, devant une **proposition** : `so that` + sujet + modal.
+        We moved the meeting so that everyone could attend.
+      — Conséquence, en tête : therefore, thus, hence, consequently.
+      — Conséquence, en incise : as a result, accordingly.
+
+      ! La négation s'insère **avant** `to` : `so as not to disturb`, et non
+      « so as to not disturb ».
     points:
       - id: g4-cons-1
         sentence: She left early ___ to avoid the traffic.

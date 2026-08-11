@@ -9,13 +9,21 @@ lessons:
   - id: c1-l1
     title: Le subjonctif présent
     notes: |
-      L'anglais garde un subjonctif, réduit à la base verbale nue. Il apparaît
-      après les verbes et adjectifs d'exigence, de recommandation et de nécessité.
-      — I insist that he be present. (pas « is »)
-      — They recommended that she apply immediately. (pas « applies »)
-      — It is essential that the document remain confidential.
-      La marque de personne disparaît totalement, y compris à la troisième.
-      L'anglais britannique préfère souvent « should » : I insist that he should be present.
+      L'anglais a gardé un subjonctif, et il est d'une simplicité désarmante :
+      **la base verbale nue**, sans -s et sans accord, à toutes les personnes.
+
+      Il apparaît après les verbes et adjectifs d'exigence, de recommandation
+      et de nécessité.
+
+      — insist, demand, require, recommend, suggest, ask.
+        I insist that he be present. (et non « that he is »)
+      — `it is essential / vital / crucial that…`
+        It is essential that the document remain confidential.
+
+      ! La troisième personne perd son -s : `that she apply`, jamais « applies ».
+
+      L'anglais britannique contourne souvent le subjonctif avec `should` :
+      I insist that he should be present.
     verbs:
       - verb: to be
         translation: être
@@ -65,12 +73,18 @@ lessons:
   - id: c1-l2
     title: Le subjonctif passé et les formes irréelles
     notes: |
-      Le « were-subjunctive » sert à marquer l'irréel, à toutes les personnes.
-      — If I were you / Were she here / He talks as if he were an expert.
-      — I would rather you came tomorrow. (prétérit après « would rather »)
-      — It is time we left. (prétérit après « it is time »)
-      Dans tous ces cas, le prétérit ne renvoie pas au passé : il signale
-      l'écart avec le réel.
+      Un seul mécanisme couvre tout l'irréel : **le prétérit y marque la distance
+      au réel, pas le passé**.
+
+      — `were` à toutes les personnes après `if`, `as if`, `wish`.
+        If I were you… / He talks as if he were an expert.
+      — `would rather` + sujet + prétérit.
+        I would rather you came tomorrow. Je préférerais que tu viennes demain.
+      — `it is time` + prétérit.
+        It is time we left. Il est temps que nous partions.
+
+      ! Aucun de ces prétérits ne renvoie au passé : `It is time we left` parle
+      bien du moment présent.
     verbs:
       - verb: to be
         translation: être

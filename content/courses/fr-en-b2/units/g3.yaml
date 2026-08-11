@@ -9,13 +9,18 @@ lessons:
   - id: g3-l1
     title: Relatives déterminatives et explicatives
     notes: |
-      Deux relatives, deux fonctions, et la virgule change le sens.
-      — Déterminative (sans virgule) : elle identifie. The students who failed must resit.
-        Seuls ceux qui ont échoué repassent l'examen.
-      — Explicative (entre virgules) : elle ajoute une information sur un référent déjà identifié.
-        The students, who failed, must resit. Tous ont échoué, et tous repassent.
-      Conséquences pratiques : « that » est impossible dans une explicative, et
-      le pronom relatif ne peut pas être omis quand il est sujet.
+      Une virgule, et la phrase ne dit plus la même chose. Ici, **c'est la
+      ponctuation qui porte le sens**, pas le pronom.
+
+      — Déterminative, __sans virgule__ : elle identifie de qui on parle.
+        The students who failed must resit. Seuls ceux qui ont échoué repassent.
+      — Explicative, __entre virgules__ : elle commente un groupe déjà identifié.
+        The students, who failed, must resit. Tous ont échoué, tous repassent.
+
+      Deux conséquences pratiques en découlent.
+
+      — `that` est impossible dans une explicative.
+      — Le pronom relatif ne s'omet jamais lorsqu'il est sujet.
     points:
       - id: g3-rel-1
         sentence: The report ___ you sent me is missing a page.
@@ -87,12 +92,18 @@ lessons:
   - id: g3-l2
     title: Passif et discours rapporté
     notes: |
-      Le passif sert à déplacer l'attention vers le résultat, ou à taire l'agent.
-      — Passif simple : The decision was taken in March.
-      — Passif impersonnel, typique de la presse : It is said that… / He is said to…
-      Au discours rapporté, les temps reculent d'un cran quand le verbe
-      introducteur est au passé, et les repères changent.
-      — « I saw her yesterday » → He said he had seen her the day before.
+      Le passif déplace l'attention vers le résultat, ou permet de **taire
+      l'agent** quand on ne veut pas le nommer.
+
+      — Passif simple : `be` au temps voulu + participe passé.
+        The decision was taken in March. La décision a été prise en mars.
+      — Passif impersonnel, propre à la presse : `It is said that…` / `He is said to…`
+        He is said to have resigned. Il aurait démissionné.
+
+      Au discours rapporté, quand le verbe introducteur est au passé, **tout
+      recule d'un cran** — les temps comme les repères.
+
+      — I saw her yesterday. → He said he had seen her the day before.
     points:
       - id: g3-pass-1
         sentence: The bridge ___ two years before the war.

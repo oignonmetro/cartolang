@@ -9,12 +9,18 @@ lessons:
   - id: g1-l1
     title: Will, going to et présent continu
     notes: |
-      L'anglais n'a pas un futur mais trois façons courantes d'en parler, et le
-      choix dépend de ce qui motive la phrase, pas du moment visé.
-      — Décision prise à l'instant, promesse, prédiction : will.
-      — Intention déjà formée, ou indice visible dans le présent : be going to.
-      — Rendez-vous déjà pris, arrangement daté : présent continu.
-      Les horaires officiels (trains, cinémas, cours) prennent le présent simple.
+      L'anglais n'a pas **un** futur mais trois façons d'en parler. Le choix ne
+      dépend pas du moment visé, mais de **ce qui motive la phrase**.
+
+      — `will` : décision prise à l'instant, promesse, prédiction.
+        That bag looks heavy; I'll help you. (je le décide en parlant)
+      — `be going to` : intention déjà formée, ou indice visible maintenant.
+        Look at those clouds; it's going to rain. (l'indice est sous nos yeux)
+      — Présent continu : rendez-vous pris, arrangement daté.
+        We're having dinner with Paul on Friday. (la table est réservée)
+
+      Les horaires officiels — trains, cinémas, cours — prennent le présent
+      simple : The train leaves at 6:04.
     points:
       - id: g1-fut-1
         sentence: Look at those clouds; it ___ rain.
@@ -84,12 +90,17 @@ lessons:
   - id: g1-l2
     title: Le futur après when, if et as soon as
     notes: |
-      Après une conjonction de temps ou de condition, l'anglais met le présent
-      là où le français met un futur. C'est une des fautes les plus tenaces à
-      ce niveau.
-      — I will call you as soon as I arrive. (jamais « as soon as I will arrive »)
-      — If it rains, we will stay in. (jamais « if it will rain »)
-      La proposition principale, elle, garde bien son « will ».
+      Après une conjonction de temps ou de condition, l'anglais met **le présent**
+      là où le français met un futur. C'est une des fautes les plus tenaces.
+
+      — Conjonctions concernées : `when`, `as soon as`, `until`, `before`,
+        `after`, `the moment`, `if`.
+        I will call you as soon as I arrive. Je t'appellerai dès que j'arriverai.
+
+      ! Jamais « as soon as I will arrive » ni « if it will rain » : la
+      subordonnée reste au présent, quoi qu'en dise le français.
+
+      La proposition principale, elle, garde bien son `will`.
     points:
       - id: g1-when-1
         sentence: I will call you as soon as I ___ .

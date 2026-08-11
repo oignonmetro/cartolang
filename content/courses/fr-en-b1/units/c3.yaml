@@ -9,12 +9,17 @@ lessons:
   - id: c3-l1
     title: Les modaux au présent et au passé
     notes: |
-      Les modaux ne se conjuguent pas : pas de -s à la troisième personne, pas
-      de « to » après eux, et pas d'auxiliaire « do » à la négation.
-      — She can swim. (jamais « she cans » ni « she can to swim »)
-      Chacun a son passé, et il n'est pas toujours régulier :
+      Les modaux ne se conjuguent pas. **Pas de -s** à la troisième personne,
+      **pas de `to`** derrière eux, **pas d'auxiliaire `do`** à la négation.
+
+      — She can swim. (et non « she cans » ni « she can to swim »)
+      — She cannot swim. (et non « she doesn't can »)
+
+      Chacun a son passé, et il n'est pas toujours régulier.
+
       — can → could, will → would, may → might.
-      — must n'a pas de passé propre : on emploie « had to ».
+      — `must` n'a pas de passé propre : on emploie `had to`.
+        I had to leave early. J'ai dû partir tôt.
     verbs:
       - verb: can
         translation: pouvoir

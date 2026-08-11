@@ -9,14 +9,19 @@ lessons:
   - id: g1-l1
     title: Inversion et mise en relief
     notes: |
-      Placer un élément négatif ou restrictif en tête de phrase force l'inversion
+      Placer un élément **négatif ou restrictif en tête** force l'inversion
       sujet-auxiliaire, comme dans une question. C'est un marqueur de registre
       soutenu, fréquent à l'écrit.
+
       — Never had I seen such a mess.
       — Not only did she apologise, she also paid for the damage.
       — Only after the meeting did we understand.
-      Autre outil d'emphase : la phrase clivée, qui met un élément en relief.
-      — It was Marie who signed the letter. / What we need is more time.
+
+      Autre outil d'emphase, la **phrase clivée** met un élément en relief sans
+      toucher à l'ordre des mots.
+
+      — It was Marie who signed the letter. (et non son frère)
+      — What we need is more time. (du temps, pas de l'argent)
     points:
       - id: g1-emph-1
         sentence: Never ___ such a badly organised event.
@@ -84,13 +89,15 @@ lessons:
   - id: g1-l2
     title: Antéposition et tournures emphatiques
     notes: |
-      Au-delà de l'inversion négative, l'écrit soutenu dispose d'autres façons
-      de déplacer le poids de la phrase vers l'avant.
-      — It is not until… that… : Ce n'est qu'à ce moment-là que…
+      Au-delà de l'inversion négative, l'écrit soutenu dispose d'autres façons de
+      **déplacer le poids de la phrase vers l'avant**.
+
+      — It is not until… that… : ce n'est qu'à ce moment-là que…
       — Little did he know… : marqueur figé de l'ironie narrative.
       — So + adjectif + inversion : So great was the demand that…
       — Such + être + inversion : Such was the outcry that…
       — Antéposition simple : Among the guests was a former minister.
+
       ! Toutes ces tournures appartiennent à l'écrit : à l'oral, elles sonnent
       affectées si elles ne sont pas parfaitement placées.
     points:

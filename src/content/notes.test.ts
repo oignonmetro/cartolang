@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { parseNotes, splitAside } from './notes'
+import { parseInline, parseNotes, splitAside } from './notes'
 
 describe('rappels de cours', () => {
   it('recolle une phrase repliée sur plusieurs lignes', () => {
@@ -95,6 +95,57 @@ describe('rappels de cours', () => {
   it('ne rend rien pour des notes vides', () => {
     expect(parseNotes('')).toEqual([])
     expect(parseNotes('\n  \n')).toEqual([])
+  })
+})
+
+describe('mise en forme dans le texte', () => {
+  it('laisse un texte sans marqueur en un seul fragment', () => {
+    expect(parseInline('Rien à signaler.')).toEqual([{ kind: 'text', text: 'Rien à signaler.' }])
+  })
+
+  it('reconnaît les quatre marqueurs', () => {
+    expect(parseInline('**g** *i* __s__ `f`')).toEqual([
+      { kind: 'strong', children: [{ kind: 'text', text: 'g' }] },
+      { kind: 'text', text: ' ' },
+      { kind: 'em', children: [{ kind: 'text', text: 'i' }] },
+      { kind: 'text', text: ' ' },
+      { kind: 'underline', children: [{ kind: 'text', text: 's' }] },
+      { kind: 'text', text: ' ' },
+      { kind: 'form', text: 'f' },
+    ])
+  })
+
+  it('ne confond pas le gras avec l’italique', () => {
+    expect(parseInline('**deux** puis *un*')).toEqual([
+      { kind: 'strong', children: [{ kind: 'text', text: 'deux' }] },
+      { kind: 'text', text: ' puis ' },
+      { kind: 'em', children: [{ kind: 'text', text: 'un' }] },
+    ])
+  })
+
+  it('interprète une forme anglaise à l’intérieur du gras', () => {
+    // Régression : « **pas de `to`** » affichait les accents graves en clair.
+    expect(parseInline('**pas de `to`**')).toEqual([
+      {
+        kind: 'strong',
+        children: [
+          { kind: 'text', text: 'pas de ' },
+          { kind: 'form', text: 'to' },
+        ],
+      },
+    ])
+  })
+
+  it('conserve le texte autour des marqueurs', () => {
+    expect(parseInline('avant `will` après')).toEqual([
+      { kind: 'text', text: 'avant ' },
+      { kind: 'form', text: 'will' },
+      { kind: 'text', text: ' après' },
+    ])
+  })
+
+  it('laisse intact un marqueur non refermé', () => {
+    expect(parseInline('un * isolé')).toEqual([{ kind: 'text', text: 'un * isolé' }])
   })
 })
 

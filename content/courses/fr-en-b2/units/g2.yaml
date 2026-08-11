@@ -9,13 +9,18 @@ lessons:
   - id: g2-l1
     title: Déduire sur le passé
     notes: |
-      Pour raisonner sur ce qui a dû se produire, l'anglais empile un modal et
-      un infinitif passé : modal + have + participe passé.
-      — Certitude positive : must have → He must have forgotten.
-      — Certitude négative : can't have / couldn't have → She can't have seen us.
-      — Possibilité : may / might / could have → They might have left already.
+      Pour raisonner sur ce qui a dû se produire, l'anglais empile un modal et un
+      infinitif passé : **modal + `have` + participe passé**.
+
+      — Certitude positive : `must have`.
+        He must have forgotten. Il a dû oublier.
+      — Certitude négative : `can't have` / `couldn't have`.
+        She can't have seen us. Elle n'a pas pu nous voir.
+      — Simple possibilité : `may` / `might` / `could have`.
+        They might have left already. Ils sont peut-être déjà partis.
+
       ! « Mustn't have » n'exprime pas la déduction négative : c'est
-      « can't have » qui joue ce rôle.
+      `can't have` qui joue ce rôle.
     points:
       - id: g2-deduce-1
         sentence: The lights are off; they ___ already gone home.
@@ -93,12 +98,21 @@ lessons:
   - id: g2-l2
     title: Obligation et absence d'obligation
     notes: |
-      Le piège classique : « must not » et « don't have to » ne sont pas des
-      contraires atténués, ils disent des choses opposées.
-      — Interdiction : mustn't → You mustn't park here. (c'est interdit)
-      — Absence d'obligation : don't have to / needn't → You don't have to come. (c'est facultatif)
-      Au passé, « needn't have » signale une action faite inutilement, tandis que
-      « didn't need to » laisse entendre qu'elle n'a pas été faite.
+      `mustn't` et `don't have to` se ressemblent, mais disent **le contraire
+      l'un de l'autre**. C'est le piège le plus coûteux du niveau.
+
+      — `mustn't` : c'est __interdit__.
+        You mustn't park here. Interdiction de se garer.
+      — `don't have to` / `needn't` : c'est __facultatif__.
+        You don't have to come. Tu viens si tu veux.
+
+      Au passé, deux formes voisines distinguent ce qui a été fait de ce qui ne
+      l'a pas été.
+
+      — `needn't have` + participe : l'action **a eu lieu**, inutilement.
+        We needn't have hurried. Nous nous sommes pressés pour rien.
+      — `didn't need to` : l'obligation n'existait pas, l'action n'a **pas** eu lieu.
+        She didn't need to pay. Elle n'a pas eu à payer.
     points:
       - id: g2-oblig-1
         sentence: You ___ touch that wire; it is live.

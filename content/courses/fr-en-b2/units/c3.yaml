@@ -9,12 +9,15 @@ lessons:
   - id: c3-l1
     title: Modaux à l'infinitif passé
     notes: |
-      Modal + have + participe passé : la forme qui permet de raisonner ou de
-      regretter après coup. Le modal ne se conjugue jamais, « have » non plus.
+      **Modal + `have` + participe passé** : la forme qui permet de raisonner ou
+      de regretter après coup. Ni le modal ni `have` ne se conjuguent.
+
       — must have left : il a dû partir (déduction)
       — should have left : il aurait dû partir (reproche)
       — could have left : il aurait pu partir (possibilité non réalisée)
-      À l'oral, « have » se réduit à /əv/, d'où la faute fréquente « should of ».
+
+      ! À l'oral, `have` se réduit à /əv/, d'où la faute très répandue
+      « should of » à l'écrit.
     verbs:
       - verb: to leave
         translation: partir

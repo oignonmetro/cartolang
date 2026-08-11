@@ -9,15 +9,17 @@ lessons:
   - id: c2-l1
     title: Formes littéraires et soutenues
     notes: |
-      Ces verbes se croisent en lecture bien avant de venir sous la plume.
-      Leur difficulté n'est pas le sens mais la troisième colonne, souvent
+      Ces verbes se croisent en lecture bien avant de venir sous la plume. Leur
+      difficulté n'est pas le sens mais **la troisième colonne**, souvent
       contre-intuitive.
-      — bear / bore / borne (mais « born » pour la naissance)
-      — strive / strove / striven
-      — forsake / forsook / forsaken
-      — weave / wove / woven
-      ! Attention à « bear » : « She has borne the cost », mais « He was born
-      in Lyon ».
+
+      — bear / bore / **borne**
+      — strive / strove / **striven**
+      — forsake / forsook / **forsaken**
+      — weave / wove / **woven**
+
+      ! `bear` a deux participes : `She has borne the cost`, mais
+      `He was born in Lyon` pour la naissance.
     verbs:
       - verb: to bear
         translation: supporter, porter
@@ -71,14 +73,18 @@ lessons:
   - id: c2-l2
     title: Les pièges de forme voisine
     notes: |
-      Certains couples se ressemblent assez pour être confondus, et la faute
-      passe rarement inaperçue.
-      — lie / lay / lain (être allongé, intransitif)
-      — lay / laid / laid (poser quelque chose, transitif)
-      — rise / rose / risen (monter, intransitif)
-      — raise / raised / raised (élever quelque chose, transitif)
-      La règle de départ est simple : si le verbe a un complément d'objet,
-      c'est la version transitive régulière.
+      Ces couples se ressemblent assez pour être confondus, et **la faute passe
+      rarement inaperçue**.
+
+      — `lie` / lay / lain : être allongé, __sans complément d'objet__.
+      — `lay` / laid / laid : poser quelque chose, __avec complément d'objet__.
+      — `rise` / rose / risen : monter de soi-même, __sans complément__.
+      — `raise` / raised / raised : élever quelque chose, __avec complément__.
+
+      Un seul réflexe suffit à trancher : **si le verbe a un complément d'objet,
+      c'est la version transitive**, la régulière des deux.
+
+      — Prices rose. / They raised prices.
     verbs:
       - verb: to lie
         translation: être allongé

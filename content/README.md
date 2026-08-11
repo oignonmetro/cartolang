@@ -116,6 +116,20 @@ notes: |
 | ligne indentée sous une règle | l'exemple de cette règle, en italique |
 | `! …` | un piège, encadré en ambre |
 
+Quatre marqueurs enrichissent le texte, dans les paragraphes comme dans les
+règles ou les pièges :
+
+| Écriture | Rendu | À réserver à |
+|---|---|---|
+| `` `will` `` | forme anglaise sur fond léger | une forme citée au milieu du français |
+| `**texte**` | gras | l'idée directrice, une opposition |
+| `__texte__` | souligné | le mot qui décide, dans une règle |
+| `*texte*` | italique | une nuance, une glose |
+
+Le plus utile est le premier : sur `` `must have` ``, l'œil repère la forme
+anglaise sans avoir à lire la phrase. Les trois autres se paient en lisibilité
+dès qu'on en abuse — deux ou trois par rappel suffisent.
+
 Le premier paragraphe est l'attaque du rappel : il s'affiche plus grand et
 plus sombre. Écrivez-y l'idée directrice, et laissez les détails aux règles.
 

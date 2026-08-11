@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import type { RuleExercise } from '@/engine/exercises'
-import { parseNotes, splitAside, type NoteRule } from '@/content/notes'
+import { parseInline, parseNotes, splitAside, type Inline, type NoteRule } from '@/content/notes'
 import { Button } from '@/components/Button'
 
 /**
@@ -77,7 +77,7 @@ export function RuleNote({ exercise, onNext }: { exercise: RuleExercise; onNext:
                     : 'text-sm leading-relaxed text-ink-soft'
                 }
               >
-                {block.text}
+                <Rich text={block.text} />
               </p>
             )
           }
@@ -91,7 +91,9 @@ export function RuleNote({ exercise, onNext }: { exercise: RuleExercise; onNext:
                 <span aria-hidden className="text-base leading-tight">
                   ⚠
                 </span>
-                <span>{block.text}</span>
+                <span>
+                  <Rich text={block.text} />
+                </span>
               </p>
             )
           }
@@ -130,13 +132,81 @@ function RuleBody({ rule, labelClass }: { rule: NoteRule; labelClass: string }) 
         {/* Le deux-points d'origine sert de séparateur : il se lit aussi bien
             derrière une catégorie (« Une syllabe : ») que derrière une règle
             entière (« must n'a pas de passé propre : »). */}
-        {rule.label && <span className={`font-black ${labelClass}`}>{rule.label} : </span>}
-        <span className="font-semibold">{main}</span>
-        {aside && <span className="font-normal text-ink-faint"> ({aside})</span>}
+        {rule.label && (
+          <span className={`font-black ${labelClass}`}>
+            <Rich text={rule.label} /> :{' '}
+          </span>
+        )}
+        <span className="font-semibold">
+          <Rich text={main} />
+        </span>
+        {aside && (
+          <span className="font-normal text-ink-faint">
+            {' ('}
+            <Rich text={aside} />
+            {')'}
+          </span>
+        )}
       </p>
       {rule.example && (
-        <p className="text-sm leading-snug font-bold text-ink-soft italic">{rule.example}</p>
+        <p className="text-sm leading-snug font-bold text-ink-soft italic">
+          <Rich text={rule.example} />
+        </p>
       )}
     </div>
+  )
+}
+
+/**
+ * Rend le texte enrichi d'un rappel.
+ *
+ * `form` — une forme anglaise citée — reçoit un fond très léger plutôt qu'une
+ * couleur : dans un paragraphe déjà teinté, la couleur se perdrait, alors que
+ * le liseré tient sur tous les fonds de l'écran. Le rembourrage est donné en
+ * `em` et reste serré, pour que la ponctuation qui suit ne paraisse pas
+ * décrochée du mot.
+ */
+export function Rich({ text }: { text: string }) {
+  return <Spans spans={parseInline(text)} />
+}
+
+function Spans({ spans }: { spans: Inline[] }) {
+  return (
+    <>
+      {spans.map((span, index) => {
+        switch (span.kind) {
+          case 'strong':
+            return (
+              <strong key={index} className="font-black text-ink">
+                <Spans spans={span.children} />
+              </strong>
+            )
+          case 'em':
+            return (
+              <em key={index} className="italic">
+                <Spans spans={span.children} />
+              </em>
+            )
+          case 'underline':
+            return (
+              <span key={index} className="font-bold underline decoration-2 underline-offset-[3px]">
+                <Spans spans={span.children} />
+              </span>
+            )
+          case 'form':
+            return (
+              <span
+                key={index}
+                lang="en"
+                className="rounded bg-ink/6 px-[0.15em] font-bold whitespace-nowrap text-ink"
+              >
+                {span.text}
+              </span>
+            )
+          default:
+            return <span key={index}>{span.text}</span>
+        }
+      })}
+    </>
   )
 }

@@ -21,6 +21,52 @@
  * corrects.
  */
 
+/**
+ * Fragment de texte enrichi.
+ *
+ * `form` est le plus utile des quatre : il marque une forme anglaise citée au
+ * milieu d'une explication française. L'œil la repère sans lire, ce qui est
+ * exactement ce qu'on demande à un rappel de cours.
+ */
+export type Inline =
+  | { kind: 'text'; text: string }
+  | { kind: 'strong'; children: Inline[] }
+  | { kind: 'em'; children: Inline[] }
+  | { kind: 'underline'; children: Inline[] }
+  /** Forme anglaise citée : littérale, rien ne s'y imbrique. */
+  | { kind: 'form'; text: string }
+
+const INLINE = /\*\*([^*]+)\*\*|__([^_]+)__|\*([^*]+)\*|`([^`]+)`/g
+
+/**
+ * `**gras**`, `*italique*`, `__souligné__`, `` `forme anglaise` ``.
+ *
+ * Les trois premiers s'imbriquent — « **pas de `to`** » met bien la forme en
+ * valeur à l'intérieur du gras. Le quatrième est littéral, comme du code.
+ * Un texte sans aucun marqueur ressort en un seul fragment, ce qui rend la
+ * fonction sûre à appliquer partout.
+ */
+export function parseInline(text: string): Inline[] {
+  const spans: Inline[] = []
+  let last = 0
+
+  for (const match of text.matchAll(INLINE)) {
+    const at = match.index
+    if (at > last) spans.push({ kind: 'text', text: text.slice(last, at) })
+
+    const [, strong, underline, em, form] = match
+    if (strong !== undefined) spans.push({ kind: 'strong', children: parseInline(strong) })
+    else if (underline !== undefined) spans.push({ kind: 'underline', children: parseInline(underline) })
+    else if (em !== undefined) spans.push({ kind: 'em', children: parseInline(em) })
+    else if (form !== undefined) spans.push({ kind: 'form', text: form })
+
+    last = at + match[0].length
+  }
+
+  if (last < text.length) spans.push({ kind: 'text', text: text.slice(last) })
+  return spans
+}
+
 /** Une règle, avec son étiquette éventuelle et son exemple éventuel. */
 export interface NoteRule {
   /** Ce qui précède le « : » — le cas couvert par la règle. */

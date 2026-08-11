@@ -83,14 +83,22 @@ lessons:
   - id: g2-l2
     title: Regrets, souhaits et irréel mixte
     notes: |
-      Après « wish » et « if only », le temps recule d'un cran par rapport au
-      réel visé.
-      — Présent regretté : wish + prétérit. I wish I knew.
-      — Passé regretté : wish + past perfect. I wish I had asked.
-      — Reproche à autrui : wish + would. I wish you would listen.
-      « It is (high) time » suit la même logique de recul : It is high time we left.
-      Le conditionnel mixte relie une hypothèse passée à une conséquence
-      présente : If I had studied medicine, I would be a doctor now.
+      Après `wish` et `if only`, **le temps recule d'un cran** par rapport au réel
+      visé. Le même décalage gouverne `it is time` et le conditionnel mixte.
+
+      — Présent regretté : `wish` + prétérit.
+        I wish I knew.
+      — Passé regretté : `wish` + past perfect.
+        I wish I had asked.
+      — Reproche adressé à autrui : `wish` + `would`.
+        I wish you would listen.
+      — `It is (high) time` + prétérit.
+        It is high time we left.
+
+      Le conditionnel mixte suit la même logique de décalage : une hypothèse
+      passée peut avoir une conséquence présente.
+
+      — If I had studied medicine, I would be a doctor now.
     points:
       - id: g2-wish-1
         sentence: I wish I ___ what she meant.

@@ -9,11 +9,15 @@ lessons:
   - id: c1-l1
     title: Verbes irréguliers courants
     notes: |
-      Trois colonnes à connaître par cœur : base, prétérit, participe passé.
-      Le prétérit s'emploie seul pour un fait passé daté ; le participe passé
-      sert à tous les temps composés (have / had / be + participe).
-      — I wrote the report yesterday. (prétérit)
-      — I have written three reports this week. (present perfect)
+      Un verbe irrégulier, ce sont **trois colonnes** à savoir ensemble : base,
+      prétérit, participe passé. Les deux dernières se confondent souvent.
+
+      — Le **prétérit** s'emploie seul, pour un fait passé et daté.
+        I wrote the report yesterday. J'ai rédigé le rapport hier.
+      — Le **participe passé** sert à tous les temps composés, jamais seul.
+        I have written three reports this week. (`have` + participe)
+
+      ! Un participe ne se conjugue pas tout seul : « I written » n'existe pas.
     verbs:
       - verb: to write
         translation: écrire
@@ -63,10 +67,17 @@ lessons:
   - id: c1-l2
     title: Present perfect et prétérit
     notes: |
-      La frontière n'est pas la distance dans le temps, mais le lien au présent.
-      — Prétérit : période close, souvent datée. I saw her last week.
-      — Present perfect : période encore ouverte, ou résultat actuel. I have seen her twice this week.
-      Un repère daté (yesterday, in 2019, last month) interdit le present perfect.
+      La frontière entre les deux temps n'est pas **la distance dans le temps**,
+      mais __le lien avec le présent__.
+
+      — Prétérit : la période est **close**, souvent datée.
+        I saw her last week. (la semaine dernière est finie)
+      — Present perfect : la période est **encore ouverte**, ou le résultat compte
+        aujourd'hui.
+        I have seen her twice this week. (la semaine court toujours)
+
+      ! Un repère daté — `yesterday`, `in 2019`, `last month` — interdit le
+      present perfect.
     verbs:
       - verb: to see
         translation: voir
@@ -109,11 +120,16 @@ lessons:
   - id: c1-l3
     title: Le past perfect
     notes: |
-      Le past perfect situe un événement avant un autre événement passé.
-      C'est le « passé du passé » : had + participe passé, invariable en personne.
+      Le past perfect situe un événement **avant un autre événement passé**.
+      C'est le « passé du passé » : `had` + participe, invariable en personne.
+
       — When we arrived, the meeting had already started.
-      Il est aussi obligatoire dans les hypothèses irréelles du passé
-      (if I had known) et au discours rapporté après un verbe au passé.
+        Quand nous sommes arrivés, la réunion avait déjà commencé.
+
+      Il est également obligatoire dans deux contextes.
+
+      — Hypothèse irréelle du passé : `if I had known`.
+      — Discours rapporté après un verbe au passé : `he said he had seen her`.
     verbs:
       - verb: to start
         translation: commencer

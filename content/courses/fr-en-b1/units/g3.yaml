@@ -9,14 +9,19 @@ lessons:
   - id: g3-l1
     title: La condition réelle
     notes: |
-      Quand la condition est plausible, l'anglais associe un présent et un futur.
-      — If + présent simple, … will + base verbale.
-        If it rains, we will stay at home.
-      ! Jamais de « will » dans la proposition en « if » : c'est la faute la
-      plus fréquente pour un francophone.
+      Quand la condition est **plausible**, l'anglais associe un présent et un
+      futur — jamais deux futurs.
 
-      Quand le fait est toujours vrai (loi physique, habitude), les deux
-      propositions sont au présent : If you heat water to 100°C, it boils.
+      — `If` + présent simple, … `will` + base verbale.
+        If it rains, we will stay at home. S'il pleut, nous resterons à la maison.
+
+      ! Jamais de `will` après `if` : c'est la faute la plus fréquente pour un
+      francophone, parce que le français met un futur des deux côtés.
+
+      Quand le fait est **toujours vrai** — loi physique, habitude —, les deux
+      propositions passent au présent.
+
+      — If you heat water to 100°C, it boils.
     points:
       - id: g3-cond1-1
         sentence: If it ___ tomorrow, we will stay at home.
@@ -86,12 +91,18 @@ lessons:
   - id: g3-l2
     title: La condition irréelle du présent
     notes: |
-      Quand la condition est imaginaire ou peu probable, on recule d'un cran.
-      — If + prétérit, … would + base verbale.
+      Quand la condition est **imaginaire**, on recule d'un cran : le prétérit
+      n'y parle pas du passé, il marque __la distance avec le réel__.
+
+      — `If` + prétérit, … `would` + base verbale.
         If I had more time, I would learn the piano.
-      Ce prétérit ne renvoie pas au passé : il marque la distance avec le réel.
-      Avec « be », la forme soignée est « were » à toutes les personnes, et
-      « If I were you » est la formule figée du conseil.
+        Si j'avais plus de temps, j'apprendrais le piano.
+
+      Avec `be`, la forme soignée est `were` à **toutes** les personnes, et
+      `If I were you` est la formule figée du conseil.
+
+      ! `would` ne se met jamais dans la proposition en `if` : on dit
+      `If I had more time`, jamais « If I would have more time ».
     points:
       - id: g3-cond2-1
         sentence: If I ___ enough money, I would buy a boat.

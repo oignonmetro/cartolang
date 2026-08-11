@@ -9,12 +9,20 @@ lessons:
   - id: g2-l1
     title: Le comparatif
     notes: |
-      La règle dépend de la longueur de l'adjectif, pas de son sens.
-      — Une syllabe : -er + than. short → shorter than
-      — Deux syllabes en -y : le y devient i. happy → happier than
-      — Trois syllabes ou plus : more + adjectif + than. interesting → more interesting
-      Quelques irréguliers à retenir par cœur : good → better, bad → worse,
-      far → further. Les adverbes suivent la même logique : carefully → more carefully.
+      Pour comparer, l'anglais regarde **la longueur de l'adjectif**, jamais son
+      sens. Comptez les syllabes avant de choisir.
+
+      — Une syllabe : __-er + than__.
+        short → shorter than
+      — Deux syllabes en -y : le y devient i.
+        happy → happier than
+      — Trois syllabes ou plus : __more + adjectif + than__.
+        interesting → more interesting than
+
+      Quatre irréguliers sont à savoir par cœur : `good` → `better`,
+      `bad` → `worse`, `far` → `further`, `little` → `less`.
+
+      ! Ne cumulez jamais les deux procédés : « more shorter » est fautif.
     points:
       - id: g2-comp-1
         sentence: This road is ___ than the other one. (short)

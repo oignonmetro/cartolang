@@ -9,13 +9,20 @@ lessons:
   - id: c2-l1
     title: Le présent simple
     notes: |
-      Le présent simple dit ce qui est habituel, permanent ou toujours vrai.
-      La seule irrégularité est la troisième personne du singulier, qui ajoute
-      un -s, et c'est justement là que la faute se glisse.
-      — Verbe en -y après consonne : study → studies.
-      — Verbe en -o, -ch, -sh, -ss, -x : go → goes, watch → watches.
-      À la forme négative et interrogative, c'est l'auxiliaire qui porte le -s :
-      he does not work, does he work, et le verbe redevient nu.
+      Le présent simple dit ce qui est **habituel, permanent ou toujours vrai**.
+      Sa seule irrégularité tient en une lettre : le -s de la troisième personne.
+
+      — Cas général : on ajoute __-s__.
+        he works, she plays
+      — Verbe en -y après consonne : __-ies__.
+        study → studies
+      — Verbe en -o, -ch, -sh, -ss, -x : __-es__.
+        go → goes, watch → watches
+
+      À la forme négative et interrogative, c'est **l'auxiliaire qui porte la
+      marque**, et le verbe redevient nu.
+
+      — he does not work, does he work (et non « does he works »)
     verbs:
       - verb: to work
         translation: travailler
@@ -65,15 +72,25 @@ lessons:
   - id: c2-l2
     title: Le présent continu
     notes: |
-      Be + verbe-ing décrit ce qui se déroule maintenant, ou une situation
-      temporaire par contraste avec l'habitude.
-      — I work in Lyon. (permanent) / I am working from home this week. (temporaire)
-      Attention à l'orthographe du participe présent :
-      — e final muet qui tombe : write → writing, make → making.
-      — consonne redoublée après voyelle brève accentuée : run → running, sit → sitting.
-      — ie qui devient y : lie → lying, die → dying.
-      ! Les verbes d'état (know, want, believe, belong) refusent cette forme :
-      on dit « I know », jamais « I am knowing ».
+      `be` + verbe en -ing décrit ce qui se déroule **maintenant**, ou une
+      situation **temporaire** par contraste avec l'habitude.
+
+      — Présent simple : l'habitude, ce qui est vrai en général.
+        I work in Lyon. Je travaille à Lyon, c'est mon poste.
+      — Présent continu : le moment, ou la parenthèse.
+        I am working from home this week. Cette semaine, je télétravaille.
+
+      Trois règles d'orthographe suffisent pour le participe en -ing.
+
+      — e final muet : il **tombe**.
+        write → writing, make → making
+      — voyelle brève accentuée : la consonne finale **double**.
+        run → running, sit → sitting
+      — -ie final : il devient **y**.
+        lie → lying, die → dying
+
+      ! Les verbes d'état (`know`, `want`, `believe`, `belong`) refusent cette
+      forme : on dit `I know`, jamais « I am knowing ».
     verbs:
       - verb: to write
         translation: écrire

@@ -9,11 +9,19 @@ lessons:
   - id: c2-l1
     title: Present perfect continu
     notes: |
-      Have / has been + verbe-ing. La forme continue insiste sur la durée ou sur
-      l'activité elle-même, la forme simple sur le résultat ou la quantité.
-      — I have been reading all afternoon. (l'activité et sa durée)
-      — I have read three chapters. (le résultat chiffré)
-      ! Les verbes d'état (know, believe, own, belong) refusent la forme continue.
+      `have` / `has been` + verbe-ing. La forme continue insiste sur **la durée**
+      ou sur l'activité elle-même ; la forme simple, sur **le résultat**.
+
+      — Continue : l'activité et son déroulement.
+        I have been reading all afternoon. Je lis depuis cet après-midi.
+      — Simple : le résultat, souvent chiffré.
+        I have read three chapters. J'ai lu trois chapitres.
+
+      Elle s'accompagne presque toujours de `for` (une durée) ou `since` (un
+      point de départ).
+
+      ! Les verbes d'état (`know`, `believe`, `own`, `belong`) refusent la forme
+      continue.
     verbs:
       - verb: to work
         translation: travailler
@@ -56,12 +64,17 @@ lessons:
   - id: c2-l2
     title: Past perfect continu et futur antérieur
     notes: |
-      Deux temps de bilan, l'un tourné vers le passé, l'autre vers l'avenir.
-      — Past perfect continu : had been + -ing. Durée avant un moment passé.
+      Deux temps de **bilan**, l'un tourné vers le passé, l'autre vers l'avenir.
+      Tous deux se construisent sur `have` + participe.
+
+      — Past perfect continu : `had been` + -ing. Une durée **avant** un moment
+        passé.
         She had been driving for six hours when the storm hit.
-      — Futur antérieur : will have + participe. Bilan à une date future.
+      — Futur antérieur : `will have` + participe. Un bilan **à une date future**.
         By June we will have finished the migration.
-      Le futur antérieur continu existe aussi : will have been working.
+
+      Le futur antérieur continu existe aussi, et cumule les deux :
+      `will have been working`.
     verbs:
       - verb: to drive
         translation: conduire

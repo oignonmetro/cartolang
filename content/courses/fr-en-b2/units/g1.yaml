@@ -9,13 +9,20 @@ lessons:
   - id: g1-l1
     title: Le conditionnel mixte
     notes: |
-      Le conditionnel mixte relie une hypothèse passée à une conséquence présente.
-      Les deux moitiés ne sont pas au même temps, et c'est là que ça se joue.
-      — Hypothèse passée : If + past perfect (had + participe passé)
-      — Conséquence présente : would + base verbale
-      If I had accepted the offer, I would be in Berlin now.
-      L'ordre inverse existe aussi : une hypothèse présente peut expliquer un fait passé.
+      Le conditionnel mixte **décale les deux moitiés de la phrase** : l'hypothèse
+      regarde le passé, la conséquence regarde le présent. C'est ce décalage qui
+      le distingue des conditionnels ordinaires.
+
+      — Hypothèse passée : `If` + past perfect (`had` + participe passé).
+      — Conséquence présente : `would` + base verbale.
+        If I had accepted the offer, I would be in Berlin now.
+        Si j'avais accepté ce poste, je serais à Berlin aujourd'hui.
+
+      L'ordre inverse existe aussi : un trait permanent peut expliquer un fait
+      passé.
+
       — If she were more careful, she would not have lost the file.
+        Si elle était plus soigneuse, elle n'aurait pas perdu le dossier.
     points:
       - id: g1-mixed-1
         sentence: If I had taken that job, I ___ in Berlin now.
@@ -93,12 +100,17 @@ lessons:
   - id: g1-l2
     title: Souhaits et regrets
     notes: |
-      « Wish » et « if only » expriment le décalage entre ce qui est et ce qu'on
-      voudrait. Le temps recule d'un cran par rapport au réel.
-      — Regret sur le présent : wish + prétérit → I wish I knew.
-      — Regret sur le passé : wish + past perfect → I wish I had known.
-      — Reproche ou irritation : wish + would → I wish you would listen.
-      Attention : « I wish I would » est impossible ; pour soi-même on utilise « could ».
+      `wish` et `if only` disent l'écart entre ce qui est et ce qu'on voudrait.
+      La règle tient en un mot : **le temps recule d'un cran** par rapport au réel.
+
+      — Regret sur le présent : `wish` + prétérit.
+        I wish I knew. Je regrette de ne pas savoir.
+      — Regret sur le passé : `wish` + past perfect.
+        I wish I had known. Si seulement j'avais su.
+      — Reproche adressé à autrui : `wish` + `would`.
+        I wish you would listen. J'aimerais que tu écoutes.
+
+      ! « I wish I would » est impossible : pour soi-même, on emploie `could`.
     points:
       - id: g1-wish-1
         sentence: I wish I ___ her phone number.

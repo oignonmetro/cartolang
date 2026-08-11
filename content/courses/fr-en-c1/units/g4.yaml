@@ -10,14 +10,16 @@ lessons:
     title: Chaque verbe et sa construction
     notes: |
       Rapporter précisément ne consiste pas à empiler des « he said that ».
-      Chaque verbe de parole impose sa propre construction, et se tromper de
+      **Chaque verbe de parole impose sa propre construction**, et se tromper de
       montage trahit immédiatement le niveau.
+
       — verbe + that : admit, claim, deny, insist, point out, argue.
       — verbe + quelqu'un + to : urge, advise, remind, warn, persuade.
       — verbe + -ing : admit, deny, suggest, recommend.
       — verbe + préposition + -ing : accuse of, apologise for, insist on.
-      ! « Suggest » ne se construit jamais avec un infinitif : « suggest to do »
-      est faux.
+
+      ! `suggest` ne se construit jamais avec un infinitif : « suggest to do »
+      est faux, on dit `suggest doing`.
     points:
       - id: g4-report-1
         sentence: She denied ___ anything about the transfer.
@@ -83,14 +85,19 @@ lessons:
   - id: g4-l2
     title: Concordance et déplacement des repères
     notes: |
-      Quand le verbe introducteur est au passé, tout recule d'un cran, et les
-      repères de temps et de lieu se déplacent avec.
-      — présent → prétérit ; prétérit → past perfect ; will → would.
-      — now → then, today → that day, tomorrow → the following day,
-        yesterday → the previous day, here → there, this → that.
-      Le past perfect ne recule pas davantage : il est déjà au bout.
-      Quand le fait rapporté reste vrai au moment où l'on parle, le recul
-      devient facultatif.
+      Quand le verbe introducteur est au passé, **tout recule d'un cran** : les
+      temps, mais aussi les repères de temps et de lieu.
+
+      — Les temps : présent → prétérit, prétérit → past perfect, will → would.
+      — Les repères : now → then, today → that day,
+        tomorrow → the following day, yesterday → the previous day,
+        here → there, this → that.
+
+      Deux limites bornent cette mécanique.
+
+      — Le past perfect ne recule pas davantage : il est **déjà au bout**.
+      — Si le fait reste vrai au moment où l'on parle, le recul devient facultatif.
+        He explained that water boils at 100°C. (toujours vrai aujourd'hui)
     points:
       - id: g4-shift-1
         sentence: He said he ___ the file the previous week.
