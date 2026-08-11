@@ -38,4 +38,8 @@
     <!-- Permissions -->
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <!-- Installer soi-même le nouvel APK téléchargé (AppUpdaterPlugin), sans
+         repasser par le navigateur. Ne dispense pas de la confirmation
+         explicite de l'utilisateur, que Android impose dans tous les cas. -->
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
 </manifest>

@@ -1,12 +1,16 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 
 const isNativePlatform = vi.fn(() => true)
-vi.mock('@capacitor/core', () => ({ Capacitor: { isNativePlatform: () => isNativePlatform() } }))
+const downloadAndInstall = vi.fn(async (_options: { url: string }) => {})
+vi.mock('@capacitor/core', () => ({
+  Capacitor: { isNativePlatform: () => isNativePlatform() },
+  registerPlugin: () => ({ downloadAndInstall: (options: { url: string }) => downloadAndInstall(options) }),
+}))
 
 const getInfo = vi.fn(async () => ({ build: '1' }))
 vi.mock('@capacitor/app', () => ({ App: { getInfo: () => getInfo() } }))
 
-const { checkForAppUpdate } = await import('./appUpdate')
+const { checkForAppUpdate, downloadAndInstallUpdate } = await import('./appUpdate')
 
 function jsonResponse(body: unknown, ok = true): Response {
   return new Response(JSON.stringify(body), { status: ok ? 200 : 500 })
@@ -82,5 +86,26 @@ describe('vérification de la version de l’app', () => {
     )
 
     await expect(checkForAppUpdate()).resolves.toBeNull()
+  })
+})
+
+describe('téléchargement et installation de l’app', () => {
+  it('signale le démarrage quand le plugin natif aboutit', async () => {
+    downloadAndInstall.mockResolvedValueOnce(undefined)
+
+    await expect(downloadAndInstallUpdate('https://example.com/app.apk')).resolves.toBe('started')
+    expect(downloadAndInstall).toHaveBeenCalledWith({ url: 'https://example.com/app.apk' })
+  })
+
+  it('signale qu’une autorisation est requise', async () => {
+    downloadAndInstall.mockRejectedValueOnce(new Error('permission-denied'))
+
+    await expect(downloadAndInstallUpdate('https://example.com/app.apk')).resolves.toBe('permission-required')
+  })
+
+  it('signale un échec pour toute autre erreur', async () => {
+    downloadAndInstall.mockRejectedValueOnce(new Error('Le téléchargement a échoué.'))
+
+    await expect(downloadAndInstallUpdate('https://example.com/app.apk')).resolves.toBe('failed')
   })
 })
