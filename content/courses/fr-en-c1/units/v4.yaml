@@ -90,7 +90,8 @@ lessons:
         term: to substantiate
         translation: étayer
         alt:
-          - corroborer
+          - appuyer
+          - documenter
         pos: verbe
         gap: substantiate
         example:
@@ -158,7 +159,7 @@ lessons:
           text: Most historians concur with that reading.
           translation: La plupart des historiens abondent dans le sens de cette lecture.
       - id: c1-compelling-evidence
-        term: corroborate
+        term: to corroborate
         translation: corroborer
         alt:
           - confirmer
@@ -174,6 +175,9 @@ lessons:
       - id: c1-by-and-large
         term: by and large
         translation: dans l'ensemble
+        alt:
+          - globalement
+          - en gros
         pos: expression
         example:
           text: By and large, the evidence supports this view.
@@ -191,6 +195,9 @@ lessons:
       - id: c1-to-a-large-extent
         term: to a large extent
         translation: dans une large mesure
+        alt:
+          - en grande partie
+          - pour beaucoup
         pos: expression
         example:
           text: The criticism is justified to a large extent.
@@ -198,6 +205,9 @@ lessons:
       - id: c1-all-things-considered
         term: all things considered
         translation: tout bien pesé
+        alt:
+          - tout compte fait
+          - au bout du compte
         pos: expression
         example:
           text: All things considered, the reform succeeded.
@@ -223,6 +233,9 @@ lessons:
       - id: c1-inconclusive
         term: inconclusive
         translation: peu concluant
+        alt:
+          - non concluant
+          - sans conclusion nette
         pos: adjectif
         example:
           text: The trial results were inconclusive.

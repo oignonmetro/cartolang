@@ -39,6 +39,8 @@ lessons:
       - id: b1-return-ticket
         term: return ticket
         translation: billet aller-retour
+        alt:
+          - aller-retour
         pos: nom
         example:
           text: A return ticket is cheaper than two singles.
@@ -99,6 +101,8 @@ lessons:
       - id: b1-spare-room
         term: spare room
         translation: chambre d'amis
+        alt:
+          - chambre libre
         pos: nom
         example:
           text: They have a spare room upstairs.
@@ -167,6 +171,8 @@ lessons:
       - id: b1-to-get-lost
         term: to get lost
         translation: se perdre
+        alt:
+          - s'égarer
         pos: verbe
         gap: got lost
         example:

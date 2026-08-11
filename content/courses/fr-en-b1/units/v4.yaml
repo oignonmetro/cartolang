@@ -12,6 +12,9 @@ lessons:
       - id: b1-to-hurt
         term: to hurt
         translation: faire mal
+        alt:
+          - blesser
+          - avoir mal
         pos: verbe
         gap: hurts
         example:
@@ -154,6 +157,9 @@ lessons:
       - id: b1-to-look-forward-to
         term: to look forward to
         translation: attendre avec impatience
+        alt:
+          - se réjouir de
+          - avoir hâte de
         pos: expression
         hint: Toujours suivi d'un nom ou d'un verbe en -ing, jamais d'un infinitif.
         example:
@@ -162,6 +168,9 @@ lessons:
       - id: b1-hardly-ever
         term: hardly ever
         translation: presque jamais
+        alt:
+          - rarement
+          - quasiment jamais
         pos: adverbe
         example:
           text: I hardly ever watch television.
@@ -169,6 +178,8 @@ lessons:
       - id: b1-to-be-used-to
         term: to be used to
         translation: être habitué à
+        alt:
+          - avoir l'habitude de
         pos: expression
         gap: used to
         hint: "« Be used to » = habitude ; « used to » seul = ancienne habitude révolue."
@@ -178,6 +189,9 @@ lessons:
       - id: b1-once-in-a-while
         term: once in a while
         translation: de temps en temps
+        alt:
+          - de temps à autre
+          - parfois
         pos: expression
         example:
           text: We meet once in a while for lunch.
@@ -196,6 +210,8 @@ lessons:
       - id: b1-spare-time
         term: spare time
         translation: temps libre
+        alt:
+          - loisirs
         pos: nom
         example:
           text: I read a lot in my spare time.

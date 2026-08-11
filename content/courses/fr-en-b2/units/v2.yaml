@@ -40,6 +40,9 @@ lessons:
       - id: b2-workload
         term: workload
         translation: charge de travail
+        alt:
+          - volume de travail
+          - plan de charge
         pos: nom
         example:
           text: Her workload has doubled since January.
@@ -47,6 +50,9 @@ lessons:
       - id: b2-understaffed
         term: understaffed
         translation: en sous-effectif
+        alt:
+          - en manque de personnel
+          - en effectif réduit
         pos: adjectif
         example:
           text: The department has been understaffed all year.
@@ -87,6 +93,8 @@ lessons:
       - id: b2-agenda
         term: agenda
         translation: ordre du jour
+        alt:
+          - programme
         pos: nom
         hint: "Faux ami : un agenda de rendez-vous se dit « diary » ou « calendar »."
         example:
@@ -221,6 +229,9 @@ lessons:
       - id: b2-bottleneck
         term: bottleneck
         translation: goulot d'étranglement
+        alt:
+          - goulet d'étranglement
+          - point de blocage
         pos: nom
         example:
           text: Testing is the real bottleneck here.

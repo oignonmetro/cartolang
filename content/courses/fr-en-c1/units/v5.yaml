@@ -60,6 +60,9 @@ lessons:
       - id: c1-to-resonate
         term: to resonate
         translation: trouver un écho
+        alt:
+          - résonner
+          - faire écho
         pos: verbe
         gap: resonates
         example:
@@ -119,6 +122,8 @@ lessons:
       - id: c1-subplot
         term: subplot
         translation: intrigue secondaire
+        alt:
+          - intrigue parallèle
         pos: nom
         example:
           text: The subplot adds nothing to the whole.
@@ -207,6 +212,9 @@ lessons:
       - id: c1-to-fall-out-of-favour
         term: to fall out of favour
         translation: tomber en disgrâce
+        alt:
+          - passer de mode
+          - perdre la faveur
         pos: expression
         gap: fell out of favour
         example:

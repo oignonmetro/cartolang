@@ -20,6 +20,8 @@ lessons:
       - id: b1-main-course
         term: main course
         translation: plat principal
+        alt:
+          - plat de résistance
         pos: nom
         example:
           text: The main course took twenty minutes to arrive.
@@ -67,6 +69,9 @@ lessons:
       - id: b1-to-be-starving
         term: to be starving
         translation: mourir de faim
+        alt:
+          - être affamé
+          - avoir très faim
         pos: expression
         gap: starving
         example:
@@ -112,6 +117,9 @@ lessons:
       - id: b1-bargain
         term: bargain
         translation: bonne affaire
+        alt:
+          - affaire
+          - occasion
         pos: nom
         example:
           text: That coat was a real bargain.
@@ -119,6 +127,9 @@ lessons:
       - id: b1-to-run-errands
         term: to run errands
         translation: faire des courses
+        alt:
+          - faire les courses
+          - faire ses courses
         pos: expression
         gap: run errands
         example:
@@ -164,6 +175,9 @@ lessons:
       - id: b1-to-boil
         term: to boil
         translation: faire bouillir
+        alt:
+          - bouillir
+          - porter à ébullition
         pos: verbe
         example:
           text: Boil the water before adding the pasta.
@@ -171,6 +185,9 @@ lessons:
       - id: b1-to-bake
         term: to bake
         translation: cuire au four
+        alt:
+          - faire cuire
+          - cuire
         pos: verbe
         gap: bakes
         example:
@@ -186,6 +203,8 @@ lessons:
       - id: b1-tablespoon
         term: tablespoon
         translation: cuillère à soupe
+        alt:
+          - cuiller à soupe
         pos: nom
         example:
           text: Add one tablespoon of olive oil.

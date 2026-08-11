@@ -195,6 +195,9 @@ lessons:
       - id: c1-insofar-as
         term: insofar as
         translation: dans la mesure où
+        alt:
+          - pour autant que
+          - en tant que
         pos: expression
         example:
           text: The rule applies insofar as the contract is valid.

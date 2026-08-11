@@ -19,6 +19,9 @@ lessons:
       - id: c1-to-be-on-thin-ice
         term: on thin ice
         translation: sur un terrain glissant
+        alt:
+          - sur la corde raide
+          - en terrain miné
         pos: expression
         example:
           text: You are on thin ice with that argument.
@@ -26,6 +29,8 @@ lessons:
       - id: c1-the-tip-of-the-iceberg
         term: the tip of the iceberg
         translation: la partie émergée de l'iceberg
+        alt:
+          - la partie visible de l'iceberg
         pos: expression
         example:
           text: These cases are only the tip of the iceberg.
@@ -42,6 +47,9 @@ lessons:
       - id: c1-to-be-a-grey-area
         term: a grey area
         translation: une zone floue
+        alt:
+          - une zone grise
+          - un flou juridique
         pos: expression
         example:
           text: The law leaves a grey area here.
@@ -56,6 +64,9 @@ lessons:
       - id: c1-to-come-to-a-head
         term: to come to a head
         translation: atteindre un point critique
+        alt:
+          - culminer
+          - arriver à son comble
         pos: expression
         gap: came to a head
         example:
@@ -77,6 +88,9 @@ lessons:
       - id: c1-to-be-set-in-ones-ways
         term: set in his ways
         translation: qui a ses habitudes bien ancrées
+        alt:
+          - routinier
+          - figé dans ses habitudes
         pos: expression
         example:
           text: He is far too set in his ways to move now.
@@ -84,6 +98,9 @@ lessons:
       - id: c1-to-take-something-with-a-pinch-of-salt
         term: with a pinch of salt
         translation: avec des pincettes
+        alt:
+          - avec prudence
+          - avec réserve
         pos: expression
         example:
           text: Take those figures with a pinch of salt.
@@ -91,6 +108,9 @@ lessons:
       - id: c1-to-see-eye-to-eye
         term: to see eye to eye
         translation: être du même avis
+        alt:
+          - s'entendre
+          - partager le même avis
         pos: expression
         gap: see eye to eye
         example:
@@ -99,6 +119,9 @@ lessons:
       - id: c1-to-go-out-of-ones-way
         term: to go out of his way
         translation: se donner du mal
+        alt:
+          - se mettre en quatre
+          - faire un effort particulier
         pos: expression
         gap: went out of his way
         example:
@@ -107,6 +130,9 @@ lessons:
       - id: c1-to-have-a-chip-on-ones-shoulder
         term: a chip on his shoulder
         translation: une rancune tenace
+        alt:
+          - de l'amertume
+          - un ressentiment
         pos: expression
         example:
           text: He still has a chip on his shoulder about the promotion.
@@ -165,6 +191,9 @@ lessons:
       - id: c1-to-bite-the-bullet
         term: to bite the bullet
         translation: prendre son courage à deux mains
+        alt:
+          - serrer les dents
+          - se lancer
         pos: expression
         gap: bit the bullet
         example:
@@ -173,6 +202,9 @@ lessons:
       - id: c1-to-jump-the-gun
         term: to jump the gun
         translation: agir prématurément
+        alt:
+          - brûler les étapes
+          - aller trop vite
         pos: expression
         gap: jumped the gun
         example:
@@ -181,6 +213,9 @@ lessons:
       - id: c1-to-let-something-slide
         term: to let it slide
         translation: laisser courir
+        alt:
+          - laisser passer
+          - fermer les yeux
         pos: expression
         gap: let it slide
         example:
@@ -189,6 +224,9 @@ lessons:
       - id: c1-to-touch-base
         term: to touch base
         translation: faire un point
+        alt:
+          - prendre contact
+          - refaire le point
         pos: expression
         gap: touch base
         example:
@@ -197,6 +235,9 @@ lessons:
       - id: c1-to-hedge-ones-bets
         term: to hedge his bets
         translation: ne pas mettre tous ses œufs dans le même panier
+        alt:
+          - se couvrir
+          - ménager ses arrières
         pos: expression
         gap: hedging his bets
         example:
@@ -205,6 +246,8 @@ lessons:
       - id: c1-to-go-back-to-the-drawing-board
         term: back to the drawing board
         translation: retour à la case départ
+        alt:
+          - tout est à refaire
         pos: expression
         example:
           text: The proposal failed, so it is back to the drawing board.

@@ -94,6 +94,9 @@ lessons:
       - id: b1-to-fall-out
         term: to fall out
         translation: se brouiller
+        alt:
+          - se fâcher
+          - se disputer
         pos: verbe
         gap: fell out
         example:
@@ -102,6 +105,8 @@ lessons:
       - id: b1-to-make-up
         term: to make up
         translation: se réconcilier
+        alt:
+          - faire la paix
         pos: verbe
         example:
           text: It took them a year to make up.
@@ -118,6 +123,8 @@ lessons:
       - id: b1-to-take-for-granted
         term: to take for granted
         translation: tenir pour acquis
+        alt:
+          - considérer comme acquis
         pos: expression
         gap: for granted
         example:
@@ -145,6 +152,9 @@ lessons:
       - id: b1-to-hold-a-grudge
         term: to hold a grudge
         translation: garder rancune
+        alt:
+          - en vouloir à
+          - garder de la rancune
         pos: expression
         example:
           text: She does not hold a grudge for long.
@@ -222,6 +232,9 @@ lessons:
       - id: b1-to-stick-to
         term: to stick to
         translation: s'en tenir à
+        alt:
+          - respecter
+          - suivre
         pos: verbe
         example:
           text: Let us stick to the original plan.

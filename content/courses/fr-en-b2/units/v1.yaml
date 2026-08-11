@@ -13,8 +13,8 @@ lessons:
         term: to argue
         translation: soutenir
         alt:
-          - affirmer
           - défendre l'idée
+          - plaider
         pos: verbe
         hint: Au sens de « défendre une thèse », pas seulement « se disputer ».
         gap: argues
@@ -74,6 +74,9 @@ lessons:
       - id: b2-to-hold-water
         term: to hold water
         translation: tenir la route
+        alt:
+          - tenir debout
+          - se tenir
         pos: expression
         hint: Se dit d'un raisonnement, jamais d'un objet.
         example:

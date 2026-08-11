@@ -43,7 +43,7 @@ unités puis aux leçons. Les fichiers d'unités n'ont donc pas à le répéter.
 
 ```yaml
 - id: b2-to-tackle        # identifiant unique dans tout le cours
-  term: to tackle         # le mot en anglais
+  term: to tackle         # le mot en anglais, verbe à l'infinitif
   translation: s'attaquer à
   alt:                    # autres réponses acceptées au clavier
     - aborder
@@ -60,6 +60,12 @@ le terme, puis sa forme sans « to ». Quand le verbe est conjugué de façon
 irrégulière dans l'exemple (`fell through` pour `to fall through`), indiquez la
 forme exacte à masquer avec **`gap`**. Sans cela, la validation échoue plutôt
 que de laisser un mot sans exercice.
+
+Soyez généreux sur **`alt`**. En saisie, seules `translation` et `alt` sont
+acceptées : sans variantes, un apprenant qui tape « bouillir » pour
+`to boil` — traduit « faire bouillir » — est compté faux alors qu'il sait le
+mot. La règle utile : dès que la traduction fait plus d'un mot, demandez-vous
+ce qu'un francophone taperait spontanément, et ajoutez-le.
 
 Une leçon de vocabulaire a besoin d'**au moins quatre mots** : en dessous,
 l'exercice d'association ne peut pas se construire.
@@ -223,6 +229,10 @@ proposent la mise à jour au prochain démarrage avec du réseau.
   une carte « motif → motif » n'enseigne rien et l'association afficherait le
   même mot des deux côtés. Donnez une traduction qui informe, et gardez la
   forme identique dans `alt` ;
+- verbe noté à l'infinitif (`to yield`) — remarque : c'est la convention du
+  corpus, et elle indique la forme attendue à la saisie ;
+- deux mots d'une même leçon qui accepteraient la même réponse — remarque :
+  la saisie ne peut plus les distinguer, et le couple perd son intérêt ;
 - nom de fichier d'unité cohérent avec son `id` ;
 - toute unité référencée existe, et toute unité existante est référencée ;
 - au moins 4 mots par leçon de vocabulaire, 3 points par leçon de grammaire,

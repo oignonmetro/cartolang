@@ -256,11 +256,31 @@ function checkVocabLesson(lesson: VocabLesson, problems: string[]) {
       )
     }
 
+    // L'infinitif est la convention du corpus : elle rend les cartes
+    // comparables et guide la forme attendue à la saisie.
+    if (vocab.pos === 'verbe' && !/^to\s/i.test(vocab.term)) {
+      warn(`mot "${vocab.id}"`, `verbe noté sans « to » ("${vocab.term}")`)
+    }
+
     if (vocab.example && !findVocabGap(vocab.example.text, vocab.term, vocab.gap)) {
       problems.push(
         `mot "${vocab.id}" : la phrase d'exemple ne contient ni "${vocab.term}" ni sa forme nue ; ` +
           "ajoutez un champ `gap` avec la forme exacte à masquer",
       )
+    }
+  }
+
+  // Deux mots d'une même leçon qui acceptent la même réponse : la saisie ne
+  // peut plus les distinguer, et le couple perd son intérêt.
+  const accepted = new Map<string, string>()
+  for (const vocab of lesson.vocab) {
+    for (const answer of [vocab.translation, ...vocab.alt]) {
+      const key = answer.trim().toLowerCase()
+      const owner = accepted.get(key)
+      if (owner && owner !== vocab.term) {
+        warn(`leçon "${lesson.id}"`, `« ${answer} » est accepté pour « ${owner} » et « ${vocab.term} »`)
+      }
+      accepted.set(key, vocab.term)
     }
   }
 }

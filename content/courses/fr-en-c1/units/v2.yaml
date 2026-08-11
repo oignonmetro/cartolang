@@ -233,6 +233,9 @@ lessons:
       - id: c1-at-stake
         term: at stake
         translation: en jeu
+        alt:
+          - en cause
+          - en balance
         pos: expression
         example:
           text: Far more is at stake than a single treaty.

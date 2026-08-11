@@ -66,6 +66,9 @@ lessons:
       - id: b2-to-lobby
         term: to lobby
         translation: faire pression
+        alt:
+          - faire du lobbying
+          - faire campagne
         pos: verbe
         gap: lobbied
         example:

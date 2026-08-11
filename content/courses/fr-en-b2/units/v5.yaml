@@ -12,6 +12,9 @@ lessons:
       - id: b2-coverage
         term: coverage
         translation: couverture médiatique
+        alt:
+          - couverture
+          - traitement médiatique
         pos: nom
         example:
           text: The coverage was relentless for a fortnight.
@@ -47,6 +50,9 @@ lessons:
       - id: b2-to-fact-check
         term: to fact-check
         translation: vérifier les faits
+        alt:
+          - vérifier
+          - recouper
         pos: verbe
         gap: fact-checked
         example:
@@ -62,6 +68,9 @@ lessons:
       - id: b2-tabloid
         term: tabloid
         translation: presse à sensation
+        alt:
+          - tabloïd
+          - journal à sensation
         pos: nom
         example:
           text: The story first appeared in a tabloid.
@@ -69,6 +78,8 @@ lessons:
       - id: b2-to-go-viral
         term: to go viral
         translation: devenir viral
+        alt:
+          - faire le buzz
         pos: expression
         gap: went viral
         example:
@@ -144,6 +155,9 @@ lessons:
       - id: b2-acclaimed
         term: acclaimed
         translation: salué par la critique
+        alt:
+          - encensé
+          - acclamé
         pos: adjectif
         example:
           text: Her acclaimed first novel appeared in 2019.
@@ -164,6 +178,9 @@ lessons:
       - id: b2-mainstream
         term: mainstream
         translation: grand public
+        alt:
+          - dominant
+          - conventionnel
         pos: adjectif
         example:
           text: The idea has become entirely mainstream.
