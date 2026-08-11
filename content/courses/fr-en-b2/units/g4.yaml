@@ -93,3 +93,85 @@ lessons:
           - so that
         translation: Prends un parapluie au cas où il pleuvrait plus tard.
         explanation: « In case » anticipe une éventualité ; « if » poserait une condition, ce qui n'est pas le sens ici.
+
+  - id: g4-l2
+    title: But, conséquence et conclusion
+    notes: |
+      L'autre moitié de l'articulation logique : dire pourquoi on agit, et ce
+      qui s'ensuit. Là encore, la faute vient de la construction, pas du sens.
+      — But visé, suivi d'un verbe : to, in order to, so as to.
+      — But visé, suivi d'une proposition : so that + sujet + modal.
+      — Conséquence, en tête de proposition : therefore, thus, hence, consequently.
+      — Conséquence, en incise après le verbe : as a result, accordingly.
+      « So as to » et « in order to » se nient en insérant « not » avant « to » :
+      in order not to disturb.
+    points:
+      - id: g4-cons-1
+        sentence: She left early ___ to avoid the traffic.
+        answer: so as
+        alt:
+          - in order
+        options:
+          - so as
+          - so that
+          - for
+          - because
+        translation: Elle est partie tôt afin d'éviter les embouteillages.
+        explanation: "Devant un infinitif : « so as to » ou « in order to », jamais « so that »."
+      - id: g4-cons-2
+        sentence: We moved the meeting ___ everyone could attend.
+        answer: so that
+        options:
+          - so that
+          - so as to
+          - in order to
+          - due to
+        translation: Nous avons déplacé la réunion pour que tout le monde puisse venir.
+        explanation: Devant une proposition complète avec son propre sujet, il faut « so that ».
+      - id: g4-cons-3
+        sentence: The evidence was incomplete; ___, the case was dropped.
+        answer: therefore
+        alt:
+          - thus
+          - consequently
+        options:
+          - therefore
+          - however
+          - whereas
+          - although
+        translation: Les preuves étaient incomplètes ; par conséquent, l'affaire a été classée.
+        explanation: Adverbe de conséquence entre deux propositions indépendantes.
+      - id: g4-cons-4
+        sentence: He spoke quietly ___ not to wake the baby.
+        answer: so as
+        alt:
+          - in order
+        options:
+          - so as
+          - so that
+          - for
+          - to
+        translation: Il a parlé doucement pour ne pas réveiller le bébé.
+        explanation: "La négation s'insère avant « to » : « so as not to »."
+      - id: g4-cons-5
+        sentence: Two suppliers withdrew; ___ a result, production stalled.
+        answer: as
+        options:
+          - as
+          - in
+          - for
+          - with
+        translation: Deux fournisseurs se sont retirés ; en conséquence, la production s'est arrêtée.
+        explanation: "Locution figée : « as a result »."
+      - id: g4-cons-6
+        sentence: The deadline was missed, ___ the penalty clause applied.
+        answer: hence
+        alt:
+          - thus
+        options:
+          - hence
+          - despite
+          - unless
+          - whereas
+        translation: L'échéance n'a pas été tenue, d'où l'application de la clause pénale.
+        explanation: « Hence » introduit une conséquence directe, dans un registre soutenu.

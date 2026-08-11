@@ -24,7 +24,7 @@ status: available
 # d'ordre alphabétique de dossier.
 default: true
 layout: library
-version: 2
+version: 3
 
 tracks:
   - id: vocabulaire
@@ -37,6 +37,7 @@ tracks:
       - v1
       - v2
       - v3
+      - v4
 
   - id: grammaire
     title: Grammaire
@@ -59,3 +60,4 @@ tracks:
     units:
       - c2
       - c3
+      - c4

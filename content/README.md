@@ -142,11 +142,10 @@ la validation : le contenu ne peut pas contenir de trou.
 
 Une piste (`kind: library`) peut avoir `units: []` — aucune unité. L'écran
 affiche alors un état « à venir » pour cette piste plutôt qu'une page vide qui
-ressemblerait à un bug. C'est ainsi que les niveaux B1 et C1 existent déjà
-dans le sélecteur, prêts à être remplis leçon par leçon plus tard sans qu'il y
-ait de nouvel écran à construire — chacun a d'ailleurs déjà une première
-piste amorcée (reprise depuis B2 après un audit de niveau), les autres
-pistes restant vides jusqu'à leur tour.
+ressemblerait à un bug. C'est ainsi que les niveaux B1 et C1 ont existé dans
+le sélecteur avant d'avoir leur contenu ; aujourd'hui les trois cours sont
+remplis, mais le mécanisme reste disponible pour ouvrir un nouveau niveau
+avant de l'écrire.
 
 ## Le cours proposé par défaut
 

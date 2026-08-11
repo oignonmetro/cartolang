@@ -1,0 +1,112 @@
+id: c3
+title: Modaux et futur
+subtitle: Can, must, will et leurs formes
+icon: compass
+color: sky
+level: B1
+
+lessons:
+  - id: c3-l1
+    title: Les modaux au présent et au passé
+    notes: |
+      Les modaux ne se conjuguent pas : pas de -s à la troisième personne, pas
+      de « to » après eux, et pas d'auxiliaire « do » à la négation.
+      — She can swim. (jamais « she cans » ni « she can to swim »)
+      Chacun a son passé, et il n'est pas toujours régulier :
+      — can → could, will → would, may → might.
+      — must n'a pas de passé propre : on emploie « had to ».
+    verbs:
+      - verb: can
+        translation: pouvoir
+        tense: modal
+        note: "Aucune marque de personne : « he can », jamais « he cans »."
+        forms:
+          - id: c3-can-pres
+            person: présent
+            answer: can
+          - id: c3-can-past
+            person: passé
+            answer: could
+          - id: c3-can-neg
+            person: négation présente
+            answer: cannot
+            alt:
+              - can't
+      - verb: must
+        translation: devoir
+        tense: modal
+        note: "Pas de passé propre : au passé, on bascule sur « had to »."
+        forms:
+          - id: c3-must-pres
+            person: présent
+            answer: must
+          - id: c3-must-past
+            person: passé
+            answer: had to
+      - verb: may
+        translation: pouvoir (permission, éventualité)
+        tense: modal
+        note: "« Might » sert de passé, mais aussi de version plus prudente au présent."
+        forms:
+          - id: c3-may-pres
+            person: présent
+            answer: may
+          - id: c3-may-past
+            person: passé
+            answer: might
+
+  - id: c3-l2
+    title: Les formes du futur
+    notes: |
+      « Will » est un modal comme les autres : une seule forme pour toutes les
+      personnes, base verbale nue derrière.
+      — I will go, she will go — jamais « she wills » ni « will to go ».
+      « Be going to », lui, se conjugue vraiment, puisque « be » se conjugue :
+      am / is / are going to.
+      La contraction 'll est la forme parlée normale, et « won't » est la
+      négation de « will ».
+    verbs:
+      - verb: to go
+        translation: aller
+        tense: futur avec will
+        note: Forme unique pour toutes les personnes.
+        forms:
+          - id: c3-go-will
+            person: affirmatif
+            answer: will go
+            alt:
+              - "'ll go"
+          - id: c3-go-will-neg
+            person: négatif
+            answer: will not go
+            alt:
+              - won't go
+      - verb: to leave
+        translation: partir
+        tense: futur proche (going to)
+        note: Seul « be » varie ; « going to leave » ne bouge pas.
+        forms:
+          - id: c3-leave-gt-1
+            person: I
+            answer: am going to leave
+          - id: c3-leave-gt-3
+            person: he / she / it
+            answer: is going to leave
+          - id: c3-leave-gt-pl
+            person: you / we / they
+            answer: are going to leave
+      - verb: to be
+        translation: être
+        tense: futur avec will
+        note: "Même au futur, « be » reste invariable derrière will : will be."
+        forms:
+          - id: c3-be-will
+            person: affirmatif
+            answer: will be
+            alt:
+              - "'ll be"
+          - id: c3-be-will-neg
+            person: négatif
+            answer: will not be
+            alt:
+              - won't be

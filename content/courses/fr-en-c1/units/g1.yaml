@@ -80,3 +80,80 @@ lessons:
           - had we realised
         translation: Ce n'est qu'après l'audit que nous avons mesuré l'ampleur du problème.
         explanation: « Only + complément » en tête entraîne l'inversion sur l'auxiliaire.
+
+  - id: g1-l2
+    title: Antéposition et tournures emphatiques
+    notes: |
+      Au-delà de l'inversion négative, l'écrit soutenu dispose d'autres façons
+      de déplacer le poids de la phrase vers l'avant.
+      — It is not until… that… : Ce n'est qu'à ce moment-là que…
+      — Little did he know… : marqueur figé de l'ironie narrative.
+      — So + adjectif + inversion : So great was the demand that…
+      — Such + être + inversion : Such was the outcry that…
+      — Antéposition simple : Among the guests was a former minister.
+      Toutes ces tournures appartiennent à l'écrit ; à l'oral, elles sonnent
+      affectées si elles ne sont pas parfaitement placées.
+    points:
+      - id: g1-front-1
+        sentence: It was not ___ the second reading that the error appeared.
+        answer: until
+        options:
+          - until
+          - since
+          - before
+          - after
+        translation: Ce n'est qu'à la deuxième lecture que l'erreur est apparue.
+        explanation: "Structure figée : « It is not until… that… »."
+      - id: g1-front-2
+        sentence: Little ___ that the decision had already been taken.
+        answer: did they know
+        options:
+          - did they know
+          - they knew
+          - they did know
+          - had they know
+        translation: Ils étaient loin de savoir que la décision était déjà prise.
+        explanation: « Little » en tête fonctionne comme un négatif et impose l'inversion.
+      - id: g1-front-3
+        sentence: So ___ the response that the servers crashed.
+        answer: great was
+        options:
+          - great was
+          - was great
+          - great it was
+          - greatly was
+        translation: La réaction fut si forte que les serveurs ont lâché.
+        explanation: "« So + adjectif » en tête : l'adjectif précède l'inversion."
+      - id: g1-front-4
+        sentence: Such ___ the criticism that the plan was withdrawn.
+        answer: was
+        options:
+          - was
+          - it was
+          - had been
+          - being
+        translation: La critique fut telle que le projet a été retiré.
+        explanation: "« Such » en tête entraîne directement le verbe : « Such was… »."
+      - id: g1-front-5
+        sentence: Among the signatories ___ two former presidents.
+        answer: were
+        options:
+          - were
+          - was
+          - there were
+          - they were
+        translation: Parmi les signataires figuraient deux anciens présidents.
+        explanation: Le sujet réel est postposé et pluriel, le verbe s'accorde avec lui.
+      - id: g1-front-6
+        sentence: On no account ___ this document be copied.
+        answer: may
+        alt:
+          - should
+          - must
+        options:
+          - may
+          - it may
+          - may it
+          - can be
+        translation: Ce document ne doit en aucun cas être copié.
+        explanation: « On no account » est un négatif antéposé, donc modal avant le sujet.

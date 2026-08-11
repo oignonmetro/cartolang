@@ -1,0 +1,226 @@
+id: v4
+title: Santé et vie quotidienne
+subtitle: Le corps, la maison, les habitudes
+icon: cup
+color: teal
+level: B1
+
+lessons:
+  - id: v4-l1
+    title: Santé et sensations
+    vocab:
+      - id: b1-to-hurt
+        term: to hurt
+        translation: faire mal
+        pos: verbe
+        gap: hurts
+        example:
+          text: My back hurts in the morning.
+          translation: J'ai mal au dos le matin.
+      - id: b1-illness
+        term: illness
+        translation: maladie
+        pos: nom
+        example:
+          text: A minor illness kept him at home.
+          translation: Une maladie bénigne l'a retenu chez lui.
+      - id: b1-to-recover
+        term: to recover
+        translation: se remettre
+        alt:
+          - guérir
+        pos: verbe
+        gap: recovered
+        example:
+          text: She recovered surprisingly quickly.
+          translation: Elle s'est remise étonnamment vite.
+      - id: b1-treatment
+        term: treatment
+        translation: traitement
+        alt:
+          - soins
+        pos: nom
+        example:
+          text: The treatment lasts six weeks.
+          translation: Le traitement dure six semaines.
+      - id: b1-to-breathe
+        term: to breathe
+        translation: respirer
+        pos: verbe
+        hint: Le verbe prend un e final, le nom « breath » non.
+
+        example:
+          text: Breathe slowly and count to five.
+          translation: Respirez lentement et comptez jusqu'à cinq.
+      - id: b1-tired
+        term: tired
+        translation: fatigué
+        pos: adjectif
+        example:
+          text: I always feel tired after lunch.
+          translation: Je me sens toujours fatigué après le déjeuner.
+      - id: b1-to-feel-sick
+        term: to feel sick
+        translation: avoir la nausée
+        alt:
+          - se sentir mal
+        pos: expression
+        gap: feel sick
+        example:
+          text: I feel sick when I read in the car.
+          translation: J'ai la nausée quand je lis en voiture.
+      - id: b1-appointment
+        term: appointment
+        translation: rendez-vous
+        pos: nom
+        hint: Rendez-vous professionnel ou médical ; « a date » est amoureux.
+
+        example:
+          text: I have an appointment at four.
+          translation: J'ai un rendez-vous à seize heures.
+
+  - id: v4-l2
+    title: À la maison
+    vocab:
+      - id: b1-chore
+        term: chore
+        translation: corvée ménagère
+        alt:
+          - tâche ménagère
+        pos: nom
+        example:
+          text: Doing the dishes is my least favourite chore.
+          translation: La vaisselle est ma corvée la moins appréciée.
+      - id: b1-to-tidy-up
+        term: to tidy up
+        translation: ranger
+        pos: verbe
+        gap: tidied up
+        example:
+          text: We tidied up before the guests arrived.
+          translation: Nous avons rangé avant l'arrivée des invités.
+      - id: b1-rubbish
+        term: rubbish
+        translation: ordures
+        alt:
+          - poubelle
+        pos: nom
+        example:
+          text: Put the rubbish outside on Tuesday.
+          translation: Sortez les ordures le mardi.
+      - id: b1-to-sweep
+        term: to sweep
+        translation: balayer
+        pos: verbe
+        example:
+          text: I sweep the kitchen every evening.
+          translation: Je balaie la cuisine tous les soirs.
+      - id: b1-kettle
+        term: kettle
+        translation: bouilloire
+        pos: nom
+        example:
+          text: The kettle takes about two minutes.
+          translation: La bouilloire met environ deux minutes.
+      - id: b1-cupboard
+        term: cupboard
+        translation: placard
+        pos: nom
+        example:
+          text: The plates are in the cupboard on the left.
+          translation: Les assiettes sont dans le placard de gauche.
+      - id: b1-to-run-out-of
+        term: to run out of
+        translation: être à court de
+        alt:
+          - ne plus avoir de
+        pos: verbe
+        gap: run out of
+        example:
+          text: We have run out of milk again.
+          translation: Nous sommes encore à court de lait.
+      - id: b1-bill
+        term: bill
+        translation: facture
+        alt:
+          - addition
+        pos: nom
+        example:
+          text: The electricity bill arrived this morning.
+          translation: La facture d'électricité est arrivée ce matin.
+
+  - id: v4-l3
+    title: Habitudes et rythme de vie
+    vocab:
+      - id: b1-to-look-forward-to
+        term: to look forward to
+        translation: attendre avec impatience
+        pos: expression
+        hint: Toujours suivi d'un nom ou d'un verbe en -ing, jamais d'un infinitif.
+
+        example:
+          text: I look forward to the weekend.
+          translation: J'attends le week-end avec impatience.
+      - id: b1-hardly-ever
+        term: hardly ever
+        translation: presque jamais
+        pos: adverbe
+        example:
+          text: I hardly ever watch television.
+          translation: Je ne regarde presque jamais la télévision.
+      - id: b1-to-be-used-to
+        term: to be used to
+        translation: être habitué à
+        pos: expression
+        gap: used to
+        hint: "« Be used to » = habitude ; « used to » seul = ancienne habitude révolue."
+
+        example:
+          text: She is used to getting up early.
+          translation: Elle est habituée à se lever tôt.
+      - id: b1-once-in-a-while
+        term: once in a while
+        translation: de temps en temps
+        pos: expression
+        example:
+          text: We meet once in a while for lunch.
+          translation: Nous nous voyons de temps en temps pour déjeuner.
+      - id: b1-to-give-up
+        term: to give up
+        translation: abandonner
+        alt:
+          - arrêter
+          - renoncer
+        pos: verbe
+        gap: gave up
+        example:
+          text: He gave up smoking last year.
+          translation: Il a arrêté de fumer l'an dernier.
+      - id: b1-spare-time
+        term: spare time
+        translation: temps libre
+        pos: nom
+        example:
+          text: I read a lot in my spare time.
+          translation: Je lis beaucoup pendant mon temps libre.
+      - id: b1-to-keep-on
+        term: to keep on
+        translation: continuer à
+        alt:
+          - ne pas arrêter de
+        pos: verbe
+        gap: kept on
+        example:
+          text: She kept on asking the same question.
+          translation: Elle n'arrêtait pas de poser la même question.
+      - id: b1-eventually
+        term: eventually
+        translation: finalement
+        alt:
+          - au bout du compte
+        pos: adverbe
+        hint: "Faux ami : « éventuellement » se dit « possibly »."
+
+        example:
+          text: They eventually agreed on a date.
+          translation: Ils se sont finalement mis d'accord sur une date.

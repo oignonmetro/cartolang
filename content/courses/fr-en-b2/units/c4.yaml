@@ -1,0 +1,117 @@
+id: c4
+title: Gérondif et infinitif
+subtitle: Ce qui suit un verbe, et pourquoi
+icon: book
+color: sky
+level: B2.1
+
+lessons:
+  - id: c4-l1
+    title: Les deux constructions de base
+    notes: |
+      Après un verbe, l'anglais impose l'une ou l'autre forme, et cela ne se
+      déduit pas du sens : cela s'apprend verbe par verbe.
+      — Suivis d'un gérondif (-ing) : enjoy, avoid, finish, mind, suggest, keep.
+      — Suivis d'un infinitif (to) : want, decide, hope, offer, refuse, manage.
+      — Après une préposition, toujours le gérondif : good at cooking,
+        interested in learning, instead of waiting.
+    verbs:
+      - verb: to enjoy
+        translation: apprécier
+        tense: verbe + gérondif
+        note: "Jamais « enjoy to read » : enjoy impose la forme en -ing."
+        forms:
+          - id: c4-enjoy-ger
+            person: forme attendue après le verbe
+            answer: enjoy reading
+          - id: c4-enjoy-ger-neg
+            person: forme négative du gérondif
+            answer: enjoy not being
+      - verb: to decide
+        translation: décider
+        tense: verbe + infinitif
+        note: Verbe de projet ou de volonté, donc infinitif complet avec « to ».
+        forms:
+          - id: c4-decide-inf
+            person: forme attendue après le verbe
+            answer: decide to leave
+          - id: c4-decide-inf-neg
+            person: forme négative de l'infinitif
+            answer: decide not to leave
+      - verb: to avoid
+        translation: éviter
+        tense: verbe + gérondif
+        note: Comme avoid, on trouve mind, deny, risk, consider, imagine.
+        forms:
+          - id: c4-avoid-ger
+            person: forme attendue après le verbe
+            answer: avoid making
+          - id: c4-avoid-prep
+            person: après la préposition « by »
+            answer: by avoiding
+      - verb: to manage
+        translation: parvenir à
+        tense: verbe + infinitif
+        note: "« Manage to » dit la réussite malgré la difficulté."
+        forms:
+          - id: c4-manage-inf
+            person: forme attendue après le verbe
+            answer: manage to finish
+          - id: c4-manage-past
+            person: prétérit + infinitif
+            answer: managed to finish
+
+  - id: c4-l2
+    title: Quand la forme change le sens
+    notes: |
+      Une poignée de verbes acceptent les deux constructions, mais ne veulent
+      alors pas dire la même chose. C'est là qu'un B2 se distingue.
+      — stop doing = cesser l'activité / stop to do = s'arrêter afin de faire.
+      — remember doing = se souvenir d'un fait passé / remember to do = penser à faire.
+      — try doing = tenter l'expérience / try to do = s'efforcer de.
+      — mean doing = impliquer / mean to do = avoir l'intention de.
+    verbs:
+      - verb: to stop
+        translation: arrêter
+        tense: sens selon la forme
+        note: Le gérondif dit ce qu'on cesse, l'infinitif dit pourquoi on s'arrête.
+        forms:
+          - id: c4-stop-ger
+            person: cesser l'activité
+            answer: stopped smoking
+          - id: c4-stop-inf
+            person: s'arrêter afin de
+            answer: stopped to smoke
+      - verb: to remember
+        translation: se souvenir
+        tense: sens selon la forme
+        note: Le gérondif regarde en arrière, l'infinitif regarde en avant.
+        forms:
+          - id: c4-remember-ger
+            person: se souvenir d'un fait passé
+            answer: remember locking
+          - id: c4-remember-inf
+            person: penser à faire
+            answer: remember to lock
+      - verb: to try
+        translation: essayer
+        tense: sens selon la forme
+        note: "« Try calling » teste une méthode ; « try to call » décrit un effort."
+        forms:
+          - id: c4-try-ger
+            person: tenter une méthode
+            answer: try calling
+          - id: c4-try-inf
+            person: s'efforcer de
+            answer: try to call
+      - verb: to mean
+        translation: signifier / avoir l'intention
+        tense: sens selon la forme
+        note: mean / meant / meant — attention au prétérit irrégulier.
+        forms:
+          - id: c4-mean-ger
+            person: impliquer, entraîner
+            answer: means working
+          - id: c4-mean-inf
+            person: avoir l'intention de
+            answer: meant to call

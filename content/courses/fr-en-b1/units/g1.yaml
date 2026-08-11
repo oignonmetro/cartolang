@@ -1,0 +1,155 @@
+id: g1
+title: Parler de l'avenir
+subtitle: Will, going to, et le présent à valeur de futur
+icon: compass
+color: violet
+level: B1
+
+lessons:
+  - id: g1-l1
+    title: Will, going to et présent continu
+    notes: |
+      L'anglais n'a pas un futur mais trois façons courantes d'en parler, et le
+      choix dépend de ce qui motive la phrase, pas du moment visé.
+      — Décision prise à l'instant, promesse, prédiction : will.
+      — Intention déjà formée, ou indice visible dans le présent : be going to.
+      — Rendez-vous déjà pris, arrangement daté : présent continu.
+      Les horaires officiels (trains, cinémas, cours) prennent le présent simple.
+    points:
+      - id: g1-fut-1
+        sentence: Look at those clouds — it ___ rain.
+        answer: is going to
+        options:
+          - is going to
+          - will
+          - rains
+          - is raining
+        translation: Regarde ces nuages — il va pleuvoir.
+        explanation: Un indice visible dans le présent appelle « be going to », pas « will ».
+      - id: g1-fut-2
+        sentence: That bag looks heavy — I ___ help you.
+        answer: will
+        alt:
+          - "'ll"
+        options:
+          - will
+          - am going to
+          - go to
+          - would
+        translation: Ce sac a l'air lourd — je vais t'aider.
+        explanation: "Décision prise au moment où l'on parle : « will »."
+      - id: g1-fut-3
+        sentence: We ___ dinner with Paul on Friday; the table is booked.
+        answer: are having
+        options:
+          - are having
+          - will have
+          - have
+          - are going have
+        translation: Nous dînons avec Paul vendredi ; la table est réservée.
+        explanation: "Arrangement déjà pris et daté : présent continu."
+      - id: g1-fut-4
+        sentence: She ___ study medicine — she has already applied.
+        answer: is going to
+        options:
+          - is going to
+          - will
+          - studies
+          - would
+        translation: Elle va étudier la médecine — elle a déjà déposé sa candidature.
+        explanation: "Intention formée avant le moment de parole : « be going to »."
+      - id: g1-fut-5
+        sentence: The last train ___ at 6:04 every evening.
+        answer: leaves
+        options:
+          - leaves
+          - will leave
+          - is leaving
+          - is going to leave
+        translation: Le dernier train part à 6 h 04 tous les soirs.
+        explanation: "Horaire officiel et répété : présent simple."
+      - id: g1-fut-6
+        sentence: I promise I ___ tell anyone.
+        answer: will not
+        alt:
+          - won't
+        options:
+          - will not
+          - am not going to
+          - do not
+          - not will
+        translation: Je promets que je ne le dirai à personne.
+        explanation: "Promesse : « will », ici à la forme négative."
+
+  - id: g1-l2
+    title: Le futur après when, if et as soon as
+    notes: |
+      Après une conjonction de temps ou de condition, l'anglais met le présent
+      là où le français met un futur. C'est une des fautes les plus tenaces à
+      ce niveau.
+      — I will call you as soon as I arrive. (jamais « as soon as I will arrive »)
+      — If it rains, we will stay in. (jamais « if it will rain »)
+      La proposition principale, elle, garde bien son « will ».
+    points:
+      - id: g1-when-1
+        sentence: I will call you as soon as I ___ .
+        answer: arrive
+        options:
+          - arrive
+          - will arrive
+          - am arriving
+          - arrived
+        translation: Je t'appellerai dès que j'arriverai.
+        explanation: Après « as soon as », présent simple malgré le sens futur.
+      - id: g1-when-2
+        sentence: We will wait until she ___ back.
+        answer: comes
+        options:
+          - comes
+          - will come
+          - will be
+          - came
+        translation: Nous attendrons jusqu'à ce qu'elle revienne.
+        explanation: "« Until » est une conjonction de temps : présent."
+      - id: g1-when-3
+        sentence: Before you ___, please switch off the lights.
+        answer: leave
+        options:
+          - leave
+          - will leave
+          - left
+          - are leaving
+        translation: Avant de partir, éteins les lumières s'il te plaît.
+        explanation: « Before » suit la même règle que « when » et « until ».
+      - id: g1-when-4
+        sentence: When the film ___, we can talk about it.
+        answer: ends
+        options:
+          - ends
+          - will end
+          - ended
+          - is ending
+        translation: Quand le film sera fini, nous pourrons en parler.
+        explanation: Le français met un futur antérieur là où l'anglais met un présent.
+      - id: g1-when-5
+        sentence: If it rains tomorrow, we ___ the trip.
+        answer: will cancel
+        alt:
+          - "'ll cancel"
+        options:
+          - will cancel
+          - cancel
+          - would cancel
+          - are cancelling
+        translation: S'il pleut demain, nous annulerons l'excursion.
+        explanation: La subordonnée en « if » est au présent, mais la principale garde « will ».
+      - id: g1-when-6
+        sentence: I will let you know the moment I ___ something.
+        answer: hear
+        options:
+          - hear
+          - will hear
+          - heard
+          - am hearing
+        translation: Je te préviendrai dès que j'aurai des nouvelles.
+        explanation: "« The moment » fonctionne comme « as soon as » : présent."

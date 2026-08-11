@@ -50,7 +50,17 @@ export const vocabSchema = z.object({
   alt: z.array(z.string().min(1)).default([]),
   hint: z.string().optional(),
   pos: z
-    .enum(['nom', 'verbe', 'adjectif', 'adverbe', 'expression', 'pronom', 'préposition', 'nombre'])
+    .enum([
+      'nom',
+      'verbe',
+      'adjectif',
+      'adverbe',
+      'expression',
+      'pronom',
+      'préposition',
+      'conjonction',
+      'nombre',
+    ])
     .optional(),
   example: exampleSchema.optional(),
   gap: z.string().min(1).optional(),

@@ -1,0 +1,156 @@
+id: g3
+title: Atténuation et prudence
+subtitle: Dire moins pour dire mieux
+icon: people
+color: violet
+level: C1
+
+lessons:
+  - id: g3-l1
+    title: Les marqueurs de prudence
+    notes: |
+      L'anglais académique et journalistique affirme rarement sans filet. Un
+      C1 se reconnaît à sa maîtrise de ces atténuateurs.
+      — Modaux affaiblis : may, might, could + base verbale.
+      — Verbes de tendance : tend to, appear to, seem to.
+      — Adverbes : arguably, seemingly, largely, broadly, to some extent.
+      — Tournures impersonnelles : it would appear that, it is widely held that.
+      Trop d'atténuation affaiblit le propos ; l'enjeu est le dosage, pas
+      l'accumulation.
+    points:
+      - id: g3-hedge-1
+        sentence: The figures ___ to suggest a slowdown.
+        answer: appear
+        alt:
+          - seem
+        options:
+          - appear
+          - appears
+          - appearing
+          - are appearing
+        translation: Les chiffres semblent indiquer un ralentissement.
+        explanation: « Figures » est pluriel ; « appear to » atténue une affirmation.
+      - id: g3-hedge-2
+        sentence: Prices ___ to rise sharply in the autumn.
+        answer: tend
+        options:
+          - tend
+          - tends
+          - are tending
+          - tended
+        translation: Les prix ont tendance à fortement augmenter à l'automne.
+        explanation: « Tend to » transforme une règle absolue en tendance.
+      - id: g3-hedge-3
+        sentence: It ___ appear that the two events are unrelated.
+        answer: would
+        options:
+          - would
+          - will
+          - should
+          - could
+        translation: Il semblerait que les deux événements soient sans lien.
+        explanation: "Tournure impersonnelle prudente : « It would appear that… »."
+      - id: g3-hedge-4
+        sentence: The policy has been ___ successful, though not entirely.
+        answer: largely
+        alt:
+          - broadly
+        options:
+          - largely
+          - totally
+          - hardly
+          - barely
+        translation: La politique a été largement efficace, sans l'être totalement.
+        explanation: La suite de la phrase impose un adverbe de degré partiel.
+      - id: g3-hedge-5
+        sentence: Such a reading is ___ defensible, but it is not the only one.
+        answer: arguably
+        options:
+          - arguably
+          - undeniably
+          - certainly
+          - unquestionably
+        translation: Une telle lecture est sans doute défendable, mais ce n'est pas la seule.
+        explanation: « Arguably » ouvre la discussion ; les autres options la ferment.
+      - id: g3-hedge-6
+        sentence: The results are valid ___ some extent.
+        answer: to
+        options:
+          - to
+          - at
+          - in
+          - by
+        translation: Les résultats sont valables dans une certaine mesure.
+        explanation: "Collocation figée : « to some extent »."
+
+  - id: g3-l2
+    title: Distance, rumeur et responsabilité
+    notes: |
+      Pour rapporter sans endosser, l'anglais dispose du passif impersonnel et
+      de quelques tournures spécialisées.
+      — It is said / believed / thought that he resigned.
+      — He is said to have resigned. (même sens, sujet remonté)
+      — Reportedly, allegedly, supposedly en tête ou en incise.
+      « Allegedly » est le mot du journalisme judiciaire : il signale une
+      accusation non tranchée, et protège juridiquement celui qui écrit.
+    points:
+      - id: g3-report-1
+        sentence: It ___ that the minister knew of the report.
+        answer: is believed
+        options:
+          - is believed
+          - believes
+          - is believing
+          - has believed
+        translation: On pense que le ministre avait connaissance du rapport.
+        explanation: "Passif impersonnel : « It is believed that… »."
+      - id: g3-report-2
+        sentence: The company ___ to have breached the contract.
+        answer: is said
+        options:
+          - is said
+          - says
+          - is saying
+          - has said
+        translation: L'entreprise aurait manqué à ses obligations contractuelles.
+        explanation: Sujet remonté + infinitif passé, équivalent de « It is said that… ».
+      - id: g3-report-3
+        sentence: The suspect ___ acted alone, according to police.
+        answer: allegedly
+        options:
+          - allegedly
+          - certainly
+          - obviously
+          - undoubtedly
+        translation: Le suspect aurait agi seul, selon la police.
+        explanation: « Allegedly » marque une accusation non établie.
+      - id: g3-report-4
+        sentence: Talks are ___ to resume next month.
+        answer: expected
+        options:
+          - expected
+          - expecting
+          - expect
+          - expects
+        translation: Les pourparlers devraient reprendre le mois prochain.
+        explanation: "Passif + infinitif : la source de l'attente reste implicite."
+      - id: g3-report-5
+        sentence: He is thought ___ left the country in June.
+        answer: to have
+        options:
+          - to have
+          - to
+          - having
+          - that he
+        translation: On pense qu'il a quitté le pays en juin.
+        explanation: Le fait rapporté précède le moment de parole, d'où l'infinitif passé.
+      - id: g3-report-6
+        sentence: ___, the decision was taken without consultation.
+        answer: Reportedly
+        options:
+          - Reportedly
+          - Reported
+          - Report
+          - Reporting
+        translation: Selon certaines sources, la décision a été prise sans consultation.
+        explanation: Adverbe de phrase en tête, suivi d'une virgule.
