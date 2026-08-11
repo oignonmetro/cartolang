@@ -20,17 +20,19 @@ export function VocabIntro({ exercise, onRate }: { exercise: IntroExercise; onRa
     <div className="flex flex-1 flex-col gap-6">
       <p className="text-sm font-bold uppercase tracking-wide text-ink-faint">Nouveau mot</p>
 
-      {/* Comme dans Flashcard.tsx : seule cette enveloppe est flexible, la
-          carte se centre dedans mais les boutons restent collés juste après —
-          pas de marge auto sur la carte, qui écarterait carte et boutons sur
-          les écrans hauts. */}
-      <div className="flex flex-1 items-center">
+      {/* La carte et les boutons doivent rester collés l'un à l'autre, quelle
+          que soit la hauteur de l'écran : c'est le duo entier qui se centre
+          dans l'espace disponible (`justify-center` sur l'enveloppe), pas la
+          carte seule dans une enveloppe où elle flotterait au milieu — ça ne
+          ferait alors que déplacer l'écart entre elle et les boutons au lieu
+          de le supprimer. */}
+      <div className="flex flex-1 flex-col justify-center gap-6">
         <motion.div
           key={vocab.id}
           initial={{ opacity: 0, scale: 0.96 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ type: 'spring', stiffness: 320, damping: 24 }}
-          className="card-3d flex w-full flex-col items-center gap-3 px-6 py-8 text-center"
+          className="card-3d flex flex-col items-center gap-3 px-6 py-8 text-center"
         >
           <Mascot mood="happy" size={84} />
           <span className="text-4xl font-black break-words">{vocab.term}</span>
@@ -47,18 +49,18 @@ export function VocabIntro({ exercise, onRate }: { exercise: IntroExercise; onRa
             </p>
           )}
         </motion.div>
-      </div>
 
-      <div className="grid grid-cols-3 gap-2">
-        <Button tone="error" onClick={() => onRate('again')} className="text-xs">
-          Nouveau
-        </Button>
-        <Button tone="amber" onClick={() => onRate('hard')} className="text-xs">
-          Incertain
-        </Button>
-        <Button tone="success" onClick={() => onRate('good')} className="text-xs">
-          Je savais
-        </Button>
+        <div className="grid grid-cols-3 gap-2">
+          <Button tone="error" onClick={() => onRate('again')} className="text-xs">
+            Nouveau
+          </Button>
+          <Button tone="amber" onClick={() => onRate('hard')} className="text-xs">
+            Incertain
+          </Button>
+          <Button tone="success" onClick={() => onRate('good')} className="text-xs">
+            Je savais
+          </Button>
+        </div>
       </div>
     </div>
   )

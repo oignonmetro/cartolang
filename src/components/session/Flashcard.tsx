@@ -28,13 +28,15 @@ export function Flashcard({
         {direction === 'to-known' ? 'Que veut dire ce mot ?' : 'Comment dit-on ?'}
       </p>
 
-      {/* La carte reste dimensionnée par son contenu et flotte au centre. */}
-      <div className="flex flex-1 items-center">
+      {/* La carte et le bouton qui suit doivent rester collés : c'est le duo
+          qui se centre dans l'espace disponible, pas la carte seule — sinon
+          elle flotte au milieu de l'écran, loin du bouton. */}
+      <div className="flex flex-1 flex-col justify-center gap-6">
         <button
           type="button"
           onClick={() => setRevealed(true)}
           disabled={revealed}
-          className="card-3d flex w-full min-h-56 flex-col items-center justify-center gap-4 px-6 py-8 text-center disabled:cursor-default"
+          className="card-3d flex min-h-56 flex-col items-center justify-center gap-4 px-6 py-8 text-center disabled:cursor-default"
         >
           <span className="text-4xl font-black break-words">{front}</span>
           {vocab.pos && (
@@ -62,25 +64,25 @@ export function Flashcard({
             <span className="text-sm font-bold text-ink-faint">Touchez pour révéler</span>
           )}
         </button>
-      </div>
 
-      {revealed ? (
-        <div className="grid grid-cols-3 gap-2">
-          <Button tone="error" onClick={() => onRate('again')} className="text-xs">
-            À revoir
+        {revealed ? (
+          <div className="grid grid-cols-3 gap-2">
+            <Button tone="error" onClick={() => onRate('again')} className="text-xs">
+              À revoir
+            </Button>
+            <Button tone="amber" onClick={() => onRate('hard')} className="text-xs">
+              Hésitant
+            </Button>
+            <Button tone="success" onClick={() => onRate('good')} className="text-xs">
+              Je savais
+            </Button>
+          </div>
+        ) : (
+          <Button block onClick={() => setRevealed(true)}>
+            Révéler
           </Button>
-          <Button tone="amber" onClick={() => onRate('hard')} className="text-xs">
-            Hésitant
-          </Button>
-          <Button tone="success" onClick={() => onRate('good')} className="text-xs">
-            Je savais
-          </Button>
-        </div>
-      ) : (
-        <Button block onClick={() => setRevealed(true)}>
-          Révéler
-        </Button>
-      )}
+        )}
+      </div>
     </div>
   )
 }

@@ -37,12 +37,13 @@ export function ConjugationAnswer({
     <div className="flex flex-1 flex-col gap-5">
       <p className="text-sm font-bold uppercase tracking-wide text-ink-faint">Conjuguez</p>
 
-      {/* Seule cette enveloppe est flexible : la carte se centre dedans, mais
-          l'input et le bouton restent collés juste après (comme dans
-          Flashcard.tsx) — une marge auto sur la carte les aurait écartés
-          d'elle sur les écrans hauts. */}
-      <div className="flex flex-1 items-center">
-        <div className="card-3d flex w-full flex-col items-center gap-3 px-5 py-8 text-center">
+      {/* La carte et le champ forment un duo qui doit rester collé : c'est ce
+          duo qui se centre dans l'espace disponible, pas la carte seule (qui
+          flotterait au milieu, à distance du champ). Le retour et le bouton
+          restent hors du regroupement : ils apparaissent après coup, les
+          inclure les ferait sauter à l'écran à chaque vérification. */}
+      <div className="flex flex-1 flex-col justify-center gap-5">
+        <div className="card-3d flex flex-col items-center gap-3 px-5 py-8 text-center">
           <span className="text-3xl font-black break-words">{verb.verb}</span>
           {verb.translation && <span className="text-sm text-ink-soft">{verb.translation}</span>}
 
@@ -55,28 +56,28 @@ export function ConjugationAnswer({
             </span>
           </div>
         </div>
-      </div>
 
-      <input
-        ref={input}
-        value={value}
-        onChange={(event) => setValue(event.target.value)}
-        onKeyDown={(event) => {
-          if (event.key !== 'Enter') return
-          if (checked === null && filled) check()
-          else if (checked !== null) onAnswer(checked)
-        }}
-        disabled={checked !== null}
-        autoCapitalize="off"
-        autoCorrect="off"
-        spellCheck={false}
-        lang="en"
-        placeholder="La forme conjuguée…"
-        aria-label="Forme conjuguée"
-        className={`w-full rounded-2xl border-2 bg-paper px-4 py-4 text-lg font-bold outline-none disabled:opacity-70 ${
-          checked === null ? 'border-line focus:border-sky' : checked ? 'border-success' : 'border-error'
-        }`}
-      />
+        <input
+          ref={input}
+          value={value}
+          onChange={(event) => setValue(event.target.value)}
+          onKeyDown={(event) => {
+            if (event.key !== 'Enter') return
+            if (checked === null && filled) check()
+            else if (checked !== null) onAnswer(checked)
+          }}
+          disabled={checked !== null}
+          autoCapitalize="off"
+          autoCorrect="off"
+          spellCheck={false}
+          lang="en"
+          placeholder="La forme conjuguée…"
+          aria-label="Forme conjuguée"
+          className={`w-full rounded-2xl border-2 bg-paper px-4 py-4 text-lg font-bold outline-none disabled:opacity-70 ${
+            checked === null ? 'border-line focus:border-sky' : checked ? 'border-success' : 'border-error'
+          }`}
+        />
+      </div>
 
       {checked !== null && (
         <motion.div
