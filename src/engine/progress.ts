@@ -1,11 +1,17 @@
+import { itemsOfLesson, itemsOfUnit, lessonsOf } from '@/content/course'
 import type { Course, Lesson, Unit } from '@/content/schema'
+import { cardStrength, type CardState } from './srs'
 
 /**
- * Règles de progression du chemin.
+ * Règles de progression.
  *
  * Une leçon se maîtrise en trois passages : chaque passage réussi ajoute une
- * étoile (niveau 0 → 3). Une étoile suffit à débloquer la suite ; les deux
- * autres sont là pour approfondir.
+ * étoile (niveau 0 → 3).
+ *
+ * Dans l'agencement `path`, la première étoile débloque la leçon suivante.
+ * Dans l'agencement `library`, rien n'est verrouillé : les étoiles ne servent
+ * qu'à indiquer où l'on en est, et c'est la maîtrise réelle des éléments
+ * (calculée depuis les cartes de révision) qui résume une unité.
  */
 
 export const MAX_LEVEL = 3
@@ -35,17 +41,6 @@ export function levelOf(progress: LessonProgressMap, lessonId: string): number {
   return progress[lessonId]?.level ?? 0
 }
 
-/** Toutes les leçons d'un cours, dans l'ordre du chemin. */
-export function lessonsOf(course: Course): { lesson: Lesson; unit: Unit }[] {
-  return course.sections.flatMap((section) =>
-    section.units.flatMap((unit) => unit.lessons.map((lesson) => ({ lesson, unit }))),
-  )
-}
-
-export function findLesson(course: Course, lessonId: string): { lesson: Lesson; unit: Unit } | null {
-  return lessonsOf(course).find((entry) => entry.lesson.id === lessonId) ?? null
-}
-
 /**
  * Le chemin est strictement linéaire : une leçon s'ouvre dès que la
  * précédente a sa première étoile. La toute première est toujours ouverte.
@@ -73,6 +68,64 @@ export function isUnitComplete(unit: Unit, progress: LessonProgressMap): boolean
 /** Prochaine leçon à jouer : la première non maîtrisée et débloquée. */
 export function nextLesson(path: readonly LessonNode[]): LessonNode | null {
   return path.find((node) => node.status === 'available' || node.status === 'partial') ?? null
+}
+
+/**
+ * Résumé de maîtrise d'un ensemble d'éléments.
+ *
+ * C'est l'indicateur central de l'agencement `library` : sans parcours
+ * imposé, l'apprenant a besoin de voir d'un coup d'œil ce qu'il a déjà
+ * solidifié dans chaque unité.
+ */
+export interface Mastery {
+  /** Nombre d'éléments de l'ensemble. */
+  total: number
+  /** Éléments déjà rencontrés au moins une fois. */
+  seen: number
+  /** Éléments installés durablement (intervalle d'au moins une semaine). */
+  known: number
+  /** Part maîtrisée, entre 0 et 1 — c'est ce que montrent les anneaux. */
+  ratio: number
+}
+
+export function masteryOf(itemIds: readonly string[], cards: Record<string, CardState>): Mastery {
+  let seen = 0
+  let known = 0
+  for (const id of itemIds) {
+    const card = cards[id]
+    if (!card) continue
+    const strength = cardStrength(card)
+    if (strength !== 'nouvelle') seen += 1
+    if (strength === 'connue' || strength === 'maîtrisée') known += 1
+  }
+  const total = itemIds.length
+  return { total, seen, known, ratio: total === 0 ? 0 : known / total }
+}
+
+export function lessonMastery(lesson: Lesson, cards: Record<string, CardState>): Mastery {
+  return masteryOf(itemsOfLesson(lesson).map((item) => item.id), cards)
+}
+
+export function unitMastery(unit: Unit, cards: Record<string, CardState>): Mastery {
+  return masteryOf(itemsOfUnit(unit).map((item) => item.id), cards)
+}
+
+/** Identifiants des éléments d'un cours qui appartiennent à une piste donnée. */
+export function itemIdsOfTrack(course: Course, trackId: string): string[] {
+  if (course.layout !== 'library') return []
+  const track = course.tracks.find((candidate) => candidate.id === trackId)
+  if (!track) return []
+  return track.units.flatMap((unit) => itemsOfUnit(unit).map((item) => item.id))
+}
+
+/** Dernière leçon travaillée, pour proposer de reprendre où l'on s'est arrêté. */
+export function lastVisitedLesson(course: Course, progress: LessonProgressMap): Lesson | null {
+  let best: { lesson: Lesson; at: number } | null = null
+  for (const { lesson } of lessonsOf(course)) {
+    const at = progress[lesson.id]?.lastAt ?? 0
+    if (at > 0 && (!best || at > best.at)) best = { lesson, at }
+  }
+  return best?.lesson ?? null
 }
 
 export interface SessionOutcome {

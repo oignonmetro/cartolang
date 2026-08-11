@@ -13,7 +13,8 @@
 export type Rating = 'again' | 'hard' | 'good' | 'easy'
 
 export interface CardState {
-  vocabId: string
+  /** Identifiant de l'élément suivi : un mot, un point de grammaire, une forme. */
+  itemId: string
   /** Facteur de facilité SM-2, entre 1.3 et 2.8. */
   ease: number
   /** Intervalle courant en jours (0 tant que la carte est en apprentissage). */
@@ -43,9 +44,9 @@ const DEFAULT_EASE = 2.5
 /** Plafond volontairement bas : un cours de vocabulaire n'a pas besoin de plus. */
 const MAX_INTERVAL = 365
 
-export function createCard(vocabId: string, now: number): CardState {
+export function createCard(itemId: string, now: number): CardState {
   return {
-    vocabId,
+    itemId,
     ease: DEFAULT_EASE,
     interval: 0,
     reps: 0,

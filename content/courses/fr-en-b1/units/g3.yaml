@@ -1,0 +1,172 @@
+id: g3
+title: Hypothèse et condition
+subtitle: Les conditionnels de type 1 et 2
+icon: clock
+color: violet
+level: B1
+
+lessons:
+  - id: g3-l1
+    title: La condition réelle
+    notes: |
+      Quand la condition est **plausible**, l'anglais associe un présent et un
+      futur, jamais deux futurs.
+
+      — `If` + présent simple, … `will` + base verbale.
+        If it rains, we will stay at home. S'il pleut, nous resterons à la maison.
+
+      ! Jamais de `will` après `if` : c'est la faute la plus fréquente pour un
+      francophone, parce que le français met un futur des deux côtés.
+
+      Quand le fait est **toujours vrai** (loi physique, habitude), les deux
+      propositions passent au présent.
+
+      — If you heat water to 100°C, it boils.
+    points:
+      - id: g3-cond1-1
+        sentence: If it ___ tomorrow, we will stay at home.
+        answer: rains
+        options:
+          - rains
+          - will rain
+          - would rain
+          - is raining
+        translation: S'il pleut demain, nous resterons à la maison.
+        explanation: Présent simple après « if », même pour parler de demain.
+      - id: g3-cond1-2
+        sentence: If you heat water to 100°C, it ___ .
+        answer: boils
+        options:
+          - boils
+          - will boil
+          - would boil
+          - boiled
+        translation: Si on chauffe l'eau à 100 °C, elle bout.
+        explanation: "Vérité générale : présent des deux côtés."
+      - id: g3-cond1-3
+        sentence: She will be annoyed if you ___ her before Friday.
+        answer: do not call
+        alt:
+          - don't call
+        options:
+          - do not call
+          - will not call
+          - would not call
+          - did not call
+        translation: Elle sera contrariée si tu ne l'appelles pas avant vendredi.
+        explanation: La subordonnée reste au présent, y compris à la forme négative.
+      - id: g3-cond1-4
+        sentence: If I ___ time, I will call you tonight.
+        answer: have
+        options:
+          - have
+          - will have
+          - had
+          - would have
+        translation: Si j'ai le temps, je t'appellerai ce soir.
+        explanation: « If » + présent, « will » réservé à la principale.
+      - id: g3-cond1-5
+        sentence: We ___ out if the weather is bad.
+        answer: will not go
+        alt:
+          - won't go
+        options:
+          - will not go
+          - do not go
+          - would not go
+          - are not going
+        translation: Nous ne sortirons pas si le temps est mauvais.
+        explanation: La principale porte le futur, ici au négatif.
+      - id: g3-cond1-6
+        sentence: If he ___ harder, he will pass the exam.
+        answer: works
+        options:
+          - works
+          - will work
+          - worked
+          - would work
+        translation: S'il travaille davantage, il réussira l'examen.
+        explanation: Troisième personne du présent simple après « if ».
+
+  - id: g3-l2
+    title: La condition irréelle du présent
+    notes: |
+      Quand la condition est **imaginaire**, on recule d'un cran : le prétérit
+      n'y parle pas du passé, il marque __la distance avec le réel__.
+
+      — `If` + prétérit, … `would` + base verbale.
+        If I had more time, I would learn the piano.
+        Si j'avais plus de temps, j'apprendrais le piano.
+
+      Avec `be`, la forme soignée est `were` à **toutes** les personnes, et
+      `If I were you` est la formule figée du conseil.
+
+      ! `would` ne se met jamais dans la proposition en `if` : on dit
+      `If I had more time`, jamais « If I would have more time ».
+    points:
+      - id: g3-cond2-1
+        sentence: If I ___ enough money, I would buy a boat.
+        answer: had
+        options:
+          - had
+          - have
+          - would have
+          - will have
+        translation: Si j'avais assez d'argent, j'achèterais un bateau.
+        explanation: "Condition imaginaire : prétérit après « if »."
+      - id: g3-cond2-2
+        sentence: If she knew the answer, she ___ us.
+        answer: would tell
+        alt:
+          - "'d tell"
+        options:
+          - would tell
+          - will tell
+          - told
+          - would told
+        translation: Si elle connaissait la réponse, elle nous le dirait.
+        explanation: « Would » + base verbale dans la principale, sans « to ».
+      - id: g3-cond2-3
+        sentence: What ___ you do if you lost your passport?
+        answer: would
+        options:
+          - would
+          - will
+          - did
+          - do
+        translation: Que ferais-tu si tu perdais ton passeport ?
+        explanation: La question porte sur la conséquence imaginaire, donc « would ».
+      - id: g3-cond2-4
+        sentence: If I ___ you, I would apologise straight away.
+        answer: were
+        alt:
+          - was
+        options:
+          - were
+          - am
+          - would be
+          - will be
+        translation: Si j'étais toi, je m'excuserais tout de suite.
+        explanation: "Formule figée du conseil : « If I were you »."
+      - id: g3-cond2-5
+        sentence: He would travel more if he ___ more free time.
+        answer: had
+        options:
+          - had
+          - has
+          - would have
+          - will have
+        translation: Il voyagerait davantage s'il avait plus de temps libre.
+        explanation: L'ordre des propositions peut s'inverser, la règle ne change pas.
+      - id: g3-cond2-6
+        sentence: If we lived closer, we ___ each other more often.
+        answer: would see
+        alt:
+          - "'d see"
+        options:
+          - would see
+          - will see
+          - saw
+          - would saw
+        translation: Si nous habitions plus près, nous nous verrions plus souvent.
+        explanation: « Would » ne se fait jamais suivre d'un prétérit.

@@ -1,0 +1,252 @@
+id: v1
+title: Registre et précision
+subtitle: Choisir le mot exact plutôt que le mot passe-partout
+icon: book
+color: teal
+level: C1
+
+lessons:
+  - id: v1-l1
+    title: Remplacer les verbes passe-partout
+    vocab:
+      - id: c1-to-underpin
+        term: to underpin
+        translation: sous-tendre
+        alt:
+          - étayer
+        pos: verbe
+        gap: underpins
+        example:
+          text: A single assumption underpins the whole argument.
+          translation: Une seule hypothèse sous-tend tout l'argument.
+      - id: c1-to-hinge-on
+        term: to hinge on
+        translation: dépendre entièrement de
+        alt:
+          - reposer sur
+        pos: verbe
+        gap: hinges on
+        example:
+          text: The verdict hinges on one witness.
+          translation: Le verdict dépend entièrement d'un seul témoin.
+      - id: c1-to-account-for
+        term: to account for
+        translation: expliquer
+        alt:
+          - représenter
+        pos: verbe
+        gap: accounts for
+        example:
+          text: Transport accounts for a quarter of emissions.
+          translation: Les transports représentent un quart des émissions.
+      - id: c1-to-yield
+        term: to yield
+        translation: produire
+        alt:
+          - donner
+          - céder
+        pos: verbe
+        gap: yielded
+        hint: "Trois sens selon le contexte : produire, céder le passage, rapporter."
+        example:
+          text: The survey yielded unexpected results.
+          translation: L'enquête a produit des résultats inattendus.
+      - id: c1-to-warrant
+        term: to warrant
+        translation: justifier
+        alt:
+          - mériter
+        pos: verbe
+        gap: warrants
+        hint: "Le nom « a warrant » est tout autre chose : un mandat de justice."
+        example:
+          text: The claim warrants closer scrutiny.
+          translation: L'affirmation justifie un examen plus attentif.
+      - id: c1-to-stem-from
+        term: to stem from
+        translation: découler de
+        alt:
+          - provenir de
+        pos: verbe
+        gap: stems from
+        example:
+          text: The confusion stems from a translation error.
+          translation: La confusion découle d'une erreur de traduction.
+      - id: c1-to-encompass
+        term: to encompass
+        translation: englober
+        alt:
+          - recouvrir
+        pos: verbe
+        gap: encompasses
+        example:
+          text: The term encompasses several distinct practices.
+          translation: Le terme englobe plusieurs pratiques distinctes.
+      - id: c1-to-preclude
+        term: to preclude
+        translation: exclure
+        alt:
+          - empêcher
+        pos: verbe
+        gap: precludes
+        example:
+          text: Nothing precludes a second reading.
+          translation: Rien n'exclut une seconde lecture.
+
+  - id: v1-l2
+    title: Nuancer un jugement
+    vocab:
+      - id: c1-tentative
+        term: tentative
+        translation: provisoire
+        alt:
+          - prudent
+        pos: adjectif
+        hint: "Faux ami : rien à voir avec « une tentative », qui se dit « an attempt »."
+        example:
+          text: These are tentative conclusions at best.
+          translation: Ce sont au mieux des conclusions provisoires.
+      - id: c1-cogent
+        term: cogent
+        translation: rigoureux
+        alt:
+          - implacable
+        pos: adjectif
+        hint: "Plus étroit que « compelling » : la force vient de la logique, pas de l'émotion."
+        example:
+          text: She made a cogent case for reform.
+          translation: Elle a présenté un argumentaire rigoureux en faveur de la réforme.
+      - id: c1-questionable
+        term: questionable
+        translation: contestable
+        alt:
+          - douteux
+        pos: adjectif
+        example:
+          text: The methodology is questionable on several counts.
+          translation: La méthodologie est contestable à plusieurs égards.
+      - id: c1-sweeping
+        term: sweeping
+        translation: à l'emporte-pièce
+        alt:
+          - radical
+        pos: adjectif
+        example:
+          text: He made a sweeping generalisation about the region.
+          translation: Il a fait une généralisation à l'emporte-pièce sur la région.
+      - id: c1-nuanced
+        term: nuanced
+        translation: nuancé
+        pos: adjectif
+        example:
+          text: The report offers a more nuanced picture.
+          translation: Le rapport offre un tableau plus nuancé.
+      - id: c1-untenable
+        term: untenable
+        translation: intenable
+        alt:
+          - indéfendable
+        pos: adjectif
+        example:
+          text: That position has become untenable.
+          translation: Cette position est devenue intenable.
+      - id: c1-plausible
+        term: plausible
+        translation: vraisemblable
+        alt:
+          - plausible
+        pos: adjectif
+        example:
+          text: It remains the most plausible explanation.
+          translation: Cela reste l'explication la plus plausible.
+      - id: c1-cursory
+        term: cursory
+        translation: superficiel
+        alt:
+          - rapide
+        pos: adjectif
+        example:
+          text: A cursory glance is not enough here.
+          translation: Un coup d'œil superficiel ne suffit pas ici.
+
+  - id: v1-l3
+    title: Le registre soutenu
+    vocab:
+      - id: c1-hitherto
+        term: hitherto
+        translation: jusqu'à présent
+        alt:
+          - jusqu'ici
+        pos: adverbe
+        hint: Registre écrit et formel ; à l'oral on dirait « until now ».
+        example:
+          text: The document was hitherto unknown to historians.
+          translation: Le document était jusqu'à présent inconnu des historiens.
+      - id: c1-notwithstanding
+        term: notwithstanding
+        translation: nonobstant
+        alt:
+          - malgré
+        pos: préposition
+        hint: "Peut aussi suivre le groupe qu'il régit : « these objections notwithstanding »."
+        example:
+          text: Notwithstanding these reservations, the plan went ahead.
+          translation: Malgré ces réserves, le plan a été mis en œuvre.
+      - id: c1-insofar-as
+        term: insofar as
+        translation: dans la mesure où
+        alt:
+          - pour autant que
+          - en tant que
+        pos: expression
+        example:
+          text: The rule applies insofar as the contract is valid.
+          translation: La règle s'applique dans la mesure où le contrat est valable.
+      - id: c1-to-deem
+        term: to deem
+        translation: juger
+        alt:
+          - estimer
+        pos: verbe
+        gap: deemed
+        example:
+          text: The evidence was deemed insufficient.
+          translation: Les preuves ont été jugées insuffisantes.
+      - id: c1-whereby
+        term: whereby
+        translation: par lequel
+        alt:
+          - au moyen duquel
+        pos: pronom
+        hint: Relie un dispositif à son mécanisme ; très fréquent dans les textes juridiques.
+        example:
+          text: They signed an agreement whereby costs are shared.
+          translation: Ils ont signé un accord par lequel les coûts sont partagés.
+      - id: c1-thereby
+        term: thereby
+        translation: ce faisant
+        alt:
+          - par là même
+        pos: adverbe
+        example:
+          text: The law was repealed, thereby ending the dispute.
+          translation: La loi a été abrogée, mettant ce faisant fin au litige.
+      - id: c1-to-forgo
+        term: to forgo
+        translation: renoncer à
+        alt:
+          - se passer de
+        pos: verbe
+        gap: forgo
+        example:
+          text: They agreed to forgo their bonuses.
+          translation: Ils ont accepté de renoncer à leurs primes.
+      - id: c1-scant
+        term: scant
+        translation: maigre
+        alt:
+          - fort peu de
+        pos: adjectif
+        example:
+          text: There is scant evidence for that claim.
+          translation: Il existe fort peu de preuves à l'appui de cette affirmation.

@@ -1,13 +1,17 @@
 /**
  * Compilateur de contenu.
  *
- *   content/courses/<id>/course.yaml   → métadonnées du cours et ordre des unités
+ *   content/courses/<id>/course.yaml   → métadonnées, et agencement du cours
  *   content/courses/<id>/units/*.yaml  → une unité par fichier
  *
  * produit
  *
  *   public/content/<id>.json           → cours compilé, embarqué dans l'app
  *   public/content/manifest.json       → index des cours (sert aux mises à jour)
+ *
+ * Le champ `kind` (vocab / grammar / conjugation) n'est écrit qu'une fois, sur
+ * la piste ; le compilateur le propage aux unités puis aux leçons avant de
+ * valider. Les fichiers d'unités restent donc courts.
  *
  * Usage :
  *   npm run content:build     compile
@@ -18,30 +22,72 @@ import { join, resolve, basename } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { parse as parseYaml } from 'yaml'
 import { z } from 'zod'
-import { courseSchema, unitSchema, type Course, type Manifest, type Unit } from '../../src/content/schema.ts'
-import { containsTerm } from '../../src/content/text.ts'
+import {
+  courseSchema,
+  unitSchema,
+  GAP,
+  type ConjugationLesson,
+  type Course,
+  type GrammarLesson,
+  type LessonKind,
+  type Manifest,
+  type Unit,
+  type VocabLesson,
+} from '../../src/content/schema.ts'
+import { findVocabGap } from '../../src/content/text.ts'
+import { itemsOfCourse, itemsOfLesson, lessonsOf } from '../../src/content/course.ts'
 
 const root = resolve(fileURLToPath(new URL('../..', import.meta.url)))
 const contentDir = join(root, 'content', 'courses')
 const outDir = join(root, 'public', 'content')
 const checkOnly = process.argv.includes('--check')
 
-/** Le fichier course.yaml décrit les sections et référence les unités par identifiant. */
-const courseFileSchema = courseSchema
-  .omit({ sections: true })
-  .extend({
+/**
+ * Le fichier course.yaml décrit l'ossature et référence les unités par
+ * identifiant ; les unités elles-mêmes vivent dans units/.
+ */
+const courseFileSchema = z.discriminatedUnion('layout', [
+  courseSchema.options[0].omit({ sections: true }).extend({
     sections: z
+      .array(z.object({ id: z.string(), title: z.string(), units: z.array(z.string()).min(1) }))
+      .min(1),
+  }),
+  courseSchema.options[1].omit({ tracks: true }).extend({
+    tracks: z
       .array(
         z.object({
           id: z.string(),
           title: z.string(),
-          units: z.array(z.string()).min(1),
+          subtitle: z.string().optional(),
+          kind: z.enum(['vocab', 'grammar', 'conjugation']),
+          color: z.enum(['teal', 'violet', 'coral', 'amber', 'sky']).default('teal'),
+          icon: z.string().default('book'),
+          // Vide, une piste publie le squelette d'un niveau avant tout contenu.
+          units: z.array(z.string()),
         }),
       )
       .min(1),
-  })
+  }),
+])
 
 class ContentError extends Error {}
+
+/**
+ * Signalements qui n'invalident pas le contenu mais méritent un regard.
+ * Une traduction identique au terme, par exemple : défendable pour un
+ * grand débutant (« bus » est le même mot), douteux au-delà.
+ */
+const warnings: string[] = []
+
+function warn(where: string, message: string) {
+  warnings.push(`${where} : ${message}`)
+}
+
+function reportWarnings() {
+  if (warnings.length === 0) return
+  console.log(`\n${warnings.length} remarque(s) :`)
+  for (const line of warnings) console.log(`  · ${line}`)
+}
 
 function fail(file: string, message: string): never {
   throw new ContentError(`${file}\n    ${message}`)
@@ -61,10 +107,41 @@ function formatIssues(error: z.ZodError): string {
     .join('\n    ')
 }
 
-function loadUnit(file: string): Unit {
-  const parsed = unitSchema.safeParse(readYaml(file))
-  if (!parsed.success) fail(file, formatIssues(parsed.error))
-  return parsed.data
+/** Propage la nature du contenu depuis la piste jusqu'aux leçons. */
+function withKind(raw: unknown, kind: LessonKind): unknown {
+  if (typeof raw !== 'object' || raw === null) return raw
+  const unit = raw as Record<string, unknown>
+  const lessons = Array.isArray(unit.lessons) ? unit.lessons : []
+  return {
+    ...unit,
+    kind: unit.kind ?? kind,
+    lessons: lessons.map((lesson) =>
+      typeof lesson === 'object' && lesson !== null
+        ? { ...(lesson as Record<string, unknown>), kind: (lesson as Record<string, unknown>).kind ?? unit.kind ?? kind }
+        : lesson,
+    ),
+  }
+}
+
+function loadUnits(dir: string, kindOf: (unitId: string) => LessonKind): Map<string, Unit> {
+  const unitsDir = join(dir, 'units')
+  if (!existsSync(unitsDir)) fail(unitsDir, 'dossier units/ manquant')
+
+  const units = new Map<string, Unit>()
+  for (const name of readdirSync(unitsDir).sort()) {
+    if (!name.endsWith('.yaml') && !name.endsWith('.yml')) continue
+    const file = join(unitsDir, name)
+    const expected = basename(name).replace(/\.ya?ml$/, '')
+
+    const parsed = unitSchema.safeParse(withKind(readYaml(file), kindOf(expected)))
+    if (!parsed.success) fail(file, formatIssues(parsed.error))
+    const unit = parsed.data
+
+    if (unit.id !== expected) fail(file, `l'identifiant "${unit.id}" ne correspond pas au fichier "${expected}"`)
+    if (units.has(unit.id)) fail(file, `unité "${unit.id}" définie deux fois`)
+    units.set(unit.id, unit)
+  }
+  return units
 }
 
 function buildCourse(courseId: string): Course {
@@ -78,104 +155,169 @@ function buildCourse(courseId: string): Course {
     fail(courseFile, `l'identifiant "${meta.data.id}" ne correspond pas au dossier "${courseId}"`)
   }
 
-  const unitsDir = join(dir, 'units')
-  if (!existsSync(unitsDir)) fail(unitsDir, 'dossier units/ manquant')
-
-  const units = new Map<string, Unit>()
-  for (const name of readdirSync(unitsDir).sort()) {
-    if (!name.endsWith('.yaml') && !name.endsWith('.yml')) continue
-    const file = join(unitsDir, name)
-    const unit = loadUnit(file)
-    if (units.has(unit.id)) fail(file, `unité "${unit.id}" définie deux fois`)
-    const expected = basename(name).replace(/\.ya?ml$/, '')
-    if (unit.id !== expected) fail(file, `l'identifiant "${unit.id}" ne correspond pas au fichier "${expected}"`)
-    units.set(unit.id, unit)
-  }
-
-  const used = new Set<string>()
-  const sections = meta.data.sections.map((section) => ({
-    id: section.id,
-    title: section.title,
-    units: section.units.map((unitId) => {
-      const unit = units.get(unitId)
-      if (!unit) fail(courseFile, `l'unité "${unitId}" est référencée mais aucun fichier units/${unitId}.yaml n'existe`)
-      if (used.has(unitId)) fail(courseFile, `l'unité "${unitId}" est référencée deux fois`)
-      used.add(unitId)
-      return unit
-    }),
-  }))
-
-  for (const unitId of units.keys()) {
-    if (!used.has(unitId)) {
-      fail(join(unitsDir, `${unitId}.yaml`), 'unité jamais référencée dans course.yaml')
+  // La nature du contenu d'une unité vient de la piste qui la référence ;
+  // un parcours n'a pas de piste et ne contient que du vocabulaire.
+  const kindByUnit = new Map<string, LessonKind>()
+  if (meta.data.layout === 'library') {
+    for (const track of meta.data.tracks) {
+      for (const unitId of track.units) kindByUnit.set(unitId, track.kind)
     }
   }
+  const units = loadUnits(dir, (unitId) => kindByUnit.get(unitId) ?? 'vocab')
 
-  const course = courseSchema.parse({ ...meta.data, sections })
-  checkCoherence(course, dir)
-  return course
+  const used = new Set<string>()
+  const take = (unitId: string, from: string): Unit => {
+    const unit = units.get(unitId)
+    if (!unit) fail(courseFile, `l'unité "${unitId}" est référencée par ${from} mais units/${unitId}.yaml n'existe pas`)
+    if (used.has(unitId)) fail(courseFile, `l'unité "${unitId}" est référencée deux fois`)
+    used.add(unitId)
+    return unit
+  }
+
+  const assembled =
+    meta.data.layout === 'library'
+      ? {
+          ...meta.data,
+          tracks: meta.data.tracks.map((track) => ({
+            ...track,
+            units: track.units.map((unitId) => take(unitId, `la piste "${track.id}"`)),
+          })),
+        }
+      : {
+          ...meta.data,
+          sections: meta.data.sections.map((section) => ({
+            ...section,
+            units: section.units.map((unitId) => take(unitId, `la section "${section.id}"`)),
+          })),
+        }
+
+  for (const unitId of units.keys()) {
+    if (!used.has(unitId)) fail(join(dir, 'units', `${unitId}.yaml`), 'unité jamais référencée dans course.yaml')
+  }
+
+  const parsed = courseSchema.safeParse(assembled)
+  if (!parsed.success) fail(courseFile, formatIssues(parsed.error))
+
+  checkCoherence(parsed.data, dir)
+  return parsed.data
 }
 
 /** Règles qui dépassent la validation fichier par fichier. */
 function checkCoherence(course: Course, dir: string) {
-  const vocabIds = new Map<string, string>()
+  const itemOwner = new Map<string, string>()
   const lessonIds = new Set<string>()
   const problems: string[] = []
 
-  for (const section of course.sections) {
-    for (const unit of section.units) {
-      for (const lesson of unit.lessons) {
-        if (lessonIds.has(lesson.id)) problems.push(`leçon "${lesson.id}" définie deux fois`)
-        lessonIds.add(lesson.id)
+  for (const { lesson, unit } of lessonsOf(course)) {
+    if (lessonIds.has(lesson.id)) problems.push(`leçon "${lesson.id}" définie deux fois`)
+    lessonIds.add(lesson.id)
 
-        if (lesson.vocab.length < 4) {
-          problems.push(
-            `leçon "${lesson.id}" : ${lesson.vocab.length} mot(s), il en faut au moins 4 pour l'exercice d'association`,
-          )
-        }
+    if (unit.kind !== lesson.kind) {
+      problems.push(`leçon "${lesson.id}" de nature ${lesson.kind} dans une unité ${unit.kind}`)
+    }
 
-        const seenTerms = new Set<string>()
-        for (const vocab of lesson.vocab) {
-          const owner = vocabIds.get(vocab.id)
-          if (owner) problems.push(`mot "${vocab.id}" déjà défini dans la leçon "${owner}"`)
-          vocabIds.set(vocab.id, lesson.id)
+    if (lesson.kind === 'vocab') checkVocabLesson(lesson, problems)
+    if (lesson.kind === 'grammar') checkGrammarLesson(lesson, problems)
+    if (lesson.kind === 'conjugation') checkConjugationLesson(lesson, problems)
+  }
 
-          const key = vocab.term.toLowerCase()
-          if (seenTerms.has(key)) {
-            problems.push(`leçon "${lesson.id}" : le terme "${vocab.term}" apparaît deux fois`)
-          }
-          seenTerms.add(key)
-
-          if (vocab.example && !containsTerm(vocab.example.text, vocab.term)) {
-            problems.push(
-              `mot "${vocab.id}" : la phrase d'exemple ne contient pas "${vocab.term}", aucun exercice à trou ne sera généré`,
-            )
-          }
-        }
-      }
+  for (const { lesson } of lessonsOf(course)) {
+    for (const item of itemsOfLesson(lesson)) {
+      const owner = itemOwner.get(item.id)
+      if (owner) problems.push(`identifiant "${item.id}" déjà utilisé dans la leçon "${owner}"`)
+      itemOwner.set(item.id, lesson.id)
     }
   }
 
   if (problems.length) fail(dir, problems.join('\n    '))
 }
 
-function countVocab(course: Course): number {
-  return course.sections.reduce(
-    (total, section) =>
-      total +
-      section.units.reduce(
-        (unitTotal, unit) => unitTotal + unit.lessons.reduce((n, lesson) => n + lesson.vocab.length, 0),
-        0,
-      ),
-    0,
-  )
+function checkVocabLesson(lesson: VocabLesson, problems: string[]) {
+  if (lesson.vocab.length < 4) {
+    problems.push(
+      `leçon "${lesson.id}" : ${lesson.vocab.length} mot(s), il en faut au moins 4 pour l'exercice d'association`,
+    )
+  }
+
+  const seen = new Set<string>()
+  for (const vocab of lesson.vocab) {
+    const key = vocab.term.toLowerCase()
+    if (seen.has(key)) problems.push(`leçon "${lesson.id}" : le terme "${vocab.term}" apparaît deux fois`)
+    seen.add(key)
+
+    // Une carte « motif → motif » n'enseigne rien, et l'association afficherait
+    // le même mot dans les deux colonnes. Défendable pour un grand débutant,
+    // douteux au-delà : on signale sans bloquer.
+    if (vocab.term.trim().toLowerCase() === vocab.translation.trim().toLowerCase()) {
+      warn(
+        `mot "${vocab.id}"`,
+        `traduction identique au terme ("${vocab.term}") ; une traduction qui ` +
+          'informe, avec la forme identique dans `alt`, ferait une meilleure carte',
+      )
+    }
+
+    // L'infinitif est la convention du corpus : elle rend les cartes
+    // comparables et guide la forme attendue à la saisie.
+    if (vocab.pos === 'verbe' && !/^to\s/i.test(vocab.term)) {
+      warn(`mot "${vocab.id}"`, `verbe noté sans « to » ("${vocab.term}")`)
+    }
+
+    if (vocab.example && !findVocabGap(vocab.example.text, vocab.term, vocab.gap)) {
+      problems.push(
+        `mot "${vocab.id}" : la phrase d'exemple ne contient ni "${vocab.term}" ni sa forme nue ; ` +
+          "ajoutez un champ `gap` avec la forme exacte à masquer",
+      )
+    }
+  }
+
+  // Deux mots d'une même leçon qui acceptent la même réponse : la saisie ne
+  // peut plus les distinguer, et le couple perd son intérêt.
+  const accepted = new Map<string, string>()
+  for (const vocab of lesson.vocab) {
+    for (const answer of [vocab.translation, ...vocab.alt]) {
+      const key = answer.trim().toLowerCase()
+      const owner = accepted.get(key)
+      if (owner && owner !== vocab.term) {
+        warn(`leçon "${lesson.id}"`, `« ${answer} » est accepté pour « ${owner} » et « ${vocab.term} »`)
+      }
+      accepted.set(key, vocab.term)
+    }
+  }
 }
 
-function countLessons(course: Course): number {
-  return course.sections.reduce(
-    (total, section) => total + section.units.reduce((n, unit) => n + unit.lessons.length, 0),
-    0,
-  )
+function checkGrammarLesson(lesson: GrammarLesson, problems: string[]) {
+  if (lesson.points.length < 3) {
+    problems.push(`leçon "${lesson.id}" : ${lesson.points.length} point(s), il en faut au moins 3`)
+  }
+
+  for (const point of lesson.points) {
+    if (!point.sentence.includes(GAP)) {
+      problems.push(`point "${point.id}" : la phrase doit contenir le marqueur ${GAP}`)
+    }
+    if (point.options.length > 0 && !point.options.includes(point.answer)) {
+      problems.push(`point "${point.id}" : la réponse "${point.answer}" ne figure pas dans les options proposées`)
+    }
+    if (point.options.length === 1) {
+      problems.push(`point "${point.id}" : une seule option proposée, il en faut au moins 2 ou aucune`)
+    }
+  }
+}
+
+function checkConjugationLesson(lesson: ConjugationLesson, problems: string[]) {
+  const total = lesson.verbs.reduce((count, verb) => count + verb.forms.length, 0)
+  if (total < 4) {
+    problems.push(`leçon "${lesson.id}" : ${total} forme(s), il en faut au moins 4 pour l'exercice d'association`)
+  }
+
+  for (const verb of lesson.verbs) {
+    const persons = new Set<string>()
+    for (const form of verb.forms) {
+      if (persons.has(form.person)) {
+        problems.push(`verbe "${verb.verb}" (${verb.tense}) : la personne "${form.person}" apparaît deux fois`)
+      }
+      persons.add(form.person)
+    }
+  }
 }
 
 function main() {
@@ -207,6 +349,11 @@ function main() {
     process.exit(1)
   }
 
+  if (courses.every((course) => course.status === 'archived')) {
+    console.error('\n✗ Tous les cours sont archivés : l\'application n\'aurait rien à proposer.')
+    process.exit(1)
+  }
+
   const manifest: Manifest = {
     generatedAt: new Date().toISOString(),
     courses: courses.map((course) => ({
@@ -215,18 +362,27 @@ function main() {
       learning: course.learning,
       known: course.known,
       flag: course.flag,
+      level: course.level,
+      tagline: course.tagline,
+      layout: course.layout,
+      status: course.status,
+      default: course.default,
       version: course.version,
       file: `${course.id}.json`,
-      vocabCount: countVocab(course),
-      lessonCount: countLessons(course),
+      itemCount: itemsOfCourse(course).length,
+      lessonCount: lessonsOf(course).length,
     })),
   }
 
   for (const entry of manifest.courses) {
-    console.log(`  ✓ ${entry.id}  v${entry.version}  ${entry.lessonCount} leçons, ${entry.vocabCount} mots`)
+    const badge = entry.status === 'archived' ? ' (archivé)' : ''
+    console.log(
+      `  ✓ ${entry.id}  v${entry.version}  ${entry.layout}  ${entry.lessonCount} leçons, ${entry.itemCount} éléments${badge}`,
+    )
   }
 
   if (checkOnly) {
+    reportWarnings()
     console.log('\nContenu valide.')
     return
   }
@@ -236,6 +392,7 @@ function main() {
     writeFileSync(join(outDir, `${course.id}.json`), JSON.stringify(course), 'utf8')
   }
   writeFileSync(join(outDir, 'manifest.json'), JSON.stringify(manifest, null, 2), 'utf8')
+  reportWarnings()
   console.log(`\nÉcrit dans public/content/`)
 }
 

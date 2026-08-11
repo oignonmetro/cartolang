@@ -1,0 +1,241 @@
+id: v1
+title: Sentiments et relations
+subtitle: Dire les états d'esprit avec précision
+icon: wave
+color: teal
+level: B1
+
+lessons:
+  - id: v1-l1
+    title: États d'esprit
+    vocab:
+      - id: b1-overwhelmed
+        term: overwhelmed
+        translation: débordé
+        alt:
+          - submergé
+        pos: adjectif
+        example:
+          text: I felt completely overwhelmed that week.
+          translation: Je me suis senti complètement débordé cette semaine-là.
+      - id: b1-reluctant
+        term: reluctant
+        translation: réticent
+        pos: adjectif
+        example:
+          text: She was reluctant to give her name.
+          translation: Elle était réticente à donner son nom.
+      - id: b1-eager
+        term: eager
+        translation: impatient
+        alt:
+          - avide
+          - désireux
+        pos: adjectif
+        example:
+          text: They were eager to start straight away.
+          translation: Ils étaient impatients de commencer tout de suite.
+      - id: b1-uneasy
+        term: uneasy
+        translation: mal à l'aise
+        alt:
+          - inquiet
+        pos: adjectif
+        example:
+          text: The silence made everyone uneasy.
+          translation: Le silence a mis tout le monde mal à l'aise.
+      - id: b1-relieved
+        term: relieved
+        translation: soulagé
+        pos: adjectif
+        example:
+          text: I was relieved to hear the news.
+          translation: J'ai été soulagé d'apprendre la nouvelle.
+      - id: b1-resentment
+        term: resentment
+        translation: rancœur
+        alt:
+          - ressentiment
+        pos: nom
+        example:
+          text: Years of resentment finally surfaced.
+          translation: Des années de rancœur ont fini par ressortir.
+      - id: b1-to-put-up-with
+        term: to put up with
+        translation: supporter
+        alt:
+          - tolérer
+        pos: verbe
+        example:
+          text: I refuse to put up with that tone.
+          translation: Je refuse de supporter ce ton.
+      - id: b1-self-conscious
+        term: self-conscious
+        translation: complexé
+        alt:
+          - gêné
+          - intimidé
+        pos: adjectif
+        hint: "Faux ami : rien à voir avec « conscient de soi » au sens philosophique."
+        example:
+          text: He felt self-conscious about his accent.
+          translation: Il était complexé par son accent.
+
+  - id: v1-l2
+    title: Liens et conflits
+    vocab:
+      - id: b1-to-get-along
+        term: to get along
+        translation: s'entendre
+        pos: verbe
+        example:
+          text: They get along surprisingly well.
+          translation: Ils s'entendent étonnamment bien.
+      - id: b1-to-fall-out
+        term: to fall out
+        translation: se brouiller
+        alt:
+          - se fâcher
+          - se disputer
+        pos: verbe
+        gap: fell out
+        example:
+          text: The brothers fell out over an inheritance.
+          translation: Les frères se sont brouillés pour un héritage.
+      - id: b1-to-make-up
+        term: to make up
+        translation: se réconcilier
+        alt:
+          - faire la paix
+        pos: verbe
+        example:
+          text: It took them a year to make up.
+          translation: Il leur a fallu un an pour se réconcilier.
+      - id: b1-supportive
+        term: supportive
+        translation: bienveillant
+        alt:
+          - soutenant
+        pos: adjectif
+        example:
+          text: Her family has been very supportive.
+          translation: Sa famille a été très bienveillante.
+      - id: b1-to-take-for-granted
+        term: to take for granted
+        translation: tenir pour acquis
+        alt:
+          - considérer comme acquis
+        pos: expression
+        gap: for granted
+        example:
+          text: We take clean water for granted.
+          translation: Nous tenons l'eau potable pour acquise.
+      - id: b1-blunt
+        term: blunt
+        translation: direct
+        alt:
+          - abrupt
+          - sans détour
+        pos: adjectif
+        example:
+          text: To be blunt, the idea will not work.
+          translation: Pour être direct, l'idée ne marchera pas.
+      - id: b1-considerate
+        term: considerate
+        translation: prévenant
+        alt:
+          - attentionné
+        pos: adjectif
+        example:
+          text: It was considerate of you to call.
+          translation: C'était prévenant de ta part d'appeler.
+      - id: b1-to-hold-a-grudge
+        term: to hold a grudge
+        translation: garder rancune
+        alt:
+          - en vouloir à
+          - garder de la rancune
+        pos: expression
+        example:
+          text: She does not hold a grudge for long.
+          translation: Elle ne garde pas rancune longtemps.
+
+  - id: v1-l3
+    title: Habitudes et caractère
+    vocab:
+      - id: b1-stubborn
+        term: stubborn
+        translation: têtu
+        alt:
+          - obstiné
+        pos: adjectif
+        example:
+          text: He is too stubborn to ask for help.
+          translation: Il est trop têtu pour demander de l'aide.
+      - id: b1-thorough
+        term: thorough
+        translation: méticuleux
+        alt:
+          - approfondi
+          - minutieux
+        pos: adjectif
+        example:
+          text: Her research is unusually thorough.
+          translation: Sa recherche est exceptionnellement méticuleuse.
+      - id: b1-outgoing
+        term: outgoing
+        translation: extraverti
+        alt:
+          - sociable
+        pos: adjectif
+        example:
+          text: You need an outgoing person for that role.
+          translation: Il faut quelqu'un d'extraverti pour ce poste.
+      - id: b1-to-be-prone-to
+        term: to be prone to
+        translation: être enclin à
+        alt:
+          - avoir tendance à
+        pos: expression
+        gap: prone to
+        example:
+          text: He is prone to changing his mind.
+          translation: Il est enclin à changer d'avis.
+      - id: b1-to-get-around-to
+        term: to get around to
+        translation: trouver le temps de
+        alt:
+          - finir par faire
+        pos: verbe
+        gap: got around to
+        example:
+          text: I never got around to answering her letter.
+          translation: Je n'ai jamais trouvé le temps de répondre à sa lettre.
+      - id: b1-hardworking
+        term: hardworking
+        translation: travailleur
+        alt:
+          - assidu
+        pos: adjectif
+        example:
+          text: They are hardworking but disorganised.
+          translation: Ils sont travailleurs mais désorganisés.
+      - id: b1-easygoing
+        term: easygoing
+        translation: accommodant
+        alt:
+          - facile à vivre
+        pos: adjectif
+        example:
+          text: My flatmate is very easygoing.
+          translation: Mon colocataire est très facile à vivre.
+      - id: b1-to-stick-to
+        term: to stick to
+        translation: s'en tenir à
+        alt:
+          - respecter
+          - suivre
+        pos: verbe
+        example:
+          text: Let us stick to the original plan.
+          translation: Tenons-nous-en au plan initial.

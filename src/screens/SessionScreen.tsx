@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import type { Exercise } from '@/engine/exercises'
-import { vocabOf } from '@/engine/exercises'
+import { isPresentation, itemIdsOf } from '@/engine/exercises'
 import { ratingFromAnswer, type Rating } from '@/engine/srs'
 import { useProgress } from '@/store/progressStore'
 import { Flashcard } from '@/components/session/Flashcard'
@@ -9,6 +9,10 @@ import { MatchPairs } from '@/components/session/MatchPairs'
 import { ClozeSentence } from '@/components/session/ClozeSentence'
 import { TypeAnswer } from '@/components/session/TypeAnswer'
 import { VocabIntro } from '@/components/session/VocabIntro'
+import { RuleNote } from '@/components/session/RuleNote'
+import { GrammarGap } from '@/components/session/GrammarGap'
+import { ConjugationAnswer } from '@/components/session/ConjugationAnswer'
+import { ConjugationMatch } from '@/components/session/ConjugationMatch'
 import { CloseIcon } from '@/components/icons'
 import type { SessionOutcome } from '@/engine/progress'
 
@@ -34,14 +38,14 @@ interface Attempt {
 }
 
 export function SessionScreen({ title, exercises, onQuit, onFinish }: SessionScreenProps) {
-  const gradeVocab = useProgress((state) => state.gradeVocab)
+  const gradeItem = useProgress((state) => state.gradeItem)
   const [queue, setQueue] = useState<Exercise[]>(exercises)
   const [position, setPosition] = useState(0)
   const [attempt, setAttempt] = useState<Attempt>({ seen: new Set(), correct: 0, total: 0 })
   const [confirmQuit, setConfirmQuit] = useState(false)
 
   const current = queue[position]
-  const graded = useMemo(() => exercises.filter((exercise) => exercise.kind !== 'intro').length, [exercises])
+  const graded = useMemo(() => exercises.filter((exercise) => !isPresentation(exercise)).length, [exercises])
   const progress = graded === 0 ? 1 : Math.min(1, attempt.seen.size / graded)
 
   /** Avance dans la file, en réinsérant l'exercice raté un peu plus loin. */
@@ -77,27 +81,27 @@ export function SessionScreen({ title, exercises, onQuit, onFinish }: SessionScr
   const answer = useCallback(
     (exercise: Exercise, correct: boolean, rating?: Rating) => {
       const firstTry = !attempt.seen.has(exercise.id)
-      for (const vocab of vocabOf(exercise)) {
-        gradeVocab(vocab, rating ?? ratingFromAnswer(correct, firstTry))
+      for (const itemId of itemIdsOf(exercise)) {
+        gradeItem(itemId, rating ?? ratingFromAnswer(correct, firstTry))
       }
       record(exercise, correct)
       advance(!correct)
     },
-    [advance, attempt.seen, gradeVocab, record],
+    [advance, attempt.seen, gradeItem, record],
   )
 
   const answerMatch = useCallback(
-    (exercise: Exercise, missedVocabIds: string[]) => {
-      const missed = new Set(missedVocabIds)
+    (exercise: Exercise, missedItemIds: string[]) => {
+      const missed = new Set(missedItemIds)
       const firstTry = !attempt.seen.has(exercise.id)
-      for (const vocab of vocabOf(exercise)) {
-        gradeVocab(vocab, missed.has(vocab.id) ? 'again' : ratingFromAnswer(true, firstTry))
+      for (const itemId of itemIdsOf(exercise)) {
+        gradeItem(itemId, missed.has(itemId) ? 'again' : ratingFromAnswer(true, firstTry))
       }
       record(exercise, missed.size === 0)
       // Les paires sont toutes trouvées à la fin : inutile de rejouer la manche.
       advance(false)
     },
-    [advance, attempt.seen, gradeVocab, record],
+    [advance, attempt.seen, gradeItem, record],
   )
 
   // La file est vide : la session est terminée. Le drapeau évite que le
@@ -152,7 +156,17 @@ export function SessionScreen({ title, exercises, onQuit, onFinish }: SessionScr
               />
             )}
             {current.kind === 'match' && (
-              <MatchPairs exercise={current} onDone={({ missedVocabIds }) => answerMatch(current, missedVocabIds)} />
+              <MatchPairs exercise={current} onDone={({ missedIds }) => answerMatch(current, missedIds)} />
+            )}
+            {current.kind === 'rule' && <RuleNote exercise={current} onNext={() => advance(false)} />}
+            {current.kind === 'grammar-gap' && (
+              <GrammarGap exercise={current} onAnswer={(correct) => answer(current, correct)} />
+            )}
+            {current.kind === 'conjugation' && (
+              <ConjugationAnswer exercise={current} onAnswer={(correct) => answer(current, correct)} />
+            )}
+            {current.kind === 'conjugation-match' && (
+              <ConjugationMatch exercise={current} onDone={({ missedIds }) => answerMatch(current, missedIds)} />
             )}
             {current.kind === 'cloze' && (
               <ClozeSentence exercise={current} onAnswer={(correct) => answer(current, correct)} />

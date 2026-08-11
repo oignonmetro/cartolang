@@ -1,0 +1,128 @@
+id: c3
+title: Aspects composés et passif avancé
+subtitle: Les formes longues de la narration écrite
+icon: cup
+color: sky
+level: C1
+
+lessons:
+  - id: c3-l1
+    title: Les formes perfectives longues
+    notes: |
+      Les formes longues de l'anglais impressionnent à l'œil, mais elles sont
+      **parfaitement régulières** : chaque auxiliaire ajoute une couche de sens,
+      toujours dans le même ordre.
+
+      — `have` + participe : le **bilan**.
+      — `be` + -ing : la **durée**, l'activité en cours.
+      — un modal (`will`, `would`) : la **projection**.
+
+      L'ordre ne varie jamais : __modal, have, been, verbe-ing__.
+
+      — will have been working (futur antérieur continu)
+      — would have been waiting (conditionnel passé continu)
+      — had been travelling (past perfect continu)
+    verbs:
+      - verb: to work
+        translation: travailler
+        tense: formes perfectives composées
+        note: L'ordre modal + have + been + -ing est invariable.
+        forms:
+          - id: c3-work-fpc
+            person: futur antérieur continu
+            answer: will have been working
+          - id: c3-work-cpc
+            person: conditionnel passé continu
+            answer: would have been working
+      - verb: to wait
+        translation: attendre
+        tense: formes perfectives composées
+        note: Le conditionnel passé continu dit une durée qui n'a pas eu lieu.
+        forms:
+          - id: c3-wait-ppc
+            person: past perfect continu
+            answer: had been waiting
+          - id: c3-wait-cpc
+            person: conditionnel passé continu
+            answer: would have been waiting
+      - verb: to travel
+        translation: voyager
+        tense: formes perfectives composées
+        note: "Orthographe britannique : deux l devant -ing."
+        forms:
+          - id: c3-travel-ppc
+            person: past perfect continu
+            answer: had been travelling
+          - id: c3-travel-fp
+            person: futur antérieur
+            answer: will have travelled
+      - verb: to speak
+        translation: parler
+        tense: formes perfectives composées
+        note: "speak / spoke / spoken : le participe porte toute la construction."
+        forms:
+          - id: c3-speak-cp
+            person: conditionnel passé
+            answer: would have spoken
+          - id: c3-speak-fp
+            person: futur antérieur
+            answer: will have spoken
+
+  - id: c3-l2
+    title: Le passif dans les temps composés
+    notes: |
+      Au passif, **`be` prend le temps de la phrase** et le verbe reste au
+      participe passé. Les formes s'allongent, la mécanique ne change pas.
+
+      — Present perfect : has been signed.
+      — Past perfect : had been signed.
+      — Futur antérieur : will have been signed.
+      — Passif continu : is being signed, was being signed.
+
+      ! Le passif continu perfectif (« has been being signed ») existe en théorie
+      mais ne s'emploie pas : on reformule.
+    verbs:
+      - verb: to sign
+        translation: signer
+        tense: passif composé
+        note: « Be » porte le temps, « signed » ne bouge plus.
+        forms:
+          - id: c3-sign-pp-pass
+            person: present perfect passif
+            answer: has been signed
+          - id: c3-sign-pastperf-pass
+            person: past perfect passif
+            answer: had been signed
+      - verb: to build
+        translation: construire
+        tense: passif composé
+        note: "build / built / built : participe identique au prétérit."
+        forms:
+          - id: c3-build-fp-pass
+            person: futur antérieur passif
+            answer: will have been built
+          - id: c3-build-cont-pass
+            person: passif continu au passé
+            answer: was being built
+      - verb: to write
+        translation: écrire
+        tense: passif composé
+        note: "Le passif continu au présent insiste sur le déroulement : is being written."
+        forms:
+          - id: c3-write-cont-pass
+            person: passif continu au présent
+            answer: is being written
+          - id: c3-write-pp-pass
+            person: present perfect passif
+            answer: has been written
+      - verb: to take
+        translation: prendre
+        tense: passif composé
+        note: "« A decision has been taken » : collocation à retenir telle quelle."
+        forms:
+          - id: c3-take-pp-pass
+            person: present perfect passif
+            answer: has been taken
+          - id: c3-take-modal-pass
+            person: modal passif passé
+            answer: should have been taken

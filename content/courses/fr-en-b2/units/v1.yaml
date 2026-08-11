@@ -1,0 +1,254 @@
+id: v1
+title: Opinion et argumentation
+subtitle: Nuancer, concéder, réfuter
+icon: people
+color: teal
+level: B2.1
+
+lessons:
+  - id: v1-l1
+    title: Prendre position
+    vocab:
+      - id: b2-to-argue
+        term: to argue
+        translation: soutenir
+        alt:
+          - défendre l'idée
+          - plaider
+        pos: verbe
+        hint: Au sens de « défendre une thèse », pas seulement « se disputer ».
+        gap: argues
+        example:
+          text: The report argues that remote work improves retention.
+          translation: Le rapport soutient que le télétravail améliore la fidélisation.
+      - id: b2-to-claim
+        term: to claim
+        translation: prétendre
+        alt:
+          - affirmer
+        pos: verbe
+        hint: Sous-entend souvent que l'affirmation n'est pas prouvée.
+        gap: claims
+        example:
+          text: He claims to have read the whole file.
+          translation: Il prétend avoir lu tout le dossier.
+      - id: b2-to-acknowledge
+        term: to acknowledge
+        translation: reconnaître
+        alt:
+          - admettre
+        pos: verbe
+        gap: acknowledged
+        example:
+          text: She acknowledged that the criticism was fair.
+          translation: Elle a reconnu que la critique était justifiée.
+      - id: b2-to-dismiss
+        term: to dismiss
+        translation: écarter
+        alt:
+          - balayer
+          - rejeter
+        pos: verbe
+        gap: dismissed
+        example:
+          text: They dismissed the objection without discussing it.
+          translation: Ils ont écarté l'objection sans en discuter.
+      - id: b2-compelling
+        term: compelling
+        translation: convaincant
+        alt:
+          - probant
+        pos: adjectif
+        example:
+          text: The evidence is compelling but not conclusive.
+          translation: Les preuves sont convaincantes mais pas décisives.
+      - id: b2-far-fetched
+        term: far-fetched
+        translation: tiré par les cheveux
+        alt:
+          - capillotracté
+        pos: adjectif
+        example:
+          text: That explanation sounds rather far-fetched.
+          translation: Cette explication semble plutôt tirée par les cheveux.
+      - id: b2-to-hold-water
+        term: to hold water
+        translation: tenir la route
+        alt:
+          - tenir debout
+          - se tenir
+        pos: expression
+        hint: Se dit d'un raisonnement, jamais d'un objet.
+        example:
+          text: His theory does not hold water.
+          translation: Sa théorie ne tient pas la route.
+      - id: b2-caveat
+        term: caveat
+        translation: réserve
+        alt:
+          - bémol
+          - mise en garde
+        pos: nom
+        example:
+          text: I agree, with one important caveat.
+          translation: Je suis d'accord, avec une réserve importante.
+
+  - id: v1-l2
+    title: Concéder et nuancer
+    vocab:
+      - id: b2-admittedly
+        term: admittedly
+        translation: certes
+        alt:
+          - il est vrai que
+        pos: adverbe
+        example:
+          text: Admittedly, the sample was small.
+          translation: Certes, l'échantillon était réduit.
+      - id: b2-arguably
+        term: arguably
+        translation: sans doute
+        alt:
+          - on peut soutenir que
+        pos: adverbe
+        hint: Signale une opinion défendable, pas une certitude.
+        example:
+          text: This is arguably her best novel.
+          translation: C'est sans doute son meilleur roman.
+      - id: b2-to-concede
+        term: to concede
+        translation: concéder
+        pos: verbe
+        example:
+          text: I concede that the timing was poor.
+          translation: Je concède que le moment était mal choisi.
+      - id: b2-nonetheless
+        term: nonetheless
+        translation: néanmoins
+        alt:
+          - toutefois
+          - pour autant
+        pos: adverbe
+        example:
+          text: The plan is costly; nonetheless, it is necessary.
+          translation: Le plan est coûteux ; néanmoins, il est nécessaire.
+      - id: b2-albeit
+        term: albeit
+        translation: quoique
+        pos: conjonction
+        alt:
+          - bien que
+        hint: Registre soutenu, suivi d'un adjectif ou d'un groupe, jamais d'une proposition complète.
+        example:
+          text: A useful reform, albeit a modest one.
+          translation: Une réforme utile, quoique modeste.
+      - id: b2-to-overstate
+        term: to overstate
+        translation: exagérer
+        alt:
+          - surestimer
+        pos: verbe
+        example:
+          text: It would be easy to overstate the risk.
+          translation: Il serait facile d'exagérer le risque.
+      - id: b2-to-understate
+        term: to understate
+        translation: minimiser
+        alt:
+          - sous-estimer
+        pos: verbe
+        gap: understates
+        example:
+          text: The summary understates the cost of delay.
+          translation: Le résumé minimise le coût du retard.
+      - id: b2-nuance
+        term: nuance
+        translation: subtilité
+        alt:
+          - nuance
+        pos: nom
+        example:
+          text: The translation loses much of the nuance.
+          translation: La traduction perd beaucoup de la nuance.
+
+  - id: v1-l3
+    title: Désaccord et critique
+    vocab:
+      - id: b2-to-object
+        term: to object
+        translation: objecter
+        alt:
+          - s'opposer
+        pos: verbe
+        gap: objected
+        example:
+          text: Nobody objected to the new schedule.
+          translation: Personne n'a objecté au nouvel horaire.
+      - id: b2-to-refute
+        term: to refute
+        translation: réfuter
+        pos: verbe
+        example:
+          text: These figures refute the earlier claim.
+          translation: Ces chiffres réfutent l'affirmation précédente.
+      - id: b2-flawed
+        term: flawed
+        translation: défectueux
+        alt:
+          - vicié
+          - bancal
+        pos: adjectif
+        example:
+          text: The method is flawed in several respects.
+          translation: La méthode est bancale à plusieurs égards.
+      - id: b2-misleading
+        term: misleading
+        translation: trompeur
+        alt:
+          - fallacieux
+        pos: adjectif
+        example:
+          text: The headline is technically true but misleading.
+          translation: Le titre est techniquement vrai mais trompeur.
+      - id: b2-to-overlook
+        term: to overlook
+        translation: négliger
+        alt:
+          - passer à côté de
+          - omettre
+        pos: verbe
+        gap: overlooks
+        example:
+          text: The study overlooks a whole generation of readers.
+          translation: L'étude néglige toute une génération de lecteurs.
+      - id: b2-shortcoming
+        term: shortcoming
+        translation: lacune
+        alt:
+          - faiblesse
+          - défaut
+        pos: nom
+        gap: shortcomings
+        example:
+          text: Every method has its shortcomings.
+          translation: Toute méthode a ses lacunes.
+      - id: b2-to-water-down
+        term: to water down
+        translation: édulcorer
+        alt:
+          - affaiblir
+          - diluer
+        pos: verbe
+        gap: watered down
+        example:
+          text: The committee watered down the original proposal.
+          translation: Le comité a édulcoré la proposition initiale.
+      - id: b2-at-odds-with
+        term: at odds with
+        translation: en contradiction avec
+        alt:
+          - en désaccord avec
+        pos: expression
+        example:
+          text: His conclusion is at odds with the data.
+          translation: Sa conclusion est en contradiction avec les données.

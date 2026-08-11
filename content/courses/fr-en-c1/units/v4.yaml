@@ -1,0 +1,252 @@
+id: v4
+title: Analyser et argumenter
+subtitle: Le lexique de l'écrit académique
+icon: people
+color: teal
+level: C1
+
+lessons:
+  - id: v4-l1
+    title: Poser un cadre d'analyse
+    vocab:
+      - id: c1-premise
+        term: premise
+        translation: prémisse
+        alt:
+          - postulat
+        pos: nom
+        hint: "Au pluriel, « premises » désigne des locaux, sens sans rapport."
+        example:
+          text: The whole model rests on a shaky premise.
+          translation: Tout le modèle repose sur une prémisse fragile.
+      - id: c1-framework
+        term: framework
+        translation: cadre
+        alt:
+          - grille de lecture
+        pos: nom
+        example:
+          text: She proposes an alternative framework.
+          translation: Elle propose un cadre alternatif.
+      - id: c1-to-posit
+        term: to posit
+        translation: poser comme hypothèse
+        alt:
+          - postuler
+        pos: verbe
+        gap: posits
+        example:
+          text: The author posits three distinct causes.
+          translation: L'auteur pose comme hypothèse trois causes distinctes.
+      - id: c1-scope
+        term: scope
+        translation: portée
+        alt:
+          - champ
+        pos: nom
+        example:
+          text: Such cases fall outside the scope of this study.
+          translation: Ces cas sortent du champ de la présente étude.
+      - id: c1-to-delineate
+        term: to delineate
+        translation: délimiter
+        alt:
+          - circonscrire
+        pos: verbe
+        gap: delineates
+        example:
+          text: The introduction delineates the problem clearly.
+          translation: L'introduction délimite clairement le problème.
+      - id: c1-underlying
+        term: underlying
+        translation: sous-jacent
+        pos: adjectif
+        example:
+          text: The underlying assumption is never stated.
+          translation: L'hypothèse sous-jacente n'est jamais explicitée.
+      - id: c1-hitherto-overlooked
+        term: overlooked
+        translation: négligé
+        alt:
+          - passé sous silence
+        pos: adjectif
+        example:
+          text: This factor has been consistently overlooked.
+          translation: Ce facteur a été systématiquement négligé.
+      - id: c1-salient
+        term: salient
+        translation: saillant
+        alt:
+          - marquant
+        pos: adjectif
+        example:
+          text: Two salient features emerge from the data.
+          translation: Deux traits saillants se dégagent des données.
+
+  - id: v4-l2
+    title: Discuter une thèse
+    vocab:
+      - id: c1-to-substantiate
+        term: to substantiate
+        translation: étayer
+        alt:
+          - appuyer
+          - documenter
+        pos: verbe
+        gap: substantiate
+        example:
+          text: Nothing in the record can substantiate that reading.
+          translation: Rien dans le dossier ne peut étayer cette lecture.
+      - id: c1-to-rebut
+        term: to rebut
+        translation: réfuter point par point
+        alt:
+          - répliquer à
+        pos: verbe
+        gap: rebuts
+        hint: "Plus procédural que « refute » : on répond à chaque argument dans l'ordre."
+        example:
+          text: The second chapter rebuts that objection.
+          translation: Le deuxième chapitre réfute point par point cette objection.
+      - id: c1-proviso
+        term: proviso
+        translation: condition restrictive
+        alt:
+          - clause
+        pos: nom
+        hint: "Un « caveat » met en garde ; un « proviso » pose une condition."
+        example:
+          text: The offer stands, with one proviso.
+          translation: L'offre tient, à une condition près.
+      - id: c1-to-conflate
+        term: to conflate
+        translation: confondre
+        alt:
+          - amalgamer
+        pos: verbe
+        gap: conflates
+        example:
+          text: The article conflates correlation and cause.
+          translation: L'article confond corrélation et cause.
+      - id: c1-to-qualify
+        term: to qualify
+        translation: nuancer
+        alt:
+          - assortir de réserves
+        pos: verbe
+        gap: qualify
+        hint: Sens distinct de « se qualifier » ; ici, atténuer une affirmation.
+        example:
+          text: I would qualify that statement considerably.
+          translation: Je nuancerais considérablement cette affirmation.
+      - id: c1-tenuous
+        term: tenuous
+        translation: ténu
+        alt:
+          - fragile
+        pos: adjectif
+        example:
+          text: The link between the two remains tenuous.
+          translation: Le lien entre les deux reste ténu.
+      - id: c1-to-concur
+        term: to concur
+        translation: abonder dans le sens
+        alt:
+          - souscrire à
+        pos: verbe
+        hint: "Registre soutenu de « agree » ; se construit avec « with »."
+        example:
+          text: Most historians concur with that reading.
+          translation: La plupart des historiens abondent dans le sens de cette lecture.
+      - id: c1-compelling-evidence
+        term: to corroborate
+        translation: corroborer
+        alt:
+          - confirmer
+        pos: verbe
+        gap: corroborated
+        example:
+          text: Two independent studies corroborated the finding.
+          translation: Deux études indépendantes ont corroboré le résultat.
+
+  - id: v4-l3
+    title: Conclure et pondérer
+    vocab:
+      - id: c1-by-and-large
+        term: by and large
+        translation: dans l'ensemble
+        alt:
+          - globalement
+          - en gros
+        pos: expression
+        example:
+          text: By and large, the evidence supports this view.
+          translation: Dans l'ensemble, les données confortent cette thèse.
+      - id: c1-ostensibly
+        term: ostensibly
+        translation: en apparence
+        alt:
+          - officiellement
+        pos: adverbe
+        hint: "Faux ami : ne veut pas dire « ostensiblement », mais annonce un décalage entre l'affiché et le réel."
+        example:
+          text: The visit was ostensibly a private one.
+          translation: La visite était en apparence privée.
+      - id: c1-to-a-large-extent
+        term: to a large extent
+        translation: dans une large mesure
+        alt:
+          - en grande partie
+          - pour beaucoup
+        pos: expression
+        example:
+          text: The criticism is justified to a large extent.
+          translation: La critique est justifiée dans une large mesure.
+      - id: c1-all-things-considered
+        term: all things considered
+        translation: tout bien pesé
+        alt:
+          - tout compte fait
+          - au bout du compte
+        pos: expression
+        example:
+          text: All things considered, the reform succeeded.
+          translation: Tout bien pesé, la réforme a réussi.
+      - id: c1-conversely
+        term: conversely
+        translation: inversement
+        alt:
+          - à l'inverse
+        pos: adverbe
+        example:
+          text: Conversely, smaller firms gained ground.
+          translation: Inversement, les petites entreprises ont progressé.
+      - id: c1-with-hindsight
+        term: with hindsight
+        translation: avec le recul
+        alt:
+          - rétrospectivement
+        pos: expression
+        example:
+          text: With hindsight, the warning signs were obvious.
+          translation: Avec le recul, les signaux d'alerte étaient évidents.
+      - id: c1-inconclusive
+        term: inconclusive
+        translation: peu concluant
+        alt:
+          - non concluant
+          - sans conclusion nette
+        pos: adjectif
+        example:
+          text: The trial results were inconclusive.
+          translation: Les résultats de l'essai ont été peu concluants.
+      - id: c1-to-bear-out
+        term: to bear out
+        translation: confirmer
+        alt:
+          - corroborer
+        pos: verbe
+        gap: bears out
+        example:
+          text: The latest data bears out that prediction.
+          translation: Les dernières données confirment cette prédiction.

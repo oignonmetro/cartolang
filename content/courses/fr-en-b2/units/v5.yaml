@@ -1,0 +1,237 @@
+id: v5
+title: Culture et médias
+subtitle: Lire une critique, suivre un débat public
+icon: people
+color: teal
+level: B2.2
+
+lessons:
+  - id: v5-l1
+    title: Médias et information
+    vocab:
+      - id: b2-coverage
+        term: coverage
+        translation: couverture médiatique
+        alt:
+          - couverture
+          - traitement médiatique
+        pos: nom
+        example:
+          text: The coverage was relentless for a fortnight.
+          translation: La couverture médiatique a été incessante pendant quinze jours.
+      - id: b2-headline
+        term: headline
+        translation: titre
+        alt:
+          - gros titre
+        pos: nom
+        example:
+          text: The headline was frankly misleading.
+          translation: Le titre était franchement trompeur.
+      - id: b2-outlet
+        term: outlet
+        translation: organe de presse
+        alt:
+          - média
+        pos: nom
+        gap: outlets
+        example:
+          text: Several outlets reported the same figure.
+          translation: Plusieurs organes de presse ont repris le même chiffre.
+      - id: b2-to-broadcast
+        term: to broadcast
+        translation: diffuser
+        pos: verbe
+        gap: broadcast
+        hint: broadcast / broadcast / broadcast, invariable au passé.
+        example:
+          text: The debate was broadcast live on Sunday.
+          translation: Le débat a été diffusé en direct dimanche.
+      - id: b2-to-fact-check
+        term: to fact-check
+        translation: vérifier les faits
+        alt:
+          - vérifier
+          - recouper
+        pos: verbe
+        gap: fact-checked
+        example:
+          text: Journalists fact-checked every claim in the speech.
+          translation: Les journalistes ont vérifié chaque affirmation du discours.
+      - id: b2-readership
+        term: readership
+        translation: lectorat
+        pos: nom
+        example:
+          text: The magazine lost half its readership in five years.
+          translation: Le magazine a perdu la moitié de son lectorat en cinq ans.
+      - id: b2-tabloid
+        term: tabloid
+        translation: presse à sensation
+        alt:
+          - tabloïd
+          - journal à sensation
+        pos: nom
+        example:
+          text: The story first appeared in a tabloid.
+          translation: L'affaire est d'abord parue dans la presse à sensation.
+      - id: b2-to-go-viral
+        term: to go viral
+        translation: devenir viral
+        alt:
+          - faire le buzz
+        pos: expression
+        gap: went viral
+        example:
+          text: The clip went viral overnight.
+          translation: La vidéo est devenue virale du jour au lendemain.
+
+  - id: v5-l2
+    title: Arts et spectacle
+    vocab:
+      - id: b2-plot
+        term: plot
+        translation: intrigue
+        pos: nom
+        hint: "L'intrigue, mais aussi un complot, et une parcelle de terrain."
+        example:
+          text: The plot is needlessly complicated.
+          translation: L'intrigue est inutilement compliquée.
+      - id: b2-cast
+        term: cast
+        translation: distribution
+        pos: nom
+        hint: Le mot désigne l'ensemble des interprètes, pas un seul.
+        example:
+          text: The cast is excellent from start to finish.
+          translation: La distribution est excellente du début à la fin.
+      - id: b2-to-stage
+        term: to stage
+        translation: mettre en scène
+        alt:
+          - monter
+        pos: verbe
+        gap: staged
+        example:
+          text: The company staged a new version last winter.
+          translation: La troupe a monté une nouvelle version l'hiver dernier.
+      - id: b2-review
+        term: review
+        translation: critique
+        alt:
+          - compte rendu
+        pos: nom
+        hint: "Faux ami : une revue au sens de magazine se dit « a magazine »."
+        example:
+          text: The review was harsh but fair.
+          translation: La critique était dure mais juste.
+      - id: b2-audience
+        term: audience
+        translation: public
+        alt:
+          - spectateurs
+        pos: nom
+        hint: "Faux ami : rien à voir avec l'audience d'un tribunal."
+        example:
+          text: The audience stayed until the very end.
+          translation: Le public est resté jusqu'au bout.
+      - id: b2-underrated
+        term: underrated
+        translation: sous-estimé
+        pos: adjectif
+        example:
+          text: The film remains badly underrated.
+          translation: Le film reste très sous-estimé.
+      - id: b2-to-portray
+        term: to portray
+        translation: dépeindre
+        alt:
+          - représenter
+        pos: verbe
+        gap: portrays
+        example:
+          text: The novel portrays a whole generation.
+          translation: Le roman dépeint toute une génération.
+      - id: b2-acclaimed
+        term: acclaimed
+        translation: salué par la critique
+        alt:
+          - encensé
+          - acclamé
+        pos: adjectif
+        example:
+          text: Her acclaimed first novel appeared in 2019.
+          translation: Son premier roman, salué par la critique, est paru en 2019.
+
+  - id: v5-l3
+    title: Débats culturels
+    vocab:
+      - id: b2-highbrow
+        term: highbrow
+        translation: intellectuel
+        alt:
+          - élitiste
+        pos: adjectif
+        example:
+          text: The programme is deliberately highbrow.
+          translation: L'émission est délibérément intellectuelle.
+      - id: b2-mainstream
+        term: mainstream
+        translation: grand public
+        alt:
+          - dominant
+          - conventionnel
+        pos: adjectif
+        example:
+          text: The idea has become entirely mainstream.
+          translation: L'idée est devenue tout à fait grand public.
+      - id: b2-to-appeal-to
+        term: to appeal to
+        translation: séduire
+        alt:
+          - plaire à
+        pos: verbe
+        gap: appeals to
+        example:
+          text: The series appeals to a younger audience.
+          translation: La série séduit un public plus jeune.
+      - id: b2-heritage
+        term: heritage
+        translation: patrimoine
+        pos: nom
+        example:
+          text: The building is part of the national heritage.
+          translation: Le bâtiment fait partie du patrimoine national.
+      - id: b2-to-censor
+        term: to censor
+        translation: censurer
+        pos: verbe
+        gap: censored
+        example:
+          text: Two scenes were censored before release.
+          translation: Deux scènes ont été censurées avant la sortie.
+      - id: b2-controversial
+        term: controversial
+        translation: controversé
+        pos: adjectif
+        example:
+          text: The choice proved deeply controversial.
+          translation: Le choix s'est révélé profondément controversé.
+      - id: b2-legacy
+        term: legacy
+        translation: postérité
+        alt:
+          - héritage
+        pos: nom
+        hint: "Ce qu'une œuvre laisse derrière elle ; « heritage » est collectif et patrimonial."
+        example:
+          text: His legacy is still fiercely debated.
+          translation: Son héritage est encore âprement débattu.
+      - id: b2-to-overshadow
+        term: to overshadow
+        translation: éclipser
+        pos: verbe
+        gap: overshadowed
+        example:
+          text: The scandal overshadowed the release.
+          translation: Le scandale a éclipsé la sortie.

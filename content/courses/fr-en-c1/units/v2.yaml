@@ -1,0 +1,242 @@
+id: v2
+title: Institutions et économie
+subtitle: Le lexique de la presse sérieuse et des rapports
+icon: compass
+color: teal
+level: C1
+
+lessons:
+  - id: v2-l1
+    title: Droit et institutions
+    vocab:
+      - id: c1-to-uphold
+        term: to uphold
+        translation: confirmer
+        alt:
+          - maintenir
+        pos: verbe
+        gap: upheld
+        example:
+          text: The court upheld the original ruling.
+          translation: La cour a confirmé la décision initiale.
+      - id: c1-to-overturn
+        term: to overturn
+        translation: annuler
+        alt:
+          - casser
+        pos: verbe
+        gap: overturned
+        example:
+          text: The verdict was overturned on appeal.
+          translation: Le verdict a été annulé en appel.
+      - id: c1-binding
+        term: binding
+        translation: contraignant
+        pos: adjectif
+        example:
+          text: The agreement is not legally binding.
+          translation: L'accord n'est pas juridiquement contraignant.
+      - id: c1-oversight
+        term: oversight
+        translation: contrôle
+        alt:
+          - supervision
+          - omission
+        pos: nom
+        hint: "Deux sens opposés selon le contexte : la surveillance, ou l'oubli."
+        example:
+          text: Parliamentary oversight remains weak.
+          translation: Le contrôle parlementaire reste faible.
+      - id: c1-mandate
+        term: mandate
+        translation: mandat
+        pos: nom
+        example:
+          text: The agency exceeded its mandate.
+          translation: L'agence a outrepassé son mandat.
+      - id: c1-to-waive
+        term: to waive
+        translation: renoncer à
+        alt:
+          - lever
+        pos: verbe
+        gap: waived
+        example:
+          text: The bank waived the transfer fee.
+          translation: La banque a renoncé aux frais de virement.
+      - id: c1-compliance
+        term: compliance
+        translation: conformité
+        alt:
+          - respect des règles
+        pos: nom
+        example:
+          text: Compliance costs have doubled since 2020.
+          translation: Les coûts de mise en conformité ont doublé depuis 2020.
+      - id: c1-precedent
+        term: precedent
+        translation: précédent
+        pos: nom
+        hint: "Le nom se prononce autrement que l'adjectif « preceding »."
+        example:
+          text: The ruling sets a dangerous precedent.
+          translation: La décision crée un précédent dangereux.
+
+  - id: v2-l2
+    title: Économie et finance
+    vocab:
+      - id: c1-to-curb-spending
+        term: austerity
+        translation: austérité
+        alt:
+          - rigueur budgétaire
+        pos: nom
+        example:
+          text: A decade of austerity left services stretched.
+          translation: Une décennie d'austérité a laissé les services sous tension.
+      - id: c1-to-soar
+        term: to soar
+        translation: s'envoler
+        alt:
+          - grimper en flèche
+        pos: verbe
+        gap: soared
+        example:
+          text: Energy prices soared over the winter.
+          translation: Les prix de l'énergie se sont envolés au cours de l'hiver.
+      - id: c1-to-plummet
+        term: to plummet
+        translation: s'effondrer
+        alt:
+          - chuter brutalement
+        pos: verbe
+        gap: plummeted
+        example:
+          text: Share values plummeted within hours.
+          translation: La valeur des actions s'est effondrée en quelques heures.
+      - id: c1-sluggish
+        term: sluggish
+        translation: atone
+        alt:
+          - poussif
+        pos: adjectif
+        example:
+          text: Demand has been sluggish since spring.
+          translation: La demande est atone depuis le printemps.
+      - id: c1-leverage
+        term: leverage
+        translation: levier
+        alt:
+          - moyen de pression
+        pos: nom
+        example:
+          text: Small states have little leverage here.
+          translation: Les petits États ont peu de moyens de pression ici.
+      - id: c1-to-underwrite
+        term: to underwrite
+        translation: garantir
+        alt:
+          - financer
+        pos: verbe
+        gap: underwrote
+        example:
+          text: The state underwrote the entire loan.
+          translation: L'État a garanti la totalité du prêt.
+      - id: c1-windfall
+        term: windfall
+        translation: manne
+        alt:
+          - aubaine
+        pos: nom
+        example:
+          text: The tax targets a windfall nobody had planned for.
+          translation: L'impôt vise une manne que personne n'avait anticipée.
+      - id: c1-to-offset-losses
+        term: to write off
+        translation: passer par pertes et profits
+        alt:
+          - amortir
+        pos: verbe
+        gap: wrote off
+        example:
+          text: The bank wrote off the debt entirely.
+          translation: La banque a passé la dette par pertes et profits.
+
+  - id: v2-l3
+    title: Diplomatie et conflit
+    vocab:
+      - id: c1-to-broker
+        term: to broker
+        translation: négocier
+        alt:
+          - obtenir par médiation
+        pos: verbe
+        gap: brokered
+        example:
+          text: Norway brokered the ceasefire.
+          translation: La Norvège a négocié le cessez-le-feu.
+      - id: c1-stalemate
+        term: stalemate
+        translation: impasse
+        alt:
+          - situation bloquée
+        pos: nom
+        hint: "Vient des échecs, où le pat bloque la partie sans la faire perdre."
+        example:
+          text: Talks ended in complete stalemate.
+          translation: Les pourparlers se sont achevés sur une impasse totale.
+      - id: c1-to-escalate
+        term: to escalate
+        translation: s'envenimer
+        alt:
+          - s'intensifier
+        pos: verbe
+        gap: escalated
+        example:
+          text: The dispute escalated within days.
+          translation: Le différend s'est envenimé en quelques jours.
+      - id: c1-to-defuse
+        term: to defuse
+        translation: désamorcer
+        pos: verbe
+        gap: defuse
+        example:
+          text: Both sides tried to defuse the crisis.
+          translation: Les deux camps ont tenté de désamorcer la crise.
+      - id: c1-sanction
+        term: sanction
+        translation: mesure punitive
+        alt:
+          - sanction
+        pos: nom
+        hint: "Comme verbe, « to sanction » signifie au contraire autoriser."
+        example:
+          text: A further sanction was imposed in June.
+          translation: Une sanction supplémentaire a été imposée en juin.
+      - id: c1-fragile-truce
+        term: truce
+        translation: trêve
+        pos: nom
+        example:
+          text: The truce held for barely a week.
+          translation: La trêve a tenu à peine une semaine.
+      - id: c1-to-back-down
+        term: to back down
+        translation: reculer
+        alt:
+          - céder
+        pos: verbe
+        gap: backed down
+        example:
+          text: Neither government backed down.
+          translation: Aucun des deux gouvernements n'a reculé.
+      - id: c1-at-stake
+        term: at stake
+        translation: en jeu
+        alt:
+          - en cause
+          - en balance
+        pos: expression
+        example:
+          text: Far more is at stake than a single treaty.
+          translation: Bien plus qu'un simple traité est en jeu.

@@ -1,0 +1,254 @@
+id: v3
+title: Expressions idiomatiques
+subtitle: Ce qui ne se traduit pas mot à mot
+icon: cup
+color: teal
+level: C1
+
+lessons:
+  - id: v3-l1
+    title: Décrire une situation
+    vocab:
+      - id: c1-a-blessing-in-disguise
+        term: a blessing in disguise
+        translation: un mal pour un bien
+        pos: expression
+        example:
+          text: Losing that contract was a blessing in disguise.
+          translation: Perdre ce contrat a été un mal pour un bien.
+      - id: c1-to-be-on-thin-ice
+        term: on thin ice
+        translation: sur un terrain glissant
+        alt:
+          - sur la corde raide
+          - en terrain miné
+        pos: expression
+        example:
+          text: You are on thin ice with that argument.
+          translation: Tu es sur un terrain glissant avec cet argument.
+      - id: c1-the-tip-of-the-iceberg
+        term: the tip of the iceberg
+        translation: la partie émergée de l'iceberg
+        alt:
+          - la partie visible de l'iceberg
+        pos: expression
+        example:
+          text: These cases are only the tip of the iceberg.
+          translation: Ces cas ne sont que la partie émergée de l'iceberg.
+      - id: c1-a-catch-22
+        term: a catch-22
+        translation: un cercle vicieux
+        alt:
+          - une situation sans issue
+        pos: expression
+        example:
+          text: "No experience without a job, no job without experience: a catch-22."
+          translation: "Pas d'expérience sans emploi, pas d'emploi sans expérience : un cercle vicieux."
+      - id: c1-to-be-a-grey-area
+        term: a grey area
+        translation: une zone floue
+        alt:
+          - une zone grise
+          - un flou juridique
+        pos: expression
+        example:
+          text: The law leaves a grey area here.
+          translation: La loi laisse une zone floue sur ce point.
+      - id: c1-a-double-edged-sword
+        term: a double-edged sword
+        translation: une arme à double tranchant
+        pos: expression
+        example:
+          text: Transparency can be a double-edged sword.
+          translation: La transparence peut être une arme à double tranchant.
+      - id: c1-to-come-to-a-head
+        term: to come to a head
+        translation: atteindre un point critique
+        alt:
+          - culminer
+          - arriver à son comble
+        pos: expression
+        gap: came to a head
+        example:
+          text: The tension came to a head last spring.
+          translation: La tension a atteint un point critique au printemps dernier.
+      - id: c1-in-the-long-run
+        term: in the long run
+        translation: à long terme
+        alt:
+          - à la longue
+        pos: expression
+        example:
+          text: It will cost less in the long run.
+          translation: Cela coûtera moins cher à long terme.
+
+  - id: v3-l2
+    title: Parler des gens
+    vocab:
+      - id: c1-to-be-set-in-ones-ways
+        term: set in his ways
+        translation: qui a ses habitudes bien ancrées
+        alt:
+          - routinier
+          - figé dans ses habitudes
+        pos: expression
+        example:
+          text: He is far too set in his ways to move now.
+          translation: Il a des habitudes bien trop ancrées pour déménager maintenant.
+      - id: c1-to-take-something-with-a-pinch-of-salt
+        term: with a pinch of salt
+        translation: avec des pincettes
+        alt:
+          - avec prudence
+          - avec réserve
+        pos: expression
+        example:
+          text: Take those figures with a pinch of salt.
+          translation: Prends ces chiffres avec des pincettes.
+      - id: c1-to-see-eye-to-eye
+        term: to see eye to eye
+        translation: être du même avis
+        alt:
+          - s'entendre
+          - partager le même avis
+        pos: expression
+        gap: see eye to eye
+        example:
+          text: The two ministers rarely see eye to eye.
+          translation: Les deux ministres sont rarement du même avis.
+      - id: c1-to-go-out-of-ones-way
+        term: to go out of his way
+        translation: se donner du mal
+        alt:
+          - se mettre en quatre
+          - faire un effort particulier
+        pos: expression
+        gap: went out of his way
+        example:
+          text: He went out of his way to help us.
+          translation: Il s'est donné du mal pour nous aider.
+      - id: c1-to-have-a-chip-on-ones-shoulder
+        term: a chip on his shoulder
+        translation: une rancune tenace
+        alt:
+          - de l'amertume
+          - un ressentiment
+        pos: expression
+        example:
+          text: He still has a chip on his shoulder about the promotion.
+          translation: Il garde une rancune tenace au sujet de la promotion.
+      - id: c1-down-to-earth
+        term: down-to-earth
+        translation: terre à terre
+        alt:
+          - pragmatique
+        pos: adjectif
+        example:
+          text: His advice is refreshingly down-to-earth.
+          translation: Ses conseils sont agréablement terre à terre.
+      - id: c1-to-be-in-two-minds
+        term: in two minds
+        translation: partagé
+        alt:
+          - indécis
+        pos: expression
+        example:
+          text: I am in two minds about accepting.
+          translation: Je suis partagé quant à l'idée d'accepter.
+      - id: c1-to-keep-someone-in-the-loop
+        term: in the loop
+        translation: au courant
+        alt:
+          - dans la boucle
+        pos: expression
+        example:
+          text: Keep me in the loop, please.
+          translation: Tiens-moi au courant, s'il te plaît.
+
+  - id: v3-l3
+    title: Agir et réagir
+    vocab:
+      - id: c1-to-play-it-by-ear
+        term: to play it by ear
+        translation: improviser
+        alt:
+          - aviser sur le moment
+        pos: expression
+        gap: play it by ear
+        example:
+          text: We will play it by ear on the day.
+          translation: Nous aviserons sur le moment le jour venu.
+      - id: c1-to-cut-corners
+        term: to cut corners
+        translation: bâcler
+        alt:
+          - faire des économies de bouts de chandelle
+        pos: expression
+        gap: cut corners
+        example:
+          text: The contractor clearly cut corners.
+          translation: L'entrepreneur a manifestement bâclé le travail.
+      - id: c1-to-bite-the-bullet
+        term: to bite the bullet
+        translation: prendre son courage à deux mains
+        alt:
+          - serrer les dents
+          - se lancer
+        pos: expression
+        gap: bit the bullet
+        example:
+          text: We finally bit the bullet and rewrote it.
+          translation: Nous avons fini par prendre notre courage à deux mains et tout réécrire.
+      - id: c1-to-jump-the-gun
+        term: to jump the gun
+        translation: agir prématurément
+        alt:
+          - brûler les étapes
+          - aller trop vite
+        pos: expression
+        gap: jumped the gun
+        example:
+          text: The press jumped the gun on that story.
+          translation: La presse a agi prématurément sur cette affaire.
+      - id: c1-to-let-something-slide
+        term: to let it slide
+        translation: laisser courir
+        alt:
+          - laisser passer
+          - fermer les yeux
+        pos: expression
+        gap: let it slide
+        example:
+          text: They let it slide for far too long.
+          translation: Ils ont laissé courir bien trop longtemps.
+      - id: c1-to-touch-base
+        term: to touch base
+        translation: faire un point
+        alt:
+          - prendre contact
+          - refaire le point
+        pos: expression
+        gap: touch base
+        example:
+          text: Let us touch base again on Monday.
+          translation: Refaisons un point lundi.
+      - id: c1-to-hedge-ones-bets
+        term: to hedge his bets
+        translation: ne pas mettre tous ses œufs dans le même panier
+        alt:
+          - se couvrir
+          - ménager ses arrières
+        pos: expression
+        gap: hedging his bets
+        example:
+          text: The minister is clearly hedging his bets.
+          translation: Le ministre évite manifestement de s'engager d'un seul côté.
+      - id: c1-to-go-back-to-the-drawing-board
+        term: back to the drawing board
+        translation: retour à la case départ
+        alt:
+          - tout est à refaire
+        pos: expression
+        example:
+          text: The proposal failed, so it is back to the drawing board.
+          translation: La proposition a échoué, retour à la case départ.

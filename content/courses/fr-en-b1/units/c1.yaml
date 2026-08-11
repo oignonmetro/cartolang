@@ -1,0 +1,168 @@
+id: c1
+title: Les temps du passé
+subtitle: Prétérit, present perfect, past perfect
+icon: clock
+color: sky
+level: B1
+
+lessons:
+  - id: c1-l1
+    title: Verbes irréguliers courants
+    notes: |
+      Un verbe irrégulier, ce sont **trois colonnes** à savoir ensemble : base,
+      prétérit, participe passé. Les deux dernières se confondent souvent.
+
+      — Le **prétérit** s'emploie seul, pour un fait __passé et daté__.
+        I wrote the report yesterday. J'ai rédigé le rapport hier.
+      — Le **participe passé** sert à tous les temps composés, __jamais seul__.
+        I have written three reports this week. (`have` + participe)
+
+      ! Un participe ne se conjugue pas tout seul : « I written » n'existe pas.
+    verbs:
+      - verb: to write
+        translation: écrire
+        tense: verbe irrégulier
+        note: "write / wrote / written : le participe prend un double t."
+        forms:
+          - id: c1-write-past
+            person: prétérit
+            answer: wrote
+          - id: c1-write-pp
+            person: participe passé
+            answer: written
+      - verb: to choose
+        translation: choisir
+        tense: verbe irrégulier
+        note: "choose / chose / chosen : attention à la prononciation du prétérit."
+        forms:
+          - id: c1-choose-past
+            person: prétérit
+            answer: chose
+          - id: c1-choose-pp
+            person: participe passé
+            answer: chosen
+      - verb: to seek
+        translation: chercher
+        tense: verbe irrégulier
+        note: "seek / sought / sought : comme buy, bring, think."
+        forms:
+          - id: c1-seek-past
+            person: prétérit
+            answer: sought
+          - id: c1-seek-pp
+            person: participe passé
+            answer: sought
+      - verb: to arise
+        translation: survenir
+        tense: verbe irrégulier
+        note: "arise / arose / arisen : se dit d'un problème, pas d'une personne."
+        forms:
+          - id: c1-arise-past
+            person: prétérit
+            answer: arose
+          - id: c1-arise-pp
+            person: participe passé
+            answer: arisen
+
+  - id: c1-l2
+    title: Present perfect et prétérit
+    notes: |
+      La frontière entre les deux temps n'est pas **la distance dans le temps**,
+      mais __le lien avec le présent__.
+
+      — Prétérit : la période est **close**, souvent datée.
+        I saw her last week. (la semaine dernière est finie)
+      — Present perfect : la période est **encore ouverte**, ou le résultat compte
+        aujourd'hui.
+        I have seen her twice this week. (la semaine court toujours)
+
+      ! Un repère daté (`yesterday`, `in 2019`, `last month`) interdit le
+      present perfect.
+    verbs:
+      - verb: to see
+        translation: voir
+        tense: present perfect
+        note: have / has + seen, jamais « have saw ».
+        forms:
+          - id: c1-see-pp-1
+            person: I / you / we / they
+            answer: have seen
+            alt:
+              - "'ve seen"
+          - id: c1-see-pp-3
+            person: he / she / it
+            answer: has seen
+            alt:
+              - "'s seen"
+      - verb: to go
+        translation: aller
+        tense: present perfect
+        note: "« has gone » = parti et pas revenu ; « has been » = y est allé et revenu."
+        forms:
+          - id: c1-go-pp-1
+            person: I / you / we / they
+            answer: have gone
+          - id: c1-go-pp-3
+            person: he / she / it
+            answer: has gone
+      - verb: to take
+        translation: prendre
+        tense: verbe irrégulier
+        note: take / took / taken.
+        forms:
+          - id: c1-take-past
+            person: prétérit
+            answer: took
+          - id: c1-take-pp
+            person: participe passé
+            answer: taken
+
+  - id: c1-l3
+    title: Le past perfect
+    notes: |
+      Le past perfect situe un événement **avant un autre événement passé**.
+      C'est le « passé du passé » : `had` + participe, invariable en personne.
+
+      — When we arrived, the meeting had already started.
+        Quand nous sommes arrivés, la réunion avait déjà commencé.
+
+      Il est également obligatoire dans deux contextes.
+
+      — Hypothèse irréelle du passé : `if I had known`.
+      — Discours rapporté après un verbe au passé : `he said he had seen her`.
+    verbs:
+      - verb: to start
+        translation: commencer
+        tense: prétérit et past perfect
+        note: "Le past perfect ne varie pas en personne : had + participe pour tous."
+        forms:
+          - id: c1-start-past
+            person: prétérit
+            answer: started
+          - id: c1-start-pastperf
+            person: past perfect
+            answer: had started
+            alt:
+              - "'d started"
+      - verb: to leave
+        translation: partir
+        tense: prétérit et past perfect
+        note: "leave / left / left : le prétérit et le participe sont identiques."
+        forms:
+          - id: c1-leave-past
+            person: prétérit
+            answer: left
+          - id: c1-leave-pastperf
+            person: past perfect
+            answer: had left
+      - verb: to know
+        translation: savoir
+        tense: prétérit et past perfect
+        note: "know / knew / known : le participe s'écrit avec un n final."
+        forms:
+          - id: c1-know-past
+            person: prétérit
+            answer: knew
+          - id: c1-know-pastperf
+            person: past perfect
+            answer: had known

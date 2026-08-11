@@ -127,7 +127,7 @@ describe('file de révision', () => {
     const future: CardState = { ...graduate(createCard('d', T0)), due: T0 + 5 * DAY }
 
     const queue = dueCards([future, recent, overdue, learning], T0 + 10 * MINUTE)
-    expect(queue.map((card) => card.vocabId)).toEqual(['a', 'b', 'c'])
+    expect(queue.map((card) => card.itemId)).toEqual(['a', 'b', 'c'])
   })
 
   it('respecte la limite demandée', () => {

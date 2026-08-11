@@ -1,0 +1,132 @@
+id: c2
+title: Le présent
+subtitle: Présent simple et présent continu
+icon: clock
+color: sky
+level: B1
+
+lessons:
+  - id: c2-l1
+    title: Le présent simple
+    notes: |
+      Le présent simple dit ce qui est **habituel, permanent ou toujours vrai**.
+      Sa seule irrégularité tient en une lettre : le -s de la troisième personne.
+
+      — Cas général : on ajoute __-s__.
+        he works, she plays
+      — Verbe en -y après consonne : __-ies__.
+        study → studies
+      — Verbe en -o, -ch, -sh, -ss, -x : __-es__.
+        go → goes, watch → watches
+
+      À la forme négative et interrogative, c'est **l'auxiliaire qui porte la
+      marque**, et le verbe redevient nu.
+
+      — he does not work, does he work (et non « does he works »)
+    verbs:
+      - verb: to work
+        translation: travailler
+        tense: présent simple
+        note: Terminaison régulière en -s à la troisième personne.
+        forms:
+          - id: c2-work-pres-1
+            person: I / you / we / they
+            answer: work
+          - id: c2-work-pres-3
+            person: he / she / it
+            answer: works
+      - verb: to study
+        translation: étudier
+        tense: présent simple
+        note: Le y précédé d'une consonne devient -ies.
+        forms:
+          - id: c2-study-pres-1
+            person: I / you / we / they
+            answer: study
+          - id: c2-study-pres-3
+            person: he / she / it
+            answer: studies
+      - verb: to go
+        translation: aller
+        tense: présent simple
+        note: Les verbes en -o prennent -es.
+        forms:
+          - id: c2-go-pres-1
+            person: I / you / we / they
+            answer: go
+          - id: c2-go-pres-3
+            person: he / she / it
+            answer: goes
+      - verb: to watch
+        translation: regarder
+        tense: présent simple
+        note: Les verbes en -ch, -sh, -ss et -x prennent -es.
+        forms:
+          - id: c2-watch-pres-1
+            person: I / you / we / they
+            answer: watch
+          - id: c2-watch-pres-3
+            person: he / she / it
+            answer: watches
+
+  - id: c2-l2
+    title: Le présent continu
+    notes: |
+      `be` + verbe en -ing décrit ce qui se déroule **maintenant**, ou une
+      situation **temporaire** par contraste avec l'habitude.
+
+      — Présent simple : l'habitude, ce qui est vrai en général.
+        I work in Lyon. Je travaille à Lyon, c'est mon poste.
+      — Présent continu : le moment, ou la parenthèse.
+        I am working from home this week. Cette semaine, je télétravaille.
+
+      Trois règles d'orthographe suffisent pour le participe en -ing.
+
+      — e final muet : il **tombe**.
+        write → writing, make → making
+      — voyelle brève accentuée : la consonne finale **double**.
+        run → running, sit → sitting
+      — -ie final : il devient **y**.
+        lie → lying, die → dying
+
+      ! Les verbes d'état (`know`, `want`, `believe`, `belong`) refusent cette
+      forme : on dit `I know`, jamais « I am knowing ».
+    verbs:
+      - verb: to write
+        translation: écrire
+        tense: présent continu
+        note: Le e final disparaît devant -ing.
+        forms:
+          - id: c2-write-cont-1
+            person: I
+            answer: am writing
+            alt:
+              - "'m writing"
+          - id: c2-write-cont-3
+            person: he / she / it
+            answer: is writing
+          - id: c2-write-cont-pl
+            person: you / we / they
+            answer: are writing
+      - verb: to run
+        translation: courir
+        tense: présent continu
+        note: Voyelle brève accentuée, donc consonne finale redoublée.
+        forms:
+          - id: c2-run-cont-1
+            person: I
+            answer: am running
+          - id: c2-run-cont-3
+            person: he / she / it
+            answer: is running
+      - verb: to lie
+        translation: être allongé
+        tense: présent continu
+        note: "-ie devient -y : lying, comme die → dying."
+        forms:
+          - id: c2-lie-cont-1
+            person: I
+            answer: am lying
+          - id: c2-lie-cont-3
+            person: he / she / it
+            answer: is lying

@@ -1,0 +1,164 @@
+id: g4
+title: Verbes de parole et discours rapporté
+subtitle: Rapporter avec la construction exacte
+icon: book
+color: violet
+level: C1
+
+lessons:
+  - id: g4-l1
+    title: Chaque verbe et sa construction
+    notes: |
+      Rapporter précisément ne consiste pas à empiler des « he said that ».
+      **Chaque verbe de parole impose sa propre construction**, et se tromper de
+      montage trahit immédiatement le niveau.
+
+      — verbe + that : admit, claim, deny, insist, point out, argue.
+      — verbe + quelqu'un + to : urge, advise, remind, warn, persuade.
+      — verbe + -ing : admit, deny, suggest, recommend.
+      — verbe + préposition + -ing : accuse of, apologise for, insist on.
+
+      ! `suggest` ne se construit jamais avec un infinitif : « suggest to do »
+      est faux, on dit `suggest doing`.
+    points:
+      - id: g4-report-1
+        sentence: She denied ___ anything about the transfer.
+        answer: knowing
+        options:
+          - knowing
+          - to know
+          - that know
+          - know
+        translation: Elle a nié avoir eu connaissance du transfert.
+        explanation: "« Deny » se construit avec un gérondif, jamais un infinitif."
+      - id: g4-report-2
+        sentence: They urged the committee ___ the vote.
+        answer: to postpone
+        options:
+          - to postpone
+          - postponing
+          - postpone
+          - that postpone
+        translation: Ils ont pressé la commission de reporter le vote.
+        explanation: "« Urge » exige un complément d'objet suivi d'un infinitif."
+      - id: g4-report-3
+        sentence: He accused the agency ___ withholding evidence.
+        answer: of
+        options:
+          - of
+          - for
+          - to
+          - with
+        translation: Il a accusé l'agence d'avoir dissimulé des preuves.
+        explanation: "« Accuse somebody of doing » : préposition « of » obligatoire."
+      - id: g4-report-4
+        sentence: The report ___ that the risk had been underestimated.
+        answer: pointed out
+        options:
+          - pointed out
+          - pointed
+          - point out
+          - pointing out
+        translation: Le rapport a souligné que le risque avait été sous-estimé.
+        explanation: "« Point out that » introduit un fait présenté comme établi."
+      - id: g4-report-5
+        sentence: She suggested ___ the deadline by a week.
+        answer: extending
+        options:
+          - extending
+          - to extend
+          - extend
+          - to extending
+        translation: Elle a proposé de repousser l'échéance d'une semaine.
+        explanation: "« Suggest » prend un gérondif ou « that + subjonctif », jamais « to »."
+      - id: g4-report-6
+        sentence: They apologised ___ misleading the shareholders.
+        answer: for
+        options:
+          - for
+          - of
+          - to
+          - about
+        translation: Ils se sont excusés d'avoir induit les actionnaires en erreur.
+        explanation: "« Apologise for doing » : la préposition est « for »."
+
+  - id: g4-l2
+    title: Concordance et déplacement des repères
+    notes: |
+      Quand le verbe introducteur est au passé, **tout recule d'un cran** : les
+      temps, mais aussi les repères de temps et de lieu.
+
+      — Les temps : présent → prétérit, prétérit → past perfect, will → would.
+      — Les repères : now → then, today → that day,
+        tomorrow → the following day, yesterday → the previous day,
+        here → there, this → that.
+
+      Deux limites bornent cette mécanique.
+
+      — Le past perfect ne recule pas davantage : il est **déjà au bout**.
+      — Si le fait __reste vrai au moment où l'on parle__, le recul devient
+        facultatif.
+        He explained that water boils at 100°C. (toujours vrai aujourd'hui)
+    points:
+      - id: g4-shift-1
+        sentence: He said he ___ the file the previous week.
+        answer: had sent
+        options:
+          - had sent
+          - sent
+          - has sent
+          - would send
+        translation: Il a dit qu'il avait envoyé le dossier la semaine précédente.
+        explanation: Un prétérit rapporté au passé devient past perfect.
+      - id: g4-shift-2
+        sentence: She told us she ___ be attending the ceremony.
+        answer: would
+        options:
+          - would
+          - will
+          - would have
+          - had
+        translation: Elle nous a dit qu'elle assisterait à la cérémonie.
+        explanation: "« Will » rapporté au passé devient « would »."
+      - id: g4-shift-3
+        sentence: They announced that the office would close the ___ day.
+        answer: following
+        options:
+          - following
+          - tomorrow
+          - next to
+          - after
+        translation: Ils ont annoncé que le bureau fermerait le lendemain.
+        explanation: « Tomorrow » devient « the following day » au discours rapporté.
+      - id: g4-shift-4
+        sentence: He explained that water ___ at one hundred degrees.
+        answer: boils
+        alt:
+          - boiled
+        options:
+          - boils
+          - boiled
+          - had boiled
+          - would boil
+        translation: Il a expliqué que l'eau bout à cent degrés.
+        explanation: "Vérité toujours valable : le recul devient facultatif."
+      - id: g4-shift-5
+        sentence: She asked whether we ___ seen the amendment.
+        answer: had
+        options:
+          - had
+          - have
+          - did
+          - would
+        translation: Elle a demandé si nous avions vu l'amendement.
+        explanation: "Question rapportée : ordre sujet-verbe normal, et recul du temps."
+      - id: g4-shift-6
+        sentence: The chair asked what the delay ___ .
+        answer: was
+        options:
+          - was
+          - is
+          - was it
+          - did it be
+        translation: Le président a demandé quel était le motif du retard.
+        explanation: Pas d'inversion dans une question rapportée, malgré le mot interrogatif.

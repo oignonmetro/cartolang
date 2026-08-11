@@ -1,0 +1,174 @@
+id: g4
+title: Quantité et déterminants
+subtitle: Much, many, some, any et les indénombrables
+icon: cup
+color: violet
+level: B1
+
+lessons:
+  - id: g4-l1
+    title: Exprimer la quantité
+    notes: |
+      Avant de choisir un quantifieur, une seule question : **le nom se
+      compte-t-il ?** Tout découle de là.
+
+      — Nom comptable, au pluriel : many, few, a few, fewer.
+        many books, a few minutes
+      — Nom non comptable, au singulier : much, little, a little, less.
+        much time, a little patience
+
+      L'article change ensuite le regard porté sur la quantité, et c'est un
+      contresens fréquent.
+
+      — `a few` / `a little` : __il y en a un peu__, plutôt rassurant.
+        I have a few minutes. J'ai quelques minutes devant moi.
+      — `few` / `little` : __il n'y en a presque pas__, c'est un manque.
+        We have little time. Nous n'avons guère de temps.
+
+      Enfin `some` va aux phrases __affirmatives__ et aux __offres__, `any` aux
+      __négatives__ et aux __questions ouvertes__.
+    points:
+      - id: g4-quant-1
+        sentence: There is not ___ milk left.
+        answer: much
+        options:
+          - much
+          - many
+          - few
+          - a few
+        translation: Il ne reste pas beaucoup de lait.
+        explanation: "« Milk » est indénombrable : much."
+      - id: g4-quant-2
+        sentence: How ___ people are coming tonight?
+        answer: many
+        options:
+          - many
+          - much
+          - little
+          - a little
+        translation: Combien de personnes viennent ce soir ?
+        explanation: "« People » est dénombrable pluriel : many."
+      - id: g4-quant-3
+        sentence: I have only ___ few minutes before the meeting.
+        answer: a
+        options:
+          - a
+          - the
+          - some
+          - any
+        translation: Je n'ai que quelques minutes avant la réunion.
+        explanation: « A few » dit qu'il y en a quelques-unes ; « few » dirait qu'il n'y en a presque pas.
+      - id: g4-quant-4
+        sentence: We have ___ time, so we had better hurry.
+        answer: little
+        options:
+          - little
+          - a little
+          - few
+          - a few
+        translation: Nous avons peu de temps, alors dépêchons-nous.
+        explanation: "Sans article, « little » est négatif : c'est ce que confirme la suite de la phrase."
+      - id: g4-quant-5
+        sentence: Would you like ___ coffee?
+        answer: some
+        options:
+          - some
+          - any
+          - many
+          - a
+        translation: Voulez-vous du café ?
+        explanation: "Offre polie : « some » malgré la forme interrogative."
+      - id: g4-quant-6
+        sentence: I do not have ___ questions for the moment.
+        answer: any
+        options:
+          - any
+          - some
+          - much
+          - a few
+        translation: Je n'ai pas de questions pour l'instant.
+        explanation: "Phrase négative avec un dénombrable pluriel : any."
+
+  - id: g4-l2
+    title: Dénombrables, indénombrables et articles
+    notes: |
+      Quelques noms très courants sont **non comptables en anglais alors que le
+      français les met au pluriel**. Ils ne prennent ni `a` ni -s.
+
+      — Les six à retenir : information, advice, luggage, furniture, news,
+        homework.
+      — Pour en compter un : `a piece of`.
+        a piece of advice, two pieces of luggage
+
+      `fewer` accompagne les comptables, `less` les non comptables.
+
+      — fewer people, fewer mistakes
+      — less money, less time
+
+      Le choix entre `a` et `an` se fait **sur le son, pas sur la lettre**.
+
+      — an honest man (le h est muet : on entend une voyelle)
+      — a university (on entend « you » : une consonne)
+
+      ! Ni « an information » ni « informations » : on dit `some information`.
+    points:
+      - id: g4-count-1
+        sentence: I need ___ information about the course.
+        answer: some
+        options:
+          - some
+          - an
+          - many
+          - a few
+        translation: J'ai besoin d'informations sur la formation.
+        explanation: "« Information » est indénombrable : ni « an information » ni « informations »."
+      - id: g4-count-2
+        sentence: How ___ luggage are you taking?
+        answer: much
+        options:
+          - much
+          - many
+          - few
+          - several
+        translation: Combien de bagages emportes-tu ?
+        explanation: « Luggage » est indénombrable, malgré le pluriel français.
+      - id: g4-count-3
+        sentence: She gave me a useful ___ of advice.
+        answer: piece
+        options:
+          - piece
+          - part
+          - slice
+          - unit
+        translation: Elle m'a donné un conseil utile.
+        explanation: On dénombre un indénombrable avec « a piece of ».
+      - id: g4-count-4
+        sentence: There were ___ people than last year.
+        answer: fewer
+        options:
+          - fewer
+          - less
+          - little
+          - few
+        translation: Il y avait moins de monde que l'an dernier.
+        explanation: "Dénombrable pluriel : fewer."
+      - id: g4-count-5
+        sentence: We have ___ money than we thought.
+        answer: less
+        options:
+          - less
+          - fewer
+          - few
+          - little
+        translation: Nous avons moins d'argent que prévu.
+        explanation: "Indénombrable : less."
+      - id: g4-count-6
+        sentence: He is ___ honest man.
+        answer: an
+        options:
+          - an
+          - a
+          - one
+          - some
+        translation: C'est un homme honnête.
+        explanation: Le h de « honest » est muet, donc le mot commence par un son de voyelle.

@@ -1,0 +1,67 @@
+# Cours d'anglais B2 pour francophones : de B2 débutant à B2 confirmé.
+#
+# Contrairement au cours débutant, ce cours n'impose aucun parcours : trois
+# pistes (vocabulaire, grammaire, conjugaison) s'affichent en onglets, et
+# l'apprenant choisit ses unités dans l'ordre qu'il veut.
+#
+# La nature du contenu (`kind`) est déclarée une seule fois, ici, sur la
+# piste : le compilateur la propage aux unités puis aux leçons. Les fichiers
+# de units/ n'ont donc pas à la répéter.
+#
+# Les unités portent un repère `level` (B2.1 puis B2.2) : il n'impose rien,
+# il aide seulement à se situer.
+
+id: fr-en-b2
+name: Anglais B2
+learning: en
+known: fr
+flag: 🇬🇧
+level: B2
+tagline: "De B2 débutant à B2 confirmé : vocabulaire, grammaire, conjugaison."
+status: available
+# Cours proposé par défaut : le niveau charnière, celui qui parle au plus
+# grand nombre. Sans ce marqueur, le premier dossier par ordre alphabétique
+# ferait office de défaut, et B1 s'ouvrirait par accident.
+default: true
+layout: library
+version: 5
+
+tracks:
+  - id: vocabulaire
+    title: Vocabulaire
+    subtitle: Nuances, collocations et registres du niveau B2
+    kind: vocab
+    color: teal
+    icon: book
+    units:
+      - v1
+      - v2
+      - v3
+      - v4
+      - v5
+
+  - id: grammaire
+    title: Grammaire
+    subtitle: Les structures qui séparent B1 de B2
+    kind: grammar
+    color: violet
+    icon: compass
+    units:
+      - g1
+      - g2
+      - g3
+      - g4
+      - g5
+
+  - id: conjugaison
+    title: Conjugaison
+    subtitle: Temps composés, formes modales et irrégularités
+    kind: conjugation
+    color: sky
+    icon: clock
+    units:
+      - c2
+      - c3
+      - c4
+      - c5
+      - c6

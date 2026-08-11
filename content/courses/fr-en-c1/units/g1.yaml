@@ -1,0 +1,166 @@
+id: g1
+title: Inversion et mise en relief
+subtitle: Emphase et registre soutenu à l'écrit
+icon: cup
+color: violet
+level: C1
+
+lessons:
+  - id: g1-l1
+    title: Inversion et mise en relief
+    notes: |
+      Placer un élément **négatif ou restrictif en tête** force l'inversion
+      sujet-auxiliaire, comme dans une question. C'est un marqueur de
+      __registre soutenu__, fréquent __à l'écrit__.
+
+      — Never had I seen such a mess.
+      — Not only did she apologise, she also paid for the damage.
+      — Only after the meeting did we understand.
+
+      Autre outil d'emphase, la **phrase clivée** met un élément en relief sans
+      toucher à l'ordre des mots.
+
+      — It was Marie who signed the letter. (et non son frère)
+      — What we need is more time. (du temps, pas de l'argent)
+    points:
+      - id: g1-emph-1
+        sentence: Never ___ such a badly organised event.
+        answer: have I seen
+        options:
+          - have I seen
+          - I have seen
+          - did I saw
+          - I saw
+        translation: Jamais je n'ai vu un événement aussi mal organisé.
+        explanation: « Never » en tête impose l'inversion auxiliaire-sujet.
+      - id: g1-emph-2
+        sentence: Not only ___ late, but he had also forgotten the file.
+        answer: was he
+        options:
+          - was he
+          - he was
+          - did he was
+          - he had been
+        translation: Non seulement il était en retard, mais il avait aussi oublié le dossier.
+        explanation: « Not only » en tête déclenche également l'inversion.
+      - id: g1-emph-3
+        sentence: Rarely ___ a candidate this well prepared.
+        answer: do we meet
+        options:
+          - do we meet
+          - we meet
+          - we do meet
+          - are we meet
+        translation: Nous rencontrons rarement un candidat aussi bien préparé.
+        explanation: Avec un verbe lexical au présent, l'inversion se fait sur l'auxiliaire « do ».
+      - id: g1-emph-4
+        sentence: ___ was Marie who signed the letter, not her brother.
+        answer: It
+        options:
+          - It
+          - There
+          - That
+          - This
+        translation: C'est Marie qui a signé la lettre, pas son frère.
+        explanation: "Phrase clivée : « It is / was… who / that… »."
+
+      - id: g1-emph-5
+        sentence: ___ we need is more time, not more money.
+        answer: What
+        options:
+          - What
+          - That
+          - Which
+          - It
+        translation: Ce dont nous avons besoin, c'est de plus de temps, pas de plus d'argent.
+        explanation: "Pseudo-clivée : « What… is… » met en relief le groupe placé après le verbe."
+
+      - id: g1-emph-6
+        sentence: Only after the audit ___ the scale of the problem.
+        answer: did we realise
+        options:
+          - did we realise
+          - we realised
+          - we did realise
+          - had we realised
+        translation: Ce n'est qu'après l'audit que nous avons mesuré l'ampleur du problème.
+        explanation: « Only + complément » en tête entraîne l'inversion sur l'auxiliaire.
+
+  - id: g1-l2
+    title: Antéposition et tournures emphatiques
+    notes: |
+      Au-delà de l'inversion négative, l'écrit soutenu dispose d'autres façons de
+      **déplacer le poids de la phrase vers l'avant**.
+
+      — It is not until… that… : ce n'est qu'à ce moment-là que…
+      — Little did he know… : marqueur figé de l'ironie narrative.
+      — So + adjectif + inversion : So great was the demand that…
+      — Such + être + inversion : Such was the outcry that…
+      — Antéposition simple : Among the guests was a former minister.
+
+      ! Toutes ces tournures appartiennent à l'écrit : à l'oral, elles sonnent
+      affectées si elles ne sont pas parfaitement placées.
+    points:
+      - id: g1-front-1
+        sentence: It was not ___ the second reading that the error appeared.
+        answer: until
+        options:
+          - until
+          - since
+          - before
+          - after
+        translation: Ce n'est qu'à la deuxième lecture que l'erreur est apparue.
+        explanation: "Structure figée : « It is not until… that… »."
+      - id: g1-front-2
+        sentence: Little ___ that the decision had already been taken.
+        answer: did they know
+        options:
+          - did they know
+          - they knew
+          - they did know
+          - had they know
+        translation: Ils étaient loin de savoir que la décision était déjà prise.
+        explanation: « Little » en tête fonctionne comme un négatif et impose l'inversion.
+      - id: g1-front-3
+        sentence: So ___ the response that the servers crashed.
+        answer: great was
+        options:
+          - great was
+          - was great
+          - great it was
+          - greatly was
+        translation: La réaction fut si forte que les serveurs ont lâché.
+        explanation: "« So + adjectif » en tête : l'adjectif précède l'inversion."
+      - id: g1-front-4
+        sentence: Such ___ the criticism that the plan was withdrawn.
+        answer: was
+        options:
+          - was
+          - it was
+          - had been
+          - being
+        translation: La critique fut telle que le projet a été retiré.
+        explanation: "« Such » en tête entraîne directement le verbe : « Such was… »."
+      - id: g1-front-5
+        sentence: Among the signatories ___ two former presidents.
+        answer: were
+        options:
+          - were
+          - was
+          - there were
+          - they were
+        translation: Parmi les signataires figuraient deux anciens présidents.
+        explanation: Le sujet réel est postposé et pluriel, le verbe s'accorde avec lui.
+      - id: g1-front-6
+        sentence: On no account ___ this document be copied.
+        answer: may
+        alt:
+          - should
+          - must
+        options:
+          - may
+          - it may
+          - may it
+          - can be
+        translation: Ce document ne doit en aucun cas être copié.
+        explanation: « On no account » est un négatif antéposé, donc modal avant le sujet.

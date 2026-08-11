@@ -1,0 +1,189 @@
+id: g4
+title: Connecteurs de discours
+subtitle: Concession, cause et enchaînement logique
+icon: cup
+color: violet
+level: B2.2
+
+lessons:
+  - id: g4-l1
+    title: Connecteurs de concession et de cause
+    notes: |
+      Ces connecteurs ont des sens voisins mais **des constructions
+      incompatibles**. C'est là que se logent la plupart des fautes à ce niveau.
+
+      — Suivis d'une **proposition** (sujet + verbe) : although, even though,
+        whereas, since.
+        Although it was raining, the match went ahead.
+      — Suivis d'un **groupe nominal** : despite, in spite of, because of,
+        due to.
+        Despite the rain, the match went ahead.
+      — **Seuls en tête de phrase**, suivis d'une virgule : however,
+        nevertheless, therefore.
+
+      ! « Despite that he came » est faux ; « despite the fact that he came » est
+      correct, mais lourd.
+    points:
+      - id: g4-conn-1
+        sentence: ___ the heavy rain, the match went ahead.
+        answer: Despite
+        alt:
+          - In spite of
+        options:
+          - Despite
+          - Although
+          - Even though
+          - However
+        translation: Malgré la forte pluie, le match a eu lieu.
+        explanation: "Devant un groupe nominal : despite / in spite of, sans « of » pour despite."
+
+      - id: g4-conn-2
+        sentence: ___ it was raining heavily, the match went ahead.
+        answer: Although
+        alt:
+          - Even though
+          - Though
+        options:
+          - Although
+          - Despite
+          - In spite of
+          - Because of
+        translation: Bien qu'il pleuve à verse, le match a eu lieu.
+        explanation: "Devant une proposition complète : although / even though."
+
+      - id: g4-conn-3
+        sentence: The plan is expensive; ___, it remains the safest option.
+        answer: however
+        alt:
+          - nevertheless
+          - nonetheless
+        options:
+          - however
+          - although
+          - despite
+          - whereas
+        translation: Le plan est coûteux ; cependant, il reste l'option la plus sûre.
+        explanation: Adverbe de liaison entre deux propositions indépendantes, encadré par un point-virgule et une virgule.
+      - id: g4-conn-4
+        sentence: The flight was cancelled ___ a technical fault.
+        answer: due to
+        alt:
+          - because of
+          - owing to
+        options:
+          - due to
+          - because
+          - although
+          - so that
+        translation: Le vol a été annulé en raison d'une panne technique.
+        explanation: "Cause suivie d'un groupe nominal : due to / because of."
+
+      - id: g4-conn-5
+        sentence: Sales rose in the north, ___ they fell sharply in the south.
+        answer: whereas
+        alt:
+          - while
+        options:
+          - whereas
+          - despite
+          - therefore
+          - unless
+        translation: Les ventes ont augmenté au nord, tandis qu'elles ont chuté au sud.
+        explanation: "Contraste entre deux propositions parallèles : whereas / while."
+
+      - id: g4-conn-6
+        sentence: Take an umbrella ___ it rains later.
+        answer: in case
+        options:
+          - in case
+          - if
+          - unless
+          - so that
+        translation: Prends un parapluie au cas où il pleuvrait plus tard.
+        explanation: « In case » anticipe une éventualité ; « if » poserait une condition, ce qui n'est pas le sens ici.
+
+  - id: g4-l2
+    title: But, conséquence et conclusion
+    notes: |
+      L'autre moitié de l'articulation logique : dire **pourquoi** on agit, et
+      **ce qui s'ensuit**. Là encore, la faute vient de la construction.
+
+      — But visé, devant un **verbe** : to, in order to, so as to.
+        She left early so as to avoid the traffic.
+      — But visé, devant une **proposition** : `so that` + sujet + modal.
+        We moved the meeting so that everyone could attend.
+      — Conséquence, en tête : therefore, thus, hence, consequently.
+      — Conséquence, en incise : as a result, accordingly.
+
+      ! La négation s'insère **avant** `to` : `so as not to disturb`, et non
+      « so as to not disturb ».
+    points:
+      - id: g4-cons-1
+        sentence: She left early ___ to avoid the traffic.
+        answer: so as
+        alt:
+          - in order
+        options:
+          - so as
+          - so that
+          - for
+          - because
+        translation: Elle est partie tôt afin d'éviter les embouteillages.
+        explanation: "Devant un infinitif : « so as to » ou « in order to », jamais « so that »."
+      - id: g4-cons-2
+        sentence: We moved the meeting ___ everyone could attend.
+        answer: so that
+        options:
+          - so that
+          - so as to
+          - in order to
+          - due to
+        translation: Nous avons déplacé la réunion pour que tout le monde puisse venir.
+        explanation: Devant une proposition complète avec son propre sujet, il faut « so that ».
+      - id: g4-cons-3
+        sentence: The evidence was incomplete; ___, the case was dropped.
+        answer: therefore
+        alt:
+          - thus
+          - consequently
+        options:
+          - therefore
+          - however
+          - whereas
+          - although
+        translation: Les preuves étaient incomplètes ; par conséquent, l'affaire a été classée.
+        explanation: Adverbe de conséquence entre deux propositions indépendantes.
+      - id: g4-cons-4
+        sentence: He spoke quietly ___ not to wake the baby.
+        answer: so as
+        alt:
+          - in order
+        options:
+          - so as
+          - so that
+          - for
+          - to
+        translation: Il a parlé doucement pour ne pas réveiller le bébé.
+        explanation: "La négation s'insère avant « to » : « so as not to »."
+      - id: g4-cons-5
+        sentence: Two suppliers withdrew; ___ a result, production stalled.
+        answer: as
+        options:
+          - as
+          - in
+          - for
+          - with
+        translation: Deux fournisseurs se sont retirés ; en conséquence, la production s'est arrêtée.
+        explanation: "Locution figée : « as a result »."
+      - id: g4-cons-6
+        sentence: The deadline was missed, ___ the penalty clause applied.
+        answer: hence
+        alt:
+          - thus
+        options:
+          - hence
+          - despite
+          - unless
+          - whereas
+        translation: L'échéance n'a pas été tenue, d'où l'application de la clause pénale.
+        explanation: « Hence » introduit une conséquence directe, dans un registre soutenu.

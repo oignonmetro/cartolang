@@ -1,8 +1,7 @@
 import { Fragment, useMemo } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import type { Unit } from '@/content/schema'
-import { useCourse } from '@/content/CourseProvider'
+import type { PathCourse, Unit } from '@/content/schema'
 import { buildPath, dayKey, displayedStreak, levelFromXp, MAX_LEVEL, type LessonNode } from '@/engine/progress'
 import { dueCards } from '@/engine/srs'
 import { useProgress } from '@/store/progressStore'
@@ -15,9 +14,8 @@ import { BoltIcon, CheckIcon, ChestIcon, FlameIcon, LockIcon, StarIcon, UnitIcon
  * Les leçons se suivent en serpentin, regroupées par unité. Une bannière
  * annonce chaque unité, un coffre marque sa fin.
  */
-export function PathScreen() {
+export function PathScreen({ course }: { course: PathCourse }) {
   const navigate = useNavigate()
-  const { course } = useCourse()
   const lessons = useProgress((state) => state.lessons)
   const cards = useProgress((state) => state.cards)
   const xp = useProgress((state) => state.xp)

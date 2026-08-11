@@ -1,0 +1,60 @@
+# Cours d'anglais B1 pour francophones : le niveau seuil.
+#
+# Structure identique au cours B2 (content/courses/fr-en-b2/) : trois pistes
+# en accès libre, que l'apprenant parcourt dans l'ordre qu'il veut.
+#
+# Ce que B1 couvre, et que B2 suppose acquis : le concret et le quotidien
+# (déplacements, logement, travail, santé), les temps de base et leurs
+# irrégularités, la comparaison, les deux premiers conditionnels et les
+# quantifieurs. B2 part de là pour aller vers l'abstrait et l'argumenté.
+
+id: fr-en-b1
+name: Anglais B1
+learning: en
+known: fr
+flag: 🇬🇧
+level: B1
+tagline: "De B1 débutant à B1 confirmé : vocabulaire, grammaire, conjugaison."
+status: available
+layout: library
+version: 5
+
+tracks:
+  - id: vocabulaire
+    title: Vocabulaire
+    subtitle: Le concret et le quotidien, dit avec précision
+    kind: vocab
+    color: teal
+    icon: book
+    units:
+      - v1
+      - v2
+      - v3
+      - v4
+      - v5
+
+  - id: grammaire
+    title: Grammaire
+    subtitle: Les structures de base à consolider avant le B2
+    kind: grammar
+    color: violet
+    icon: compass
+    units:
+      - g1
+      - g2
+      - g3
+      - g4
+      - g5
+
+  - id: conjugaison
+    title: Conjugaison
+    subtitle: Présent, passé, futur et modaux
+    kind: conjugation
+    color: sky
+    icon: clock
+    units:
+      - c1
+      - c2
+      - c3
+      - c4
+      - c5

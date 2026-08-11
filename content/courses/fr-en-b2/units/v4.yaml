@@ -1,0 +1,238 @@
+id: v4
+title: Sciences et technologie
+subtitle: Décrire un dispositif, un procédé, une évolution
+icon: clock
+color: teal
+level: B2.2
+
+lessons:
+  - id: v4-l1
+    title: Recherche et innovation
+    vocab:
+      - id: b2-breakthrough-tech
+        term: cutting-edge
+        translation: de pointe
+        alt:
+          - à la pointe
+        pos: adjectif
+        example:
+          text: The lab works on cutting-edge materials.
+          translation: Le laboratoire travaille sur des matériaux de pointe.
+      - id: b2-to-pioneer
+        term: to pioneer
+        translation: être le premier à développer
+        alt:
+          - ouvrir la voie à
+        pos: verbe
+        gap: pioneered
+        example:
+          text: A Dutch team pioneered the technique.
+          translation: Une équipe néerlandaise a été la première à développer la technique.
+      - id: b2-trial
+        term: trial
+        translation: essai
+        alt:
+          - test
+        pos: nom
+        hint: "L'essai, mais aussi le procès ; « on trial » veut dire jugé."
+        example:
+          text: The drug failed its second trial.
+          translation: Le médicament a échoué à son deuxième essai.
+      - id: b2-findings
+        term: findings
+        translation: résultats
+        alt:
+          - conclusions
+        pos: nom
+        hint: Toujours au pluriel quand il s'agit des résultats d'une étude.
+        example:
+          text: The findings were published in March.
+          translation: Les résultats ont été publiés en mars.
+      - id: b2-to-replicate
+        term: to replicate
+        translation: reproduire
+        pos: verbe
+        gap: replicate
+        example:
+          text: Nobody has managed to replicate the experiment.
+          translation: Personne n'est parvenu à reproduire l'expérience.
+      - id: b2-accurate
+        term: accurate
+        translation: précis
+        alt:
+          - exact
+        pos: adjectif
+        example:
+          text: The model is accurate to within two per cent.
+          translation: Le modèle est précis à deux pour cent près.
+      - id: b2-flaw
+        term: flaw
+        translation: défaut
+        alt:
+          - faille
+        pos: nom
+        example:
+          text: Reviewers spotted a flaw in the method.
+          translation: Les relecteurs ont repéré un défaut dans la méthode.
+      - id: b2-promising
+        term: promising
+        translation: prometteur
+        pos: adjectif
+        example:
+          text: Early results look promising.
+          translation: Les premiers résultats semblent prometteurs.
+
+  - id: v4-l2
+    title: Outils et usages numériques
+    vocab:
+      - id: b2-device
+        term: device
+        translation: appareil
+        alt:
+          - dispositif
+        pos: nom
+        example:
+          text: The device runs for eight hours on one charge.
+          translation: L'appareil fonctionne huit heures avec une seule charge.
+      - id: b2-to-roll-out
+        term: to roll out
+        translation: déployer
+        alt:
+          - lancer
+        pos: verbe
+        gap: rolled out
+        example:
+          text: The update was rolled out last night.
+          translation: La mise à jour a été déployée cette nuit.
+      - id: b2-user-friendly
+        term: user-friendly
+        translation: facile à utiliser
+        alt:
+          - intuitif
+        pos: adjectif
+        example:
+          text: The interface is far from user-friendly.
+          translation: L'interface est loin d'être facile à utiliser.
+      - id: b2-to-back-up
+        term: to back up
+        translation: sauvegarder
+        pos: verbe
+        gap: back up
+        example:
+          text: Remember to back up your files.
+          translation: Pense à sauvegarder tes fichiers.
+      - id: b2-feature
+        term: feature
+        translation: fonctionnalité
+        alt:
+          - caractéristique
+        pos: nom
+        example:
+          text: The feature is disabled by default.
+          translation: La fonctionnalité est désactivée par défaut.
+      - id: b2-reliable
+        term: reliable
+        translation: fiable
+        pos: adjectif
+        example:
+          text: The connection is fast but not reliable.
+          translation: La connexion est rapide mais pas fiable.
+      - id: b2-to-troubleshoot
+        term: to troubleshoot
+        translation: dépanner
+        alt:
+          - diagnostiquer une panne
+        pos: verbe
+        example:
+          text: It took an hour to troubleshoot the problem.
+          translation: Il a fallu une heure pour dépanner le problème.
+      - id: b2-obsolete
+        term: obsolete
+        translation: obsolète
+        alt:
+          - dépassé
+        pos: adjectif
+        example:
+          text: The format became obsolete within five years.
+          translation: Le format est devenu obsolète en cinq ans.
+
+  - id: v4-l3
+    title: Enjeux et débats
+    vocab:
+      - id: b2-privacy
+        term: privacy
+        translation: vie privée
+        alt:
+          - confidentialité
+        pos: nom
+        example:
+          text: The app raises serious privacy concerns.
+          translation: L'application soulève de sérieuses questions de vie privée.
+      - id: b2-to-monitor
+        term: to monitor
+        translation: surveiller
+        alt:
+          - suivre
+        pos: verbe
+        gap: monitors
+        example:
+          text: The system monitors traffic in real time.
+          translation: Le système surveille le trafic en temps réel.
+      - id: b2-bias
+        term: bias
+        translation: biais
+        alt:
+          - parti pris
+        pos: nom
+        example:
+          text: The dataset carries an obvious bias.
+          translation: Le jeu de données comporte un biais évident.
+      - id: b2-to-outsource
+        term: to outsource
+        translation: externaliser
+        alt:
+          - sous-traiter
+        pos: verbe
+        gap: outsourced
+        example:
+          text: They outsourced the moderation work.
+          translation: Ils ont externalisé le travail de modération.
+      - id: b2-disruptive
+        term: disruptive
+        translation: qui bouleverse le secteur
+        alt:
+          - perturbateur
+        pos: adjectif
+        hint: Sens économique, souvent mélioratif en anglais des affaires.
+        example:
+          text: The model proved disruptive for the whole industry.
+          translation: Le modèle a bouleversé tout le secteur.
+      - id: b2-safeguard
+        term: safeguard
+        translation: garde-fou
+        alt:
+          - garantie
+        pos: nom
+        gap: safeguards
+        example:
+          text: The law provides few real safeguards.
+          translation: La loi prévoit peu de véritables garde-fous.
+      - id: b2-to-lag
+        term: to lag
+        translation: accuser un retard
+        alt:
+          - traîner
+        pos: verbe
+        gap: lags
+        example:
+          text: Regulation lags well behind the technology.
+          translation: La réglementation accuse un net retard sur la technologie.
+      - id: b2-unintended
+        term: unintended
+        translation: non voulu
+        alt:
+          - involontaire
+        pos: adjectif
+        example:
+          text: Every reform has unintended effects.
+          translation: Toute réforme a des effets non voulus.

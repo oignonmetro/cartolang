@@ -1,0 +1,136 @@
+id: c5
+title: Ellipse et reprise
+subtitle: Répondre sans répéter le verbe
+icon: people
+color: sky
+level: C1
+
+lessons:
+  - id: c5-l1
+    title: So do I, neither do I
+    notes: |
+      Pour marquer qu'on est dans le même cas, l'anglais **ne répète pas le
+      verbe : il reprend l'auxiliaire et inverse**. Le français, lui, dit
+      simplement « moi aussi ».
+
+      — Accord positif : `so` + auxiliaire + sujet.
+        I like jazz. → So do I.
+      — Accord négatif : `neither` + auxiliaire + sujet.
+        I do not smoke. → Neither do I.
+
+      L'auxiliaire repris est __celui de la phrase de départ__ : `do` pour un
+      verbe lexical, mais `be`, `have` ou le modal s'il y en a un.
+
+      ! `neither` est déjà négatif : on ne dit jamais « neither don't I ».
+    verbs:
+      - verb: to do (reprise)
+        translation: reprise d'un verbe lexical
+        tense: après un verbe ordinaire
+        note: "« I like jazz » se reprend par « do », pas par « like »."
+        forms:
+          - id: c5-do-so
+            person: accord positif
+            answer: so do I
+          - id: c5-do-neither
+            person: accord négatif
+            answer: neither do I
+      - verb: to be (reprise)
+        translation: reprise de be
+        tense: après une phrase en be
+        note: "« I am tired » se reprend par « be », jamais par « do »."
+        forms:
+          - id: c5-be-so
+            person: accord positif
+            answer: so am I
+          - id: c5-be-neither
+            person: accord négatif
+            answer: neither am I
+      - verb: to have (reprise)
+        translation: reprise du present perfect
+        tense: après un temps composé
+        note: C'est l'auxiliaire du temps composé qui revient.
+        forms:
+          - id: c5-have-so
+            person: accord positif
+            answer: so have I
+          - id: c5-have-neither
+            person: accord négatif
+            answer: neither have I
+      - verb: can (reprise)
+        translation: reprise d'un modal
+        tense: après un modal
+        note: Le modal se reprend tel quel, sans « do ».
+        forms:
+          - id: c5-can-so
+            person: accord positif
+            answer: so can I
+          - id: c5-can-neither
+            person: accord négatif
+            answer: neither can I
+
+  - id: c5-l2
+    title: I think so, I hope not
+    notes: |
+      Après un verbe d'opinion, `so` et `not` **remplacent toute une
+      proposition**. C'est une économie que le français ne connaît pas et qui
+      s'entend immédiatement à l'oral.
+
+      — Will it rain ? → I think so. Je crois que oui.
+      — Will it rain ? → I hope not. J'espère que non.
+
+      La forme négative se partage en deux familles, et le choix n'est pas
+      libre.
+
+      — `hope`, `be afraid`, `guess` prennent **`not`** : I hope not.
+      — `think`, `believe`, `expect` préfèrent **la négation du verbe** :
+        I do not think so.
+
+      ! « I think not » existe mais sonne très littéraire ; à l'usage courant,
+      c'est `I do not think so`.
+    verbs:
+      - verb: to hope
+        translation: espérer
+        tense: reprise par so / not
+        note: "« Hope » prend « not », jamais la négation du verbe."
+        forms:
+          - id: c5-hope-so
+            person: reprise positive
+            answer: I hope so
+          - id: c5-hope-not
+            person: reprise négative
+            answer: I hope not
+      - verb: to think
+        translation: penser
+        tense: reprise par so / not
+        note: "« Think » nie le verbe, pas la reprise."
+        forms:
+          - id: c5-think-so
+            person: reprise positive
+            answer: I think so
+          - id: c5-think-not
+            person: reprise négative
+            answer: I do not think so
+            alt:
+              - I don't think so
+      - verb: to be afraid
+        translation: craindre
+        tense: reprise par so / not
+        note: Sert à annoncer une mauvaise nouvelle avec ménagement.
+        forms:
+          - id: c5-afraid-so
+            person: reprise positive
+            answer: I am afraid so
+          - id: c5-afraid-not
+            person: reprise négative
+            answer: I am afraid not
+      - verb: to expect
+        translation: s'attendre à
+        tense: reprise par so / not
+        note: Se comporte comme « think » à la forme négative.
+        forms:
+          - id: c5-expect-so
+            person: reprise positive
+            answer: I expect so
+          - id: c5-expect-not
+            person: reprise négative
+            answer: I do not expect so

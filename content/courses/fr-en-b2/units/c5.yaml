@@ -1,0 +1,137 @@
+id: c5
+title: Verbes à particule
+subtitle: Formes irrégulières et place du complément
+icon: compass
+color: sky
+level: B2.2
+
+lessons:
+  - id: c5-l1
+    title: Les formes irrégulières
+    notes: |
+      Un verbe à particule se conjugue comme **le verbe simple dont il est
+      tiré** : c'est le verbe qui change, la particule ne bouge jamais.
+
+      — take → took → taken, donc take off → took off → taken off
+      — give → gave → given, donc give up → gave up → given up
+      — break → broke → broken, donc break down → broke down → broken down
+
+      Il suffit donc de savoir conjuguer le verbe de base pour maîtriser
+      toute la famille qu'il engendre.
+
+      ! La particule ne prend jamais de marque : on dit `taken off`, jamais
+      « taken offed ».
+    verbs:
+      - verb: to take off
+        translation: décoller
+        tense: verbe à particule irrégulier
+        note: "Aussi « enlever » un vêtement : take off your coat."
+        forms:
+          - id: c5-takeoff-past
+            person: prétérit
+            answer: took off
+          - id: c5-takeoff-pp
+            person: participe passé
+            answer: taken off
+      - verb: to give up
+        translation: renoncer
+        tense: verbe à particule irrégulier
+        note: give / gave / given, la particule suit sans changer.
+        forms:
+          - id: c5-giveup-past
+            person: prétérit
+            answer: gave up
+          - id: c5-giveup-pp
+            person: participe passé
+            answer: given up
+      - verb: to break down
+        translation: tomber en panne
+        tense: verbe à particule irrégulier
+        note: Se dit d'une machine, mais aussi de négociations.
+        forms:
+          - id: c5-breakdown-past
+            person: prétérit
+            answer: broke down
+          - id: c5-breakdown-pp
+            person: participe passé
+            answer: broken down
+      - verb: to bring up
+        translation: soulever une question
+        tense: verbe à particule irrégulier
+        note: "bring / brought / brought : prétérit et participe identiques."
+        forms:
+          - id: c5-bringup-past
+            person: prétérit
+            answer: brought up
+          - id: c5-bringup-pp
+            person: participe passé
+            answer: brought up
+
+  - id: c5-l2
+    title: Séparable ou non
+    notes: |
+      La vraie difficulté n'est pas la forme, c'est **où placer le
+      complément**. Deux familles, deux comportements.
+
+      — **Séparables** : le complément se place avant ou après la particule…
+        turn down the offer / turn the offer down
+      — …mais un **pronom** doit s'insérer au milieu, sans exception.
+        turn it down (et jamais « turn down it »)
+      — **Inséparables** : rien ne s'insère, le complément suit la particule.
+        look after the children / look after them
+
+      Aucune règle ne permet de deviner à quelle famille appartient un verbe :
+      les inséparables sont en général __ceux qui portent une préposition__
+      (`look after`, `run into`, `get over`).
+
+      ! Avec un séparable, le pronom passe **toujours** au milieu : c'est la
+      faute la plus visible sur ce point.
+    verbs:
+      - verb: to turn down
+        translation: refuser
+        tense: séparable
+        note: Le pronom s'intercale obligatoirement.
+        forms:
+          - id: c5-turndown-noun
+            person: avec un nom
+            answer: turn down the offer
+            alt:
+              - turn the offer down
+          - id: c5-turndown-pron
+            person: avec un pronom
+            answer: turn it down
+      - verb: to put off
+        translation: reporter
+        tense: séparable
+        note: "Aussi « rebuter » : the smell put me off."
+        forms:
+          - id: c5-putoff-noun
+            person: avec un nom
+            answer: put off the meeting
+            alt:
+              - put the meeting off
+          - id: c5-putoff-pron
+            person: avec un pronom
+            answer: put it off
+      - verb: to look after
+        translation: s'occuper de
+        tense: inséparable
+        note: Rien ne s'insère entre le verbe et sa préposition.
+        forms:
+          - id: c5-lookafter-noun
+            person: avec un nom
+            answer: look after the children
+          - id: c5-lookafter-pron
+            person: avec un pronom
+            answer: look after them
+      - verb: to run into
+        translation: tomber sur
+        tense: inséparable
+        note: "Sens figuré : rencontrer par hasard."
+        forms:
+          - id: c5-runinto-noun
+            person: avec un nom
+            answer: run into an old friend
+          - id: c5-runinto-pron
+            person: avec un pronom
+            answer: run into him

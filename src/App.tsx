@@ -1,6 +1,6 @@
 import { HashRouter, Navigate, Route, Routes } from 'react-router-dom'
 import { CourseProvider } from '@/content/CourseProvider'
-import { PathScreen } from '@/screens/PathScreen'
+import { HomeScreen } from '@/screens/HomeScreen'
 import { LessonRoute } from '@/screens/LessonRoute'
 import { ReviewRoute } from '@/screens/ReviewRoute'
 import { ProfileScreen } from '@/screens/ProfileScreen'
@@ -16,7 +16,7 @@ export default function App() {
     <HashRouter>
       <CourseProvider>
         <Routes>
-          <Route path="/" element={<PathScreen />} />
+          <Route path="/" element={<HomeScreen />} />
           <Route path="/lecon/:lessonId" element={<LessonRoute />} />
           <Route path="/revision" element={<ReviewRoute />} />
           <Route path="/profil" element={<ProfileScreen />} />

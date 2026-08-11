@@ -1,0 +1,160 @@
+id: g5
+title: Verbes et prépositions
+subtitle: Les couples qui ne se devinent pas
+icon: wave
+color: violet
+level: B2.1
+
+lessons:
+  - id: g5-l1
+    title: Verbes suivis d'une préposition
+    notes: |
+      Un verbe anglais et sa préposition forment **un couple à apprendre
+      ensemble**. Le français ne sert de guide en rien : « dépendre de » se dit
+      `depend on`, pas « depend of ».
+
+      — `depend on`, `rely on`, `insist on`, `concentrate on`
+      — `accuse of`, `consist of`, `approve of`, `be aware of`
+      — `result in`, `succeed in`, `believe in`, `specialise in`
+      — `apologise for`, `blame for`, `account for`, `allow for`
+      — `comply with`, `deal with`, `cope with`, `provide with`
+
+      ! Ce qui suit une préposition est toujours un nom ou un verbe en **-ing**,
+      jamais un infinitif : `insist on seeing`, et non « insist on to see ».
+    points:
+      - id: g5-prep-1
+        sentence: The result depends ___ several factors.
+        answer: on
+        options:
+          - on
+          - of
+          - from
+          - to
+        translation: Le résultat dépend de plusieurs facteurs.
+        explanation: « Depend on », jamais « depend of » malgré le français.
+      - id: g5-prep-2
+        sentence: She was accused ___ negligence.
+        answer: of
+        options:
+          - of
+          - for
+          - with
+          - about
+        translation: Elle a été accusée de négligence.
+        explanation: « Accuse somebody of something » est figé.
+      - id: g5-prep-3
+        sentence: The delay resulted ___ heavy losses.
+        answer: in
+        options:
+          - in
+          - of
+          - to
+          - on
+        translation: Le retard a entraîné de lourdes pertes.
+        explanation: « Result in » introduit la conséquence ; « result from » introduirait la cause.
+      - id: g5-prep-4
+        sentence: They insisted ___ seeing the manager.
+        answer: on
+        options:
+          - on
+          - to
+          - for
+          - in
+        translation: Ils ont insisté pour voir le responsable.
+        explanation: « Insist on » + verbe en -ing, jamais d'infinitif.
+      - id: g5-prep-5
+        sentence: He apologised ___ the mistake at once.
+        answer: for
+        options:
+          - for
+          - of
+          - about
+          - to
+        translation: Il s'est excusé de l'erreur sur-le-champ.
+        explanation: On s'excuse « for » quelque chose, mais « to » quelqu'un.
+      - id: g5-prep-6
+        sentence: All suppliers must comply ___ the new rules.
+        answer: with
+        options:
+          - with
+          - to
+          - at
+          - for
+        translation: Tous les fournisseurs doivent se conformer aux nouvelles règles.
+        explanation: "« Comply with » : la préposition est invariable."
+
+  - id: g5-l2
+    title: Adjectifs et noms suivis d'une préposition
+    notes: |
+      Adjectifs et noms ont eux aussi **leur préposition attitrée**, et c'est
+      souvent là qu'un texte par ailleurs correct trahit un francophone.
+
+      — `good at`, `bad at`, `surprised at`
+      — `responsible for`, `famous for`, `known for`, `grateful for`
+      — `interested in`, `involved in`, `successful in`
+      — `aware of`, `capable of`, `typical of`, `guilty of`
+      — `based on`, `dependent on`, `keen on`
+
+      ! Après ces prépositions aussi, le verbe se met en **-ing** :
+      `interested in joining`, et non « interested to join ».
+    points:
+      - id: g5-adj-1
+        sentence: She is remarkably good ___ negotiating.
+        answer: at
+        options:
+          - at
+          - in
+          - for
+          - with
+        translation: Elle est remarquablement douée pour négocier.
+        explanation: "« Good at » + verbe en -ing : la compétence se dit avec « at »."
+      - id: g5-adj-2
+        sentence: Who is responsible ___ the delay?
+        answer: for
+        options:
+          - for
+          - of
+          - to
+          - about
+        translation: Qui est responsable du retard ?
+        explanation: « Responsible for » quelque chose, « responsible to » quelqu'un.
+      - id: g5-adj-3
+        sentence: He is interested ___ joining the team.
+        answer: in
+        options:
+          - in
+          - to
+          - for
+          - at
+        translation: Il est intéressé à l'idée de rejoindre l'équipe.
+        explanation: « Interested in » + -ing, et non « interested to ».
+      - id: g5-adj-4
+        sentence: The town is famous ___ its covered market.
+        answer: for
+        options:
+          - for
+          - by
+          - of
+          - with
+        translation: La ville est connue pour son marché couvert.
+        explanation: « Famous for » ce qu'on fait, « famous as » ce qu'on est.
+      - id: g5-adj-5
+        sentence: I was not aware ___ any change in the schedule.
+        answer: of
+        options:
+          - of
+          - about
+          - on
+          - for
+        translation: Je n'étais pas au courant d'un changement d'horaire.
+        explanation: "« Aware of » est figé : la préposition ne varie pas."
+      - id: g5-adj-6
+        sentence: The report is based ___ two independent surveys.
+        answer: on
+        options:
+          - on
+          - in
+          - of
+          - from
+        translation: Le rapport repose sur deux enquêtes indépendantes.
+        explanation: « Based on » se dit du fondement d'un raisonnement.

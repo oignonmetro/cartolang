@@ -1,0 +1,240 @@
+id: v5
+title: Arts et critique
+subtitle: Juger une œuvre avec les mots justes
+icon: wave
+color: teal
+level: C1
+
+lessons:
+  - id: v5-l1
+    title: Porter un jugement
+    vocab:
+      - id: c1-to-hail
+        term: to hail
+        translation: saluer
+        alt:
+          - encenser
+        pos: verbe
+        gap: hailed
+        example:
+          text: Critics hailed it as a masterpiece.
+          translation: La critique l'a salué comme un chef-d'œuvre.
+      - id: c1-derivative
+        term: derivative
+        translation: sans originalité
+        alt:
+          - dérivatif
+        pos: adjectif
+        hint: "Reproche courant : l'œuvre imite sans rien inventer."
+        example:
+          text: The score is derivative but competent.
+          translation: La musique est sans originalité mais bien faite.
+      - id: c1-to-lambast
+        term: to lambast
+        translation: éreinter
+        alt:
+          - démolir
+        pos: verbe
+        gap: lambasted
+        example:
+          text: Reviewers lambasted the ending.
+          translation: Les critiques ont éreinté la fin.
+      - id: c1-seminal
+        term: seminal
+        translation: fondateur
+        alt:
+          - décisif
+        pos: adjectif
+        example:
+          text: It remains a seminal work in the field.
+          translation: Cela reste une œuvre fondatrice du domaine.
+      - id: c1-contrived
+        term: contrived
+        translation: artificiel
+        alt:
+          - forcé
+        pos: adjectif
+        example:
+          text: The final twist feels contrived.
+          translation: Le retournement final paraît artificiel.
+      - id: c1-to-resonate
+        term: to resonate
+        translation: trouver un écho
+        alt:
+          - résonner
+          - faire écho
+        pos: verbe
+        gap: resonates
+        example:
+          text: The theme resonates with younger readers.
+          translation: Le thème trouve un écho chez les jeunes lecteurs.
+      - id: c1-understated
+        term: understated
+        translation: tout en retenue
+        alt:
+          - sobre
+        pos: adjectif
+        example:
+          text: Her understated performance carries the film.
+          translation: Son jeu tout en retenue porte le film.
+      - id: c1-pastiche
+        term: pastiche
+        translation: imitation stylistique
+        alt:
+          - pastiche
+        pos: nom
+        example:
+          text: The novel is a pastiche of Victorian fiction.
+          translation: Le roman est un pastiche du roman victorien.
+
+  - id: v5-l2
+    title: Formes et procédés
+    vocab:
+      - id: c1-narrative
+        term: narrative
+        translation: récit
+        alt:
+          - trame narrative
+        pos: nom
+        example:
+          text: The narrative shifts halfway through.
+          translation: Le récit change de cap à mi-parcours.
+      - id: c1-imagery
+        term: imagery
+        translation: imagerie
+        alt:
+          - images
+        pos: nom
+        hint: "Indénombrable : jamais « imageries »."
+        example:
+          text: The imagery is drawn from folklore.
+          translation: L'imagerie est puisée dans le folklore.
+      - id: c1-to-foreshadow
+        term: to foreshadow
+        translation: annoncer
+        alt:
+          - préfigurer
+        pos: verbe
+        gap: foreshadows
+        example:
+          text: The first chapter foreshadows the ending.
+          translation: Le premier chapitre annonce la fin.
+      - id: c1-subplot
+        term: subplot
+        translation: intrigue secondaire
+        alt:
+          - intrigue parallèle
+        pos: nom
+        example:
+          text: The subplot adds nothing to the whole.
+          translation: L'intrigue secondaire n'apporte rien à l'ensemble.
+      - id: c1-rendition
+        term: rendition
+        translation: interprétation
+        pos: nom
+        example:
+          text: Her rendition of the aria was flawless.
+          translation: Son interprétation de l'aria était irréprochable.
+      - id: c1-to-evoke
+        term: to evoke
+        translation: évoquer
+        pos: verbe
+        gap: evoke
+        example:
+          text: The colours evoke a northern winter.
+          translation: Les couleurs évoquent un hiver nordique.
+      - id: c1-motif
+        term: motif
+        translation: thème récurrent
+        alt:
+          - motif
+          - leitmotiv
+        pos: nom
+        example:
+          text: Water is the central motif of the cycle.
+          translation: L'eau est le motif central du cycle.
+      - id: c1-restraint
+        term: restraint
+        translation: retenue
+        alt:
+          - sobriété
+        pos: nom
+        example:
+          text: The direction shows admirable restraint.
+          translation: La mise en scène fait preuve d'une retenue admirable.
+
+  - id: v5-l3
+    title: Réception et postérité
+    vocab:
+      - id: c1-acclaim
+        term: acclaim
+        translation: éloges
+        pos: nom
+        hint: "Indénombrable, et presque toujours accompagné de « critical »."
+        example:
+          text: The book met with immediate critical acclaim.
+          translation: Le livre a immédiatement reçu les éloges de la critique.
+      - id: c1-to-endure
+        term: to endure
+        translation: perdurer
+        alt:
+          - traverser le temps
+        pos: verbe
+        hint: "Intransitif, durer ; transitif, subir, comme « to endure hardship »."
+        example:
+          text: Few works endure this long.
+          translation: Peu d'œuvres perdurent aussi longtemps.
+      - id: c1-canon
+        term: canon
+        translation: corpus de référence
+        alt:
+          - canon
+        pos: nom
+        hint: "Un seul n : « cannon » avec deux n est la pièce d'artillerie."
+        example:
+          text: The play entered the canon within a decade.
+          translation: La pièce est entrée au canon en une décennie.
+      - id: c1-to-eclipse
+        term: to eclipse
+        translation: éclipser
+        pos: verbe
+        gap: eclipsed
+        example:
+          text: His later novels eclipsed the first.
+          translation: Ses romans ultérieurs ont éclipsé le premier.
+      - id: c1-posthumous
+        term: posthumous
+        translation: posthume
+        pos: adjectif
+        example:
+          text: The posthumous edition restored the cuts.
+          translation: L'édition posthume a rétabli les coupes.
+      - id: c1-to-fall-out-of-favour
+        term: to fall out of favour
+        translation: tomber en disgrâce
+        alt:
+          - passer de mode
+          - perdre la faveur
+        pos: expression
+        gap: fell out of favour
+        example:
+          text: The style fell out of favour after the war.
+          translation: Le style est tombé en disgrâce après la guerre.
+      - id: c1-enduring
+        term: enduring
+        translation: durable
+        alt:
+          - persistant
+        pos: adjectif
+        example:
+          text: Its enduring appeal is hard to explain.
+          translation: Son attrait durable est difficile à expliquer.
+      - id: c1-revival
+        term: revival
+        translation: reprise
+        alt:
+          - regain d'intérêt
+        pos: nom
+        example:
+          text: The revival drew an entirely new audience.
+          translation: La reprise a attiré un public entièrement nouveau.

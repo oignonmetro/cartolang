@@ -1,0 +1,172 @@
+id: g5
+title: Prépositions
+subtitle: Situer dans le temps et dans l'espace
+icon: wave
+color: violet
+level: B1
+
+lessons:
+  - id: g5-l1
+    title: Les prépositions de temps
+    notes: |
+      Trois prépositions couvrent presque tout le temps en anglais, et elles se
+      classent **de la plus large à la plus précise**.
+
+      — `in` : une longue période (années, mois, saisons).
+        in 1998, in March, in the summer
+      — `on` : un jour précis, ou une date.
+        on Monday, on 3 May, on my birthday
+      — `at` : une heure, ou un point du temps.
+        at seven, at midnight, at the weekend
+
+      Pour une durée, l'anglais distingue nettement deux façons de compter.
+
+      — `for` + une durée : combien de temps.
+        for ten years, for two hours
+      — `since` + un point de départ : depuis quand.
+        since 2015, since Monday
+
+      ! `ago` se place **après** le repère, jamais avant : `two hours ago`,
+      et non « ago two hours ».
+    points:
+      - id: g5-time-1
+        sentence: The meeting is ___ Monday morning.
+        answer: on
+        options:
+          - on
+          - in
+          - at
+          - to
+        translation: La réunion est lundi matin.
+        explanation: "Un jour précis : on."
+      - id: g5-time-2
+        sentence: I usually get up ___ seven.
+        answer: at
+        options:
+          - at
+          - on
+          - in
+          - by
+        translation: Je me lève d'habitude à sept heures.
+        explanation: "Une heure : at."
+      - id: g5-time-3
+        sentence: She was born ___ 1998.
+        answer: in
+        options:
+          - in
+          - on
+          - at
+          - since
+        translation: Elle est née en 1998.
+        explanation: "Une année : in."
+      - id: g5-time-4
+        sentence: We have lived here ___ ten years.
+        answer: for
+        options:
+          - for
+          - since
+          - during
+          - from
+        translation: Nous habitons ici depuis dix ans.
+        explanation: « For » compte une durée, pas un point de départ.
+      - id: g5-time-5
+        sentence: I have known her ___ 2015.
+        answer: since
+        options:
+          - since
+          - for
+          - from
+          - during
+        translation: Je la connais depuis 2015.
+        explanation: « Since » annonce le point de départ.
+      - id: g5-time-6
+        sentence: They left two hours ___ .
+        answer: ago
+        options:
+          - ago
+          - before
+          - since
+          - past
+        translation: Ils sont partis il y a deux heures.
+        explanation: « Ago » se place après la durée, en fin de groupe.
+
+  - id: g5-l2
+    title: Les prépositions de lieu et de mouvement
+    notes: |
+      Les mêmes trois prépositions servent l'espace, avec **la même logique du
+      large au précis**.
+
+      — `in` : à l'intérieur d'un volume ou d'une zone.
+        in the box, in Paris, in the garden
+      — `on` : posé sur une surface.
+        on the table, on the wall, on page 12
+      — `at` : un point, souvent une adresse ou un lieu-fonction.
+        at the station, at work, at 12 Oak Street
+
+      Le mouvement se dit avec d'autres prépositions, qui décrivent **le
+      trajet** plutôt que la position.
+
+      — `to` : la destination. I am going to Spain.
+      — `through` : de part en part. We walked through the tunnel.
+      — `over` : par-dessus. The cat jumped over the wall.
+    points:
+      - id: g5-place-1
+        sentence: The keys are ___ the kitchen table.
+        answer: on
+        options:
+          - on
+          - in
+          - at
+          - over
+        translation: Les clés sont sur la table de la cuisine.
+        explanation: "Posé sur une surface : on."
+      - id: g5-place-2
+        sentence: He is waiting ___ the station.
+        answer: at
+        options:
+          - at
+          - in
+          - on
+          - to
+        translation: Il attend à la gare.
+        explanation: "Un lieu vu comme un point de rendez-vous : at."
+      - id: g5-place-3
+        sentence: She put the letter ___ her bag.
+        answer: in
+        options:
+          - in
+          - on
+          - at
+          - into
+        translation: Elle a mis la lettre dans son sac.
+        explanation: "À l'intérieur d'un volume : in."
+      - id: g5-place-4
+        sentence: We walked ___ the tunnel to reach the beach.
+        answer: through
+        options:
+          - through
+          - over
+          - across
+          - along
+        translation: Nous avons traversé le tunnel pour rejoindre la plage.
+        explanation: « Through » décrit un passage de part en part, dans un volume.
+      - id: g5-place-5
+        sentence: The cat jumped ___ the wall.
+        answer: over
+        options:
+          - over
+          - through
+          - in
+          - on
+        translation: Le chat a sauté par-dessus le mur.
+        explanation: « Over » décrit un franchissement par le dessus.
+      - id: g5-place-6
+        sentence: I am going ___ Spain next week.
+        answer: to
+        options:
+          - to
+          - in
+          - at
+          - for
+        translation: Je vais en Espagne la semaine prochaine.
+        explanation: "Destination d'un déplacement : to."

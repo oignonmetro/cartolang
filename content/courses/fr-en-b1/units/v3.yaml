@@ -1,0 +1,225 @@
+id: v3
+title: Travail et études
+subtitle: Le vocabulaire du bureau et de la salle de classe
+icon: book
+color: teal
+level: B1
+
+lessons:
+  - id: v3-l1
+    title: Chercher et occuper un poste
+    vocab:
+      - id: b1-to-apply
+        term: to apply
+        translation: postuler
+        alt:
+          - se porter candidat
+        pos: verbe
+        gap: applied
+        example:
+          text: I applied for three jobs last week.
+          translation: J'ai postulé à trois offres la semaine dernière.
+      - id: b1-interview
+        term: interview
+        translation: entretien
+        pos: nom
+        example:
+          text: The interview lasted almost an hour.
+          translation: L'entretien a duré presque une heure.
+      - id: b1-wage
+        term: wage
+        translation: salaire
+        alt:
+          - paie
+        pos: nom
+        hint: "« Wage » se paie souvent à l'heure ou à la semaine ; « salary » au mois."
+        example:
+          text: The wage is paid every Friday.
+          translation: Le salaire est versé tous les vendredis.
+      - id: b1-shift
+        term: shift
+        translation: poste
+        alt:
+          - service
+        pos: nom
+        hint: "Ici la période de travail ; le mot dit aussi un décalage."
+        example:
+          text: She works the night shift twice a week.
+          translation: Elle travaille de nuit deux fois par semaine.
+      - id: b1-colleague
+        term: colleague
+        translation: collègue
+        pos: nom
+        example:
+          text: My colleague speaks four languages.
+          translation: Mon collègue parle quatre langues.
+      - id: b1-to-hire
+        term: to hire
+        translation: embaucher
+        alt:
+          - recruter
+        pos: verbe
+        gap: hired
+        example:
+          text: They hired two new engineers in March.
+          translation: Ils ont embauché deux nouveaux ingénieurs en mars.
+      - id: b1-skill
+        term: skill
+        translation: compétence
+        pos: nom
+        example:
+          text: Patience is a useful skill in this job.
+          translation: La patience est une compétence utile dans ce métier.
+      - id: b1-to-earn
+        term: to earn
+        translation: gagner
+        pos: verbe
+        gap: earns
+        hint: "« Earn » pour un revenu mérité ; « win » pour une compétition."
+        example:
+          text: He earns enough to live comfortably.
+          translation: Il gagne assez pour vivre confortablement.
+
+  - id: v3-l2
+    title: Études et examens
+    vocab:
+      - id: b1-degree
+        term: degree
+        translation: diplôme universitaire
+        alt:
+          - licence
+        pos: nom
+        hint: "Aussi le degré d'un thermomètre ou d'un angle."
+        example:
+          text: She has a degree in biology.
+          translation: Elle a un diplôme de biologie.
+      - id: b1-to-attend
+        term: to attend
+        translation: assister à
+        alt:
+          - suivre
+        pos: verbe
+        hint: "Faux ami : « attendre » se dit « to wait »."
+        example:
+          text: I attend classes every morning.
+          translation: J'assiste aux cours tous les matins.
+      - id: b1-homework
+        term: homework
+        translation: devoirs
+        pos: nom
+        hint: "Indénombrable : jamais « homeworks »."
+        example:
+          text: The homework took me two hours.
+          translation: Les devoirs m'ont pris deux heures.
+      - id: b1-to-revise
+        term: to revise
+        translation: réviser
+        pos: verbe
+        example:
+          text: I revise best in the morning.
+          translation: Je révise mieux le matin.
+      - id: b1-exam
+        term: exam
+        translation: examen
+        pos: nom
+        example:
+          text: The exam is next Tuesday.
+          translation: L'examen est mardi prochain.
+      - id: b1-to-pass
+        term: to pass
+        translation: réussir
+        pos: verbe
+        gap: passed
+        hint: "Faux ami : « passer un examen » se dit « to take an exam »."
+        example:
+          text: She passed the exam without difficulty.
+          translation: Elle a réussi l'examen sans difficulté.
+      - id: b1-subject
+        term: subject
+        translation: matière
+        pos: nom
+        example:
+          text: History is my favourite subject.
+          translation: L'histoire est ma matière préférée.
+      - id: b1-term
+        term: term
+        translation: trimestre
+        pos: nom
+        hint: "Faux ami : le terme d'un contrat se dit plutôt « end » ou « expiry »."
+        example:
+          text: The autumn term starts in September.
+          translation: Le trimestre d'automne commence en septembre.
+
+  - id: v3-l3
+    title: S'organiser
+    vocab:
+      - id: b1-schedule
+        term: schedule
+        translation: emploi du temps
+        alt:
+          - planning
+        pos: nom
+        example:
+          text: My schedule is full this week.
+          translation: Mon emploi du temps est chargé cette semaine.
+      - id: b1-deadline
+        term: deadline
+        translation: date limite
+        alt:
+          - échéance
+        pos: nom
+        example:
+          text: We missed the deadline by two days.
+          translation: Nous avons dépassé la date limite de deux jours.
+      - id: b1-in-charge-of
+        term: in charge of
+        translation: responsable de
+        alt:
+          - chargé de
+          - à la tête de
+        pos: expression
+        example:
+          text: She is in charge of the whole team.
+          translation: Elle est responsable de toute l'équipe.
+      - id: b1-meeting
+        term: meeting
+        translation: réunion
+        pos: nom
+        example:
+          text: The meeting starts at nine sharp.
+          translation: La réunion commence à neuf heures pile.
+      - id: b1-task
+        term: task
+        translation: tâche
+        pos: nom
+        example:
+          text: Each task takes about ten minutes.
+          translation: Chaque tâche prend une dizaine de minutes.
+      - id: b1-to-manage
+        term: to manage
+        translation: réussir à
+        alt:
+          - parvenir à
+          - gérer
+        pos: verbe
+        gap: managed
+        hint: "Deux sens : diriger, et réussir à faire ; « manage to » annonce le second."
+        example:
+          text: I managed to finish on time.
+          translation: J'ai réussi à finir à temps.
+      - id: b1-busy
+        term: busy
+        translation: occupé
+        alt:
+          - chargé
+        pos: adjectif
+        example:
+          text: The office is busy on Mondays.
+          translation: Le bureau est chargé le lundi.
+      - id: b1-break
+        term: break
+        translation: pause
+        pos: nom
+        example:
+          text: Let us take a short break.
+          translation: Faisons une courte pause.

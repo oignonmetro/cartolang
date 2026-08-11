@@ -1,0 +1,248 @@
+id: v2
+title: Travail et organisation
+subtitle: Le registre professionnel courant
+icon: clock
+color: teal
+level: B2.1
+
+lessons:
+  - id: v2-l1
+    title: Postes et responsabilités
+    vocab:
+      - id: b2-to-oversee
+        term: to oversee
+        translation: superviser
+        alt:
+          - chapeauter
+        pos: verbe
+        gap: oversees
+        example:
+          text: She oversees a team of twelve engineers.
+          translation: Elle supervise une équipe de douze ingénieurs.
+      - id: b2-to-delegate
+        term: to delegate
+        translation: déléguer
+        pos: verbe
+        example:
+          text: Learning to delegate takes time.
+          translation: Apprendre à déléguer prend du temps.
+      - id: b2-remit
+        term: remit
+        translation: attributions
+        alt:
+          - périmètre
+          - mandat
+        pos: nom
+        hint: Britannique et plutôt formel ; « scope » est plus neutre.
+        example:
+          text: Budget decisions fall outside my remit.
+          translation: Les décisions budgétaires sortent de mes attributions.
+      - id: b2-workload
+        term: workload
+        translation: charge de travail
+        alt:
+          - volume de travail
+          - plan de charge
+        pos: nom
+        example:
+          text: Her workload has doubled since January.
+          translation: Sa charge de travail a doublé depuis janvier.
+      - id: b2-understaffed
+        term: understaffed
+        translation: en sous-effectif
+        alt:
+          - en manque de personnel
+          - en effectif réduit
+        pos: adjectif
+        example:
+          text: The department has been understaffed all year.
+          translation: Le service est en sous-effectif depuis un an.
+      - id: b2-to-step-down
+        term: to step down
+        translation: démissionner
+        alt:
+          - se retirer
+          - quitter ses fonctions
+        pos: verbe
+        example:
+          text: The director will step down in June.
+          translation: Le directeur quittera ses fonctions en juin.
+      - id: b2-accountable
+        term: accountable
+        translation: responsable
+        alt:
+          - comptable
+        pos: adjectif
+        hint: « Accountable for » = devoir rendre des comptes ; plus fort que « responsible ».
+        example:
+          text: Managers are accountable for their decisions.
+          translation: Les responsables doivent rendre des comptes sur leurs décisions.
+      - id: b2-backlog
+        term: backlog
+        translation: retard accumulé
+        alt:
+          - arriéré
+        pos: nom
+        example:
+          text: We are still clearing the backlog from last month.
+          translation: Nous résorbons encore le retard accumulé le mois dernier.
+
+  - id: v2-l2
+    title: Réunions et décisions
+    vocab:
+      - id: b2-agenda
+        term: agenda
+        translation: ordre du jour
+        alt:
+          - programme
+        pos: nom
+        hint: "Faux ami : un agenda de rendez-vous se dit « diary » ou « calendar »."
+        example:
+          text: That point is not on the agenda.
+          translation: Ce point n'est pas à l'ordre du jour.
+      - id: b2-minutes
+        term: minutes
+        translation: compte rendu
+        alt:
+          - procès-verbal
+        pos: nom
+        example:
+          text: Could you circulate the minutes before Friday?
+          translation: Peux-tu diffuser le compte rendu avant vendredi ?
+      - id: b2-to-postpone
+        term: to postpone
+        translation: reporter
+        alt:
+          - ajourner
+        pos: verbe
+        gap: postponed
+        example:
+          text: They postponed the vote until autumn.
+          translation: Ils ont reporté le vote à l'automne.
+      - id: b2-deadlock
+        term: deadlock
+        translation: impasse
+        alt:
+          - blocage
+        pos: nom
+        example:
+          text: The talks ended in deadlock.
+          translation: Les négociations ont abouti à une impasse.
+      - id: b2-to-come-up-with
+        term: to come up with
+        translation: trouver
+        alt:
+          - imaginer
+          - proposer
+        pos: verbe
+        example:
+          text: We need to come up with a better plan.
+          translation: Nous devons trouver un meilleur plan.
+      - id: b2-to-follow-up
+        term: to follow up
+        translation: relancer
+        alt:
+          - assurer le suivi
+        pos: verbe
+        example:
+          text: I will follow up with the supplier tomorrow.
+          translation: Je relancerai le fournisseur demain.
+      - id: b2-trade-off
+        term: trade-off
+        translation: compromis
+        alt:
+          - arbitrage
+        pos: nom
+        example:
+          text: There is always a trade-off between speed and quality.
+          translation: Il y a toujours un compromis entre vitesse et qualité.
+      - id: b2-to-sign-off-on
+        term: to sign off on
+        translation: valider
+        alt:
+          - approuver
+        pos: verbe
+        example:
+          text: Legal still has to sign off on the contract.
+          translation: Le service juridique doit encore valider le contrat.
+
+  - id: v2-l3
+    title: Résultats et difficultés
+    vocab:
+      - id: b2-to-fall-through
+        term: to fall through
+        translation: échouer
+        alt:
+          - tomber à l'eau
+        pos: verbe
+        gap: fell through
+        example:
+          text: The merger fell through at the last minute.
+          translation: La fusion est tombée à l'eau à la dernière minute.
+      - id: b2-setback
+        term: setback
+        translation: revers
+        alt:
+          - contretemps
+        pos: nom
+        example:
+          text: The recall was a serious setback.
+          translation: Le rappel a été un sérieux revers.
+      - id: b2-breakthrough
+        term: breakthrough
+        translation: percée
+        alt:
+          - avancée décisive
+        pos: nom
+        example:
+          text: The team made a genuine breakthrough this spring.
+          translation: L'équipe a réalisé une véritable percée ce printemps.
+      - id: b2-to-scale-back
+        term: to scale back
+        translation: revoir à la baisse
+        alt:
+          - réduire
+        pos: verbe
+        example:
+          text: They had to scale back their ambitions.
+          translation: Ils ont dû revoir leurs ambitions à la baisse.
+      - id: b2-sustainable
+        term: sustainable
+        translation: viable
+        alt:
+          - durable
+          - tenable
+        pos: adjectif
+        example:
+          text: This pace of growth is not sustainable.
+          translation: Ce rythme de croissance n'est pas tenable.
+      - id: b2-to-streamline
+        term: to streamline
+        translation: rationaliser
+        alt:
+          - simplifier
+          - fluidifier
+        pos: verbe
+        example:
+          text: The aim is to streamline the approval process.
+          translation: L'objectif est de rationaliser le processus de validation.
+      - id: b2-bottleneck
+        term: bottleneck
+        translation: goulot d'étranglement
+        alt:
+          - goulet d'étranglement
+          - point de blocage
+        pos: nom
+        example:
+          text: Testing is the real bottleneck here.
+          translation: Les tests sont le vrai goulot d'étranglement ici.
+      - id: b2-to-pay-off
+        term: to pay off
+        translation: porter ses fruits
+        alt:
+          - être payant
+        pos: verbe
+        gap: paid off
+        example:
+          text: The investment finally paid off.
+          translation: L'investissement a fini par porter ses fruits.

@@ -1,0 +1,165 @@
+id: g2
+title: Hypothèse formelle
+subtitle: Inversion conditionnelle et irréel soutenu
+icon: compass
+color: violet
+level: C1
+
+lessons:
+  - id: g2-l1
+    title: L'inversion à la place de « if »
+    notes: |
+      À l'écrit soutenu, l'anglais supprime « if » et inverse le sujet et
+      l'auxiliaire. Le sens est inchangé, le registre monte d'un cran.
+      — Were I in charge, I would resign. (= If I were in charge)
+      — Had we known, we would have acted. (= If we had known)
+      — Should you need help, call me. (= If you should need help)
+      Trois auxiliaires seulement acceptent ce tour : __were__, __had__,
+      __should__.
+
+      ! À la négative, pas de contraction : « Were it not for… », jamais
+      « Weren't it ».
+    points:
+      - id: g2-inv-1
+        sentence: ___ I in your position, I would decline the offer.
+        answer: Were
+        options:
+          - Were
+          - Was
+          - If
+          - Had
+        translation: Si j'étais à votre place, je déclinerais l'offre.
+        explanation: "Irréel du présent sans « if » : « Were » + sujet."
+      - id: g2-inv-2
+        sentence: ___ we known earlier, we would have cancelled.
+        answer: Had
+        options:
+          - Had
+          - Have
+          - Were
+          - If
+        translation: Si nous l'avions su plus tôt, nous aurions annulé.
+        explanation: "Irréel du passé sans « if » : « Had » + sujet + participe."
+      - id: g2-inv-3
+        sentence: ___ you require assistance, our team is available.
+        answer: Should
+        options:
+          - Should
+          - Would
+          - Were
+          - Had
+        translation: Si vous aviez besoin d'aide, notre équipe est disponible.
+        explanation: "Éventualité polie et formelle : « Should » + sujet."
+      - id: g2-inv-4
+        sentence: ___ it not for her intervention, the deal would have collapsed.
+        answer: Were
+        options:
+          - Were
+          - Was
+          - Had
+          - If
+        translation: Sans son intervention, l'accord se serait effondré.
+        explanation: "Formule figée : « Were it not for… » = « If it were not for… »."
+      - id: g2-inv-5
+        sentence: Had the report been published, the outcome ___ different.
+        answer: would have been
+        options:
+          - would have been
+          - would be
+          - had been
+          - will be
+        translation: Si le rapport avait été publié, l'issue aurait été différente.
+        explanation: L'inversion ne touche que la subordonnée ; la principale garde « would have ».
+      - id: g2-inv-6
+        sentence: ___ anyone object, the matter will be reopened.
+        answer: Should
+        options:
+          - Should
+          - Would
+          - Were
+          - Does
+        translation: Si quelqu'un venait à s'y opposer, la question serait rouverte.
+        explanation: « Should » + sujet + base verbale, sans -s de troisième personne.
+
+  - id: g2-l2
+    title: Regrets, souhaits et irréel mixte
+    notes: |
+      Après `wish` et `if only`, **le temps recule d'un cran** par rapport au réel
+      visé. Le même décalage gouverne `it is time` et le conditionnel mixte.
+
+      — Présent regretté : `wish` + prétérit.
+        I wish I knew.
+      — Passé regretté : `wish` + past perfect.
+        I wish I had asked.
+      — Reproche adressé à autrui : `wish` + `would`.
+        I wish you would listen.
+      — `It is (high) time` + prétérit.
+        It is high time we left.
+
+      Le conditionnel mixte suit la même logique de décalage : une hypothèse
+      passée peut avoir une conséquence présente.
+
+      — If I had studied medicine, I would be a doctor now.
+    points:
+      - id: g2-wish-1
+        sentence: I wish I ___ what she meant.
+        answer: knew
+        options:
+          - knew
+          - know
+          - had known
+          - would know
+        translation: J'aimerais savoir ce qu'elle voulait dire.
+        explanation: "Regret portant sur le présent : prétérit après « wish »."
+      - id: g2-wish-2
+        sentence: If only we ___ the warning at the time.
+        answer: had heeded
+        options:
+          - had heeded
+          - heeded
+          - would heed
+          - have heeded
+        translation: Si seulement nous avions tenu compte de l'avertissement à l'époque.
+        explanation: "Regret portant sur le passé : past perfect."
+      - id: g2-wish-3
+        sentence: I wish you ___ interrupting me.
+        answer: would stop
+        options:
+          - would stop
+          - stopped
+          - had stopped
+          - will stop
+        translation: J'aimerais que tu arrêtes de m'interrompre.
+        explanation: "Reproche sur un comportement d'autrui : « wish + would »."
+      - id: g2-wish-4
+        sentence: It is high time we ___ this discussion.
+        answer: ended
+        options:
+          - ended
+          - end
+          - will end
+          - have ended
+        translation: Il est grand temps que nous mettions fin à cette discussion.
+        explanation: « It is high time » entraîne le prétérit, malgré le sens présent.
+      - id: g2-wish-5
+        sentence: If she had taken that post, she ___ in Geneva today.
+        answer: would be living
+        alt:
+          - would live
+        options:
+          - would be living
+          - would have lived
+          - had lived
+          - will be living
+        translation: Si elle avait accepté ce poste, elle vivrait à Genève aujourd'hui.
+        explanation: "Conditionnel mixte : hypothèse passée, conséquence présente."
+      - id: g2-wish-6
+        sentence: He would have been promoted ___ he been more diplomatic.
+        answer: had
+        options:
+          - had
+          - if
+          - were
+          - would
+        translation: Il aurait été promu s'il avait été plus diplomate.
+        explanation: L'inversion peut aussi suivre la principale, sans virgule ni « if ».

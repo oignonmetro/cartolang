@@ -1,0 +1,175 @@
+id: g3
+title: Structures de la phrase complexe
+subtitle: Relatives, passif, discours rapporté
+icon: people
+color: violet
+level: B2.2
+
+lessons:
+  - id: g3-l1
+    title: Relatives déterminatives et explicatives
+    notes: |
+      Une virgule, et la phrase ne dit plus la même chose. Ici, **c'est la
+      ponctuation qui porte le sens**, pas le pronom.
+
+      — Déterminative, __sans virgule__ : elle identifie de qui on parle.
+        The students who failed must resit. Seuls ceux qui ont échoué repassent.
+      — Explicative, __entre virgules__ : elle commente un groupe déjà identifié.
+        The students, who failed, must resit. Tous ont échoué, tous repassent.
+
+      Deux conséquences pratiques en découlent.
+
+      — `that` est impossible dans une explicative.
+      — Le pronom relatif ne s'omet jamais lorsqu'il est sujet.
+    points:
+      - id: g3-rel-1
+        sentence: The report ___ you sent me is missing a page.
+        answer: that
+        alt:
+          - which
+        options:
+          - that
+          - which
+          - what
+          - whose
+        translation: Le rapport que tu m'as envoyé a une page manquante.
+        explanation: "Relative déterminative, pronom complément : « that » ou « which », et l'omission serait même possible."
+
+      - id: g3-rel-2
+        sentence: My sister, ___ lives in Oslo, is visiting next week.
+        answer: who
+        options:
+          - who
+          - that
+          - which
+          - whom
+        translation: Ma sœur, qui vit à Oslo, vient nous voir la semaine prochaine.
+        explanation: "Relative explicative : « that » est exclu après une virgule."
+
+      - id: g3-rel-3
+        sentence: This is the author ___ book won the prize.
+        answer: whose
+        options:
+          - whose
+          - who
+          - which
+          - that
+        translation: Voici l'auteur dont le livre a remporté le prix.
+        explanation: "Possession : « whose », y compris pour des personnes."
+
+      - id: g3-rel-4
+        sentence: He arrived two hours late, ___ annoyed everyone.
+        answer: which
+        options:
+          - which
+          - that
+          - what
+          - who
+        translation: Il est arrivé avec deux heures de retard, ce qui a agacé tout le monde.
+        explanation: « Which » reprend toute la proposition précédente ; « that » ne le peut pas.
+      - id: g3-rel-5
+        sentence: The village ___ we spent the summer has barely changed.
+        answer: where
+        options:
+          - where
+          - which
+          - that
+          - when
+        translation: Le village où nous avons passé l'été a à peine changé.
+        explanation: "Complément de lieu : « where » évite la lourdeur de « in which »."
+
+      - id: g3-rel-6
+        sentence: Everything ___ she said turned out to be true.
+        answer: that
+        options:
+          - that
+          - which
+          - what
+          - who
+        translation: Tout ce qu'elle a dit s'est révélé vrai.
+        explanation: Après « everything », « all », « the only », on emploie « that », jamais « which ».
+
+  - id: g3-l2
+    title: Passif et discours rapporté
+    notes: |
+      Le passif déplace l'attention vers le résultat, ou permet de **taire
+      l'agent** quand on ne veut pas le nommer.
+
+      — Passif simple : `be` au temps voulu + participe passé.
+        The decision was taken in March. La décision a été prise en mars.
+      — Passif impersonnel, propre à la presse : `It is said that…` / `He is said to…`
+        He is said to have resigned. Il aurait démissionné.
+
+      Au discours rapporté, __quand le verbe introducteur est au passé__, **tout
+      recule d'un cran**, les temps comme les repères.
+
+      — I saw her yesterday. → He said he had seen her the day before.
+    points:
+      - id: g3-pass-1
+        sentence: The bridge ___ two years before the war.
+        answer: was built
+        options:
+          - was built
+          - was building
+          - had built
+          - is built
+        translation: Le pont a été construit deux ans avant la guerre.
+        explanation: "Passif au prétérit : was / were + participe passé."
+
+      - id: g3-pass-2
+        sentence: It ___ that the company is preparing a merger.
+        answer: is rumoured
+        options:
+          - is rumoured
+          - rumours
+          - has rumoured
+          - is rumouring
+        translation: Le bruit court que l'entreprise prépare une fusion.
+        explanation: "Passif impersonnel : « it is said / thought / rumoured that… »."
+
+      - id: g3-pass-3
+        sentence: The minister ___ to have known about the report.
+        answer: is believed
+        options:
+          - is believed
+          - believes
+          - has believed
+          - is believing
+        translation: Le ministre aurait eu connaissance du rapport.
+        explanation: "Seconde forme du passif impersonnel : sujet + be + participe + infinitif."
+
+      - id: g3-pass-4
+        sentence: She told me she ___ the file the previous evening.
+        answer: had finished
+        options:
+          - had finished
+          - has finished
+          - finished
+          - would finish
+        translation: Elle m'a dit qu'elle avait terminé le dossier la veille.
+        explanation: "Discours rapporté au passé : le present perfect ou le prétérit reculent au past perfect."
+
+      - id: g3-pass-5
+        sentence: He asked me ___ I had ever worked abroad.
+        answer: whether
+        alt:
+          - if
+        options:
+          - whether
+          - that
+          - what
+          - which
+        translation: Il m'a demandé si j'avais déjà travaillé à l'étranger.
+        explanation: "Question fermée rapportée : « whether » ou « if », et l'ordre redevient celui d'une affirmation."
+
+      - id: g3-pass-6
+        sentence: They are having the roof ___ next month.
+        answer: repaired
+        options:
+          - repaired
+          - repair
+          - repairing
+          - to repair
+        translation: Ils font réparer le toit le mois prochain.
+        explanation: "Structure causative « have something done » : participe passé après l'objet."
+

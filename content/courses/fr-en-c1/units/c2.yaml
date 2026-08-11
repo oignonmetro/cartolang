@@ -1,0 +1,132 @@
+id: c2
+title: Verbes irréguliers rares
+subtitle: Ceux qu'on rencontre à l'écrit et qu'on n'ose pas employer
+icon: book
+color: sky
+level: C1
+
+lessons:
+  - id: c2-l1
+    title: Formes littéraires et soutenues
+    notes: |
+      Ces verbes se croisent en lecture bien avant de venir sous la plume. Leur
+      difficulté n'est pas le sens mais **la troisième colonne**, souvent
+      contre-intuitive.
+
+      — bear / bore / **borne**
+      — strive / strove / **striven**
+      — forsake / forsook / **forsaken**
+      — weave / wove / **woven**
+
+      ! `bear` a deux participes : `She has borne the cost`, mais
+      `He was born in Lyon` pour la naissance.
+    verbs:
+      - verb: to bear
+        translation: supporter, porter
+        tense: verbe irrégulier
+        note: "Participe « borne », sauf pour la naissance : « born »."
+        forms:
+          - id: c2-bear-past
+            person: prétérit
+            answer: bore
+          - id: c2-bear-pp
+            person: participe passé
+            answer: borne
+      - verb: to strive
+        translation: s'efforcer
+        tense: verbe irrégulier
+        note: Souvent suivi de « to » + infinitif, ou de « for » + nom.
+        forms:
+          - id: c2-strive-past
+            person: prétérit
+            answer: strove
+            alt:
+              - strived
+          - id: c2-strive-pp
+            person: participe passé
+            answer: striven
+            alt:
+              - strived
+      - verb: to forsake
+        translation: abandonner
+        tense: verbe irrégulier
+        note: Registre littéraire ; « to abandon » est le mot courant.
+        forms:
+          - id: c2-forsake-past
+            person: prétérit
+            answer: forsook
+          - id: c2-forsake-pp
+            person: participe passé
+            answer: forsaken
+      - verb: to weave
+        translation: tisser
+        tense: verbe irrégulier
+        note: "Régulier au sens de zigzaguer : « the car weaved through traffic »."
+        forms:
+          - id: c2-weave-past
+            person: prétérit
+            answer: wove
+          - id: c2-weave-pp
+            person: participe passé
+            answer: woven
+
+  - id: c2-l2
+    title: Les pièges de forme voisine
+    notes: |
+      Ces couples se ressemblent assez pour être confondus, et **la faute passe
+      rarement inaperçue**.
+
+      — `lie` / lay / lain : être allongé, __sans complément d'objet__.
+      — `lay` / laid / laid : poser quelque chose, __avec complément d'objet__.
+      — `rise` / rose / risen : monter de soi-même, __sans complément__.
+      — `raise` / raised / raised : élever quelque chose, __avec complément__.
+
+      Un seul réflexe suffit à trancher : **si le verbe a un complément d'objet,
+      c'est la version transitive**, la régulière des deux.
+
+      — Prices rose. / They raised prices.
+    verbs:
+      - verb: to lie
+        translation: être allongé
+        tense: verbe irrégulier intransitif
+        note: Sans complément d'objet. Ne pas confondre avec « lie / lied » (mentir).
+        forms:
+          - id: c2-lie-past
+            person: prétérit
+            answer: lay
+          - id: c2-lie-pp
+            person: participe passé
+            answer: lain
+      - verb: to lay
+        translation: poser
+        tense: verbe irrégulier transitif
+        note: "Toujours un complément d'objet : « lay the table »."
+        forms:
+          - id: c2-lay-past
+            person: prétérit
+            answer: laid
+          - id: c2-lay-pp
+            person: participe passé
+            answer: laid
+      - verb: to rise
+        translation: monter
+        tense: verbe irrégulier intransitif
+        note: "Le sujet monte de lui-même : « prices rose »."
+        forms:
+          - id: c2-rise-past
+            person: prétérit
+            answer: rose
+          - id: c2-rise-pp
+            person: participe passé
+            answer: risen
+      - verb: to raise
+        translation: élever, augmenter
+        tense: verbe régulier transitif
+        note: "Quelqu'un élève quelque chose : « they raised prices »."
+        forms:
+          - id: c2-raise-past
+            person: prétérit
+            answer: raised
+          - id: c2-raise-pp
+            person: participe passé
+            answer: raised

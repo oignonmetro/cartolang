@@ -1,4 +1,5 @@
-import { courseSchema, manifestSchema, type Course, type Manifest, type Vocab } from './schema'
+import { courseSchema, manifestSchema, type Course, type Manifest, type ManifestEntry } from './schema'
+import { cachedCourse, cachedManifest } from './contentCache'
 
 /**
  * Chargement des cours.
@@ -32,22 +33,26 @@ export async function loadCourse(courseId: string): Promise<Course> {
   return parsed.data
 }
 
-export interface VocabLocation {
-  vocab: Vocab
-  lessonId: string
+/**
+ * Cours proposés à l'apprenant.
+ *
+ * Un cours archivé reste compilé et validé par la CI, mais n'est plus offert :
+ * c'est ainsi que le cours débutant a été mis de côté sans être perdu.
+ */
+export function availableCourses(manifest: Manifest): ManifestEntry[] {
+  return manifest.courses.filter((entry) => entry.status === 'available')
 }
 
-/** Index mot → leçon, pour retrouver un mot depuis une carte de révision. */
-export function indexVocab(course: Course): Map<string, VocabLocation> {
-  const byId = new Map<string, VocabLocation>()
-  for (const section of course.sections) {
-    for (const unit of section.units) {
-      for (const lesson of unit.lessons) {
-        for (const vocab of lesson.vocab) {
-          byId.set(vocab.id, { vocab, lessonId: lesson.id })
-        }
-      }
-    }
-  }
-  return byId
+/**
+ * Manifeste à utiliser : le cache local (alimenté par `remoteSync.ts` dans
+ * l'APK) s'il existe, sinon celui embarqué dans le build. Le cache est
+ * toujours le plus frais par construction — voir `contentCache.ts`.
+ */
+export async function resolveManifest(): Promise<Manifest> {
+  return cachedManifest() ?? loadManifest()
+}
+
+/** Même logique que `resolveManifest`, pour un cours donné. */
+export async function resolveCourse(courseId: string): Promise<Course> {
+  return cachedCourse(courseId) ?? loadCourse(courseId)
 }

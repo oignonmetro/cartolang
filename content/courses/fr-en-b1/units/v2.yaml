@@ -1,0 +1,225 @@
+id: v2
+title: Voyages et déplacements
+subtitle: Se déplacer, se loger, visiter
+icon: compass
+color: teal
+level: B1
+
+lessons:
+  - id: v2-l1
+    title: Prendre la route
+    vocab:
+      - id: b1-journey
+        term: journey
+        translation: trajet
+        alt:
+          - voyage
+        pos: nom
+        hint: "« Journey » est le trajet ; « trip » est le déplacement dans son ensemble."
+        example:
+          text: The journey takes about two hours.
+          translation: Le trajet dure environ deux heures.
+      - id: b1-to-board
+        term: to board
+        translation: embarquer
+        alt:
+          - monter à bord
+        pos: verbe
+        example:
+          text: We board the plane at six.
+          translation: Nous embarquons dans l'avion à six heures.
+      - id: b1-delay
+        term: delay
+        translation: retard
+        pos: nom
+        hint: "Faux ami : un « délai » accordé se dit « a deadline » ou « time »."
+        example:
+          text: The delay was caused by bad weather.
+          translation: Le retard était dû au mauvais temps.
+      - id: b1-return-ticket
+        term: return ticket
+        translation: billet aller-retour
+        alt:
+          - aller-retour
+        pos: nom
+        example:
+          text: A return ticket is cheaper than two singles.
+          translation: Un billet aller-retour coûte moins cher que deux allers simples.
+      - id: b1-luggage
+        term: luggage
+        translation: bagages
+        pos: nom
+        hint: "Indénombrable : « a luggage » n'existe pas, on dit « a piece of luggage »."
+        example:
+          text: Leave your luggage at the desk.
+          translation: Laissez vos bagages à l'accueil.
+      - id: b1-to-catch
+        term: to catch
+        translation: attraper
+        alt:
+          - prendre
+        pos: verbe
+        example:
+          text: I need to catch the early train.
+          translation: Je dois prendre le train du matin.
+      - id: b1-crowded
+        term: crowded
+        translation: bondé
+        pos: adjectif
+        example:
+          text: The station was crowded at that hour.
+          translation: La gare était bondée à cette heure-là.
+      - id: b1-on-foot
+        term: on foot
+        translation: à pied
+        pos: expression
+        example:
+          text: It is only ten minutes on foot.
+          translation: Ce n'est qu'à dix minutes à pied.
+
+  - id: v2-l2
+    title: Se loger
+    vocab:
+      - id: b1-accommodation
+        term: accommodation
+        translation: hébergement
+        alt:
+          - logement
+        pos: nom
+        example:
+          text: Accommodation is included in the price.
+          translation: L'hébergement est compris dans le prix.
+      - id: b1-to-book
+        term: to book
+        translation: réserver
+        pos: verbe
+        gap: booked
+        hint: "Comme verbe, réserver ; le livre, c'est le nom « a book »."
+        example:
+          text: We booked a room online.
+          translation: Nous avons réservé une chambre en ligne.
+      - id: b1-spare-room
+        term: spare room
+        translation: chambre d'amis
+        alt:
+          - chambre libre
+        pos: nom
+        example:
+          text: They have a spare room upstairs.
+          translation: Ils ont une chambre d'amis à l'étage.
+      - id: b1-landlord
+        term: landlord
+        translation: propriétaire
+        alt:
+          - bailleur
+        pos: nom
+        example:
+          text: The landlord raised the rent in June.
+          translation: Le propriétaire a augmenté le loyer en juin.
+      - id: b1-rent
+        term: rent
+        translation: loyer
+        pos: nom
+        example:
+          text: The rent is due on the first of the month.
+          translation: Le loyer est à payer le premier du mois.
+      - id: b1-to-share
+        term: to share
+        translation: partager
+        pos: verbe
+        example:
+          text: I share a flat with two friends.
+          translation: Je partage un appartement avec deux amis.
+      - id: b1-cosy
+        term: cosy
+        translation: douillet
+        alt:
+          - chaleureux
+        pos: adjectif
+        example:
+          text: The room is small but cosy.
+          translation: La chambre est petite mais douillette.
+      - id: b1-neighbourhood
+        term: neighbourhood
+        translation: quartier
+        pos: nom
+        example:
+          text: It is a quiet neighbourhood in the evening.
+          translation: C'est un quartier calme le soir.
+
+  - id: v2-l3
+    title: Sur place
+    vocab:
+      - id: b1-sightseeing
+        term: sightseeing
+        translation: visite touristique
+        alt:
+          - tourisme
+        pos: nom
+        example:
+          text: We spent the morning sightseeing.
+          translation: Nous avons passé la matinée à faire du tourisme.
+      - id: b1-landmark
+        term: landmark
+        translation: monument emblématique
+        alt:
+          - point de repère
+        pos: nom
+        example:
+          text: The tower is the best-known landmark here.
+          translation: La tour est le monument le plus connu ici.
+      - id: b1-to-get-lost
+        term: to get lost
+        translation: se perdre
+        alt:
+          - s'égarer
+        pos: verbe
+        gap: got lost
+        example:
+          text: We got lost twice on the way.
+          translation: Nous nous sommes perdus deux fois en chemin.
+      - id: b1-souvenir
+        term: souvenir
+        translation: objet souvenir
+        alt:
+          - souvenir
+        pos: nom
+        hint: "Uniquement l'objet rapporté : le souvenir en mémoire se dit « memory »."
+        example:
+          text: She bought a souvenir for her sister.
+          translation: Elle a acheté un souvenir pour sa sœur.
+      - id: b1-worth
+        term: worth
+        translation: qui vaut la peine
+        alt:
+          - valant
+        pos: adjectif
+        example:
+          text: The museum is worth a visit.
+          translation: Le musée vaut la visite.
+      - id: b1-to-wander
+        term: to wander
+        translation: flâner
+        alt:
+          - errer
+        pos: verbe
+        gap: wandered
+        example:
+          text: We wandered through the old town.
+          translation: Nous avons flâné dans la vieille ville.
+      - id: b1-crowd
+        term: crowd
+        translation: foule
+        pos: nom
+        example:
+          text: A crowd gathered near the fountain.
+          translation: Une foule s'est rassemblée près de la fontaine.
+      - id: b1-lively
+        term: lively
+        translation: animé
+        alt:
+          - vivant
+        pos: adjectif
+        example:
+          text: The market is lively on Saturdays.
+          translation: Le marché est animé le samedi.

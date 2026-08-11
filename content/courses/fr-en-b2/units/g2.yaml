@@ -1,0 +1,192 @@
+id: g2
+title: Modalité et déduction
+subtitle: Nuancer la certitude et le reproche
+icon: book
+color: violet
+level: B2.1
+
+lessons:
+  - id: g2-l1
+    title: Déduire sur le passé
+    notes: |
+      Pour raisonner sur ce qui a dû se produire, l'anglais empile un modal et un
+      infinitif passé : **modal + `have` + participe passé**.
+
+      — Certitude positive : `must have`.
+        He must have forgotten. Il a dû oublier.
+      — Certitude négative : `can't have` / `couldn't have`.
+        She can't have seen us. Elle n'a pas pu nous voir.
+      — Simple possibilité : `may` / `might` / `could have`.
+        They might have left already. Ils sont peut-être déjà partis.
+
+      ! « Mustn't have » n'exprime pas la déduction négative : c'est
+      `can't have` qui joue ce rôle.
+    points:
+      - id: g2-deduce-1
+        sentence: The lights are off; they ___ already gone home.
+        answer: must have
+        options:
+          - must have
+          - can have
+          - should have
+          - must
+        translation: Les lumières sont éteintes, ils ont dû rentrer.
+        explanation: "Déduction quasi certaine à partir d'un indice : must + have + participe."
+
+      - id: g2-deduce-2
+        sentence: She ___ seen us; she was facing the other way.
+        answer: cannot have
+        alt:
+          - can't have
+          - could not have
+          - couldn't have
+        options:
+          - cannot have
+          - must not have
+          - should not have
+          - did not have
+        translation: Elle n'a pas pu nous voir ; elle était tournée dans l'autre sens.
+        explanation: "Déduction négative : « can't have », jamais « mustn't have »."
+
+      - id: g2-deduce-3
+        sentence: I am not sure, but he ___ missed the train.
+        answer: might have
+        options:
+          - might have
+          - must have
+          - cannot have
+          - would have
+        translation: Je n'en suis pas sûr, mais il a peut-être raté le train.
+        explanation: "Simple possibilité : might / may / could + have + participe."
+
+      - id: g2-deduce-4
+        sentence: You ___ told me earlier; I would have changed my plans.
+        answer: should have
+        options:
+          - should have
+          - must have
+          - can have
+          - would have
+        translation: Tu aurais dû me le dire plus tôt, j'aurais changé mes plans.
+        explanation: "Reproche sur une action non faite : should + have + participe."
+
+      - id: g2-deduce-5
+        sentence: There is no answer. She ___ be asleep.
+        answer: must
+        options:
+          - must
+          - can
+          - should
+          - would
+        translation: Personne ne répond. Elle doit dormir.
+        explanation: "Déduction sur le présent : modal seul, sans « have »."
+
+      - id: g2-deduce-6
+        sentence: They ___ have finished by now, but I would not count on it.
+        answer: may
+        alt:
+          - might
+          - could
+        options:
+          - may
+          - must
+          - cannot
+          - should
+        translation: Ils ont peut-être fini à l'heure qu'il est, mais je n'y compterais pas.
+        explanation: L'incertitude affichée par la deuxième moitié impose un modal de possibilité.
+
+  - id: g2-l2
+    title: Obligation et absence d'obligation
+    notes: |
+      `mustn't` et `don't have to` se ressemblent, mais disent **le contraire
+      l'un de l'autre**. C'est le piège le plus coûteux du niveau.
+
+      — `mustn't` : c'est __interdit__.
+        You mustn't park here. Interdiction de se garer.
+      — `don't have to` / `needn't` : c'est __facultatif__.
+        You don't have to come. Tu viens si tu veux.
+
+      Au passé, deux formes voisines distinguent ce qui a été fait de ce qui ne
+      l'a pas été.
+
+      — `needn't have` + participe : l'action **a eu lieu**, inutilement.
+        We needn't have hurried. Nous nous sommes pressés pour rien.
+      — `didn't need to` : l'obligation n'existait pas, l'action n'a **pas** eu lieu.
+        She didn't need to pay. Elle n'a pas eu à payer.
+    points:
+      - id: g2-oblig-1
+        sentence: You ___ touch that wire; it is live.
+        answer: must not
+        alt:
+          - mustn't
+        options:
+          - must not
+          - do not have to
+          - need not
+          - should not have
+        translation: Tu ne dois pas toucher ce fil, il est sous tension.
+        explanation: "Interdiction formelle : mustn't."
+
+      - id: g2-oblig-2
+        sentence: You ___ bring anything; everything is provided.
+        answer: do not have to
+        alt:
+          - don't have to
+          - need not
+          - needn't
+        options:
+          - do not have to
+          - must not
+          - should not
+          - cannot
+        translation: Tu n'as rien à apporter ; tout est fourni.
+        explanation: "Absence d'obligation, pas interdiction : don't have to."
+
+      - id: g2-oblig-3
+        sentence: We ___ hurried; the train was delayed anyway.
+        answer: need not have
+        alt:
+          - needn't have
+        options:
+          - need not have
+          - did not need to
+          - must not have
+          - should not
+        translation: Nous n'avions pas besoin de nous presser, le train avait du retard de toute façon.
+        explanation: "« Needn't have » : l'action a bien été faite, et pour rien."
+
+      - id: g2-oblig-4
+        sentence: Luckily she ___ pay the fine, so she kept her money.
+        answer: did not need to
+        alt:
+          - didn't need to
+        options:
+          - did not need to
+          - need not have
+          - must not have
+          - could not have
+        translation: Heureusement elle n'a pas eu besoin de payer l'amende, elle a donc gardé son argent.
+        explanation: "« Didn't need to » : l'obligation n'existait pas, et l'action n'a pas eu lieu."
+
+      - id: g2-oblig-5
+        sentence: Visitors ___ wear a badge at all times.
+        answer: are required to
+        options:
+          - are required to
+          - are allowed to
+          - need not
+          - had better not
+        translation: Les visiteurs sont tenus de porter un badge en permanence.
+        explanation: "Registre administratif de l'obligation : be required to."
+
+      - id: g2-oblig-6
+        sentence: You ___ check the address before you leave.
+        answer: had better
+        options:
+          - had better
+          - would better
+          - have better
+          - should have
+        translation: Tu ferais mieux de vérifier l'adresse avant de partir.
+        explanation: "Conseil pressant : « had better » + base verbale, sans « to »."
+
