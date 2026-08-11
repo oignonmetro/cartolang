@@ -37,15 +37,23 @@ export function ConjugationAnswer({
     <div className="flex flex-1 flex-col gap-5">
       <p className="text-sm font-bold uppercase tracking-wide text-ink-faint">Conjuguez</p>
 
-      <div className="card-3d my-auto flex flex-col items-center gap-3 px-5 py-8 text-center">
-        <span className="text-3xl font-black break-words">{verb.verb}</span>
-        {verb.translation && <span className="text-sm text-ink-soft">{verb.translation}</span>}
+      {/* Seule cette enveloppe est flexible : la carte se centre dedans, mais
+          l'input et le bouton restent collés juste après (comme dans
+          Flashcard.tsx) — une marge auto sur la carte les aurait écartés
+          d'elle sur les écrans hauts. */}
+      <div className="flex flex-1 items-center">
+        <div className="card-3d flex w-full flex-col items-center gap-3 px-5 py-8 text-center">
+          <span className="text-3xl font-black break-words">{verb.verb}</span>
+          {verb.translation && <span className="text-sm text-ink-soft">{verb.translation}</span>}
 
-        <div className="mt-2 flex flex-wrap items-center justify-center gap-2">
-          <span className="rounded-full bg-sky/15 px-3 py-1 text-xs font-extrabold uppercase tracking-wide text-sky">
-            {verb.tense}
-          </span>
-          <span className="rounded-full bg-line px-3 py-1 text-xs font-extrabold text-ink-soft">{form.person}</span>
+          <div className="mt-2 flex flex-wrap items-center justify-center gap-2">
+            <span className="rounded-full bg-sky/15 px-3 py-1 text-xs font-extrabold uppercase tracking-wide text-sky">
+              {verb.tense}
+            </span>
+            <span className="rounded-full bg-line px-3 py-1 text-xs font-extrabold text-ink-soft">
+              {form.person}
+            </span>
+          </div>
         </div>
       </div>
 
