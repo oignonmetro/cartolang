@@ -293,10 +293,13 @@ function TrackSummary({
           color={tone.css}
         />
         <div className="flex-1">
-          <p className={`text-[0.65rem] font-black uppercase tracking-wide ${tone.text}`}>Vue d'ensemble</p>
-          <h2 className="text-base leading-tight font-extrabold">{track.title}</h2>
-          <p className="text-xs text-ink-soft">{masteredLabel(track.kind, known, total)}</p>
-          {track.subtitle && <p className="mt-0.5 text-xs text-ink-faint">{track.subtitle}</p>}
+          {/* Ni « Vue d'ensemble » ni le nom de la piste : l'onglet juste
+              au-dessus les dit déjà. Le sous-titre porte l'intention de la
+              piste, la maîtrise en dessous porte le chiffre qui avance. */}
+          {track.subtitle && <p className="text-sm leading-snug font-extrabold text-ink">{track.subtitle}</p>}
+          <p className={`text-xs font-bold ${tone.text} ${track.subtitle ? 'mt-0.5' : ''}`}>
+            {masteredLabel(track.kind, known, total)}
+          </p>
         </div>
       </div>
 
