@@ -50,26 +50,37 @@ const kinds = (nodes: ReturnType<typeof buildUnitPath>) => nodes.map((node) => n
 const statuses = (nodes: ReturnType<typeof buildUnitPath>) => nodes.map((node) => node.status)
 
 describe('composition du parcours', () => {
-  it('intercale une révision toutes les deux leçons, puis clôt par approfondissement et entraînement', () => {
+  it('suit chaque leçon d’une révision puis d’une consolidation alternée, et clôt par une séance finale', () => {
     expect(kinds(buildUnitPath(U3, {}, {}))).toEqual([
       'lesson',
-      'lesson',
       'review',
+      'workout',
       'lesson',
       'review',
       'drill',
+      'lesson',
+      'review',
       'workout',
+      'final',
     ])
   })
 
-  it('n’ajoute pas de révision finale quand la dernière leçon vient d’en déclencher une', () => {
-    expect(kinds(buildUnitPath(U2, {}, {}))).toEqual(['lesson', 'lesson', 'review', 'drill', 'workout'])
+  it('alterne entraînement et approfondissement en commençant par l’entraînement', () => {
+    expect(kinds(buildUnitPath(U2, {}, {}))).toEqual([
+      'lesson',
+      'review',
+      'workout',
+      'lesson',
+      'review',
+      'drill',
+      'final',
+    ])
   })
 })
 
 describe('progression dans le parcours', () => {
   it('n’ouvre que la première étape au démarrage', () => {
-    expect(statuses(buildUnitPath(U3, {}, {}))).toEqual([
+    expect(statuses(buildUnitPath(U2, {}, {}))).toEqual([
       'available',
       'locked',
       'locked',
@@ -86,14 +97,13 @@ describe('progression dans le parcours', () => {
   })
 
   it('reconnaît une étape de révision franchie', () => {
-    const progress = { 'v1-l1': done, 'v1-l2': done }
-    const locked = buildUnitPath(U3, progress, {})
-    expect(locked[2]!.status).toBe('available')
-    expect(locked[3]!.status).toBe('locked')
+    const path = buildUnitPath(U3, { 'v1-l1': done }, {})
+    expect(path[1]!.status).toBe('available')
+    expect(path[2]!.status).toBe('locked')
 
-    const opened = buildUnitPath(U3, progress, { [stepKey('v1', locked[2]!.id)]: 1 })
-    expect(opened[2]!.status).toBe('done')
-    expect(opened[3]!.status).toBe('available')
+    const opened = buildUnitPath(U3, { 'v1-l1': done }, { [stepKey('v1', path[1]!.id)]: 1 })
+    expect(opened[1]!.status).toBe('done')
+    expect(opened[2]!.status).toBe('available')
   })
 
   it('laisse une étape déjà faite accessible', () => {
@@ -101,17 +111,23 @@ describe('progression dans le parcours', () => {
     const path = buildUnitPath(U3, { 'v1-l1': done }, {})
     expect(path[0]!.status).toBe('done')
   })
+
+  it('n’ouvre la séance finale qu’après la dernière consolidation', () => {
+    const path = buildUnitPath(U2, {}, {})
+    const final = path.find((node) => node.kind === 'final')!
+    expect(final.status).toBe('locked')
+  })
 })
 
 describe('étape suivante', () => {
   it('donne le nœud d’après, révision comprise', () => {
-    const path = buildUnitPath(U3, { 'v1-l1': done, 'v1-l2': done }, {})
-    expect(nextNodeAfter(path, 'v1-l2')?.kind).toBe('review')
+    const path = buildUnitPath(U3, { 'v1-l1': done }, {})
+    expect(nextNodeAfter(path, 'v1-l1')?.kind).toBe('review')
   })
 
   it('renvoie null au bout du parcours', () => {
     const path = buildUnitPath(U3, {}, {})
-    expect(nextNodeAfter(path, 'workout')).toBeNull()
+    expect(nextNodeAfter(path, 'final')).toBeNull()
   })
 })
 

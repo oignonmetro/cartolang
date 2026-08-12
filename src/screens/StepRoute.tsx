@@ -52,15 +52,19 @@ function StepSession({ unitId, stepId }: { unitId: string; stepId: string }) {
       scope: node.kind === 'workout' ? 'course' : 'unit',
       unitItemIds: itemsOfUnit(unit).map((item) => item.id),
       now: Date.now(),
-      limit: STEP_LIMIT,
+      // La séance finale est un bilan complet : pas de plafond court comme
+      // pour les étapes intermédiaires.
+      limit: node.kind === 'final' ? itemsOfUnit(unit).length : STEP_LIMIT,
     })
   })
 
   const exercises = useMemo(() => {
     if (!node) return []
-    // L'approfondissement force la production ; les deux autres suivent
-    // l'état réel de chaque carte.
-    return node.kind === 'drill' ? buildPracticeSession(entries) : buildReviewSession(entries)
+    // L'approfondissement et la séance finale forcent la production ; les
+    // deux autres suivent l'état réel de chaque carte.
+    return node.kind === 'drill' || node.kind === 'final'
+      ? buildPracticeSession(entries)
+      : buildReviewSession(entries)
   }, [entries, node])
 
   if (!unit || !node || node.kind === 'lesson') return <Navigate to="/" replace />
@@ -74,7 +78,6 @@ function StepSession({ unitId, stepId }: { unitId: string; stepId: string }) {
         outcome={finished.outcome}
         passed
         xp={finished.xp}
-        level={null}
         onContinue={backToPath}
         onNext={
           next && next.status !== 'locked'

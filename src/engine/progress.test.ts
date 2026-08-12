@@ -7,10 +7,9 @@ import {
   dayKey,
   displayedStreak,
   isUnitComplete,
-  lessonStars,
+  lessonDifficulty,
   levelFromXp,
   nextLesson,
-  starsFromMastery,
   xpFor,
   type LessonProgressMap,
 } from './progress'
@@ -69,25 +68,21 @@ describe('chemin', () => {
     expect(statuses({})).toEqual(['available', 'locked', 'locked'])
   })
 
-  it('débloque la suivante dès la première étoile', () => {
-    expect(statuses({ l1: at(1) })).toEqual(['partial', 'available', 'locked'])
-  })
-
-  it('marque une leçon maîtrisée à trois étoiles', () => {
-    expect(statuses({ l1: at(3) })).toEqual(['mastered', 'available', 'locked'])
+  it('débloque la suivante dès que la leçon est faite', () => {
+    expect(statuses({ l1: at(1) })).toEqual(['done', 'available', 'locked'])
   })
 
   it('franchit les unités sans traitement particulier', () => {
-    expect(statuses({ l1: at(1), l2: at(2) })).toEqual(['partial', 'partial', 'available'])
+    expect(statuses({ l1: at(1), l2: at(1) })).toEqual(['done', 'done', 'available'])
   })
 
   it('propose la première leçon jouable', () => {
-    const path = buildPath(COURSE, { l1: at(3) })
+    const path = buildPath(COURSE, { l1: at(1) })
     expect(nextLesson(path)?.lesson.id).toBe('l2')
   })
 
-  it('ne propose plus rien quand tout est maîtrisé', () => {
-    expect(nextLesson(buildPath(COURSE, { l1: at(3), l2: at(3), l3: at(3) }))).toBeNull()
+  it('ne propose plus rien quand tout est fait', () => {
+    expect(nextLesson(buildPath(COURSE, { l1: at(1), l2: at(1), l3: at(1) }))).toBeNull()
   })
 
   it('reconnaît une unité terminée', () => {
@@ -97,7 +92,7 @@ describe('chemin', () => {
   })
 })
 
-describe('étoiles d’une leçon', () => {
+describe('difficulté d’une leçon', () => {
   const LESSON: VocabLesson = {
     kind: 'vocab',
     id: 'l',
@@ -112,40 +107,23 @@ describe('étoiles d’une leçon', () => {
 
   const cardsOf = (...entries: CardState[]) => Object.fromEntries(entries.map((card) => [card.itemId, card]))
 
-  it('n’accorde rien tant qu’un élément n’a pas été vu', () => {
+  it('reste en découverte tant qu’un élément n’a pas été vu', () => {
     const partial = cardsOf(seen('a', 1), seen('b', 1), seen('c', 1), seen('d', 1))
-    expect(starsFromMastery(LESSON, partial)).toBe(0)
+    expect(lessonDifficulty(LESSON, partial)).toBe(0)
     // Une carte créée mais jamais répondue ne compte pas comme vue.
-    expect(starsFromMastery(LESSON, { ...partial, e: createCard('e', 0) })).toBe(0)
+    expect(lessonDifficulty(LESSON, { ...partial, e: createCard('e', 0) })).toBe(0)
   })
 
-  it('accorde la première étoile dès que toute la leçon a été parcourue', () => {
+  it('passe en consolidation dès que tout a été vu, sans être encore su', () => {
     const all = cardsOf(...['a', 'b', 'c', 'd', 'e'].map((id) => seen(id, 1)))
-    expect(starsFromMastery(LESSON, all)).toBe(1)
+    expect(lessonDifficulty(LESSON, all)).toBe(1)
   })
 
-  it('accorde la deuxième quand les éléments tiennent une semaine', () => {
+  it('passe en production quand 80 % des éléments tiennent au moins une semaine', () => {
     const four = ['a', 'b', 'c', 'd'].map((id) => seen(id, 7))
-    expect(starsFromMastery(LESSON, cardsOf(...four, seen('e', 1)))).toBe(2)
+    expect(lessonDifficulty(LESSON, cardsOf(...four, seen('e', 1)))).toBe(2)
     // Trois sur cinq restent sous le seuil de 80 %.
-    expect(starsFromMastery(LESSON, cardsOf(...four.slice(0, 3), seen('d', 1), seen('e', 1)))).toBe(1)
-  })
-
-  it('accorde la troisième quand ils tiennent un mois', () => {
-    const four = ['a', 'b', 'c', 'd'].map((id) => seen(id, 30))
-    expect(starsFromMastery(LESSON, cardsOf(...four, seen('e', 7)))).toBe(3)
-  })
-
-  it('ne redescend pas sous le plancher déjà atteint', () => {
-    // Une rechute ramène tout en apprentissage : la maîtrise chute, pas l'acquis.
-    const lapsed = cardsOf(...['a', 'b', 'c', 'd', 'e'].map((id) => seen(id, 1)))
-    expect(starsFromMastery(LESSON, lapsed)).toBe(1)
-    expect(lessonStars(LESSON, lapsed, 3)).toBe(3)
-  })
-
-  it('suit la maîtrise quand elle dépasse le plancher', () => {
-    const solid = cardsOf(...['a', 'b', 'c', 'd', 'e'].map((id) => seen(id, 30)))
-    expect(lessonStars(LESSON, solid, 1)).toBe(3)
+    expect(lessonDifficulty(LESSON, cardsOf(...four.slice(0, 3), seen('d', 1), seen('e', 1)))).toBe(1)
   })
 })
 

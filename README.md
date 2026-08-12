@@ -21,7 +21,7 @@ Le moteur est générique : un cours n'est qu'un jeu de fichiers YAML.
 | Vocabulaire | flashcard auto-évaluée, association de paires, phrase à trou, saisie clavier |
 | Grammaire | rappel de cours, phrase à trou avec banque de formes puis au clavier |
 | Conjugaison | association personnes/formes, puis production de mémoire |
-| Progression | parcours ordonné par unité, révision espacée (SM-2), étoiles gagnées par la maîtrise réelle, anneaux |
+| Progression | parcours ordonné par unité, révision espacée (SM-2), anneaux de maîtrise |
 | Motivation | série de jours, XP et niveaux, objectif quotidien |
 | Hors-ligne | total — contenu, polices et interface embarqués |
 | Cibles | PWA sur GitHub Pages, APK Android via Capacitor |
@@ -33,10 +33,12 @@ quoi commencer ; une fois dans une unité, un parcours ordonné le mène de la
 découverte à la maîtrise (`/unite/:unitId`, voir `src/engine/unitPath.ts`) :
 
 ```
-leçon → leçon → révision → leçon → révision → approfondissement → entraînement
+leçon → révision → entraînement → leçon → révision → approfondissement → leçon → révision → entraînement → séance finale
 ```
 
-Quatre natures d'étapes, chacune avec son rôle :
+Chaque leçon est immédiatement suivie d'une révision puis d'une consolidation,
+qui alterne entraînement et approfondissement — assez rapproché pour que rien
+ne s'oublie entre deux. Cinq natures d'étapes, chacune avec son rôle :
 
 - **Leçon** — la découverte. Sa difficulté suit ce que l'apprenant sait déjà de
   ses éléments : la découvrir donne la présentation, la reprendre une fois sue
@@ -46,23 +48,24 @@ Quatre natures d'étapes, chacune avec son rôle :
   qu'elle tient trois jours.
 - **Approfondissement** — les mêmes éléments, mais production forcée : plus de
   banque de mots, plus de reconnaissance.
-- **Entraînement** — le seul à sortir de l'unité. Il sert d'abord ce qui est
-  échu **ailleurs dans le cours** (les autres unités déjà travaillées
-  remontent naturellement avec le temps), puis complète avec les cartes les
-  plus fragiles — `intervalle / (1 + rechutes)`, du plus petit au plus grand.
-  Au tout début, quand rien d'extérieur n'est encore échu, il porte donc sur
+- **Entraînement** — sort de l'unité. Il sert d'abord ce qui est échu
+  **ailleurs dans le cours** (les autres unités déjà travaillées remontent
+  naturellement avec le temps), puis complète avec les cartes les plus
+  fragiles — `intervalle / (1 + rechutes)`, du plus petit au plus grand. Au
+  tout début, quand rien d'extérieur n'est encore échu, il porte donc sur
   l'unité en cours et ses points faibles, ce qui est exactement ce qu'il faut
   à ce moment-là.
+- **Séance finale** — clôt l'unité une fois toutes les leçons vues : un bilan
+  complet, en production, sur l'ensemble de ses éléments.
 
 En parallèle du parcours, l'écran d'accueil ouvre sur **ce qui est dû**, toutes
 pistes mélangées : c'est l'entrée « j'ai dix minutes » quand on ne veut pas
 choisir d'unité.
 
-Les étoiles ne comptent pas les passages mais mesurent ce qui est su : ★ leçon
-parcourue, ★★ éléments installés (≥ 7 j), ★★★ solidement acquis (≥ 30 j). Ce
-sont donc les révisions qui les font monter. Une étoile décrochée reste acquise
-(le champ `level` sert de plancher) ; l'anneau, lui, montre l'état réel en
-direct — les deux indicateurs se complètent au lieu de se répéter.
+Une leçon est acquise dès qu'elle est réussie une fois (le champ `level` sert
+de plancher, qui ne redescend jamais). Ce n'est pas une note : la maîtrise
+réelle se lit en direct sur les anneaux de progression, alimentés par les
+mêmes cartes de révision espacée que les étapes ci-dessus.
 
 ## Démarrer
 

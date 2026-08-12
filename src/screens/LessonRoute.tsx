@@ -4,7 +4,7 @@ import { useCourse } from '@/content/CourseProvider'
 import { buildLessonSession } from '@/engine/exercises'
 import { seedFrom } from '@/engine/rng'
 import { findLesson } from '@/content/course'
-import { starsFromMastery, type SessionOutcome } from '@/engine/progress'
+import { lessonDifficulty, type SessionOutcome } from '@/engine/progress'
 import { buildUnitPath, nextNodeAfter } from '@/engine/unitPath'
 import { useProgress } from '@/store/progressStore'
 import { SessionScreen } from './SessionScreen'
@@ -14,7 +14,6 @@ interface Finished {
   outcome: SessionOutcome
   passed: boolean
   xp: number
-  level: number
 }
 
 /**
@@ -34,12 +33,12 @@ function LessonSession({ lessonId }: { lessonId: string }) {
 
   const entry = useMemo(() => findLesson(course, lessonId), [course, lessonId])
 
-  // La difficulté suit ce qui est réellement su, plus le nombre de passages :
-  // rejouer une leçon déjà solide donne d'emblée de la production, la
-  // découvrir donne la présentation. Figée à l'ouverture pour que les réponses
-  // de la session en cours ne la fassent pas varier en cours de route.
+  // La difficulté suit ce qui est réellement su : rejouer une leçon déjà
+  // solide donne d'emblée de la production, la découvrir donne la
+  // présentation. Figée à l'ouverture pour que les réponses de la session en
+  // cours ne la fassent pas varier en cours de route.
   const [level] = useState(() =>
-    entry ? starsFromMastery(entry.lesson, useProgress.getState().cards) : 0,
+    entry ? lessonDifficulty(entry.lesson, useProgress.getState().cards) : 0,
   )
 
   // La graine change à chaque tentative pour que « Recommencer » rebatte les cartes.
@@ -68,7 +67,6 @@ function LessonSession({ lessonId }: { lessonId: string }) {
         outcome={finished.outcome}
         passed={finished.passed}
         xp={finished.xp}
-        level={finished.level}
         onContinue={backToPath}
         onNext={
           next && next.status !== 'locked'
@@ -95,10 +93,7 @@ function LessonSession({ lessonId }: { lessonId: string }) {
       exercises={exercises}
       onQuit={backToPath}
       onFinish={(outcome) => {
-        // Les cartes viennent d'être mises à jour par la session : les étoiles
-        // se calculent donc sur l'état d'après, pas celui d'avant.
-        const stars = starsFromMastery(entry.lesson, useProgress.getState().cards)
-        const result = finishLesson(lessonId, outcome, stars)
+        const result = finishLesson(lessonId, outcome)
         setFinished({ outcome, ...result })
       }}
     />

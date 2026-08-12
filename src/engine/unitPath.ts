@@ -14,7 +14,7 @@ import { levelOf, type LessonProgressMap } from './progress'
  * suite et ce qui alimente chaque étape.
  */
 
-export type UnitStepKind = 'review' | 'drill' | 'workout'
+export type UnitStepKind = 'review' | 'drill' | 'workout' | 'final'
 export type UnitNodeKind = 'lesson' | UnitStepKind
 export type UnitNodeStatus = 'done' | 'available' | 'locked'
 
@@ -33,6 +33,7 @@ const STEP_LABELS: Record<UnitStepKind, { title: string; subtitle: string }> = {
   review: { title: 'Révision', subtitle: "Reprendre ce qui vient d'être vu" },
   drill: { title: 'Approfondissement', subtitle: 'Produire de mémoire, sans aide' },
   workout: { title: 'Entraînement', subtitle: 'Vos points les plus fragiles' },
+  final: { title: 'Séance finale', subtitle: "Bilan complet de l'unité" },
 }
 
 /** Clé de persistance d'une étape : l'identifiant du nœud, préfixé par l'unité. */
@@ -43,22 +44,22 @@ export function stepKey(unitId: string, nodeId: string): string {
 /**
  * Suite des nœuds d'une unité, avant calcul des états.
  *
- * Une révision toutes les deux leçons, puis un approfondissement et un
- * entraînement pour clore l'unité : assez rapproché pour que rien ne
- * s'oublie entre deux, assez espacé pour ne pas hacher la découverte.
+ * Chaque leçon est immédiatement suivie d'une révision puis d'une
+ * consolidation, qui alterne entraînement (points fragiles, dans et hors de
+ * l'unité) et approfondissement (production sur l'unité seule) — le cycle
+ * s'ouvre par l'entraînement. Rien n'a le temps de s'oublier entre deux
+ * leçons. L'unité se clôt par une séance finale unique, bilan complet une
+ * fois toutes les leçons vues.
  */
 function layout(unit: Unit): { id: string; kind: UnitNodeKind; lesson: Lesson | null }[] {
   const nodes: { id: string; kind: UnitNodeKind; lesson: Lesson | null }[] = []
 
   unit.lessons.forEach((lesson, index) => {
     nodes.push({ id: lesson.id, kind: 'lesson', lesson })
-    if (index % 2 === 1) nodes.push({ id: `review-${index}`, kind: 'review', lesson: null })
+    nodes.push({ id: `review-${index}`, kind: 'review', lesson: null })
+    nodes.push({ id: `consolidate-${index}`, kind: index % 2 === 0 ? 'workout' : 'drill', lesson: null })
   })
-  // Unité à nombre impair de leçons : la dernière n'a pas encore été reprise.
-  if (unit.lessons.length % 2 === 1) nodes.push({ id: 'review-fin', kind: 'review', lesson: null })
-
-  nodes.push({ id: 'drill', kind: 'drill', lesson: null })
-  nodes.push({ id: 'workout', kind: 'workout', lesson: null })
+  nodes.push({ id: 'final', kind: 'final', lesson: null })
   return nodes
 }
 

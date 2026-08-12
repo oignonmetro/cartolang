@@ -8,7 +8,7 @@ import { unitMastery } from '@/engine/progress'
 import { buildUnitPath, type UnitNodeKind, type UnitPathNode } from '@/engine/unitPath'
 import { useProgress } from '@/store/progressStore'
 import { ProgressRing } from '@/components/ProgressRing'
-import { BoltIcon, BookIcon, ChestIcon, CheckIcon, ChevronLeftIcon, LockIcon, RefreshIcon } from '@/components/icons'
+import { BoltIcon, BookIcon, ChestIcon, CheckIcon, ChevronLeftIcon, FlagIcon, LockIcon, RefreshIcon } from '@/components/icons'
 
 /**
  * Parcours d'une unité.
@@ -41,6 +41,7 @@ const NODE_ICONS: Record<UnitNodeKind, (props: { size?: number }) => React.React
   review: RefreshIcon,
   drill: BoltIcon,
   workout: ChestIcon,
+  final: FlagIcon,
 }
 
 /**
@@ -114,7 +115,7 @@ export function UnitPathScreen() {
         ))}
 
         <p className="mt-4 max-w-xs text-center text-xs text-ink-faint">
-          {itemsOfUnit(unit).length} éléments dans cette unité. L'entraînement final va aussi chercher vos points
+          {itemsOfUnit(unit).length} éléments dans cette unité. Les entraînements vont aussi chercher vos points
           fragiles dans les autres unités déjà travaillées.
         </p>
       </main>

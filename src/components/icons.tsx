@@ -97,6 +97,15 @@ export function ChestIcon(props: IconProps) {
   )
 }
 
+export function FlagIcon(props: IconProps) {
+  return (
+    <svg {...svgProps(props)}>
+      <path d="M6 21V4" />
+      <path d="M6 4h12l-3 4 3 4H6" />
+    </svg>
+  )
+}
+
 export function BookIcon(props: IconProps) {
   return (
     <svg {...svgProps(props)}>

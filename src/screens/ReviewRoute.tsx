@@ -43,7 +43,6 @@ export function ReviewRoute() {
         outcome={finished.outcome}
         passed
         xp={finished.xp}
-        level={null}
         onContinue={() => navigate('/', { replace: true })}
         onRetry={() => navigate('/', { replace: true })}
       />

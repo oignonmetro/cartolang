@@ -2,7 +2,7 @@ import { Fragment, useMemo } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import type { PathCourse, Unit } from '@/content/schema'
-import { buildPath, dayKey, displayedStreak, levelFromXp, MAX_LEVEL, type LessonNode } from '@/engine/progress'
+import { buildPath, dayKey, displayedStreak, levelFromXp, type LessonNode } from '@/engine/progress'
 import { dueCards } from '@/engine/srs'
 import { useProgress } from '@/store/progressStore'
 import { Mascot } from '@/components/Mascot'
@@ -79,7 +79,7 @@ export function PathScreen({ course }: { course: PathCourse }) {
                   onOpen={() => navigate(`/lecon/${node.lesson.id}`)}
                 />
               ))}
-              <ChestNode unlocked={nodes.every((node) => node.level >= 1)} />
+              <ChestNode unlocked={nodes.every((node) => node.status === 'done')} />
             </div>
           </Fragment>
         ))}
@@ -106,7 +106,7 @@ function groupByUnit(path: LessonNode[]): { unit: Unit; nodes: LessonNode[] }[] 
 
 function UnitBanner({ unit, index, nodes }: { unit: Unit; index: number; nodes: LessonNode[] }) {
   const tone = UNIT_TONES[unit.color]
-  const done = nodes.filter((node) => node.level >= 1).length
+  const done = nodes.filter((node) => node.status === 'done').length
 
   return (
     <div
@@ -128,8 +128,8 @@ function UnitBanner({ unit, index, nodes }: { unit: Unit; index: number; nodes: 
 function LessonBubble({ node, offset, onOpen }: { node: LessonNode; offset: number; onOpen: () => void }) {
   const tone = UNIT_TONES[node.unit.color]
   const locked = node.status === 'locked'
-  const mastered = node.status === 'mastered'
-  const active = node.status === 'available' && node.level === 0
+  const done = node.status === 'done'
+  const active = node.status === 'available'
 
   return (
     <div className="relative flex flex-col items-center py-3" style={{ transform: `translateX(${offset}px)` }}>
@@ -154,27 +154,16 @@ function LessonBubble({ node, offset, onOpen }: { node: LessonNode; offset: numb
         whileTap={locked ? undefined : { scale: 0.92, y: 4 }}
         aria-label={`${node.lesson.title}${locked ? ' (verrouillée)' : ''}`}
         className={`flex h-18 w-18 items-center justify-center rounded-full text-white transition-colors ${
-          locked ? 'bg-line text-ink-faint' : mastered ? 'bg-amber' : tone.bg
+          locked ? 'bg-line text-ink-faint' : tone.bg
         }`}
         style={{
           width: '4.5rem',
           height: '4.5rem',
-          boxShadow: `0 6px 0 0 ${locked ? 'var(--color-line)' : mastered ? 'var(--color-amber-deep)' : tone.deep}`,
+          boxShadow: `0 6px 0 0 ${locked ? 'var(--color-line)' : tone.deep}`,
         }}
       >
-        {locked ? <LockIcon size={26} /> : mastered ? <StarIcon filled size={30} /> : node.level > 0 ? <CheckIcon size={30} /> : <UnitIcon name={node.unit.icon} size={28} />}
+        {locked ? <LockIcon size={26} /> : done ? <CheckIcon size={30} /> : <UnitIcon name={node.unit.icon} size={28} />}
       </motion.button>
-
-      <div className="mt-2 flex gap-0.5">
-        {Array.from({ length: MAX_LEVEL }, (_, index) => (
-          <StarIcon
-            key={index}
-            filled={index < node.level}
-            size={12}
-            className={index < node.level ? 'text-amber' : 'text-line'}
-          />
-        ))}
-      </div>
 
       <span className={`mt-1 max-w-32 text-center text-xs font-bold ${locked ? 'text-ink-faint' : 'text-ink-soft'}`}>
         {node.lesson.title}

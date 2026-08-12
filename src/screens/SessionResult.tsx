@@ -1,15 +1,14 @@
 import { motion } from 'framer-motion'
 import { Button } from '@/components/Button'
 import { Mascot } from '@/components/Mascot'
-import { BoltIcon, StarIcon } from '@/components/icons'
-import { accuracyOf, MAX_LEVEL, type SessionOutcome } from '@/engine/progress'
+import { BoltIcon } from '@/components/icons'
+import { accuracyOf, type SessionOutcome } from '@/engine/progress'
 
-/** Écran de fin de session : score, étoile gagnée, XP. */
+/** Écran de fin de session : score et XP gagnés. */
 export function SessionResult({
   outcome,
   passed,
   xp,
-  level,
   onContinue,
   onNext,
   onRetry,
@@ -17,10 +16,8 @@ export function SessionResult({
   outcome: SessionOutcome
   passed: boolean
   xp: number
-  /** Étoiles de la leçon, ou `null` pour une session de révision. */
-  level: number | null
   onContinue: () => void
-  /** Enchaîne sur la leçon suivante, quand il y en a une dans la piste. */
+  /** Enchaîne sur l'étape suivante, quand il y en a une dans le parcours. */
   onNext?: () => void
   onRetry: () => void
 }) {
@@ -36,30 +33,12 @@ export function SessionResult({
         <Mascot mood={passed ? 'cheer' : 'disappointed'} size={150} />
       </motion.div>
 
-      <h1 className="text-3xl font-black">
-        {passed ? (level === MAX_LEVEL ? 'Leçon maîtrisée !' : 'Bien joué !') : 'Presque…'}
-      </h1>
+      <h1 className="text-3xl font-black">{passed ? 'Bien joué !' : 'Presque…'}</h1>
       <p className="max-w-xs text-sm text-ink-soft">
         {passed
           ? 'Ces mots reviendront au bon moment dans vos révisions.'
           : `Il faut 70 % de bonnes réponses pour valider. Vous êtes à ${accuracy} %.`}
       </p>
-
-      {level !== null && (
-        <div className="flex gap-2">
-          {Array.from({ length: MAX_LEVEL }, (_, index) => (
-            <motion.span
-              key={index}
-              initial={{ scale: 0, rotate: -30 }}
-              animate={{ scale: 1, rotate: 0 }}
-              transition={{ delay: 0.15 + index * 0.12, type: 'spring', stiffness: 300, damping: 14 }}
-              className={index < level ? 'text-amber' : 'text-line'}
-            >
-              <StarIcon filled={index < level} size={40} />
-            </motion.span>
-          ))}
-        </div>
-      )}
 
       <div className="grid w-full max-w-sm grid-cols-2 gap-3">
         <Stat label="Réussite" value={`${accuracy} %`} tone="text-teal" />
