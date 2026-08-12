@@ -1,13 +1,16 @@
 import { describe, expect, it } from 'vitest'
-import type { PathCourse, Vocab } from '@/content/schema'
+import type { PathCourse, Vocab, VocabLesson } from '@/content/schema'
+import { createCard, type CardState } from './srs'
 import {
   buildPath,
   bumpStreak,
   dayKey,
   displayedStreak,
   isUnitComplete,
+  lessonStars,
   levelFromXp,
   nextLesson,
+  starsFromMastery,
   xpFor,
   type LessonProgressMap,
 } from './progress'
@@ -91,6 +94,58 @@ describe('chemin', () => {
     const unit = COURSE.sections[0].units[0]
     expect(isUnitComplete(unit, { l1: at(1) })).toBe(false)
     expect(isUnitComplete(unit, { l1: at(1), l2: at(1) })).toBe(true)
+  })
+})
+
+describe('étoiles d’une leçon', () => {
+  const LESSON: VocabLesson = {
+    kind: 'vocab',
+    id: 'l',
+    title: 'L',
+    vocab: ['a', 'b', 'c', 'd', 'e'].map(vocab),
+  }
+
+  /** Carte sortie d'apprentissage, avec l'intervalle voulu (en jours). */
+  function seen(itemId: string, interval: number): CardState {
+    return { ...createCard(itemId, 0), interval, step: null, lastReviewed: 1 }
+  }
+
+  const cardsOf = (...entries: CardState[]) => Object.fromEntries(entries.map((card) => [card.itemId, card]))
+
+  it('n’accorde rien tant qu’un élément n’a pas été vu', () => {
+    const partial = cardsOf(seen('a', 1), seen('b', 1), seen('c', 1), seen('d', 1))
+    expect(starsFromMastery(LESSON, partial)).toBe(0)
+    // Une carte créée mais jamais répondue ne compte pas comme vue.
+    expect(starsFromMastery(LESSON, { ...partial, e: createCard('e', 0) })).toBe(0)
+  })
+
+  it('accorde la première étoile dès que toute la leçon a été parcourue', () => {
+    const all = cardsOf(...['a', 'b', 'c', 'd', 'e'].map((id) => seen(id, 1)))
+    expect(starsFromMastery(LESSON, all)).toBe(1)
+  })
+
+  it('accorde la deuxième quand les éléments tiennent une semaine', () => {
+    const four = ['a', 'b', 'c', 'd'].map((id) => seen(id, 7))
+    expect(starsFromMastery(LESSON, cardsOf(...four, seen('e', 1)))).toBe(2)
+    // Trois sur cinq restent sous le seuil de 80 %.
+    expect(starsFromMastery(LESSON, cardsOf(...four.slice(0, 3), seen('d', 1), seen('e', 1)))).toBe(1)
+  })
+
+  it('accorde la troisième quand ils tiennent un mois', () => {
+    const four = ['a', 'b', 'c', 'd'].map((id) => seen(id, 30))
+    expect(starsFromMastery(LESSON, cardsOf(...four, seen('e', 7)))).toBe(3)
+  })
+
+  it('ne redescend pas sous le plancher déjà atteint', () => {
+    // Une rechute ramène tout en apprentissage : la maîtrise chute, pas l'acquis.
+    const lapsed = cardsOf(...['a', 'b', 'c', 'd', 'e'].map((id) => seen(id, 1)))
+    expect(starsFromMastery(LESSON, lapsed)).toBe(1)
+    expect(lessonStars(LESSON, lapsed, 3)).toBe(3)
+  })
+
+  it('suit la maîtrise quand elle dépasse le plancher', () => {
+    const solid = cardsOf(...['a', 'b', 'c', 'd', 'e'].map((id) => seen(id, 30)))
+    expect(lessonStars(LESSON, solid, 1)).toBe(3)
   })
 })
 

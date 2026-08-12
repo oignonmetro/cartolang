@@ -11,14 +11,17 @@ export function SessionResult({
   xp,
   level,
   onContinue,
+  onNext,
   onRetry,
 }: {
   outcome: SessionOutcome
   passed: boolean
   xp: number
-  /** Niveau atteint par la leçon, ou `null` pour une session de révision. */
+  /** Étoiles de la leçon, ou `null` pour une session de révision. */
   level: number | null
   onContinue: () => void
+  /** Enchaîne sur la leçon suivante, quand il y en a une dans la piste. */
+  onNext?: () => void
   onRetry: () => void
 }) {
   const accuracy = Math.round(accuracyOf(outcome) * 100)
@@ -64,9 +67,23 @@ export function SessionResult({
       </div>
 
       <div className="mt-2 flex w-full max-w-sm flex-col gap-3">
-        <Button block onClick={onContinue}>
-          Continuer
-        </Button>
+        {/* Enchaîner est l'envie naturelle après une leçon réussie : c'est
+            donc l'action principale, et non un retour à la bibliothèque où il
+            faudrait retrouver sa place à la main. */}
+        {passed && onNext ? (
+          <>
+            <Button block onClick={onNext}>
+              Leçon suivante
+            </Button>
+            <Button block tone="neutral" onClick={onContinue}>
+              Terminer
+            </Button>
+          </>
+        ) : (
+          <Button block onClick={onContinue}>
+            Continuer
+          </Button>
+        )}
         {!passed && (
           <Button block tone="neutral" onClick={onRetry}>
             Recommencer

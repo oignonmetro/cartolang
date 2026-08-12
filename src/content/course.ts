@@ -41,6 +41,23 @@ export function findLesson(course: Course, lessonId: string): LessonEntry | null
 }
 
 /**
+ * Leçon suivante dans l'ordre de déclaration : la suite de l'unité, puis
+ * l'unité suivante. Sert à enchaîner en fin de session, pour ne pas renvoyer
+ * l'apprenant chercher sa place dans la bibliothèque.
+ *
+ * Reste dans la même piste : passer du vocabulaire à la grammaire au milieu
+ * d'une série serait une rupture, pas un enchaînement.
+ */
+export function nextLessonAfter(course: Course, lessonId: string): LessonEntry | null {
+  const all = lessonsOf(course)
+  const index = all.findIndex((entry) => entry.lesson.id === lessonId)
+  if (index === -1) return null
+  const next = all[index + 1]
+  if (!next) return null
+  return next.track?.id === all[index]!.track?.id ? next : null
+}
+
+/**
  * Les éléments pratiquables d'une leçon, à plat.
  * C'est cette liste qui alimente la révision espacée : un élément, une carte.
  */
@@ -59,6 +76,10 @@ export function itemsOfLesson(lesson: Lesson): PracticeItem[] {
 
 export function itemsOfUnit(unit: Unit): PracticeItem[] {
   return unit.lessons.flatMap(itemsOfLesson)
+}
+
+export function findUnit(course: Course, unitId: string): Unit | null {
+  return unitsOf(course).find(({ unit }) => unit.id === unitId)?.unit ?? null
 }
 
 export function itemsOfCourse(course: Course): PracticeItem[] {

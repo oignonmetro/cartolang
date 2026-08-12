@@ -320,24 +320,35 @@ function buildConjugationSession(
 }
 
 /**
- * Session de révision : construite à partir des cartes échues, tous cours
- * confondus. Les cartes encore fragiles restent en reconnaissance, les
- * cartes solides passent à la production.
+ * Intervalle à partir duquel une carte passe en production plutôt qu'en
+ * reconnaissance. Trois jours, soit dès la deuxième révision : au-delà, la
+ * reconnaissance s'installe comme un plafond — on croit savoir un mot qu'on
+ * ne sait en réalité que reconnaître.
  */
-export function buildReviewSession(
+const SOLID_INTERVAL = 3
+
+/**
+ * Session mélangée à partir de cartes existantes.
+ *
+ * `forceProduction` distingue les deux usages : la révision suit l'état réel
+ * de chaque carte, l'entraînement pousse tout le monde à la forme la plus
+ * exigeante — c'est ce qu'on vient y chercher.
+ */
+function buildMixedSession(
   entries: readonly { card: CardState; item: PracticeItem }[],
-  seed?: number,
+  seed: number,
+  forceProduction: boolean,
 ): Exercise[] {
   if (entries.length === 0) return []
-  const rng = createRng(seed ?? seedFrom('review', entries.length, entries[0]!.item.id))
+  const rng = createRng(seed)
 
-  // Les distracteurs des banques de mots viennent des autres mots à réviser.
+  // Les distracteurs des banques de mots viennent des autres mots de la session.
   const vocabPool = entries
     .map((entry) => (entry.item.kind === 'vocab' ? entry.item.vocab : null))
     .filter((vocab): vocab is Vocab => vocab !== null)
 
   const exercises = entries.map(({ card, item }): Exercise => {
-    const solid = card.step === null && card.interval >= 7
+    const solid = forceProduction || (card.step === null && card.interval >= SOLID_INTERVAL)
 
     if (item.kind === 'grammar') {
       return {
@@ -365,6 +376,35 @@ export function buildReviewSession(
 
   const rounds = matchRounds(vocabPool, vocabPool.length >= MATCH_SIZE ? 1 : 0, rng)
   return [...shuffle(exercises, rng), ...rounds]
+}
+
+/**
+ * Session de révision : construite à partir des cartes échues. Les cartes
+ * encore fragiles restent en reconnaissance, les cartes solides passent à la
+ * production.
+ */
+export function buildReviewSession(
+  entries: readonly { card: CardState; item: PracticeItem }[],
+  seed?: number,
+): Exercise[] {
+  if (entries.length === 0) return []
+  return buildMixedSession(entries, seed ?? seedFrom('review', entries.length, entries[0]!.item.id), false)
+}
+
+/**
+ * Session d'entraînement : les éléments déjà rencontrés d'une unité, mélangés,
+ * sans attendre les échéances et tous en production.
+ *
+ * Ce n'est pas une révision anticipée : c'est l'alternative au fait de rejouer
+ * une leçon à l'identique. Mélanger les éléments de toute l'unité ancre mieux
+ * que de reprendre un bloc déjà vu dans le même ordre.
+ */
+export function buildPracticeSession(
+  entries: readonly { card: CardState; item: PracticeItem }[],
+  seed?: number,
+): Exercise[] {
+  if (entries.length === 0) return []
+  return buildMixedSession(entries, seed ?? seedFrom('practice', entries.length, entries[0]!.item.id), true)
 }
 
 /** Découpe une phrase de grammaire autour de son marqueur `___`. */

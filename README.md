@@ -21,10 +21,32 @@ Le moteur est générique : un cours n'est qu'un jeu de fichiers YAML.
 | Vocabulaire | flashcard auto-évaluée, association de paires, phrase à trou, saisie clavier |
 | Grammaire | rappel de cours, phrase à trou avec banque de formes puis au clavier |
 | Conjugaison | association personnes/formes, puis production de mémoire |
-| Progression | révision espacée (SM-2), 3 étoiles par leçon, anneaux de maîtrise |
+| Progression | révision espacée (SM-2), étoiles gagnées par la maîtrise réelle, anneaux, entraînement par unité |
 | Motivation | série de jours, XP et niveaux, objectif quotidien |
 | Hors-ligne | total — contenu, polices et interface embarqués |
 | Cibles | PWA sur GitHub Pages, APK Android via Capacitor |
+
+## Boucle d'apprentissage
+
+Trois rôles distincts, qui ne se marchent pas dessus :
+
+- **Les leçons font découvrir.** Un passage suffit. La difficulté d'une leçon
+  suit ce que l'apprenant sait déjà de ses éléments : la redécouvrir donne la
+  présentation, la reprendre une fois sue donne d'emblée de la production.
+- **Les révisions font revenir et approfondir.** C'est la colonne vertébrale :
+  échéances SM-2, toutes pistes mélangées, et montée automatique en exigence —
+  reconnaissance tant que la carte est fragile, production dès qu'elle tient
+  trois jours. L'appel à réviser est la première chose de l'écran d'accueil.
+- **L'entraînement (`/entrainement/:unitId`) comble le reste.** Il reprend les
+  éléments déjà rencontrés d'une unité, mélangés et tous en production, sans
+  attendre les échéances : c'est l'alternative à rejouer une leçon à
+  l'identique, et l'entrelacement y ancre mieux qu'une reprise en bloc.
+
+Les étoiles ne comptent pas les passages mais mesurent ce qui est su : ★ leçon
+parcourue, ★★ éléments installés (≥ 7 j), ★★★ solidement acquis (≥ 30 j). Ce
+sont donc les révisions qui les font monter. Une étoile décrochée reste acquise
+(le champ `level` sert de plancher) ; l'anneau, lui, montre l'état réel en
+direct — les deux indicateurs se complètent au lieu de se répéter.
 
 ## Démarrer
 

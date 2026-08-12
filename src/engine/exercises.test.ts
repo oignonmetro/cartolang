@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest'
 import type { ConjugationLesson, GrammarLesson, PracticeItem, Vocab, VocabLesson } from '@/content/schema'
 import {
   buildLessonSession,
+  buildPracticeSession,
   buildReviewSession,
   isAnswerCorrect,
   itemIdsOf,
@@ -172,6 +173,46 @@ describe('session de révision', () => {
     const fragile = entries([{ step: 0 }, { step: 0 }, { step: 1 }, { step: 0 }])
     const session = buildReviewSession(fragile).filter((e) => e.kind !== 'match')
     expect(session.every((e) => e.kind === 'flashcard' || (e.kind === 'cloze' && e.bank !== null))).toBe(true)
+  })
+
+  it('bascule en production dès la deuxième révision', () => {
+    // Après une première révision réussie l'intervalle vaut 3 jours : la
+    // reconnaissance ne doit pas s'installer plus longtemps que ça.
+    const early = entries([
+      { step: null, interval: 3 },
+      { step: null, interval: 3 },
+      { step: null, interval: 3 },
+      { step: null, interval: 3 },
+    ])
+    const session = buildReviewSession(early).filter((e) => e.kind !== 'match')
+    expect(session.every((e) => e.kind === 'type' || (e.kind === 'cloze' && e.bank === null))).toBe(true)
+  })
+})
+
+describe('session d’entraînement', () => {
+  const entries = (states: Partial<CardState>[]): { card: CardState; item: PracticeItem }[] =>
+    states.map((state, index) => ({
+      card: { ...createCard(LESSON[index].id, T0), ...state },
+      item: { kind: 'vocab', id: LESSON[index].id, vocab: LESSON[index] },
+    }))
+
+  it('est vide sans élément déjà rencontré', () => {
+    expect(buildPracticeSession([])).toEqual([])
+  })
+
+  it('exige la production même sur des cartes fragiles', () => {
+    // C'est toute la différence avec la révision : ici on vient travailler,
+    // pas attendre que l'échéance décide du niveau d'exigence.
+    const fragile = entries([{ step: 0 }, { step: 0 }, { step: 1 }, { step: 0 }])
+    const session = buildPracticeSession(fragile).filter((e) => e.kind !== 'match')
+    expect(session.length).toBeGreaterThan(0)
+    expect(session.every((e) => e.kind === 'type' || (e.kind === 'cloze' && e.bank === null))).toBe(true)
+  })
+
+  it('couvre chaque élément fourni', () => {
+    const session = buildPracticeSession(entries([{}, {}, {}, {}]))
+    const covered = new Set(session.flatMap((exercise) => itemIdsOf(exercise)))
+    expect(covered.size).toBeGreaterThanOrEqual(4)
   })
 })
 

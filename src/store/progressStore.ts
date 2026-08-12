@@ -41,8 +41,23 @@ export interface ProgressSnapshot {
 interface ProgressState extends ProgressSnapshot {
   /** Enregistre la réponse à un élément et met à jour sa carte de révision. */
   gradeItem: (itemId: string, rating: Rating, now?: number) => void
-  /** Clôt une session de leçon : étoile, XP, série. */
-  finishLesson: (lessonId: string, outcome: SessionOutcome, now?: number) => { passed: boolean; xp: number; level: number }
+  /**
+   * Clôt une session de leçon : étoiles, XP, série. `stars` est calculé par
+   * l'appelant depuis la maîtrise des éléments — le magasin ne connaît pas le
+   * contenu des leçons, seulement les cartes.
+   */
+  finishLesson: (
+    lessonId: string,
+    outcome: SessionOutcome,
+    stars: number,
+    now?: number,
+  ) => { passed: boolean; xp: number; level: number }
+  /**
+   * Relève le plancher d'étoiles des leçons dont la maîtrise a progressé —
+   * typiquement après une révision, qui touche des éléments de plusieurs
+   * leçons à la fois. Sans effet si rien n'a monté.
+   */
+  raiseLessonStars: (stars: Record<string, number>, now?: number) => void
   /** Clôt une session de révision : XP et série, sans toucher au chemin. */
   finishReview: (outcome: SessionOutcome, now?: number) => { xp: number }
   setDailyGoal: (goal: number) => void
@@ -92,11 +107,13 @@ export const useProgress = create<ProgressState>()(
           return { cards: { ...state.cards, [itemId]: review(card, rating, now) } }
         }),
 
-      finishLesson: (lessonId, outcome, now = Date.now()) => {
+      finishLesson: (lessonId, outcome, stars, now = Date.now()) => {
         const state = get()
         const passed = isPassed(outcome)
         const previous = state.lessons[lessonId]
-        const level = passed ? Math.min(MAX_LEVEL, (previous?.level ?? 0) + 1) : (previous?.level ?? 0)
+        // Le plancher ne descend jamais : une étoile déjà décrochée reste
+        // acquise, même si un oubli fait momentanément baisser la maîtrise.
+        const level = Math.min(MAX_LEVEL, Math.max(previous?.level ?? 0, stars))
         const xp = xpFor(outcome, passed)
 
         set({
@@ -114,6 +131,25 @@ export const useProgress = create<ProgressState>()(
 
         return { passed, xp, level }
       },
+
+      raiseLessonStars: (stars, now = Date.now()) =>
+        set((state) => {
+          const lessons = { ...state.lessons }
+          let changed = false
+          for (const [lessonId, value] of Object.entries(stars)) {
+            const previous = lessons[lessonId]
+            const level = Math.min(MAX_LEVEL, value)
+            if (level <= (previous?.level ?? 0)) continue
+            lessons[lessonId] = {
+              level,
+              completions: previous?.completions ?? 0,
+              lastAt: previous?.lastAt ?? now,
+              bestAccuracy: previous?.bestAccuracy ?? 0,
+            }
+            changed = true
+          }
+          return changed ? { lessons } : {}
+        }),
 
       finishReview: (outcome, now = Date.now()) => {
         const state = get()

@@ -5,13 +5,14 @@ import { cardStrength, type CardState } from './srs'
 /**
  * Règles de progression.
  *
- * Une leçon se maîtrise en trois passages : chaque passage réussi ajoute une
- * étoile (niveau 0 → 3).
+ * Une leçon se maîtrise en la sachant, pas en la rejouant : ses étoiles
+ * viennent de l'état des cartes de révision de ses éléments (voir
+ * `starsFromMastery`). Le champ `level` n'est plus qu'un plancher — la
+ * meilleure valeur déjà atteinte — pour qu'une étoile reste acquise même
+ * après un oubli passager.
  *
- * Dans l'agencement `path`, la première étoile débloque la leçon suivante.
- * Dans l'agencement `library`, rien n'est verrouillé : les étoiles ne servent
- * qu'à indiquer où l'on en est, et c'est la maîtrise réelle des éléments
- * (calculée depuis les cartes de révision) qui résume une unité.
+ * Dans l'agencement `path`, la première étoile débloque la leçon suivante ;
+ * terminer une leçon suffit à l'obtenir.
  */
 
 export const MAX_LEVEL = 3
@@ -106,16 +107,52 @@ export function lessonMastery(lesson: Lesson, cards: Record<string, CardState>):
   return masteryOf(itemsOfLesson(lesson).map((item) => item.id), cards)
 }
 
-export function unitMastery(unit: Unit, cards: Record<string, CardState>): Mastery {
-  return masteryOf(itemsOfUnit(unit).map((item) => item.id), cards)
+/** Part des éléments à atteindre pour décrocher une étoile. */
+export const STAR_RATIO = 0.8
+
+/**
+ * Étoiles méritées par ce qui est su aujourd'hui.
+ *
+ * ★ la leçon a été parcourue en entier ; ★★ ses éléments tiennent une semaine ;
+ * ★★★ ils tiennent un mois. Les étoiles mesuraient auparavant le nombre de
+ * passages : elles récompensaient donc de rejouer une leçon déjà sue, seul
+ * moyen de débloquer les exercices de production — exactement l'inverse de ce
+ * qu'il faut faire. Ici, ce sont les révisions qui les font monter.
+ */
+export function starsFromMastery(lesson: Lesson, cards: Record<string, CardState>): number {
+  const items = itemsOfLesson(lesson)
+  if (items.length === 0) return 0
+
+  let seen = 0
+  let known = 0
+  let mastered = 0
+  for (const item of items) {
+    const card = cards[item.id]
+    if (!card) continue
+    const strength = cardStrength(card)
+    if (strength !== 'new') seen += 1
+    if (strength === 'known' || strength === 'mastered') known += 1
+    if (strength === 'mastered') mastered += 1
+  }
+
+  if (seen < items.length) return 0
+  if (mastered / items.length >= STAR_RATIO) return MAX_LEVEL
+  if (known / items.length >= STAR_RATIO) return 2
+  return 1
 }
 
-/** Identifiants des éléments d'un cours qui appartiennent à une piste donnée. */
-export function itemIdsOfTrack(course: Course, trackId: string): string[] {
-  if (course.layout !== 'library') return []
-  const track = course.tracks.find((candidate) => candidate.id === trackId)
-  if (!track) return []
-  return track.units.flatMap((unit) => itemsOfUnit(unit).map((item) => item.id))
+/**
+ * Étoiles affichées : le maximum entre ce qui est su aujourd'hui et le
+ * plancher déjà atteint. Une étoile est un acquis et ne redescend pas ;
+ * l'anneau de maîtrise, lui, montre l'état réel en direct — les deux
+ * indicateurs se complètent au lieu de se répéter.
+ */
+export function lessonStars(lesson: Lesson, cards: Record<string, CardState>, floor: number): number {
+  return Math.max(floor, starsFromMastery(lesson, cards))
+}
+
+export function unitMastery(unit: Unit, cards: Record<string, CardState>): Mastery {
+  return masteryOf(itemsOfUnit(unit).map((item) => item.id), cards)
 }
 
 /** Dernière leçon travaillée, pour proposer de reprendre où l'on s'est arrêté. */

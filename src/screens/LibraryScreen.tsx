@@ -7,6 +7,7 @@ import {
   dayKey,
   displayedStreak,
   lessonMastery,
+  lessonStars,
   levelFromXp,
   masteryOf,
   MAX_LEVEL,
@@ -18,7 +19,7 @@ import { useCourse } from '@/content/CourseProvider'
 import { availableCourses } from '@/content/loader'
 import { ProgressRing } from '@/components/ProgressRing'
 import { CoursePicker } from '@/components/CoursePicker'
-import { BoltIcon, ChevronLeftIcon, FlameIcon, StarIcon, UnitIcon } from '@/components/icons'
+import { BoltIcon, ChevronLeftIcon, FlameIcon, RefreshIcon, StarIcon, UnitIcon } from '@/components/icons'
 
 /**
  * Écran d'accueil des cours en accès libre.
@@ -75,7 +76,7 @@ const TRACK_TONES: Record<string, { text: string; bg: string; soft: string; bord
 
 export function LibraryScreen({ course }: { course: LibraryCourse }) {
   const navigate = useNavigate()
-  const { manifest, switchCourse } = useCourse()
+  const { manifest, switchCourse, itemsById } = useCourse()
   const lessons = useProgress((state) => state.lessons)
   const cards = useProgress((state) => state.cards)
   const xp = useProgress((state) => state.xp)
@@ -105,13 +106,13 @@ export function LibraryScreen({ course }: { course: LibraryCourse }) {
     [track],
   )
   const trackMastery = useMemo(() => masteryOf(trackItemIds, cards), [trackItemIds, cards])
-  const trackDue = useMemo(() => {
-    const inTrack = new Set(trackItemIds)
-    return dueCards(
-      Object.values(cards).filter((card) => inTrack.has(card.itemId)),
-      Date.now(),
-    ).length
-  }, [trackItemIds, cards])
+
+  // Toutes pistes confondues, et restreint au cours affiché — les cartes d'un
+  // autre niveau resteraient sinon comptées ici sans être révisables.
+  const due = useMemo(
+    () => dueCards(Object.values(cards).filter((card) => itemsById.has(card.itemId)), Date.now()).length,
+    [cards, itemsById],
+  )
 
   return (
     <div className="mx-auto flex min-h-full w-full max-w-md flex-col">
@@ -157,14 +158,18 @@ export function LibraryScreen({ course }: { course: LibraryCourse }) {
       </header>
 
       <main className="flex flex-1 flex-col gap-3 px-4 pt-4 pb-16">
+        {/* Avant le résumé de piste, et non dedans : c'est l'action du jour,
+            celle qui fait revenir ce qui a été appris. Elle vaut pour les
+            trois pistes à la fois — mélanger les natures d'exercices vaut
+            mieux que réviser le vocabulaire d'un bloc. */}
+        {due > 0 && <ReviewCallout due={due} onReview={() => navigate('/revision')} />}
+
         <TrackSummary
           track={track}
           tone={tone}
           known={trackMastery.known}
           seen={trackMastery.seen}
           total={trackMastery.total}
-          due={trackDue}
-          onReview={() => navigate(`/revision?piste=${track.id}`)}
         />
 
         {track.units.length === 0 ? (
@@ -178,9 +183,10 @@ export function LibraryScreen({ course }: { course: LibraryCourse }) {
               open={openUnitId === unit.id}
               onToggle={() => setOpenUnitId((current) => (current === unit.id ? null : unit.id))}
               mastery={unitMastery(unit, cards)}
-              lessonLevel={(lessonId) => lessons[lessonId]?.level ?? 0}
+              lessonStars={(lesson) => lessonStars(lesson, cards, lessons[lesson.id]?.level ?? 0)}
               lessonMastery={(lesson) => lessonMastery(lesson, cards)}
               onOpenLesson={(lessonId) => navigate(`/lecon/${lessonId}`)}
+              onPractice={() => navigate(`/entrainement/${unit.id}`)}
             />
           ))
         )}
@@ -263,28 +269,54 @@ function EmptyTrack({ tone }: { tone: (typeof TRACK_TONES)[string] }) {
   )
 }
 
+/**
+ * Appel à réviser, en tête d'écran.
+ *
+ * C'est le cœur du système : les leçons font découvrir, les révisions font
+ * revenir et approfondir. Tant qu'elles restaient un bouton discret au fond
+ * d'un panneau de piste, l'app n'était qu'une liste de leçons à cocher.
+ */
+function ReviewCallout({ due, onReview }: { due: number; onReview: () => void }) {
+  return (
+    <button
+      type="button"
+      onClick={onReview}
+      className="card-3d flex items-center gap-4 border-teal bg-teal/10 px-5 py-4 text-left"
+    >
+      <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-teal text-white">
+        <StarIcon filled size={24} />
+      </span>
+      <span className="flex-1">
+        <span className="block text-base font-extrabold text-ink">
+          {due} élément{due > 1 ? 's' : ''} à réviser
+        </span>
+        <span className="mt-0.5 block text-xs text-ink-soft">
+          Les revoir maintenant, c'est ce qui les fera tenir.
+        </span>
+      </span>
+      <span className="text-xs font-black uppercase text-teal">Réviser</span>
+    </button>
+  )
+}
+
 function TrackSummary({
   track,
   tone,
   known,
   seen,
   total,
-  due,
-  onReview,
 }: {
   track: Track
   tone: (typeof TRACK_TONES)[string]
   known: number
   seen: number
   total: number
-  due: number
-  onReview: () => void
 }) {
   return (
     // Pas de `card-3d` ici : ce bloc n'est pas cliquable, et lui donner la
     // même carte blanche à ombre que les unités en dessous laissait croire
     // le contraire. Le fond teinté signale un panneau d'ensemble, pas une ligne.
-    <section className={`flex flex-col gap-3 rounded-2xl ${tone.soft} px-5 py-4`}>
+    <section className={`rounded-2xl ${tone.soft} px-5 py-4`}>
       <div className="flex items-start gap-4">
         <ProgressRing
           ratio={total === 0 ? 0 : known / total}
@@ -302,20 +334,6 @@ function TrackSummary({
           </p>
         </div>
       </div>
-
-      {due > 0 && (
-        // Fond blanc, pas `tone.soft` : le panneau parent est maintenant teinté,
-        // et un bouton de la même teinte s'y fondrait au lieu de ressortir.
-        <button
-          type="button"
-          onClick={onReview}
-          className={`flex items-center gap-2 rounded-2xl border-2 ${tone.border} bg-paper px-4 py-2.5 text-left shadow-sm`}
-        >
-          <StarIcon filled size={18} className={tone.text} />
-          <span className="flex-1 text-sm font-extrabold">{countLabel(track.kind, due)} à réviser</span>
-          <span className={`text-xs font-black uppercase ${tone.text}`}>Réviser</span>
-        </button>
-      )}
     </section>
   )
 }
@@ -326,18 +344,20 @@ function UnitCard({
   open,
   onToggle,
   mastery,
-  lessonLevel,
+  lessonStars,
   lessonMastery,
   onOpenLesson,
+  onPractice,
 }: {
   unit: Unit
   tone: (typeof TRACK_TONES)[string]
   open: boolean
   onToggle: () => void
   mastery: { known: number; seen: number; total: number; ratio: number }
-  lessonLevel: (lessonId: string) => number
+  lessonStars: (lesson: Unit['lessons'][number]) => number
   lessonMastery: (lesson: Unit['lessons'][number]) => { ratio: number; seen: number; total: number }
   onOpenLesson: (lessonId: string) => void
+  onPractice: () => void
 }) {
   return (
     <section className="card-3d overflow-hidden">
@@ -406,9 +426,9 @@ function UnitCard({
                       {Array.from({ length: MAX_LEVEL }, (_, index) => (
                         <StarIcon
                           key={index}
-                          filled={index < lessonLevel(lesson.id)}
+                          filled={index < lessonStars(lesson)}
                           size={12}
-                          className={index < lessonLevel(lesson.id) ? 'text-amber' : 'text-line'}
+                          className={index < lessonStars(lesson) ? 'text-amber' : 'text-line'}
                         />
                       ))}
                     </span>
@@ -416,6 +436,22 @@ function UnitCard({
                 </li>
               ))}
             </ul>
+
+            {/* L'alternative à rejouer une leçon à l'identique : reprendre
+                l'unité entière, mélangée. N'apparaît qu'une fois quelque chose
+                rencontré, sinon il n'y aurait rien à travailler. */}
+            {mastery.seen > 0 && (
+              <div className="border-t-2 border-line px-3 py-3">
+                <button
+                  type="button"
+                  onClick={onPractice}
+                  className={`flex w-full items-center justify-center gap-2 rounded-2xl border-2 ${tone.border} px-4 py-2.5 text-sm font-extrabold ${tone.text}`}
+                >
+                  <RefreshIcon size={16} />
+                  S'entraîner sur l'unité
+                </button>
+              </div>
+            )}
           </motion.div>
         )}
       </AnimatePresence>
