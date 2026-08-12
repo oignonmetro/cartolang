@@ -30,35 +30,41 @@ interface Tone {
   faintBg: string
   faintBorder: string
   faintText: string
-  /** Pastille du chemin pas encore franchi. */
-  dot: string
+  /** Pastille du chemin pas encore franchi, et sa version franchie. */
+  dotFill: string
+  fill: string
 }
 
 const TONES: Record<string, Tone> = {
   teal: {
     face: 'bg-teal', edge: 'var(--color-teal-deep)', soft: 'bg-teal/15', border: 'border-teal/40',
     text: 'text-teal', css: 'var(--color-teal)',
-    faintBg: 'bg-teal/8', faintBorder: 'border-teal/20', faintText: 'text-teal/55', dot: 'bg-teal/25',
+    faintBg: 'bg-teal/8', faintBorder: 'border-teal/20', faintText: 'text-teal/55',
+    dotFill: 'fill-teal/25', fill: 'fill-teal',
   },
   violet: {
     face: 'bg-violet', edge: 'var(--color-violet-deep)', soft: 'bg-violet/15', border: 'border-violet/40',
     text: 'text-violet', css: 'var(--color-violet)',
-    faintBg: 'bg-violet/8', faintBorder: 'border-violet/20', faintText: 'text-violet/55', dot: 'bg-violet/25',
+    faintBg: 'bg-violet/8', faintBorder: 'border-violet/20', faintText: 'text-violet/55',
+    dotFill: 'fill-violet/25', fill: 'fill-violet',
   },
   sky: {
     face: 'bg-sky', edge: 'var(--color-sky-deep)', soft: 'bg-sky/15', border: 'border-sky/40',
     text: 'text-sky', css: 'var(--color-sky)',
-    faintBg: 'bg-sky/8', faintBorder: 'border-sky/20', faintText: 'text-sky/55', dot: 'bg-sky/25',
+    faintBg: 'bg-sky/8', faintBorder: 'border-sky/20', faintText: 'text-sky/55',
+    dotFill: 'fill-sky/25', fill: 'fill-sky',
   },
   coral: {
     face: 'bg-coral', edge: 'var(--color-coral-deep)', soft: 'bg-coral/15', border: 'border-coral/40',
     text: 'text-coral', css: 'var(--color-coral)',
-    faintBg: 'bg-coral/8', faintBorder: 'border-coral/20', faintText: 'text-coral/55', dot: 'bg-coral/25',
+    faintBg: 'bg-coral/8', faintBorder: 'border-coral/20', faintText: 'text-coral/55',
+    dotFill: 'fill-coral/25', fill: 'fill-coral',
   },
   amber: {
     face: 'bg-amber', edge: 'var(--color-amber-deep)', soft: 'bg-amber/15', border: 'border-amber/40',
     text: 'text-amber', css: 'var(--color-amber)',
-    faintBg: 'bg-amber/8', faintBorder: 'border-amber/20', faintText: 'text-amber/55', dot: 'bg-amber/25',
+    faintBg: 'bg-amber/8', faintBorder: 'border-amber/20', faintText: 'text-amber/55',
+    dotFill: 'fill-amber/25', fill: 'fill-amber',
   },
 }
 
@@ -83,8 +89,26 @@ const OFFSETS = [0, 38, 52, 38, 0, -38, -52, -38]
  */
 const SIZES = { available: 68, done: 52, locked: 46 }
 
-/** Nombre de pastilles marquant le chemin entre deux nœuds. */
-const TRAIL_DOTS = 3
+/** Hauteur du fil entre deux nœuds, en pixels. */
+const TRAIL_HEIGHT = 40
+
+/** Position des pastilles le long du fil, en fraction du parcours. */
+const TRAIL_STEPS = [0.26, 0.5, 0.74]
+
+/**
+ * Point sur la courbe reliant le centre d'un nœud (en haut) à celui du
+ * suivant (en bas), à la fraction `t`. x et y viennent de la même courbe de
+ * Bézier au lieu d'être interpolés séparément — sans ça, une pastille au
+ * tiers du chemin en x pouvait très bien être aux deux tiers en y, et le fil
+ * paraissait désaxé au lieu de suivre une ligne cohérente.
+ */
+function trailPoint(from: number, to: number, t: number): [number, number] {
+  const mt = 1 - t
+  const half = TRAIL_HEIGHT / 2
+  const x = mt ** 3 * from + 3 * mt ** 2 * t * from + 3 * mt * t ** 2 * to + t ** 3 * to
+  const y = mt ** 3 * 0 + 3 * mt ** 2 * t * half + 3 * mt * t ** 2 * half + t ** 3 * TRAIL_HEIGHT
+  return [x, y]
+}
 
 export function UnitPathScreen() {
   const { unitId = '' } = useParams()
@@ -259,30 +283,18 @@ function PathNode({
 }
 
 /**
- * Chemin entre deux nœuds : trois pastilles alignées vers le nœud suivant.
- * Un trait plein posé sous le libellé flottait sans relier personne ; des
- * pastilles se lisent comme des pas, et penchées vers la suite elles rendent
- * le serpentin évident. Elles grossissent légèrement en approchant du nœud
- * suivant — un soupçon de perspective — et se colorent une fois l'étape
- * franchie : le chemin se remplit derrière soi plutôt que de rester gris.
+ * Chemin entre deux nœuds : trois pastilles posées sur la courbe qui relie
+ * leurs centres. Elles grossissent légèrement en approchant du nœud suivant
+ * — un soupçon de perspective — et se colorent une fois l'étape franchie :
+ * le chemin se remplit derrière soi plutôt que de rester gris.
  */
 function Trail({ from, to, filled, tone }: { from: number; to: number; filled: boolean; tone: Tone }) {
   return (
-    <span aria-hidden className="flex flex-col items-center gap-1 py-1">
-      {Array.from({ length: TRAIL_DOTS }, (_, index) => {
-        const dotSize = 4 + index * 1.5
-        return (
-          <span
-            key={index}
-            className={`rounded-full ${filled ? tone.face : tone.dot}`}
-            style={{
-              width: dotSize,
-              height: dotSize,
-              transform: `translateX(${from + ((to - from) * (index + 1)) / (TRAIL_DOTS + 1)}px)`,
-            }}
-          />
-        )
+    <svg aria-hidden width={160} height={TRAIL_HEIGHT} viewBox={`-80 0 160 ${TRAIL_HEIGHT}`} className="shrink-0">
+      {TRAIL_STEPS.map((t, index) => {
+        const [x, y] = trailPoint(from, to, t)
+        return <circle key={index} cx={x} cy={y} r={2 + index * 0.75} className={filled ? tone.fill : tone.dotFill} />
       })}
-    </span>
+    </svg>
   )
 }
