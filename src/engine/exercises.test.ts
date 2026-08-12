@@ -44,7 +44,7 @@ function kinds(session: Exercise[]): string[] {
 }
 
 describe('session de leçon', () => {
-  it('présente et note chaque mot en un seul écran au niveau 0', () => {
+  it('présente et note chaque mot en un seul écran', () => {
     // La présentation montre déjà tout (terme, traduction, exemple) : une
     // flashcard séparée juste après ne testerait rien de plus, elle ne ferait
     // que répéter ce qui vient d'être lu. L'auto-évaluation est donc portée
@@ -57,31 +57,49 @@ describe('session de leçon', () => {
     }
   })
 
-  it('ne présente plus rien aux niveaux suivants', () => {
-    expect(kinds(buildLessonSession(lessonOf('u1-l1', LESSON), 1))).not.toContain('intro')
-    expect(kinds(buildLessonSession(lessonOf('u1-l1', LESSON), 2))).not.toContain('intro')
+  it('découpe la leçon en blocs : chaque mot est présenté avant les mots du bloc suivant', () => {
+    // Six mots, blocs de quatre : le reliquat de deux mots rejoint le
+    // premier bloc plutôt que de former son propre bloc trop petit pour une
+    // manche d'association — donc un seul bloc de six ici.
+    const session = kinds(buildLessonSession(lessonOf('u1-l1', LESSON), 0))
+    const introIndexes = session
+      .map((kind, index) => (kind === 'intro' ? index : -1))
+      .filter((index) => index !== -1)
+    expect(introIndexes).toHaveLength(LESSON.length)
+    // Tous les intros arrivent groupés avant le premier exercice d'un autre type.
+    const firstNonIntro = session.findIndex((kind) => kind !== 'intro')
+    expect(introIndexes.every((index) => index < firstNonIntro)).toBe(true)
   })
 
-  it('passe de la reconnaissance à la production selon le niveau', () => {
-    const level0 = kinds(buildLessonSession(lessonOf('u1-l1', LESSON), 0))
-    const level2 = kinds(buildLessonSession(lessonOf('u1-l1', LESSON), 2))
-    expect(level0).not.toContain('type')
-    expect(level2.filter((kind) => kind === 'type').length).toBeGreaterThan(0)
-    expect(level2).not.toContain('flashcard')
+  it('propose des manches d’association, des QCM puis des phrases à trou après la présentation', () => {
+    const session = kinds(buildLessonSession(lessonOf('u1-l1', LESSON), 0))
+    expect(session).toContain('match')
+    expect(session).toContain('choice')
+    expect(session).toContain('cloze')
   })
 
-  it('propose une banque de mots au niveau 1, la retire au niveau 2', () => {
-    const guided = buildLessonSession(lessonOf('u1-l1', LESSON), 1).filter((e) => e.kind === 'cloze')
-    const free = buildLessonSession(lessonOf('u1-l1', LESSON), 2).filter((e) => e.kind === 'cloze')
-    expect(guided.length).toBeGreaterThan(0)
+  it('propose toujours une banque de mots pour les phrases à trou', () => {
+    const session = buildLessonSession(lessonOf('u1-l1', LESSON), 0).filter((e) => e.kind === 'cloze')
+    expect(session.length).toBeGreaterThan(0)
     // La banque doit contenir une case qui vaut réellement la réponse, au
     // sens où l'écran la valide — pas seulement le terme de dictionnaire.
     expect(
-      guided.every(
+      session.every(
         (e) => e.bank !== null && e.bank.some((w) => normalizeAnswer(w) === normalizeAnswer(e.sentence.match)),
       ),
     ).toBe(true)
-    expect(free.every((e) => e.bank === null)).toBe(true)
+  })
+
+  it('propose au moins deux options distinctes à chaque QCM, dont la bonne réponse', () => {
+    const choices = buildLessonSession(lessonOf('u1-l1', LESSON), 0).filter((e) => e.kind === 'choice')
+    expect(choices.length).toBeGreaterThan(0)
+    for (const exercise of choices) {
+      expect(exercise.options.length).toBeGreaterThanOrEqual(2)
+      expect(new Set(exercise.options.map(normalizeAnswer)).size).toBe(exercise.options.length)
+      expect(exercise.options.some((option) => normalizeAnswer(option) === normalizeAnswer(exercise.vocab.term))).toBe(
+        true,
+      )
+    }
   })
 
   it('propose la forme fléchie, pas l’infinitif, quand le mot est irrégulier', () => {
@@ -94,7 +112,7 @@ describe('session de leçon', () => {
       word('rent', 'rent', 'loyer', 'The rent is due today.'),
       word('cosy', 'cosy', 'douillet', 'The room is small but cosy.'),
     ]
-    const guided = buildLessonSession(lessonOf('u2-l1', irregular), 1).filter((e) => e.kind === 'cloze')
+    const guided = buildLessonSession(lessonOf('u2-l1', irregular), 0).filter((e) => e.kind === 'cloze')
     expect(guided.length).toBeGreaterThan(0)
     for (const exercise of guided) {
       expect(exercise.bank).not.toBeNull()
@@ -105,21 +123,19 @@ describe('session de leçon', () => {
     }
   })
 
-  it('est déterministe à graine égale, différente d’un niveau à l’autre', () => {
-    expect(buildLessonSession(lessonOf('u1-l1', LESSON), 1)).toEqual(buildLessonSession(lessonOf('u1-l1', LESSON), 1))
-    expect(buildLessonSession(lessonOf('u1-l1', LESSON), 1)).not.toEqual(buildLessonSession(lessonOf('u1-l1', LESSON), 2))
+  it('est déterministe à graine égale, différente d’une tentative à l’autre', () => {
+    expect(buildLessonSession(lessonOf('u1-l1', LESSON), 0, 1)).toEqual(buildLessonSession(lessonOf('u1-l1', LESSON), 0, 1))
+    expect(buildLessonSession(lessonOf('u1-l1', LESSON), 0, 1)).not.toEqual(buildLessonSession(lessonOf('u1-l1', LESSON), 0, 2))
   })
 
   it('n’enchaîne pas deux exercices sur le même mot', () => {
-    for (const level of [1, 2]) {
-      const session = buildLessonSession(lessonOf('u1-l1', LESSON), level)
-      for (let i = 1; i < session.length; i++) {
-        const previous = new Set(itemIdsOf(session[i - 1]))
-        const repeated = itemIdsOf(session[i]).filter((id) => previous.has(id))
-        // Une manche d'association peut reprendre un mot déjà vu ; les autres non.
-        if (session[i].kind !== 'match' && session[i - 1].kind !== 'match') {
-          expect(repeated).toHaveLength(0)
-        }
+    const session = buildLessonSession(lessonOf('u1-l1', LESSON), 0)
+    for (let i = 1; i < session.length; i++) {
+      const previous = new Set(itemIdsOf(session[i - 1]))
+      const repeated = itemIdsOf(session[i]).filter((id) => previous.has(id))
+      // Une manche d'association peut reprendre un mot déjà vu ; les autres non.
+      if (session[i].kind !== 'match' && session[i - 1].kind !== 'match') {
+        expect(repeated).toHaveLength(0)
       }
     }
   })
@@ -131,13 +147,25 @@ describe('session de leçon', () => {
       word('c', 'cheese', 'fromage', 'This cheese is good.'),
       word('d', 'milk', 'lait', 'There is no milk left.'),
     ]
-    const clozes = buildLessonSession(lessonOf('x', vocab), 2).filter((e) => e.kind === 'cloze')
-    expect(clozes.map((e) => e.vocab.id).sort()).toEqual(['c', 'd'])
+    const clozes = buildLessonSession(lessonOf('x', vocab), 0).filter((e) => e.kind === 'cloze')
+    expect(clozes.every((e) => e.vocab.id === 'c' || e.vocab.id === 'd')).toBe(true)
   })
 
   it('n’ajoute pas de manche d’association sous quatre mots', () => {
     const tiny = LESSON.slice(0, 3)
     expect(kinds(buildLessonSession(lessonOf('x', tiny), 0))).not.toContain('match')
+  })
+
+  it('répartit une grande leçon sur plusieurs blocs plutôt que de tout présenter d’un coup', () => {
+    const big = [...LESSON, ...LESSON.map((w) => ({ ...w, id: `${w.id}-2` }))] // 12 mots
+    const session = kinds(buildLessonSession(lessonOf('big', big), 0))
+    expect(session.filter((kind) => kind === 'intro')).toHaveLength(big.length)
+    // Au moins deux groupes d'intros séparés par d'autres exercices.
+    let groups = 0
+    for (let i = 0; i < session.length; i++) {
+      if (session[i] === 'intro' && session[i - 1] !== 'intro') groups++
+    }
+    expect(groups).toBeGreaterThan(1)
   })
 })
 

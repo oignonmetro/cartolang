@@ -8,24 +8,28 @@ import type { CardState } from './srs'
 /**
  * Génération des exercices d'une session.
  *
- * Pour le vocabulaire, cinq familles choisies avec l'auteur du projet :
+ * Pour le vocabulaire, une leçon se découpe en blocs de trois-quatre mots
+ * nouveaux : chaque bloc les présente, puis les fait travailler avant de
+ * passer aux suivants, plutôt que de présenter tous les mots d'un coup pour
+ * les noyer ensuite dans un grand mélange. Cinq familles d'exercices :
  *   - `intro`     : présentation d'un mot nouveau, avec auto-évaluation en trois
  *                   boutons — tout est déjà visible, inutile de le redemander
  *                   aussitôt dans une flashcard séparée ;
- *   - `flashcard` : la carte classique, avec auto-évaluation en trois boutons ;
  *   - `match`     : relier des mots à leurs traductions ;
- *   - `cloze`     : compléter une phrase, au clavier ou en piochant dans une banque ;
- *   - `type`      : traduire au clavier, sans contexte.
+ *   - `choice`    : reconnaître la bonne traduction parmi des leurres (QCM) ;
+ *   - `cloze`     : compléter une phrase en piochant dans une banque de mots ;
+ *   - `flashcard` / `type` : réservés aux sessions de révision et
+ *                   d'entraînement (`buildMixedSession`), qui reprennent des
+ *                   mots déjà rencontrés plutôt qu'une leçon neuve.
  *
  * La grammaire et la conjugaison ne se ramènent pas à des paires
- * terme/traduction : elles ont leurs propres exercices.
+ * terme/traduction : elles ont leurs propres exercices, et suivent elles le
+ * niveau de maîtrise de la leçon — on y reconnaît d'abord, on y produit
+ * ensuite.
  *   - `rule`         : présentation d'un point de grammaire avant pratique ;
  *   - `grammar-gap`  : phrase trouée, au clavier ou parmi des formes proposées ;
  *   - `conjugation`  : produire une forme à partir du verbe, du temps, de la personne ;
  *   - `conjugation-match` : relier les personnes aux formes d'un même verbe.
- *
- * Dans tous les cas le mélange dépend du niveau de maîtrise de la leçon : on
- * reconnaît d'abord, on produit ensuite.
  */
 
 export type Direction = 'to-known' | 'to-learning'
@@ -47,6 +51,15 @@ export interface MatchExercise {
   kind: 'match'
   id: string
   pairs: Vocab[]
+}
+
+export interface ChoiceExercise {
+  kind: 'choice'
+  id: string
+  vocab: Vocab
+  direction: Direction
+  /** La bonne réponse et ses leurres, déjà mélangés. */
+  options: string[]
 }
 
 export interface ClozeExercise {
@@ -101,6 +114,7 @@ export type Exercise =
   | IntroExercise
   | FlashcardExercise
   | MatchExercise
+  | ChoiceExercise
   | ClozeExercise
   | TypeExercise
   | RuleExercise
@@ -112,6 +126,8 @@ export type Exercise =
 export const MATCH_SIZE = 4
 /** Nombre de mots proposés dans une banque de cloze. */
 const BANK_SIZE = 4
+/** Nombre d'options (bonne réponse comprise) proposées dans un QCM. */
+const CHOICE_SIZE = 3
 
 /** Les exercices qui présentent sans évaluer : ils ne comptent pas dans le score. */
 export function isPresentation(exercise: Exercise): boolean {
@@ -181,19 +197,74 @@ function matchRounds(pool: readonly Vocab[], rounds: number, rng: Rng): MatchExe
 }
 
 /**
+ * QCM : reconnaître la bonne traduction parmi des leurres piochés dans le
+ * reste du bassin. `null` quand le bassin est trop petit pour offrir au
+ * moins un leurre distinct de la réponse — un QCM à une seule option ne
+ * teste rien.
+ */
+function choiceFor(vocab: Vocab, direction: Direction, pool: readonly Vocab[], rng: Rng): ChoiceExercise | null {
+  const answer = direction === 'to-known' ? vocab.translation : vocab.term
+  const candidates = shuffle(
+    pool.filter((item) => item.id !== vocab.id),
+    rng,
+  )
+  const distractors: string[] = []
+  for (const item of candidates) {
+    if (distractors.length >= CHOICE_SIZE - 1) break
+    const word = direction === 'to-known' ? item.translation : item.term
+    if (normalizeAnswer(word) === normalizeAnswer(answer)) continue
+    if (distractors.some((seen) => normalizeAnswer(seen) === normalizeAnswer(word))) continue
+    distractors.push(word)
+  }
+  if (distractors.length === 0) return null
+  return { kind: 'choice', id: `choice:${vocab.id}`, vocab, direction, options: shuffle([answer, ...distractors], rng) }
+}
+
+function choiceRounds(pool: readonly Vocab[], count: number, rng: Rng): ChoiceExercise[] {
+  return sample(pool, count, rng)
+    .map((word) => choiceFor(word, 'to-learning', pool, rng))
+    .filter((exercise): exercise is ChoiceExercise => exercise !== null)
+}
+
+/** Mots nouveaux présentés avant de les pratiquer, par bloc. */
+const BLOCK_SIZE = 4
+
+/**
+ * Découpe une leçon en blocs de trois-quatre mots. Un reliquat d'un ou deux
+ * mots rejoint le bloc précédent plutôt que de former son propre petit bloc
+ * solitaire : mieux vaut un dernier bloc un peu plus riche qu'un bloc de un
+ * seul mot qui n'aurait même pas de quoi remplir une manche d'association.
+ */
+function blocksOf(words: readonly Vocab[]): Vocab[][] {
+  const blocks: Vocab[][] = []
+  for (let i = 0; i < words.length; i += BLOCK_SIZE) blocks.push(words.slice(i, i + BLOCK_SIZE))
+  const last = blocks[blocks.length - 1]
+  if (blocks.length > 1 && last!.length < 3) {
+    const previous = blocks[blocks.length - 2]!
+    blocks.splice(blocks.length - 2, 2, [...previous, ...last!])
+  }
+  return blocks
+}
+
+/** Un nombre entier au hasard entre `min` et `max`, bornes comprises. */
+function between(min: number, max: number, rng: Rng): number {
+  return min + Math.floor(rng() * (max - min + 1))
+}
+
+/**
  * Session d'une leçon, quelle que soit sa nature.
  *
- * `level` est le nombre d'étoiles déjà obtenues (0 à 2) : il détermine la
- * difficulté du passage suivant.
- *   niveau 0 — découverte : présentation puis reconnaissance
- *   niveau 1 — consolidation : association et exercices guidés
- *   niveau 2 — production : saisie au clavier
+ * `level` ne joue que pour la grammaire et la conjugaison : c'est le nombre
+ * d'étoiles déjà obtenues (0 à 2), qui détermine la difficulté du passage
+ * suivant (présentation puis reconnaissance, puis production). Le
+ * vocabulaire l'ignore : ses blocs suivent toujours la même progression,
+ * quel que soit le nombre de passages sur la leçon.
  */
 export function buildLessonSession(lesson: Lesson, level: number, seed?: number): Exercise[] {
   const resolved = seed ?? seedFrom(lesson.id, level)
   switch (lesson.kind) {
     case 'vocab':
-      return buildVocabSession(lesson.vocab, level, resolved)
+      return buildVocabSession(lesson.vocab, resolved)
     case 'grammar':
       return buildGrammarSession(lesson.id, lesson.points, lesson.notes, lesson.title, level, resolved)
     case 'conjugation':
@@ -201,43 +272,49 @@ export function buildLessonSession(lesson: Lesson, level: number, seed?: number)
   }
 }
 
-function buildVocabSession(vocab: readonly Vocab[], level: number, seed: number): Exercise[] {
+/** Manches d'association et de QCM par bloc — un peu de variété d'une leçon à l'autre. */
+const MATCH_ROUNDS_PER_BLOCK = [2, 3] as const
+const CHOICE_ROUNDS_PER_BLOCK = [2, 3] as const
+/** Phrases à trou par bloc, toujours en banque de mots à ce stade. */
+const CLOZE_PER_BLOCK = 2
+
+/**
+ * Session de vocabulaire, construite bloc par bloc plutôt qu'en présentant
+ * la leçon entière d'un coup : trois-quatre mots nouveaux, puis quelques
+ * manches d'association, quelques QCM, deux phrases à trou, et on
+ * recommence avec les mots suivants s'il en reste. Les exercices d'un bloc
+ * piochent dans tous les mots déjà présentés, pas seulement les siens — le
+ * chemin révise en avançant plutôt que de cloisonner chaque bloc.
+ */
+function buildVocabSession(vocab: readonly Vocab[], seed: number): Exercise[] {
   const rng = createRng(seed)
-  const words = shuffle(vocab, rng)
+  const blocks = blocksOf(shuffle(vocab, rng))
 
-  if (level <= 0) {
-    const discovery = words.map((word): IntroExercise => ({ kind: 'intro', id: `intro:${word.id}`, vocab: word }))
-    const clozes = words
-      .map((word) => clozeFor(word, words, rng))
-      .filter((exercise): exercise is ClozeExercise => exercise !== null)
-    return [...discovery, ...matchRounds(words, 1, rng), ...sample(clozes, 3, rng)]
-  }
+  const exercises: Exercise[] = []
+  const pool: Vocab[] = []
+  for (const block of blocks) {
+    pool.push(...block)
 
-  if (level === 1) {
-    const flashcards = sample(words, 3, rng).map(
-      (word): FlashcardExercise => ({
-        kind: 'flashcard',
-        id: `flash:${word.id}`,
-        vocab: word,
-        direction: 'to-learning',
-      }),
+    const blockExercises: Exercise[] = block.map(
+      (word): IntroExercise => ({ kind: 'intro', id: `intro:${word.id}`, vocab: word }),
     )
-    const clozes = words
-      .map((word) => clozeFor(word, words, rng))
-      .filter((exercise): exercise is ClozeExercise => exercise !== null)
-    const typed = sample(words, 3, rng).map(
-      (word): TypeExercise => ({ kind: 'type', id: `type:${word.id}`, vocab: word, direction: 'to-known' }),
-    )
-    return interleave([...flashcards, ...sample(clozes, 3, rng), ...typed], rng)
-  }
+    blockExercises.push(...matchRounds(pool, between(...MATCH_ROUNDS_PER_BLOCK, rng), rng))
+    blockExercises.push(...choiceRounds(pool, between(...CHOICE_ROUNDS_PER_BLOCK, rng), rng))
 
-  const clozes = words
-    .map((word) => clozeFor(word, null, rng))
-    .filter((exercise): exercise is ClozeExercise => exercise !== null)
-  const typed = words.map(
-    (word): TypeExercise => ({ kind: 'type', id: `type:${word.id}`, vocab: word, direction: 'to-learning' }),
-  )
-  return interleave([...sample(clozes, 4, rng), ...sample(typed, 4, rng), ...matchRounds(words, 1, rng)], rng)
+    const clozes = pool
+      .map((word) => clozeFor(word, pool, rng))
+      .filter((exercise): exercise is ClozeExercise => exercise !== null)
+    blockExercises.push(...sample(clozes, CLOZE_PER_BLOCK, rng))
+
+    // Un QCM juste après une manche d'association peut retomber sur le même
+    // mot, ou une phrase à trou reprendre celui du QCM qui la précède : ces
+    // chocs locaux sont désamorcés à l'intérieur du bloc. La correction reste
+    // bornée au bloc plutôt qu'à la session entière, sinon elle pourrait
+    // aller chercher un mot du bloc suivant et faire apparaître sa
+    // présentation en avance, avant même le reste de son propre bloc.
+    exercises.push(...avoidAdjacentRepeats(blockExercises))
+  }
+  return exercises
 }
 
 /**
@@ -432,18 +509,32 @@ export function itemCountOf(lesson: Lesson): number {
 
 /** Mélange en évitant, autant que possible, deux exercices de suite sur le même mot. */
 function interleave(exercises: readonly Exercise[], rng: Rng): Exercise[] {
-  const shuffled = shuffle(exercises, rng)
-  for (let i = 1; i < shuffled.length; i++) {
-    if (!sharesVocab(shuffled[i - 1], shuffled[i])) continue
-    const swap = shuffled.findIndex(
+  return avoidAdjacentRepeats(shuffle(exercises, rng))
+}
+
+/**
+ * Réordonne localement pour qu'un exercice n'enchaîne pas, autant que
+ * possible, sur le même mot que le précédent. Une manche d'association fait
+ * exception des deux côtés : elle porte quatre mots à la fois, alors la
+ * corriger déplacerait un exercice d'un autre type pour rien — et pour le
+ * vocabulaire, ça romprait justement l'ordre mots → paires → QCM → trous
+ * que les blocs veulent imposer.
+ */
+function avoidAdjacentRepeats(exercises: readonly Exercise[]): Exercise[] {
+  const result = exercises.slice()
+  for (let i = 1; i < result.length; i++) {
+    if (result[i - 1].kind === 'match' || result[i].kind === 'match') continue
+    if (!sharesVocab(result[i - 1], result[i])) continue
+    const swap = result.findIndex(
       (candidate, index) =>
         index > i &&
-        !sharesVocab(shuffled[i - 1], candidate) &&
-        (index + 1 >= shuffled.length || !sharesVocab(shuffled[i], shuffled[index + 1])),
+        candidate.kind !== 'match' &&
+        !sharesVocab(result[i - 1], candidate) &&
+        (index + 1 >= result.length || !sharesVocab(result[i], result[index + 1])),
     )
-    if (swap !== -1) [shuffled[i], shuffled[swap]] = [shuffled[swap], shuffled[i]]
+    if (swap !== -1) [result[i], result[swap]] = [result[swap], result[i]]
   }
-  return shuffled
+  return result
 }
 
 function sharesVocab(a: Exercise, b: Exercise): boolean {

@@ -5,6 +5,7 @@ import { isPresentation, itemIdsOf } from '@/engine/exercises'
 import { ratingFromAnswer, type Rating } from '@/engine/srs'
 import { useProgress } from '@/store/progressStore'
 import { Flashcard } from '@/components/session/Flashcard'
+import { ChoiceQuestion } from '@/components/session/ChoiceQuestion'
 import { MatchPairs } from '@/components/session/MatchPairs'
 import { ClozeSentence } from '@/components/session/ClozeSentence'
 import { TypeAnswer } from '@/components/session/TypeAnswer'
@@ -161,6 +162,9 @@ export function SessionScreen({ title, exercises, onQuit, onFinish }: SessionScr
             )}
             {current.kind === 'match' && (
               <MatchPairs exercise={current} onDone={({ missedIds }) => answerMatch(current, missedIds)} />
+            )}
+            {current.kind === 'choice' && (
+              <ChoiceQuestion exercise={current} onAnswer={(correct) => answer(current, correct)} />
             )}
             {current.kind === 'rule' && <RuleNote exercise={current} onNext={() => advance(false)} />}
             {current.kind === 'grammar-gap' && (
