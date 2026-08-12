@@ -26,14 +26,40 @@ interface Tone {
   border: string
   text: string
   css: string
+  /** Teinte à peine posée : le verrouillé reste coloré, pas juste gris éteint. */
+  faintBg: string
+  faintBorder: string
+  faintText: string
+  /** Pastille du chemin pas encore franchi. */
+  dot: string
 }
 
 const TONES: Record<string, Tone> = {
-  teal: { face: 'bg-teal', edge: 'var(--color-teal-deep)', soft: 'bg-teal/15', border: 'border-teal/40', text: 'text-teal', css: 'var(--color-teal)' },
-  violet: { face: 'bg-violet', edge: 'var(--color-violet-deep)', soft: 'bg-violet/15', border: 'border-violet/40', text: 'text-violet', css: 'var(--color-violet)' },
-  sky: { face: 'bg-sky', edge: 'var(--color-sky-deep)', soft: 'bg-sky/15', border: 'border-sky/40', text: 'text-sky', css: 'var(--color-sky)' },
-  coral: { face: 'bg-coral', edge: 'var(--color-coral-deep)', soft: 'bg-coral/15', border: 'border-coral/40', text: 'text-coral', css: 'var(--color-coral)' },
-  amber: { face: 'bg-amber', edge: 'var(--color-amber-deep)', soft: 'bg-amber/15', border: 'border-amber/40', text: 'text-amber', css: 'var(--color-amber)' },
+  teal: {
+    face: 'bg-teal', edge: 'var(--color-teal-deep)', soft: 'bg-teal/15', border: 'border-teal/40',
+    text: 'text-teal', css: 'var(--color-teal)',
+    faintBg: 'bg-teal/8', faintBorder: 'border-teal/20', faintText: 'text-teal/55', dot: 'bg-teal/25',
+  },
+  violet: {
+    face: 'bg-violet', edge: 'var(--color-violet-deep)', soft: 'bg-violet/15', border: 'border-violet/40',
+    text: 'text-violet', css: 'var(--color-violet)',
+    faintBg: 'bg-violet/8', faintBorder: 'border-violet/20', faintText: 'text-violet/55', dot: 'bg-violet/25',
+  },
+  sky: {
+    face: 'bg-sky', edge: 'var(--color-sky-deep)', soft: 'bg-sky/15', border: 'border-sky/40',
+    text: 'text-sky', css: 'var(--color-sky)',
+    faintBg: 'bg-sky/8', faintBorder: 'border-sky/20', faintText: 'text-sky/55', dot: 'bg-sky/25',
+  },
+  coral: {
+    face: 'bg-coral', edge: 'var(--color-coral-deep)', soft: 'bg-coral/15', border: 'border-coral/40',
+    text: 'text-coral', css: 'var(--color-coral)',
+    faintBg: 'bg-coral/8', faintBorder: 'border-coral/20', faintText: 'text-coral/55', dot: 'bg-coral/25',
+  },
+  amber: {
+    face: 'bg-amber', edge: 'var(--color-amber-deep)', soft: 'bg-amber/15', border: 'border-amber/40',
+    text: 'text-amber', css: 'var(--color-amber)',
+    faintBg: 'bg-amber/8', faintBorder: 'border-amber/20', faintText: 'text-amber/55', dot: 'bg-amber/25',
+  },
 }
 
 const NODE_ICONS: Record<UnitNodeKind, (props: { size?: number }) => React.ReactElement> = {
@@ -112,7 +138,15 @@ export function UnitPathScreen() {
         </p>
       </header>
 
-      <main className="flex flex-1 flex-col items-center px-4 pt-4 pb-12">
+      <main
+        className="flex flex-1 flex-col items-center px-4 pt-4 pb-12"
+        // Un lavis très léger de la teinte de l'unité derrière le chemin :
+        // sans lui, l'écran retombe sur le cream générique de partout ailleurs
+        // et l'unité perd sa couleur dès qu'on quitte le fil des cercles.
+        style={{
+          background: `radial-gradient(ellipse 90% 55% at 50% 0%, color-mix(in srgb, ${tone.css} 7%, transparent), transparent 70%)`,
+        }}
+      >
         {path.map((node, index) => (
           <PathNode
             key={node.id}
@@ -156,13 +190,24 @@ function PathNode({
   const size = locked ? SIZES.locked : done ? SIZES.done : SIZES.available
 
   // Un seul cercle plein à la fois, l'étape courante : les étapes franchies
-  // passent en teinte claire, les suivantes en gris. La hiérarchie se lit
-  // alors d'un coup d'œil, sans avoir à comparer des nuances.
+  // passent en teinte claire, les suivantes restent teintées mais à peine —
+  // gris pur les aurait fait sortir de la couleur de l'unité, comme si le
+  // chemin changeait de nature au lieu de simplement attendre.
   const circle = locked
-    ? 'border-2 border-line bg-line/30 text-ink-faint'
+    ? `border-2 ${tone.faintBorder} ${tone.faintBg} ${tone.faintText}`
     : done
       ? `border-2 ${tone.border} ${tone.soft} ${tone.text}`
       : `${tone.face} text-white`
+
+  // Chaque cercle porte l'ombre en tranche qui fait le langage visuel du
+  // reste de l'app (boutons, cartes) : sans elle, tout ce qui n'est pas
+  // l'étape courante retombait à plat, hors style. Elle s'assombrit avec
+  // l'importance de l'étape plutôt que de disparaître.
+  const shadow = current
+    ? `0 5px 0 0 ${tone.edge}`
+    : done
+      ? `0 3px 0 0 color-mix(in srgb, ${tone.edge} 55%, var(--color-line))`
+      : `0 2px 0 0 color-mix(in srgb, ${tone.edge} 18%, var(--color-line))`
 
   return (
     <div className="flex w-full flex-col items-center">
@@ -186,11 +231,7 @@ function PathNode({
             whileTap={locked ? undefined : { y: 4 }}
             aria-label={`${node.title} — ${locked ? 'verrouillé' : done ? 'terminé' : 'à faire'}`}
             className={`relative flex items-center justify-center rounded-full transition-colors ${circle}`}
-            style={{
-              width: size,
-              height: size,
-              ...(current ? { boxShadow: `0 5px 0 0 ${tone.edge}` } : {}),
-            }}
+            style={{ width: size, height: size, boxShadow: shadow }}
           >
             {locked ? <LockIcon size={20} /> : done ? <CheckIcon size={24} /> : <Icon size={30} />}
           </motion.button>
@@ -221,20 +262,27 @@ function PathNode({
  * Chemin entre deux nœuds : trois pastilles alignées vers le nœud suivant.
  * Un trait plein posé sous le libellé flottait sans relier personne ; des
  * pastilles se lisent comme des pas, et penchées vers la suite elles rendent
- * le serpentin évident. Elles se colorent une fois l'étape franchie — le
- * chemin se remplit derrière soi.
+ * le serpentin évident. Elles grossissent légèrement en approchant du nœud
+ * suivant — un soupçon de perspective — et se colorent une fois l'étape
+ * franchie : le chemin se remplit derrière soi plutôt que de rester gris.
  */
 function Trail({ from, to, filled, tone }: { from: number; to: number; filled: boolean; tone: Tone }) {
   return (
-    <span aria-hidden className="flex flex-col items-center gap-0.5 py-1">
-      {Array.from({ length: TRAIL_DOTS }, (_, index) => (
-        <span
-          key={index}
-          className={`h-1.5 w-1.5 rounded-full ${filled ? tone.face : 'bg-line'}`}
-          // Les pastilles s'égrènent du nœud courant vers le suivant.
-          style={{ transform: `translateX(${from + ((to - from) * (index + 1)) / (TRAIL_DOTS + 1)}px)` }}
-        />
-      ))}
+    <span aria-hidden className="flex flex-col items-center gap-1 py-1">
+      {Array.from({ length: TRAIL_DOTS }, (_, index) => {
+        const dotSize = 4 + index * 1.5
+        return (
+          <span
+            key={index}
+            className={`rounded-full ${filled ? tone.face : tone.dot}`}
+            style={{
+              width: dotSize,
+              height: dotSize,
+              transform: `translateX(${from + ((to - from) * (index + 1)) / (TRAIL_DOTS + 1)}px)`,
+            }}
+          />
+        )
+      })}
     </span>
   )
 }
