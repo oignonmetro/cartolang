@@ -8,6 +8,7 @@ import { cardStrength, dueCards } from '@/engine/srs'
 import { useProgress } from '@/store/progressStore'
 import { Button } from '@/components/Button'
 import { Mascot } from '@/components/Mascot'
+import { AppUpdateCard } from '@/components/AppUpdateCard'
 import { BoltIcon, ChevronLeftIcon, FlameIcon } from '@/components/icons'
 
 const STRENGTHS = ['nouvelle', 'en cours', 'connue', 'maîtrisée'] as const
@@ -169,6 +170,8 @@ export function ProfileScreen() {
         />
         {message && <p className="text-xs font-bold text-teal">{message}</p>}
       </section>
+
+      <AppUpdateCard />
 
       <section className="flex flex-col gap-2">
         <Button

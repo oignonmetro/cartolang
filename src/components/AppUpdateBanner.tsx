@@ -1,11 +1,9 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
-import { checkForAppUpdate, downloadAndInstallUpdate, type AppUpdate } from '@/content/appUpdate'
+import { useAppUpdate } from '@/content/useAppUpdate'
 import { RefreshIcon } from './icons'
 
 const DISMISSED_KEY = 'cartolang.dismissed-app-version'
-
-type Status = 'idle' | 'downloading' | 'permission-required' | 'failed'
 
 /**
  * Bandeau de mise à jour de l'app (APK), pendant de `UpdatePrompt.tsx` côté
@@ -13,32 +11,23 @@ type Status = 'idle' | 'downloading' | 'permission-required' | 'failed'
  * directement l'installateur système, sans repasser par le navigateur —
  * l'installation reste toujours confirmée par l'utilisateur, Android ne
  * permet rien d'automatique.
+ *
+ * « Plus tard » ne fait que masquer ce bandeau : la mise à jour reste
+ * proposée dans une case du profil (`AppUpdateCard.tsx`) tant qu'elle n'est
+ * pas installée.
  */
 export function AppUpdateBanner() {
-  const [update, setUpdate] = useState<AppUpdate | null>(null)
-  const [status, setStatus] = useState<Status>('idle')
+  const { update, status, download } = useAppUpdate()
+  const [dismissedVersion, setDismissedVersion] = useState(() => {
+    const stored = localStorage.getItem(DISMISSED_KEY)
+    return stored ? Number.parseInt(stored, 10) : null
+  })
 
-  useEffect(() => {
-    void checkForAppUpdate().then((found) => {
-      if (!found) return
-      const dismissed = Number.parseInt(localStorage.getItem(DISMISSED_KEY) ?? '', 10)
-      if (dismissed === found.versionCode) return
-      setUpdate(found)
-    })
-  }, [])
-
-  if (!update) return null
+  if (!update || update.versionCode === dismissedVersion) return null
 
   const dismiss = () => {
     localStorage.setItem(DISMISSED_KEY, String(update.versionCode))
-    setUpdate(null)
-  }
-
-  const download = async () => {
-    setStatus('downloading')
-    const outcome = await downloadAndInstallUpdate(update.url)
-    if (outcome === 'started') dismiss()
-    else setStatus(outcome)
+    setDismissedVersion(update.versionCode)
   }
 
   return (
