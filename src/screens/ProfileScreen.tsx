@@ -11,13 +11,23 @@ import { Mascot } from '@/components/Mascot'
 import { AppUpdateCard } from '@/components/AppUpdateCard'
 import { BoltIcon, ChevronLeftIcon, FlameIcon } from '@/components/icons'
 
-const STRENGTHS = ['nouvelle', 'en cours', 'connue', 'maîtrisée'] as const
+const STRENGTHS = ['new', 'learning', 'known', 'mastered'] as const
+
+// Accordés au masculin : ils qualifient des « éléments » (« X éléments
+// nouveaux »), pas des « cartes » comme le ferait croire le nom anglais des
+// clés qu'ils traduisent.
+const STRENGTH_LABELS: Record<(typeof STRENGTHS)[number], string> = {
+  new: 'nouveau',
+  learning: 'en cours',
+  known: 'connu',
+  mastered: 'maîtrisé',
+}
 
 const STRENGTH_TONE: Record<(typeof STRENGTHS)[number], string> = {
-  nouvelle: 'bg-line',
-  'en cours': 'bg-coral',
-  connue: 'bg-sky',
-  maîtrisée: 'bg-success',
+  new: 'bg-line',
+  learning: 'bg-coral',
+  known: 'bg-sky',
+  mastered: 'bg-success',
 }
 
 export function ProfileScreen() {
@@ -117,7 +127,7 @@ export function ProfileScreen() {
           {STRENGTHS.map((key) => (
             <li key={key} className="flex items-center gap-2">
               <span className={`h-3 w-3 rounded-full ${STRENGTH_TONE[key]}`} />
-              {key} · {breakdown[key]}
+              {STRENGTH_LABELS[key]} · {breakdown[key]}
             </li>
           ))}
         </ul>

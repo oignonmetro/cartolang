@@ -95,8 +95,8 @@ export function masteryOf(itemIds: readonly string[], cards: Record<string, Card
     const card = cards[id]
     if (!card) continue
     const strength = cardStrength(card)
-    if (strength !== 'nouvelle') seen += 1
-    if (strength === 'connue' || strength === 'maîtrisée') known += 1
+    if (strength !== 'new') seen += 1
+    if (strength === 'known' || strength === 'mastered') known += 1
   }
   const total = itemIds.length
   return { total, seen, known, ratio: total === 0 ? 0 : known / total }

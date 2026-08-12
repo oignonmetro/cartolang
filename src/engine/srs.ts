@@ -155,11 +155,17 @@ export function dueCards(cards: readonly CardState[], now: number, limit = Infin
     .slice(0, limit)
 }
 
-/** Répartition affichée dans les statistiques. */
-export function cardStrength(card: CardState): 'nouvelle' | 'en cours' | 'connue' | 'maîtrisée' {
+/**
+ * Répartition affichée dans les statistiques.
+ *
+ * Clés stables, pas les mots affichés : l'accord (« nouveau » ou « nouvelle »)
+ * dépend du nom qu'ils qualifient à l'affichage — c'est à l'écran de le
+ * choisir, pas à cette fonction de le figer.
+ */
+export function cardStrength(card: CardState): 'new' | 'learning' | 'known' | 'mastered' {
   // `reps` ne compte que les révisions ; un mot vu aujourd'hui est déjà « en cours ».
-  if (card.lastReviewed === null) return 'nouvelle'
-  if (card.step !== null || card.interval < 7) return 'en cours'
-  if (card.interval < 30) return 'connue'
-  return 'maîtrisée'
+  if (card.lastReviewed === null) return 'new'
+  if (card.step !== null || card.interval < 7) return 'learning'
+  if (card.interval < 30) return 'known'
+  return 'mastered'
 }
