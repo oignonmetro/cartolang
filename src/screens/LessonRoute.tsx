@@ -3,8 +3,9 @@ import { Navigate, useNavigate, useParams } from 'react-router-dom'
 import { useCourse } from '@/content/CourseProvider'
 import { buildLessonSession } from '@/engine/exercises'
 import { seedFrom } from '@/engine/rng'
-import { findLesson, nextLessonAfter } from '@/content/course'
+import { findLesson } from '@/content/course'
 import { starsFromMastery, type SessionOutcome } from '@/engine/progress'
+import { buildUnitPath, nextNodeAfter } from '@/engine/unitPath'
 import { useProgress } from '@/store/progressStore'
 import { SessionScreen } from './SessionScreen'
 import { SessionResult } from './SessionResult'
@@ -32,7 +33,6 @@ function LessonSession({ lessonId }: { lessonId: string }) {
   const finishLesson = useProgress((state) => state.finishLesson)
 
   const entry = useMemo(() => findLesson(course, lessonId), [course, lessonId])
-  const next = useMemo(() => nextLessonAfter(course, lessonId), [course, lessonId])
 
   // La difficulté suit ce qui est réellement su, plus le nombre de passages :
   // rejouer une leçon déjà solide donne d'emblée de la production, la
@@ -53,15 +53,31 @@ function LessonSession({ lessonId }: { lessonId: string }) {
 
   if (!entry) return <Navigate to="/" replace />
 
+  const unit = entry.unit
+  const backToPath = () => navigate(`/unite/${unit.id}`, { replace: true })
+
   if (finished) {
+    // L'enchaînement suit l'ordre du parcours, pas celui des seules leçons :
+    // la suite peut être une révision, et la sauter viderait le parcours de
+    // son sens.
+    const { lessons: progress, steps } = useProgress.getState()
+    const next = nextNodeAfter(buildUnitPath(unit, progress, steps), lessonId)
+
     return (
       <SessionResult
         outcome={finished.outcome}
         passed={finished.passed}
         xp={finished.xp}
         level={finished.level}
-        onContinue={() => navigate('/', { replace: true })}
-        onNext={next ? () => navigate(`/lecon/${next.lesson.id}`, { replace: true }) : undefined}
+        onContinue={backToPath}
+        onNext={
+          next && next.status !== 'locked'
+            ? () =>
+                navigate(next.lesson ? `/lecon/${next.lesson.id}` : `/etape/${unit.id}/${next.id}`, {
+                  replace: true,
+                })
+            : undefined
+        }
         onRetry={() => {
           setFinished(null)
           setAttempt((value) => value + 1)
@@ -77,7 +93,7 @@ function LessonSession({ lessonId }: { lessonId: string }) {
       key={attempt}
       title={entry.lesson.title}
       exercises={exercises}
-      onQuit={() => navigate('/', { replace: true })}
+      onQuit={backToPath}
       onFinish={(outcome) => {
         // Les cartes viennent d'être mises à jour par la session : les étoiles
         // se calculent donc sur l'état d'après, pas celui d'avant.

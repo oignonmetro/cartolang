@@ -21,26 +21,42 @@ Le moteur est générique : un cours n'est qu'un jeu de fichiers YAML.
 | Vocabulaire | flashcard auto-évaluée, association de paires, phrase à trou, saisie clavier |
 | Grammaire | rappel de cours, phrase à trou avec banque de formes puis au clavier |
 | Conjugaison | association personnes/formes, puis production de mémoire |
-| Progression | révision espacée (SM-2), étoiles gagnées par la maîtrise réelle, anneaux, entraînement par unité |
+| Progression | parcours ordonné par unité, révision espacée (SM-2), étoiles gagnées par la maîtrise réelle, anneaux |
 | Motivation | série de jours, XP et niveaux, objectif quotidien |
 | Hors-ligne | total — contenu, polices et interface embarqués |
 | Cibles | PWA sur GitHub Pages, APK Android via Capacitor |
 
 ## Boucle d'apprentissage
 
-Trois rôles distincts, qui ne se marchent pas dessus :
+**Les unités sont libres, leur intérieur ne l'est pas.** L'apprenant choisit par
+quoi commencer ; une fois dans une unité, un parcours ordonné le mène de la
+découverte à la maîtrise (`/unite/:unitId`, voir `src/engine/unitPath.ts`) :
 
-- **Les leçons font découvrir.** Un passage suffit. La difficulté d'une leçon
-  suit ce que l'apprenant sait déjà de ses éléments : la redécouvrir donne la
-  présentation, la reprendre une fois sue donne d'emblée de la production.
-- **Les révisions font revenir et approfondir.** C'est la colonne vertébrale :
-  échéances SM-2, toutes pistes mélangées, et montée automatique en exigence —
-  reconnaissance tant que la carte est fragile, production dès qu'elle tient
-  trois jours. L'appel à réviser est la première chose de l'écran d'accueil.
-- **L'entraînement (`/entrainement/:unitId`) comble le reste.** Il reprend les
-  éléments déjà rencontrés d'une unité, mélangés et tous en production, sans
-  attendre les échéances : c'est l'alternative à rejouer une leçon à
-  l'identique, et l'entrelacement y ancre mieux qu'une reprise en bloc.
+```
+leçon → leçon → révision → leçon → révision → approfondissement → entraînement
+```
+
+Quatre natures d'étapes, chacune avec son rôle :
+
+- **Leçon** — la découverte. Sa difficulté suit ce que l'apprenant sait déjà de
+  ses éléments : la découvrir donne la présentation, la reprendre une fois sue
+  donne d'emblée de la production.
+- **Révision** — reprendre les éléments de l'unité, en suivant l'état réel de
+  chaque carte : reconnaissance tant qu'elle est fragile, production dès
+  qu'elle tient trois jours.
+- **Approfondissement** — les mêmes éléments, mais production forcée : plus de
+  banque de mots, plus de reconnaissance.
+- **Entraînement** — le seul à sortir de l'unité. Il sert d'abord ce qui est
+  échu **ailleurs dans le cours** (les autres unités déjà travaillées
+  remontent naturellement avec le temps), puis complète avec les cartes les
+  plus fragiles — `intervalle / (1 + rechutes)`, du plus petit au plus grand.
+  Au tout début, quand rien d'extérieur n'est encore échu, il porte donc sur
+  l'unité en cours et ses points faibles, ce qui est exactement ce qu'il faut
+  à ce moment-là.
+
+En parallèle du parcours, l'écran d'accueil ouvre sur **ce qui est dû**, toutes
+pistes mélangées : c'est l'entrée « j'ai dix minutes » quand on ne veut pas
+choisir d'unité.
 
 Les étoiles ne comptent pas les passages mais mesurent ce qui est su : ★ leçon
 parcourue, ★★ éléments installés (≥ 7 j), ★★★ solidement acquis (≥ 30 j). Ce
@@ -129,7 +145,7 @@ src/content/      schéma (zod), accès au contenu, chargement, texte partagé
 src/engine/       logique pure et testée : SRS, exercices, progression
 src/store/        état de l'apprenant, persisté localement
 src/components/   mascotte, boutons en relief, anneaux, exercices
-src/screens/      bibliothèque, chemin, session, résultat, profil
+src/screens/      bibliothèque, parcours d'unité, session, résultat, profil
 android/          projet Capacitor
 ```
 

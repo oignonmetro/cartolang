@@ -67,16 +67,17 @@ export function SessionResult({
       </div>
 
       <div className="mt-2 flex w-full max-w-sm flex-col gap-3">
-        {/* Enchaîner est l'envie naturelle après une leçon réussie : c'est
-            donc l'action principale, et non un retour à la bibliothèque où il
-            faudrait retrouver sa place à la main. */}
+        {/* Enchaîner est l'envie naturelle après une session réussie : c'est
+            donc l'action principale, et non un retour à la liste où il
+            faudrait retrouver sa place à la main. « Étape » et non « leçon » :
+            la suite du parcours peut être une révision. */}
         {passed && onNext ? (
           <>
             <Button block onClick={onNext}>
-              Leçon suivante
+              Étape suivante
             </Button>
             <Button block tone="neutral" onClick={onContinue}>
-              Terminer
+              Voir le parcours
             </Button>
           </>
         ) : (

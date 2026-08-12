@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import type { LibraryCourse, Unit, Vocab } from './schema'
-import { findUnit, nextLessonAfter } from './course'
+import { findUnit } from './course'
 
 function vocab(id: string): Vocab {
   return { id, term: id, translation: id, alt: [] }
@@ -43,30 +43,6 @@ const COURSE: LibraryCourse = {
     },
   ],
 }
-
-describe('leçon suivante', () => {
-  it('enchaîne à l’intérieur d’une unité', () => {
-    expect(nextLessonAfter(COURSE, 'v1-l1')?.lesson.id).toBe('v1-l2')
-  })
-
-  it('passe à l’unité suivante de la même piste', () => {
-    expect(nextLessonAfter(COURSE, 'v1-l2')?.lesson.id).toBe('v2-l1')
-  })
-
-  it('s’arrête au bout de la piste plutôt que de sauter à la suivante', () => {
-    // Enchaîner du vocabulaire sur de la grammaire serait une rupture de
-    // contexte, pas la suite de ce qu'on était en train de faire.
-    expect(nextLessonAfter(COURSE, 'v2-l1')).toBeNull()
-  })
-
-  it('s’arrête à la dernière leçon du cours', () => {
-    expect(nextLessonAfter(COURSE, 'g1-l1')).toBeNull()
-  })
-
-  it('ignore une leçon inconnue', () => {
-    expect(nextLessonAfter(COURSE, 'inexistante')).toBeNull()
-  })
-})
 
 describe('recherche d’unité', () => {
   it('retrouve une unité de n’importe quelle piste', () => {

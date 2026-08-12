@@ -3,7 +3,8 @@ import { CourseProvider } from '@/content/CourseProvider'
 import { HomeScreen } from '@/screens/HomeScreen'
 import { LessonRoute } from '@/screens/LessonRoute'
 import { ReviewRoute } from '@/screens/ReviewRoute'
-import { PracticeRoute } from '@/screens/PracticeRoute'
+import { UnitPathScreen } from '@/screens/UnitPathScreen'
+import { StepRoute } from '@/screens/StepRoute'
 import { ProfileScreen } from '@/screens/ProfileScreen'
 import { UpdatePrompt } from '@/components/UpdatePrompt'
 import { AppUpdateBanner } from '@/components/AppUpdateBanner'
@@ -21,7 +22,8 @@ export default function App() {
           <Route path="/" element={<HomeScreen />} />
           <Route path="/lecon/:lessonId" element={<LessonRoute />} />
           <Route path="/revision" element={<ReviewRoute />} />
-          <Route path="/entrainement/:unitId" element={<PracticeRoute />} />
+          <Route path="/unite/:unitId" element={<UnitPathScreen />} />
+          <Route path="/etape/:unitId/:stepId" element={<StepRoute />} />
           <Route path="/profil" element={<ProfileScreen />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>

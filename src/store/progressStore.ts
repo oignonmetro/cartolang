@@ -25,13 +25,18 @@ export const STORAGE_KEY = 'cartolang.progress.v1'
 /**
  * Format 2 : les cartes suivent des « éléments » (mot, point de grammaire,
  * forme conjuguée) et non plus seulement des mots — `vocabId` est devenu
- * `itemId`. Les sauvegardes au format 1 sont converties à la lecture.
+ * `itemId`.
+ * Format 3 : `steps` enregistre les étapes de parcours qui ne sont pas des
+ * leçons (révision, approfondissement, entraînement).
+ * Les sauvegardes plus anciennes sont converties à la lecture.
  */
-export const SAVE_FORMAT = 2
+export const SAVE_FORMAT = 3
 
 export interface ProgressSnapshot {
   lessons: LessonProgressMap
   cards: Record<string, CardState>
+  /** Étapes de parcours franchies : clé `unité:nœud` → nombre de passages. */
+  steps: Record<string, number>
   xp: number
   xpByDay: Record<string, number>
   dailyGoal: number
@@ -60,6 +65,11 @@ interface ProgressState extends ProgressSnapshot {
   raiseLessonStars: (stars: Record<string, number>, now?: number) => void
   /** Clôt une session de révision : XP et série, sans toucher au chemin. */
   finishReview: (outcome: SessionOutcome, now?: number) => { xp: number }
+  /**
+   * Clôt une étape de parcours qui n'est pas une leçon. Même comptage qu'une
+   * révision, plus la marque qui fait avancer le parcours de l'unité.
+   */
+  finishStep: (stepId: string, outcome: SessionOutcome, now?: number) => { xp: number }
   setDailyGoal: (goal: number) => void
   exportSave: () => string
   importSave: (payload: string) => void
@@ -69,6 +79,7 @@ interface ProgressState extends ProgressSnapshot {
 const initial: ProgressSnapshot = {
   lessons: {},
   cards: {},
+  steps: {},
   xp: 0,
   xpByDay: {},
   dailyGoal: 30,
@@ -158,21 +169,38 @@ export const useProgress = create<ProgressState>()(
         return { xp }
       },
 
+      finishStep: (stepId, outcome, now = Date.now()) => {
+        const state = get()
+        const xp = xpFor(outcome, isPassed(outcome))
+        set({
+          steps: { ...state.steps, [stepId]: (state.steps[stepId] ?? 0) + 1 },
+          ...withActivity(state, xp, now),
+        })
+        return { xp }
+      },
+
       setDailyGoal: (goal) => set({ dailyGoal: Math.max(10, Math.round(goal)) }),
 
       exportSave: () => {
-        const { lessons, cards, xp, xpByDay, dailyGoal, streak } = get()
-        return JSON.stringify({ format: SAVE_FORMAT, savedAt: Date.now(), lessons, cards, xp, xpByDay, dailyGoal, streak }, null, 2)
+        const { lessons, cards, steps, xp, xpByDay, dailyGoal, streak } = get()
+        return JSON.stringify(
+          { format: SAVE_FORMAT, savedAt: Date.now(), lessons, cards, steps, xp, xpByDay, dailyGoal, streak },
+          null,
+          2,
+        )
       },
 
       importSave: (payload) => {
         const parsed = JSON.parse(payload) as Partial<ProgressSnapshot> & { format?: number }
-        if (parsed.format !== SAVE_FORMAT && parsed.format !== 1) {
+        // Les formats antérieurs n'ont rien perdu : leurs champs manquants
+        // prennent simplement leur valeur par défaut ci-dessous.
+        if (![1, 2, SAVE_FORMAT].includes(parsed.format ?? 0)) {
           throw new Error(`Format de sauvegarde inconnu (attendu ${SAVE_FORMAT}).`)
         }
         set({
           lessons: parsed.lessons ?? {},
           cards: migrateCards((parsed.cards ?? {}) as Record<string, unknown>),
+          steps: parsed.steps ?? {},
           xp: parsed.xp ?? 0,
           xpByDay: parsed.xpByDay ?? {},
           dailyGoal: parsed.dailyGoal ?? initial.dailyGoal,
@@ -187,11 +215,18 @@ export const useProgress = create<ProgressState>()(
       version: SAVE_FORMAT,
       migrate: (persisted) => {
         const state = persisted as ProgressSnapshot
-        return { ...state, cards: migrateCards((state?.cards ?? {}) as Record<string, unknown>) }
+        return {
+          ...state,
+          cards: migrateCards((state?.cards ?? {}) as Record<string, unknown>),
+          // Absent avant le format 3 : un parcours vierge, les leçons déjà
+          // faites restant reconnues par `lessons`.
+          steps: state?.steps ?? {},
+        }
       },
-      partialize: ({ lessons, cards, xp, xpByDay, dailyGoal, streak }) => ({
+      partialize: ({ lessons, cards, steps, xp, xpByDay, dailyGoal, streak }) => ({
         lessons,
         cards,
+        steps,
         xp,
         xpByDay,
         dailyGoal,

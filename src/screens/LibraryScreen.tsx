@@ -2,24 +2,27 @@ import { useEffect, useMemo, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
 import type { LibraryCourse, Track, Unit } from '@/content/schema'
-import { countLabel, itemsOfLesson, itemsOfUnit, masteredLabel } from '@/content/course'
-import {
-  dayKey,
-  displayedStreak,
-  lessonMastery,
-  lessonStars,
-  levelFromXp,
-  masteryOf,
-  MAX_LEVEL,
-  unitMastery,
-} from '@/engine/progress'
+import { countLabel, itemsOfUnit, masteredLabel } from '@/content/course'
+import type { LessonProgressMap } from '@/engine/progress'
+import { dayKey, displayedStreak, levelFromXp, masteryOf, unitMastery } from '@/engine/progress'
+import { buildUnitPath } from '@/engine/unitPath'
 import { dueCards } from '@/engine/srs'
 import { useProgress } from '@/store/progressStore'
 import { useCourse } from '@/content/CourseProvider'
 import { availableCourses } from '@/content/loader'
 import { ProgressRing } from '@/components/ProgressRing'
 import { CoursePicker } from '@/components/CoursePicker'
-import { BoltIcon, ChevronLeftIcon, FlameIcon, RefreshIcon, StarIcon, UnitIcon } from '@/components/icons'
+import { BoltIcon, ChevronLeftIcon, FlameIcon, StarIcon, UnitIcon } from '@/components/icons'
+
+/** Avancement d'une unité sur son parcours, pour la carte de la bibliothèque. */
+function doneNodes(
+  unit: Unit,
+  lessons: LessonProgressMap,
+  steps: Record<string, number>,
+): { count: number; total: number } {
+  const path = buildUnitPath(unit, lessons, steps)
+  return { count: path.filter((node) => node.status === 'done').length, total: path.length }
+}
 
 /**
  * Écran d'accueil des cours en accès libre.
@@ -78,21 +81,20 @@ export function LibraryScreen({ course }: { course: LibraryCourse }) {
   const navigate = useNavigate()
   const { manifest, switchCourse, itemsById } = useCourse()
   const lessons = useProgress((state) => state.lessons)
+  const steps = useProgress((state) => state.steps)
   const cards = useProgress((state) => state.cards)
   const xp = useProgress((state) => state.xp)
   const streak = useProgress((state) => state.streak)
 
   const [activeTrackId, setActiveTrackId] = useState(course.tracks[0]!.id)
-  const [openUnitId, setOpenUnitId] = useState<string | null>(null)
   const [pickerOpen, setPickerOpen] = useState(false)
   const pickableCourses = useMemo(() => availableCourses(manifest), [manifest])
 
-  // `course` change de référence quand on bascule de niveau : l'onglet et
-  // l'accordéon ouverts se réinitialisent plutôt que de garder l'état
-  // (potentiellement incohérent) du cours précédent.
+  // `course` change de référence quand on bascule de niveau : l'onglet actif
+  // se réinitialise plutôt que de garder celui (potentiellement inexistant)
+  // du cours précédent.
   useEffect(() => {
     setActiveTrackId(course.tracks[0]!.id)
-    setOpenUnitId(null)
   }, [course.id])
 
   const track = course.tracks.find((candidate) => candidate.id === activeTrackId) ?? course.tracks[0]!
@@ -151,10 +153,7 @@ export function LibraryScreen({ course }: { course: LibraryCourse }) {
           </div>
         </div>
 
-        <TrackTabs tracks={course.tracks} activeId={track.id} onSelect={(id) => {
-          setActiveTrackId(id)
-          setOpenUnitId(null)
-        }} />
+        <TrackTabs tracks={course.tracks} activeId={track.id} onSelect={setActiveTrackId} />
       </header>
 
       <main className="flex flex-1 flex-col gap-3 px-4 pt-4 pb-16">
@@ -180,13 +179,9 @@ export function LibraryScreen({ course }: { course: LibraryCourse }) {
               key={unit.id}
               unit={unit}
               tone={tone}
-              open={openUnitId === unit.id}
-              onToggle={() => setOpenUnitId((current) => (current === unit.id ? null : unit.id))}
               mastery={unitMastery(unit, cards)}
-              lessonStars={(lesson) => lessonStars(lesson, cards, lessons[lesson.id]?.level ?? 0)}
-              lessonMastery={(lesson) => lessonMastery(lesson, cards)}
-              onOpenLesson={(lessonId) => navigate(`/lecon/${lessonId}`)}
-              onPractice={() => navigate(`/entrainement/${unit.id}`)}
+              done={doneNodes(unit, lessons, steps)}
+              onOpen={() => navigate(`/unite/${unit.id}`)}
             />
           ))
         )}
@@ -341,32 +336,20 @@ function TrackSummary({
 function UnitCard({
   unit,
   tone,
-  open,
-  onToggle,
   mastery,
-  lessonStars,
-  lessonMastery,
-  onOpenLesson,
-  onPractice,
+  done,
+  onOpen,
 }: {
   unit: Unit
   tone: (typeof TRACK_TONES)[string]
-  open: boolean
-  onToggle: () => void
   mastery: { known: number; seen: number; total: number; ratio: number }
-  lessonStars: (lesson: Unit['lessons'][number]) => number
-  lessonMastery: (lesson: Unit['lessons'][number]) => { ratio: number; seen: number; total: number }
-  onOpenLesson: (lessonId: string) => void
-  onPractice: () => void
+  /** Étapes franchies sur le parcours de l'unité, et total. */
+  done: { count: number; total: number }
+  onOpen: () => void
 }) {
   return (
     <section className="card-3d overflow-hidden">
-      <button
-        type="button"
-        onClick={onToggle}
-        aria-expanded={open}
-        className="flex w-full items-center gap-4 px-4 py-4 text-left"
-      >
+      <button type="button" onClick={onOpen} className="flex w-full items-center gap-4 px-4 py-4 text-left">
         <ProgressRing
           ratio={mastery.ratio}
           seenRatio={mastery.total === 0 ? 0 : mastery.seen / mastery.total}
@@ -378,83 +361,14 @@ function UnitCard({
               officielle, et son badge prêtait à confusion avec le CECRL. */}
           <span className="text-base leading-tight font-extrabold">{unit.title}</span>
           {unit.subtitle && <span className="mt-0.5 block text-xs text-ink-soft">{unit.subtitle}</span>}
-          <span className="mt-0.5 block text-xs text-ink-faint">
-            {unit.lessons.length} leçons · {countLabel(unit.kind, mastery.total)}
+          <span className={`mt-0.5 block text-xs font-bold ${done.count > 0 ? tone.text : 'text-ink-faint'}`}>
+            {done.count} / {done.total} étapes · {countLabel(unit.kind, mastery.total)}
           </span>
         </span>
-        <motion.span animate={{ rotate: open ? -90 : -180 }} className="text-ink-faint">
+        <span className="-rotate-180 text-ink-faint">
           <ChevronLeftIcon size={20} />
-        </motion.span>
+        </span>
       </button>
-
-      <AnimatePresence initial={false}>
-        {open && (
-          <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: 'auto', opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.22, ease: 'easeInOut' }}
-            className="overflow-hidden"
-          >
-            <ul className="flex flex-col gap-1 border-t-2 border-line px-3 py-3">
-              {unit.lessons.map((lesson) => (
-                <li key={lesson.id}>
-                  <button
-                    type="button"
-                    onClick={() => onOpenLesson(lesson.id)}
-                    className="flex w-full items-center gap-3 rounded-2xl px-3 py-2.5 text-left transition-colors hover:bg-cream"
-                  >
-                    <ProgressRing
-                      ratio={lessonMastery(lesson).ratio}
-                      seenRatio={
-                        lessonMastery(lesson).total === 0
-                          ? 0
-                          : lessonMastery(lesson).seen / lessonMastery(lesson).total
-                      }
-                      size={32}
-                      stroke={4}
-                      color={tone.css}
-                      label=" "
-                    />
-                    <span className="flex-1">
-                      <span className="block text-sm font-extrabold">{lesson.title}</span>
-                      <span className="block text-[0.7rem] text-ink-faint">
-                        {countLabel(lesson.kind, itemsOfLesson(lesson).length)}
-                      </span>
-                    </span>
-                    <span className="flex gap-0.5">
-                      {Array.from({ length: MAX_LEVEL }, (_, index) => (
-                        <StarIcon
-                          key={index}
-                          filled={index < lessonStars(lesson)}
-                          size={12}
-                          className={index < lessonStars(lesson) ? 'text-amber' : 'text-line'}
-                        />
-                      ))}
-                    </span>
-                  </button>
-                </li>
-              ))}
-            </ul>
-
-            {/* L'alternative à rejouer une leçon à l'identique : reprendre
-                l'unité entière, mélangée. N'apparaît qu'une fois quelque chose
-                rencontré, sinon il n'y aurait rien à travailler. */}
-            {mastery.seen > 0 && (
-              <div className="border-t-2 border-line px-3 py-3">
-                <button
-                  type="button"
-                  onClick={onPractice}
-                  className={`flex w-full items-center justify-center gap-2 rounded-2xl border-2 ${tone.border} px-4 py-2.5 text-sm font-extrabold ${tone.text}`}
-                >
-                  <RefreshIcon size={16} />
-                  S'entraîner sur l'unité
-                </button>
-              </div>
-            )}
-          </motion.div>
-        )}
-      </AnimatePresence>
     </section>
   )
 }
