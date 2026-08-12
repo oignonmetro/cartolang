@@ -39,7 +39,6 @@ export function ChoiceQuestion({
         <Mascot mood={checked ? (correct ? 'happy' : 'disappointed') : 'idle'} size={64} />
         <div className="card-3d relative flex-1 px-4 py-3 before:absolute before:top-5 before:-left-2 before:h-4 before:w-4 before:rotate-45 before:border-b-2 before:border-l-2 before:border-line before:bg-paper">
           <span className="text-xl font-black break-words">{prompt}</span>
-          {vocab.pos && <span className="ml-2 text-xs font-bold uppercase tracking-widest text-ink-faint">{vocab.pos}</span>}
         </div>
       </div>
 
