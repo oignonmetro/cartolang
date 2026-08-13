@@ -10,7 +10,7 @@ import {
   type SessionOutcome,
   type Streak,
 } from '@/engine/progress'
-import { createCard, review, type CardState, type Rating } from '@/engine/srs'
+import { createCard, DAY, review, type CardState, type Rating } from '@/engine/srs'
 
 /**
  * État de l'apprenant.
@@ -27,9 +27,11 @@ export const STORAGE_KEY = 'cartolang.progress.v1'
  * `itemId`.
  * Format 3 : `steps` enregistre les étapes de parcours qui ne sont pas des
  * leçons (révision, approfondissement, entraînement).
+ * Format 4 : les échéances gonflées par la répétition massée sont ramenées
+ * à une valeur réaliste (voir `deflateSchedules`).
  * Les sauvegardes plus anciennes sont converties à la lecture.
  */
-export const SAVE_FORMAT = 3
+export const SAVE_FORMAT = 4
 
 export interface ProgressSnapshot {
   lessons: LessonProgressMap
@@ -83,6 +85,56 @@ export function migrateCards(cards: Record<string, unknown>): Record<string, Car
     migrated[id] = { ...(rest as CardState), itemId: (rest as CardState).itemId ?? vocabId ?? id }
   }
   return migrated
+}
+
+/**
+ * Plafond appliqué aux échéances héritées, en jours.
+ *
+ * Trois jours : sous le seuil à partir duquel un mot est réclamé en
+ * production libre, de sorte qu'aucune carte ne conserve par héritage une
+ * maturité qu'elle n'a pas gagnée. Elle la regagne en trois révisions
+ * espacées si elle le mérite — sa facilité est préservée, elle remonte donc
+ * aussi vite qu'avant.
+ */
+const INHERITED_CEILING = 3
+
+/**
+ * Ramène les échéances gonflées à une valeur réaliste.
+ *
+ * Jusqu'au format 3, chaque exercice d'une même séance comptait pour une
+ * révision espacée réussie et multipliait l'intervalle par la facilité. Un
+ * mot enchaîné en présentation, en association, en QCM puis en phrase à trou
+ * ressortait de sa propre leçon planifié à cinquante jours : il ne revenait
+ * plus avant des semaines, et passait entre-temps pour assez mûr qu'on lui
+ * réclame le mot de mémoire.
+ *
+ * L'historique ne permet pas de démêler les vraies révisions des répétitions
+ * de séance — `reps` a été gonflé de la même façon. On ne cherche donc pas à
+ * reconstituer l'échéance exacte : on plafonne, et le calcul corrigé
+ * reconstruit ensuite un vrai calendrier à partir des réponses réelles.
+ *
+ * Ce qui a été appris est conservé : les rechutes, la facilité, le nombre de
+ * révisions, les leçons faites, l'XP et la série ne bougent pas. Les cartes
+ * encore en apprentissage non plus — leurs paliers se comptent en minutes,
+ * la multiplication ne les a jamais touchées.
+ */
+export function deflateSchedules(
+  cards: Record<string, CardState>,
+  now = Date.now(),
+): Record<string, CardState> {
+  const result: Record<string, CardState> = {}
+  for (const [id, card] of Object.entries(cards)) {
+    if (card.step !== null || card.interval <= INHERITED_CEILING) {
+      result[id] = card
+      continue
+    }
+    const interval = INHERITED_CEILING
+    // L'échéance repart de la dernière réponse : une carte négligée depuis
+    // longtemps redevient due tout de suite, comme elle aurait dû l'être.
+    const due = (card.lastReviewed ?? now) + interval * DAY
+    result[id] = { ...card, interval, due }
+  }
+  return result
 }
 
 /** Enregistre l'activité du jour : XP cumulés et série. */
@@ -163,12 +215,14 @@ export const useProgress = create<ProgressState>()(
         const parsed = JSON.parse(payload) as Partial<ProgressSnapshot> & { format?: number }
         // Les formats antérieurs n'ont rien perdu : leurs champs manquants
         // prennent simplement leur valeur par défaut ci-dessous.
-        if (![1, 2, SAVE_FORMAT].includes(parsed.format ?? 0)) {
+        const format = parsed.format ?? 0
+        if (![1, 2, 3, SAVE_FORMAT].includes(format)) {
           throw new Error(`Format de sauvegarde inconnu (attendu ${SAVE_FORMAT}).`)
         }
+        const cards = migrateCards((parsed.cards ?? {}) as Record<string, unknown>)
         set({
           lessons: parsed.lessons ?? {},
-          cards: migrateCards((parsed.cards ?? {}) as Record<string, unknown>),
+          cards: format < 4 ? deflateSchedules(cards) : cards,
           steps: parsed.steps ?? {},
           xp: parsed.xp ?? 0,
           xpByDay: parsed.xpByDay ?? {},
@@ -182,11 +236,13 @@ export const useProgress = create<ProgressState>()(
     {
       name: STORAGE_KEY,
       version: SAVE_FORMAT,
-      migrate: (persisted) => {
+      migrate: (persisted, version) => {
         const state = persisted as ProgressSnapshot
+        const cards = migrateCards((state?.cards ?? {}) as Record<string, unknown>)
         return {
           ...state,
-          cards: migrateCards((state?.cards ?? {}) as Record<string, unknown>),
+          // Les sauvegardes d'avant le format 4 portent des échéances gonflées.
+          cards: version < 4 ? deflateSchedules(cards) : cards,
           // Absent avant le format 3 : un parcours vierge, les leçons déjà
           // faites restant reconnues par `lessons`.
           steps: state?.steps ?? {},
