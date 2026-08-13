@@ -119,6 +119,60 @@ describe('phase de révision', () => {
   })
 })
 
+describe('révision anticipée', () => {
+  it('n’allonge pas l’échéance d’une carte pas encore échue', () => {
+    // Régression : une leçon enchaîne le même mot en présentation, en
+    // association, en QCM puis en phrase à trou. Chaque passage comptait
+    // pour une révision réussie et multipliait l'intervalle, si bien qu'un
+    // mot découvert quatre minutes plus tôt ressortait planifié à cinquante
+    // jours — et tout ce qui jugeait ensuite de sa maturité était trompé.
+    const card = { ...graduate(createCard('hello', T0)), interval: 10 }
+    const next = review(card, 'good', card.due - 2 * DAY)
+    expect(next.interval).toBe(10)
+    expect(next.due).toBe(card.due)
+    expect(next.reps).toBe(card.reps)
+    expect(next.ease).toBe(card.ease)
+  })
+
+  it('enregistre tout de même la réponse', () => {
+    // Sans quoi la carte passerait pour jamais rencontrée : c'est ce drapeau
+    // qui la fait entrer dans les étapes de consolidation.
+    const card = { ...graduate(createCard('hello', T0)), interval: 10 }
+    const early = card.due - 2 * DAY
+    expect(review(card, 'good', early).lastReviewed).toBe(early)
+  })
+
+  it('compte quand même l’échec', () => {
+    // Oublier un mot qu'on vient de voir est une information : la carte
+    // repart en apprentissage même si son échéance était encore loin.
+    const card = { ...graduate(createCard('hello', T0)), interval: 30 }
+    const next = review(card, 'again', card.due - 10 * DAY)
+    expect(next.step).toBe(0)
+    expect(next.lapses).toBe(1)
+    expect(next.interval).toBe(0)
+  })
+
+  it('reprend sa progression une fois l’échéance atteinte', () => {
+    const card = { ...graduate(createCard('hello', T0)), interval: 10 }
+    const held = review(card, 'good', card.due - 2 * DAY)
+    const due = review(held, 'good', held.due)
+    expect(due.interval).toBe(25)
+    expect(due.reps).toBe(card.reps + 1)
+  })
+
+  it('laisse la phase d’apprentissage se terminer dans la séance', () => {
+    // Les paliers courts sont faits pour être franchis le jour même : les
+    // bloquer empêcherait toute carte de graduer pendant sa leçon.
+    const card = createCard('hello', T0)
+    const first = review(card, 'good', T0)
+    expect(first.step).toBe(1)
+    // Réponse donnée trente secondes plus tard, bien avant le palier de dix minutes.
+    const second = review(first, 'good', T0 + 30_000)
+    expect(second.step).toBeNull()
+    expect(second.interval).toBe(1)
+  })
+})
+
 describe('file de révision', () => {
   it('ne retient que les cartes échues, apprentissage en tête', () => {
     const learning: CardState = { ...createCard('a', T0), due: T0 + 5 * MINUTE }

@@ -397,24 +397,61 @@ function buildConjugationSession(
 }
 
 /**
- * Intervalle à partir duquel une carte passe en production plutôt qu'en
- * reconnaissance. Trois jours, soit dès la deuxième révision : au-delà, la
- * reconnaissance s'installe comme un plafond — on croit savoir un mot qu'on
- * ne sait en réalité que reconnaître.
+ * Intervalle à partir duquel on retire les aides : plus de banque de mots
+ * sous la phrase à trou, la réponse se saisit. Trois jours, soit la première
+ * révision réussie après la graduation.
  */
-const SOLID_INTERVAL = 3
+const UNAIDED_INTERVAL = 3
+
+/**
+ * Intervalle à partir duquel on demande le mot en production libre — voir la
+ * traduction française et écrire le mot anglais, sans contexte.
+ *
+ * Sept jours, soit deux révisions réussies après la graduation. C'est le
+ * rappel le plus coûteux qui soit : tant que la carte n'a pas tenu quelques
+ * jours, le mot n'est simplement pas encore récupérable, et le demander ne
+ * teste rien — ça ne fait qu'enseigner l'échec. La reconnaissance, puis la
+ * traduction vers le français, préparent ce rappel-là au lieu de le brusquer.
+ */
+const PRODUCTION_INTERVAL = 7
+
+/**
+ * Échelon de rappel qu'une carte est en état de soutenir.
+ *
+ *   `recognize`  : la carte est encore en apprentissage, elle n'a pas passé
+ *                  une nuit — on la reconnaît, on ne la produit pas ;
+ *   `comprehend` : elle a gradué, on la rappelle dans le sens facile
+ *                  (anglais → français : la réponse est dans sa langue) ;
+ *   `produce`    : elle a tenu plusieurs jours, elle peut se produire de
+ *                  mémoire dans la langue apprise.
+ *
+ * Une rechute remet l'intervalle à zéro et rend la carte à l'apprentissage :
+ * un mot oublié redescend donc de lui-même à la reconnaissance.
+ */
+type RecallStage = 'recognize' | 'comprehend' | 'produce'
+
+function recallStage(card: CardState): RecallStage {
+  if (card.step !== null) return 'recognize'
+  if (card.interval < PRODUCTION_INTERVAL) return 'comprehend'
+  return 'produce'
+}
 
 /**
  * Session mélangée à partir de cartes existantes.
  *
- * `forceProduction` distingue les deux usages : la révision suit l'état réel
- * de chaque carte, l'entraînement pousse tout le monde à la forme la plus
- * exigeante — c'est ce qu'on vient y chercher.
+ * `unaided` distingue les deux usages : la révision laisse les aides
+ * (banque de mots, auto-évaluation), l'entraînement les retire et fait
+ * réellement saisir la réponse — c'est ce qu'on vient y chercher.
+ *
+ * Ce qu'il ne fait pas, c'est décider du sens de traduction : celui-ci suit
+ * la maturité de chaque carte et rien d'autre. Forcer la production libre
+ * parce que l'étape s'appelle « approfondissement » revenait à réclamer des
+ * mots vus quelques minutes plus tôt.
  */
 function buildMixedSession(
   entries: readonly { card: CardState; item: PracticeItem }[],
   seed: number,
-  forceProduction: boolean,
+  drill: boolean,
 ): Exercise[] {
   if (entries.length === 0) return []
   const rng = createRng(seed)
@@ -425,14 +462,14 @@ function buildMixedSession(
     .filter((vocab): vocab is Vocab => vocab !== null)
 
   const exercises = entries.map(({ card, item }): Exercise => {
-    const solid = forceProduction || (card.step === null && card.interval >= SOLID_INTERVAL)
+    const unaided = drill || card.interval >= UNAIDED_INTERVAL
 
     if (item.kind === 'grammar') {
       return {
         kind: 'grammar-gap',
         id: `gap:${item.id}`,
         point: item.point,
-        bank: !solid && item.point.options.length > 1 ? shuffle(item.point.options, rng) : null,
+        bank: !unaided && item.point.options.length > 1 ? shuffle(item.point.options, rng) : null,
       }
     }
 
@@ -441,13 +478,30 @@ function buildMixedSession(
     }
 
     const vocab = item.vocab
-    if (solid) {
+    const stage = recallStage(card)
+
+    if (stage === 'produce') {
       const cloze = clozeFor(vocab, null, rng)
       if (cloze && rng() < 0.5) return cloze
       return { kind: 'type', id: `type:${vocab.id}`, vocab, direction: 'to-learning' }
     }
+
+    if (stage === 'comprehend') {
+      // La phrase à trou porte le mot anglais : elle reste un rappel dans la
+      // langue apprise, mais le contexte le tire, là où la page blanche ne
+      // tire rien. À défaut, on demande le sens — réponse en français.
+      const cloze = clozeFor(vocab, unaided ? null : vocabPool, rng)
+      if (cloze && rng() < 0.5) return cloze
+      return { kind: 'type', id: `type:${vocab.id}`, vocab, direction: 'to-known' }
+    }
+
+    // Carte encore en apprentissage : reconnaissance seulement, et la banque
+    // de mots reste même à l'entraînement — retirer l'aide ici reviendrait à
+    // réclamer de mémoire un mot rencontré quelques minutes plus tôt. Ce que
+    // l'entraînement change, c'est la fréquence de la phrase à trou : un vrai
+    // rappel, là où la flashcard se contente d'une auto-évaluation.
     const cloze = clozeFor(vocab, vocabPool, rng)
-    if (cloze && rng() < 0.4) return cloze
+    if (cloze && rng() < (drill ? 0.7 : 0.4)) return cloze
     return { kind: 'flashcard', id: `flash:${vocab.id}`, vocab, direction: 'to-known' }
   })
 
@@ -456,9 +510,9 @@ function buildMixedSession(
 }
 
 /**
- * Session de révision : construite à partir des cartes échues. Les cartes
- * encore fragiles restent en reconnaissance, les cartes solides passent à la
- * production.
+ * Session de révision : construite à partir des cartes échues, avec leurs
+ * aides. Chaque carte est interrogée à l'échelon qu'elle a atteint — on
+ * reconnaît, puis on traduit vers le français, puis on produit en anglais.
  */
 export function buildReviewSession(
   entries: readonly { card: CardState; item: PracticeItem }[],
@@ -470,11 +524,16 @@ export function buildReviewSession(
 
 /**
  * Session d'entraînement : les éléments déjà rencontrés d'une unité, mélangés,
- * sans attendre les échéances et tous en production.
+ * sans attendre les échéances et sans les aides — banque de mots retirée,
+ * réponse réellement saisie plutôt qu'auto-évaluée.
  *
  * Ce n'est pas une révision anticipée : c'est l'alternative au fait de rejouer
  * une leçon à l'identique. Mélanger les éléments de toute l'unité ancre mieux
  * que de reprendre un bloc déjà vu dans le même ordre.
+ *
+ * L'exigence porte sur les aides, jamais sur le sens de traduction : celui-ci
+ * suit la maturité de chaque carte, faute de quoi l'étape réclamerait en
+ * production libre des mots vus le jour même.
  */
 export function buildPracticeSession(
   entries: readonly { card: CardState; item: PracticeItem }[],

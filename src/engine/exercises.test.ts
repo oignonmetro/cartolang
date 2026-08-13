@@ -186,7 +186,7 @@ describe('session de révision', () => {
     expect(covered.size).toBeGreaterThanOrEqual(4)
   })
 
-  it('demande la production sur les cartes solides', () => {
+  it('demande la production libre sur les cartes solides', () => {
     const solid = entries([
       { step: null, interval: 40 },
       { step: null, interval: 60 },
@@ -195,6 +195,7 @@ describe('session de révision', () => {
     ])
     const session = buildReviewSession(solid).filter((e) => e.kind !== 'match')
     expect(session.every((e) => e.kind === 'type' || e.kind === 'cloze')).toBe(true)
+    expect(session.every((e) => e.kind !== 'type' || e.direction === 'to-learning')).toBe(true)
   })
 
   it('reste en reconnaissance sur les cartes fragiles', () => {
@@ -203,9 +204,11 @@ describe('session de révision', () => {
     expect(session.every((e) => e.kind === 'flashcard' || (e.kind === 'cloze' && e.bank !== null))).toBe(true)
   })
 
-  it('bascule en production dès la deuxième révision', () => {
-    // Après une première révision réussie l'intervalle vaut 3 jours : la
-    // reconnaissance ne doit pas s'installer plus longtemps que ça.
+  it('fait traduire vers le français avant d’exiger le mot anglais', () => {
+    // Après une première révision réussie l'intervalle vaut 3 jours : la carte
+    // sort de la reconnaissance, mais le mot anglais n'est pas encore
+    // récupérable page blanche. On retire les aides sans changer de sens :
+    // la réponse se donne en français, ou dans une phrase qui porte le mot.
     const early = entries([
       { step: null, interval: 3 },
       { step: null, interval: 3 },
@@ -213,7 +216,9 @@ describe('session de révision', () => {
       { step: null, interval: 3 },
     ])
     const session = buildReviewSession(early).filter((e) => e.kind !== 'match')
+    expect(session.length).toBeGreaterThan(0)
     expect(session.every((e) => e.kind === 'type' || (e.kind === 'cloze' && e.bank === null))).toBe(true)
+    expect(session.every((e) => e.kind !== 'type' || e.direction === 'to-known')).toBe(true)
   })
 })
 
@@ -228,13 +233,34 @@ describe('session d’entraînement', () => {
     expect(buildPracticeSession([])).toEqual([])
   })
 
-  it('exige la production même sur des cartes fragiles', () => {
-    // C'est toute la différence avec la révision : ici on vient travailler,
-    // pas attendre que l'échéance décide du niveau d'exigence.
+  it('n’exige jamais le mot anglais d’une carte encore en apprentissage', () => {
+    // Régression : l'entraînement forçait la production libre sur toutes ses
+    // cartes, y compris des mots présentés quelques minutes plus tôt dans la
+    // leçon qui précède l'étape. On réclamait un rappel que la mémoire ne
+    // pouvait pas encore fournir — la banque de mots reste, elle aussi.
     const fragile = entries([{ step: 0 }, { step: 0 }, { step: 1 }, { step: 0 }])
     const session = buildPracticeSession(fragile).filter((e) => e.kind !== 'match')
     expect(session.length).toBeGreaterThan(0)
-    expect(session.every((e) => e.kind === 'type' || (e.kind === 'cloze' && e.bank === null))).toBe(true)
+    expect(session.some((e) => e.kind === 'type' && e.direction === 'to-learning')).toBe(false)
+    expect(session.every((e) => e.kind !== 'cloze' || e.bank !== null)).toBe(true)
+  })
+
+  it('retire les aides sur les cartes mûres', () => {
+    // L'exigence de l'entraînement porte là : plus de banque de mots, plus
+    // d'auto-évaluation, et le mot se produit en anglais.
+    const solid = entries([
+      { step: null, interval: 40 },
+      { step: null, interval: 60 },
+      { step: null, interval: 90 },
+      { step: null, interval: 120 },
+    ])
+    const session = buildPracticeSession(solid).filter((e) => e.kind !== 'match')
+    expect(session.length).toBeGreaterThan(0)
+    expect(
+      session.every(
+        (e) => (e.kind === 'cloze' && e.bank === null) || (e.kind === 'type' && e.direction === 'to-learning'),
+      ),
+    ).toBe(true)
   })
 
   it('couvre chaque élément fourni', () => {

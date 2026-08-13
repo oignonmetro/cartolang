@@ -112,6 +112,25 @@ export function review(card: CardState, rating: Rating, now: number): CardState 
     return next
   }
 
+  /*
+   * Révision anticipée : la carte n'est pas encore échue.
+   *
+   * C'est le cas courant d'un même mot revu plusieurs fois dans la même
+   * séance — une leçon l'enchaîne en présentation, en association, en QCM,
+   * puis en phrase à trou. Chacun de ces passages est une bonne réponse,
+   * mais ils ne sont espacés que de quelques secondes : les compter comme
+   * autant de révisions multipliait l'échéance à chaque fois, si bien qu'un
+   * mot découvert quatre minutes plus tôt ressortait de sa propre leçon
+   * planifié à cinquante jours. Tout ce qui juge ensuite de sa maturité
+   * était trompé, et réclamait de mémoire un mot jamais revu depuis.
+   *
+   * La répétition massée entretient, elle n'ancre pas : on note la réponse,
+   * on laisse l'échéance où elle est. Seul le temps écoulé fait progresser
+   * l'intervalle. Un échec, lui, compte toujours — oublier un mot qu'on
+   * vient de voir est une information, et il repart plus haut.
+   */
+  if (card.due > now) return next
+
   const base = Math.max(1, card.interval)
   let interval: number
   if (rating === 'hard') {
