@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
 import type { LibraryCourse, Track, Unit } from '@/content/schema'
-import { countLabel, itemsOfUnit, masteredLabel } from '@/content/course'
+import { countLabel, itemsOfUnit } from '@/content/course'
 import type { LessonProgressMap } from '@/engine/progress'
 import { dayKey, displayedStreak, levelFromXp, masteryOf, unitMastery } from '@/engine/progress'
 import { buildUnitPath } from '@/engine/unitPath'
@@ -322,11 +322,9 @@ function TrackSummary({
         <div className="flex-1">
           {/* Ni « Vue d'ensemble » ni le nom de la piste : l'onglet juste
               au-dessus les dit déjà. Le sous-titre porte l'intention de la
-              piste, la maîtrise en dessous porte le chiffre qui avance. */}
+              piste ; le chiffre qui avance est déjà dans l'anneau, inutile
+              de le répéter en toutes lettres à côté. */}
           {track.subtitle && <p className="text-sm leading-snug font-extrabold text-ink">{track.subtitle}</p>}
-          <p className={`text-xs font-bold ${tone.text} ${track.subtitle ? 'mt-0.5' : ''}`}>
-            {masteredLabel(track.kind, known, total)}
-          </p>
         </div>
       </div>
     </section>
