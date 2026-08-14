@@ -87,27 +87,14 @@ export function indexItems(course: Course): Map<string, ItemLocation> {
   return byId
 }
 
-/**
- * Libellé d'une nature de contenu. Le genre est porté par les données pour
- * que les participes s'accordent : « 12 règles acquises », pas « acquis ».
- */
-export const KIND_LABELS: Record<LessonKind, { one: string; many: string; feminine: boolean }> = {
-  vocab: { one: 'mot', many: 'mots', feminine: false },
-  grammar: { one: 'règle', many: 'règles', feminine: true },
-  conjugation: { one: 'forme', many: 'formes', feminine: true },
+/** Libellé d'une nature de contenu : « 12 règles », « 1 forme ». */
+export const KIND_LABELS: Record<LessonKind, { one: string; many: string }> = {
+  vocab: { one: 'mot', many: 'mots' },
+  grammar: { one: 'règle', many: 'règles' },
+  conjugation: { one: 'forme', many: 'formes' },
 }
 
 export function countLabel(kind: LessonKind, count: number): string {
   const { one, many } = KIND_LABELS[kind]
   return `${count} ${count > 1 ? many : one}`
-}
-
-/**
- * « 3 / 12 règles solidement acquises » — avec l'accord qui convient.
- * Au masculin, « acquis » ne prend pas de marque de pluriel supplémentaire.
- */
-export function masteredLabel(kind: LessonKind, known: number, total: number): string {
-  const { feminine } = KIND_LABELS[kind]
-  const participle = feminine ? (total > 1 ? 'acquises' : 'acquise') : 'acquis'
-  return `${known} / ${countLabel(kind, total)} solidement ${participle}`
 }

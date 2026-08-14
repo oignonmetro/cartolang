@@ -2,7 +2,7 @@ import { useMemo } from 'react'
 import { Navigate, useNavigate, useParams } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { useCourse } from '@/content/CourseProvider'
-import { findUnit, masteredLabel } from '@/content/course'
+import { findUnit } from '@/content/course'
 import { unitMastery } from '@/engine/progress'
 import { buildUnitPath, type UnitNodeKind, type UnitPathNode } from '@/engine/unitPath'
 import { useProgress } from '@/store/progressStore'
@@ -156,9 +156,6 @@ export function UnitPathScreen() {
             color={tone.css}
           />
         </div>
-        <p className={`mt-1 text-xs font-bold ${tone.text}`}>
-          {masteredLabel(unit.kind, mastery.known, mastery.total)}
-        </p>
       </header>
 
       <main
