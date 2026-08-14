@@ -14,7 +14,9 @@ import type { CardState } from './srs'
  * les noyer ensuite dans un grand mélange. Cinq familles d'exercices :
  *   - `intro`     : présentation d'un mot nouveau, avec auto-évaluation en trois
  *                   boutons — tout est déjà visible, inutile de le redemander
- *                   aussitôt dans une flashcard séparée ;
+ *                   aussitôt dans une flashcard séparée. Réservée aux mots
+ *                   sans carte de révision : rejouer une leçon déjà sue ne
+ *                   la réintroduit pas ;
  *   - `match`     : relier des mots à leurs traductions ;
  *   - `choice`    : reconnaître la bonne traduction parmi des leurres (QCM) ;
  *   - `cloze`     : compléter une phrase en piochant dans une banque de mots ;
@@ -258,13 +260,20 @@ function between(min: number, max: number, rng: Rng): number {
  * d'étoiles déjà obtenues (0 à 2), qui détermine la difficulté du passage
  * suivant (présentation puis reconnaissance, puis production). Le
  * vocabulaire l'ignore : ses blocs suivent toujours la même progression,
- * quel que soit le nombre de passages sur la leçon.
+ * quel que soit le nombre de passages sur la leçon — sauf pour la
+ * présentation elle-même, qui suit `cards` plutôt que `level` (voir
+ * `buildVocabSession`).
  */
-export function buildLessonSession(lesson: Lesson, level: number, seed?: number): Exercise[] {
+export function buildLessonSession(
+  lesson: Lesson,
+  level: number,
+  seed?: number,
+  cards: Record<string, CardState> = {},
+): Exercise[] {
   const resolved = seed ?? seedFrom(lesson.id, level)
   switch (lesson.kind) {
     case 'vocab':
-      return buildVocabSession(lesson.vocab, resolved)
+      return buildVocabSession(lesson.vocab, cards, resolved)
     case 'grammar':
       return buildGrammarSession(lesson.id, lesson.points, lesson.notes, lesson.title, level, resolved)
     case 'conjugation':
@@ -285,8 +294,15 @@ const CLOZE_PER_BLOCK = 2
  * recommence avec les mots suivants s'il en reste. Les exercices d'un bloc
  * piochent dans tous les mots déjà présentés, pas seulement les siens — le
  * chemin révise en avançant plutôt que de cloisonner chaque bloc.
+ *
+ * `cards` dit quels mots ont déjà une carte de révision, donc ont déjà été
+ * présentés au moins une fois — dans cette leçon lors d'un essai précédent,
+ * ou ailleurs si le même mot est enseigné à deux endroits. Un mot connu ne
+ * reçoit pas de nouvel écran de présentation : rejouer une leçon déjà sue ne
+ * doit pas rouvrir son cours du premier jour, seulement remettre ses mots au
+ * travail dans les blocs qui suivent.
  */
-function buildVocabSession(vocab: readonly Vocab[], seed: number): Exercise[] {
+function buildVocabSession(vocab: readonly Vocab[], cards: Record<string, CardState>, seed: number): Exercise[] {
   const rng = createRng(seed)
   const blocks = blocksOf(shuffle(vocab, rng))
 
@@ -295,9 +311,9 @@ function buildVocabSession(vocab: readonly Vocab[], seed: number): Exercise[] {
   for (const block of blocks) {
     pool.push(...block)
 
-    const blockExercises: Exercise[] = block.map(
-      (word): IntroExercise => ({ kind: 'intro', id: `intro:${word.id}`, vocab: word }),
-    )
+    const blockExercises: Exercise[] = block
+      .filter((word) => !cards[word.id])
+      .map((word): IntroExercise => ({ kind: 'intro', id: `intro:${word.id}`, vocab: word }))
     blockExercises.push(...matchRounds(pool, between(...MATCH_ROUNDS_PER_BLOCK, rng), rng))
     blockExercises.push(...choiceRounds(pool, between(...CHOICE_ROUNDS_PER_BLOCK, rng), rng))
 

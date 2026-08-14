@@ -46,7 +46,15 @@ function LessonSession({ lessonId }: { lessonId: string }) {
   const [finished, setFinished] = useState<Finished | null>(null)
 
   const exercises = useMemo(
-    () => (entry ? buildLessonSession(entry.lesson, level, seedFrom(entry.lesson.id, level, attempt)) : []),
+    () =>
+      entry
+        ? buildLessonSession(
+            entry.lesson,
+            level,
+            seedFrom(entry.lesson.id, level, attempt),
+            useProgress.getState().cards,
+          )
+        : [],
     [entry, attempt, level],
   )
 

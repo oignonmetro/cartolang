@@ -156,6 +156,30 @@ describe('session de leçon', () => {
     expect(kinds(buildLessonSession(lessonOf('x', tiny), 0))).not.toContain('match')
   })
 
+  it('ne réintroduit pas un mot qui a déjà une carte de révision', () => {
+    // Régression : rejouer une leçon déjà sue rouvrait sa présentation en
+    // entier, huit écrans « nouveau mot » avant le premier vrai exercice —
+    // exactement ce que `lessonDifficulty` était censé éviter avant que le
+    // vocabulaire ne passe aux blocs.
+    const known: Record<string, CardState> = Object.fromEntries(
+      LESSON.map((v) => [v.id, createCard(v.id, T0)]),
+    )
+    const session = buildLessonSession(lessonOf('u1-l1', LESSON), 0, undefined, known)
+    expect(kinds(session)).not.toContain('intro')
+    // Le reste du bloc continue de faire travailler ces mots.
+    expect(kinds(session)).toContain('match')
+    expect(kinds(session)).toContain('choice')
+    expect(kinds(session)).toContain('cloze')
+  })
+
+  it('ne présente que les mots réellement nouveaux d’une leçon en partie connue', () => {
+    const known: Record<string, CardState> = { [LESSON[0].id]: createCard(LESSON[0].id, T0) }
+    const session = buildLessonSession(lessonOf('u1-l1', LESSON), 0, undefined, known)
+    const introduced = session.filter((e) => e.kind === 'intro').map((e) => e.vocab.id)
+    expect(introduced).not.toContain(LESSON[0].id)
+    expect(introduced).toHaveLength(LESSON.length - 1)
+  })
+
   it('répartit une grande leçon sur plusieurs blocs plutôt que de tout présenter d’un coup', () => {
     const big = [...LESSON, ...LESSON.map((w) => ({ ...w, id: `${w.id}-2` }))] // 12 mots
     const session = kinds(buildLessonSession(lessonOf('big', big), 0))
