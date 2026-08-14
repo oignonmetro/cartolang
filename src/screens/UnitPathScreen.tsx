@@ -2,8 +2,7 @@ import { useMemo } from 'react'
 import { Navigate, useNavigate, useParams } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { useCourse } from '@/content/CourseProvider'
-import { findUnit, itemsOfUnit } from '@/content/course'
-import { masteredLabel } from '@/content/course'
+import { findUnit, masteredLabel } from '@/content/course'
 import { unitMastery } from '@/engine/progress'
 import { buildUnitPath, type UnitNodeKind, type UnitPathNode } from '@/engine/unitPath'
 import { useProgress } from '@/store/progressStore'
@@ -183,11 +182,6 @@ export function UnitPathScreen() {
             onOpen={() => open(node)}
           />
         ))}
-
-        <p className="mt-5 max-w-xs text-center text-xs text-ink-faint">
-          {itemsOfUnit(unit).length} éléments dans cette unité. Les entraînements vont aussi chercher vos points
-          fragiles dans les autres unités déjà travaillées.
-        </p>
       </main>
     </div>
   )
