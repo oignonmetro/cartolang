@@ -6,6 +6,7 @@ import { installedAppVersion } from '@/content/appUpdate'
 import { dayKey, displayedStreak, levelFromXp } from '@/engine/progress'
 import { cardStrength, dueCards } from '@/engine/srs'
 import { useProgress } from '@/store/progressStore'
+import { canSpeak } from '@/lib/speech'
 import { Button } from '@/components/Button'
 import { Mascot } from '@/components/Mascot'
 import { AppUpdateCard } from '@/components/AppUpdateCard'
@@ -153,6 +154,34 @@ export function ProfileScreen() {
           Aujourd'hui : {state.xpByDay[today] ?? 0} / {state.dailyGoal} XP
         </p>
       </section>
+
+      {canSpeak && (
+        <section className="card-3d flex flex-col gap-3 px-5 py-5">
+          <h2 className="text-sm font-extrabold uppercase tracking-wide text-ink-faint">Prononciation</h2>
+          <label className="flex items-center justify-between gap-4">
+            <span className="text-sm font-bold">Écouter le mot à sa découverte</span>
+            <button
+              type="button"
+              role="switch"
+              aria-checked={state.autoSpeak}
+              onClick={() => state.setAutoSpeak(!state.autoSpeak)}
+              className={`relative h-7 w-12 shrink-0 rounded-full border-2 transition-colors ${
+                state.autoSpeak ? 'border-teal bg-teal' : 'border-line bg-paper'
+              }`}
+            >
+              <span
+                className={`absolute top-0.5 h-5 w-5 rounded-full transition-all ${
+                  state.autoSpeak ? 'left-[1.35rem] bg-white' : 'left-0.5 bg-ink-faint'
+                }`}
+              />
+            </button>
+          </label>
+          <p className="text-xs text-ink-faint">
+            Le bouton haut-parleur reste disponible même sans lecture automatique. La voix est celle de votre
+            appareil : Android la télécharge dans ses réglages de synthèse vocale.
+          </p>
+        </section>
+      )}
 
       <section className="card-3d flex flex-col gap-3 px-5 py-5">
         <h2 className="text-sm font-extrabold uppercase tracking-wide text-ink-faint">Sauvegarde</h2>

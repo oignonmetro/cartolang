@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { deflateSchedules, migrateCards } from './progressStore'
+import { deflateSchedules, migrateCards, useProgress } from './progressStore'
 import { createCard, DAY, review, type CardState } from '@/engine/srs'
 
 const T0 = Date.UTC(2026, 0, 1, 9, 0)
@@ -60,6 +60,35 @@ describe('reprise des échéances gonflées', () => {
     let { w } = deflateSchedules({ w: card({ interval: 50, due: T0 + 50 * DAY }) }, T0)
     for (let i = 0; i < 3; i++) w = review(w, 'good', w.due)
     expect(w.interval).toBeGreaterThanOrEqual(7)
+  })
+})
+
+describe('réglage de prononciation', () => {
+  it('est activé par défaut', () => {
+    expect(useProgress.getState().autoSpeak).toBe(true)
+  })
+
+  it('se coupe et revient', () => {
+    useProgress.getState().setAutoSpeak(false)
+    expect(useProgress.getState().autoSpeak).toBe(false)
+    useProgress.getState().setAutoSpeak(true)
+    expect(useProgress.getState().autoSpeak).toBe(true)
+  })
+
+  it('survit à un aller-retour export / import', () => {
+    useProgress.getState().setAutoSpeak(false)
+    const payload = useProgress.getState().exportSave()
+    useProgress.getState().setAutoSpeak(true)
+    useProgress.getState().importSave(payload)
+    expect(useProgress.getState().autoSpeak).toBe(false)
+  })
+
+  it('reste activé en important une sauvegarde antérieure au réglage', () => {
+    // Les formats 1 à 3 ne connaissent pas le champ : mieux vaut entendre le
+    // mot que d'hériter d'un silence qu'on n'a jamais demandé.
+    useProgress.getState().setAutoSpeak(false)
+    useProgress.getState().importSave(JSON.stringify({ format: 3, cards: {}, lessons: {} }))
+    expect(useProgress.getState().autoSpeak).toBe(true)
   })
 })
 

@@ -4,6 +4,7 @@ import type { Exercise } from '@/engine/exercises'
 import { isPresentation, itemIdsOf } from '@/engine/exercises'
 import { ratingFromAnswer, type Rating } from '@/engine/srs'
 import { useProgress } from '@/store/progressStore'
+import { stopSpeaking } from '@/lib/speech'
 import { Flashcard } from '@/components/session/Flashcard'
 import { ChoiceQuestion } from '@/components/session/ChoiceQuestion'
 import { MatchPairs } from '@/components/session/MatchPairs'
@@ -113,6 +114,10 @@ export function SessionScreen({ title, exercises, onQuit, onFinish }: SessionScr
     finished.current = true
     onFinish({ correct: attempt.correct, total: attempt.total })
   }, [attempt.correct, attempt.total, current, onFinish])
+
+  // Quitter une session en cours de prononciation laisserait la voix courir
+  // sur l'écran suivant, qui n'a plus rien à voir avec le mot.
+  useEffect(() => () => void stopSpeaking(), [])
 
   if (!current) return null
 

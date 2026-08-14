@@ -115,6 +115,17 @@ export function BookIcon(props: IconProps) {
   )
 }
 
+/** Haut-parleur, pour écouter la prononciation d'un mot. */
+export function SpeakerIcon(props: IconProps) {
+  return (
+    <svg {...svgProps(props)}>
+      <path d="M11 5 6.5 8.5H3.5v7h3L11 19z" />
+      <path d="M14.5 9.5a3.5 3.5 0 0 1 0 5" />
+      <path d="M17 7a7 7 0 0 1 0 10" />
+    </svg>
+  )
+}
+
 /** Icônes d'unité, référencées par leur nom dans les fichiers YAML. */
 const UNIT_ICONS: Record<string, (props: IconProps) => React.ReactElement> = {
   book: BookIcon,

@@ -3,6 +3,7 @@ import { motion } from 'framer-motion'
 import type { ClozeExercise } from '@/engine/exercises'
 import { normalizeForm } from '@/engine/exercises'
 import { Button } from '@/components/Button'
+import { SpeakButton } from './SpeakButton'
 
 /**
  * Phrase à trou.
@@ -95,9 +96,14 @@ export function ClozeSentence({
             Vérifier
           </Button>
         ) : (
-          <Button block tone={checked ? 'success' : 'error'} onClick={() => onAnswer(checked)}>
-            Continuer
-          </Button>
+          <div className="flex items-center gap-3">
+            {/* Le mot attendu, pas la phrase : c'est lui qu'on apprend, et
+                l'écouter avant d'avoir répondu donnerait la réponse. */}
+            <SpeakButton text={sentence.match} className="shrink-0" />
+            <Button block tone={checked ? 'success' : 'error'} onClick={() => onAnswer(checked)}>
+              Continuer
+            </Button>
+          </div>
         )}
       </div>
     </div>

@@ -42,6 +42,12 @@ export interface ProgressSnapshot {
   xpByDay: Record<string, number>
   dailyGoal: number
   streak: Streak
+  /**
+   * Prononcer le mot tout seul à sa découverte. Se coupe : on révise aussi
+   * dans le train, et un son qui part sans qu'on l'ait demandé y est un
+   * défaut, pas un service. Le bouton, lui, reste toujours disponible.
+   */
+  autoSpeak: boolean
 }
 
 interface ProgressState extends ProgressSnapshot {
@@ -61,6 +67,7 @@ interface ProgressState extends ProgressSnapshot {
    */
   finishStep: (stepId: string, outcome: SessionOutcome, now?: number) => { xp: number }
   setDailyGoal: (goal: number) => void
+  setAutoSpeak: (on: boolean) => void
   exportSave: () => string
   importSave: (payload: string) => void
   reset: () => void
@@ -73,6 +80,7 @@ const initial: ProgressSnapshot = {
   xp: 0,
   xpByDay: {},
   dailyGoal: 30,
+  autoSpeak: true,
   streak: { current: 0, best: 0, lastDay: null },
 }
 
@@ -202,10 +210,12 @@ export const useProgress = create<ProgressState>()(
 
       setDailyGoal: (goal) => set({ dailyGoal: Math.max(10, Math.round(goal)) }),
 
+      setAutoSpeak: (on) => set({ autoSpeak: on }),
+
       exportSave: () => {
-        const { lessons, cards, steps, xp, xpByDay, dailyGoal, streak } = get()
+        const { lessons, cards, steps, xp, xpByDay, dailyGoal, streak, autoSpeak } = get()
         return JSON.stringify(
-          { format: SAVE_FORMAT, savedAt: Date.now(), lessons, cards, steps, xp, xpByDay, dailyGoal, streak },
+          { format: SAVE_FORMAT, savedAt: Date.now(), lessons, cards, steps, xp, xpByDay, dailyGoal, streak, autoSpeak },
           null,
           2,
         )
@@ -227,6 +237,7 @@ export const useProgress = create<ProgressState>()(
           xp: parsed.xp ?? 0,
           xpByDay: parsed.xpByDay ?? {},
           dailyGoal: parsed.dailyGoal ?? initial.dailyGoal,
+          autoSpeak: parsed.autoSpeak ?? initial.autoSpeak,
           streak: parsed.streak ?? initial.streak,
         })
       },
@@ -248,13 +259,14 @@ export const useProgress = create<ProgressState>()(
           steps: state?.steps ?? {},
         }
       },
-      partialize: ({ lessons, cards, steps, xp, xpByDay, dailyGoal, streak }) => ({
+      partialize: ({ lessons, cards, steps, xp, xpByDay, dailyGoal, streak, autoSpeak }) => ({
         lessons,
         cards,
         steps,
         xp,
         xpByDay,
         dailyGoal,
+        autoSpeak,
         streak,
       }),
     },

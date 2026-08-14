@@ -4,6 +4,7 @@ import type { ChoiceExercise } from '@/engine/exercises'
 import { normalizeAnswer } from '@/engine/exercises'
 import { Button } from '@/components/Button'
 import { Mascot } from '@/components/Mascot'
+import { SpeakButton } from './SpeakButton'
 
 /**
  * QCM : reconnaître la bonne traduction parmi des leurres, juste après avoir
@@ -73,7 +74,14 @@ export function ChoiceQuestion({
 
       <div className="mt-auto">
         {checked && (
-          <motion.div initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }}>
+          <motion.div
+            initial={{ opacity: 0, y: 6 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="flex items-center gap-3"
+          >
+            {/* Le son n'arrive qu'à la correction : l'entendre avant de
+                répondre désignerait la bonne case. */}
+            <SpeakButton text={vocab.term} className="shrink-0" />
             <Button block tone={correct ? 'success' : 'error'} onClick={() => onAnswer(correct)}>
               Continuer
             </Button>
