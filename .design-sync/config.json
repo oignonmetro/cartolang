@@ -1,0 +1,19 @@
+{
+  "projectId": "3a8a7948-5770-41d0-840a-82349cef114c",
+  "shape": "package",
+  "pkg": "cartolang",
+  "srcDir": "src/components",
+  "tsconfig": "tsconfig.json",
+  "cssEntry": "dist/assets/index-Dyuocme7.css",
+  "buildCmd": "npm run build",
+  "extraFonts": [".design-sync/extra-fonts.css"],
+  "srcExclude": ["UpdatePrompt.tsx"],
+  "componentSrcMap": {
+    "UpdatePrompt": null
+  },
+  "libOverrides": {
+    "source-kit.mjs": "cartolang has no dist/ (private app); adds cfg.srcExclude so UpdatePrompt.tsx's Vite-only virtual import (virtual:pwa-register/react) never enters the synth-entry barrel — componentSrcMap only filters the component list, not the bundle's file set",
+    "common.mjs": "adds srcExclude to CONFIG_KEYS so validateConfig accepts the source-kit.mjs fork's new key",
+    "package-capture.mjs": "settle() didn't wait for JS-driven entrance animations (framer-motion); the per-story capture is a cache-warm second navigation where networkidle fires before the animation runs, reproducibly capturing frame 0 — see file header"
+  }
+}

@@ -1,0 +1,32 @@
+/* Rules a design-sync build needs but doesn't ship on its own.
+ *
+ * The compiled Tailwind CSS (dist/assets/index-*.css, our cfg.cssEntry)
+ * rewrites this @font-face's url() to a content-hashed, root-absolute path
+ * (`/assets/nunito-latin-<hash>.woff2`) — correct for a browser serving the
+ * app from its own root, but the converter's font extractor resolves url()s
+ * relative to the CSS file's own directory and doesn't special-case a
+ * leading `/`, so it never finds the file and drops the rule as dead
+ * (`[FONT_DANGLING]`). Pointing here at the original, unhashed source files
+ * instead sidesteps that: this rule lands after the dead one in fonts/fonts.css,
+ * and a later same-family/weight/unicode-range @font-face rule shadows an
+ * earlier one, so this is the copy that actually wins — and unlike the
+ * hashed build path, these filenames don't change on every rebuild.
+ */
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 400 900;
+  font-display: swap;
+  src: url('../src/assets/fonts/nunito-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329,
+    U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 400 900;
+  font-display: swap;
+  src: url('../src/assets/fonts/nunito-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF,
+    U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
