@@ -207,6 +207,14 @@ function PathNode({
   const current = node.status === 'available'
   const size = locked ? SIZES.locked : done ? SIZES.done : SIZES.available
 
+  // Révision, entraînement, approfondissement reviennent plusieurs fois par
+  // unité : leur nom en toutes lettres finissait par tapisser le chemin de
+  // texte répété. Leur icône propre (déjà là pour chaque nature de nœud) les
+  // distingue tout aussi bien. Une leçon garde son titre — c'est un nom
+  // propre, pas une catégorie —, la séance finale aussi : elle n'apparaît
+  // qu'une fois par unité, la répétition ne la concerne pas.
+  const iconOnly = node.kind === 'review' || node.kind === 'drill' || node.kind === 'workout'
+
   // Un seul cercle plein à la fois, l'étape courante : les étapes franchies
   // passent en teinte claire, les suivantes restent teintées mais à peine —
   // gris pur les aurait fait sortir de la couleur de l'unité, comme si le
@@ -251,21 +259,41 @@ function PathNode({
             className={`relative flex items-center justify-center rounded-full transition-colors ${circle}`}
             style={{ width: size, height: size, boxShadow: shadow }}
           >
-            {locked ? <LockIcon size={20} /> : done ? <CheckIcon size={24} /> : <Icon size={30} />}
+            {/* Un nœud verrouillé affiche d'ordinaire un cadenas, quelle que
+                soit sa nature : sans texte à côté, ce serait le seul indice
+                qui reste, et un cadenas ne dit pas s'il s'agit d'une révision
+                ou d'un entraînement. Ces nœuds gardent donc leur icône propre
+                même verrouillés — atténuée par la teinte du cercle comme
+                le reste. Une leçon ou la séance finale, elles, restent
+                identifiées par leur nom : le cadenas peut y rester générique. */}
+            {locked && !iconOnly ? (
+              <LockIcon size={20} />
+            ) : done ? (
+              <CheckIcon size={24} />
+            ) : (
+              <Icon size={locked ? 20 : 30} />
+            )}
           </motion.button>
         </div>
 
-        <p
-          className={`mt-1 max-w-[13rem] text-center text-xs leading-tight font-extrabold ${
-            locked ? 'text-ink-faint' : current ? tone.text : 'text-ink-soft'
-          }`}
-        >
-          {node.title}
-        </p>
+        {!iconOnly && (
+          <p
+            className={`mt-1 max-w-[13rem] text-center text-xs leading-tight font-extrabold ${
+              locked ? 'text-ink-faint' : current ? tone.text : 'text-ink-soft'
+            }`}
+          >
+            {node.title}
+          </p>
+        )}
         {/* Le sous-titre n'a d'utilité que là où l'on va cliquer : partout
-            ailleurs il double la hauteur d'un nœud pour rien. */}
+            ailleurs il double la hauteur d'un nœud pour rien. Sans titre
+            au-dessus, il lui faut son propre espace vis-à-vis du cercle. */}
         {current && (
-          <p className="mt-0.5 max-w-[15rem] text-center text-[0.68rem] leading-tight text-ink-faint">
+          <p
+            className={`max-w-[15rem] text-center text-[0.68rem] leading-tight text-ink-faint ${
+              iconOnly ? 'mt-1.5' : 'mt-0.5'
+            }`}
+          >
             {node.subtitle}
           </p>
         )}
