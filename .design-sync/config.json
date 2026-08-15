@@ -6,10 +6,15 @@
   "tsconfig": "tsconfig.json",
   "cssEntry": "dist/assets/index-Dyuocme7.css",
   "buildCmd": "npm run build",
+  "readmeHeader": ".design-sync/conventions.md",
   "extraFonts": [".design-sync/extra-fonts.css"],
   "srcExclude": ["UpdatePrompt.tsx"],
   "componentSrcMap": {
     "UpdatePrompt": null
+  },
+  "overrides": {
+    "Button": { "cardMode": "column" },
+    "CoursePicker": { "cardMode": "single", "primaryStory": "Open" }
   },
   "libOverrides": {
     "source-kit.mjs": "cartolang has no dist/ (private app); adds cfg.srcExclude so UpdatePrompt.tsx's Vite-only virtual import (virtual:pwa-register/react) never enters the synth-entry barrel — componentSrcMap only filters the component list, not the bundle's file set",
