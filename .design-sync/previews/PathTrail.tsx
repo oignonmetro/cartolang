@@ -23,10 +23,10 @@ const violet = {
 }
 
 const nodes = [
-  { node: { id: 'n1', kind: 'lesson' as const, lesson: null, title: 'Le conditionnel', subtitle: '', status: 'done' as const, cycle: 0 }, x: -60, y: 40, r: 29 },
-  { node: { id: 'n2', kind: 'review' as const, lesson: null, title: 'Révision', subtitle: '', status: 'done' as const, cycle: 0 }, x: 46, y: 148, r: 21 },
-  { node: { id: 'n3', kind: 'lesson' as const, lesson: null, title: 'Le passif', subtitle: 'Prochaine étape', status: 'available' as const, cycle: 1 }, x: -20, y: 262, r: 33 },
-  { node: { id: 'n4', kind: 'workout' as const, lesson: null, title: 'Entraînement', subtitle: '', status: 'locked' as const, cycle: 1 }, x: 58, y: 366, r: 19 },
+  { node: { id: 'n1', kind: 'lesson' as const, lesson: null, title: 'Le conditionnel', subtitle: '', status: 'done' as const, cycle: 0 }, x: -60, y: 40, r: 27 },
+  { node: { id: 'n2', kind: 'review' as const, lesson: null, title: 'Révision', subtitle: '', status: 'done' as const, cycle: 0 }, x: 46, y: 148, r: 24 },
+  { node: { id: 'n3', kind: 'lesson' as const, lesson: null, title: 'Le passif', subtitle: 'Prochaine étape', status: 'available' as const, cycle: 1 }, x: -20, y: 262, r: 29 },
+  { node: { id: 'n4', kind: 'workout' as const, lesson: null, title: 'Entraînement', subtitle: '', status: 'locked' as const, cycle: 1 }, x: 58, y: 366, r: 23 },
 ]
 
 /**

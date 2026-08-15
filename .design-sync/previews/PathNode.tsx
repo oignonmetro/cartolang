@@ -26,7 +26,7 @@ const teal = {
 
 /**
  * Les trois états d'une leçon, tailles réelles issues de `KIND_SIZES` +
- * `STATUS_DELTA` (leçon : courante 66, franchie 58, verrouillée 54). L'étape
+ * `STATUS_DELTA` (leçon : courante 58, franchie 54, verrouillée 52). L'étape
  * courante garde son titre et son sous-titre, la franchie devient un pavé
  * plein, la verrouillée un simple contour — c'est cette échelle qui fait lire
  * le chemin comme se pavant derrière soi.
@@ -37,7 +37,7 @@ export function LessonStates() {
       <PathNode
         spot={{
           node: { id: 'l3', kind: 'lesson', lesson: null, title: 'Le present perfect', subtitle: 'Prochaine étape', status: 'available', cycle: 2 },
-          x: -105, y: 44, r: 33,
+          x: -105, y: 44, r: 29,
         }}
         tone={teal}
         depth={0}
@@ -46,7 +46,7 @@ export function LessonStates() {
       <PathNode
         spot={{
           node: { id: 'l2', kind: 'lesson', lesson: null, title: 'Les modaux', subtitle: '', status: 'done', cycle: 1 },
-          x: 0, y: 44, r: 29,
+          x: 0, y: 44, r: 27,
         }}
         tone={teal}
         depth={0}
@@ -55,7 +55,7 @@ export function LessonStates() {
       <PathNode
         spot={{
           node: { id: 'l4', kind: 'lesson', lesson: null, title: 'Le passif', subtitle: '', status: 'locked', cycle: 3 },
-          x: 105, y: 44, r: 27,
+          x: 105, y: 44, r: 26,
         }}
         tone={teal}
         depth={1}
@@ -66,9 +66,11 @@ export function LessonStates() {
 }
 
 /**
- * Les étapes de pratique : plus petites que les leçons — c'est la nature, et
- * non l'état, qui donne son gabarit au cercle — et nommées en marge plutôt que
- * dessous, là où le serpentin laisse la place vide.
+ * Les étapes de pratique : un peu plus petites que les leçons — c'est la
+ * nature, et non l'état, qui donne son gabarit — et nommées en marge plutôt
+ * que dessous, là où le serpentin laisse la place vide. L'écart de taille
+ * reste une nuance : ce sont l'icône et l'étiquette qui distinguent, la
+ * taille ne fait que les accompagner.
  *
  * Les deux nœuds sont décalés en hauteur comme ils le sont toujours dans le
  * parcours : les étiquettes partent du côté où le serpentin laisse de l'air,
@@ -81,7 +83,7 @@ export function StepsWithAsideLabels() {
       <PathNode
         spot={{
           node: { id: 'r0', kind: 'review', lesson: null, title: 'Révision', subtitle: '', status: 'done', cycle: 0 },
-          x: -62, y: 40, r: 21,
+          x: -62, y: 40, r: 24,
         }}
         tone={teal}
         depth={0}
@@ -90,7 +92,7 @@ export function StepsWithAsideLabels() {
       <PathNode
         spot={{
           node: { id: 'w0', kind: 'workout', lesson: null, title: 'Entraînement', subtitle: '', status: 'locked', cycle: 0 },
-          x: 40, y: 104, r: 19,
+          x: 40, y: 104, r: 23,
         }}
         tone={teal}
         depth={2}
@@ -112,7 +114,7 @@ export function FinalDestination() {
       <PathNode
         spot={{
           node: { id: 'final', kind: 'final', lesson: null, title: 'Séance finale', subtitle: "Bilan complet de l'unité", status: 'available', cycle: 3 },
-          x: -80, y: 52, r: 37,
+          x: -80, y: 52, r: 33,
         }}
         tone={teal}
         depth={0}
@@ -121,7 +123,7 @@ export function FinalDestination() {
       <PathNode
         spot={{
           node: { id: 'final-locked', kind: 'final', lesson: null, title: 'Séance finale', subtitle: '', status: 'locked', cycle: 3 },
-          x: 60, y: 52, r: 31,
+          x: 60, y: 52, r: 30,
         }}
         tone={teal}
         depth={6}

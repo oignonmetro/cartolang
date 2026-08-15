@@ -33,23 +33,35 @@ function offsetOf(index: number): number {
  * La taille encodait l'état seul, si bien qu'une leçon franchie et une simple
  * révision franchie étaient deux cercles identiques — la structure du parcours
  * (une leçon, sa pratique, une leçon, sa pratique) ne se lisait qu'à l'icône.
- * En donnant à chaque nature son gabarit, le rythme apparaît de loin : un
- * grand, deux petits, un grand, deux petits, et la séance finale plus large
- * que tout le reste. L'état module ce gabarit sans jamais l'écraser.
+ * Chaque nature a donc son gabarit.
+ *
+ * Mais l'écart doit rester une nuance, pas une hiérarchie criée : la première
+ * version allait de 38 à 74 px, presque du simple au double, et le chemin
+ * paraissait dépareillé — les étapes lointaines devenaient de petits pois à
+ * côté des leçons. L'échelle est resserrée autour de 46-66 px. Le rythme se
+ * lit encore, mais ce sont surtout l'icône, l'étiquette en marge et le
+ * remplissage qui distinguent les natures ; la taille ne fait que les
+ * accompagner. Seule la séance finale garde une avance nette : c'est une
+ * arrivée, elle a le droit de dominer.
  */
 export const KIND_SIZES: Record<UnitNodeKind, number> = {
-  lesson: 58,
-  review: 42,
-  drill: 42,
-  workout: 42,
-  final: 66,
+  lesson: 54,
+  review: 48,
+  drill: 48,
+  workout: 48,
+  final: 62,
 }
 
-/** L'étape courante gonfle un peu, celle qu'on n'a pas atteinte se rétracte. */
+/**
+ * L'étape courante gonfle un peu, celle qu'on n'a pas atteinte se rétracte —
+ * à peine. Le halo pulsé, la face pleine et l'ombre plus profonde signalent
+ * déjà l'étape courante ; la taille n'a pas à refaire ce travail une
+ * troisième fois.
+ */
 const STATUS_DELTA: Record<UnitPathNode['status'], number> = {
-  available: 8,
+  available: 4,
   done: 0,
-  locked: -4,
+  locked: -2,
 }
 
 /** Descente minimale entre deux nœuds : le chemin doit se lire de haut en bas. */
