@@ -5,6 +5,7 @@ import { LessonRoute } from '@/screens/LessonRoute'
 import { ReviewRoute } from '@/screens/ReviewRoute'
 import { UnitPathScreen } from '@/screens/UnitPathScreen'
 import { StepRoute } from '@/screens/StepRoute'
+import { HardWordsScreen } from '@/screens/HardWordsScreen'
 import { ProfileScreen } from '@/screens/ProfileScreen'
 import { UpdatePrompt } from '@/components/UpdatePrompt'
 import { AppUpdateBanner } from '@/components/AppUpdateBanner'
@@ -25,6 +26,8 @@ export default function App() {
           <Route path="/unite/:unitId" element={<UnitPathScreen />} />
           <Route path="/etape/:unitId/:stepId" element={<StepRoute />} />
           <Route path="/profil" element={<ProfileScreen />} />
+          {/* Prototype de conception, données en dur — pas encore relié au moteur. */}
+          <Route path="/difficiles" element={<HardWordsScreen />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
         <UpdatePrompt />
