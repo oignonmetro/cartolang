@@ -5,15 +5,27 @@
 // `animate`). That alone is usually enough on a component's FIRST navigation
 // in a session, where the real network round-trip to fetch the bundle/fonts
 // already burns more wall-clock time than the animation needs. But every
-// per-story capture is a SECOND navigation to the same URL (the first, done
-// once per component to read window.__dsCells, already warmed the browser's
-// cache) — served near-instantly from cache, so `networkidle` on that second
-// load fires while the animation is still at frame 0. Confirmed by direct
-// replay of the exact two-navigation sequence outside this script: capturing
-// right after the second `networkidle` reads `opacity: 0` on VocabIntro's
-// card every time, reproducibly — not a flaky race. Adds a short fixed wait
-// to settle() so mount animations have real time to finish regardless of
-// cache-driven timing. Bounded by ANIM_SETTLE_MS below.
+// per-story capture is a repeat navigation to the same URL served near-
+// instantly from cache, so `networkidle` fires while the animation is still
+// at frame 0. Confirmed by direct replay: capturing right after `networkidle`
+// on a repeat navigation reads `opacity: 0` on the animated root every time.
+//
+// Two separate problems, two separate fixes:
+//  1. settle() polls the animated root's computed opacity instead of a fixed
+//     wait, capped at ANIM_SETTLE_CAP_MS (see there for the calibration).
+//  2. The delay before a mount animation starts isn't a fixed "second nav is
+//     slower" cost — it grows with how many prior page.goto() calls this
+//     browser *page* has made (reproduced against RuleNote's Grammar cell:
+//     stuck opacity 0 at +1.2s/+2.0s but settled by +2.5s in a short 2-nav
+//     replay — yet in the real multi-component run, where RuleNote lands
+//     ~13 navigations into the session, the same cell was STILL stuck past
+//     the same cap). A bigger fixed cap only buys more headroom, it doesn't
+//     bound the growth. So each per-story capture gets its OWN fresh `page`
+//     (a cheap Playwright object, not a browser relaunch), closed right
+//     after its screenshot — this resets whatever was accumulating instead
+//     of paying for it. The once-per-component "discover window.__dsCells"
+//     navigation and the end-of-component sheet composition keep the outer
+//     page; only the per-cell capture loop is per-page.
 //
 // package-capture — capture harness for the PACKAGE shape's ABSOLUTE grading.
 // There is no storybook here, so there is no reference render to compare
@@ -51,10 +63,25 @@ import { join, resolve } from 'node:path';
 import { KEY_RECIPE, gradeKeyFrom, renderHashFor } from '../../.ds-sync/lib/sync-hashes.mjs';
 import { serveDir } from '../../.ds-sync/storybook/http-serve.mjs';
 
-// Cartolang's slowest mount transition (VocabIntro: spring, stiffness 320,
-// damping 24) settles well inside this — checked against the real values in
-// src/components/VocabIntro.tsx, not guessed.
-const ANIM_SETTLE_MS = 700;
+// A fixed wait here used to be 700ms, sized against VocabIntro's mount
+// spring (stiffness 320, damping 24) — but that was only ever measured on a
+// component's FIRST per-story navigation. Root-caused via a standalone replay
+// (bare page → story A → story B, same page object, checking computed
+// opacity on the animated root after each nav): a component's SECOND+
+// per-story navigation in the same page session starts its mount animation
+// much later than the first — confirmed against RuleNote's Grammar cell
+// (2-cell component, plain 250ms tween, nothing exotic): opacity was still 0
+// at +1.2s and +2.0s, but reliably 1 by +2.5s and +3.0s. Full-page
+// navigation resets all JS state each time, so this isn't app-level bleed —
+// most likely Chromium compositor/rAF throttling on the cache-warm reload
+// (see file header). A flat bump big enough to cover that would 4x+ the
+// cost of every FAST single-cell capture, so this polls the real signal
+// instead: framer-motion marks animating elements with an inline
+// `style="opacity: …"`, so wait until none are still near 0, capped so a
+// component that's animating something intentionally faint forever can't
+// hang the run.
+const ANIM_POLL_MS = 150;
+const ANIM_SETTLE_CAP_MS = 3500;
 
 const argv = process.argv.slice(2);
 const flag = (n, d) => { const i = argv.indexOf(`--${n}`); return i < 0 ? d : argv[i + 1]; };
@@ -125,14 +152,31 @@ let pageErrs = [];
 page.on('pageerror', (e) => pageErrs.push(String(e).split('\n')[0]));
 const { srv, port } = await serveDir(OUT);
 
-async function settle() {
-  await page.evaluate(() => Promise.all([
+async function settle(pg) {
+  await pg.evaluate(() => Promise.all([
     document.fonts?.ready,
     ...[...document.images].map((i) => i.decode().catch(() => {})),
   ])).catch(() => {});
-  // See the file header: the per-story navigation is a cache-warm reload,
-  // so `networkidle` alone doesn't guarantee a mount animation has run.
-  await page.waitForTimeout(ANIM_SETTLE_MS);
+  // See the file header: repeat navigations don't guarantee a mount
+  // animation has run by the time `networkidle` fires — poll for
+  // framer-motion's inline opacity to settle rather than guess a fixed delay.
+  const start = Date.now();
+  while (Date.now() - start < ANIM_SETTLE_CAP_MS) {
+    const stillFading = await pg.evaluate(() =>
+      [...document.querySelectorAll('[style*="opacity"]')].some((el) => {
+        const v = Number.parseFloat(getComputedStyle(el).opacity);
+        return Number.isFinite(v) && v < 0.98;
+      }),
+    ).catch(() => false);
+    if (!stillFading) return;
+    await pg.waitForTimeout(ANIM_POLL_MS);
+  }
+}
+
+async function freshPage(vp) {
+  const pg = await browser.newPage({ viewport: vp });
+  try { await pg.clock.setFixedTime(new Date('2024-05-15T12:00:00Z')); } catch { /* older playwright */ }
+  return pg;
 }
 
 const report = [];
@@ -209,20 +253,27 @@ for (const c of comps) {
 
   const shots = [];
   for (const label of cells) {
+    // Fresh page per story — see file header: reusing one page across many
+    // navigations is what let the mount-animation delay grow unbounded.
+    const storyPage = await freshPage(vp);
     try {
-      await page.goto(`http://127.0.0.1:${port}/${rel}?story=${encodeURIComponent(label)}`, { waitUntil: 'networkidle', timeout: 20_000 });
-    } catch (e) {
-      if (!/Timeout/i.test(String(e.message ?? e))) { shots.push({ label, png: null, err: String(e.message ?? e).split('\n')[0] }); continue; }
+      try {
+        await storyPage.goto(`http://127.0.0.1:${port}/${rel}?story=${encodeURIComponent(label)}`, { waitUntil: 'networkidle', timeout: 20_000 });
+      } catch (e) {
+        if (!/Timeout/i.test(String(e.message ?? e))) { shots.push({ label, png: null, err: String(e.message ?? e).split('\n')[0] }); continue; }
+      }
+      await settle(storyPage);
+      const info = await storyPage.evaluate(() => {
+        const t = (document.getElementById('r0')?.textContent ?? '').trim();
+        return { caught: t.startsWith('⚠'), text: t.slice(0, 200) };
+      }).catch(() => ({ caught: false, text: '' }));
+      const file = `${c.group}__${c.name}__${label}.png`;
+      const png = await storyPage.screenshot({ fullPage: false }).catch(() => null);
+      if (png) writeFileSync(join(rawDir, file), png);
+      shots.push({ label, png: png ? `raw/${file}` : null, err: info.caught ? info.text.slice(0, 120) : null });
+    } finally {
+      await storyPage.close().catch(() => {});
     }
-    await settle();
-    const info = await page.evaluate(() => {
-      const t = (document.getElementById('r0')?.textContent ?? '').trim();
-      return { caught: t.startsWith('⚠'), text: t.slice(0, 200) };
-    }).catch(() => ({ caught: false, text: '' }));
-    const file = `${c.group}__${c.name}__${label}.png`;
-    const png = await page.screenshot({ fullPage: false }).catch(() => null);
-    if (png) writeFileSync(join(rawDir, file), png);
-    shots.push({ label, png: png ? `raw/${file}` : null, err: info.caught ? info.text.slice(0, 120) : null });
   }
 
   // Single-column sheet: one labeled render per row — the agent grades each
