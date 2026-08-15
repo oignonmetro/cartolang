@@ -6,6 +6,10 @@ Cartolang is a French→English vocabulary and grammar learning app (React + Tai
 
 All product copy is **French** — labels, buttons, error text, exercise prompts. Only the English being taught appears in English (vocabulary terms, example sentences, conjugated forms). When mocking new copy, keep this split: French chrome around English learning content.
 
+**Vouvoiement, always.** Every screen addresses the learner as *vous*: « Votre réponse… », « Vos points les plus fragiles », « Complétez la phrase », « Choisissez le sens », « Reliez les paires ». Never *tu*. The app is warm but not familiar — it's a study tool, not a buddy.
+
+**Never surface engine vocabulary.** The type names and `.d.ts` files carry the internal model's words, and they are not the product's words. `lapses` is *oublis*, never « rechutes » (clinical). `solidity`, `ease`, `interval`, `step`, `due` never appear on screen at all. `card`/`item` is *mot*, *règle* or *forme* depending on the track — see `countLabel`. When a prop name looks like a good label, it almost certainly isn't.
+
 ## Visual language
 
 - **Cards** (`.card-3d`) and **buttons** (`.btn-3d`) share one signature: a solid flat "sliced" shadow (`box-shadow: 0 Npx 0 0 <deep-color>`), not a blurred drop shadow. It reads as a physical, pressable layer. Buttons visibly depress on tap (`whileTap={{ y: 4 }}`) to match.
