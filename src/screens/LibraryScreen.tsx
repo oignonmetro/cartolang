@@ -163,13 +163,7 @@ export function LibraryScreen({ course }: { course: LibraryCourse }) {
             mieux que réviser le vocabulaire d'un bloc. */}
         {due > 0 && <ReviewCallout due={due} onReview={() => navigate('/revision')} />}
 
-        <TrackSummary
-          track={track}
-          tone={tone}
-          known={trackMastery.known}
-          seen={trackMastery.seen}
-          total={trackMastery.total}
-        />
+        <TrackSummary track={track} known={trackMastery.known} seen={trackMastery.seen} />
 
         {track.units.length === 0 ? (
           <EmptyTrack tone={tone} />
@@ -294,41 +288,20 @@ function ReviewCallout({ due, onReview }: { due: number; onReview: () => void })
   )
 }
 
-function TrackSummary({
-  track,
-  tone,
-  known,
-  seen,
-  total,
-}: {
-  track: Track
-  tone: (typeof TRACK_TONES)[string]
-  known: number
-  seen: number
-  total: number
-}) {
-  return (
-    // Pas de `card-3d` ici : ce bloc n'est pas cliquable, et lui donner la
-    // même carte blanche à ombre que les unités en dessous laissait croire
-    // le contraire. Le fond teinté signale un panneau d'ensemble, pas une ligne.
-    <section className={`rounded-2xl ${tone.soft} px-5 py-4`}>
-      <div className="flex items-start gap-4">
-        <ProgressRing
-          ratio={total === 0 ? 0 : known / total}
-          seenRatio={total === 0 ? 0 : seen / total}
-          size={52}
-          color={tone.css}
-        />
-        <div className="flex-1">
-          {/* Ni « Vue d'ensemble » ni le nom de la piste : l'onglet juste
-              au-dessus les dit déjà. Le sous-titre porte l'intention de la
-              piste ; le chiffre qui avance est déjà dans l'anneau, inutile
-              de le répéter en toutes lettres à côté. */}
-          {track.subtitle && <p className="text-sm leading-snug font-extrabold text-ink">{track.subtitle}</p>}
-        </div>
-      </div>
-    </section>
-  )
+/**
+ * Sous-titre de la piste, en tête de liste des unités.
+ *
+ * Portait autrefois un anneau de progression dans un pavé teinté arrondi —
+ * exactement la forme des cartes d'unité juste en dessous, sans en avoir
+ * l'affordance (pas de flèche, rien à ouvrir). Ça se lisait comme une carte
+ * cassée plutôt qu'un résumé volontaire, surtout à 0 % où l'anneau reste
+ * vide. Un simple texte, sans cadre, ne laisse plus ce doute — et il
+ * n'apparaît que s'il y a effectivement quelque chose à résumer : tant que
+ * rien n'a été ni vu ni su dans la piste, l'onglet au-dessus suffit.
+ */
+function TrackSummary({ track, known, seen }: { track: Track; known: number; seen: number }) {
+  if (!track.subtitle || (known === 0 && seen === 0)) return null
+  return <p className="px-1 text-sm leading-snug font-extrabold text-ink">{track.subtitle}</p>
 }
 
 function UnitCard({
