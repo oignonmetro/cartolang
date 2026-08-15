@@ -27,6 +27,13 @@ export interface UnitPathNode {
   title: string
   subtitle: string
   status: UnitNodeStatus
+  /**
+   * Bloc auquel le nœud appartient : une leçon et sa pratique portent le même
+   * numéro, la séance finale a le sien. L'écran s'en sert pour séparer
+   * visuellement les blocs — sans ça, le parcours n'est qu'une chaîne de dix
+   * pastilles où rien ne dit que la structure se répète.
+   */
+  cycle: number
 }
 
 const STEP_LABELS: Record<UnitStepKind, { title: string; subtitle: string }> = {
@@ -51,15 +58,20 @@ export function stepKey(unitId: string, nodeId: string): string {
  * leçons. L'unité se clôt par une séance finale unique, bilan complet une
  * fois toutes les leçons vues.
  */
-function layout(unit: Unit): { id: string; kind: UnitNodeKind; lesson: Lesson | null }[] {
-  const nodes: { id: string; kind: UnitNodeKind; lesson: Lesson | null }[] = []
+function layout(unit: Unit): { id: string; kind: UnitNodeKind; lesson: Lesson | null; cycle: number }[] {
+  const nodes: { id: string; kind: UnitNodeKind; lesson: Lesson | null; cycle: number }[] = []
 
   unit.lessons.forEach((lesson, index) => {
-    nodes.push({ id: lesson.id, kind: 'lesson', lesson })
-    nodes.push({ id: `review-${index}`, kind: 'review', lesson: null })
-    nodes.push({ id: `consolidate-${index}`, kind: index % 2 === 0 ? 'workout' : 'drill', lesson: null })
+    nodes.push({ id: lesson.id, kind: 'lesson', lesson, cycle: index })
+    nodes.push({ id: `review-${index}`, kind: 'review', lesson: null, cycle: index })
+    nodes.push({
+      id: `consolidate-${index}`,
+      kind: index % 2 === 0 ? 'workout' : 'drill',
+      lesson: null,
+      cycle: index,
+    })
   })
-  nodes.push({ id: 'final', kind: 'final', lesson: null })
+  nodes.push({ id: 'final', kind: 'final', lesson: null, cycle: unit.lessons.length })
   return nodes
 }
 
@@ -70,7 +82,7 @@ export function buildUnitPath(
 ): UnitPathNode[] {
   let reached = false
 
-  return layout(unit).map(({ id, kind, lesson }) => {
+  return layout(unit).map(({ id, kind, lesson, cycle }) => {
     const done = lesson
       ? levelOf(progress, lesson.id) >= 1
       : (steps[stepKey(unit.id, id)] ?? 0) >= 1
@@ -92,6 +104,7 @@ export function buildUnitPath(
         ? countLabel(lesson.kind, itemsOfLesson(lesson).length)
         : STEP_LABELS[kind as UnitStepKind].subtitle,
       status,
+      cycle,
     }
   })
 }

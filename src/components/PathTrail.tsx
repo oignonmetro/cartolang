@@ -11,14 +11,15 @@ const DOT_PITCH = 13
 const TRAIL_WIDTH = 2 * SWING + 80
 
 /**
- * Fil du chemin : jusqu'à trois pastilles posées sur le segment qui joint
- * deux centres, entre les bords des deux cercles. Elles suivent donc la vraie
- * direction du parcours, aussi penchée soit-elle, grossissent en approchant
- * du nœud suivant — un soupçon de perspective — et se colorent une fois
- * l'étape franchie : le chemin se remplit derrière soi plutôt que de rester
- * gris. Leur nombre suit la place disponible entre les deux cercles : un
- * intervalle serré en reçoit une seule plutôt que trois écrasées les unes sur
- * les autres, pour que le fil reste continu d'un bout à l'autre du parcours.
+ * Fil du chemin, entre les bords de deux cercles successifs.
+ *
+ * Derrière soi, un trait plein : le chemin est tracé, il ne se discute plus.
+ * Devant, des pastilles espacées qui grossissent en approchant du nœud suivant
+ * — un soupçon de perspective, et une invitation à avancer plutôt qu'une
+ * chaîne déjà posée. Les deux se rejoignent exactement sur l'étape courante,
+ * si bien qu'on voit d'un coup d'œil jusqu'où l'on est allé. Leur nombre suit
+ * la place disponible entre les deux cercles : un intervalle serré en reçoit
+ * une seule plutôt que trois écrasées les unes sur les autres.
  */
 export function PathTrail({ nodes, height, tone }: { nodes: readonly PlacedNode[]; height: number; tone: Tone }) {
   return (
@@ -38,21 +39,35 @@ export function PathTrail({ nodes, height, tone }: { nodes: readonly PlacedNode[
         const end = span - to.r - TRAIL_PAD
         if (end <= start) return null
 
+        const point = (along: number) => ({
+          x: from.x + (dx / span) * along,
+          y: from.y + (dy / span) * along,
+        })
+
+        if (from.node.status === 'done') {
+          const a = point(start)
+          const b = point(end)
+          return (
+            <line
+              key={to.node.id}
+              x1={a.x}
+              y1={a.y}
+              x2={b.x}
+              y2={b.y}
+              strokeWidth={5}
+              strokeLinecap="round"
+              className={tone.stroke}
+            />
+          )
+        }
+
         const count = Math.min(TRAIL_DOTS, Math.max(1, Math.floor((end - start) / DOT_PITCH)))
 
         return (
           <g key={to.node.id}>
             {Array.from({ length: count }, (_, dot) => {
-              const along = start + ((end - start) * (dot + 1)) / (count + 1)
-              return (
-                <circle
-                  key={dot}
-                  cx={from.x + (dx / span) * along}
-                  cy={from.y + (dy / span) * along}
-                  r={2 + dot * 0.75}
-                  className={from.node.status === 'done' ? tone.fill : tone.dotFill}
-                />
-              )
+              const at = point(start + ((end - start) * (dot + 1)) / (count + 1))
+              return <circle key={dot} cx={at.x} cy={at.y} r={2 + dot * 0.75} className={tone.dotFill} />
             })}
           </g>
         )

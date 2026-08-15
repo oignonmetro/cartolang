@@ -76,6 +76,10 @@ describe('composition du parcours', () => {
       'final',
     ])
   })
+
+  it('regroupe chaque leçon avec sa pratique, et isole la séance finale', () => {
+    expect(buildUnitPath(U2, {}, {}).map((node) => node.cycle)).toEqual([0, 0, 0, 1, 1, 1, 2])
+  })
 })
 
 describe('progression dans le parcours', () => {

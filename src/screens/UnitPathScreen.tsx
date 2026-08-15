@@ -36,6 +36,11 @@ export function UnitPathScreen() {
   const placed = useMemo(() => placePath(path), [path])
   const mastery = useMemo(() => (unit ? unitMastery(unit, cards) : null), [unit, cards])
 
+  // Rang de l'étape courante : tout ce qui la suit s'efface avec la distance.
+  // Sans repère, un parcours vierge est un mur de cercles identiques.
+  const currentIndex = path.findIndex((node) => node.status === 'available')
+  const doneCount = path.filter((node) => node.status === 'done').length
+
   if (!unit || !mastery) return <Navigate to="/" replace />
 
   const tone = TONES[unit.color] ?? TONES.teal
@@ -60,6 +65,14 @@ export function UnitPathScreen() {
           <div className="flex-1">
             <h1 className="text-base leading-tight font-black">{unit.title}</h1>
             {unit.subtitle && <p className="text-xs text-ink-soft">{unit.subtitle}</p>}
+            {/* La carte d'unité, sur l'écran précédent, annonce un nombre
+                d'étapes ; le compte disparaissait dès qu'on entrait, remplacé
+                par l'anneau de maîtrise, qui mesure autre chose (ce qui est su,
+                pas ce qui est fait). Les deux sont utiles, mais celui que ce
+                chemin dessine littéralement de haut en bas, c'est celui-ci. */}
+            <p className={`text-xs font-bold ${doneCount > 0 ? tone.text : 'text-ink-faint'}`}>
+              {doneCount} / {path.length} étapes
+            </p>
           </div>
           <ProgressRing
             ratio={mastery.ratio}
@@ -81,8 +94,28 @@ export function UnitPathScreen() {
       >
         <div className="relative w-full" style={{ height: placed.height }}>
           <PathTrail nodes={placed.nodes} height={placed.height} tone={tone} />
-          {placed.nodes.map((spot) => (
-            <PathNode key={spot.node.id} spot={spot} tone={tone} onOpen={() => open(spot.node)} />
+
+          {/* Un filet là où un bloc s'achève et où le suivant commence. Le
+              parcours répète la même figure — une leçon, sa révision, sa
+              consolidation — et sans séparation cette structure ne se lisait
+              nulle part : on ne voyait qu'une chaîne de dix pastilles. */}
+          {placed.breaks.map((cut) => (
+            <span
+              key={cut.y}
+              aria-hidden
+              className="absolute inset-x-2 border-t-2 border-dashed border-line"
+              style={{ top: cut.y }}
+            />
+          ))}
+
+          {placed.nodes.map((spot, index) => (
+            <PathNode
+              key={spot.node.id}
+              spot={spot}
+              tone={tone}
+              depth={currentIndex === -1 ? 0 : Math.max(0, index - currentIndex)}
+              onOpen={() => open(spot.node)}
+            />
           ))}
         </div>
       </main>

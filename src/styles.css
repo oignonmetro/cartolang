@@ -98,6 +98,20 @@
     @apply rounded-blob border-2 border-line bg-paper;
     box-shadow: 0 4px 0 0 var(--color-line);
   }
+
+  /*
+   * Libellé du parcours d'unité, posé par-dessus le fil du chemin.
+   *
+   * Un halo crème le détache du trait sans lui donner de fond : une pastille
+   * opaque ferait une tache franche là où le lavis de teinte doit rester
+   * continu, alors que le halo épouse les lettres et ne se voit pas.
+   */
+  .path-label {
+    text-shadow:
+      0 0 3px var(--color-cream),
+      0 0 3px var(--color-cream),
+      0 0 7px var(--color-cream);
+  }
 }
 
 /* Le confetti et les rebonds disparaissent si le système demande moins d'animation. */

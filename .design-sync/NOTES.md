@@ -18,9 +18,11 @@ cartolang is a private Vite app (`"private": true`, no `dist`/`main`/`exports`),
 
 2. **`fixed`-rooted components collapse in single-story capture.** The harness wraps a `?story=` render in `.ds-single { transform: translateZ(0) }` so `position:fixed` descendants stay contained instead of escaping the whole page (intentional — see `.ds-sync/lib/emit.mjs`). But that wrapper has no explicit size, so an ALL-`fixed` root (CoursePicker's `fixed inset-0` overlay) collapses its containing block to near-zero height and renders as a sliver. `emit.mjs` isn't forkable (explicitly marked app-contract surface). Fixed from the **preview file** instead: a `useEffect` in `CoursePicker.tsx`'s preview sets `#r0`'s width/height directly. Watch for this on any future component whose root is entirely `position:fixed` (grep `fixed inset` in `src/components/` before assuming a new one is safe).
 
-## `cssEntry` hash fragility (unresolved — real risk on next re-sync)
+## `cssEntry` and the hashed stylesheet (résolu)
 
-`cfg.cssEntry` points at `dist/assets/index-<hash>.css`, a content-hashed filename from `npm run build`. It **will** change on the next rebuild if any source changes. There's no glob-based lookup wired up — after running `npm run build` for a re-sync, grep `dist/assets/index-*.css` and update `cssEntry` by hand, or the build will fail on `[CSS_IMPORT_MISSING]`/stale styles. Worth fixing with a small `readdirSync` glob in a future pass instead of hand-editing every time.
+The converter needs the *compiled* CSS: `src/styles.css` is Tailwind v4 source (`@import 'tailwindcss'`) which it can't resolve — pointing at it renders every component unstyled. But Vite writes that CSS under a content-hashed name (`index-<hash>.css`) that changes on every build where any source moved, so a hardcoded `cssEntry` pointed at nothing the next time round (it did exactly that, once).
+
+Fixed: `tools/design-sync-css.mjs` copies the built sheet to the stable `.design-sync/.cache/app.css`, and `cfg.cssEntry` points there. `cfg.buildCmd` runs both steps, so a re-sync no longer needs a hand-edited hash.
 
 ## `[RENDER_THIN]` warnings on 9 icon/Mascot components — confirmed false positives
 
@@ -36,7 +38,7 @@ Both take zero props and derive everything from `useAppUpdate()` (`src/content/u
 
 ## Re-sync checklist
 
-1. `npm run build`, then fix `cfg.cssEntry` to the new hash (see above).
+1. `npm run build && node tools/design-sync-css.mjs` (that's `cfg.buildCmd` — the second half refreshes the stable stylesheet copy the converter reads).
 2. Full `package-build.mjs` (needed after ANY `.design-sync/overrides/*` or `config.json` edit — the build stamps a `sourceKey`/`cfgSlice` that gates grading; editing a fork clears grades for every component that references it, even if the edit was capture-only, not render-affecting — expect a full re-grade pass after touching `overrides/package-capture.mjs`).
 3. `preview-rebuild.mjs` + the forked `package-capture.mjs` (always `DS_CHROMIUM_PATH=/opt/pw-browsers/chromium-1194/chrome-linux/chrome`, never the un-forked `.ds-sync/package-capture.mjs` directly) for anything touched.
 4. `package-validate.mjs` (same `DS_CHROMIUM_PATH`) before closing out — should show 34/34 render cleanly, 2 floor cards (AppUpdateBanner/Card), and the 9 known-benign `[RENDER_THIN]` warnings above.
