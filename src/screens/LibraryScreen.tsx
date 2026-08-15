@@ -264,15 +264,22 @@ function EmptyTrack({ tone }: { tone: (typeof TRACK_TONES)[string] }) {
  * C'est le cœur du système : les leçons font découvrir, les révisions font
  * revenir et approfondir. Tant qu'elles restaient un bouton discret au fond
  * d'un panneau de piste, l'app n'était qu'une liste de leçons à cocher.
+ *
+ * Toujours en amber, jamais dans la teinte de la piste active : la révision
+ * mélange les trois pistes (voir plus haut), un ton fixe le dit d'un coup
+ * d'œil. Le teal d'origine coïncidait par hasard avec l'onglet Vocabulaire
+ * actif au premier lancement et jurait dès qu'on passait sur Grammaire
+ * (violet) ou Conjugaison (sky) — amber n'est jamais la couleur d'une piste,
+ * et c'est déjà celle de l'XP dans l'en-tête.
  */
 function ReviewCallout({ due, onReview }: { due: number; onReview: () => void }) {
   return (
     <button
       type="button"
       onClick={onReview}
-      className="card-3d flex items-center gap-4 border-teal bg-teal/10 px-5 py-4 text-left"
+      className="card-3d flex items-center gap-4 border-amber bg-amber/10 px-5 py-4 text-left"
     >
-      <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-teal text-white">
+      <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-amber text-white">
         <StarIcon filled size={24} />
       </span>
       <span className="flex-1">
@@ -283,7 +290,7 @@ function ReviewCallout({ due, onReview }: { due: number; onReview: () => void })
           Les revoir maintenant, c'est ce qui les fera tenir.
         </span>
       </span>
-      <span className="text-xs font-black uppercase text-teal">Réviser</span>
+      <span className="text-xs font-black uppercase text-amber">Réviser</span>
     </button>
   )
 }
