@@ -24,6 +24,7 @@ export function Default() {
             ],
           },
           form: { id: 'go-1', person: 'I', answer: 'went', alt: [] },
+          cue: 'verb',
         }}
         onAnswer={() => {}}
       />
@@ -32,8 +33,12 @@ export function Default() {
 }
 
 /**
- * Même exercice à un autre temps, pour montrer la piste sky sur un cas où le
- * verbe n'a pas de note d'usage (`note` est optionnelle).
+ * Le même exercice à partir du français seul : il faut retrouver « to see »
+ * avant de l'accorder, et c'est ce rappel-là qui sert à parler — personne, en
+ * conversation, ne part de l'infinitif anglais déjà trouvé. L'anglais
+ * disparaît donc de l'énoncé, sans quoi la moitié de la réponse serait donnée ;
+ * il revient à la correction, seul endroit où le couple s'apprend. Ce verbe n'a
+ * pas de note d'usage (`note` est optionnelle), ce que la carte absorbe.
  */
 export function PresentPerfect() {
   return (
@@ -52,6 +57,7 @@ export function PresentPerfect() {
             ],
           },
           form: { id: 'see-1', person: 'they', answer: 'have seen', alt: [] },
+          cue: 'translation',
         }}
         onAnswer={() => {}}
       />

@@ -5,6 +5,7 @@ import {
   buildPracticeSession,
   buildReviewSession,
   choiceAnswer,
+  fillGap,
   isAnswerCorrect,
   itemIdsOf,
   matchesAnswer,
@@ -415,9 +416,11 @@ const GRAMMAR: GrammarLesson = {
   title: 'Le conditionnel mixte',
   notes: 'Une hypothèse passée, une conséquence présente.',
   points: [
-    { id: 'p1', sentence: 'If I had known, I ___ there.', answer: 'would be', alt: [], options: ['would be', 'would have been', 'will be'] },
-    { id: 'p2', sentence: 'She ___ that message.', answer: 'would not have sent', alt: ["wouldn't have sent"], options: [] },
-    { id: 'p3', sentence: 'We ___ stuck now.', answer: 'would not be', alt: [], options: ['would not be', 'had not been'] },
+    { id: 'p1', sentence: 'If I had known, I ___ there.', answer: 'would be', alt: [], options: ['would be', 'would have been', 'will be'], translation: 'Si j’avais su, je serais là.' },
+    // p2 est le point volontairement pauvre : pas de formes proposées, donc ni
+    // QCM ni banque de mots — il ne peut se travailler qu'au clavier.
+    { id: 'p2', sentence: 'She ___ that message.', answer: 'would not have sent', alt: ["wouldn't have sent"], options: [], translation: 'Elle n’aurait pas envoyé ce message.' },
+    { id: 'p3', sentence: 'We ___ stuck now.', answer: 'would not be', alt: [], options: ['would not be', 'had not been'], translation: 'Nous ne serions pas coincés maintenant.' },
   ],
 }
 
@@ -429,6 +432,7 @@ const CONJUGATION: ConjugationLesson = {
   verbs: [
     {
       verb: 'to see',
+      translation: 'voir',
       tense: 'present perfect',
       forms: [
         { id: 'f1', person: 'I / you / we / they', answer: 'have seen', alt: [] },
@@ -437,6 +441,7 @@ const CONJUGATION: ConjugationLesson = {
     },
     {
       verb: 'to go',
+      translation: 'aller',
       tense: 'present perfect',
       forms: [
         { id: 'f3', person: 'I / you / we / they', answer: 'have gone', alt: [] },
@@ -453,8 +458,8 @@ describe('session de grammaire', () => {
   })
 
   it('teste chaque point de la leçon', () => {
-    const gaps = buildLessonSession(GRAMMAR, 1).filter((e) => e.kind === 'grammar-gap')
-    expect(gaps.map((e) => e.point.id).sort()).toEqual(['p1', 'p2', 'p3'])
+    const points = buildLessonSession(GRAMMAR, 1).flatMap(itemIdsOf)
+    expect(new Set(points)).toEqual(new Set(['p1', 'p2', 'p3']))
   })
 
   it('propose les formes à la découverte, les retire ensuite', () => {
@@ -486,7 +491,7 @@ describe('session de conjugaison', () => {
 
   it('couvre toutes les formes déclarées', () => {
     const typed = buildLessonSession(CONJUGATION, 2).filter((e) => e.kind === 'conjugation')
-    expect(typed.map((e) => e.form.id).sort()).toEqual(['f1', 'f2', 'f3', 'f4'])
+    expect(new Set(typed.map((e) => e.form.id))).toEqual(new Set(['f1', 'f2', 'f3', 'f4']))
   })
 
   it('note les formes, pas les verbes', () => {
@@ -504,7 +509,154 @@ describe('révision toutes natures confondues', () => {
     ]
     const session = buildReviewSession(items)
     expect(session.some((e) => e.kind === 'grammar-gap')).toBe(true)
-    expect(session.some((e) => e.kind === 'conjugation')).toBe(true)
+    // Carte de conjugaison encore en apprentissage : on la reconnaît.
+    expect(session.some((e) => e.kind === 'conjugation-choice')).toBe(true)
+  })
+
+  it('ne réclame la forme conjuguée de mémoire qu’une fois la carte mûre', () => {
+    const fresh = createCard('f1', T0)
+    const item: PracticeItem = {
+      kind: 'conjugation',
+      id: 'f1',
+      form: CONJUGATION.verbs[0].forms[0],
+      verb: CONJUGATION.verbs[0],
+    }
+    // Régression : la révision réclamait d'écrire « have seen » de mémoire dès
+    // le jour de la découverte, ce qui n'enseigne que l'échec.
+    expect(buildReviewSession([{ card: fresh, item }])[0]!.kind).toBe('conjugation-choice')
+
+    const mature: CardState = { ...fresh, step: null, interval: 10 }
+    expect(buildReviewSession([{ card: mature, item }])[0]!.kind).toBe('conjugation')
+  })
+
+  it('retire la traduction française des phrases de grammaire à l’entraînement', () => {
+    const item: PracticeItem = { kind: 'grammar', id: 'p1', point: GRAMMAR.points[0] }
+    const card = createCard('p1', T0)
+    const [review] = buildReviewSession([{ card, item }])
+    const [drill] = buildPracticeSession([{ card, item }])
+    expect(review).toMatchObject({ kind: 'grammar-gap', cue: 'translation' })
+    expect(drill).toMatchObject({ kind: 'grammar-gap', cue: 'sentence' })
+  })
+})
+
+describe('variété des exercices de grammaire et de conjugaison', () => {
+  /** Signature d'un exercice ciblé : l'élément ET la question posée. */
+  function signature(exercise: Exercise): string {
+    const cue = 'cue' in exercise ? `:${exercise.cue}` : ''
+    const bank = 'bank' in exercise ? (exercise.bank ? ':banque' : ':clavier') : ''
+    return `${exercise.kind}${cue}${bank}:${itemIdsOf(exercise).join()}`
+  }
+
+  const SEEDS = [1, 2, 3, 4, 5]
+  const LEVELS = [0, 1, 2]
+
+  it('ne pose jamais deux fois la même question sur le même point', () => {
+    // Régression : la leçon ne posait qu'une phrase à trou par point, toujours
+    // la même, si bien que six points faisaient six exercices d'un seul gabarit.
+    for (const level of LEVELS) {
+      for (const seed of SEEDS) {
+        const sigs = buildLessonSession(GRAMMAR, level, seed)
+          .filter((e) => e.kind !== 'rule')
+          .map(signature)
+        expect(new Set(sigs).size).toBe(sigs.length)
+      }
+    }
+  })
+
+  it('ne pose jamais deux fois la même question sur la même forme', () => {
+    for (const level of LEVELS) {
+      for (const seed of SEEDS) {
+        const sigs = buildLessonSession(CONJUGATION, level, seed)
+          .filter((e) => e.kind !== 'rule' && e.kind !== 'conjugation-match')
+          .map(signature)
+        expect(new Set(sigs).size).toBe(sigs.length)
+      }
+    }
+  })
+
+  it('interroge chaque point et chaque forme au moins deux fois', () => {
+    // Un seul exercice par élément, c'était le fond du problème : le passage
+    // suivant ne pouvait que reposer la même question.
+    for (const level of LEVELS) {
+      for (const seed of SEEDS) {
+        for (const point of GRAMMAR.points) {
+          const asked = buildLessonSession(GRAMMAR, level, seed).filter((e) =>
+            itemIdsOf(e).includes(point.id),
+          )
+          expect(asked.length).toBeGreaterThanOrEqual(2)
+        }
+        const forms = CONJUGATION.verbs.flatMap((verb) => verb.forms)
+        for (const form of forms) {
+          const asked = buildLessonSession(CONJUGATION, level, seed).filter(
+            (e) => e.kind !== 'conjugation-match' && itemIdsOf(e).includes(form.id),
+          )
+          expect(asked.length).toBeGreaterThanOrEqual(2)
+        }
+      }
+    }
+  })
+
+  it('fait monter l’exigence avec la maîtrise', () => {
+    const stages = (lesson: GrammarLesson | ConjugationLesson, level: number) =>
+      new Set(SEEDS.flatMap((seed) => buildLessonSession(lesson, level, seed)).map((e) => e.kind))
+
+    // À la découverte on reconnaît la phrase, on ne l'écrit pas ; une fois la
+    // leçon sue, le QCM disparaît et il ne reste que la production.
+    expect(stages(GRAMMAR, 0)).toContain('grammar-choice')
+    expect(stages(GRAMMAR, 2)).not.toContain('grammar-choice')
+    expect(stages(CONJUGATION, 0)).toContain('conjugation-choice')
+    expect(stages(CONJUGATION, 2)).not.toContain('conjugation-choice')
+  })
+
+  it('demande parfois la forme à partir du français seul', () => {
+    // Le rappel réellement utile pour parler : personne ne part de l'infinitif
+    // anglais déjà trouvé.
+    const cues = new Set(
+      SEEDS.flatMap((seed) => buildLessonSession(CONJUGATION, 2, seed))
+        .filter((e) => e.kind === 'conjugation')
+        .map((e) => e.cue),
+    )
+    expect(cues).toEqual(new Set(['verb', 'translation']))
+  })
+
+  it('ne part du français que si le verbe en a une traduction', () => {
+    const bare: ConjugationLesson = {
+      ...CONJUGATION,
+      verbs: CONJUGATION.verbs.map(({ translation: _translation, ...rest }) => rest),
+    }
+    for (const level of LEVELS) {
+      for (const seed of SEEDS) {
+        const session = buildLessonSession(bare, level, seed)
+        expect(session.some((e) => 'cue' in e && e.cue === 'translation')).toBe(false)
+      }
+    }
+  })
+
+  it('propose des phrases entières distinctes, dont la bonne', () => {
+    const choices = SEEDS.flatMap((seed) => buildLessonSession(GRAMMAR, 0, seed)).filter(
+      (e) => e.kind === 'grammar-choice',
+    )
+    expect(choices.length).toBeGreaterThan(0)
+    for (const choice of choices) {
+      expect(new Set(choice.options).size).toBe(choice.options.length)
+      expect(choice.options).toContain(fillGap(choice.point.sentence, choice.point.answer))
+      // p2 n'a pas d'options : il ne peut pas produire de QCM du tout.
+      expect(choice.point.id).not.toBe('p2')
+    }
+  })
+
+  it('oppose d’abord les autres personnes du même verbe', () => {
+    // « have seen » contre « has seen » : c'est là que la confusion se joue,
+    // pas entre deux verbes sans rapport.
+    const choices = SEEDS.flatMap((seed) => buildLessonSession(CONJUGATION, 0, seed)).filter(
+      (e) => e.kind === 'conjugation-choice',
+    )
+    expect(choices.length).toBeGreaterThan(0)
+    for (const choice of choices) {
+      const siblings = choice.verb.forms.filter((form) => form.id !== choice.form.id)
+      expect(choice.options).toContain(choice.form.answer)
+      expect(choice.options.some((option) => siblings.some((form) => form.answer === option))).toBe(true)
+    }
   })
 })
 

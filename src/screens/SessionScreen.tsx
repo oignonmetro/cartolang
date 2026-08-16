@@ -13,7 +13,9 @@ import { TypeAnswer } from '@/components/session/TypeAnswer'
 import { VocabIntro } from '@/components/session/VocabIntro'
 import { RuleNote } from '@/components/session/RuleNote'
 import { GrammarGap } from '@/components/session/GrammarGap'
+import { GrammarSentenceChoice } from '@/components/session/GrammarSentenceChoice'
 import { ConjugationAnswer } from '@/components/session/ConjugationAnswer'
+import { ConjugationChoice } from '@/components/session/ConjugationChoice'
 import { ConjugationMatch } from '@/components/session/ConjugationMatch'
 import { CloseIcon } from '@/components/icons'
 import type { SessionOutcome } from '@/engine/progress'
@@ -175,8 +177,17 @@ export function SessionScreen({ title, exercises, onQuit, onFinish }: SessionScr
             {current.kind === 'grammar-gap' && (
               <GrammarGap exercise={current} onAnswer={(correct) => answer(current, correct)} />
             )}
+            {current.kind === 'grammar-choice' && (
+              <GrammarSentenceChoice
+                exercise={current}
+                onAnswer={(correct) => answer(current, correct)}
+              />
+            )}
             {current.kind === 'conjugation' && (
               <ConjugationAnswer exercise={current} onAnswer={(correct) => answer(current, correct)} />
+            )}
+            {current.kind === 'conjugation-choice' && (
+              <ConjugationChoice exercise={current} onAnswer={(correct) => answer(current, correct)} />
             )}
             {current.kind === 'conjugation-match' && (
               <ConjugationMatch exercise={current} onDone={({ missedIds }) => answerMatch(current, missedIds)} />

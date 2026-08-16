@@ -4,6 +4,7 @@ import type { ChoiceCue, ChoiceExercise } from '@/engine/exercises'
 import { choiceAnswer, choicePrompt, choicePromptIsEnglish, normalizeAnswer } from '@/engine/exercises'
 import { Button } from '@/components/Button'
 import { Mascot } from '@/components/Mascot'
+import { OptionList } from './OptionList'
 import { SpeakButton } from './SpeakButton'
 
 /**
@@ -68,34 +69,12 @@ export function ChoiceQuestion({
         </div>
       </div>
 
-      <div className="flex flex-col gap-3">
-        {options.map((option, index) => {
-          const isPicked = picked === option
-          const isAnswer = checked && normalizeAnswer(option) === normalizeAnswer(answer)
-          const tone = !checked
-            ? 'border-line bg-paper'
-            : isAnswer
-              ? 'border-success bg-success/15 text-success'
-              : isPicked
-                ? 'border-error bg-error/15 text-error'
-                : 'border-line bg-paper text-ink-faint'
-
-          return (
-            <button
-              key={option}
-              type="button"
-              disabled={checked}
-              onClick={() => setPicked(option)}
-              className={`flex items-center gap-3 rounded-2xl border-2 px-4 py-3 text-left font-bold transition-colors disabled:opacity-100 ${tone}`}
-            >
-              <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border-2 border-current text-xs">
-                {index + 1}
-              </span>
-              {option}
-            </button>
-          )
-        })}
-      </div>
+      <OptionList
+        options={options}
+        picked={picked}
+        isCorrect={(option) => normalizeAnswer(option) === normalizeAnswer(answer)}
+        onPick={setPicked}
+      />
 
       <div className="mt-auto">
         {checked && (

@@ -8,6 +8,11 @@ import { Button } from '@/components/Button'
  * Production d'une forme conjuguée : verbe, temps et personne sont donnés,
  * la forme est à écrire. C'est l'exercice le plus exigeant de la piste, et
  * le seul qui vérifie vraiment que le paradigme est su.
+ *
+ * Le verbe se donne de deux façons. En anglais, il ne reste qu'à conjuguer.
+ * En français — « travailler » —, il faut d'abord retrouver le verbe anglais,
+ * et c'est ce rappel-là qui sert à parler : personne, en conversation, ne part
+ * de l'infinitif anglais déjà trouvé.
  */
 export function ConjugationAnswer({
   exercise,
@@ -16,7 +21,8 @@ export function ConjugationAnswer({
   exercise: ConjugationExercise
   onAnswer: (correct: boolean) => void
 }) {
-  const { verb, form } = exercise
+  const { verb, form, cue } = exercise
+  const fromFrench = cue === 'translation' && Boolean(verb.translation)
   const [value, setValue] = useState('')
   const [checked, setChecked] = useState<null | boolean>(null)
   const input = useRef<HTMLInputElement>(null)
@@ -35,7 +41,9 @@ export function ConjugationAnswer({
 
   return (
     <div className="flex flex-1 flex-col gap-5">
-      <p className="text-sm font-bold uppercase tracking-wide text-ink-faint">Conjuguez</p>
+      <p className="text-sm font-bold uppercase tracking-wide text-ink-faint">
+        {fromFrench ? 'Traduisez et conjuguez' : 'Conjuguez'}
+      </p>
 
       {/* La carte et le champ forment un duo qui doit rester collé : c'est ce
           duo qui se centre dans l'espace disponible, pas la carte seule (qui
@@ -44,8 +52,15 @@ export function ConjugationAnswer({
           inclure les ferait sauter à l'écran à chaque vérification. */}
       <div className="flex flex-1 flex-col justify-center gap-5">
         <div className="card-3d flex flex-col items-center gap-3 px-5 py-8 text-center">
-          <span className="text-3xl font-black break-words">{verb.verb}</span>
-          {verb.translation && <span className="text-sm text-ink-soft">{verb.translation}</span>}
+          {/* Quand l'énoncé part du français, l'infinitif anglais disparaît :
+              l'afficher en petit sous le français donnerait la moitié de la
+              réponse, et l'exercice retomberait sur le précédent. */}
+          <span lang={fromFrench ? 'fr' : 'en'} className="text-3xl font-black break-words">
+            {fromFrench ? verb.translation : verb.verb}
+          </span>
+          {!fromFrench && verb.translation && (
+            <span className="text-sm text-ink-soft">{verb.translation}</span>
+          )}
 
           <div className="mt-2 flex flex-wrap items-center justify-center gap-2">
             <span className="rounded-full bg-sky/15 px-3 py-1 text-xs font-extrabold uppercase tracking-wide text-sky">
@@ -90,6 +105,13 @@ export function ConjugationAnswer({
           <p className={`font-extrabold ${checked ? 'text-success' : 'text-error'}`}>
             {checked ? 'Bonne réponse.' : `La forme attendue était « ${form.answer} ».`}
           </p>
+          {/* Le verbe anglais était caché par l'énoncé : la correction est le
+              seul endroit où le couple français/anglais peut s'apprendre. */}
+          {fromFrench && (
+            <p className="mt-1 text-ink-soft">
+              {verb.translation} — <span lang="en">{verb.verb}</span>
+            </p>
+          )}
           {verb.note && <p className="mt-1 text-ink-soft">{verb.note}</p>}
         </motion.div>
       )}

@@ -27,9 +27,13 @@ import type { CardState } from './srs'
  * La grammaire et la conjugaison ne se ramènent pas à des paires
  * terme/traduction : elles ont leurs propres exercices, et suivent elles le
  * niveau de maîtrise de la leçon — on y reconnaît d'abord, on y produit
- * ensuite.
+ * ensuite. Elles se découpent elles aussi en blocs, et chaque élément y
+ * gravit une échelle d'exigence (voir `grammarLadder`, `conjugationLadder`)
+ * au lieu de recevoir toujours le même exercice.
  *   - `rule`         : présentation d'un point de grammaire avant pratique ;
+ *   - `grammar-choice` : choisir la phrase entière correcte parmi ses variantes ;
  *   - `grammar-gap`  : phrase trouée, au clavier ou parmi des formes proposées ;
+ *   - `conjugation-choice` : reconnaître une forme parmi celles du paradigme ;
  *   - `conjugation`  : produire une forme à partir du verbe, du temps, de la personne ;
  *   - `conjugation-match` : relier les personnes aux formes d'un même verbe.
  */
@@ -142,19 +146,73 @@ export interface RuleExercise {
   topic: 'grammar' | 'conjugation'
 }
 
+/**
+ * L'aide affichée sous une phrase de grammaire.
+ *
+ *   `translation` : la traduction française de la phrase est donnée — le sens
+ *                   visé est acquis, il ne reste qu'à trouver la forme ;
+ *   `sentence`    : la phrase anglaise seule. C'est la grammaire qui doit
+ *                   trancher, sans que le français ne désigne la réponse.
+ *
+ * C'est l'écart entre les deux qui manquait : la traduction était affichée à
+ * tous les coups, si bien qu'un point ne pouvait jamais être demandé deux fois
+ * sans être demandé deux fois de la même façon.
+ */
+export type GrammarCue = 'translation' | 'sentence'
+
 export interface GrammarGapExercise {
   kind: 'grammar-gap'
   id: string
   point: GrammarPoint
+  cue: GrammarCue
   /** Formes proposées, ou `null` quand la réponse se saisit au clavier. */
   bank: string[] | null
 }
+
+/**
+ * Choisir la phrase entière correcte plutôt que la forme isolée : chaque
+ * option est la phrase complétée par l'une des formes plausibles. Le trou seul
+ * se traite parfois par élimination mécanique ; la phrase entière oblige à la
+ * relire, et c'est là que la règle s'entend.
+ */
+export interface GrammarChoiceExercise {
+  kind: 'grammar-choice'
+  id: string
+  point: GrammarPoint
+  /** Phrases complètes — la bonne et ses variantes fautives, déjà mélangées. */
+  options: string[]
+}
+
+/**
+ * Sous quelle forme le verbe est donné.
+ *
+ *   `verb`        : l'infinitif anglais (« to work ») ;
+ *   `translation` : l'infinitif français (« travailler »). Il faut alors
+ *                   retrouver le verbe anglais *avant* de le conjuguer, ce qui
+ *                   est le rappel réellement utile pour parler.
+ */
+export type ConjugationCue = 'verb' | 'translation'
 
 export interface ConjugationExercise {
   kind: 'conjugation'
   id: string
   verb: ConjugationVerb
   form: ConjugationForm
+  cue: ConjugationCue
+}
+
+/**
+ * Reconnaître une forme parmi celles du paradigme. Les leurres sont d'abord
+ * les autres personnes du même verbe — « have been working » contre « has been
+ * working » est exactement la confusion que la leçon veut lever.
+ */
+export interface ConjugationChoiceExercise {
+  kind: 'conjugation-choice'
+  id: string
+  verb: ConjugationVerb
+  form: ConjugationForm
+  cue: ConjugationCue
+  options: string[]
 }
 
 export interface ConjugationMatchExercise {
@@ -173,7 +231,9 @@ export type Exercise =
   | TypeExercise
   | RuleExercise
   | GrammarGapExercise
+  | GrammarChoiceExercise
   | ConjugationExercise
+  | ConjugationChoiceExercise
   | ConjugationMatchExercise
 
 /** Nombre de paires par manche d'association. */
@@ -198,8 +258,10 @@ export function itemIdsOf(exercise: Exercise): string[] {
     case 'conjugation-match':
       return exercise.forms.map((form) => form.id)
     case 'grammar-gap':
+    case 'grammar-choice':
       return [exercise.point.id]
     case 'conjugation':
+    case 'conjugation-choice':
       return [exercise.form.id]
     default:
       return [exercise.vocab.id]
@@ -352,16 +414,16 @@ function firstAvailableExercise(
 const BLOCK_SIZE = 4
 
 /**
- * Découpe une leçon en blocs de trois-quatre mots. Un reliquat d'un ou deux
- * mots rejoint le bloc précédent plutôt que de former son propre petit bloc
- * solitaire : mieux vaut un dernier bloc un peu plus riche qu'un bloc de un
- * seul mot qui n'aurait même pas de quoi remplir une manche d'association.
+ * Découpe une leçon en blocs. Un reliquat trop maigre rejoint le bloc
+ * précédent plutôt que de former son propre petit bloc solitaire : mieux vaut
+ * un dernier bloc un peu plus riche qu'un bloc de un seul élément, qui n'aurait
+ * même pas de quoi remplir une manche d'association.
  */
-function blocksOf(words: readonly Vocab[]): Vocab[][] {
-  const blocks: Vocab[][] = []
-  for (let i = 0; i < words.length; i += BLOCK_SIZE) blocks.push(words.slice(i, i + BLOCK_SIZE))
+function blocksOf<T>(items: readonly T[], size = BLOCK_SIZE): T[][] {
+  const blocks: T[][] = []
+  for (let i = 0; i < items.length; i += size) blocks.push(items.slice(i, i + size))
   const last = blocks[blocks.length - 1]
-  if (blocks.length > 1 && last!.length < 3) {
+  if (blocks.length > 1 && last!.length < size - 1) {
     const previous = blocks[blocks.length - 2]!
     blocks.splice(blocks.length - 2, 2, [...previous, ...last!])
   }
@@ -446,6 +508,44 @@ function servedCount(served: Served, wordId: string): number {
  */
 function leastServedFirst(pool: readonly Vocab[], served: Served, rng: Rng): Vocab[] {
   return shuffle(pool, rng).sort((a, b) => servedCount(served, a.id) - servedCount(served, b.id))
+}
+
+/**
+ * Remplit un budget d'exercices en servant, à chaque tour, l'élément le moins
+ * servi jusque-là.
+ *
+ * Le recalcul à chaque tour n'est pas un détail : un tri unique en début de
+ * bloc épuisait l'échelle d'exigence des points déjà rencontrés avant d'avoir
+ * donné le moindre second exercice aux nouveaux — les premiers points d'une
+ * leçon en recevaient trois, les derniers un seul.
+ *
+ * `next` rend l'exercice suivant que l'élément peut encore soutenir, ou `null`
+ * quand il a tout reçu ; c'est lui qui tient à jour `served`. Un élément épuisé
+ * sort du tirage plutôt que d'être redemandé à chaque tour.
+ */
+function serveLeastFirst<T>(
+  pool: readonly T[],
+  idOf: (item: T) => string,
+  served: Served,
+  budget: number,
+  next: (item: T) => Exercise | null,
+  rng: Rng,
+): Exercise[] {
+  const result: Exercise[] = []
+  const exhausted = new Set<string>()
+
+  while (result.length < budget) {
+    const candidates = pool.filter((item) => !exhausted.has(idOf(item)))
+    if (candidates.length === 0) break
+
+    const item = shuffle(candidates, rng).reduce((best, candidate) =>
+      servedCount(served, idOf(candidate)) < servedCount(served, idOf(best)) ? candidate : best,
+    )
+    const exercise = next(item)
+    if (exercise) result.push(exercise)
+    else exhausted.add(idOf(item))
+  }
+  return result
 }
 
 /**
@@ -537,12 +637,158 @@ function buildVocabSession(
   return exercises
 }
 
+/** Remplit le trou d'une phrase de grammaire par la forme donnée. */
+export function fillGap(sentence: string, form: string): string {
+  return sentence.replace(GAP, form)
+}
+
+/** Nombre de phrases proposées (la bonne comprise) dans un QCM de grammaire. */
+const GRAMMAR_CHOICE_SIZE = 3
+
 /**
- * Grammaire : on relit la règle, puis on l'applique.
+ * QCM sur la phrase entière : chaque option est la phrase complétée par l'une
+ * des formes plausibles fournies par l'auteur. `null` quand la phrase n'a pas
+ * de trou à remplir, ou pas une seule forme fautive à opposer — un QCM à une
+ * option ne teste rien.
+ */
+function grammarChoiceFor(point: GrammarPoint, rng: Rng): GrammarChoiceExercise | null {
+  if (!point.sentence.includes(GAP)) return null
+
+  const distractors: string[] = []
+  for (const option of shuffle(point.options, rng)) {
+    if (distractors.length >= GRAMMAR_CHOICE_SIZE - 1) break
+    // Une variante qui vaudrait la réponse offrirait deux bonnes cases.
+    if (matchesAnswer(point.answer, point.alt, option)) continue
+    distractors.push(fillGap(point.sentence, option))
+  }
+  if (distractors.length === 0) return null
+
+  return {
+    kind: 'grammar-choice',
+    id: `sentence:${point.id}`,
+    point,
+    options: shuffle([fillGap(point.sentence, point.answer), ...distractors], rng),
+  }
+}
+
+/**
+ * L'échelle d'exigence d'un point de grammaire.
  *
- * Aux premiers passages la phrase se complète en choisissant parmi les formes
- * proposées (quand l'auteur en a fourni) ; ensuite la réponse se saisit, ce
- * qui interdit de reconnaître sans produire.
+ * C'est ce qui remplace l'exercice unique : la leçon ne posait qu'une phrase à
+ * trou par point, si bien que six points faisaient six exercices, tous du même
+ * gabarit, et qu'un second passage les reposait à l'identique. Un point gravit
+ * maintenant cette échelle, échelon par échelon, et deux exercices sur un même
+ * point ne se ressemblent plus.
+ *
+ * Un échelon peut proposer plusieurs formulations de difficulté équivalente :
+ * on en tire une, ce qui fait qu'une leçon rejouée au même niveau ne repose
+ * pas exactement les mêmes questions.
+ */
+interface GrammarVariant {
+  stage: 'choice' | 'bank' | 'typed'
+  cue: GrammarCue
+}
+
+type Ladder<T> = readonly (readonly T[])[]
+
+/**
+ * L'échelle suivie selon la maîtrise déjà acquise. Elle glisse plutôt qu'elle
+ * ne s'allonge : à la découverte on ne réclame pas la phrase nue au clavier,
+ * et une fois la leçon sue on ne redonne pas le QCM qui la déchiffrait.
+ *
+ * Un point ne reçoit en pratique que les deux premiers échelons d'une leçon de
+ * six points (voir `GRAMMAR_PER_POINT_PER_BLOCK`) : le troisième sert aux
+ * leçons courtes, où chaque point revient plus souvent.
+ */
+function grammarLadder(level: number): Ladder<GrammarVariant> {
+  if (level <= 0)
+    return [
+      [{ stage: 'choice', cue: 'translation' }],
+      [
+        { stage: 'bank', cue: 'translation' },
+        { stage: 'bank', cue: 'sentence' },
+      ],
+      [{ stage: 'typed', cue: 'translation' }],
+      // Un point sans formes proposées ne peut ni QCM ni banque de mots : sans
+      // ce dernier échelon il traverserait la découverte avec un seul exercice,
+      // exactement le défaut qu'on répare.
+      [{ stage: 'typed', cue: 'sentence' }],
+    ]
+  if (level === 1)
+    return [
+      [
+        { stage: 'bank', cue: 'sentence' },
+        { stage: 'choice', cue: 'translation' },
+      ],
+      [{ stage: 'typed', cue: 'translation' }],
+      [{ stage: 'typed', cue: 'sentence' }],
+    ]
+  return [
+    [{ stage: 'typed', cue: 'translation' }],
+    [{ stage: 'typed', cue: 'sentence' }],
+    [{ stage: 'bank', cue: 'sentence' }],
+  ]
+}
+
+function grammarExercise(point: GrammarPoint, variant: GrammarVariant, rng: Rng): Exercise | null {
+  if (variant.stage === 'choice') return grammarChoiceFor(point, rng)
+  if (variant.stage === 'bank' && point.options.length < 2) return null
+  // Retirer une traduction que l'auteur n'a pas écrite ne durcit rien : c'est
+  // le même exercice sous un autre nom.
+  const cue = point.translation ? variant.cue : 'sentence'
+  return {
+    kind: 'grammar-gap',
+    // L'exigence entre dans l'identifiant : la même phrase au clavier et en
+    // banque de mots sont deux exercices, pas deux rendus du même.
+    id: `gap:${variant.stage}:${cue}:${point.id}`,
+    point,
+    cue,
+    bank: variant.stage === 'bank' ? shuffle(point.options, rng) : null,
+  }
+}
+
+/**
+ * Le premier échelon que cet élément n'a pas encore gravi.
+ *
+ * La marque porte sur l'échelon, pas sur la formulation tirée : c'est ce qui
+ * fait avancer sur l'échelle plutôt que de tourner à l'intérieur d'un échelon
+ * dont plusieurs formulations restent disponibles.
+ *
+ * L'exercice construit est marqué lui aussi, et un échelon qui retombe dessus
+ * passe son tour. Deux échelons peuvent en effet produire le même exercice
+ * quand la matière manque : sans traduction, « pars du français » et « pars de
+ * l'anglais » sont le même énoncé, et l'échelle poserait deux fois la même
+ * question en croyant l'avoir durcie.
+ */
+function climb<T>(
+  itemId: string,
+  ladder: Ladder<T>,
+  served: Served,
+  rng: Rng,
+  build: (variant: T) => Exercise | null,
+): Exercise | null {
+  for (const [rung, variants] of ladder.entries()) {
+    if (hasServed(served, itemId, `rung:${rung}`)) continue
+    for (const variant of shuffle(variants, rng)) {
+      const exercise = build(variant)
+      if (!exercise || hasServed(served, itemId, exercise.id)) continue
+      markServed(served, itemId, `rung:${rung}`)
+      markServed(served, itemId, exercise.id)
+      return exercise
+    }
+  }
+  return null
+}
+
+/** Points par bloc, et échelons servis à chacun par bloc. */
+const GRAMMAR_BLOCK_SIZE = 3
+const GRAMMAR_PER_POINT_PER_BLOCK = 2
+
+/**
+ * Grammaire : on relit la règle, puis on l'applique — par blocs de trois
+ * points, comme le vocabulaire, chaque bloc reprenant aussi les points déjà
+ * rencontrés pour les faire monter d'un échelon plutôt que de les abandonner
+ * derrière lui.
  */
 function buildGrammarSession(
   lessonId: string,
@@ -553,29 +799,155 @@ function buildGrammarSession(
   seed: number,
 ): Exercise[] {
   const rng = createRng(seed)
-  const shuffled = shuffle(points, rng)
-  const guided = level <= 0
-
-  const gaps = shuffled.map(
-    (point): GrammarGapExercise => ({
-      kind: 'grammar-gap',
-      id: `gap:${point.id}`,
-      point,
-      bank: guided && point.options.length > 1 ? shuffle(point.options, rng) : null,
-    }),
-  )
+  const ladder = grammarLadder(level)
+  const blocks = blocksOf(shuffle(points, rng), GRAMMAR_BLOCK_SIZE)
 
   // Le rappel de cours n'apparaît qu'à la découverte : au-delà, il donnerait
   // la réponse avant même la question.
-  const preamble: Exercise[] =
+  const exercises: Exercise[] =
     level <= 0 && notes ? [{ kind: 'rule', id: `rule:${lessonId}`, title, notes, topic: 'grammar' }] : []
 
-  return [...preamble, ...gaps]
+  const served: Served = new Map()
+  const pool: GrammarPoint[] = []
+
+  for (const block of blocks) {
+    pool.push(...block)
+
+    const blockExercises = serveLeastFirst(
+      pool,
+      (point) => point.id,
+      served,
+      block.length * GRAMMAR_PER_POINT_PER_BLOCK,
+      (point) =>
+        climb(point.id, ladder, served, rng, (variant) => grammarExercise(point, variant, rng)),
+      rng,
+    )
+
+    // Rattrapage : un point dont aucun échelon n'a pu être construit — formes
+    // proposées manquantes, phrase sans trou — se rabat sur la saisie plutôt
+    // que de traverser la leçon sans jamais être interrogé.
+    for (const point of block) {
+      if (servedCount(served, point.id) > 0) continue
+      const fallback = climb(point.id, ladder, served, rng, (variant) =>
+        grammarExercise(point, variant, rng),
+      )
+      if (fallback) blockExercises.push(fallback)
+    }
+
+    exercises.push(...avoidAdjacentRepeats(blockExercises))
+  }
+  return exercises
+}
+
+/** Nombre de formes proposées (la bonne comprise) dans un QCM de conjugaison. */
+const CONJUGATION_CHOICE_SIZE = 3
+
+/**
+ * QCM de conjugaison. Les leurres viennent d'abord des autres personnes du
+ * même verbe : c'est là que se joue la confusion réelle (« have been working »
+ * contre « has been working »). Les autres verbes du bassin complètent quand
+ * le paradigme est trop court.
+ */
+function conjugationChoiceFor(
+  verb: ConjugationVerb,
+  form: ConjugationForm,
+  cue: ConjugationCue,
+  pool: readonly ConjugationVerb[],
+  rng: Rng,
+): ConjugationChoiceExercise | null {
+  const siblings = verb.forms.filter((other) => other.id !== form.id).map((other) => other.answer)
+  const strangers = shuffle(
+    pool.filter((other) => other !== verb),
+    rng,
+  ).flatMap((other) => other.forms.map((otherForm) => otherForm.answer))
+
+  const distractors: string[] = []
+  for (const candidate of [...shuffle(siblings, rng), ...strangers]) {
+    if (distractors.length >= CONJUGATION_CHOICE_SIZE - 1) break
+    if (matchesAnswer(form.answer, form.alt, candidate)) continue
+    if (distractors.some((seen) => normalizeForm(seen) === normalizeForm(candidate))) continue
+    distractors.push(candidate)
+  }
+  if (distractors.length === 0) return null
+
+  return {
+    kind: 'conjugation-choice',
+    id: `cchoice:${cue}:${form.id}`,
+    verb,
+    form,
+    cue,
+    options: shuffle([form.answer, ...distractors], rng),
+  }
+}
+
+interface ConjugationVariant {
+  stage: 'choice' | 'typed'
+  cue: ConjugationCue
 }
 
 /**
- * Conjugaison : on relie d'abord les personnes aux formes, puis on produit
- * les formes de mémoire.
+ * L'échelle d'exigence d'une forme conjuguée. La piste n'avait qu'un seul
+ * exercice ciblé — écrire la forme — donné une fois par forme et à l'identique
+ * à chaque passage ; il manquait l'échelon de reconnaissance en dessous, et
+ * au-dessus le rappel qui part du français, celui dont on a réellement besoin
+ * pour parler.
+ */
+function conjugationLadder(level: number): Ladder<ConjugationVariant> {
+  if (level <= 0)
+    return [
+      [{ stage: 'choice', cue: 'verb' }],
+      [
+        { stage: 'typed', cue: 'verb' },
+        { stage: 'choice', cue: 'translation' },
+      ],
+      [{ stage: 'typed', cue: 'translation' }],
+    ]
+  if (level === 1)
+    return [
+      [{ stage: 'choice', cue: 'translation' }],
+      [{ stage: 'typed', cue: 'verb' }],
+      [{ stage: 'typed', cue: 'translation' }],
+    ]
+  return [
+    [{ stage: 'typed', cue: 'verb' }],
+    [{ stage: 'typed', cue: 'translation' }],
+    [{ stage: 'choice', cue: 'translation' }],
+  ]
+}
+
+function conjugationExercise(
+  verb: ConjugationVerb,
+  form: ConjugationForm,
+  variant: ConjugationVariant,
+  pool: readonly ConjugationVerb[],
+  rng: Rng,
+): Exercise | null {
+  // Partir du français suppose que l'auteur l'ait écrit ; sans traduction,
+  // l'énoncé n'aurait pas de verbe à montrer et retomberait sur l'anglais.
+  // `climb` écarte alors l'échelon, qui ferait doublon.
+  const cue = verb.translation ? variant.cue : 'verb'
+  if (variant.stage === 'choice') return conjugationChoiceFor(verb, form, cue, pool, rng)
+  return { kind: 'conjugation', id: `conj:${cue}:${form.id}`, verb, form, cue }
+}
+
+/** Verbes par bloc, et échelons servis à chaque forme par bloc. */
+const CONJUGATION_BLOCK_SIZE = 2
+const CONJUGATION_PER_FORM_PER_BLOCK = 2
+
+function conjugationMatchOf(verb: ConjugationVerb): ConjugationMatchExercise {
+  return {
+    kind: 'conjugation-match',
+    id: `cmatch:${verb.verb}:${verb.tense}`,
+    verb,
+    forms: verb.forms,
+  }
+}
+
+/**
+ * Conjugaison : on relie d'abord les personnes aux formes — le tableau entier
+ * d'un coup —, puis on reconnaît chaque forme, puis on la produit. Par blocs de
+ * deux verbes, les blocs suivants reprenant les formes déjà vues pour les faire
+ * monter d'un échelon.
  */
 function buildConjugationSession(
   lessonId: string,
@@ -586,34 +958,55 @@ function buildConjugationSession(
   seed: number,
 ): Exercise[] {
   const rng = createRng(seed)
-  const preamble: Exercise[] =
+  const ladder = conjugationLadder(level)
+  const blocks = blocksOf(shuffle(verbs, rng), CONJUGATION_BLOCK_SIZE)
+
+  const exercises: Exercise[] =
     level <= 0 && notes ? [{ kind: 'rule', id: `rule:${lessonId}`, title, notes, topic: 'conjugation' }] : []
 
-  const matches = verbs
-    .filter((verb) => verb.forms.length >= 2)
-    .map(
-      (verb): ConjugationMatchExercise => ({
-        kind: 'conjugation-match',
-        id: `cmatch:${verb.verb}:${verb.tense}`,
-        verb,
-        forms: verb.forms,
-      }),
+  const served: Served = new Map()
+  const pool: ConjugationVerb[] = []
+
+  for (const block of blocks) {
+    pool.push(...block)
+
+    // À la découverte, l'association présente le tableau de chaque verbe neuf ;
+    // au passage suivant elle n'en rappelle plus qu'un ; ensuite on va droit à
+    // la pratique.
+    const pairable = block.filter((verb) => verb.forms.length >= 2)
+    const rounds =
+      level <= 0 ? shuffle(pairable, rng) : level === 1 ? sample(pairable, 1, rng) : []
+    const blockExercises: Exercise[] = rounds.map(conjugationMatchOf)
+
+    const budget =
+      block.reduce((total, verb) => total + verb.forms.length, 0) * CONJUGATION_PER_FORM_PER_BLOCK
+    blockExercises.push(
+      ...serveLeastFirst(
+        pool.flatMap((verb) => verb.forms.map((form) => ({ verb, form }))),
+        (entry) => entry.form.id,
+        served,
+        budget,
+        (entry) =>
+          climb(entry.form.id, ladder, served, rng, (variant) =>
+            conjugationExercise(entry.verb, entry.form, variant, pool, rng),
+          ),
+        rng,
+      ),
     )
 
-  const typed = shuffle(
-    verbs.flatMap((verb) =>
-      verb.forms.map(
-        (form): ConjugationExercise => ({ kind: 'conjugation', id: `conj:${form.id}`, verb, form }),
-      ),
-    ),
-    rng,
-  )
+    for (const verb of block) {
+      for (const form of verb.forms) {
+        if (servedCount(served, form.id) > 0) continue
+        const fallback = climb(form.id, ladder, served, rng, (variant) =>
+          conjugationExercise(verb, form, variant, pool, rng),
+        )
+        if (fallback) blockExercises.push(fallback)
+      }
+    }
 
-  // À la découverte, l'association sert de présentation du tableau ; ensuite
-  // on va droit à la production.
-  if (level <= 0) return [...preamble, ...shuffle(matches, rng), ...typed]
-  if (level === 1) return interleave([...sample(matches, 1, rng), ...typed], rng)
-  return typed
+    exercises.push(...avoidAdjacentRepeats(blockExercises))
+  }
+  return exercises
 }
 
 /**
@@ -689,12 +1082,22 @@ function buildMixedSession(
         kind: 'grammar-gap',
         id: `gap:${item.id}`,
         point: item.point,
+        // La traduction française reste tant que la carte est jeune : c'est
+        // l'aide qu'on retire en dernier, quand la forme est déjà su.
+        cue: unaided ? 'sentence' : 'translation',
         bank: !unaided && item.point.options.length > 1 ? shuffle(item.point.options, rng) : null,
       }
     }
 
     if (item.kind === 'conjugation') {
-      return { kind: 'conjugation', id: `conj:${item.id}`, verb: item.verb, form: item.form }
+      // Une carte encore en apprentissage se reconnaît, elle ne se produit
+      // pas : réclamer une forme rencontrée le jour même n'enseigne que
+      // l'échec. C'est ce que le vocabulaire fait déjà avec sa flashcard.
+      if (!unaided && recallStage(card) === 'recognize') {
+        const choice = conjugationChoiceFor(item.verb, item.form, 'verb', [item.verb], rng)
+        if (choice) return choice
+      }
+      return { kind: 'conjugation', id: `conj:${item.id}`, verb: item.verb, form: item.form, cue: 'verb' }
     }
 
     const vocab = item.vocab
@@ -786,28 +1189,31 @@ export function itemCountOf(lesson: Lesson): number {
   return itemsOfLesson(lesson).length
 }
 
-/** Mélange en évitant, autant que possible, deux exercices de suite sur le même mot. */
-function interleave(exercises: readonly Exercise[], rng: Rng): Exercise[] {
-  return avoidAdjacentRepeats(shuffle(exercises, rng))
+/**
+ * Une manche d'association : elle porte plusieurs éléments à la fois, et sert
+ * de présentation au bloc qu'elle ouvre.
+ */
+function isRound(exercise: Exercise): boolean {
+  return exercise.kind === 'match' || exercise.kind === 'conjugation-match'
 }
 
 /**
  * Réordonne localement pour qu'un exercice n'enchaîne pas, autant que
- * possible, sur le même mot que le précédent. Une manche d'association fait
- * exception des deux côtés : elle porte quatre mots à la fois, alors la
- * corriger déplacerait un exercice d'un autre type pour rien — et pour le
- * vocabulaire, ça romprait justement l'ordre mots → paires → QCM → trous
+ * possible, sur le même élément que le précédent. Une manche d'association
+ * fait exception des deux côtés : elle porte plusieurs éléments à la fois,
+ * alors la corriger déplacerait un exercice d'un autre type pour rien — et
+ * ça romprait justement l'ordre présentation → reconnaissance → production
  * que les blocs veulent imposer.
  */
 function avoidAdjacentRepeats(exercises: readonly Exercise[]): Exercise[] {
   const result = exercises.slice()
   for (let i = 1; i < result.length; i++) {
-    if (result[i - 1].kind === 'match' || result[i].kind === 'match') continue
+    if (isRound(result[i - 1]) || isRound(result[i])) continue
     if (!sharesVocab(result[i - 1], result[i])) continue
     const swap = result.findIndex(
       (candidate, index) =>
         index > i &&
-        candidate.kind !== 'match' &&
+        !isRound(candidate) &&
         !sharesVocab(result[i - 1], candidate) &&
         (index + 1 >= result.length || !sharesVocab(result[i], result[index + 1])),
     )

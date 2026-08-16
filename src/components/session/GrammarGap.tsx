@@ -10,6 +10,11 @@ import { Button } from '@/components/Button'
  * Aux premiers passages, les formes plausibles sont proposées : l'apprenant
  * choisit, et c'est la comparaison entre les formes qui enseigne la règle.
  * Ensuite la réponse se saisit, sans filet.
+ *
+ * La traduction française suit le même retrait : tant qu'elle est là, le sens
+ * visé est acquis et il ne reste qu'à trouver la forme ; une fois retirée,
+ * c'est la grammaire seule qui doit trancher. Elle réapparaît toujours à la
+ * correction, où elle n'aide plus mais explique.
  */
 export function GrammarGap({
   exercise,
@@ -18,7 +23,7 @@ export function GrammarGap({
   exercise: GrammarGapExercise
   onAnswer: (correct: boolean) => void
 }) {
-  const { point, bank } = exercise
+  const { point, bank, cue } = exercise
   const gap = useMemo(() => splitGap(point.sentence), [point.sentence])
   const [value, setValue] = useState('')
   const [checked, setChecked] = useState<null | boolean>(null)
@@ -47,7 +52,9 @@ export function GrammarGap({
           <Blank value={value} state={checked} />
           {gap.after}
         </p>
-        {point.translation && <p className="text-sm text-ink-soft">{point.translation}</p>}
+        {point.translation && (cue === 'translation' || checked !== null) && (
+          <p className="text-sm text-ink-soft">{point.translation}</p>
+        )}
       </div>
 
       {bank ? (

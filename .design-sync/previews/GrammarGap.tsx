@@ -21,6 +21,7 @@ export function Bank() {
             translation: 'Elle vit à Londres depuis cinq ans.',
             explanation: "Present perfect (has lived) : l'action a commencé dans le passé et continue.",
           },
+          cue: 'translation',
           bank: ['has lived', 'lives', 'lived', 'is living'],
         }}
         onAnswer={() => {}}
@@ -31,7 +32,10 @@ export function Bank() {
 
 /**
  * Même règle, leçon plus mûre : la banque a disparu, la réponse se saisit au
- * clavier.
+ * clavier — et la traduction française avec elle. C'est l'aide qu'on retire en
+ * dernier ; tant qu'elle est là, le sens visé est acquis et il ne reste qu'à
+ * trouver la forme. Elle réapparaît toujours à la correction, où elle n'aide
+ * plus mais explique.
  */
 export function TypedInput() {
   return (
@@ -49,6 +53,7 @@ export function TypedInput() {
             translation: 'Elle vit à Londres depuis cinq ans.',
             explanation: "Present perfect (has lived) : l'action a commencé dans le passé et continue.",
           },
+          cue: 'sentence',
           bank: null,
         }}
         onAnswer={() => {}}
