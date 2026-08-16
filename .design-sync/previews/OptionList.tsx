@@ -75,3 +75,34 @@ export function PhrasesEntieres() {
     />
   )
 }
+
+const BEFORE = 'If I had taken that job, I '
+const AFTER = ' in Berlin now.'
+
+/**
+ * `renderOption` souligne ce qui distingue les cases entre elles. Sur une
+ * phrase entière, trois options qui ne diffèrent que par leur milieu se
+ * confondent à la relecture ; sans repère, l'exercice se ferait en cherchant
+ * l'écart plutôt qu'en jugeant la grammaire.
+ */
+export function EcartSouligne() {
+  return (
+    <OptionList
+      options={[`${BEFORE}will be${AFTER}`, `${BEFORE}would be${AFTER}`, `${BEFORE}would have been${AFTER}`]}
+      picked={null}
+      isCorrect={(option) => option === `${BEFORE}would be${AFTER}`}
+      onPick={() => {}}
+      lang="en"
+      size="long"
+      renderOption={(option) => (
+        <>
+          {BEFORE}
+          <span className="underline decoration-2 underline-offset-4">
+            {option.slice(BEFORE.length, option.length - AFTER.length)}
+          </span>
+          {AFTER}
+        </>
+      )}
+    />
+  )
+}

@@ -1,9 +1,33 @@
 import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import type { GrammarChoiceExercise } from '@/engine/exercises'
-import { fillGap, normalizeForm } from '@/engine/exercises'
+import { fillGap, normalizeForm, splitGap } from '@/engine/exercises'
 import { Button } from '@/components/Button'
 import { OptionList } from './OptionList'
+
+/**
+ * Les options ne diffèrent que par la forme qui comble le trou — le reste de
+ * la phrase, avant et après, est identique d'une case à l'autre. Sans repère,
+ * il faut relire chaque phrase en entier pour trouver ce qui change ; la
+ * forme substituée est donc soulignée, ce qui ramène l'attention sur ce que
+ * l'exercice teste réellement.
+ *
+ * Le découpage est exact, pas une devinette : chaque option est
+ * `fillGap(point.sentence, uneForme)`, donc `before` et `after` — calculés une
+ * fois sur la phrase d'origine — sont le préfixe et le suffixe littéraux de
+ * toute option.
+ */
+function highlightGap(option: string, before: string, after: string) {
+  const middle = option.slice(before.length, option.length - after.length)
+  if (!middle) return option
+  return (
+    <>
+      {before}
+      <span className="underline decoration-2 underline-offset-4">{middle}</span>
+      {after}
+    </>
+  )
+}
 
 /**
  * Choisir la phrase entière correcte, plutôt que la forme isolée.
@@ -27,6 +51,7 @@ export function GrammarSentenceChoice({
 }) {
   const { point, options } = exercise
   const answer = fillGap(point.sentence, point.answer)
+  const { before, after } = splitGap(point.sentence)
   const [picked, setPicked] = useState<string | null>(null)
 
   useEffect(() => {
@@ -55,6 +80,7 @@ export function GrammarSentenceChoice({
         onPick={setPicked}
         lang="en"
         size="long"
+        renderOption={(option) => highlightGap(option, before, after)}
       />
 
       {checked && (

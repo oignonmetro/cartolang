@@ -1,3 +1,5 @@
+import type { ReactNode } from 'react'
+
 /**
  * La liste d'options d'un QCM, quel que soit ce qu'on y choisit : un mot, une
  * phrase entière, une forme conjuguée.
@@ -19,6 +21,7 @@ export function OptionList({
   onPick,
   lang,
   size = 'normal',
+  renderOption,
 }: {
   options: string[]
   /** L'option choisie, ou `null` tant que rien n'est joué. */
@@ -28,6 +31,14 @@ export function OptionList({
   lang?: string
   /** `long` pour des phrases entières : le texte respire, le numéro s'aligne en haut. */
   size?: 'normal' | 'long'
+  /**
+   * Rendu personnalisé d'une option, par défaut le texte brut. Sert à mettre
+   * en évidence ce qui distingue les cases entre elles — quand les options ne
+   * diffèrent que par quelques mots noyés dans une phrase identique, il faut
+   * les relire en entier pour repérer l'écart ; le souligner évite cette
+   * chasse et ramène l'attention sur ce qui teste réellement.
+   */
+  renderOption?: (option: string) => ReactNode
 }) {
   const checked = picked !== null
 
@@ -64,7 +75,7 @@ export function OptionList({
             >
               {index + 1}
             </span>
-            <span className="break-words">{option}</span>
+            <span className="break-words">{renderOption ? renderOption(option) : option}</span>
           </button>
         )
       })}
