@@ -982,11 +982,19 @@ function buildConjugationSession(
     // appartient telle forme, une confusion que le tableau isolé ne teste
     // pas. Ensuite on va droit à la pratique.
     const pairable = block.filter((verb) => verb.forms.length >= 2)
+    // Un nombre impair de verbes laisse le dernier bloc à un seul verbe : sans
+    // partenaire dans son propre bloc, il resterait condamné à une manche
+    // solitaire pour toute la leçon. On va lui en chercher un dans les blocs
+    // déjà vus plutôt que de le priver du mélange.
+    const crossVerbPool =
+      level === 1 && pairable.length === 1
+        ? [...pairable, ...sample(pool.filter((verb) => verb !== pairable[0]), 1, rng)]
+        : pairable
     const rounds: ConjugationVerb[][] =
       level <= 0
         ? shuffle(pairable, rng).map((verb) => [verb])
-        : level === 1 && pairable.length > 0
-          ? [pairable]
+        : level === 1 && crossVerbPool.length > 0
+          ? [crossVerbPool]
           : []
     const blockExercises: Exercise[] = rounds.map(conjugationMatchOf)
 

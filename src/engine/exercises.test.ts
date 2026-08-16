@@ -532,6 +532,32 @@ describe('session de conjugaison', () => {
     expect(matches[0]!.verbs.length).toBeGreaterThan(1)
     expect(itemIdsOf(matches[0]!).sort()).toEqual(['f1', 'f2', 'f3', 'f4'])
   })
+
+  it('va chercher un partenaire ailleurs pour le verbe qui reste seul dans son bloc', () => {
+    // Régression : un nombre impair de verbes (fréquent en contenu réel — B1
+    // en a onze leçons sur onze) laisse le dernier bloc à un seul verbe, sans
+    // partenaire dans son propre bloc. Sans correctif, il restait condamné à
+    // une manche solitaire pour toute la leçon, jamais mélangé.
+    const three: ConjugationLesson = {
+      ...CONJUGATION,
+      verbs: [
+        ...CONJUGATION.verbs,
+        {
+          verb: 'to eat',
+          translation: 'manger',
+          tense: 'present perfect',
+          forms: [
+            { id: 'f5', person: 'I / you / we / they', answer: 'have eaten', alt: [] },
+            { id: 'f6', person: 'he / she / it', answer: 'has eaten', alt: [] },
+          ],
+        },
+      ],
+    }
+    for (const seed of [1, 2, 3, 4, 5]) {
+      const matches = buildLessonSession(three, 1, seed).filter((e) => e.kind === 'conjugation-match')
+      expect(matches.every((e) => e.verbs.length > 1)).toBe(true)
+    }
+  })
 })
 
 describe('révision toutes natures confondues', () => {
