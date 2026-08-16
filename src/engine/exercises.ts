@@ -35,7 +35,7 @@ import type { CardState } from './srs'
  *   - `grammar-gap`  : phrase trouée, au clavier ou parmi des formes proposées ;
  *   - `conjugation-choice` : reconnaître une forme parmi celles du paradigme ;
  *   - `conjugation`  : produire une forme à partir du verbe, du temps, de la personne ;
- *   - `conjugation-match` : relier les personnes aux formes d'un même verbe.
+ *   - `conjugation-match` : relier les personnes aux formes, d'un verbe ou de plusieurs mélangés.
  */
 
 export type Direction = 'to-known' | 'to-learning'
@@ -215,11 +215,17 @@ export interface ConjugationChoiceExercise {
   options: string[]
 }
 
+/**
+ * Association personnes ↔ formes. Un seul verbe présente son tableau
+ * complet ; plusieurs verbes — toujours du même temps, puisqu'une leçon de
+ * conjugaison n'en couvre qu'un — mélangent leurs paradigmes dans une seule
+ * manche, ce qui teste une discrimination que le tableau isolé ne teste pas :
+ * savoir à quel verbe appartient telle forme, pas seulement à quelle personne.
+ */
 export interface ConjugationMatchExercise {
   kind: 'conjugation-match'
   id: string
-  verb: ConjugationVerb
-  forms: ConjugationForm[]
+  verbs: ConjugationVerb[]
 }
 
 export type Exercise =
@@ -256,7 +262,7 @@ export function itemIdsOf(exercise: Exercise): string[] {
     case 'match':
       return exercise.pairs.map((pair) => pair.id)
     case 'conjugation-match':
-      return exercise.forms.map((form) => form.id)
+      return exercise.verbs.flatMap((verb) => verb.forms.map((form) => form.id))
     case 'grammar-gap':
     case 'grammar-choice':
       return [exercise.point.id]
@@ -934,12 +940,11 @@ function conjugationExercise(
 const CONJUGATION_BLOCK_SIZE = 2
 const CONJUGATION_PER_FORM_PER_BLOCK = 2
 
-function conjugationMatchOf(verb: ConjugationVerb): ConjugationMatchExercise {
+function conjugationMatchOf(verbs: readonly ConjugationVerb[]): ConjugationMatchExercise {
   return {
     kind: 'conjugation-match',
-    id: `cmatch:${verb.verb}:${verb.tense}`,
-    verb,
-    forms: verb.forms,
+    id: `cmatch:${verbs.map((verb) => verb.verb).join('+')}:${verbs[0]!.tense}`,
+    verbs: [...verbs],
   }
 }
 
@@ -970,12 +975,19 @@ function buildConjugationSession(
   for (const block of blocks) {
     pool.push(...block)
 
-    // À la découverte, l'association présente le tableau de chaque verbe neuf ;
-    // au passage suivant elle n'en rappelle plus qu'un ; ensuite on va droit à
-    // la pratique.
+    // À la découverte, l'association présente le tableau de chaque verbe neuf
+    // isolément — mélanger déroulerait la présentation avant qu'elle soit
+    // faite. Au passage suivant, une seule manche qui mélange tout le bloc :
+    // plus qu'un rappel de tableau, elle demande de reconnaître à quel verbe
+    // appartient telle forme, une confusion que le tableau isolé ne teste
+    // pas. Ensuite on va droit à la pratique.
     const pairable = block.filter((verb) => verb.forms.length >= 2)
-    const rounds =
-      level <= 0 ? shuffle(pairable, rng) : level === 1 ? sample(pairable, 1, rng) : []
+    const rounds: ConjugationVerb[][] =
+      level <= 0
+        ? shuffle(pairable, rng).map((verb) => [verb])
+        : level === 1 && pairable.length > 0
+          ? [pairable]
+          : []
     const blockExercises: Exercise[] = rounds.map(conjugationMatchOf)
 
     const budget =

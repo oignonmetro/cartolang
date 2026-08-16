@@ -514,6 +514,24 @@ describe('session de conjugaison', () => {
     const match = buildLessonSession(CONJUGATION, 0).find((e) => e.kind === 'conjugation-match')!
     expect(itemIdsOf(match).sort()).toEqual(['f1', 'f2'])
   })
+
+  it('présente chaque verbe isolément à la découverte', () => {
+    const matches = buildLessonSession(CONJUGATION, 0).filter((e) => e.kind === 'conjugation-match')
+    // Deux verbes dans la leçon : mélanger dès la présentation escamoterait
+    // le tableau du second avant qu'il ait été montré seul.
+    expect(matches).toHaveLength(2)
+    expect(matches.every((e) => e.verbs.length === 1)).toBe(true)
+  })
+
+  it('mélange les verbes du bloc dans le rappel du second passage', () => {
+    // Régression : le rappel ne reprenait qu'un verbe tiré au hasard, un
+    // second passage sur exactement la même petite manche à deux paires que
+    // la présentation venait de montrer.
+    const matches = buildLessonSession(CONJUGATION, 1).filter((e) => e.kind === 'conjugation-match')
+    expect(matches).toHaveLength(1)
+    expect(matches[0]!.verbs.length).toBeGreaterThan(1)
+    expect(itemIdsOf(matches[0]!).sort()).toEqual(['f1', 'f2', 'f3', 'f4'])
+  })
 })
 
 describe('révision toutes natures confondues', () => {
