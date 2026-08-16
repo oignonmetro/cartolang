@@ -52,7 +52,7 @@ lessons:
         options:
           - The
           - A
-          - An
+          - Its
           - Some
         translation: J'ai acheté une voiture la semaine dernière. La voiture fait déjà un bruit bizarre.
         explanation: "Seconde mention d'une chose déjà introduite dans la phrase précédente : elle devient définie."
@@ -62,8 +62,8 @@ lessons:
         options:
           - the
           - a
-          - an
-          - some
+          - our
+          - this
         translation: C'est la méthode la plus fiable dont nous disposions actuellement.
         explanation: Le superlatif impose systématiquement « the », même sans second terme de comparaison exprimé.
       - id: g6-art-5
@@ -72,7 +72,7 @@ lessons:
         options:
           - The
           - A
-          - An
+          - Its
           - Some
         translation: Le soleil s'était déjà couché quand nous avons atteint la côte.
         explanation: Objet unique en son genre — un francophone omet souvent « the » ici, par calque du français.
@@ -83,7 +83,7 @@ lessons:
           - an
           - a
           - the
-          - some
+          - this
         translation: J'ai regardé un documentaire intéressant sur les créatures des abysses hier soir.
         explanation: "Première mention, un élément parmi d'autres : article indéfini, et « an » devant la voyelle de « interesting »."
 
@@ -115,7 +115,7 @@ lessons:
         options:
           - The
           - A
-          - An
+          - This
           - Its
         translation: Les États-Unis ont signé le traité en 1987.
         explanation: "Nom de pays pluriel ou composé d'un nom commun (« states ») : il prend toujours « the »."
@@ -124,8 +124,8 @@ lessons:
         answer: the
         options:
           - the
-          - a
           - an
+          - this
           - its
         translation: Ils ont traversé l'Atlantique en un peu moins de six jours.
         explanation: Les océans prennent toujours « the ».
@@ -135,8 +135,8 @@ lessons:
         options:
           - the
           - a
-          - an
-          - some
+          - its
+          - one
         translation: C'est la première fois que je vois de la neige ici.
         explanation: Les ordinaux (« first », « second »…) fonctionnent comme des superlatifs et imposent « the ».
       - id: g6-proper-4
@@ -145,7 +145,7 @@ lessons:
         options:
           - the
           - a
-          - an
+          - this
           - some
         translation: Il est allé à l'école pour récupérer sa fille.
         explanation: "Il se rend à un bâtiment précis, pas à l'école en tant qu'institution : « the school »."
@@ -155,8 +155,8 @@ lessons:
         options:
           - the
           - a
-          - an
-          - some
+          - his
+          - this
         translation: Elle apprend le piano depuis l'âge de six ans.
         explanation: Un instrument de musique après « play » prend toujours « the ».
       - id: g6-proper-6
