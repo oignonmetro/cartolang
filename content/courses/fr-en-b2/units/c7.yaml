@@ -28,37 +28,37 @@ lessons:
     verbs:
       - verb: to win
         translation: gagner
-        tense: 1er conditionnel
-        note: "If + présent, will + base verbale : un futur qu'on estime possible."
+        tense: conditionnel
+        note: "« will » pour un futur qu'on croit possible, « would » pour un futur qu'on n'y croit pas."
         forms:
-          - id: c7-win-first-aff
-            person: affirmatif
+          - id: c7-win-first
+            person: 1er conditionnel
             answer: will win
-          - id: c7-win-first-q
-            person: interrogatif
-            answer: will you win
+          - id: c7-win-second
+            person: 2e conditionnel
+            answer: would win
       - verb: to know
         translation: savoir
-        tense: 2e conditionnel
-        note: "If + prétérit, would + base verbale : irréel du présent."
+        tense: conditionnel
+        note: Le même verbe, deux degrés de probabilité — rien d'autre ne change dans la phrase.
         forms:
-          - id: c7-know-second-aff
-            person: affirmatif
+          - id: c7-know-first
+            person: 1er conditionnel
+            answer: will know
+          - id: c7-know-second
+            person: 2e conditionnel
             answer: would know
-          - id: c7-know-second-q
-            person: interrogatif
-            answer: would you know
       - verb: to help
         translation: aider
-        tense: 2e conditionnel
-        note: "Même construction quel que soit le sujet, y compris à la question."
+        tense: conditionnel
+        note: "« would » ne prend jamais de -s, même à la troisième personne."
         forms:
-          - id: c7-help-second-aff
-            person: affirmatif
+          - id: c7-help-first
+            person: 1er conditionnel
+            answer: will help
+          - id: c7-help-second
+            person: 2e conditionnel
             answer: would help
-          - id: c7-help-second-q
-            person: interrogatif
-            answer: would you help
 
   - id: c7-l2
     title: Conditionnel passé et forme mixte
@@ -78,34 +78,34 @@ lessons:
     verbs:
       - verb: to pass
         translation: réussir
-        tense: 3e conditionnel
-        note: "If + past perfect, would have + participe passé."
+        tense: conditionnel
+        note: "Le mixte perd le « have » du résultat, même si l'hypothèse reste au passé."
         forms:
-          - id: c7-pass-third-aff
-            person: affirmatif
+          - id: c7-pass-third
+            person: 3e conditionnel
             answer: would have passed
-          - id: c7-pass-third-q
-            person: interrogatif
-            answer: would you have passed
+          - id: c7-pass-mixed
+            person: conditionnel mixte
+            answer: would pass
       - verb: to be
         translation: être
-        tense: 3e conditionnel
-        note: "« Been », jamais « be », après « would have »."
+        tense: conditionnel
+        note: "« been », jamais « be », dès que « would have » apparaît."
         forms:
-          - id: c7-be-third-aff
-            person: affirmatif
+          - id: c7-be-third
+            person: 3e conditionnel
             answer: would have been
-          - id: c7-be-third-q
-            person: interrogatif
-            answer: would you have been
+          - id: c7-be-mixed
+            person: conditionnel mixte
+            answer: would be
       - verb: to accept
         translation: accepter
-        tense: conditionnel mixte
-        note: "Hypothèse passée, conséquence présente : would + base verbale, pas would have."
+        tense: conditionnel
+        note: Même piège dans l'autre sens — ne pas ajouter « have » qui ne sert à rien ici.
         forms:
-          - id: c7-accept-mixed-aff
-            person: affirmatif
+          - id: c7-accept-third
+            person: 3e conditionnel
+            answer: would have accepted
+          - id: c7-accept-mixed
+            person: conditionnel mixte
             answer: would accept
-          - id: c7-accept-mixed-q
-            person: interrogatif
-            answer: would you accept
