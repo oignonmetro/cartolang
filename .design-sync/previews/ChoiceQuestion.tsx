@@ -21,6 +21,10 @@ const postpone = {
  * porte sur la question et non sur le vocabulaire.
  */
 const OPTIONS_FR = ['reporter', 'annuler', 'accélérer']
+// Les trois infinitifs partagent leur « to » : c'est le cas où le
+// soulignage (voir highlightDiffWords) a quelque chose à montrer, alors que
+// OPTIONS_FR — trois mots sans rapport — reste en clair, comme la plupart
+// des QCM de vocabulaire.
 const OPTIONS_EN = ['to postpone', 'to cancel', 'to rush']
 
 function stage(cue: 'term' | 'translation' | 'hint' | 'sentence' | 'audio', options: string[]) {

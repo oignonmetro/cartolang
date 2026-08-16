@@ -1,48 +1,10 @@
-import { useEffect, useState, type ReactNode } from 'react'
+import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import type { ConjugationChoiceExercise } from '@/engine/exercises'
 import { normalizeForm } from '@/engine/exercises'
 import { Button } from '@/components/Button'
+import { highlightDiffWords } from './highlightDiffWords'
 import { OptionList } from './OptionList'
-
-/**
- * Souligne les mots qui distinguent les options entre elles.
- *
- * Contrairement à la phrase de grammaire, il n'y a pas ici de gabarit unique
- * autour d'un seul trou : un leurre peut différer par l'auxiliaire (un
- * sibling — « have » contre « has » —, même verbe, autre personne) et un autre
- * par le verbe lui-même (un étranger, pris à un autre verbe faute de sibling
- * disponible). Le découpage se fait donc mot à mot plutôt que par
- * préfixe/suffixe : une position est soulignée dès qu'elle diffère quelque
- * part dans le lot, chez toutes les options à la fois pour que l'œil compare
- * la même colonne.
- *
- * Un décompte de mots inégal — une forme plus longue qu'une autre — n'a pas de
- * colonnes à comparer : l'option se rend alors telle quelle plutôt que de
- * souligner au hasard.
- */
-function highlightDiffWords(options: readonly string[]): (option: string) => ReactNode {
-  const tokenized = options.map((option) => option.split(' '))
-  const width = tokenized[0]?.length ?? 0
-  const sameLength = tokenized.every((tokens) => tokens.length === width)
-  const differs = sameLength
-    ? tokenized[0].map((token, index) => tokenized.some((tokens) => tokens[index] !== token))
-    : []
-
-  return (option) => {
-    if (!sameLength || !differs.some(Boolean)) return option
-    return option.split(' ').map((token, index) => (
-      <span key={index}>
-        {index > 0 && ' '}
-        {differs[index] ? (
-          <span className="underline decoration-2 underline-offset-4">{token}</span>
-        ) : (
-          token
-        )}
-      </span>
-    ))
-  }
-}
 
 /**
  * Reconnaître une forme conjuguée parmi celles du paradigme.

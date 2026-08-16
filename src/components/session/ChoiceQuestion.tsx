@@ -4,6 +4,7 @@ import type { ChoiceCue, ChoiceExercise } from '@/engine/exercises'
 import { choiceAnswer, choicePrompt, choicePromptIsEnglish, normalizeAnswer } from '@/engine/exercises'
 import { Button } from '@/components/Button'
 import { Mascot } from '@/components/Mascot'
+import { highlightDiffWords } from './highlightDiffWords'
 import { OptionList } from './OptionList'
 import { SpeakButton } from './SpeakButton'
 
@@ -74,6 +75,7 @@ export function ChoiceQuestion({
         picked={picked}
         isCorrect={(option) => normalizeAnswer(option) === normalizeAnswer(answer)}
         onPick={setPicked}
+        renderOption={highlightDiffWords(options)}
       />
 
       <div className="mt-auto">
