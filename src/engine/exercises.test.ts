@@ -300,7 +300,23 @@ describe('session de révision', () => {
   it('reste en reconnaissance sur les cartes fragiles', () => {
     const fragile = entries([{ step: 0 }, { step: 0 }, { step: 1 }, { step: 0 }])
     const session = buildReviewSession(fragile).filter((e) => e.kind !== 'match')
-    expect(session.every((e) => e.kind === 'flashcard' || (e.kind === 'cloze' && e.bank !== null))).toBe(true)
+    expect(
+      session.every(
+        (e) => e.kind === 'flashcard' || e.kind === 'choice' || (e.kind === 'cloze' && e.bank !== null),
+      ),
+    ).toBe(true)
+  })
+
+  it('varie la reconnaissance au lieu de toujours retomber sur la flashcard', () => {
+    // Régression : la carte encore en apprentissage ne recevait jamais de QCM
+    // en révision, alors que la leçon d'origine en proposait déjà plusieurs.
+    const kinds = new Set<string>()
+    for (let seed = 0; seed < 20; seed++) {
+      const fragile = entries([{ step: 0 }, { step: 0 }, { step: 1 }, { step: 0 }])
+      for (const e of buildReviewSession(fragile, seed)) kinds.add(e.kind)
+    }
+    expect(kinds).toContain('choice')
+    expect(kinds).toContain('flashcard')
   })
 
   it('fait traduire vers le français avant d’exiger le mot anglais', () => {
@@ -508,7 +524,9 @@ describe('révision toutes natures confondues', () => {
       { card: createCard(LESSON[0].id, T0), item: { kind: 'vocab', id: LESSON[0].id, vocab: LESSON[0] } },
     ]
     const session = buildReviewSession(items)
-    expect(session.some((e) => e.kind === 'grammar-gap')).toBe(true)
+    // Carte de grammaire encore jeune : phrase à trou ou QCM, les deux sont
+    // de la reconnaissance — voir « varie la reconnaissance… » plus haut.
+    expect(session.some((e) => e.kind === 'grammar-gap' || e.kind === 'grammar-choice')).toBe(true)
     // Carte de conjugaison encore en apprentissage : on la reconnaît.
     expect(session.some((e) => e.kind === 'conjugation-choice')).toBe(true)
   })
@@ -532,10 +550,42 @@ describe('révision toutes natures confondues', () => {
   it('retire la traduction française des phrases de grammaire à l’entraînement', () => {
     const item: PracticeItem = { kind: 'grammar', id: 'p1', point: GRAMMAR.points[0] }
     const card = createCard('p1', T0)
-    const [review] = buildReviewSession([{ card, item }])
-    const [drill] = buildPracticeSession([{ card, item }])
-    expect(review).toMatchObject({ kind: 'grammar-gap', cue: 'translation' })
-    expect(drill).toMatchObject({ kind: 'grammar-gap', cue: 'sentence' })
+    // L'entraînement est toujours en production, jamais en QCM : pas de repli
+    // vers le plus facile une fois que l'étape en réclame la production.
+    for (let seed = 0; seed < 20; seed++) {
+      expect(buildPracticeSession([{ card, item }], seed)[0]).toMatchObject({
+        kind: 'grammar-gap',
+        cue: 'sentence',
+      })
+    }
+    // La révision, elle, reconnaît d'abord : QCM ou phrase à trou avec sa
+    // traduction — jamais la phrase à trou nue, réservée aux cartes mûres.
+    const kinds = new Set<string>()
+    for (let seed = 0; seed < 20; seed++) {
+      const [review] = buildReviewSession([{ card, item }], seed)
+      kinds.add(review!.kind)
+      if (review!.kind === 'grammar-gap') expect(review).toMatchObject({ cue: 'translation' })
+    }
+    expect(kinds).toEqual(new Set(['grammar-gap', 'grammar-choice']))
+  })
+
+  it('fait parfois partir la conjugaison du français sur une carte mûre', () => {
+    // Le rappel réellement utile pour parler : personne ne part en
+    // conversation d'un infinitif anglais déjà trouvé.
+    const item: PracticeItem = {
+      kind: 'conjugation',
+      id: 'f1',
+      form: CONJUGATION.verbs[0].forms[0],
+      verb: CONJUGATION.verbs[0],
+    }
+    const mature: CardState = { ...createCard('f1', T0), step: null, interval: 10 }
+    const cues = new Set<string>()
+    for (let seed = 0; seed < 20; seed++) {
+      const [exercise] = buildReviewSession([{ card: mature, item }], seed)
+      expect(exercise!.kind).toBe('conjugation')
+      if (exercise!.kind === 'conjugation') cues.add(exercise.cue)
+    }
+    expect(cues).toEqual(new Set(['verb', 'translation']))
   })
 })
 

@@ -12,6 +12,7 @@ import {
   type ConsolidationEntry,
 } from '@/engine/unitPath'
 import { useProgress } from '@/store/progressStore'
+import { canSpeak } from '@/lib/speech'
 import { SessionScreen } from './SessionScreen'
 import { SessionResult } from './SessionResult'
 import { Button } from '@/components/Button'
@@ -63,8 +64,8 @@ function StepSession({ unitId, stepId }: { unitId: string; stepId: string }) {
     // L'approfondissement et la séance finale forcent la production ; les
     // deux autres suivent l'état réel de chaque carte.
     return node.kind === 'drill' || node.kind === 'final'
-      ? buildPracticeSession(entries)
-      : buildReviewSession(entries)
+      ? buildPracticeSession(entries, undefined, canSpeak)
+      : buildReviewSession(entries, undefined, canSpeak)
   }, [entries, node])
 
   if (!unit || !node || node.kind === 'lesson') return <Navigate to="/" replace />

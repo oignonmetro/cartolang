@@ -4,6 +4,7 @@ import { useCourse } from '@/content/CourseProvider'
 import { buildReviewSession } from '@/engine/exercises'
 import type { SessionOutcome } from '@/engine/progress'
 import { dueCards, type CardState } from '@/engine/srs'
+import { canSpeak } from '@/lib/speech'
 import { useProgress } from '@/store/progressStore'
 import { SessionScreen } from './SessionScreen'
 import { SessionResult } from './SessionResult'
@@ -35,7 +36,7 @@ export function ReviewRoute() {
     ).map((card) => ({ card, item: itemsById.get(card.itemId)!.item })),
   )
 
-  const exercises = useMemo(() => buildReviewSession(entries), [entries])
+  const exercises = useMemo(() => buildReviewSession(entries, undefined, canSpeak), [entries])
 
   if (finished) {
     return (

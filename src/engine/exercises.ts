@@ -1060,11 +1060,16 @@ function recallStage(card: CardState): RecallStage {
  * la maturité de chaque carte et rien d'autre. Forcer la production libre
  * parce que l'étape s'appelle « approfondissement » revenait à réclamer des
  * mots vus quelques minutes plus tôt.
+ *
+ * Dans chaque échelon, plusieurs énoncés restent possibles plutôt qu'un seul :
+ * sans quoi une carte revue chaque jour poserait indéfiniment la même
+ * question, quand la leçon d'origine en offrait déjà plusieurs.
  */
 function buildMixedSession(
   entries: readonly { card: CardState; item: PracticeItem }[],
   seed: number,
   drill: boolean,
+  canSpeak: boolean,
 ): Exercise[] {
   if (entries.length === 0) return []
   const rng = createRng(seed)
@@ -1078,6 +1083,14 @@ function buildMixedSession(
     const unaided = drill || card.interval >= UNAIDED_INTERVAL
 
     if (item.kind === 'grammar') {
+      // Reconnaître avant de produire : tant que la carte est jeune, la
+      // phrase entière (QCM) et la phrase à trou en banque se relaient au
+      // hasard plutôt que de retomber toujours sur le même gabarit — la carte
+      // mûre, elle, reste sur la production, sans repli vers le plus facile.
+      if (!unaided) {
+        const choice = rng() < 0.5 ? grammarChoiceFor(item.point, rng) : null
+        if (choice) return choice
+      }
       return {
         kind: 'grammar-gap',
         id: `gap:${item.id}`,
@@ -1090,14 +1103,30 @@ function buildMixedSession(
     }
 
     if (item.kind === 'conjugation') {
+      const fromFrench = Boolean(item.verb.translation) && rng() < 0.35
       // Une carte encore en apprentissage se reconnaît, elle ne se produit
       // pas : réclamer une forme rencontrée le jour même n'enseigne que
       // l'échec. C'est ce que le vocabulaire fait déjà avec sa flashcard.
       if (!unaided && recallStage(card) === 'recognize') {
-        const choice = conjugationChoiceFor(item.verb, item.form, 'verb', [item.verb], rng)
+        const choice = conjugationChoiceFor(
+          item.verb,
+          item.form,
+          fromFrench ? 'translation' : 'verb',
+          [item.verb],
+          rng,
+        )
         if (choice) return choice
       }
-      return { kind: 'conjugation', id: `conj:${item.id}`, verb: item.verb, form: item.form, cue: 'verb' }
+      // Sur une carte mûre, partir du français de temps en temps : c'est le
+      // rappel réellement utile pour parler, personne ne partant en
+      // conversation d'un infinitif anglais déjà trouvé.
+      return {
+        kind: 'conjugation',
+        id: `conj:${item.id}`,
+        verb: item.verb,
+        form: item.form,
+        cue: fromFrench ? 'translation' : 'verb',
+      }
     }
 
     const vocab = item.vocab
@@ -1124,7 +1153,15 @@ function buildMixedSession(
     // l'entraînement change, c'est la fréquence de la phrase à trou : un vrai
     // rappel, là où la flashcard se contente d'une auto-évaluation.
     const cloze = clozeFor(vocab, vocabPool, rng)
-    if (cloze && rng() < (drill ? 0.7 : 0.4)) return cloze
+    if (cloze && rng() < (drill ? 0.55 : 0.35)) return cloze
+
+    // Le QCM est une deuxième façon de reconnaître, à côté de la flashcard —
+    // sans lui, la reconnaissance se ramenait toujours à la même
+    // auto-évaluation, quand la leçon d'origine variait déjà l'énoncé.
+    const cue = sample(cuesFor(vocab, canSpeak), 1, rng)[0]
+    const choice = cue ? choiceFor(vocab, cue, vocabPool, rng) : null
+    if (choice && rng() < 0.55) return choice
+
     return { kind: 'flashcard', id: `flash:${vocab.id}`, vocab, direction: 'to-known' }
   })
 
@@ -1140,9 +1177,15 @@ function buildMixedSession(
 export function buildReviewSession(
   entries: readonly { card: CardState; item: PracticeItem }[],
   seed?: number,
+  canSpeak = false,
 ): Exercise[] {
   if (entries.length === 0) return []
-  return buildMixedSession(entries, seed ?? seedFrom('review', entries.length, entries[0]!.item.id), false)
+  return buildMixedSession(
+    entries,
+    seed ?? seedFrom('review', entries.length, entries[0]!.item.id),
+    false,
+    canSpeak,
+  )
 }
 
 /**
@@ -1161,9 +1204,15 @@ export function buildReviewSession(
 export function buildPracticeSession(
   entries: readonly { card: CardState; item: PracticeItem }[],
   seed?: number,
+  canSpeak = false,
 ): Exercise[] {
   if (entries.length === 0) return []
-  return buildMixedSession(entries, seed ?? seedFrom('practice', entries.length, entries[0]!.item.id), true)
+  return buildMixedSession(
+    entries,
+    seed ?? seedFrom('practice', entries.length, entries[0]!.item.id),
+    true,
+    canSpeak,
+  )
 }
 
 /** Découpe une phrase de grammaire autour de son marqueur `___`. */
