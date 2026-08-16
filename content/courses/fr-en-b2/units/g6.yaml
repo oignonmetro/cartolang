@@ -7,85 +7,82 @@ level: B2.2
 
 lessons:
   - id: g6-l1
-    title: A, an, the
+    title: Générique ou spécifique
     notes: |
-      Trois pièges reviennent sans cesse, même à ce niveau : le choix entre
-      `a` et `an` **se fait à l'oreille**, pas à l'œil, et `the` s'impose dès
-      qu'on parle d'une chose déjà identifiée.
+      Le vrai piège de l'article à ce niveau n'est plus `a` contre `an`, mais
+      **l'article que le français met et que l'anglais supprime**. Une règle
+      commande presque tout : dès qu'on parle en général, l'anglais ne met
+      __rien__.
 
-      — `an` devant un **son** de voyelle : `an hour`, mais `a university`
-        (qui commence par un son [j]).
-      — `a` devant un **son** de consonne, même si la lettre est une voyelle :
-        `a one-way street`, `a European country`.
-      — `the` reprend ce que la phrase précédente a déjà introduit : la
-        deuxième mention devient définie.
-        I bought a car last week. The car is red.
-      — `the` s'impose devant un superlatif et devant les objets **uniques**
-        (`the sun`, `the internet`, `the government` dans son pays).
+      — Général, article zéro : `Life is short.` `Children learn fast.`
+        `Information is power.` — jamais « The life », « The children ».
+      — Spécifique, article défini : `The water in this bottle is not
+        drinkable.` On désigne cette eau-là, pas l'eau en général.
+      — `most` + nom pluriel se passe d'article : `Most people disagree.`
+        `The most` ne s'emploie que dans un superlatif.
+      — Un nom de métier prend `a`, là où le français n'en met aucun :
+        `She is a teacher.` Elle est enseignante.
 
-      ! Le français ne marque pas cette différence de son : « an » ne dépend
-      jamais de l'orthographe anglaise, seulement de la prononciation.
+      ! Un adjectif substantivé prend `the` et ne prend jamais de -s :
+      `the poor`, `the unemployed`, `the French`.
     points:
-      - id: g6-art-1
+      - id: g6-gen-1
+        sentence: ___ is short, and we waste far too much of it.
+        answer: Life
+        options:
+          - Life
+          - The life
+          - A life
+        translation: La vie est courte, et nous en gaspillons beaucoup trop.
+        explanation: "Nom abstrait pris en général : article zéro, là où le français met « la »."
+      - id: g6-gen-2
+        sentence: ___ in this bottle is not drinkable.
+        answer: The water
+        options:
+          - The water
+          - Water
+          - A water
+        translation: L'eau de cette bouteille n'est pas potable.
+        explanation: "« In this bottle » restreint à une eau précise : l'article défini redevient obligatoire."
+      - id: g6-gen-3
+        sentence: ___ people underestimate how long the procedure takes.
+        answer: Most
+        options:
+          - Most
+          - The most
+          - Most of
+          - The most of
+        translation: La plupart des gens sous-estiment le temps que prend la procédure.
+        explanation: "« Most » + nom pluriel se passe d'article ; « the most » ne s'emploie qu'au superlatif."
+      - id: g6-gen-4
+        sentence: After ten years in the lab, she is now ___ at the university.
+        answer: a researcher
+        options:
+          - a researcher
+          - researcher
+          - the researcher
+        translation: Après dix ans en laboratoire, elle est aujourd'hui chercheuse à l'université.
+        explanation: Un nom de métier prend l'article indéfini en anglais, alors que le français n'en met aucun.
+      - id: g6-gen-5
+        sentence: The reform was meant to help ___, but it did the opposite.
+        answer: the poor
+        options:
+          - the poor
+          - poor
+          - the poors
+          - poors
+        translation: La réforme devait aider les pauvres, mais elle a fait l'inverse.
+        explanation: "Adjectif substantivé : « the » est obligatoire, et le mot ne prend jamais de -s."
+      - id: g6-gen-6
         sentence: It's ___ once-in-a-lifetime opportunity.
         answer: a
         options:
           - a
           - an
           - the
-          - some
+          - this
         translation: C'est une occasion unique dans une vie.
         explanation: "« Once » se prononce [wʌns] : le son de consonne impose « a », malgré le « o » écrit."
-      - id: g6-art-2
-        sentence: She gave ___ honest answer to a difficult question.
-        answer: an
-        options:
-          - an
-          - a
-          - the
-          - some
-        translation: Elle a donné une réponse honnête à une question difficile.
-        explanation: "Le « h » de « honest » est muet : la voyelle qui suit impose « an »."
-      - id: g6-art-3
-        sentence: I bought a car last week. ___ car is already making a strange noise.
-        answer: The
-        options:
-          - The
-          - A
-          - Its
-          - Some
-        translation: J'ai acheté une voiture la semaine dernière. La voiture fait déjà un bruit bizarre.
-        explanation: "Seconde mention d'une chose déjà introduite dans la phrase précédente : elle devient définie."
-      - id: g6-art-4
-        sentence: This is ___ most reliable method we currently have.
-        answer: the
-        options:
-          - the
-          - a
-          - our
-          - this
-        translation: C'est la méthode la plus fiable dont nous disposions actuellement.
-        explanation: Le superlatif impose systématiquement « the », même sans second terme de comparaison exprimé.
-      - id: g6-art-5
-        sentence: ___ sun had already set by the time we reached the coast.
-        answer: The
-        options:
-          - The
-          - A
-          - Its
-          - Some
-        translation: Le soleil s'était déjà couché quand nous avons atteint la côte.
-        explanation: Objet unique en son genre — un francophone omet souvent « the » ici, par calque du français.
-      - id: g6-art-6
-        sentence: I watched ___ interesting documentary about deep-sea creatures last night.
-        answer: an
-        options:
-          - an
-          - a
-          - the
-          - this
-        translation: J'ai regardé un documentaire intéressant sur les créatures des abysses hier soir.
-        explanation: "Première mention, un élément parmi d'autres : article indéfini, et « an » devant la voyelle de « interesting »."
 
   - id: g6-l2
     title: The avec les noms propres et les emplois figés

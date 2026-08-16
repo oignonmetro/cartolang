@@ -105,10 +105,12 @@ lessons:
       — fewer people, fewer mistakes
       — less money, less time
 
-      Le choix entre `a` et `an` se fait **sur le son, pas sur la lettre**.
+      Trois noms très courants **ressemblent à des pluriels** sans en être :
+      `news`, et les disciplines en -ics (`mathematics`, `politics`). Le verbe
+      qui suit reste au **singulier**.
 
-      — an honest man (le h est muet : on entend une voyelle)
-      — a university (on entend « you » : une consonne)
+      — The news is good. Les nouvelles sont bonnes.
+      — Politics bores him. La politique l'ennuie.
 
       ! Ni « an information » ni « informations » : on dit `some information`.
     points:
@@ -163,12 +165,12 @@ lessons:
         translation: Nous avons moins d'argent que prévu.
         explanation: "Indénombrable : less."
       - id: g4-count-6
-        sentence: He is ___ honest man.
-        answer: an
+        sentence: The news ___ better than we expected.
+        answer: is
         options:
-          - an
-          - a
-          - one
-          - some
-        translation: C'est un homme honnête.
-        explanation: Le h de « honest » est muet, donc le mot commence par un son de voyelle.
+          - is
+          - are
+          - were
+          - have been
+        translation: Les nouvelles sont meilleures que prévu.
+        explanation: "« News » se termine par -s mais reste indénombrable : le verbe se met au singulier."

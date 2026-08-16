@@ -9,25 +9,21 @@ lessons:
   - id: g5-l1
     title: Les prépositions de temps
     notes: |
-      Trois prépositions couvrent presque tout le temps en anglais, et elles se
-      classent **de la plus large à la plus précise**.
+      `in`, `on` et `at` vont du plus large au plus précis — mais à ce niveau la
+      difficulté n'est plus là : elle est dans **les couples qui se
+      ressemblent**.
 
-      — `in` : une longue période (années, mois, saisons).
-        in 1998, in March, in the summer
-      — `on` : un jour précis, ou une date.
-        on Monday, on 3 May, on my birthday
-      — `at` : une heure, ou un point du temps.
-        at seven, at midnight, at the weekend
+      — Un moment de la journée prend `in` (in the morning), sauf **quand un
+        jour précis est nommé** : on Monday morning.
+      — `by` = au plus tard, une échéance ; `until` = jusqu'à, une durée qui
+        se prolonge.
+        Finish it by Friday. The shop stays open until midnight.
+      — `for` + une durée, `since` + un point de départ, `during` + un nom
+        d'événement.
+        for ten years, since 2015, during the meeting
 
-      Pour une durée, l'anglais distingue nettement deux façons de compter.
-
-      — `for` + une durée : combien de temps.
-        for ten years, for two hours
-      — `since` + un point de départ : depuis quand.
-        since 2015, since Monday
-
-      ! `ago` se place **après** le repère, jamais avant : `two hours ago`,
-      et non « ago two hours ».
+      ! `during` ne se met jamais devant une durée chiffrée : on dit
+      `for three weeks`, jamais « during three weeks ».
     points:
       - id: g5-time-1
         sentence: The meeting is ___ Monday morning.
@@ -36,49 +32,51 @@ lessons:
           - on
           - in
           - at
-          - to
+          - during
         translation: La réunion est lundi matin.
-        explanation: "Un jour précis : on."
+        explanation: "« In the morning » seul, mais « on » dès qu'un jour précis est nommé."
       - id: g5-time-2
-        sentence: I usually get up ___ seven.
-        answer: at
+        sentence: The report has to be on my desk ___ Friday at the latest.
+        answer: by
         options:
-          - at
-          - on
-          - in
           - by
-        translation: Je me lève d'habitude à sept heures.
-        explanation: "Une heure : at."
-      - id: g5-time-3
-        sentence: She was born ___ 1998.
-        answer: in
-        options:
-          - in
-          - on
-          - at
-          - since
-        translation: Elle est née en 1998.
-        explanation: "Une année : in."
-      - id: g5-time-4
-        sentence: We have lived here ___ ten years.
-        answer: for
-        options:
+          - until
           - for
           - since
+        translation: Le rapport doit être sur mon bureau vendredi au plus tard.
+        explanation: "« By » pose une échéance ; « until » dirait que cela se prolonge jusque-là."
+      - id: g5-time-3
+        sentence: The shop stays open ___ midnight on Fridays.
+        answer: until
+        alt:
+          - till
+        options:
+          - until
+          - by
+          - at
+          - for
+        translation: Le magasin reste ouvert jusqu'à minuit le vendredi.
+        explanation: "L'ouverture se prolonge : « until », et non « by » qui marquerait une limite à respecter."
+      - id: g5-time-4
+        sentence: Nobody said a word ___ the entire meeting.
+        answer: during
+        options:
           - during
-          - from
-        translation: Nous habitons ici depuis dix ans.
-        explanation: « For » compte une durée, pas un point de départ.
+          - for
+          - while
+          - since
+        translation: Personne n'a dit un mot pendant toute la réunion.
+        explanation: "« During » + nom d'événement ; « while » exigerait une proposition avec un verbe."
       - id: g5-time-5
         sentence: I have known her ___ 2015.
         answer: since
         options:
           - since
           - for
-          - from
           - during
+          - from
         translation: Je la connais depuis 2015.
-        explanation: « Since » annonce le point de départ.
+        explanation: « Since » annonce un point de départ ; « for » compterait une durée.
       - id: g5-time-6
         sentence: They left two hours ___ .
         answer: ago
@@ -86,87 +84,84 @@ lessons:
           - ago
           - before
           - since
-          - past
+          - early
         translation: Ils sont partis il y a deux heures.
         explanation: « Ago » se place après la durée, en fin de groupe.
 
   - id: g5-l2
     title: Les prépositions de lieu et de mouvement
     notes: |
-      Les mêmes trois prépositions servent l'espace, avec **la même logique du
-      large au précis**.
+      Pour l'espace aussi, `in`, `on` et `at` vont du volume au point. Les
+      fautes du niveau tiennent à **trois couples** que le français ne
+      distingue pas.
 
-      — `in` : à l'intérieur d'un volume ou d'une zone.
-        in the box, in Paris, in the garden
-      — `on` : posé sur une surface.
-        on the table, on the wall, on page 12
-      — `at` : un point, souvent une adresse ou un lieu-fonction.
-        at the station, at work, at 12 Oak Street
+      — `arrive in` + ville ou pays, `arrive at` + lieu précis. Jamais
+        « arrive to », calque direct de « arriver à ».
+      — On voyage `in` une voiture, mais `on` un bus, un train, un avion —
+        tout véhicule où l'on peut se lever.
+      — `between` oppose deux éléments identifiés, `among` en noie un dans un
+        ensemble.
 
-      Le mouvement se dit avec d'autres prépositions, qui décrivent **le
-      trajet** plutôt que la position.
-
-      — `to` : la destination. I am going to Spain.
-      — `through` : de part en part. We walked through the tunnel.
-      — `over` : par-dessus. The cat jumped over the wall.
+      ! `to` marque la destination, sauf devant `home` : on dit `go home`,
+      sans aucune préposition.
     points:
       - id: g5-place-1
-        sentence: The keys are ___ the kitchen table.
-        answer: on
+        sentence: We arrived ___ Madrid late at night.
+        answer: in
         options:
-          - on
           - in
           - at
-          - over
-        translation: Les clés sont sur la table de la cuisine.
-        explanation: "Posé sur une surface : on."
+          - to
+          - on
+        translation: Nous sommes arrivés à Madrid tard dans la nuit.
+        explanation: "« Arrive in » devant une ville ; « arrive to » n'existe pas, malgré « arriver à »."
       - id: g5-place-2
-        sentence: He is waiting ___ the station.
+        sentence: He is waiting ___ the station, just outside the entrance.
         answer: at
         options:
           - at
           - in
           - on
           - to
-        translation: Il attend à la gare.
-        explanation: "Un lieu vu comme un point de rendez-vous : at."
+        translation: Il attend à la gare, juste devant l'entrée.
+        explanation: "« At » voit le lieu comme un point de rendez-vous ; « in the station » dirait à l'intérieur du bâtiment."
       - id: g5-place-3
-        sentence: She put the letter ___ her bag.
-        answer: in
+        sentence: We spent six hours ___ the plane.
+        answer: on
         options:
-          - in
           - on
+          - in
           - at
           - into
-        translation: Elle a mis la lettre dans son sac.
-        explanation: "À l'intérieur d'un volume : in."
+        translation: Nous avons passé six heures dans l'avion.
+        explanation: On voyage « on » un avion, un train ou un bus, mais « in » une voiture.
       - id: g5-place-4
         sentence: We walked ___ the tunnel to reach the beach.
         answer: through
         options:
           - through
-          - over
           - across
+          - over
           - along
         translation: Nous avons traversé le tunnel pour rejoindre la plage.
-        explanation: « Through » décrit un passage de part en part, dans un volume.
+        explanation: "« Through » traverse un volume ; « across » traverserait une surface."
       - id: g5-place-5
         sentence: The cat jumped ___ the wall.
         answer: over
         options:
           - over
           - through
-          - in
-          - on
+          - above
+          - across
         translation: Le chat a sauté par-dessus le mur.
-        explanation: « Over » décrit un franchissement par le dessus.
+        explanation: "« Over » franchit par le dessus ; « above » situerait sans mouvement."
       - id: g5-place-6
-        sentence: I am going ___ Spain next week.
-        answer: to
+        sentence: The agreement was signed ___ the two governments.
+        answer: between
         options:
-          - to
-          - in
-          - at
-          - for
-        translation: Je vais en Espagne la semaine prochaine.
-        explanation: "Destination d'un déplacement : to."
+          - between
+          - among
+          - within
+          - along
+        translation: L'accord a été signé entre les deux gouvernements.
+        explanation: "« Between » pour deux parties identifiées ; « among » les fondrait dans un ensemble."

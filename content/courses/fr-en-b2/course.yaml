@@ -23,7 +23,7 @@ status: available
 # ferait office de défaut, et B1 s'ouvrirait par accident.
 default: true
 layout: library
-version: 6
+version: 7
 
 tracks:
   - id: vocabulaire
