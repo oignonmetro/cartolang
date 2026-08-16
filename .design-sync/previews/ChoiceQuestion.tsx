@@ -6,54 +6,65 @@ const postpone = {
   translation: 'reporter',
   alt: ['remettre à plus tard'],
   pos: 'verbe',
-  hint: 'Décaler dans le temps, sans annuler.',
+  hint: 'Décaler dans le temps, sans annuler ni renoncer.',
   example: {
     text: 'They postponed the meeting until next week.',
     translation: 'Ils ont reporté la réunion à la semaine prochaine.',
   },
 }
 
-/**
- * QCM anglais → français, juste après une manche d'association : le mot est
- * affiché, aucune option n'est encore choisie. C'est l'état qu'un rendu
- * statique peut représenter honnêtement — le retour coloré n'apparaît
- * qu'après un clic interne au composant (`useState`), impossible à figer
- * depuis les props.
+/*
+ * Un même mot, cinq énoncés. C'est ce qui a remplacé la question unique
+ * (« voici le français, trouvez l'anglais ») que la leçon reposait à chaque
+ * fois : vingt-trois exercices se ramenaient à quatre gabarits. Chaque cellule
+ * ci-dessous montre un énoncé, tous sur le même mot pour que la comparaison
+ * porte sur la question et non sur le vocabulaire.
  */
-export function ToKnown() {
+const OPTIONS_FR = ['reporter', 'annuler', 'accélérer']
+const OPTIONS_EN = ['to postpone', 'to cancel', 'to rush']
+
+function stage(cue: 'term' | 'translation' | 'hint' | 'sentence' | 'audio', options: string[]) {
   return (
     <div style={{ height: 560 }} className="flex flex-col">
       <ChoiceQuestion
-        exercise={{
-          kind: 'choice',
-          id: 'choice:to-postpone',
-          vocab: postpone,
-          direction: 'to-known',
-          options: ['reporter', 'annuler', 'accélérer'],
-        }}
+        exercise={{ kind: 'choice', id: `choice:${cue}:${postpone.id}`, vocab: postpone, cue, options }}
         onAnswer={() => {}}
       />
     </div>
   )
 }
 
+/** Le mot anglais est montré, on choisit son sens. */
+export function CueTerm() {
+  return stage('term', OPTIONS_FR)
+}
+
+/** Le mot français est montré, on choisit la forme anglaise. */
+export function CueTranslation() {
+  return stage('translation', OPTIONS_EN)
+}
+
 /**
- * Même QCM en sens inverse : la traduction française est affichée, il faut
- * reconnaître le terme anglais parmi les leurres.
+ * La note d'usage tient lieu d'énoncé : le français ne sert plus de béquille,
+ * c'est le sens seul qui doit rappeler la forme.
  */
-export function ToLearning() {
-  return (
-    <div style={{ height: 560 }} className="flex flex-col">
-      <ChoiceQuestion
-        exercise={{
-          kind: 'choice',
-          id: 'choice:to-postpone-2',
-          vocab: postpone,
-          direction: 'to-learning',
-          options: ['to postpone', 'to cancel', 'to rush', 'to schedule'],
-        }}
-        onAnswer={() => {}}
-      />
-    </div>
-  )
+export function CueHint() {
+  return stage('hint', OPTIONS_EN)
+}
+
+/**
+ * La phrase d'exemple traduite : le mot se retrouve par le contexte plutôt
+ * que par une paire isolée. Disponible pour tous les mots du cours.
+ */
+export function CueSentence() {
+  return stage('sentence', OPTIONS_EN)
+}
+
+/**
+ * Le mot prononcé, jamais écrit — sinon il ne resterait rien à reconnaître.
+ * L'anglais ne s'écrit pas comme il se dit : sans cet énoncé, la moitié du
+ * mot restait non apprise.
+ */
+export function CueAudio() {
+  return stage('audio', OPTIONS_EN)
 }

@@ -4,6 +4,7 @@ import {
   buildLessonSession,
   buildPracticeSession,
   buildReviewSession,
+  choiceAnswer,
   isAnswerCorrect,
   itemIdsOf,
   matchesAnswer,
@@ -91,14 +92,20 @@ describe('session de leçon', () => {
   })
 
   it('propose au moins deux options distinctes à chaque QCM, dont la bonne réponse', () => {
-    const choices = buildLessonSession(lessonOf('u1-l1', LESSON), 0).filter((e) => e.kind === 'choice')
-    expect(choices.length).toBeGreaterThan(0)
-    for (const exercise of choices) {
-      expect(exercise.options.length).toBeGreaterThanOrEqual(2)
-      expect(new Set(exercise.options.map(normalizeAnswer)).size).toBe(exercise.options.length)
-      expect(exercise.options.some((option) => normalizeAnswer(option) === normalizeAnswer(exercise.vocab.term))).toBe(
-        true,
+    // Toutes graines et tous énoncés confondus : la réponse attendue dépend de
+    // l'énoncé (le sens quand on montre le mot, la forme sinon), et une option
+    // qui vaudrait la réponse offrirait deux bonnes cases.
+    for (const seed of [1, 2, 3, 4, 5]) {
+      const choices = buildLessonSession(lessonOf('u1-l1', LESSON), 0, seed, {}, true).filter(
+        (e) => e.kind === 'choice',
       )
+      expect(choices.length).toBeGreaterThan(0)
+      for (const exercise of choices) {
+        const answer = choiceAnswer(exercise.vocab, exercise.cue)
+        expect(exercise.options.length).toBeGreaterThanOrEqual(2)
+        expect(new Set(exercise.options.map(normalizeAnswer)).size).toBe(exercise.options.length)
+        expect(exercise.options.some((option) => normalizeAnswer(option) === normalizeAnswer(answer))).toBe(true)
+      }
     }
   })
 
@@ -190,6 +197,73 @@ describe('session de leçon', () => {
       if (session[i] === 'intro' && session[i - 1] !== 'intro') groups++
     }
     expect(groups).toBeGreaterThan(1)
+  })
+})
+
+describe('variété des exercices de vocabulaire', () => {
+  /** Signature d'un exercice ciblé : le mot ET la question posée. */
+  function signature(exercise: Exercise): string {
+    const cue = 'cue' in exercise ? `:${exercise.cue}` : ''
+    return `${exercise.kind}${cue}:${itemIdsOf(exercise).join()}`
+  }
+
+  const targeted = (session: Exercise[]) => session.filter((e) => e.kind === 'choice' || e.kind === 'cloze')
+
+  it('ne pose jamais deux fois la même question sur le même mot', () => {
+    // Régression : la phrase à trou d'un mot pouvait revenir au bloc suivant —
+    // même phrase, même trou — parce que chaque bloc repiochait dans tout le
+    // bassin sans mémoire de ce qui avait déjà été servi.
+    for (const seed of [1, 2, 3, 4, 5]) {
+      const session = buildLessonSession(lessonOf('u1-l1', LESSON), 0, seed, {}, true)
+      const sigs = targeted(session).map(signature)
+      expect(new Set(sigs).size).toBe(sigs.length)
+    }
+  })
+
+  it('interroge chaque mot au moins une fois hors des manches d’association', () => {
+    // Régression : un tirage uniforme laissait des mots sans le moindre
+    // exercice ciblé — vus à la présentation, noyés ensuite dans les paires.
+    for (const seed of [1, 2, 3, 4, 5]) {
+      const session = buildLessonSession(lessonOf('u1-l1', LESSON), 0, seed, {}, true)
+      const touched = new Set(targeted(session).flatMap(itemIdsOf))
+      expect(touched.size).toBe(LESSON.length)
+    }
+  })
+
+  it('varie l’énoncé des QCM au lieu de toujours demander la forme anglaise', () => {
+    const cues = new Set<string>()
+    for (const seed of [1, 2, 3, 4, 5]) {
+      for (const exercise of buildLessonSession(lessonOf('u1-l1', LESSON), 0, seed, {}, true)) {
+        if (exercise.kind === 'choice') cues.add(exercise.cue)
+      }
+    }
+    expect(cues.size).toBeGreaterThanOrEqual(3)
+  })
+
+  it('n’enchaîne pas des manches d’association identiques', () => {
+    // Régression : au premier bloc le bassin fait exactement MATCH_SIZE, si
+    // bien que trois manches d'affilée portaient les mêmes quatre mots.
+    for (const seed of [1, 2, 3, 4, 5]) {
+      const rounds = buildLessonSession(lessonOf('u1-l1', LESSON), 0, seed, {}, true)
+        .filter((e) => e.kind === 'match')
+        .map((e) => e.pairs.map((p) => p.id).sort().join())
+      expect(new Set(rounds).size).toBe(rounds.length)
+    }
+  })
+
+  it('ne demande le mot à l’oreille que si l’appareil sait prononcer', () => {
+    const silent = buildLessonSession(lessonOf('u1-l1', LESSON), 0, 1, {}, false)
+    expect(silent.some((e) => e.kind === 'choice' && e.cue === 'audio')).toBe(false)
+  })
+
+  it('n’utilise un énoncé que si le mot en a la matière', () => {
+    // `hint` est optionnel et rare : le proposer sans note d'usage afficherait
+    // la traduction à la place, soit deux fois le même exercice sous deux noms.
+    const bare = LESSON.map(({ hint: _hint, ...rest }) => rest)
+    for (const seed of [1, 2, 3, 4, 5]) {
+      const session = buildLessonSession(lessonOf('u1-l1', bare), 0, seed, {}, true)
+      expect(session.some((e) => e.kind === 'choice' && e.cue === 'hint')).toBe(false)
+    }
   })
 })
 
