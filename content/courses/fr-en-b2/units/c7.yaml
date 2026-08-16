@@ -1,0 +1,119 @@
+id: c7
+title: Le conditionnel
+subtitle: Premier, deuxième, troisième et forme mixte
+icon: people
+color: sky
+level: B2.2
+
+lessons:
+  - id: c7-l1
+    title: Premier et deuxième conditionnel
+    notes: |
+      Deux structures, pour deux degrés d'irréel — et c'est **la forme du
+      verbe dans la proposition en « if »** qui les distingue, pas le sens de
+      la phrase entière.
+
+      — 1er conditionnel : `if` + présent, `will` + base verbale. Un futur
+        plausible.
+        If it rains, I will take the car.
+      — 2e conditionnel : `if` + prétérit, `would` + base verbale. Un présent
+        ou un futur imaginaire, peu probable ou contraire aux faits.
+        If I won the lottery, I would travel the world.
+
+      `would` ne change **jamais** selon le sujet : pas de -s à la troisième
+      personne, contrairement au présent français.
+
+      ! Le prétérit dans la proposition en « if » ne parle pas du passé : « if
+      I won » ne veut pas dire que j'ai gagné, seulement que c'est improbable.
+    verbs:
+      - verb: to win
+        translation: gagner
+        tense: 1er conditionnel
+        note: "If + présent, will + base verbale : un futur qu'on estime possible."
+        forms:
+          - id: c7-win-first-aff
+            person: 1er conditionnel, affirmatif
+            answer: will win
+          - id: c7-win-first-neg
+            person: 1er conditionnel, négatif
+            answer: will not win
+            alt:
+              - won't win
+      - verb: to know
+        translation: savoir
+        tense: 2e conditionnel
+        note: "If + prétérit, would + base verbale : irréel du présent."
+        forms:
+          - id: c7-know-second-aff
+            person: 2e conditionnel, affirmatif
+            answer: would know
+          - id: c7-know-second-neg
+            person: 2e conditionnel, négatif
+            answer: would not know
+            alt:
+              - wouldn't know
+      - verb: to help
+        translation: aider
+        tense: 2e conditionnel
+        note: "Même construction quel que soit le sujet, y compris à la question."
+        forms:
+          - id: c7-help-second-aff
+            person: 2e conditionnel, affirmatif
+            answer: would help
+          - id: c7-help-second-q
+            person: 2e conditionnel, interrogatif
+            answer: would you help
+
+  - id: c7-l2
+    title: Conditionnel passé et forme mixte
+    notes: |
+      Le 3e conditionnel refait le passé ; la forme mixte **répare un passé
+      dans le présent**, en combinant les deux structures.
+
+      — 3e conditionnel : `if` + past perfect, `would have` + participe
+        passé. Un passé qui ne s'est pas produit.
+        If I had known, I would have called you.
+      — Conditionnel mixte : hypothèse passée, conséquence présente. `would`
+        + base verbale, __pas__ `would have`.
+        If I had studied medicine, I would be a doctor now.
+
+      ! Après `would have`, c'est toujours le participe passé : `would have
+      been`, jamais « would have be ».
+    verbs:
+      - verb: to pass
+        translation: réussir
+        tense: 3e conditionnel
+        note: "If + past perfect, would have + participe passé."
+        forms:
+          - id: c7-pass-third-aff
+            person: 3e conditionnel, affirmatif
+            answer: would have passed
+          - id: c7-pass-third-neg
+            person: 3e conditionnel, négatif
+            answer: would not have passed
+            alt:
+              - wouldn't have passed
+      - verb: to be
+        translation: être
+        tense: 3e conditionnel
+        note: "« Been », jamais « be », après « would have »."
+        forms:
+          - id: c7-be-third-aff
+            person: 3e conditionnel, affirmatif
+            answer: would have been
+          - id: c7-be-third-q
+            person: 3e conditionnel, interrogatif
+            answer: would you have been
+      - verb: to accept
+        translation: accepter
+        tense: conditionnel mixte
+        note: "Hypothèse passée, conséquence présente : would + base verbale, pas would have."
+        forms:
+          - id: c7-accept-mixed-aff
+            person: conditionnel mixte, affirmatif
+            answer: would accept
+          - id: c7-accept-mixed-neg
+            person: conditionnel mixte, négatif
+            answer: would not accept
+            alt:
+              - wouldn't accept

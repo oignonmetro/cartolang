@@ -1,0 +1,244 @@
+id: v6
+title: Droit et justice
+subtitle: Comprendre un contrat, suivre un procès
+icon: book
+color: teal
+level: B2.2
+
+lessons:
+  - id: v6-l1
+    title: Contrats et obligations
+    vocab:
+      - id: b2-binding
+        term: binding
+        translation: contraignant
+        alt:
+          - qui engage juridiquement
+        pos: adjectif
+        example:
+          text: Once signed, the agreement is legally binding.
+          translation: Une fois signé, l'accord est juridiquement contraignant.
+      - id: b2-to-breach
+        term: to breach
+        translation: rompre
+        alt:
+          - violer
+        pos: verbe
+        gap: breached
+        example:
+          text: The supplier breached the contract twice this year.
+          translation: Le fournisseur a rompu le contrat à deux reprises cette année.
+      - id: b2-liability
+        term: liability
+        translation: responsabilité civile
+        alt:
+          - responsabilité
+        pos: nom
+        hint: "Faux ami partiel : rien à voir avec la « liberté »."
+        example:
+          text: The firm denies any liability for the damage.
+          translation: L'entreprise nie toute responsabilité pour les dommages.
+      - id: b2-terms-and-conditions
+        term: terms and conditions
+        translation: conditions générales
+        alt:
+          - conditions générales de vente
+        pos: expression
+        example:
+          text: Read the terms and conditions before you sign.
+          translation: Lisez les conditions générales avant de signer.
+      - id: b2-to-draft
+        term: to draft
+        translation: rédiger
+        alt:
+          - établir
+        pos: verbe
+        gap: drafted
+        example:
+          text: A junior lawyer drafted the first version of the agreement.
+          translation: Un jeune avocat a rédigé la première version de l'accord.
+      - id: b2-waiver
+        term: waiver
+        translation: renonciation
+        alt:
+          - dérogation
+        pos: nom
+        example:
+          text: She had to sign a waiver before the trial began.
+          translation: Elle a dû signer une renonciation avant le début de l'essai.
+      - id: b2-null-and-void
+        term: null and void
+        translation: nul et non avenu
+        pos: expression
+        example:
+          text: The judge declared the clause null and void.
+          translation: Le juge a déclaré la clause nulle et non avenue.
+      - id: b2-to-violate
+        term: to violate
+        translation: enfreindre
+        alt:
+          - transgresser
+        pos: verbe
+        gap: violated
+        example:
+          text: The factory violated several safety regulations.
+          translation: L'usine a enfreint plusieurs règles de sécurité.
+
+  - id: v6-l2
+    title: Litiges et procès
+    vocab:
+      - id: b2-lawsuit
+        term: lawsuit
+        translation: procès
+        alt:
+          - action en justice
+        pos: nom
+        example:
+          text: The company is facing a lawsuit over unpaid wages.
+          translation: L'entreprise fait face à un procès pour salaires impayés.
+      - id: b2-to-sue
+        term: to sue
+        translation: poursuivre en justice
+        alt:
+          - attaquer en justice
+        pos: verbe
+        gap: sued
+        example:
+          text: Two former employees sued the company for damages.
+          translation: Deux anciens employés ont poursuivi l'entreprise en dommages et intérêts.
+      - id: b2-plaintiff
+        term: plaintiff
+        translation: plaignant
+        alt:
+          - demandeur
+        pos: nom
+        example:
+          text: The plaintiff must prove the loss actually occurred.
+          translation: Le plaignant doit prouver que la perte a bien eu lieu.
+      - id: b2-defendant
+        term: defendant
+        translation: défendeur
+        alt:
+          - accusé
+          - prévenu
+        pos: nom
+        example:
+          text: The defendant did not appear in court.
+          translation: Le défendeur ne s'est pas présenté au tribunal.
+      - id: b2-evidence
+        term: evidence
+        translation: preuve
+        alt:
+          - preuves
+          - éléments de preuve
+        pos: nom
+        hint: "Faux ami : « évidence » en français se dit plutôt « obviousness »."
+        example:
+          text: The lawyer presented new evidence to the jury.
+          translation: L'avocate a présenté de nouvelles preuves au jury.
+      - id: b2-ruling
+        term: ruling
+        translation: décision de justice
+        alt:
+          - verdict
+          - arrêt
+        pos: nom
+        example:
+          text: The court's ruling surprised both sides.
+          translation: La décision du tribunal a surpris les deux parties.
+      - id: b2-to-testify
+        term: to testify
+        translation: témoigner
+        pos: verbe
+        gap: testified
+        example:
+          text: Three witnesses testified against the defendant.
+          translation: Trois témoins ont témoigné contre le défendeur.
+      - id: b2-to-overturn
+        term: to overturn
+        translation: infirmer
+        alt:
+          - annuler
+        pos: verbe
+        gap: overturned
+        example:
+          text: The appeal court overturned the earlier ruling.
+          translation: La cour d'appel a infirmé la décision antérieure.
+
+  - id: v6-l3
+    title: Droits et réglementation
+    vocab:
+      - id: b2-entitlement
+        term: entitlement
+        translation: droit acquis
+        alt:
+          - prestation
+          - droit
+        pos: nom
+        example:
+          text: Employees lose this entitlement once they resign.
+          translation: Les salariés perdent ce droit acquis dès qu'ils démissionnent.
+      - id: b2-regulation
+        term: regulation
+        translation: réglementation
+        alt:
+          - règlement
+        pos: nom
+        example:
+          text: New regulation comes into force next month.
+          translation: Une nouvelle réglementation entre en vigueur le mois prochain.
+      - id: b2-to-infringe
+        term: to infringe
+        translation: porter atteinte à
+        alt:
+          - enfreindre
+        pos: verbe
+        gap: infringed
+        example:
+          text: The article infringed her right to privacy.
+          translation: L'article a porté atteinte à son droit à la vie privée.
+      - id: b2-compliance
+        term: compliance
+        translation: conformité
+        pos: nom
+        hint: Se construit avec « with » — voir la piste grammaire.
+        example:
+          text: The audit checks compliance with the new rules.
+          translation: L'audit vérifie la conformité aux nouvelles règles.
+      - id: b2-statute
+        term: statute
+        translation: texte de loi
+        alt:
+          - loi
+        pos: nom
+        example:
+          text: The statute came into force last January.
+          translation: Le texte de loi est entré en vigueur en janvier dernier.
+      - id: b2-exemption
+        term: exemption
+        translation: dispense
+        alt:
+          - exonération
+        pos: nom
+        example:
+          text: Small businesses can apply for an exemption.
+          translation: Les petites entreprises peuvent demander une dispense.
+      - id: b2-to-uphold
+        term: to uphold
+        translation: confirmer
+        alt:
+          - maintenir
+        pos: verbe
+        gap: upheld
+        example:
+          text: The tribunal upheld the original decision.
+          translation: Le tribunal a confirmé la décision initiale.
+      - id: b2-watchdog
+        term: watchdog
+        translation: organisme de contrôle
+        alt:
+          - autorité de surveillance
+        pos: nom
+        example:
+          text: A watchdog will monitor compliance from next year.
+          translation: Un organisme de contrôle surveillera la conformité dès l'an prochain.

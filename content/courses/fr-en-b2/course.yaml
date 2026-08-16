@@ -23,7 +23,7 @@ status: available
 # ferait office de défaut, et B1 s'ouvrirait par accident.
 default: true
 layout: library
-version: 5
+version: 6
 
 tracks:
   - id: vocabulaire
@@ -38,6 +38,7 @@ tracks:
       - v3
       - v4
       - v5
+      - v6
 
   - id: grammaire
     title: Grammaire
@@ -51,6 +52,7 @@ tracks:
       - g3
       - g4
       - g5
+      - g6
 
   - id: conjugaison
     title: Conjugaison
@@ -64,3 +66,4 @@ tracks:
       - c4
       - c5
       - c6
+      - c7
