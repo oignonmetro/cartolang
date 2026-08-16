@@ -32,36 +32,32 @@ lessons:
         note: "If + présent, will + base verbale : un futur qu'on estime possible."
         forms:
           - id: c7-win-first-aff
-            person: 1er conditionnel, affirmatif
+            person: affirmatif
             answer: will win
-          - id: c7-win-first-neg
-            person: 1er conditionnel, négatif
-            answer: will not win
-            alt:
-              - won't win
+          - id: c7-win-first-q
+            person: interrogatif
+            answer: will you win
       - verb: to know
         translation: savoir
         tense: 2e conditionnel
         note: "If + prétérit, would + base verbale : irréel du présent."
         forms:
           - id: c7-know-second-aff
-            person: 2e conditionnel, affirmatif
+            person: affirmatif
             answer: would know
-          - id: c7-know-second-neg
-            person: 2e conditionnel, négatif
-            answer: would not know
-            alt:
-              - wouldn't know
+          - id: c7-know-second-q
+            person: interrogatif
+            answer: would you know
       - verb: to help
         translation: aider
         tense: 2e conditionnel
         note: "Même construction quel que soit le sujet, y compris à la question."
         forms:
           - id: c7-help-second-aff
-            person: 2e conditionnel, affirmatif
+            person: affirmatif
             answer: would help
           - id: c7-help-second-q
-            person: 2e conditionnel, interrogatif
+            person: interrogatif
             answer: would you help
 
   - id: c7-l2
@@ -86,23 +82,21 @@ lessons:
         note: "If + past perfect, would have + participe passé."
         forms:
           - id: c7-pass-third-aff
-            person: 3e conditionnel, affirmatif
+            person: affirmatif
             answer: would have passed
-          - id: c7-pass-third-neg
-            person: 3e conditionnel, négatif
-            answer: would not have passed
-            alt:
-              - wouldn't have passed
+          - id: c7-pass-third-q
+            person: interrogatif
+            answer: would you have passed
       - verb: to be
         translation: être
         tense: 3e conditionnel
         note: "« Been », jamais « be », après « would have »."
         forms:
           - id: c7-be-third-aff
-            person: 3e conditionnel, affirmatif
+            person: affirmatif
             answer: would have been
           - id: c7-be-third-q
-            person: 3e conditionnel, interrogatif
+            person: interrogatif
             answer: would you have been
       - verb: to accept
         translation: accepter
@@ -110,10 +104,8 @@ lessons:
         note: "Hypothèse passée, conséquence présente : would + base verbale, pas would have."
         forms:
           - id: c7-accept-mixed-aff
-            person: conditionnel mixte, affirmatif
+            person: affirmatif
             answer: would accept
-          - id: c7-accept-mixed-neg
-            person: conditionnel mixte, négatif
-            answer: would not accept
-            alt:
-              - wouldn't accept
+          - id: c7-accept-mixed-q
+            person: interrogatif
+            answer: would you accept
