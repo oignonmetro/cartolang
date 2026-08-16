@@ -19,6 +19,11 @@ const OPTIONS = ['has been working', 'have been waiting', 'have been working']
  * seule chose apprenable à ce stade est la différence entre les formes — et
  * c'est elle que les leurres opposent, en prenant d'abord les autres personnes
  * du même verbe.
+ *
+ * Les trois options ci-dessous varient sur deux colonnes (l'auxiliaire, le
+ * verbe) : les deux se soulignent, la colonne commune (« been ») reste en
+ * clair — sans repère, retrouver ce qui change forcerait à relire les trois
+ * cases mot à mot plutôt que de comparer d'un coup d'œil.
  */
 function stage(cue: 'verb' | 'translation') {
   return (
