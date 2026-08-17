@@ -100,6 +100,18 @@ function splitLabel(text: string): { label: string | null; body: string } {
   return { label: text.slice(0, at), body: text.slice(at + 3) }
 }
 
+/**
+ * Une règle est-elle achevée ?
+ *
+ * On juge sur la ponctuation finale. Les marques de mise en forme sont
+ * retirées d'abord : une règle qui se termine par une forme citée
+ * (« …`Children learn fast.` ») est bien achevée, l'accent grave ne la laisse
+ * pas en suspens.
+ */
+function isFinished(body: string): boolean {
+  return /[.!?:;…]$/.test(body.replace(/[`*_\s]+$/, ''))
+}
+
 export function parseNotes(notes: string): NoteBlock[] {
   const blocks: NoteBlock[] = []
   // Bloc de texte en cours de constitution — prose ou piège. Les lignes s'y
@@ -143,12 +155,16 @@ export function parseNotes(notes: string): NoteBlock[] {
       continue
     }
 
-    // Ligne indentée juste après une règle : c'est son exemple. On regarde
+    // Ligne indentée sous une règle : sa suite, ou son exemple. On regarde
     // l'indentation de la ligne brute, la seule trace qu'il en reste.
     const rules = openRules()
     if (/^\s+/.test(raw) && !pending && rules) {
       const last = rules[rules.length - 1]
-      last.example = last.example ? `${last.example} ${line}` : line
+      // Une règle dont la dernière ligne reste en suspens se poursuit : le
+      // repli à 80 colonnes du YAML ne doit pas transformer la fin d'une règle
+      // en exemple, ce qui l'afficherait en italique et amputerait la règle.
+      if (last.example === null && !isFinished(last.body)) last.body = `${last.body} ${line}`
+      else last.example = last.example ? `${last.example} ${line}` : line
       continue
     }
 

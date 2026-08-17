@@ -9,9 +9,9 @@ lessons:
   - id: c2-l1
     title: Formes littéraires et soutenues
     notes: |
-      Ces verbes se croisent en lecture bien avant de venir sous la plume. Leur
-      difficulté n'est pas le sens mais **la troisième colonne**, souvent
-      contre-intuitive.
+      Le sens de ces verbes ne pose pas de problème ; **leur participe passé,
+      si** — c'est la troisième colonne qu'il faut apprendre, et elle ne se
+      déduit pas du prétérit.
 
       — bear / bore / **borne**
       — strive / strove / **striven**
@@ -73,18 +73,19 @@ lessons:
   - id: c2-l2
     title: Les pièges de forme voisine
     notes: |
-      Ces couples se ressemblent assez pour être confondus, et **la faute passe
-      rarement inaperçue**.
+      Un seul réflexe départage ces couples : **cherchez le complément d'objet.**
+      S'il y en a un, c'est la version transitive — et c'est toujours la
+      régulière des deux.
+
+      — Prices rose. Rien ne les a fait monter. → `rise`, intransitif.
+      — They raised prices. Ils ont monté quelque chose. → `raise`, transitif.
+
+      Le sens suit ce partage, et les formes avec lui.
 
       — `lie` / lay / lain : être allongé, __sans complément d'objet__.
       — `lay` / laid / laid : poser quelque chose, __avec complément d'objet__.
       — `rise` / rose / risen : monter de soi-même, __sans complément__.
       — `raise` / raised / raised : élever quelque chose, __avec complément__.
-
-      Un seul réflexe suffit à trancher : **si le verbe a un complément d'objet,
-      c'est la version transitive**, la régulière des deux.
-
-      — Prices rose. / They raised prices.
     verbs:
       - verb: to lie
         translation: être allongé

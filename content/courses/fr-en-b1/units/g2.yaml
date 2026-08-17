@@ -88,15 +88,24 @@ lessons:
   - id: g2-l2
     title: Le superlatif et l'égalité
     notes: |
-      Le superlatif se construit comme le comparatif, mais avec « the ».
-      — the shortest, the most interesting, the best, the worst
-      Pour dire l'égalité, on encadre l'adjectif : as + adjectif + as.
-      — She is as tall as her mother. / It is not as expensive as I feared.
-      « Much », « far » et « a lot » renforcent __un comparatif__, jamais un
-      superlatif.
+      Le superlatif reprend la règle de longueur du comparatif, et y ajoute une
+      obligation : **`the` devant, toujours**. C'est lui qui marque le
+      superlatif, plus encore que la terminaison.
 
-      ! « Very » ne renforce pas un comparatif : « very better » est faux,
-      « much better » est correct.
+      — Adjectif court : `the` + adjectif + **-est**.
+        the shortest, the biggest, the earliest
+      — Adjectif long : **`the most`** + adjectif.
+        the most interesting, the most qualified
+      — Les mêmes irréguliers qu'au comparatif.
+        the best, the worst, the furthest
+      — Égalité : on **encadre** l'adjectif entre deux `as`.
+        She is as tall as her mother. It is not as expensive as I feared.
+      — `much`, `far` et `a lot` renforcent __un comparatif__, jamais un
+        superlatif.
+        much better, far more expensive
+
+      ! `very` ne renforce pas un comparatif : « very better » est faux,
+      `much better` est correct.
     points:
       - id: g2-sup-1
         sentence: It is one of ___ museums in Europe. (big)

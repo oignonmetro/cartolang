@@ -222,3 +222,40 @@ describe('ruleSpeech — défauts vus au rendu', () => {
     expect(ruleSpeech(rule('Un nom de métier prend `a`, contrairement au français.'))).toBeNull()
   })
 })
+
+describe('règle repliée sur plusieurs lignes', () => {
+  it('poursuit le corps quand la ligne reste en suspens', () => {
+    const blocks = parseNotes(
+      '— `much`, `far` et `a lot` renforcent un comparatif, jamais un\n' +
+        '  superlatif.\n' +
+        '  much better, far more expensive\n',
+    )
+    const rule = (blocks[0] as { kind: 'rules'; rules: NoteRule[] }).rules[0]
+    expect(rule.body).toBe('`much`, `far` et `a lot` renforcent un comparatif, jamais un superlatif.')
+    expect(rule.example).toBe('much better, far more expensive')
+  })
+
+  it('traite la ligne indentée en exemple quand la règle est achevée', () => {
+    const blocks = parseNotes('— `will` : décision prise à l\'instant.\n  I will help you.\n')
+    const rule = (blocks[0] as { kind: 'rules'; rules: NoteRule[] }).rules[0]
+    expect(rule.example).toBe('I will help you.')
+  })
+
+  it('ne se laisse pas abuser par une forme citée en fin de règle', () => {
+    // « …that…` » se termine par une ellipse : la règle est achevée, la ligne
+    // suivante est bien un exemple.
+    const blocks = parseNotes('— `it is essential that…`\n  It is essential that he remain.\n')
+    const rule = (blocks[0] as { kind: 'rules'; rules: NoteRule[] }).rules[0]
+    expect(rule.body).toBe('`it is essential that…`')
+    expect(rule.example).toBe('It is essential that he remain.')
+  })
+
+  it('recolle un corps replié sur trois lignes', () => {
+    const blocks = parseNotes('— Suivis d\'une proposition : although,\n  even though,\n  whereas.\n')
+    const rule = (blocks[0] as { kind: 'rules'; rules: NoteRule[] }).rules[0]
+    // L'étiquette est détachée du corps, comme pour toute règle en « … : … ».
+    expect(rule.label).toBe("Suivis d'une proposition")
+    expect(rule.body).toBe('although, even though, whereas.')
+    expect(rule.example).toBeNull()
+  })
+})

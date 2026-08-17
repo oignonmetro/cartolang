@@ -142,21 +142,25 @@ plus sombre. Écrivez-y l'idée directrice, et laissez les détails aux règles.
 Un commentaire final entre parenthèses est automatiquement mis en retrait :
 `— I will call you as soon as I arrive. (jamais « as soon as I will arrive »)`.
 
-**Ne coupez jamais une forme entre accents graves par un repli de ligne.** Le
-repli est recollé dans la prose et les pièges, mais pas entre une règle et son
-exemple indenté : les deux moitiés y deviennent des champs distincts, et
-l'apprenant voit les accents graves s'afficher tels quels. La validation le
-signale.
+**Une règle peut se replier librement**, comme la prose : tant que sa ligne
+reste en suspens — sans point final — la ligne indentée suivante la poursuit.
+C'est la ponctuation qui décide, pas l'indentation.
 
 ```yaml
-# ✗ l'accent grave est coupé par le repli
-  — Spécifique : `The water in this bottle is not
-    drinkable.` On désigne cette eau-là.
-
-# ✓ la forme tient sur sa ligne
-  — Spécifique :
-    `The water in this bottle is not drinkable.` On désigne cette eau-là.
+  # le corps se poursuit : « superlatif. » complète la règle
+  — `much`, `far` et `a lot` renforcent __un comparatif__, jamais un
+    superlatif.
+    much better, far more expensive   # ← l'exemple, la règle étant achevée
 ```
+
+Corollaire : **terminez une règle par un point** dès que la ligne indentée qui
+suit doit être lue comme son exemple. Sans cela, l'exemple serait recollé à la
+règle. Une règle qui se termine par une forme citée (`` …`Children learn
+fast.` ``) est bien considérée comme achevée — l'accent grave ne la laisse pas
+en suspens.
+
+La validation signale par ailleurs tout accent grave orphelin, qui s'afficherait
+tel quel à l'écran.
 
 ### Ce qui se fait entendre
 

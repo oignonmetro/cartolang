@@ -87,9 +87,10 @@ lessons:
   - id: g6-l2
     title: The avec les noms propres et les emplois figés
     notes: |
-      `the` suit des règles précises devant les noms propres, et certaines
-      expressions figées **s'apprennent telles quelles** plutôt que de se
-      déduire.
+      Devant un nom propre, `the` n'est pas libre : il apparaît dès que le nom
+      **contient un nom commun** (the United **States**, the **Republic** of
+      Ireland) et disparaît devant un nom simple (France, Everest). Le reste
+      s'apprend par familles.
 
       — Pays au nom pluriel ou composé d'un nom commun : `the Netherlands`,
         `the United States`, `the United Kingdom` — mais rien devant un pays
