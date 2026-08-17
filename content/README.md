@@ -241,3 +241,38 @@ proposent la mise à jour au prochain démarrage avec du réseau.
 - phrases d'exemple dont la forme à masquer est réellement présente ;
 - phrases de grammaire contenant le marqueur `___`, et réponse figurant bien
   parmi les `options` quand il y en a.
+
+## Ce que la validation surveille en plus : la difficulté
+
+Les contrôles ci-dessus valident la structure. Ceux qui suivent vérifient
+qu'un exercice **teste bien ce qu'il prétend tester** (`tools/content/difficulty.ts`).
+Ce sont des remarques, jamais des erreurs : ce sont des heuristiques, elles se
+trompent parfois, et c'est à vous de trancher.
+
+Une seule règle les commande tous : **un distracteur doit être faux pour la
+raison qu'enseigne le point.** Un distracteur qu'on écarte autrement laisse
+résoudre l'exercice sans la règle visée, et la leçon cesse alors de valoir son
+niveau sans que rien ne le signale.
+
+- **Distracteur impossible à l'oreille** — un « an » devant un son de consonne
+  (`an car`) s'élimine par la seule règle a/an, sans rien savoir de la règle
+  testée. Le contrôle se tait quand le point porte justement sur a/an.
+- **Distracteur qui casse l'accord** — dans « ___ in this bottle is not
+  drinkable », l'option « The waters » se repère à l'accord avec `is`, pas à la
+  règle d'article. Même chose pour un attribut au pluriel nu après `is`
+  (« she is now researchers »). Le contrôle se tait quand le trou est
+  lui-même le verbe, l'accord étant alors ce qu'on enseigne.
+- **Paire de conjugaison qu'un seul mot sépare** — « will win » et
+  « will not win » se relient en repérant `not`, sans rien savoir de la
+  construction. Opposez deux constructions réelles (« would have passed » /
+  « would pass »). Toléré en B1, où la négation et la question sont encore
+  l'objet du cours ; signalé à partir de B2.
+- **Phrase reprise d'un cours à l'autre** — un niveau qui rejoue l'exemple du
+  niveau précédent n'approfondit rien, même quand la règle affichée diffère.
+  Vaut pour les phrases d'exercice comme pour les exemples des cartes.
+
+Attention à un piège plus discret : l'application n'affiche que **deux**
+distracteurs, tirés au hasard parmi ceux que vous fournissez
+(`GRAMMAR_CHOICE_SIZE` dans `src/engine/exercises.ts`). Un distracteur faible
+parmi quatre options ne dilue pas l'exercice, il le remplace deux fois sur
+trois. Mieux vaut trois options solides que quatre inégales.

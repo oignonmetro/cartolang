@@ -36,6 +36,7 @@ import {
 } from '../../src/content/schema.ts'
 import { findVocabGap } from '../../src/content/text.ts'
 import { itemsOfCourse, itemsOfLesson, lessonsOf } from '../../src/content/course.ts'
+import { conjugationVerbRemarks, duplicateAcrossCourses, grammarPointRemarks } from './difficulty.ts'
 
 const root = resolve(fileURLToPath(new URL('../..', import.meta.url)))
 const contentDir = join(root, 'content', 'courses')
@@ -218,7 +219,7 @@ function checkCoherence(course: Course, dir: string) {
 
     if (lesson.kind === 'vocab') checkVocabLesson(lesson, problems)
     if (lesson.kind === 'grammar') checkGrammarLesson(lesson, problems)
-    if (lesson.kind === 'conjugation') checkConjugationLesson(lesson, problems)
+    if (lesson.kind === 'conjugation') checkConjugationLesson(lesson, problems, course.level ?? '')
   }
 
   for (const { lesson } of lessonsOf(course)) {
@@ -300,10 +301,14 @@ function checkGrammarLesson(lesson: GrammarLesson, problems: string[]) {
     if (point.options.length === 1) {
       problems.push(`point "${point.id}" : une seule option proposée, il en faut au moins 2 ou aucune`)
     }
+
+    // Un distracteur doit être faux pour la raison qu'enseigne le point ;
+    // sinon l'exercice se résout sans la règle (voir difficulty.ts).
+    for (const remark of grammarPointRemarks(point)) warn(`leçon "${lesson.id}"`, remark)
   }
 }
 
-function checkConjugationLesson(lesson: ConjugationLesson, problems: string[]) {
+function checkConjugationLesson(lesson: ConjugationLesson, problems: string[], courseLevel: string) {
   const total = lesson.verbs.reduce((count, verb) => count + verb.forms.length, 0)
   if (total < 4) {
     problems.push(`leçon "${lesson.id}" : ${total} forme(s), il en faut au moins 4 pour l'exercice d'association`)
@@ -317,7 +322,39 @@ function checkConjugationLesson(lesson: ConjugationLesson, problems: string[]) {
       }
       persons.add(form.person)
     }
+
+    // Deux formes qu'un seul mot sépare font une paire d'association triviale.
+    for (const remark of conjugationVerbRemarks(verb, courseLevel)) warn(`leçon "${lesson.id}"`, remark)
   }
+}
+
+/**
+ * Ce qu'un cours ne peut pas voir seul : les phrases qu'un niveau reprend au
+ * niveau voisin. Un cours archivé sert de référence historique et n'entre pas
+ * dans la comparaison.
+ */
+function checkAcrossCourses(courses: readonly Course[]) {
+  const sentences: { courseId: string; where: string; sentence: string }[] = []
+
+  for (const course of courses) {
+    if (course.status === 'archived') continue
+    for (const { lesson } of lessonsOf(course)) {
+      if (lesson.kind === 'grammar') {
+        for (const point of lesson.points) {
+          sentences.push({ courseId: course.id, where: point.id, sentence: point.sentence })
+        }
+      }
+      // Les exemples des cartes de cours se recopient aussi d'un niveau à l'autre.
+      for (const line of (lesson.notes ?? '').split('\n')) {
+        const trimmed = line.trim().replace(/^[—!]\s*/, '')
+        if (/^[A-Z][^.!?]*[.!?]$/.test(trimmed) && !/[àâçéèêëîïôûùü«»]/i.test(trimmed)) {
+          sentences.push({ courseId: course.id, where: `${lesson.id} (carte)`, sentence: trimmed })
+        }
+      }
+    }
+  }
+
+  for (const remark of duplicateAcrossCourses(sentences)) warn('entre cours', remark)
 }
 
 function main() {
@@ -348,6 +385,8 @@ function main() {
     for (const message of errors) console.error(`  ${message}\n`)
     process.exit(1)
   }
+
+  checkAcrossCourses(courses)
 
   if (courses.every((course) => course.status === 'archived')) {
     console.error('\n✗ Tous les cours sont archivés : l\'application n\'aurait rien à proposer.')
