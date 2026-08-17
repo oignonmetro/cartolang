@@ -169,3 +169,71 @@ export function splitAside(text: string): { main: string; aside: string | null }
   if (!match) return { main: text, aside: null }
   return { main: match[1], aside: match[2] }
 }
+
+/**
+ * Marques d'un texte français.
+ *
+ * Volontairement prudent : « son » et « plus » sont aussi des mots anglais et
+ * n'y figurent pas. Mieux vaut manquer une phrase française que faire lire de
+ * l'anglais à une phrase qui n'en est pas.
+ */
+const FRENCH = /[àâäçéèêëîïôöûùüÿœ]|\b(nous|vous|je|j'|qui|que|qu'|dans|pour|avec|sans|cette|leur|leurs|est|sont|une|des|les|aux|sur|elle|ils|elles|tout|toute|jamais|toujours|ne|pas|mais|donc|alors|ici|là)\b/i
+
+/**
+ * Une portion se lit-elle comme une phrase anglaise à part entière ?
+ *
+ * On exige une majuscule initiale et trois mots : les fragments de liste
+ * (« for ten years, since 2015 ») et les résidus de repli de ligne
+ * (« jour précis est nommé** : … ») ne sont pas des modèles à faire entendre.
+ */
+function isEnglishSentence(segment: string): boolean {
+  const bare = segment.replace(/[`*_]/g, '').trim()
+  if (bare.length === 0) return false
+  if (FRENCH.test(bare)) return false
+  if (!/^[A-Z]/.test(bare)) return false
+  return bare.split(/\s+/).length >= 3
+}
+
+/**
+ * Ce qu'il y a à faire entendre dans une règle de rappel, ou `null`.
+ *
+ * L'anglais et le français cohabitent dans ces notes, souvent sur la même
+ * ligne (« If it rains, we will stay at home. S'il pleut, nous resterons à la
+ * maison. ») : lire le tout avec une voix anglaise donnerait une bouillie. On
+ * ne retient donc que ce qui est sûrement anglais, et on préfère se taire.
+ *
+ * Une phrase d'exemple complète fait le meilleur modèle ; à défaut, les formes
+ * citées entre accents graves, que l'auteur a explicitement marquées comme
+ * anglaises.
+ */
+export function ruleSpeech(rule: NoteRule): string | null {
+  if (rule.example) {
+    // Retirer les marques avant de découper : « `She is a teacher.` Elle est
+    // enseignante. » n'a pas d'espace après le point, l'accent grave s'y
+    // intercale, et la phrase française resterait collée à l'anglaise.
+    const sentences = splitAside(rule.example)
+      .main.replace(/[`*_]/g, '')
+      .split(/(?<=[.!?])\s+/)
+      .map((segment) => segment.trim())
+      .filter(isEnglishSentence)
+    if (sentences.length > 0) return sentences.join(' ')
+  }
+
+  const cited = parseInline(rule.body)
+    .filter((span): span is { kind: 'form'; text: string } => span.kind === 'form')
+    .map((span) => span.text.trim())
+    .filter(Boolean)
+  if (cited.length === 0) return null
+
+  // Une liste de formes se lit d'une traite. Les fragments déjà ponctués se
+  // suivent tels quels — « Life is short., Children learn fast. » s'entendrait
+  // hacher — les autres se séparent d'une virgule, qui marque la pause.
+  const spoken = cited.reduce((text, fragment, index) => {
+    if (index === 0) return fragment
+    return /[.!?]$/.test(text) ? `${text} ${fragment}` : `${text}, ${fragment}`
+  }, '')
+
+  // Un article ou une préposition seuls ne s'entendent pas : trop brefs pour
+  // être reconnus, et sans contexte ils n'apprennent rien.
+  return spoken.split(/\s+/).length >= 2 ? spoken : null
+}

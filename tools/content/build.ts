@@ -35,6 +35,7 @@ import {
   type VocabLesson,
 } from '../../src/content/schema.ts'
 import { findVocabGap } from '../../src/content/text.ts'
+import { parseNotes } from '../../src/content/notes.ts'
 import { itemsOfCourse, itemsOfLesson, lessonsOf } from '../../src/content/course.ts'
 import { conjugationVerbRemarks, duplicateAcrossCourses, grammarPointRemarks } from './difficulty.ts'
 
@@ -217,6 +218,7 @@ function checkCoherence(course: Course, dir: string) {
       problems.push(`leçon "${lesson.id}" de nature ${lesson.kind} dans une unité ${unit.kind}`)
     }
 
+    checkNotesMarkup(lesson.id, 'notes' in lesson ? lesson.notes : undefined)
     if (lesson.kind === 'vocab') checkVocabLesson(lesson, problems)
     if (lesson.kind === 'grammar') checkGrammarLesson(lesson, problems)
     if (lesson.kind === 'conjugation') checkConjugationLesson(lesson, problems, course.level ?? '')
@@ -282,6 +284,32 @@ function checkVocabLesson(lesson: VocabLesson, problems: string[]) {
         warn(`leçon "${lesson.id}"`, `« ${answer} » est accepté pour « ${owner} » et « ${vocab.term} »`)
       }
       accepted.set(key, vocab.term)
+    }
+  }
+}
+
+/**
+ * Une forme citée entre accents graves doit tenir sur une seule ligne.
+ *
+ * Le repli du YAML est recollé pour la prose et les pièges, mais pas à la
+ * frontière entre une règle et son exemple indenté : les deux moitiés y
+ * deviennent des champs distincts, chacune avec un accent grave orphelin, que
+ * l'apprenant voit alors s'afficher tel quel.
+ */
+function checkNotesMarkup(lessonId: string, notes: string | undefined) {
+  if (!notes) return
+  for (const block of parseNotes(notes)) {
+    if (block.kind !== 'rules') continue
+    for (const rule of block.rules) {
+      for (const [field, text] of [['règle', rule.body], ['exemple', rule.example]] as const) {
+        if (text && (text.match(/`/g)?.length ?? 0) % 2 === 1) {
+          warn(
+            `leçon "${lessonId}"`,
+            `accent grave orphelin dans ${field} « ${text.slice(0, 48)}… » : une forme citée ` +
+              "ne doit pas être coupée par un repli de ligne, elle s'afficherait avec ses accents graves",
+          )
+        }
+      }
     }
   }
 }

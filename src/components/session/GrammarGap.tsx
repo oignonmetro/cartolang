@@ -1,8 +1,9 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
 import type { GrammarGapExercise } from '@/engine/exercises'
-import { matchesAnswer, splitGap } from '@/engine/exercises'
+import { fillGap, matchesAnswer, splitGap } from '@/engine/exercises'
 import { Button } from '@/components/Button'
+import { SpeakButton } from './SpeakButton'
 
 /**
  * Phrase de grammaire à compléter.
@@ -119,9 +120,15 @@ export function GrammarGap({
             Vérifier
           </Button>
         ) : (
-          <Button block tone={checked ? 'success' : 'error'} onClick={() => onAnswer(checked)}>
-            Continuer
-          </Button>
+          <div className="flex items-center gap-3">
+            {/* La phrase entière, une fois complétée : c'est la structure qu'on
+                apprend, pas la forme isolée. Après la réponse seulement —
+                l'entendre plus tôt donnerait la solution. */}
+            <SpeakButton text={fillGap(point.sentence, point.answer)} className="shrink-0" />
+            <Button block tone={checked ? 'success' : 'error'} onClick={() => onAnswer(checked)}>
+              Continuer
+            </Button>
+          </div>
         )}
       </div>
     </div>

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { parseInline, parseNotes, splitAside } from './notes'
+import { parseInline, parseNotes, ruleSpeech, splitAside, type NoteRule } from './notes'
 
 describe('rappels de cours', () => {
   it('recolle une phrase repliée sur plusieurs lignes', () => {
@@ -164,5 +164,61 @@ describe('commentaire entre parenthèses', () => {
   it('ne se laisse pas piéger par une parenthèse au milieu', () => {
     const text = 'Les horaires (trains, cinémas) prennent le présent simple.'
     expect(splitAside(text)).toEqual({ main: text, aside: null })
+  })
+})
+
+describe('ruleSpeech', () => {
+  const rule = (body: string, example: string | null = null): NoteRule => ({ label: null, body, example })
+
+  it('ne retient que la phrase anglaise quand la traduction suit', () => {
+    expect(ruleSpeech(rule('x', 'If it rains, we will stay at home. S\'il pleut, nous resterons à la maison.')))
+      .toBe('If it rains, we will stay at home.')
+  })
+
+  it('écarte le commentaire français entre parenthèses', () => {
+    expect(ruleSpeech(rule('x', 'That bag looks heavy; I\'ll help you. (je le décide en parlant)')))
+      .toBe("That bag looks heavy; I'll help you.")
+  })
+
+  it('se rabat sur les formes citées quand la règle n\'a pas d\'exemple', () => {
+    expect(ruleSpeech(rule('`depend on`, `rely on`, `insist on`'))).toBe('depend on, rely on, insist on')
+  })
+
+  it('préfère la phrase complète aux formes citées', () => {
+    expect(ruleSpeech(rule('`will` : décision prise à l\'instant', 'I will help you with that.')))
+      .toBe('I will help you with that.')
+  })
+
+  it('se tait sur un résidu de repli de ligne', () => {
+    expect(ruleSpeech(rule('x', 'jour précis est nommé** : on Monday morning.'))).toBeNull()
+  })
+
+  it('se tait sur un fragment de liste sans majuscule', () => {
+    expect(ruleSpeech(rule('x', 'for ten years, since 2015, during the meeting'))).toBeNull()
+  })
+
+  it('se tait quand il n\'y a ni exemple ni forme citée', () => {
+    expect(ruleSpeech(rule('Une règle sans aucune forme anglaise.'))).toBeNull()
+  })
+
+  it('retire les accents graves de la phrase lue', () => {
+    expect(ruleSpeech(rule('x', '`Life is short.` And we waste it.'))).toBe('Life is short. And we waste it.')
+  })
+})
+
+describe('ruleSpeech — défauts vus au rendu', () => {
+  const rule = (body: string, example: string | null = null): NoteRule => ({ label: null, body, example })
+
+  it('n\'ajoute pas de virgule après un point', () => {
+    expect(ruleSpeech(rule('Article zéro : `Life is short.` `Children learn fast.`')))
+      .toBe('Life is short. Children learn fast.')
+  })
+
+  it('sépare d\'une virgule les formes non ponctuées', () => {
+    expect(ruleSpeech(rule('`depend on`, `rely on`'))).toBe('depend on, rely on')
+  })
+
+  it('se tait sur un article seul, trop bref pour s\'entendre', () => {
+    expect(ruleSpeech(rule('Un nom de métier prend `a`, contrairement au français.'))).toBeNull()
   })
 })

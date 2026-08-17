@@ -1,7 +1,8 @@
 import { motion } from 'framer-motion'
 import type { RuleExercise } from '@/engine/exercises'
-import { parseInline, parseNotes, splitAside, type Inline, type NoteRule } from '@/content/notes'
+import { parseInline, parseNotes, ruleSpeech, splitAside, type Inline, type NoteRule } from '@/content/notes'
 import { Button } from '@/components/Button'
+import { SpeakButton } from './SpeakButton'
 
 /**
  * Rappel de cours affiché avant la pratique, à la découverte d'une leçon.
@@ -125,6 +126,9 @@ export function RuleNote({ exercise, onNext }: { exercise: RuleExercise; onNext:
 
 function RuleBody({ rule, labelClass }: { rule: NoteRule; labelClass: string }) {
   const { main, aside } = splitAside(rule.body)
+  // Rien à entendre pour une règle purement française : le bouton ne s'affiche
+  // que là où une forme anglaise est sûrement identifiable (voir ruleSpeech).
+  const spoken = ruleSpeech(rule)
 
   return (
     <div className="flex min-w-0 flex-col gap-1">
@@ -148,10 +152,15 @@ function RuleBody({ rule, labelClass }: { rule: NoteRule; labelClass: string }) 
           </span>
         )}
       </p>
-      {rule.example && (
-        <p className="text-sm leading-snug font-bold text-ink-soft italic">
-          <Rich text={rule.example} />
-        </p>
+      {(rule.example || spoken) && (
+        <div className="flex items-start gap-2">
+          {rule.example && (
+            <p className="min-w-0 flex-1 text-sm leading-snug font-bold text-ink-soft italic">
+              <Rich text={rule.example} />
+            </p>
+          )}
+          {spoken && <SpeakButton text={spoken} size={16} className="shrink-0 !p-1.5" />}
+        </div>
       )}
     </div>
   )
@@ -194,11 +203,16 @@ function Spans({ spans }: { spans: Inline[] }) {
               </span>
             )
           case 'form':
+            // Une forme courte ne doit pas se couper en deux (« depend / on »).
+            // Une phrase citée entière, si : l'empêcher de se replier la ferait
+            // déborder de la colonne, sous le bouton d'écoute.
             return (
               <span
                 key={index}
                 lang="en"
-                className="rounded bg-ink/6 px-[0.15em] font-bold whitespace-nowrap text-ink"
+                className={`rounded bg-ink/6 px-[0.15em] font-bold text-ink ${
+                  span.text.length <= 24 ? 'whitespace-nowrap' : ''
+                }`}
               >
                 {span.text}
               </span>

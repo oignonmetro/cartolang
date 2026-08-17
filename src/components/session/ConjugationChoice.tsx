@@ -5,6 +5,7 @@ import { normalizeForm } from '@/engine/exercises'
 import { Button } from '@/components/Button'
 import { highlightDiffWords } from './highlightDiffWords'
 import { OptionList } from './OptionList'
+import { SpeakButton } from './SpeakButton'
 
 /**
  * Reconnaître une forme conjuguée parmi celles du paradigme.
@@ -82,9 +83,13 @@ export function ConjugationChoice({
 
       <div className="mt-auto pt-2">
         {checked && (
-          <Button block tone={correct ? 'success' : 'error'} onClick={() => onAnswer(correct)}>
-            Continuer
-          </Button>
+          <div className="flex items-center gap-3">
+            {/* La forme attendue, pas celle qui a été choisie. */}
+            <SpeakButton text={form.answer} className="shrink-0" />
+            <Button block tone={correct ? 'success' : 'error'} onClick={() => onAnswer(correct)}>
+              Continuer
+            </Button>
+          </div>
         )}
       </div>
     </div>

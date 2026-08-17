@@ -142,6 +142,34 @@ plus sombre. Écrivez-y l'idée directrice, et laissez les détails aux règles.
 Un commentaire final entre parenthèses est automatiquement mis en retrait :
 `— I will call you as soon as I arrive. (jamais « as soon as I will arrive »)`.
 
+**Ne coupez jamais une forme entre accents graves par un repli de ligne.** Le
+repli est recollé dans la prose et les pièges, mais pas entre une règle et son
+exemple indenté : les deux moitiés y deviennent des champs distincts, et
+l'apprenant voit les accents graves s'afficher tels quels. La validation le
+signale.
+
+```yaml
+# ✗ l'accent grave est coupé par le repli
+  — Spécifique : `The water in this bottle is not
+    drinkable.` On désigne cette eau-là.
+
+# ✓ la forme tient sur sa ligne
+  — Spécifique :
+    `The water in this bottle is not drinkable.` On désigne cette eau-là.
+```
+
+### Ce qui se fait entendre
+
+Un bouton d'écoute s'affiche à côté d'une règle dès qu'une forme anglaise y
+est **sûrement** identifiable : une phrase d'exemple complète de préférence,
+sinon les formes citées entre accents graves. Les notes mêlant les deux
+langues, souvent sur la même ligne, tout ce qui n'est pas certainement anglais
+est écarté — mieux vaut pas de bouton qu'une voix anglaise lisant du français.
+Un article seul (`` `a` ``) ne déclenche rien : trop bref pour s'entendre.
+
+En exercice, le bouton n'apparaît **qu'après la réponse**, et lit la forme
+attendue ou la phrase complétée — l'entendre plus tôt donnerait la solution.
+
 ## Ajouter un tableau de conjugaison (`kind: conjugation`)
 
 ```yaml

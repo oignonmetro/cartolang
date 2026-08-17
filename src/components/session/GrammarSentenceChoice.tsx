@@ -4,6 +4,7 @@ import type { GrammarChoiceExercise } from '@/engine/exercises'
 import { fillGap, normalizeForm, splitGap } from '@/engine/exercises'
 import { Button } from '@/components/Button'
 import { OptionList } from './OptionList'
+import { SpeakButton } from './SpeakButton'
 
 /**
  * Les options ne diffèrent que par la forme qui comble le trou — le reste de
@@ -100,9 +101,14 @@ export function GrammarSentenceChoice({
 
       <div className="mt-auto pt-2">
         {checked && (
-          <Button block tone={correct ? 'success' : 'error'} onClick={() => onAnswer(correct)}>
-            Continuer
-          </Button>
+          <div className="flex items-center gap-3">
+            {/* La phrase correcte, pas celle qui a été choisie : c'est le
+                modèle à retenir, y compris quand on s'est trompé. */}
+            <SpeakButton text={answer} className="shrink-0" />
+            <Button block tone={correct ? 'success' : 'error'} onClick={() => onAnswer(correct)}>
+              Continuer
+            </Button>
+          </div>
         )}
       </div>
     </div>

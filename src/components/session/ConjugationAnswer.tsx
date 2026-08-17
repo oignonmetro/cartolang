@@ -3,6 +3,7 @@ import { motion } from 'framer-motion'
 import type { ConjugationExercise } from '@/engine/exercises'
 import { matchesAnswer } from '@/engine/exercises'
 import { Button } from '@/components/Button'
+import { SpeakButton } from './SpeakButton'
 
 /**
  * Production d'une forme conjuguée : verbe, temps et personne sont donnés,
@@ -122,9 +123,14 @@ export function ConjugationAnswer({
             Vérifier
           </Button>
         ) : (
-          <Button block tone={checked ? 'success' : 'error'} onClick={() => onAnswer(checked)}>
-            Continuer
-          </Button>
+          <div className="flex items-center gap-3">
+            {/* Les formes composées ne se devinent pas à l'écrit : « would have
+                been » s'entend « would've been ». Après la réponse seulement. */}
+            <SpeakButton text={form.answer} className="shrink-0" />
+            <Button block tone={checked ? 'success' : 'error'} onClick={() => onAnswer(checked)}>
+              Continuer
+            </Button>
+          </div>
         )}
       </div>
     </div>
