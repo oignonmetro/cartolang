@@ -1,176 +1,13 @@
 id: v1
-title: Registre et précision
-subtitle: Choisir le mot exact plutôt que le mot passe-partout
+title: Registre soutenu
+subtitle: Les mots qui n'appartiennent qu'à l'écrit formel
 icon: book
 color: teal
 level: C1
 
 lessons:
   - id: v1-l1
-    title: Remplacer les verbes passe-partout
-    vocab:
-      - id: c1-to-underpin
-        term: to underpin
-        translation: sous-tendre
-        alt:
-          - étayer
-        pos: verbe
-        gap: underpins
-        example:
-          text: A single assumption underpins the whole argument.
-          translation: Une seule hypothèse sous-tend tout l'argument.
-      - id: c1-to-hinge-on
-        term: to hinge on
-        translation: dépendre entièrement de
-        alt:
-          - reposer sur
-        pos: verbe
-        gap: hinges on
-        example:
-          text: The verdict hinges on one witness.
-          translation: Le verdict dépend entièrement d'un seul témoin.
-      - id: c1-to-account-for
-        term: to account for
-        translation: expliquer
-        alt:
-          - représenter
-        pos: verbe
-        gap: accounts for
-        example:
-          text: Transport accounts for a quarter of emissions.
-          translation: Les transports représentent un quart des émissions.
-      - id: c1-to-yield
-        term: to yield
-        translation: produire
-        alt:
-          - donner
-          - céder
-        pos: verbe
-        gap: yielded
-        hint: "Trois sens selon le contexte : produire, céder le passage, rapporter."
-        example:
-          text: The survey yielded unexpected results.
-          translation: L'enquête a produit des résultats inattendus.
-      - id: c1-to-warrant
-        term: to warrant
-        translation: justifier
-        alt:
-          - mériter
-        pos: verbe
-        gap: warrants
-        hint: "Le nom « a warrant » est tout autre chose : un mandat de justice."
-        example:
-          text: The claim warrants closer scrutiny.
-          translation: L'affirmation justifie un examen plus attentif.
-      - id: c1-to-stem-from
-        term: to stem from
-        translation: découler de
-        alt:
-          - provenir de
-        pos: verbe
-        gap: stems from
-        example:
-          text: The confusion stems from a translation error.
-          translation: La confusion découle d'une erreur de traduction.
-      - id: c1-to-encompass
-        term: to encompass
-        translation: englober
-        alt:
-          - recouvrir
-        pos: verbe
-        gap: encompasses
-        example:
-          text: The term encompasses several distinct practices.
-          translation: Le terme englobe plusieurs pratiques distinctes.
-      - id: c1-to-preclude
-        term: to preclude
-        translation: exclure
-        alt:
-          - empêcher
-        pos: verbe
-        gap: precludes
-        example:
-          text: Nothing precludes a second reading.
-          translation: Rien n'exclut une seconde lecture.
-
-  - id: v1-l2
-    title: Nuancer un jugement
-    vocab:
-      - id: c1-tentative
-        term: tentative
-        translation: provisoire
-        alt:
-          - prudent
-        pos: adjectif
-        hint: "Faux ami : rien à voir avec « une tentative », qui se dit « an attempt »."
-        example:
-          text: These are tentative conclusions at best.
-          translation: Ce sont au mieux des conclusions provisoires.
-      - id: c1-cogent
-        term: cogent
-        translation: rigoureux
-        alt:
-          - implacable
-        pos: adjectif
-        hint: "Plus étroit que « compelling » : la force vient de la logique, pas de l'émotion."
-        example:
-          text: She made a cogent case for reform.
-          translation: Elle a présenté un argumentaire rigoureux en faveur de la réforme.
-      - id: c1-questionable
-        term: questionable
-        translation: contestable
-        alt:
-          - douteux
-        pos: adjectif
-        example:
-          text: The methodology is questionable on several counts.
-          translation: La méthodologie est contestable à plusieurs égards.
-      - id: c1-sweeping
-        term: sweeping
-        translation: à l'emporte-pièce
-        alt:
-          - radical
-        pos: adjectif
-        example:
-          text: He made a sweeping generalisation about the region.
-          translation: Il a fait une généralisation à l'emporte-pièce sur la région.
-      - id: c1-nuanced
-        term: nuanced
-        translation: nuancé
-        pos: adjectif
-        example:
-          text: The report offers a more nuanced picture.
-          translation: Le rapport offre un tableau plus nuancé.
-      - id: c1-untenable
-        term: untenable
-        translation: intenable
-        alt:
-          - indéfendable
-        pos: adjectif
-        example:
-          text: That position has become untenable.
-          translation: Cette position est devenue intenable.
-      - id: c1-plausible
-        term: plausible
-        translation: vraisemblable
-        alt:
-          - plausible
-        pos: adjectif
-        example:
-          text: It remains the most plausible explanation.
-          translation: Cela reste l'explication la plus plausible.
-      - id: c1-cursory
-        term: cursory
-        translation: superficiel
-        alt:
-          - rapide
-        pos: adjectif
-        example:
-          text: A cursory glance is not enough here.
-          translation: Un coup d'œil superficiel ne suffit pas ici.
-
-  - id: v1-l3
-    title: Le registre soutenu
+    title: Mots-outils du registre écrit
     vocab:
       - id: c1-hitherto
         term: hitherto
@@ -250,3 +87,168 @@ lessons:
         example:
           text: There is scant evidence for that claim.
           translation: Il existe fort peu de preuves à l'appui de cette affirmation.
+
+  - id: v1-l2
+    title: Renvois et liens de l'écrit formel
+    vocab:
+      - id: c1-henceforth
+        term: henceforth
+        translation: désormais
+        alt:
+          - dorénavant
+        pos: adverbe
+        hint: Tourné vers l'avenir, quand « hitherto » regarde en arrière.
+        example:
+          text: The clause shall henceforth apply to all subsidiaries.
+          translation: La clause s'applique désormais à toutes les filiales.
+      - id: c1-thereafter
+        term: thereafter
+        translation: par la suite
+        alt:
+          - ensuite
+        pos: adverbe
+        example:
+          text: The committee met once and never thereafter.
+          translation: La commission s'est réunie une fois et jamais par la suite.
+      - id: c1-therein
+        term: therein
+        translation: dans ce document
+        alt:
+          - là-dedans
+        pos: adverbe
+        hint: "Renvoie à ce qui précède : le texte, le lieu, la chose déjà nommée."
+        example:
+          text: The report and the figures contained therein are confidential.
+          translation: Le rapport et les chiffres qu'il contient sont confidentiels.
+      - id: c1-hereby
+        term: hereby
+        translation: par la présente
+        pos: adverbe
+        hint: Propre aux actes qui s'accomplissent en s'énonçant, comme une résiliation.
+        example:
+          text: We hereby terminate the agreement.
+          translation: Nous résilions par la présente le contrat.
+      - id: c1-pursuant-to
+        term: pursuant to
+        translation: conformément à
+        alt:
+          - en application de
+        pos: préposition
+        example:
+          text: The data was destroyed pursuant to the court order.
+          translation: Les données ont été détruites conformément à la décision de justice.
+      - id: c1-whereupon
+        term: whereupon
+        translation: sur quoi
+        alt:
+          - après quoi
+        pos: adverbe
+        hint: Enchaîne deux faits dans un récit écrit, sans nouvelle phrase.
+        example:
+          text: The chair called a vote, whereupon three members walked out.
+          translation: Le président a demandé un vote, sur quoi trois membres sont sortis.
+      - id: c1-in-lieu-of
+        term: in lieu of
+        translation: à la place de
+        alt:
+          - au lieu de
+        pos: préposition
+        hint: "Faux ami trompeur : « lieu » est bien le mot français, mais figé dans cette locution seule."
+        example:
+          text: Staff were offered days off in lieu of overtime pay.
+          translation: Le personnel s'est vu proposer des jours de congé à la place des heures supplémentaires.
+      - id: c1-barring
+        term: barring
+        translation: sauf
+        alt:
+          - hormis
+          - sauf imprévu
+        pos: préposition
+        example:
+          text: Barring further delays, the bridge opens in June.
+          translation: Sauf nouveaux retards, le pont ouvre en juin.
+
+  - id: v1-l3
+    title: Le lexique du registre soutenu
+    vocab:
+      - id: c1-to-ascertain
+        term: to ascertain
+        translation: établir avec certitude
+        alt:
+          - vérifier
+        pos: verbe
+        gap: ascertain
+        hint: Plus fort que « to check » — on établit un fait, on ne le contrôle pas.
+        example:
+          text: Investigators could not ascertain the cause of the fire.
+          translation: Les enquêteurs n'ont pu établir avec certitude la cause de l'incendie.
+      - id: c1-to-endeavour
+        term: to endeavour
+        translation: s'employer à
+        alt:
+          - entreprendre
+        pos: verbe
+        gap: endeavour
+        example:
+          text: We endeavour to answer every request within a week.
+          translation: Nous nous employons à répondre à chaque demande sous une semaine.
+      - id: c1-to-cease
+        term: to cease
+        translation: cesser
+        pos: verbe
+        gap: ceased
+        hint: "« Stop » à l'oral, « cease » à l'écrit administratif."
+        example:
+          text: The company ceased trading in March.
+          translation: L'entreprise a cessé son activité en mars.
+      - id: c1-to-obviate
+        term: to obviate
+        translation: rendre superflu
+        alt:
+          - dispenser de
+        pos: verbe
+        gap: obviates
+        hint: On n'écarte pas le problème, on le rend sans objet.
+        example:
+          text: The new process obviates the need for a second check.
+          translation: Le nouveau procédé rend superflu un second contrôle.
+      - id: c1-to-expedite
+        term: to expedite
+        translation: accélérer
+        alt:
+          - hâter
+        pos: verbe
+        gap: expedite
+        example:
+          text: A dedicated team was set up to expedite the claims.
+          translation: Une équipe dédiée a été créée pour accélérer le traitement des demandes.
+      - id: c1-aforementioned
+        term: aforementioned
+        translation: susmentionné
+        alt:
+          - précité
+        pos: adjectif
+        example:
+          text: The aforementioned clause was never invoked.
+          translation: La clause susmentionnée n'a jamais été invoquée.
+      - id: c1-paucity
+        term: paucity
+        translation: pénurie
+        alt:
+          - rareté
+          - indigence
+        pos: nom
+        hint: "S'emploie surtout de l'immatériel : une pénurie de données, de preuves."
+        example:
+          text: The paucity of reliable data hampered the study.
+          translation: La pénurie de données fiables a entravé l'étude.
+      - id: c1-extant
+        term: extant
+        translation: subsistant
+        alt:
+          - encore existant
+        pos: adjectif
+        hint: Se dit de ce qui a survécu au temps — manuscrits, espèces, bâtiments.
+        example:
+          text: Only three extant copies of the manuscript are known.
+          translation: On ne connaît que trois exemplaires subsistants du manuscrit.

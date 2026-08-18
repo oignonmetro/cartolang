@@ -250,3 +250,90 @@ lessons:
         example:
           text: The latest data bears out that prediction.
           translation: Les dernières données confirment cette prédiction.
+
+  - id: v4-l4
+    title: Expliquer et relier
+    vocab:
+      - id: c1-to-underpin
+        term: to underpin
+        translation: sous-tendre
+        alt:
+          - étayer
+        pos: verbe
+        gap: underpins
+        example:
+          text: A single assumption underpins the whole argument.
+          translation: Une seule hypothèse sous-tend tout l'argument.
+      - id: c1-to-hinge-on
+        term: to hinge on
+        translation: dépendre entièrement de
+        alt:
+          - reposer sur
+        pos: verbe
+        gap: hinges on
+        example:
+          text: The verdict hinges on one witness.
+          translation: Le verdict dépend entièrement d'un seul témoin.
+      - id: c1-to-account-for
+        term: to account for
+        translation: expliquer
+        alt:
+          - représenter
+        pos: verbe
+        gap: accounts for
+        example:
+          text: Transport accounts for a quarter of emissions.
+          translation: Les transports représentent un quart des émissions.
+      - id: c1-to-yield
+        term: to yield
+        translation: produire
+        alt:
+          - donner
+          - céder
+        pos: verbe
+        gap: yielded
+        hint: "Trois sens selon le contexte : produire, céder le passage, rapporter."
+        example:
+          text: The survey yielded unexpected results.
+          translation: L'enquête a produit des résultats inattendus.
+      - id: c1-to-warrant
+        term: to warrant
+        translation: justifier
+        alt:
+          - mériter
+        pos: verbe
+        gap: warrants
+        hint: "Le nom « a warrant » est tout autre chose : un mandat de justice."
+        example:
+          text: The claim warrants closer scrutiny.
+          translation: L'affirmation justifie un examen plus attentif.
+      - id: c1-to-stem-from
+        term: to stem from
+        translation: découler de
+        alt:
+          - provenir de
+        pos: verbe
+        gap: stems from
+        example:
+          text: The confusion stems from a translation error.
+          translation: La confusion découle d'une erreur de traduction.
+      - id: c1-to-encompass
+        term: to encompass
+        translation: englober
+        alt:
+          - recouvrir
+        pos: verbe
+        gap: encompasses
+        example:
+          text: The term encompasses several distinct practices.
+          translation: Le terme englobe plusieurs pratiques distinctes.
+      - id: c1-to-preclude
+        term: to preclude
+        translation: exclure
+        alt:
+          - empêcher
+        pos: verbe
+        gap: precludes
+        example:
+          text: Nothing precludes a second reading.
+          translation: Rien n'exclut une seconde lecture.

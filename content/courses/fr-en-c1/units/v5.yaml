@@ -238,3 +238,79 @@ lessons:
         example:
           text: The revival drew an entirely new audience.
           translation: La reprise a attiré un public entièrement nouveau.
+
+  - id: v5-l4
+    title: Qualifier un traitement
+    vocab:
+      - id: c1-tentative
+        term: tentative
+        translation: provisoire
+        alt:
+          - prudent
+        pos: adjectif
+        hint: "Faux ami : rien à voir avec « une tentative », qui se dit « an attempt »."
+        example:
+          text: These are tentative conclusions at best.
+          translation: Ce sont au mieux des conclusions provisoires.
+      - id: c1-cogent
+        term: cogent
+        translation: rigoureux
+        alt:
+          - implacable
+        pos: adjectif
+        hint: "Plus étroit que « compelling » : la force vient de la logique, pas de l'émotion."
+        example:
+          text: She made a cogent case for reform.
+          translation: Elle a présenté un argumentaire rigoureux en faveur de la réforme.
+      - id: c1-questionable
+        term: questionable
+        translation: contestable
+        alt:
+          - douteux
+        pos: adjectif
+        example:
+          text: The methodology is questionable on several counts.
+          translation: La méthodologie est contestable à plusieurs égards.
+      - id: c1-sweeping
+        term: sweeping
+        translation: à l'emporte-pièce
+        alt:
+          - radical
+        pos: adjectif
+        example:
+          text: He made a sweeping generalisation about the region.
+          translation: Il a fait une généralisation à l'emporte-pièce sur la région.
+      - id: c1-nuanced
+        term: nuanced
+        translation: nuancé
+        pos: adjectif
+        example:
+          text: The report offers a more nuanced picture.
+          translation: Le rapport offre un tableau plus nuancé.
+      - id: c1-untenable
+        term: untenable
+        translation: intenable
+        alt:
+          - indéfendable
+        pos: adjectif
+        example:
+          text: That position has become untenable.
+          translation: Cette position est devenue intenable.
+      - id: c1-plausible
+        term: plausible
+        translation: vraisemblable
+        alt:
+          - plausible
+        pos: adjectif
+        example:
+          text: It remains the most plausible explanation.
+          translation: Cela reste l'explication la plus plausible.
+      - id: c1-cursory
+        term: cursory
+        translation: superficiel
+        alt:
+          - rapide
+        pos: adjectif
+        example:
+          text: A cursory glance is not enough here.
+          translation: Un coup d'œil superficiel ne suffit pas ici.
