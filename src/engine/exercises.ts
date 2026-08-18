@@ -1184,7 +1184,19 @@ function buildMixedSession(
     // Le QCM est une deuxième façon de reconnaître, à côté de la flashcard —
     // sans lui, la reconnaissance se ramenait toujours à la même
     // auto-évaluation, quand la leçon d'origine variait déjà l'énoncé.
-    const cue = sample(cuesFor(vocab, canSpeak), 1, rng)[0]
+    //
+    // `hint` en est exclu ici : c'est une note d'usage, pas un indice pensé
+    // pour désigner un mot sans ambiguïté, et elle ne le fait que par rapport
+    // aux autres mots de la même leçon (« hitherto » se distingue de
+    // « henceforth », son opposé, écrit dans la même leçon). Or `vocabPool`
+    // mélange ici tout le cours : les distracteurs peuvent venir d'une leçon
+    // sans rapport, et deviner devient un pari sur l'association plutôt
+    // qu'un rappel du sens.
+    const cue = sample(
+      cuesFor(vocab, canSpeak).filter((candidate) => candidate !== 'hint'),
+      1,
+      rng,
+    )[0]
     const choice = cue ? choiceFor(vocab, cue, vocabPool, rng) : null
     if (choice && rng() < 0.55) return choice
 

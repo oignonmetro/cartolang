@@ -336,6 +336,28 @@ describe('session de révision', () => {
     expect(kinds).toContain('flashcard')
   })
 
+  it('exclut l’indice du QCM en révision, même quand le mot en a un', () => {
+    // « hitherto » et « henceforth » ne se distinguent que l'un par rapport à
+    // l'autre, dans la même leçon. En révision, le réservoir de leurres vient
+    // de tout le cours (voir buildMixedSession) : deviner deviendrait un pari
+    // sur l'association plutôt qu'un rappel du sens.
+    const withHints: Vocab[] = [
+      { id: 'a', term: 'hitherto', translation: "jusqu'à présent", alt: [], hint: 'Regarde en arrière.' },
+      { id: 'b', term: 'henceforth', translation: 'désormais', alt: [], hint: "Tourné vers l'avenir." },
+      { id: 'c', term: 'therein', translation: 'dans ce document', alt: [], hint: 'Renvoie à ce qui précède.' },
+      { id: 'd', term: 'hereby', translation: 'par la présente', alt: [], hint: 'Propre aux actes.' },
+    ]
+    const fragile = withHints.map((vocab) => ({
+      card: { ...createCard(vocab.id, T0), step: 0 },
+      item: { kind: 'vocab' as const, id: vocab.id, vocab },
+    }))
+    for (let seed = 0; seed < 20; seed++) {
+      expect(buildReviewSession(fragile, seed).some((e) => e.kind === 'choice' && e.cue === 'hint')).toBe(
+        false,
+      )
+    }
+  })
+
   it('fait traduire vers le français avant d’exiger le mot anglais', () => {
     // Après une première révision réussie l'intervalle vaut 3 jours : la carte
     // sort de la reconnaissance, mais le mot anglais n'est pas encore
@@ -363,6 +385,24 @@ describe('session d’entraînement', () => {
 
   it('est vide sans élément déjà rencontré', () => {
     expect(buildPracticeSession([])).toEqual([])
+  })
+
+  it('exclut aussi l’indice du QCM à l’entraînement', () => {
+    const withHints: Vocab[] = [
+      { id: 'a', term: 'hitherto', translation: "jusqu'à présent", alt: [], hint: 'Regarde en arrière.' },
+      { id: 'b', term: 'henceforth', translation: 'désormais', alt: [], hint: "Tourné vers l'avenir." },
+      { id: 'c', term: 'therein', translation: 'dans ce document', alt: [], hint: 'Renvoie à ce qui précède.' },
+      { id: 'd', term: 'hereby', translation: 'par la présente', alt: [], hint: 'Propre aux actes.' },
+    ]
+    const fragile = withHints.map((vocab) => ({
+      card: { ...createCard(vocab.id, T0), step: 0 },
+      item: { kind: 'vocab' as const, id: vocab.id, vocab },
+    }))
+    for (let seed = 0; seed < 20; seed++) {
+      expect(
+        buildPracticeSession(fragile, seed).some((e) => e.kind === 'choice' && e.cue === 'hint'),
+      ).toBe(false)
+    }
   })
 
   it('n’exige jamais le mot anglais d’une carte encore en apprentissage', () => {
