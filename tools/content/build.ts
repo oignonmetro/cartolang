@@ -298,6 +298,26 @@ function checkVocabLesson(lesson: VocabLesson, problems: string[], learning: str
       accepted.set(key, vocab.term)
     }
   }
+
+  // `hint` sert d'indice dans le QCM « de quel mot parle-t-on ? » (voir
+  // `cuesFor` dans exercises.ts) : deux mots qui partagent le même indice
+  // rendent ce QCM insoluble par raisonnement entre eux, un pur hasard. Les
+  // lettres sont exclues de ce QCM précisément pour cette raison — le
+  // contrôle ne vaut donc que pour le reste du vocabulaire.
+  const hints = new Map<string, string>()
+  for (const vocab of lesson.vocab) {
+    if (!vocab.hint || vocab.pos === 'lettre') continue
+    const key = vocab.hint.trim().toLowerCase()
+    const owner = hints.get(key)
+    if (owner && owner !== vocab.term) {
+      warn(
+        `leçon "${lesson.id}"`,
+        `« ${vocab.term} » et « ${owner} » partagent le même indice ; le QCM qui s'appuie ` +
+          'dessus ne peut plus les distinguer',
+      )
+    }
+    hints.set(key, vocab.term)
+  }
 }
 
 /**

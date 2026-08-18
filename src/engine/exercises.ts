@@ -381,7 +381,13 @@ function choiceFor(vocab: Vocab, cue: ChoiceCue, pool: readonly Vocab[], rng: Rn
 /** Les énoncés qu'un mot peut réellement soutenir, selon ce que l'auteur a écrit. */
 function cuesFor(vocab: Vocab, canSpeak: boolean): ChoiceCue[] {
   const cues: ChoiceCue[] = ['term', 'translation']
-  if (vocab.hint) cues.push('hint')
+  // `hint` est une remarque sur le mot (prononciation, faux ami…), pas un
+  // indice conçu pour désigner un mot parmi d'autres. Pour une lettre, cette
+  // remarque décrit souvent un trait partagé par plusieurs lettres à la fois
+  // (« même forme, même son qu'en français ») : le QCM redeviendrait un choix
+  // au hasard entre elles. Les mots ordinaires y échappent, une remarque de
+  // vocabulaire visant en pratique à distinguer le mot qu'elle décrit.
+  if (vocab.hint && vocab.pos !== 'lettre') cues.push('hint')
   if (vocab.example) cues.push('sentence')
   if (canSpeak) cues.push('audio')
   return cues

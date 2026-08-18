@@ -266,6 +266,23 @@ describe('variété des exercices de vocabulaire', () => {
       expect(session.some((e) => e.kind === 'choice' && e.cue === 'hint')).toBe(false)
     }
   })
+
+  it('ne propose jamais l’indice comme énoncé pour une lettre', () => {
+    // Un indice de lettre décrit un trait souvent partagé par plusieurs
+    // lettres à la fois (« même forme, même son qu'en français ») : en faire
+    // l'énoncé d'un QCM rendrait le choix insoluble par raisonnement entre
+    // elles. Voir `cuesFor` dans exercises.ts.
+    const letters: Vocab[] = [
+      { id: 'a', term: 'А', translation: 'a', alt: [], pos: 'lettre', hint: 'Même forme, même son.' },
+      { id: 'k', term: 'К', translation: 'k', alt: [], pos: 'lettre', hint: 'Même forme, même son.' },
+      { id: 'm', term: 'М', translation: 'm', alt: [], pos: 'lettre', hint: 'Même forme, même son.' },
+      { id: 'o', term: 'О', translation: 'o', alt: [], pos: 'lettre', hint: 'Se lit « o » ou « a ».' },
+    ]
+    for (const seed of [1, 2, 3, 4, 5]) {
+      const session = buildLessonSession(lessonOf('u1-l1', letters), 0, seed, {}, true)
+      expect(session.some((e) => e.kind === 'choice' && e.cue === 'hint')).toBe(false)
+    }
+  })
 })
 
 describe('session de révision', () => {
