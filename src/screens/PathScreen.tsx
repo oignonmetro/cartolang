@@ -134,8 +134,8 @@ function LessonBubble({ node, offset, onOpen }: { node: LessonNode; offset: numb
 
   return (
     <div className="relative flex flex-col items-center py-3" style={{ transform: `translateX(${offset}px)` }}>
-      {/* Le badge se place sur le côté : au-dessus, il chevaucherait le
-          titre de la leçon précédente. */}
+      {/* Le badge se place sur le côté : au-dessus, il chevaucherait la
+          bulle précédente sur le serpentin. */}
       {active && (
         <motion.span
           initial={{ x: offset >= 0 ? 8 : -8, opacity: 0 }}
@@ -165,10 +165,6 @@ function LessonBubble({ node, offset, onOpen }: { node: LessonNode; offset: numb
       >
         {locked ? <LockIcon size={26} /> : done ? <CheckIcon size={30} /> : <UnitIcon name={node.unit.icon} size={28} />}
       </motion.button>
-
-      <span className={`mt-1 max-w-32 text-center text-xs font-bold ${locked ? 'text-ink-faint' : 'text-ink-soft'}`}>
-        {node.lesson.title}
-      </span>
     </div>
   )
 }
