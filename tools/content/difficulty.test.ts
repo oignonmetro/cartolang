@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest'
 import {
+  alphabetGatingRemarks,
   conjugationVerbRemarks,
   duplicateAcrossCourses,
   grammarPointRemarks,
@@ -231,5 +232,52 @@ describe('duplicateAcrossCourses', () => {
       { courseId: 'b', where: 'y', sentence: 'I wish I knew.' },
     ])
     expect(remarks).toEqual([])
+  })
+})
+
+describe('alphabetGatingRemarks', () => {
+  const letter = (term: string) => ({ id: `l-${term}`, term, translation: 't', alt: [], pos: 'lettre' as const })
+  const word = (term: string, example?: string) => ({
+    id: `w-${term}`,
+    term,
+    translation: 't',
+    alt: [],
+    ...(example ? { example: { text: example, translation: 't' } } : {}),
+  })
+
+  it('se tait quand chaque mot n\'emploie que des lettres déjà vues', () => {
+    const remarks = alphabetGatingRemarks([
+      { id: 'l1', vocab: [letter('К'), letter('О'), letter('Т')] },
+      { id: 'l2', vocab: [word('кот')] },
+    ])
+    expect(remarks).toEqual([])
+  })
+
+  it('signale une lettre pas encore enseignée', () => {
+    const remarks = alphabetGatingRemarks([
+      { id: 'l1', vocab: [letter('К'), letter('О')] },
+      { id: 'l2', vocab: [word('кот')] },
+    ])
+    expect(remarks).toHaveLength(1)
+    expect(remarks[0]).toMatch(/« т »/)
+  })
+
+  it('ne compte les lettres qu\'à partir de la leçon suivante', () => {
+    // Un mot placé dans la leçon qui enseigne ses lettres reste illisible :
+    // on le découvre avant d'avoir appris à le lire.
+    const remarks = alphabetGatingRemarks([{ id: 'l1', vocab: [letter('К'), word('кот')] }])
+    expect(remarks).toHaveLength(1)
+  })
+
+  it('contrôle aussi la phrase d\'exemple', () => {
+    const remarks = alphabetGatingRemarks([
+      { id: 'l1', vocab: [letter('К'), letter('О'), letter('Т')] },
+      { id: 'l2', vocab: [word('кот', 'Кот там.')] },
+    ])
+    expect(remarks.join(' ')).toMatch(/l'exemple/)
+  })
+
+  it('ne s\'active pas sur un cours sans alphabet', () => {
+    expect(alphabetGatingRemarks([{ id: 'l1', vocab: [word('hello')] }])).toEqual([])
   })
 })

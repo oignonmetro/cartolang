@@ -24,8 +24,26 @@ import { TextToSpeech } from '@capacitor-community/text-to-speech'
  * l'avance si le bouton vaut la peine d'être affiché.
  */
 
-/** Anglais américain : la voix la plus souvent installée par défaut. */
-const LANG = 'en-US'
+/**
+ * Étiquette de voix pour chaque langue enseignée.
+ *
+ * Le code court vient du champ `learning` du cours ; le moteur de synthèse,
+ * lui, attend une étiquette complète. Faire lire du russe par une voix
+ * anglaise ne donnerait pas un accent approximatif mais du charabia : la
+ * langue doit suivre le cours, pas être figée.
+ */
+const VOICES: Record<string, string> = {
+  en: 'en-US',
+  ru: 'ru-RU',
+}
+
+const FALLBACK = 'en-US'
+let LANG = FALLBACK
+
+/** Appelé au chargement d'un cours (voir `CourseProvider`). */
+export function setSpokenLanguage(learning: string): void {
+  LANG = VOICES[learning] ?? FALLBACK
+}
 
 const native = Capacitor.isNativePlatform()
 

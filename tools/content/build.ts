@@ -37,7 +37,12 @@ import {
 import { findVocabGap } from '../../src/content/text.ts'
 import { parseNotes } from '../../src/content/notes.ts'
 import { itemsOfCourse, itemsOfLesson, lessonsOf } from '../../src/content/course.ts'
-import { conjugationVerbRemarks, duplicateAcrossCourses, grammarPointRemarks } from './difficulty.ts'
+import {
+  alphabetGatingRemarks,
+  conjugationVerbRemarks,
+  duplicateAcrossCourses,
+  grammarPointRemarks,
+} from './difficulty.ts'
 
 const root = resolve(fileURLToPath(new URL('../..', import.meta.url)))
 const contentDir = join(root, 'content', 'courses')
@@ -219,7 +224,7 @@ function checkCoherence(course: Course, dir: string) {
     }
 
     checkNotesMarkup(lesson.id, 'notes' in lesson ? lesson.notes : undefined)
-    if (lesson.kind === 'vocab') checkVocabLesson(lesson, problems)
+    if (lesson.kind === 'vocab') checkVocabLesson(lesson, problems, course.learning)
     if (lesson.kind === 'grammar') checkGrammarLesson(lesson, problems)
     if (lesson.kind === 'conjugation') checkConjugationLesson(lesson, problems, course.level ?? '')
   }
@@ -232,10 +237,16 @@ function checkCoherence(course: Course, dir: string) {
     }
   }
 
+  // Un cours qui enseigne un alphabet doit rester déchiffrable de bout en bout.
+  const vocabLessons = lessonsOf(course)
+    .map(({ lesson }) => lesson)
+    .filter((lesson): lesson is VocabLesson => lesson.kind === 'vocab')
+  for (const remark of alphabetGatingRemarks(vocabLessons)) warn(`cours "${course.id}"`, remark)
+
   if (problems.length) fail(dir, problems.join('\n    '))
 }
 
-function checkVocabLesson(lesson: VocabLesson, problems: string[]) {
+function checkVocabLesson(lesson: VocabLesson, problems: string[], learning: string) {
   if (lesson.vocab.length < 4) {
     problems.push(
       `leçon "${lesson.id}" : ${lesson.vocab.length} mot(s), il en faut au moins 4 pour l'exercice d'association`,
@@ -259,9 +270,10 @@ function checkVocabLesson(lesson: VocabLesson, problems: string[]) {
       )
     }
 
-    // L'infinitif est la convention du corpus : elle rend les cartes
-    // comparables et guide la forme attendue à la saisie.
-    if (vocab.pos === 'verbe' && !/^to\s/i.test(vocab.term)) {
+    // L'infinitif anglais s'écrit avec « to » : la convention rend les cartes
+    // comparables et guide la forme attendue à la saisie. Elle ne vaut que pour
+    // l'anglais — l'infinitif russe (« есть ») ne porte aucune particule.
+    if (learning === 'en' && vocab.pos === 'verbe' && !/^to\s/i.test(vocab.term)) {
       warn(`mot "${vocab.id}"`, `verbe noté sans « to » ("${vocab.term}")`)
     }
 

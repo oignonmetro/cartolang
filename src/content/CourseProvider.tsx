@@ -25,6 +25,8 @@ interface CourseContextValue extends CourseState {
 
 const CourseContext = createContext<CourseContextValue | null>(null)
 
+import { setSpokenLanguage } from '@/lib/speech'
+
 const SELECTED_COURSE_KEY = 'cartolang.course'
 
 export function CourseProvider({ children }: { children: ReactNode }) {
@@ -48,6 +50,9 @@ export function CourseProvider({ children }: { children: ReactNode }) {
     const course = await resolveCourse(entry.id)
     if (id !== requestId.current) return
     localStorage.setItem(SELECTED_COURSE_KEY, course.id)
+    // La voix suit la langue enseignée : un cours de russe ne doit pas être lu
+    // par une voix anglaise.
+    setSpokenLanguage(course.learning)
     setState({ course, itemsById: indexItems(course), manifest })
   }, [])
 

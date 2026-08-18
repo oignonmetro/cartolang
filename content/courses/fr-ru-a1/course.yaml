@@ -1,0 +1,44 @@
+# Cours de russe grand débutant, pour francophones.
+#
+# Parti pris central : l'alphabet n'est pas un préalable à franchir avant de
+# commencer, il est ce qui ouvre le vocabulaire. Chaque leçon de lettres est
+# suivie d'une leçon de mots composés **uniquement de lettres déjà vues** —
+# l'apprenant ne rencontre jamais un signe qu'il ne sait pas lire, et déchiffre
+# de vrais mots russes dès la première séance.
+#
+# Les lettres sont groupées par rapport à l'alphabet latin, et non par ordre
+# alphabétique : c'est là qu'est la difficulté d'un francophone. Les
+# « traîtresses » (В Н Р С У Х), qui ont l'air latines et se lisent autrement,
+# forment à elles seules une unité, parce que le réflexe acquis se bat contre
+# la lecture correcte.
+#
+# D'où le `layout: path` : contrairement aux cours B1-C1, l'ordre n'est pas
+# libre. On ne peut pas lire « спасибо » avant de connaître П, С, И et Б.
+
+id: fr-ru-a1
+name: Russe, grand débutant
+learning: ru
+known: fr
+flag: 🇷🇺
+level: A1
+tagline: Lire l'alphabet, puis les premiers mots.
+status: available
+layout: path
+version: 1
+
+sections:
+  - id: s1
+    title: "Section 1 : Lire le russe"
+    units:
+      - u1
+      - u2
+      - u3
+      - u4
+      - u5
+
+  - id: s2
+    title: "Section 2 : Les premiers mots"
+    units:
+      - u6
+      - u7
+      - u8

@@ -60,6 +60,10 @@ export const vocabSchema = z.object({
       'préposition',
       'conjonction',
       'nombre',
+      // Une carte peut porter une lettre plutôt qu'un mot : c'est ainsi que le
+      // cours de russe enseigne l'alphabet, avec les mêmes exercices que le
+      // vocabulaire (flashcard, association, QCM).
+      'lettre',
     ])
     .optional(),
   example: exampleSchema.optional(),

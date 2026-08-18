@@ -1,0 +1,106 @@
+id: u6
+title: Se présenter
+subtitle: Saluer, se nommer, prendre congé
+icon: people
+color: teal
+level: A1
+
+lessons:
+  - id: u6-l1
+    title: Saluer et prendre congé
+    vocab:
+      - id: ru-privet
+        term: привет
+        translation: salut
+        pos: expression
+        hint: Entre proches uniquement.
+        example:
+          text: Привет, как дела?
+          translation: Salut, comment ça va ?
+      - id: ru-zdravstvuyte
+        term: здравствуйте
+        translation: bonjour
+        pos: expression
+        hint: "La forme polie, et le mot le plus long du cours : « zdrastvouïtié »."
+        example:
+          text: Здравствуйте, я Анна.
+          translation: Bonjour, je suis Anna.
+      - id: ru-do-svidaniya
+        term: до свидания
+        translation: au revoir
+        pos: expression
+        example:
+          text: Спасибо и до свидания.
+          translation: Merci et au revoir.
+      - id: ru-kak-dela
+        term: как дела
+        translation: comment ça va
+        pos: expression
+        example:
+          text: Привет, как дела?
+          translation: Salut, comment ça va ?
+      - id: ru-khorosho
+        term: хорошо
+        translation: bien
+        pos: adverbe
+        example:
+          text: Всё хорошо, спасибо.
+          translation: Tout va bien, merci.
+      - id: ru-pozhaluysta
+        term: пожалуйста
+        translation: s'il vous plaît
+        alt:
+          - je vous en prie
+        pos: expression
+        hint: Sert aussi à répondre à « merci ».
+        example:
+          text: Чай, пожалуйста.
+          translation: Un thé, s'il vous plaît.
+
+  - id: u6-l2
+    title: Dire qui l'on est
+    vocab:
+      - id: ru-menya-zovut
+        term: меня зовут
+        translation: je m'appelle
+        pos: expression
+        hint: "Mot à mot « on m'appelle » : le russe n'a pas de verbe « s'appeler »."
+        example:
+          text: Меня зовут Иван.
+          translation: Je m'appelle Ivan.
+      - id: ru-on
+        term: он
+        translation: il
+        pos: pronom
+        example:
+          text: Он дома.
+          translation: Il est à la maison.
+      - id: ru-ona
+        term: она
+        translation: elle
+        pos: pronom
+        example:
+          text: Она здесь.
+          translation: Elle est ici.
+      - id: ru-my
+        term: мы
+        translation: nous
+        pos: pronom
+        example:
+          text: Мы здесь.
+          translation: Nous sommes ici.
+      - id: ru-vy
+        term: вы
+        translation: vous
+        pos: pronom
+        hint: Sert au pluriel comme au vouvoiement.
+        example:
+          text: Вы дома?
+          translation: Êtes-vous à la maison ?
+      - id: ru-ochen-priyatno
+        term: очень приятно
+        translation: enchanté
+        pos: expression
+        example:
+          text: Очень приятно, Анна.
+          translation: Enchanté, Anna.

@@ -1,0 +1,72 @@
+id: u3
+title: Formes nouvelles, sons connus
+subtitle: Des lettres inédites, mais rien de difficile à prononcer
+icon: wave
+color: violet
+level: A1
+
+lessons:
+  - id: u3-l1
+    title: Six formes à apprendre
+    vocab:
+      - id: ru-let-b
+        term: Б
+        translation: b
+        pos: lettre
+        hint: "À ne pas confondre avec В, qui se lit v : le Б a une boucle ouverte."
+      - id: ru-let-d
+        term: Д
+        translation: d
+        pos: lettre
+        hint: Une petite maison sur pilotis.
+      - id: ru-let-z
+        term: З
+        translation: z
+        pos: lettre
+        hint: Un 3 à l'envers, et le son suit presque.
+      - id: ru-let-i
+        term: И
+        translation: i
+        pos: lettre
+        hint: "Un N latin renversé, mais se lit i : « i » comme dans « ici »."
+      - id: ru-let-l
+        term: Л
+        translation: l
+        pos: lettre
+        hint: Une tente.
+      - id: ru-let-p
+        term: П
+        translation: p
+        pos: lettre
+        hint: "Un portique. Attention : c'est Р qui se lit r, pas П."
+
+  - id: u3-l2
+    title: Des mots du quotidien
+    vocab:
+      - id: ru-da
+        term: да
+        translation: oui
+        pos: adverbe
+      - id: ru-spasibo
+        term: спасибо
+        translation: merci
+        pos: expression
+        hint: Sept lettres, toutes connues désormais.
+      - id: ru-voda
+        term: вода
+        translation: eau
+        pos: nom
+      - id: ru-stol
+        term: стол
+        translation: table
+        pos: nom
+      - id: ru-dom
+        term: дом
+        translation: maison
+        pos: nom
+      - id: ru-bilet
+        term: билет
+        translation: billet
+        alt:
+          - ticket
+        pos: nom

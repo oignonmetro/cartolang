@@ -1,0 +1,79 @@
+id: u1
+title: Les lettres amies
+subtitle: Six lettres que vous savez déjà lire
+icon: book
+color: teal
+level: A1
+
+lessons:
+  - id: u1-l1
+    title: Six lettres sans piège
+    vocab:
+      - id: ru-let-a
+        term: А
+        translation: a
+        pos: lettre
+        hint: Même forme, même son qu'en français.
+      - id: ru-let-k
+        term: К
+        translation: k
+        pos: lettre
+        hint: Même forme, même son. Toujours dur, jamais « s ».
+      - id: ru-let-m
+        term: М
+        translation: m
+        pos: lettre
+        hint: Même forme, même son qu'en français.
+      - id: ru-let-o
+        term: О
+        translation: o
+        pos: lettre
+        hint: "Se lit « o » quand la syllabe est accentuée, « a » sinon — on y reviendra."
+      - id: ru-let-t
+        term: Т
+        translation: t
+        pos: lettre
+        hint: Même forme, même son qu'en français.
+      - id: ru-let-e
+        term: Е
+        translation: ié
+        alt:
+          - e
+        pos: lettre
+        hint: "Presque une amie : la forme est la même, mais elle mouille — « ié », comme dans « pièce »."
+
+  - id: u1-l2
+    title: Vos premiers mots russes
+    vocab:
+      - id: ru-mama
+        term: мама
+        translation: maman
+        pos: nom
+        hint: Quatre lettres, toutes connues. Vous lisez déjà du russe.
+      - id: ru-kot
+        term: кот
+        translation: chat
+        pos: nom
+      - id: ru-tam
+        term: там
+        translation: là-bas
+        pos: adverbe
+      - id: ru-tak
+        term: так
+        translation: ainsi
+        alt:
+          - comme ça
+        pos: adverbe
+      - id: ru-tom
+        term: том
+        translation: tome
+        alt:
+          - volume
+        pos: nom
+        hint: Le même mot qu'en français, à l'orthographe près.
+      - id: ru-mak
+        term: мак
+        translation: coquelicot
+        alt:
+          - pavot
+        pos: nom

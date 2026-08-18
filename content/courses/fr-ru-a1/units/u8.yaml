@@ -1,0 +1,106 @@
+id: u8
+title: Manger et boire
+subtitle: Commander et nommer ce qu'il y a sur la table
+icon: cup
+color: amber
+level: A1
+
+lessons:
+  - id: u8-l1
+    title: Sur la table
+    vocab:
+      - id: ru-khleb
+        term: хлеб
+        translation: pain
+        pos: nom
+        example:
+          text: Хлеб и вода.
+          translation: Du pain et de l'eau.
+      - id: ru-moloko
+        term: молоко
+        translation: lait
+        pos: nom
+        hint: "Trois О, et un seul se prononce « o » : « malako »."
+        example:
+          text: Чай с молоком.
+          translation: Du thé avec du lait.
+        gap: молоком
+      - id: ru-kofe
+        term: кофе
+        translation: café
+        pos: nom
+        example:
+          text: Кофе, пожалуйста.
+          translation: Un café, s'il vous plaît.
+      - id: ru-sup
+        term: суп
+        translation: soupe
+        pos: nom
+        example:
+          text: Суп и хлеб.
+          translation: De la soupe et du pain.
+      - id: ru-myaso
+        term: мясо
+        translation: viande
+        pos: nom
+        example:
+          text: Мясо и картошка.
+          translation: De la viande et des pommes de terre.
+      - id: ru-ryba
+        term: рыба
+        translation: poisson
+        pos: nom
+        example:
+          text: Рыба здесь очень вкусная.
+          translation: Le poisson est très bon ici.
+        gap: Рыба
+
+  - id: u8-l2
+    title: À table
+    vocab:
+      - id: ru-est
+        term: есть
+        translation: manger
+        pos: verbe
+        hint: "Le même mot signifie « il y a » — le contexte tranche."
+        example:
+          text: Я хочу есть.
+          translation: J'ai faim.
+      - id: ru-pit
+        term: пить
+        translation: boire
+        pos: verbe
+        example:
+          text: Я хочу пить.
+          translation: J'ai soif.
+      - id: ru-vkusno
+        term: вкусно
+        translation: c'est bon
+        alt:
+          - délicieux
+        pos: adverbe
+        example:
+          text: Очень вкусно, спасибо!
+          translation: C'est très bon, merci !
+      - id: ru-schyot
+        term: счёт
+        translation: addition
+        pos: nom
+        hint: "Le groupe СЧ se lit « chtch », comme un Щ."
+        example:
+          text: Счёт, пожалуйста.
+          translation: L'addition, s'il vous plaît.
+      - id: ru-voda-stakan
+        term: стакан
+        translation: verre
+        pos: nom
+        example:
+          text: Стакан воды, пожалуйста.
+          translation: Un verre d'eau, s'il vous plaît.
+      - id: ru-lozhka
+        term: ложка
+        translation: cuillère
+        pos: nom
+        example:
+          text: Ложка и нож.
+          translation: Une cuillère et un couteau.

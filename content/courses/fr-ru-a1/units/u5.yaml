@@ -1,0 +1,89 @@
+id: u5
+title: Voyelles iotées et signes
+subtitle: Les huit dernières, et l'alphabet est complet
+icon: clock
+color: sky
+level: A1
+
+lessons:
+  - id: u5-l1
+    title: Les huit dernières lettres
+    vocab:
+      - id: ru-let-ya
+        term: Я
+        translation: ia
+        alt:
+          - ya
+        pos: lettre
+        hint: "Un R latin renversé. Se lit « ia », et signifie « je » à elle seule."
+      - id: ru-let-you
+        term: Ю
+        translation: iou
+        alt:
+          - you
+        pos: lettre
+      - id: ru-let-e-ouvert
+        term: Э
+        translation: è
+        pos: lettre
+        hint: "Le è ouvert, sans mouillure — là où Е mouille."
+      - id: ru-let-io
+        term: Ё
+        translation: io
+        alt:
+          - yo
+        pos: lettre
+        hint: "Un Е avec deux points. Toujours accentué — et souvent écrit « е » dans les textes courants."
+      - id: ru-let-i-bref
+        term: Й
+        translation: y
+        alt:
+          - i bref
+        pos: lettre
+        hint: "Un И coiffé. Ne forme jamais une syllabe : il ferme la précédente."
+      - id: ru-let-y
+        term: Ы
+        translation: y guttural
+        pos: lettre
+        hint: Aucun équivalent français — un i prononcé au fond de la gorge.
+      - id: ru-let-mou
+        term: Ь
+        translation: signe mou
+        pos: lettre
+        hint: Ne se prononce pas seul — il mouille la consonne qui précède.
+      - id: ru-let-dur
+        term: Ъ
+        translation: signe dur
+        pos: lettre
+        hint: Muet lui aussi, et rarissime — il sépare, là où le signe mou mouille.
+
+  - id: u5-l2
+    title: L'alphabet au complet
+    vocab:
+      - id: ru-ya
+        term: я
+        translation: je
+        pos: pronom
+        hint: Une seule lettre, un mot entier.
+      - id: ru-ty
+        term: ты
+        translation: tu
+        pos: pronom
+        hint: Contient le Ы, le son sans équivalent français.
+      - id: ru-moy
+        term: мой
+        translation: mon
+        pos: adjectif
+      - id: ru-chay
+        term: чай
+        translation: thé
+        pos: nom
+      - id: ru-dver
+        term: дверь
+        translation: porte
+        pos: nom
+        hint: Le signe mou final adoucit le Р, sans s'entendre lui-même.
+      - id: ru-eshcho
+        term: ещё
+        translation: encore
+        pos: adverbe

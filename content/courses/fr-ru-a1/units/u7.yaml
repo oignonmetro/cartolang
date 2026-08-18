@@ -1,0 +1,101 @@
+id: u7
+title: Compter et situer
+subtitle: Les premiers nombres et les repères du jour
+icon: clock
+color: violet
+level: A1
+
+lessons:
+  - id: u7-l1
+    title: De un à six
+    vocab:
+      - id: ru-odin
+        term: один
+        translation: un
+        pos: nombre
+        example:
+          text: Один билет, пожалуйста.
+          translation: Un billet, s'il vous plaît.
+      - id: ru-dva
+        term: два
+        translation: deux
+        pos: nombre
+        example:
+          text: Два часа.
+          translation: Deux heures.
+      - id: ru-tri
+        term: три
+        translation: trois
+        pos: nombre
+        example:
+          text: Три дня.
+          translation: Trois jours.
+      - id: ru-chetyre
+        term: четыре
+        translation: quatre
+        pos: nombre
+        example:
+          text: Четыре книги.
+          translation: Quatre livres.
+      - id: ru-pyat
+        term: пять
+        translation: cinq
+        pos: nombre
+        example:
+          text: Пять минут.
+          translation: Cinq minutes.
+      - id: ru-shest
+        term: шесть
+        translation: six
+        pos: nombre
+        example:
+          text: Шесть часов.
+          translation: Six heures.
+
+  - id: u7-l2
+    title: Aujourd'hui, demain, ici
+    vocab:
+      - id: ru-segodnya
+        term: сегодня
+        translation: aujourd'hui
+        pos: adverbe
+        hint: "Le Г se lit v dans ce mot : « sivodnia ». Une exception à retenir telle quelle."
+        example:
+          text: Сегодня хорошо.
+          translation: Aujourd'hui, tout va bien.
+      - id: ru-zavtra
+        term: завтра
+        translation: demain
+        pos: adverbe
+        example:
+          text: До завтра!
+          translation: À demain !
+      - id: ru-seychas
+        term: сейчас
+        translation: maintenant
+        pos: adverbe
+        example:
+          text: Я сейчас дома.
+          translation: Je suis à la maison maintenant.
+      - id: ru-zdes
+        term: здесь
+        translation: ici
+        pos: adverbe
+        example:
+          text: Метро здесь.
+          translation: Le métro est ici.
+      - id: ru-den
+        term: день
+        translation: jour
+        pos: nom
+        example:
+          text: Добрый день!
+          translation: Bonjour !
+      - id: ru-noch
+        term: ночь
+        translation: nuit
+        pos: nom
+        example:
+          text: Спокойной ночи!
+          translation: Bonne nuit !
+        gap: ночи

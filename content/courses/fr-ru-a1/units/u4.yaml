@@ -1,0 +1,77 @@
+id: u4
+title: Formes nouvelles, sons nouveaux
+subtitle: Les chuintantes, absentes du français
+icon: cup
+color: amber
+level: A1
+
+lessons:
+  - id: u4-l1
+    title: Sept lettres sans équivalent
+    vocab:
+      - id: ru-let-g
+        term: Г
+        translation: g
+        pos: lettre
+        hint: "Toujours dur, comme dans « gare » — jamais « j »."
+      - id: ru-let-j
+        term: Ж
+        translation: j
+        pos: lettre
+        hint: "Un scarabée. Se lit comme le j de « jour »."
+      - id: ru-let-f
+        term: Ф
+        translation: f
+        pos: lettre
+      - id: ru-let-ts
+        term: Ц
+        translation: ts
+        pos: lettre
+        hint: "Un seul son, comme le « tsé » de tsé-tsé."
+      - id: ru-let-tch
+        term: Ч
+        translation: tch
+        pos: lettre
+        hint: "Comme dans « tchèque »."
+      - id: ru-let-ch
+        term: Ш
+        translation: ch
+        pos: lettre
+        hint: "Comme dans « chat ». Un peigne à trois dents."
+      - id: ru-let-chtch
+        term: Щ
+        translation: chtch
+        pos: lettre
+        hint: "Le même peigne, avec une queue : un ch plus mouillé et plus long."
+
+  - id: u4-l2
+    title: Lire les chuintantes
+    vocab:
+      - id: ru-gorod
+        term: город
+        translation: ville
+        pos: nom
+      - id: ru-jurnal
+        term: журнал
+        translation: revue
+        alt:
+          - magazine
+        pos: nom
+      - id: ru-shkaf
+        term: шкаф
+        translation: armoire
+        pos: nom
+      - id: ru-mashina
+        term: машина
+        translation: voiture
+        pos: nom
+        hint: "Le mot dit aussi « machine » — le contexte tranche."
+      - id: ru-borshch
+        term: борщ
+        translation: bortsch
+        pos: nom
+        hint: Le Щ final, celui du peigne à queue.
+      - id: ru-tsena
+        term: цена
+        translation: prix
+        pos: nom

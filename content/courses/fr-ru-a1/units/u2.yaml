@@ -1,0 +1,79 @@
+id: u2
+title: Les lettres traîtresses
+subtitle: Elles ont l'air latines, elles se lisent autrement
+icon: compass
+color: coral
+level: A1
+
+lessons:
+  - id: u2-l1
+    title: Six pièges à désamorcer
+    vocab:
+      - id: ru-let-v
+        term: В
+        translation: v
+        pos: lettre
+        hint: "Ressemble au B latin, se lit v — comme dans « vote »."
+      - id: ru-let-n
+        term: Н
+        translation: n
+        pos: lettre
+        hint: Ressemble au H latin, se lit n.
+      - id: ru-let-r
+        term: Р
+        translation: r
+        pos: lettre
+        hint: Ressemble au P latin, se lit r roulé.
+      - id: ru-let-s
+        term: С
+        translation: s
+        pos: lettre
+        hint: "Ressemble au C latin, se lit toujours s — jamais k."
+      - id: ru-let-ou
+        term: У
+        translation: ou
+        pos: lettre
+        hint: Ressemble au Y latin, se lit ou.
+      - id: ru-let-kh
+        term: Х
+        translation: kh
+        alt:
+          - r raclé
+        pos: lettre
+        hint: "Ressemble au X latin, se lit comme la jota espagnole ou le « ch » allemand."
+
+  - id: u2-l2
+    title: Lire malgré le réflexe
+    vocab:
+      - id: ru-vot
+        term: вот
+        translation: voici
+        alt:
+          - voilà
+        pos: adverbe
+        hint: "Commence par un V, pas un B : « vot »."
+      - id: ru-net
+        term: нет
+        translation: non
+        pos: adverbe
+        hint: "Trois traîtresses d'affilée serait trop : ici seul le Н piège, il se lit n."
+      - id: ru-sok
+        term: сок
+        translation: jus
+        pos: nom
+      - id: ru-ruka
+        term: рука
+        translation: main
+        alt:
+          - bras
+        pos: nom
+        hint: "Le Р se lit r : « rouka »."
+      - id: ru-sumka
+        term: сумка
+        translation: sac
+        pos: nom
+      - id: ru-metro
+        term: метро
+        translation: métro
+        pos: nom
+        hint: Le même mot qu'en français — mais il faut savoir lire le Р.

@@ -16,7 +16,7 @@
  * repèrent les tournures qui ont réellement posé problème dans ce corpus,
  * pas l'anglais en général.
  */
-import { GAP, type ConjugationVerb, type GrammarPoint } from '../../src/content/schema.ts'
+import { GAP, type ConjugationVerb, type GrammarPoint, type Vocab } from '../../src/content/schema.ts'
 
 /** Mots dont la première lettre ment sur le son initial. */
 const SILENT_H = new Set([
@@ -301,6 +301,51 @@ export function duplicateAcrossCourses(
       `« ${sentence} » apparaît dans ${[...courses].join(' et ')} ` +
         `(${list.map((item) => item.where).join(', ')})`,
     )
+  }
+  return remarks
+}
+
+/**
+ * Un cours qui enseigne un alphabet promet que tout ce qu'il montre est
+ * déchiffrable : aucun mot ne doit employer une lettre que l'apprenant n'a pas
+ * encore rencontrée. C'est ce qui distingue une progression d'un empilement.
+ *
+ * Le contrôle ne s'active que si le cours comporte des cartes `pos: lettre` ;
+ * ailleurs il ne coûte rien. L'ordre des leçons fait foi — d'où un cours en
+ * `layout: path`, où cet ordre est imposé.
+ */
+export function alphabetGatingRemarks(
+  lessons: readonly { id: string; vocab: readonly Vocab[] }[],
+): string[] {
+  const teachesLetters = lessons.some((l) => l.vocab.some((v) => v.pos === 'lettre'))
+  if (!teachesLetters) return []
+
+  const remarks: string[] = []
+  const known = new Set<string>()
+
+  for (const lesson of lessons) {
+    for (const item of lesson.vocab) {
+      if (item.pos === 'lettre') continue
+      // Le terme et sa phrase d'exemple sont tous deux donnés à lire.
+      for (const [what, text] of [['le mot', item.term], ["l'exemple", item.example?.text]] as const) {
+        if (!text) continue
+        const missing = [...new Set([...text.toLowerCase()])].filter(
+          (c) => /\p{Script=Cyrillic}/u.test(c) && !known.has(c),
+        )
+        if (missing.length > 0) {
+          remarks.push(
+            `leçon "${lesson.id}" : ${what} « ${item.term} » emploie ${missing
+              .map((c) => `« ${c} »`)
+              .join(', ')}, pas encore enseigné`,
+          )
+        }
+      }
+    }
+    // Les lettres de la leçon ne comptent qu'à partir de la leçon suivante.
+    for (const item of lesson.vocab) {
+      if (item.pos !== 'lettre') continue
+      for (const c of item.term.toLowerCase()) known.add(c)
+    }
   }
   return remarks
 }

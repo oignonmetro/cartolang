@@ -19,7 +19,12 @@ export function VocabIntro({ exercise, onRate }: { exercise: IntroExercise; onRa
 
   return (
     <div className="flex flex-1 flex-col gap-6">
-      <p className="text-sm font-bold uppercase tracking-wide text-ink-faint">Nouveau mot</p>
+      {/* Une carte peut porter une lettre plutôt qu'un mot — c'est ainsi que le
+          cours de russe enseigne l'alphabet. L'annoncer comme un « mot »
+          sonnerait faux pendant toute une section. */}
+      <p className="text-sm font-bold uppercase tracking-wide text-ink-faint">
+        {vocab.pos === 'lettre' ? 'Nouvelle lettre' : 'Nouveau mot'}
+      </p>
 
       {/* La carte et les boutons doivent rester collés l'un à l'autre, quelle
           que soit la hauteur de l'écran : c'est le duo entier qui se centre
