@@ -252,3 +252,87 @@ lessons:
         example:
           text: The proposal failed, so it is back to the drawing board.
           translation: La proposition a échoué, retour à la case départ.
+
+  - id: v3-l4
+    title: Avancer, caler, renoncer
+    vocab:
+      - id: c1-to-hit-the-ground-running
+        term: to hit the ground running
+        translation: être opérationnel d'emblée
+        alt:
+          - démarrer sur les chapeaux de roue
+        pos: expression
+        gap: hit the ground running
+        example:
+          text: The new director hit the ground running.
+          translation: La nouvelle directrice a été opérationnelle d'emblée.
+      - id: c1-to-weather-the-storm
+        term: to weather the storm
+        translation: essuyer la tempête
+        alt:
+          - tenir bon
+        pos: expression
+        gap: weathered the storm
+        hint: "« Weather » est ici un verbe : traverser sans sombrer."
+        example:
+          text: The firm weathered the storm better than its rivals.
+          translation: L'entreprise a essuyé la tempête mieux que ses concurrentes.
+      - id: c1-to-move-the-goalposts
+        term: to move the goalposts
+        translation: changer les règles en cours de route
+        pos: expression
+        gap: moved the goalposts
+        example:
+          text: They moved the goalposts halfway through the trial.
+          translation: Ils ont changé les règles en cours d'essai.
+      - id: c1-a-stopgap
+        term: a stopgap
+        translation: une solution provisoire
+        alt:
+          - un expédient
+        pos: nom
+        gap: stopgap
+        example:
+          text: The measure is a stopgap, not a policy.
+          translation: La mesure est une solution provisoire, pas une politique.
+      - id: c1-out-of-his-depth
+        term: out of his depth
+        translation: dépassé
+        alt:
+          - pas à la hauteur
+        pos: expression
+        hint: Image de la baignade — on n'a plus pied.
+        example:
+          text: He was clearly out of his depth in the negotiations.
+          translation: Il était manifestement dépassé dans ces négociations.
+      - id: c1-to-take-stock
+        term: to take stock
+        translation: faire le point
+        alt:
+          - dresser le bilan
+        pos: expression
+        gap: take stock
+        example:
+          text: Let us take stock before committing further funds.
+          translation: Faisons le point avant d'engager d'autres fonds.
+      - id: c1-to-pull-the-plug
+        term: to pull the plug
+        translation: mettre fin à
+        alt:
+          - débrancher
+          - arrêter les frais
+        pos: expression
+        gap: pulled the plug
+        example:
+          text: Investors pulled the plug after two bad quarters.
+          translation: Les investisseurs y ont mis fin après deux mauvais trimestres.
+      - id: c1-a-long-shot
+        term: a long shot
+        translation: une chance sur mille
+        alt:
+          - un pari risqué
+        pos: expression
+        gap: long shot
+        example:
+          text: It was a long shot, but it paid off.
+          translation: C'était une chance sur mille, mais cela a payé.

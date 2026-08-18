@@ -240,3 +240,84 @@ lessons:
         example:
           text: Far more is at stake than a single treaty.
           translation: Bien plus qu'un simple traité est en jeu.
+
+  - id: v2-l4
+    title: Finances publiques et administration
+    vocab:
+      - id: c1-levy
+        term: levy
+        translation: prélèvement
+        alt:
+          - taxe
+        pos: nom
+        example:
+          text: A new levy on plastic packaging takes effect in April.
+          translation: Un nouveau prélèvement sur les emballages plastique entre en vigueur en avril.
+      - id: c1-to-earmark
+        term: to earmark
+        translation: affecter
+        alt:
+          - flécher
+          - réserver
+        pos: verbe
+        gap: earmarked
+        hint: L'argent est réservé à un usage précis, avant même d'être dépensé.
+        example:
+          text: Two million pounds were earmarked for rural transport.
+          translation: Deux millions de livres ont été affectés au transport rural.
+      - id: c1-procurement
+        term: procurement
+        translation: marchés publics
+        alt:
+          - achat public
+          - approvisionnement
+        pos: nom
+        example:
+          text: The inquiry examined procurement during the pandemic.
+          translation: L'enquête a porté sur les marchés publics pendant la pandémie.
+      - id: c1-subsidy
+        term: subsidy
+        translation: subvention
+        pos: nom
+        gap: subsidies
+        example:
+          text: Farming subsidies account for a third of the budget.
+          translation: Les subventions agricoles représentent un tiers du budget.
+      - id: c1-fiscal
+        term: fiscal
+        translation: budgétaire
+        pos: adjectif
+        hint: "Faux ami : « fiscal » anglais couvre les finances publiques en général, pas seulement l'impôt."
+        example:
+          text: The fiscal year ends in March.
+          translation: L'exercice budgétaire s'achève en mars.
+      - id: c1-incumbent
+        term: incumbent
+        translation: en exercice
+        alt:
+          - sortant
+          - titulaire
+        pos: adjectif
+        hint: "Le nom existe aussi : « the incumbent » désigne celui qui occupe le poste."
+        example:
+          text: The incumbent mayor is not seeking re-election.
+          translation: Le maire en exercice ne se représente pas.
+      - id: c1-red-tape
+        term: red tape
+        translation: paperasserie
+        alt:
+          - lourdeurs administratives
+        pos: nom
+        hint: Indénombrable, et toujours péjoratif.
+        example:
+          text: Small firms complain of endless red tape.
+          translation: Les petites entreprises se plaignent d'une paperasserie sans fin.
+      - id: c1-constituency
+        term: constituency
+        translation: circonscription
+        alt:
+          - électorat
+        pos: nom
+        example:
+          text: She has represented the constituency since 2015.
+          translation: Elle représente la circonscription depuis 2015.

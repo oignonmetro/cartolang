@@ -252,3 +252,90 @@ lessons:
         example:
           text: Only three extant copies of the manuscript are known.
           translation: On ne connaît que trois exemplaires subsistants du manuscrit.
+
+  - id: v1-l4
+    title: Verbes du registre formel
+    vocab:
+      - id: c1-to-eschew
+        term: to eschew
+        translation: s'abstenir de
+        alt:
+          - se garder de
+          - fuir
+        pos: verbe
+        gap: eschews
+        hint: On renonce par principe, non par contrainte — la nuance est morale.
+        example:
+          text: The author eschews jargon of any kind.
+          translation: L'auteur s'abstient de tout jargon.
+      - id: c1-to-construe
+        term: to construe
+        translation: interpréter
+        alt:
+          - comprendre
+        pos: verbe
+        gap: construed
+        hint: "Terme du droit et de l'exégèse : on interprète un texte, une clause."
+        example:
+          text: The clause was construed narrowly by the court.
+          translation: La clause a été interprétée de façon restrictive par le tribunal.
+      - id: c1-to-entail
+        term: to entail
+        translation: impliquer
+        alt:
+          - supposer
+          - entraîner
+        pos: verbe
+        gap: entails
+        hint: L'implication est logique et nécessaire, pas une simple conséquence.
+        example:
+          text: The post entails a good deal of travel.
+          translation: Le poste implique de nombreux déplacements.
+      - id: c1-to-purport
+        term: to purport
+        translation: prétendre
+        alt:
+          - se donner pour
+        pos: verbe
+        gap: purports
+        hint: Signale que l'auteur ne reprend pas l'affirmation à son compte.
+        example:
+          text: The document purports to be a royal charter.
+          translation: Le document prétend être une charte royale.
+      - id: c1-forthwith
+        term: forthwith
+        translation: sans délai
+        alt:
+          - sur-le-champ
+        pos: adverbe
+        example:
+          text: All payments were suspended forthwith.
+          translation: Tous les paiements ont été suspendus sans délai.
+      - id: c1-inter-alia
+        term: inter alia
+        translation: entre autres
+        pos: expression
+        hint: Latinisme de l'écrit juridique, resté tel quel en anglais.
+        example:
+          text: The report cites, inter alia, three earlier studies.
+          translation: Le rapport cite, entre autres, trois études antérieures.
+      - id: c1-to-elapse
+        term: to elapse
+        translation: s'écouler
+        pos: verbe
+        gap: elapsed
+        hint: Ne se dit que du temps, et jamais d'un liquide.
+        example:
+          text: Six months elapsed before anyone replied.
+          translation: Six mois se sont écoulés avant que quiconque réponde.
+      - id: c1-to-abate
+        term: to abate
+        translation: s'atténuer
+        alt:
+          - faiblir
+          - se calmer
+        pos: verbe
+        gap: abating
+        example:
+          text: The storm showed no sign of abating.
+          translation: La tempête ne montrait aucun signe d'atténuation.
