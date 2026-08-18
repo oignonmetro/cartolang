@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import type { LibraryCourse, Unit, Vocab } from './schema'
-import { courseLabel, findUnit, groupCoursesByLanguage } from './course'
+import { courseLabel, findUnit, groupCoursesByLanguage, lessonCountLabel } from './course'
 import type { ManifestEntry } from './schema'
 
 function vocab(id: string): Vocab {
@@ -114,5 +114,35 @@ describe('groupCoursesByLanguage', () => {
 
   it('ne casse rien sur une liste vide', () => {
     expect(groupCoursesByLanguage([])).toEqual([])
+  })
+})
+
+describe('lessonCountLabel', () => {
+  const letters = (ids: string[]): Vocab[] =>
+    ids.map((id) => ({ id, term: id, translation: id, alt: [], pos: 'lettre' as const }))
+
+  it('compte en lettres une leçon qui n’enseigne que des lettres', () => {
+    const alphabet = { kind: 'vocab' as const, id: 'l', title: 'l', vocab: letters(['а', 'к', 'м']) }
+    expect(lessonCountLabel(alphabet)).toBe('3 lettres')
+  })
+
+  it('accorde le singulier', () => {
+    const one = { kind: 'vocab' as const, id: 'l', title: 'l', vocab: letters(['а']) }
+    expect(lessonCountLabel(one)).toBe('1 lettre')
+  })
+
+  it('compte en mots dès qu’un mot se mêle aux lettres', () => {
+    const mixed = {
+      kind: 'vocab' as const,
+      id: 'l',
+      title: 'l',
+      vocab: [...letters(['а', 'к']), vocab('мак')],
+    }
+    expect(lessonCountLabel(mixed)).toBe('3 mots')
+  })
+
+  it('laisse les autres natures à leur libellé', () => {
+    const words = { kind: 'vocab' as const, id: 'l', title: 'l', vocab: [vocab('a'), vocab('b')] }
+    expect(lessonCountLabel(words)).toBe('2 mots')
   })
 })

@@ -28,6 +28,13 @@ npm run content:build   # compile vers public/content/
   l'apprenant choisit ses unités dans l'ordre qu'il veut. C'est le cours B2
   (`fr-en-b2`).
 
+Un contenu qui exige un ordre n'appelle pas pour autant `path` : le parcours
+*interne* d'une unité est déjà ordonné (leçon, révision, consolidation, séance
+finale), seule la bibliothèque qui les contient est libre. L'alphabet russe
+(`fr-ru-a1`) en profite — ses trente-trois lettres et les mots qui les
+réemploient tiennent dans une seule unité, dont l'ordre des leçons garantit
+qu'on ne lit jamais un signe qu'on n'a pas appris.
+
 ## Les trois natures de contenu
 
 Une piste déclare son `kind` une seule fois ; le compilateur le propage aux

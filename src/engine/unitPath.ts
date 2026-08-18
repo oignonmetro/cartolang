@@ -1,5 +1,5 @@
 import type { ItemLocation } from '@/content/course'
-import { countLabel, itemsOfLesson } from '@/content/course'
+import { lessonCountLabel } from '@/content/course'
 import type { Lesson, PracticeItem, Unit } from '@/content/schema'
 import { dueCards, type CardState } from './srs'
 import { levelOf, type LessonProgressMap } from './progress'
@@ -100,9 +100,7 @@ export function buildUnitPath(
       kind,
       lesson,
       title: lesson ? lesson.title : STEP_LABELS[kind as UnitStepKind].title,
-      subtitle: lesson
-        ? countLabel(lesson.kind, itemsOfLesson(lesson).length)
-        : STEP_LABELS[kind as UnitStepKind].subtitle,
+      subtitle: lesson ? lessonCountLabel(lesson) : STEP_LABELS[kind as UnitStepKind].subtitle,
       status,
       cycle,
     }

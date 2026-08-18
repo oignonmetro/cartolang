@@ -1,13 +1,30 @@
+# L'alphabet russe en dix étapes, issu de la fusion des cinq unités qui le
+# découpaient autrefois (u1 à u5).
+#
+# Le découpage tenait à une nécessité : on ne peut pas lire « спасибо » avant
+# de connaître П, С, И et Б. Mais une nécessité d'ordre n'appelle pas cinq
+# unités enchaînées — le parcours interne d'une unité est déjà ordonné, alors
+# que la bibliothèque qui les contient ne l'est pas. Tout l'alphabet tient donc
+# ici, et le cours peut passer en accès libre sans rien perdre de sa
+# progression.
+#
+# L'alternance est le principe : une leçon de lettres, puis une leçon de mots
+# composés **uniquement de lettres déjà vues**. Les groupes de lettres ne
+# suivent pas l'ordre alphabétique mais la distance à l'alphabet latin, qui est
+# la vraie difficulté d'un francophone. Chaque leçon de lettres porte son
+# groupe dans son titre : c'est là que vit désormais ce que les sous-titres
+# d'unité annonçaient.
+
 id: u1
-title: Les lettres amies
-subtitle: Six lettres que vous savez déjà lire
+title: Lire le russe
+subtitle: L'alphabet entier, groupe par groupe
 icon: book
 color: teal
 level: A1
 
 lessons:
   - id: u1-l1
-    title: Six lettres sans piège
+    title: Les lettres amies
     vocab:
       - id: ru-let-a
         term: А
@@ -77,3 +94,292 @@ lessons:
         alt:
           - pavot
         pos: nom
+
+  - id: u2-l1
+    title: Les lettres traîtresses
+    vocab:
+      - id: ru-let-v
+        term: В
+        translation: v
+        pos: lettre
+        hint: "Ressemble au B latin, se lit v — comme dans « vote »."
+      - id: ru-let-n
+        term: Н
+        translation: n
+        pos: lettre
+        hint: Ressemble au H latin, se lit n.
+      - id: ru-let-r
+        term: Р
+        translation: r
+        pos: lettre
+        hint: Ressemble au P latin, se lit r roulé.
+      - id: ru-let-s
+        term: С
+        translation: s
+        pos: lettre
+        hint: "Ressemble au C latin, se lit toujours s — jamais k."
+      - id: ru-let-ou
+        term: У
+        translation: ou
+        pos: lettre
+        hint: Ressemble au Y latin, se lit ou.
+      - id: ru-let-kh
+        term: Х
+        translation: kh
+        alt:
+          - r raclé
+        pos: lettre
+        hint: "Ressemble au X latin, se lit comme la jota espagnole ou le « ch » allemand."
+
+  - id: u2-l2
+    title: Lire malgré le réflexe
+    vocab:
+      - id: ru-vot
+        term: вот
+        translation: voici
+        alt:
+          - voilà
+        pos: adverbe
+        hint: "Commence par un V, pas un B : « vot »."
+      - id: ru-net
+        term: нет
+        translation: non
+        pos: adverbe
+        hint: "Trois traîtresses d'affilée serait trop : ici seul le Н piège, il se lit n."
+      - id: ru-sok
+        term: сок
+        translation: jus
+        pos: nom
+      - id: ru-ruka
+        term: рука
+        translation: main
+        alt:
+          - bras
+        pos: nom
+        hint: "Le Р se lit r : « rouka »."
+      - id: ru-sumka
+        term: сумка
+        translation: sac
+        pos: nom
+      - id: ru-metro
+        term: метро
+        translation: métro
+        pos: nom
+        hint: Le même mot qu'en français — mais il faut savoir lire le Р.
+
+  - id: u3-l1
+    title: Formes nouvelles, sons connus
+    vocab:
+      - id: ru-let-b
+        term: Б
+        translation: b
+        pos: lettre
+        hint: "À ne pas confondre avec В, qui se lit v : le Б a une boucle ouverte."
+      - id: ru-let-d
+        term: Д
+        translation: d
+        pos: lettre
+        hint: Une petite maison sur pilotis.
+      - id: ru-let-z
+        term: З
+        translation: z
+        pos: lettre
+        hint: Un 3 à l'envers, et le son suit presque.
+      - id: ru-let-i
+        term: И
+        translation: i
+        pos: lettre
+        hint: "Un N latin renversé, mais se lit i : « i » comme dans « ici »."
+      - id: ru-let-l
+        term: Л
+        translation: l
+        pos: lettre
+        hint: Une tente.
+      - id: ru-let-p
+        term: П
+        translation: p
+        pos: lettre
+        hint: "Un portique. Attention : c'est Р qui se lit r, pas П."
+
+  - id: u3-l2
+    title: Des mots du quotidien
+    vocab:
+      - id: ru-da
+        term: да
+        translation: oui
+        pos: adverbe
+      - id: ru-spasibo
+        term: спасибо
+        translation: merci
+        pos: expression
+        hint: Sept lettres, toutes connues désormais.
+      - id: ru-voda
+        term: вода
+        translation: eau
+        pos: nom
+      - id: ru-stol
+        term: стол
+        translation: table
+        pos: nom
+      - id: ru-dom
+        term: дом
+        translation: maison
+        pos: nom
+      - id: ru-bilet
+        term: билет
+        translation: billet
+        alt:
+          - ticket
+        pos: nom
+
+  - id: u4-l1
+    title: Formes nouvelles, sons nouveaux
+    vocab:
+      - id: ru-let-g
+        term: Г
+        translation: g
+        pos: lettre
+        hint: "Toujours dur, comme dans « gare » — jamais « j »."
+      - id: ru-let-j
+        term: Ж
+        translation: j
+        pos: lettre
+        hint: "Un scarabée. Se lit comme le j de « jour »."
+      - id: ru-let-f
+        term: Ф
+        translation: f
+        pos: lettre
+      - id: ru-let-ts
+        term: Ц
+        translation: ts
+        pos: lettre
+        hint: "Un seul son, comme le « tsé » de tsé-tsé."
+      - id: ru-let-tch
+        term: Ч
+        translation: tch
+        pos: lettre
+        hint: "Comme dans « tchèque »."
+      - id: ru-let-ch
+        term: Ш
+        translation: ch
+        pos: lettre
+        hint: "Comme dans « chat ». Un peigne à trois dents."
+      - id: ru-let-chtch
+        term: Щ
+        translation: chtch
+        pos: lettre
+        hint: "Le même peigne, avec une queue : un ch plus mouillé et plus long."
+
+  - id: u4-l2
+    title: Lire les chuintantes
+    vocab:
+      - id: ru-gorod
+        term: город
+        translation: ville
+        pos: nom
+      - id: ru-jurnal
+        term: журнал
+        translation: revue
+        alt:
+          - magazine
+        pos: nom
+      - id: ru-shkaf
+        term: шкаф
+        translation: armoire
+        pos: nom
+      - id: ru-mashina
+        term: машина
+        translation: voiture
+        pos: nom
+        hint: "Le mot dit aussi « machine » — le contexte tranche."
+      - id: ru-borshch
+        term: борщ
+        translation: bortsch
+        pos: nom
+        hint: Le Щ final, celui du peigne à queue.
+      - id: ru-tsena
+        term: цена
+        translation: prix
+        pos: nom
+
+  - id: u5-l1
+    title: Voyelles iotées et signes
+    vocab:
+      - id: ru-let-ya
+        term: Я
+        translation: ia
+        alt:
+          - ya
+        pos: lettre
+        hint: "Un R latin renversé. Se lit « ia », et signifie « je » à elle seule."
+      - id: ru-let-you
+        term: Ю
+        translation: iou
+        alt:
+          - you
+        pos: lettre
+      - id: ru-let-e-ouvert
+        term: Э
+        translation: è
+        pos: lettre
+        hint: "Le è ouvert, sans mouillure — là où Е mouille."
+      - id: ru-let-io
+        term: Ё
+        translation: io
+        alt:
+          - yo
+        pos: lettre
+        hint: "Un Е avec deux points. Toujours accentué — et souvent écrit « е » dans les textes courants."
+      - id: ru-let-i-bref
+        term: Й
+        translation: y
+        alt:
+          - i bref
+        pos: lettre
+        hint: "Un И coiffé. Ne forme jamais une syllabe : il ferme la précédente."
+      - id: ru-let-y
+        term: Ы
+        translation: y guttural
+        pos: lettre
+        hint: Aucun équivalent français — un i prononcé au fond de la gorge.
+      - id: ru-let-mou
+        term: Ь
+        translation: signe mou
+        pos: lettre
+        hint: Ne se prononce pas seul — il mouille la consonne qui précède.
+      - id: ru-let-dur
+        term: Ъ
+        translation: signe dur
+        pos: lettre
+        hint: Muet lui aussi, et rarissime — il sépare, là où le signe mou mouille.
+
+  - id: u5-l2
+    title: L'alphabet au complet
+    vocab:
+      - id: ru-ya
+        term: я
+        translation: je
+        pos: pronom
+        hint: Une seule lettre, un mot entier.
+      - id: ru-ty
+        term: ты
+        translation: tu
+        pos: pronom
+        hint: Contient le Ы, le son sans équivalent français.
+      - id: ru-moy
+        term: мой
+        translation: mon
+        pos: adjectif
+      - id: ru-chay
+        term: чай
+        translation: thé
+        pos: nom
+      - id: ru-dver
+        term: дверь
+        translation: porte
+        pos: nom
+        hint: Le signe mou final adoucit le Р, sans s'entendre lui-même.
+      - id: ru-eshcho
+        term: ещё
+        translation: encore
+        pos: adverbe

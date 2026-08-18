@@ -101,6 +101,24 @@ export function countLabel(kind: LessonKind, count: number): string {
 }
 
 /**
+ * Même libellé, mais pour une leçon dont on connaît le contenu — « 6 lettres »
+ * là où le compte générique dirait « 6 mots ».
+ *
+ * Une carte de vocabulaire peut porter une lettre plutôt qu'un mot (c'est
+ * ainsi que le cours de russe enseigne l'alphabet), et une leçon de l'unité
+ * d'alphabet n'en contient alors que. Annoncer « 6 mots » sous six lettres
+ * cyrilliques décrirait mal ce qui attend l'apprenant ; une leçon mixte, elle,
+ * reste comptée en mots.
+ */
+export function lessonCountLabel(lesson: Lesson): string {
+  const items = itemsOfLesson(lesson)
+  if (lesson.kind === 'vocab' && lesson.vocab.every((entry) => entry.pos === 'lettre')) {
+    return `${items.length} ${items.length > 1 ? 'lettres' : 'lettre'}`
+  }
+  return countLabel(lesson.kind, items.length)
+}
+
+/**
  * `name` ne porte que la langue (« Anglais », « Russe ») ; ce qui identifiait
  * jusqu'ici un cours dans les libellés d'accessibilité — « Anglais B1» —
  * se recompose ici plutôt que de dupliquer le niveau dans `name`.

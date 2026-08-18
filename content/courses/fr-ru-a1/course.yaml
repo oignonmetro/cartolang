@@ -9,11 +9,20 @@
 # Les lettres sont groupées par rapport à l'alphabet latin, et non par ordre
 # alphabétique : c'est là qu'est la difficulté d'un francophone. Les
 # « traîtresses » (В Н Р С У Х), qui ont l'air latines et se lisent autrement,
-# forment à elles seules une unité, parce que le réflexe acquis se bat contre
+# forment à elles seules une leçon, parce que le réflexe acquis se bat contre
 # la lecture correcte.
 #
-# D'où le `layout: path` : contrairement aux cours B1-C1, l'ordre n'est pas
-# libre. On ne peut pas lire « спасибо » avant de connaître П, С, И et Б.
+# D'où le `layout: library`, comme les cours d'anglais : cette progression a
+# besoin d'un ordre, mais un ordre *interne*, celui du parcours d'unité. Elle
+# tient donc dans une seule unité, et la bibliothèque qui la contient reste en
+# accès libre — on ne peut toujours pas lire « спасибо » avant de connaître П,
+# С, И et Б, sans imposer pour autant un enchaînement entre unités le jour où
+# le cours en comptera plusieurs.
+#
+# Les trois unités de vocabulaire écrites pour la version « parcours »
+# (salutations, nombres, nourriture) attendent dans units-en-reserve/ : elles
+# supposent l'alphabet entier acquis, ce que l'accès libre ne garantit plus.
+# Voir le README de ce dossier.
 
 id: fr-ru-a1
 name: Russe
@@ -23,22 +32,15 @@ flag: 🇷🇺
 level: A1
 tagline: Lire l'alphabet, puis les premiers mots.
 status: available
-layout: path
-version: 2
+layout: library
+version: 3
 
-sections:
-  - id: s1
-    title: "Section 1 : Lire le russe"
+tracks:
+  - id: vocabulaire
+    title: Vocabulaire
+    subtitle: Déchiffrer le cyrillique, puis lire de vrais mots
+    kind: vocab
+    color: teal
+    icon: book
     units:
       - u1
-      - u2
-      - u3
-      - u4
-      - u5
-
-  - id: s2
-    title: "Section 2 : Les premiers mots"
-    units:
-      - u6
-      - u7
-      - u8
