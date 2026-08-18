@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import type { UnitNodeKind, UnitNodeStatus, UnitPathNode } from './unitPath'
-import { KIND_SIZES, placePath, showsTitle } from './unitPathLayout'
+import { KIND_SIZES, placePath } from './unitPathLayout'
 
 function node(
   kind: UnitNodeKind,
@@ -43,20 +43,6 @@ describe('gabarit des cercles', () => {
   })
 })
 
-describe('titres sous le cercle', () => {
-  it('les réserve aux leçons, à la séance finale et à l’étape courante', () => {
-    expect(showsTitle(node('lesson', 'locked', 0))).toBe(true)
-    expect(showsTitle(node('final', 'locked', 0))).toBe(true)
-    expect(showsTitle(node('review', 'locked', 0))).toBe(false)
-  })
-
-  it('donne son titre à l’étape courante même quand sa nature s’en passe', () => {
-    // Sans ça, le sous-titre de l'étape courante s'affichait seul, sans rien
-    // au-dessus pour dire de quoi il parlait.
-    expect(showsTitle(node('workout', 'available', 0))).toBe(true)
-  })
-})
-
 describe('séparation des blocs', () => {
   it('pose un filet à chaque changement de bloc, et un seul', () => {
     const path = [...block(0, 'done'), ...block(1, 'locked'), node('final', 'locked', 2)]
@@ -64,10 +50,8 @@ describe('séparation des blocs', () => {
   })
 
   it('les pose quel que soit l’avancement', () => {
-    // La réserve de hauteur dépendait du texte affiché, si bien qu'un filet
-    // apparaissait ou non selon que l'étape courante portait un sous-titre :
-    // la structure du parcours changeait de lisibilité au fil de la
-    // progression, ce qu'un repère ne doit jamais faire.
+    // La structure du parcours ne doit pas changer de lisibilité au fil de la
+    // progression, quel que soit le statut de l'étape courante du bloc.
     const path = [
       ...block(0, 'done'),
       node('lesson', 'available', 1),
@@ -78,7 +62,7 @@ describe('séparation des blocs', () => {
     expect(placePath(path).breaks).toHaveLength(2)
   })
 
-  it('laisse le filet respirer entre le texte du dessus et le cercle du dessous', () => {
+  it('pose le filet à mi-chemin entre le cercle du dessus et celui du dessous', () => {
     const path = [...block(0, 'done'), node('lesson', 'available', 1)]
     const { nodes, breaks } = placePath(path)
     const previous = nodes[2]!

@@ -20,8 +20,7 @@ const WAVE = 8
 /**
  * Le chemin suit une sinusoïde plutôt qu'un aller-retour d'un bord à l'autre :
  * les nœuds voisins restent proches, la courbe se lit d'un trait, et le regard
- * la suit sans à-coup. L'amplitude est bornée par les libellés, qui doivent
- * tenir à l'écran une fois centrés sous leur cercle.
+ * la suit sans à-coup.
  */
 function offsetOf(index: number): number {
   return Math.round(SWING * Math.sin((2 * Math.PI * index) / WAVE))
@@ -39,10 +38,9 @@ function offsetOf(index: number): number {
  * version allait de 38 à 74 px, presque du simple au double, et le chemin
  * paraissait dépareillé — les étapes lointaines devenaient de petits pois à
  * côté des leçons. L'échelle est resserrée autour de 46-66 px. Le rythme se
- * lit encore, mais ce sont surtout l'icône, l'étiquette en marge et le
- * remplissage qui distinguent les natures ; la taille ne fait que les
- * accompagner. Seule la séance finale garde une avance nette : c'est une
- * arrivée, elle a le droit de dominer.
+ * lit encore, mais ce sont surtout l'icône et le remplissage qui distinguent
+ * les natures ; la taille ne fait que les accompagner. Seule la séance finale
+ * garde une avance nette : c'est une arrivée, elle a le droit de dominer.
  */
 export const KIND_SIZES: Record<UnitNodeKind, number> = {
   lesson: 54,
@@ -75,17 +73,9 @@ const MIN_STEP = 40
  * l'idée même de parcours.
  */
 const CLEARANCE = 26
-/** Écart entre le bas d'un libellé et le cercle qui suit. */
-const TEXT_GAP = 12
-/** Hauteur réservée à un titre sous son cercle (deux lignes au plus). */
-const TITLE_SPACE = 30
-/** Hauteur réservée en plus au sous-titre de l'étape courante (une ligne). */
-const SUBTITLE_SPACE = 22
-/** Demi-largeur d'un libellé, pour savoir s'il passe au-dessus du nœud suivant. */
-const LABEL_HALF = 104
 /** Air laissé sous le dernier nœud. */
 const BOTTOM_SPACE = 4
-/** Respiration réservée au filet qui sépare deux blocs, texte compris. */
+/** Respiration réservée au filet qui sépare deux blocs. */
 const BREAK_SPACE = 30
 
 export interface PlacedNode {
@@ -100,53 +90,24 @@ function radiusOf(node: UnitPathNode): number {
 }
 
 /**
- * Un nœud porte-t-il son titre sous le cercle ?
- *
- * Les natures qui reviennent plusieurs fois par unité (révision, entraînement,
- * approfondissement) s'en passent : leur nom irait tapisser le chemin de texte
- * répété, et il se lit désormais en marge du cercle. L'étape courante fait
- * exception — c'est la seule qu'on va ouvrir, et son sous-titre s'afficherait
- * sinon sans rien au-dessus pour dire de quoi il parle.
- */
-export function showsTitle(node: UnitPathNode): boolean {
-  return node.kind === 'lesson' || node.kind === 'final' || node.status === 'available'
-}
-
-/** Hauteur que le texte d'un nœud occupe sous son cercle. */
-function textSpaceUnder(node: UnitPathNode): number {
-  const title = showsTitle(node) ? TITLE_SPACE : 0
-  // Le sous-titre n'apparaît que sur l'étape courante.
-  const subtitle = node.status === 'available' ? SUBTITLE_SPACE : 0
-  return title + subtitle
-}
-
-/**
  * Descente entre deux nœuds : la plus contraignante des exigences.
  *
  * Les cercles ne doivent pas se toucher — mais écartés horizontalement, ils
- * n'ont besoin d'aucune descente pour cela, et c'est tout le gain. Le libellé
- * du nœud du dessus ne réclame de la hauteur que si le nœud suivant passe
- * effectivement sous lui ; rejeté au-delà de sa demi-largeur, il n'en coûte
- * aucune. Reste une descente minimale, pour que le chemin garde son sens.
+ * n'ont besoin d'aucune descente pour cela, et c'est tout le gain. Reste une
+ * descente minimale, pour que le chemin garde son sens.
  *
  * Un changement de bloc, lui, réclame toujours sa place : le filet qui les
- * sépare traverse toute la largeur, il ne peut donc contourner ni le texte du
- * nœud du dessus ni le cercle du dessous. Sans cette réserve, le filet
- * apparaissait ou non selon que l'étape courante affichait un sous-titre —
- * autrement dit la structure du parcours changeait de lisibilité au fil de
- * l'avancement, ce qui est exactement ce qu'un repère ne doit pas faire.
+ * sépare traverse toute la largeur, il ne peut donc contourner le cercle du
+ * dessous.
  */
 function stepBetween(a: PlacedNode, b: { node: UnitPathNode; x: number; r: number }): number {
   const dx = Math.abs(b.x - a.x)
-  const text = textSpaceUnder(a.node)
 
   const apart = a.r + b.r + CLEARANCE
   const byCircles = Math.sqrt(Math.max(0, apart ** 2 - dx ** 2))
-  const byText = text > 0 && dx < LABEL_HALF + b.r ? a.r + text + TEXT_GAP + b.r : 0
-  const byBreak =
-    a.node.cycle !== b.node.cycle ? a.r + text + BREAK_SPACE + b.r : 0
+  const byBreak = a.node.cycle !== b.node.cycle ? a.r + BREAK_SPACE + b.r : 0
 
-  return Math.max(MIN_STEP, byCircles, byText, byBreak)
+  return Math.max(MIN_STEP, byCircles, byBreak)
 }
 
 /** Séparation entre deux blocs du parcours, à mi-chemin des deux cercles. */
@@ -169,7 +130,7 @@ function cycleBreaks(nodes: readonly PlacedNode[]): CycleBreak[] {
     const current = nodes[index]!
     if (previous.node.cycle === current.node.cycle) continue
 
-    const from = previous.y + previous.r + textSpaceUnder(previous.node)
+    const from = previous.y + previous.r
     const to = current.y - current.r
     breaks.push({ y: (from + to) / 2 })
   }
@@ -191,6 +152,6 @@ export function placePath(path: readonly UnitPathNode[]): {
     nodes.push({ node, x, y, r })
   })
   const last = nodes[nodes.length - 1]
-  const height = last ? last.y + last.r + textSpaceUnder(last.node) + BOTTOM_SPACE : 0
+  const height = last ? last.y + last.r + BOTTOM_SPACE : 0
   return { nodes, height, breaks: cycleBreaks(nodes) }
 }
