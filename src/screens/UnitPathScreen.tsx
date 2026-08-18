@@ -52,34 +52,42 @@ export function UnitPathScreen() {
 
   return (
     <div className="mx-auto flex min-h-full w-full max-w-md flex-col">
-      <header className="sticky top-0 z-20 border-b-2 border-line bg-cream/95 px-4 py-3 backdrop-blur">
-        <div className="flex items-center gap-2">
+      <header className="sticky top-0 z-20 border-b border-line bg-cream/95 px-5 py-4 backdrop-blur">
+        <div className="flex items-center gap-3">
           <button
             type="button"
             onClick={() => navigate('/', { replace: true })}
             aria-label="Retour"
-            className="rounded-full p-2 text-ink-faint hover:text-ink"
+            className="-ml-2 rounded-full p-2 text-ink-faint hover:text-ink"
           >
             <ChevronLeftIcon size={24} />
           </button>
           <div className="flex-1">
-            <h1 className="text-base leading-tight font-black">{unit.title}</h1>
+            <p className={`text-[11px] font-black tracking-wide uppercase ${tone.text}`}>Unité</p>
+            <h1 className="text-lg leading-tight font-black">{unit.title}</h1>
             {unit.subtitle && <p className="text-xs text-ink-soft">{unit.subtitle}</p>}
-            {/* La carte d'unité, sur l'écran précédent, annonce un nombre
-                d'étapes ; le compte disparaissait dès qu'on entrait, remplacé
-                par l'anneau de maîtrise, qui mesure autre chose (ce qui est su,
-                pas ce qui est fait). Les deux sont utiles, mais celui que ce
-                chemin dessine littéralement de haut en bas, c'est celui-ci. */}
-            <p className={`text-xs font-bold ${doneCount > 0 ? tone.text : 'text-ink-faint'}`}>
-              {doneCount} / {path.length} étapes
-            </p>
           </div>
           <ProgressRing
             ratio={mastery.ratio}
             seenRatio={mastery.total === 0 ? 0 : mastery.seen / mastery.total}
-            size={44}
+            size={48}
             color={tone.css}
           />
+        </div>
+        {/* La carte d'unité, sur l'écran précédent, annonce un nombre
+            d'étapes ; le compte disparaissait dès qu'on entrait, remplacé par
+            l'anneau de maîtrise, qui mesure autre chose (ce qui est su, pas ce
+            qui est fait). Les deux sont utiles, mais celui que ce chemin
+            dessine littéralement de haut en bas, c'est celui-ci — en pastille
+            plutôt qu'en simple texte, pour rester lisible sous le titre agrandi. */}
+        <div
+          className={`mt-3 inline-flex w-fit items-center rounded-full border-2 px-3 py-1 text-xs font-bold ${
+            doneCount > 0 ? `${tone.border} ${tone.soft} ${tone.text}` : 'border-line bg-line/30 text-ink-faint'
+          }`}
+        >
+          <span>
+            {doneCount} / {path.length} étapes
+          </span>
         </div>
       </header>
 
