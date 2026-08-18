@@ -1,5 +1,6 @@
 import { Capacitor } from '@capacitor/core'
 import { TextToSpeech } from '@capacitor-community/text-to-speech'
+import type { Vocab } from '@/content/schema'
 
 /**
  * Prononciation des mots anglais.
@@ -43,6 +44,63 @@ let LANG = FALLBACK
 /** Appelé au chargement d'un cours (voir `CourseProvider`). */
 export function setSpokenLanguage(learning: string): void {
   LANG = VOICES[learning] ?? FALLBACK
+}
+
+/**
+ * Nom de chaque lettre de l'alphabet russe, tel qu'on l'épèle à l'oral.
+ *
+ * Une consonne seule (« Т », « К »…) n'est pas une syllabe : sans voyelle
+ * pour la porter, plusieurs moteurs de synthèse ne produisent aucun son
+ * audible — silence total plutôt qu'un accent approximatif. Le signe dur et
+ * le signe mou n'ont même pas de son propre en isolation. On fait donc dire
+ * au moteur le nom de la lettre, pas la lettre elle-même — ce qu'un
+ * locuteur ferait aussi en l'épelant.
+ */
+const RUSSIAN_LETTER_NAMES: Record<string, string> = {
+  А: 'а',
+  Б: 'бэ',
+  В: 'вэ',
+  Г: 'гэ',
+  Д: 'дэ',
+  Е: 'е',
+  Ё: 'ё',
+  Ж: 'жэ',
+  З: 'зэ',
+  И: 'и',
+  Й: 'ий',
+  К: 'ка',
+  Л: 'эль',
+  М: 'эм',
+  Н: 'эн',
+  О: 'о',
+  П: 'пэ',
+  Р: 'эр',
+  С: 'эс',
+  Т: 'тэ',
+  У: 'у',
+  Ф: 'эф',
+  Х: 'ха',
+  Ц: 'цэ',
+  Ч: 'че',
+  Ш: 'ша',
+  Щ: 'ща',
+  Ъ: 'твёрдый знак',
+  Ы: 'ы',
+  Ь: 'мягкий знак',
+  Э: 'э',
+  Ю: 'ю',
+  Я: 'я',
+}
+
+/**
+ * Texte à envoyer au moteur de synthèse pour un mot du vocabulaire.
+ *
+ * Pour une lettre isolée, c'est son nom épelé (voir `RUSSIAN_LETTER_NAMES`) ;
+ * pour un mot ordinaire, c'est le mot lui-même.
+ */
+export function speechFor(vocab: Pick<Vocab, 'term' | 'pos'>): string {
+  if (vocab.pos !== 'lettre') return vocab.term
+  return RUSSIAN_LETTER_NAMES[vocab.term] ?? vocab.term
 }
 
 const native = Capacitor.isNativePlatform()

@@ -3,6 +3,7 @@ import { motion } from 'framer-motion'
 import type { FlashcardExercise } from '@/engine/exercises'
 import type { Rating } from '@/engine/srs'
 import { Button } from '@/components/Button'
+import { speechFor } from '@/lib/speech'
 import { SpeakButton } from './SpeakButton'
 
 /**
@@ -48,7 +49,7 @@ export function Flashcard({
               l'entendre avant d'avoir répondu donnerait la réponse quand c'est
               le français qui est en façade. */}
           <span className="text-4xl font-black break-words">{front}</span>
-          {direction === 'to-known' && <SpeakButton text={vocab.term} />}
+          {direction === 'to-known' && <SpeakButton text={speechFor(vocab)} />}
           {vocab.pos && (
             <span className="text-xs font-bold uppercase tracking-widest text-ink-faint">{vocab.pos}</span>
           )}
@@ -62,7 +63,7 @@ export function Flashcard({
             >
               <div className="flex items-center justify-center gap-3">
                 <span className="text-3xl font-extrabold text-teal">{back}</span>
-                {direction === 'to-learning' && <SpeakButton text={vocab.term} />}
+                {direction === 'to-learning' && <SpeakButton text={speechFor(vocab)} />}
               </div>
               {vocab.hint && <span className="text-sm text-ink-soft">{vocab.hint}</span>}
               {vocab.example && (

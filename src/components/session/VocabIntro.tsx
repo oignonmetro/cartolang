@@ -3,6 +3,7 @@ import type { IntroExercise } from '@/engine/exercises'
 import type { Rating } from '@/engine/srs'
 import { Button } from '@/components/Button'
 import { Mascot } from '@/components/Mascot'
+import { speechFor } from '@/lib/speech'
 import { SpeakButton } from './SpeakButton'
 
 /**
@@ -45,7 +46,7 @@ export function VocabIntro({ exercise, onRate }: { exercise: IntroExercise; onRa
               mot qu'on écoute, pas l'écran. */}
           <div className="flex items-center justify-center gap-3">
             <span className="text-4xl font-black break-words">{vocab.term}</span>
-            <SpeakButton text={vocab.term} auto className="shrink-0" />
+            <SpeakButton text={speechFor(vocab)} auto className="shrink-0" />
           </div>
           {vocab.pos && (
             <span className="text-xs font-bold uppercase tracking-widest text-ink-faint">{vocab.pos}</span>

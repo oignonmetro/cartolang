@@ -4,6 +4,7 @@ import type { ChoiceCue, ChoiceExercise } from '@/engine/exercises'
 import { choiceAnswer, choicePrompt, choicePromptIsEnglish, normalizeAnswer } from '@/engine/exercises'
 import { Button } from '@/components/Button'
 import { Mascot } from '@/components/Mascot'
+import { speechFor } from '@/lib/speech'
 import { highlightDiffWords } from './highlightDiffWords'
 import { OptionList } from './OptionList'
 import { SpeakButton } from './SpeakButton'
@@ -56,7 +57,7 @@ export function ChoiceQuestion({
             // part tout seul à l'affichage — sans quoi l'écran est muet et la
             // question sans énoncé.
             <div className="flex items-center gap-3 py-1">
-              <SpeakButton text={vocab.term} auto size={26} className="shrink-0" />
+              <SpeakButton text={speechFor(vocab)} auto size={26} className="shrink-0" />
               <span className="text-sm text-ink-soft">Touchez pour réécouter</span>
             </div>
           ) : (
@@ -89,7 +90,7 @@ export function ChoiceQuestion({
                 répondre désignerait la bonne case. Sauf quand le son EST la
                 question — il a alors déjà servi d'énoncé, et le bouton reste
                 là-haut. */}
-            {cue !== 'audio' && <SpeakButton text={vocab.term} className="shrink-0" />}
+            {cue !== 'audio' && <SpeakButton text={speechFor(vocab)} className="shrink-0" />}
             <Button block tone={correct ? 'success' : 'error'} onClick={() => onAnswer(correct)}>
               Continuer
             </Button>
