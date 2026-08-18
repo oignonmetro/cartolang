@@ -78,6 +78,18 @@ const BOTTOM_SPACE = 4
 /** Respiration réservée au filet qui sépare deux blocs. */
 const BREAK_SPACE = 30
 
+/**
+ * Respiration sous les nœuds qui comptaient un titre, avant que les libellés
+ * ne soient retirés du chemin (l'icône suffit à distinguer une étape).
+ * L'espace, lui, reste réservé : c'est lui qui donne au parcours son rythme
+ * aéré, indépendamment du texte qui s'y logeait.
+ */
+const TEXT_GAP = 12
+const TITLE_SPACE = 30
+const SUBTITLE_SPACE = 22
+/** Portée horizontale, de part et d'autre d'un nœud, sur laquelle compter cette respiration. */
+export const LABEL_HALF = 104
+
 export interface PlacedNode {
   node: UnitPathNode
   x: number
@@ -87,6 +99,17 @@ export interface PlacedNode {
 
 function radiusOf(node: UnitPathNode): number {
   return (KIND_SIZES[node.kind] + STATUS_DELTA[node.status]) / 2
+}
+
+/** Vrai pour les nœuds qui portaient un titre : une leçon, la séance finale, ou l'étape courante. */
+export function showsTitle(node: UnitPathNode): boolean {
+  return node.kind === 'lesson' || node.kind === 'final' || node.status === 'available'
+}
+
+function textSpaceUnder(node: UnitPathNode): number {
+  const title = showsTitle(node) ? TITLE_SPACE : 0
+  const subtitle = node.status === 'available' ? SUBTITLE_SPACE : 0
+  return title + subtitle
 }
 
 /**
@@ -102,12 +125,14 @@ function radiusOf(node: UnitPathNode): number {
  */
 function stepBetween(a: PlacedNode, b: { node: UnitPathNode; x: number; r: number }): number {
   const dx = Math.abs(b.x - a.x)
+  const text = textSpaceUnder(a.node)
 
   const apart = a.r + b.r + CLEARANCE
   const byCircles = Math.sqrt(Math.max(0, apart ** 2 - dx ** 2))
-  const byBreak = a.node.cycle !== b.node.cycle ? a.r + BREAK_SPACE + b.r : 0
+  const byText = text > 0 && dx < LABEL_HALF + b.r ? a.r + text + TEXT_GAP + b.r : 0
+  const byBreak = a.node.cycle !== b.node.cycle ? a.r + text + BREAK_SPACE + b.r : 0
 
-  return Math.max(MIN_STEP, byCircles, byBreak)
+  return Math.max(MIN_STEP, byCircles, byText, byBreak)
 }
 
 /** Séparation entre deux blocs du parcours, à mi-chemin des deux cercles. */
@@ -130,7 +155,7 @@ function cycleBreaks(nodes: readonly PlacedNode[]): CycleBreak[] {
     const current = nodes[index]!
     if (previous.node.cycle === current.node.cycle) continue
 
-    const from = previous.y + previous.r
+    const from = previous.y + previous.r + textSpaceUnder(previous.node)
     const to = current.y - current.r
     breaks.push({ y: (from + to) / 2 })
   }
@@ -152,6 +177,6 @@ export function placePath(path: readonly UnitPathNode[]): {
     nodes.push({ node, x, y, r })
   })
   const last = nodes[nodes.length - 1]
-  const height = last ? last.y + last.r + BOTTOM_SPACE : 0
+  const height = last ? last.y + last.r + textSpaceUnder(last.node) + BOTTOM_SPACE : 0
   return { nodes, height, breaks: cycleBreaks(nodes) }
 }

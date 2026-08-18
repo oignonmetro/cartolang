@@ -2,13 +2,13 @@ import { motion } from 'framer-motion'
 import type { UnitNodeKind } from '@/engine/unitPath'
 import type { PlacedNode } from '@/engine/unitPathLayout'
 import { FINAL_TONE, type Tone } from './pathTone'
-import { BoltIcon, BookIcon, ChestIcon, CheckIcon, FlagIcon, LockIcon, RefreshIcon } from './icons'
+import { BoltIcon, BookIcon, CheckIcon, FlagIcon, LockIcon, RefreshIcon, StarIcon } from './icons'
 
 const NODE_ICONS: Record<UnitNodeKind, (props: { size?: number }) => React.ReactElement> = {
   lesson: BookIcon,
   review: RefreshIcon,
-  drill: BoltIcon,
-  workout: ChestIcon,
+  drill: StarIcon,
+  workout: BoltIcon,
   final: FlagIcon,
 }
 

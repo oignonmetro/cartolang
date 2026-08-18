@@ -4,13 +4,17 @@ import { useCourse } from '@/content/CourseProvider'
 import { findUnit } from '@/content/course'
 import { unitMastery } from '@/engine/progress'
 import { buildUnitPath, type UnitPathNode } from '@/engine/unitPath'
-import { placePath } from '@/engine/unitPathLayout'
+import { LABEL_HALF, placePath } from '@/engine/unitPathLayout'
 import { useProgress } from '@/store/progressStore'
 import { ProgressRing } from '@/components/ProgressRing'
 import { PathNode } from '@/components/PathNode'
 import { PathTrail } from '@/components/PathTrail'
+import { Mascot } from '@/components/Mascot'
 import { TONES } from '@/components/pathTone'
 import { ChevronLeftIcon } from '@/components/icons'
+
+/** Écart entre Kartu et le nœud de l'étape courante, au-delà de la respiration déjà réservée pour un libellé. */
+const MASCOT_CLEARANCE = 34
 
 /**
  * Parcours d'une unité.
@@ -44,6 +48,13 @@ export function UnitPathScreen() {
   if (!unit || !mastery) return <Navigate to="/" replace />
 
   const tone = TONES[unit.color] ?? TONES.teal
+
+  // Kartu se poste à côté de l'étape courante plutôt que dessus : à l'opposé
+  // du côté où le nœud a dévié de l'axe, pour ne jamais empiéter sur lui.
+  const currentSpot = currentIndex === -1 ? null : placed.nodes[currentIndex]
+  const mascotSpot = currentSpot
+    ? { x: currentSpot.x + (currentSpot.x >= 0 ? -1 : 1) * (LABEL_HALF + MASCOT_CLEARANCE), y: currentSpot.y + 16 }
+    : null
 
   const open = (node: UnitPathNode) => {
     if (node.status === 'locked') return
@@ -92,7 +103,7 @@ export function UnitPathScreen() {
       </header>
 
       <main
-        className="flex flex-1 flex-col items-center px-4 pt-4 pb-6"
+        className="flex flex-1 flex-col items-center px-4 pt-6 pb-10"
         // Un lavis très léger de la teinte de l'unité derrière le chemin :
         // sans lui, l'écran retombe sur le cream générique de partout ailleurs
         // et l'unité perd sa couleur dès qu'on quitte le fil des cercles.
@@ -103,18 +114,20 @@ export function UnitPathScreen() {
         <div className="relative w-full" style={{ height: placed.height }}>
           <PathTrail nodes={placed.nodes} height={placed.height} tone={tone} />
 
-          {/* Un filet là où un bloc s'achève et où le suivant commence. Le
-              parcours répète la même figure — une leçon, sa révision, sa
-              consolidation — et sans séparation cette structure ne se lisait
-              nulle part : on ne voyait qu'une chaîne de dix pastilles. */}
-          {placed.breaks.map((cut) => (
-            <span
-              key={cut.y}
-              aria-hidden
-              className="absolute inset-x-2 border-t-2 border-dashed border-line"
-              style={{ top: cut.y }}
-            />
-          ))}
+          {mascotSpot && (
+            <div
+              className="absolute"
+              style={{
+                left: '50%',
+                top: mascotSpot.y,
+                transform: `translate(calc(-50% + ${mascotSpot.x}px), -50%)`,
+                width: 64,
+                height: 64,
+              }}
+            >
+              <Mascot mood="happy" size={64} />
+            </div>
+          )}
 
           {placed.nodes.map((spot, index) => (
             <PathNode
