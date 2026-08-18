@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
 import type { LibraryCourse, Track, Unit } from '@/content/schema'
-import { countLabel, itemsOfUnit } from '@/content/course'
+import { countLabel, courseLabel, itemsOfUnit } from '@/content/course'
 import type { LessonProgressMap } from '@/engine/progress'
 import { dayKey, displayedStreak, levelFromXp, masteryOf, unitMastery } from '@/engine/progress'
 import { buildUnitPath } from '@/engine/unitPath'
@@ -123,7 +123,7 @@ export function LibraryScreen({ course }: { course: LibraryCourse }) {
           <button
             type="button"
             onClick={() => setPickerOpen(true)}
-            aria-label={`${course.name} — changer de niveau`}
+            aria-label={`${courseLabel(course)} — changer de niveau`}
             className="flex items-center gap-2 rounded-full py-1 pr-2 pl-1 transition-colors hover:bg-ink/5 active:bg-ink/10"
           >
             <span className="text-2xl" aria-hidden>

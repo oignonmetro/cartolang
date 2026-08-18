@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useCourse } from '@/content/CourseProvider'
-import { itemsOfCourse } from '@/content/course'
+import { courseLabel, itemsOfCourse } from '@/content/course'
 import { installedAppVersion } from '@/content/appUpdate'
 import { dayKey, displayedStreak, levelFromXp } from '@/engine/progress'
 import { cardStrength, dueCards } from '@/engine/srs'
@@ -227,7 +227,7 @@ export function ProfileScreen() {
         <p className="text-center text-xs text-ink-faint">
           {appVersion
             ? `Cartolang v${appVersion.versionName} (${appVersion.build})`
-            : `${course.name} · contenu v${course.version}`}
+            : `${courseLabel(course)} · contenu v${course.version}`}
         </p>
       </section>
     </div>

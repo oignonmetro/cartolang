@@ -9,7 +9,7 @@
 # Après modification : `npm run content:check` pour valider.
 
 id: fr-en
-name: Anglais, grand débutant
+name: Anglais
 learning: en
 known: fr
 flag: 🇬🇧
@@ -17,7 +17,7 @@ level: A1
 tagline: Les tout premiers mots, en parcours guidé.
 status: archived
 layout: path
-version: 1
+version: 2
 
 sections:
   - id: s1

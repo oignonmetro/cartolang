@@ -2,6 +2,7 @@ import type {
   Course,
   Lesson,
   LessonKind,
+  ManifestEntry,
   PracticeItem,
   Track,
   Unit,
@@ -97,4 +98,45 @@ export const KIND_LABELS: Record<LessonKind, { one: string; many: string }> = {
 export function countLabel(kind: LessonKind, count: number): string {
   const { one, many } = KIND_LABELS[kind]
   return `${count} ${count > 1 ? many : one}`
+}
+
+/**
+ * `name` ne porte que la langue (« Anglais », « Russe ») ; ce qui identifiait
+ * jusqu'ici un cours dans les libellés d'accessibilité — « Anglais B1» —
+ * se recompose ici plutôt que de dupliquer le niveau dans `name`.
+ */
+export function courseLabel(course: { name: string; level?: string }): string {
+  return course.level ? `${course.name} ${course.level}` : course.name
+}
+
+/** Un groupe de cours qui partagent la même langue apprise. */
+export interface LanguageGroup {
+  /** Code de la langue apprise (`learning`), qui distingue deux groupes. */
+  learning: string
+  name: string
+  flag: string
+  courses: ManifestEntry[]
+}
+
+/**
+ * Regroupe les cours du sélecteur par langue apprise, sans réordonner : un
+ * groupe apparaît à la position de son premier cours, et les cours d'un même
+ * groupe gardent entre eux l'ordre du manifeste. C'est ce qui distingue les
+ * niveaux d'une même langue (B1, B2, C1) sans dupliquer le drapeau et le nom
+ * sur chaque ligne.
+ */
+export function groupCoursesByLanguage(courses: readonly ManifestEntry[]): LanguageGroup[] {
+  const groups: LanguageGroup[] = []
+  const byLearning = new Map<string, LanguageGroup>()
+
+  for (const course of courses) {
+    let group = byLearning.get(course.learning)
+    if (!group) {
+      group = { learning: course.learning, name: course.name, flag: course.flag, courses: [] }
+      byLearning.set(course.learning, group)
+      groups.push(group)
+    }
+    group.courses.push(course)
+  }
+  return groups
 }

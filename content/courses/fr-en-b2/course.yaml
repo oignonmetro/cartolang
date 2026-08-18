@@ -12,7 +12,7 @@
 # il aide seulement à se situer.
 
 id: fr-en-b2
-name: Anglais B2
+name: Anglais
 learning: en
 known: fr
 flag: 🇬🇧
@@ -23,7 +23,7 @@ status: available
 # ferait office de défaut, et B1 s'ouvrirait par accident.
 default: true
 layout: library
-version: 8
+version: 9
 
 tracks:
   - id: vocabulaire

@@ -16,7 +16,7 @@
 # libre. On ne peut pas lire « спасибо » avant de connaître П, С, И et Б.
 
 id: fr-ru-a1
-name: Russe, grand débutant
+name: Russe
 learning: ru
 known: fr
 flag: 🇷🇺
@@ -24,7 +24,7 @@ level: A1
 tagline: Lire l'alphabet, puis les premiers mots.
 status: available
 layout: path
-version: 1
+version: 2
 
 sections:
   - id: s1

@@ -2,6 +2,7 @@ import { Fragment, useMemo } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import type { PathCourse, Unit } from '@/content/schema'
+import { courseLabel } from '@/content/course'
 import { buildPath, dayKey, displayedStreak, levelFromXp, type LessonNode } from '@/engine/progress'
 import { dueCards } from '@/engine/srs'
 import { useProgress } from '@/store/progressStore'
@@ -32,7 +33,7 @@ export function PathScreen({ course }: { course: PathCourse }) {
   return (
     <div className="mx-auto flex min-h-full w-full max-w-md flex-col">
       <header className="sticky top-0 z-10 flex items-center justify-between gap-3 border-b-2 border-line bg-cream/95 px-4 py-3 backdrop-blur">
-        <span className="text-2xl" aria-label={course.name}>
+        <span className="text-2xl" aria-label={courseLabel(course)}>
           {course.flag}
         </span>
         <div className="flex items-center gap-4 text-sm font-extrabold">

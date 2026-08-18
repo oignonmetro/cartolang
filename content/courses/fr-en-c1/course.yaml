@@ -9,14 +9,14 @@
 # verbales rares : subjonctif, irréguliers littéraires, aspects composés.
 
 id: fr-en-c1
-name: Anglais C1
+name: Anglais
 learning: en
 known: fr
 flag: 🇬🇧
 level: C1
 status: available
 layout: library
-version: 9
+version: 10
 
 tracks:
   - id: vocabulaire

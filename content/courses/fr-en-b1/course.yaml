@@ -9,14 +9,14 @@
 # quantifieurs. B2 part de là pour aller vers l'abstrait et l'argumenté.
 
 id: fr-en-b1
-name: Anglais B1
+name: Anglais
 learning: en
 known: fr
 flag: 🇬🇧
 level: B1
 status: available
 layout: library
-version: 7
+version: 8
 
 tracks:
   - id: vocabulaire
