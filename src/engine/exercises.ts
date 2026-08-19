@@ -22,7 +22,11 @@ import type { CardState } from './srs'
  *   - `cloze`     : compléter une phrase en piochant dans une banque de mots ;
  *   - `flashcard` / `type` : réservés aux sessions de révision et
  *                   d'entraînement (`buildMixedSession`), qui reprennent des
- *                   mots déjà rencontrés plutôt qu'une leçon neuve.
+ *                   mots déjà rencontrés plutôt qu'une leçon neuve. `flashcard`
+ *                   n'y sert qu'en dernier ressort, quand le bassin est trop
+ *                   pauvre pour un QCM et le mot sans exemple pour une phrase
+ *                   à trou : l'auto-évaluation ne se redemande pas une fois
+ *                   qu'elle a eu lieu à la présentation.
  *
  * La grammaire et la conjugaison ne se ramènent pas à des paires
  * terme/traduction : elles ont leurs propres exercices, et suivent elles le
@@ -1175,18 +1179,24 @@ function buildMixedSession(
     // Carte encore en apprentissage : reconnaissance seulement, et la banque
     // de mots reste même à l'entraînement — retirer l'aide ici reviendrait à
     // réclamer de mémoire un mot rencontré quelques minutes plus tôt. Ce que
-    // l'entraînement change, c'est la fréquence de la phrase à trou : un vrai
-    // rappel, là où la flashcard se contente d'une auto-évaluation.
+    // l'entraînement change, c'est la fréquence de la phrase à trou.
     const cloze = clozeFor(vocab, vocabPool, rng)
     if (cloze && rng() < (drill ? 0.55 : 0.35)) return cloze
 
-    // Le QCM est une deuxième façon de reconnaître, à côté de la flashcard —
-    // sans lui, la reconnaissance se ramenait toujours à la même
-    // auto-évaluation, quand la leçon d'origine variait déjà l'énoncé.
+    // Le QCM est une deuxième façon de reconnaître, à côté de la phrase à
+    // trou : varier l'énoncé plutôt que retomber toujours sur le même gabarit.
+    // L'auto-évaluation de la flashcard ne se redemande pas ici : le mot l'a
+    // déjà reçue une fois, à sa présentation (voir `VocabIntro`) — c'est aux
+    // exercices qui suivent de repérer une fragilité, pas à l'apprenant de la
+    // déclarer une seconde fois.
     const cue = sample(cuesFor(vocab, canSpeak), 1, rng)[0]
     const choice = cue ? choiceFor(vocab, cue, vocabPool, rng) : null
-    if (choice && rng() < 0.55) return choice
+    if (choice) return choice
+    if (cloze) return cloze
 
+    // Ni QCM (bassin trop pauvre pour un leurre distinct) ni phrase à trou
+    // (pas d'exemple) : aucun test n'est constructible, l'auto-évaluation
+    // reste alors le seul moyen de faire avancer la carte.
     return { kind: 'flashcard', id: `flash:${vocab.id}`, vocab, direction: 'to-known' }
   })
 

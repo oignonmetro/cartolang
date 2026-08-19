@@ -298,7 +298,7 @@ describe('session de révision', () => {
     ).toBe(true)
   })
 
-  it('varie la reconnaissance au lieu de toujours retomber sur la flashcard', () => {
+  it('varie la reconnaissance entre QCM et phrase à trou', () => {
     // Régression : la carte encore en apprentissage ne recevait jamais de QCM
     // en révision, alors que la leçon d'origine en proposait déjà plusieurs.
     const kinds = new Set<string>()
@@ -307,7 +307,28 @@ describe('session de révision', () => {
       for (const e of buildReviewSession(fragile, seed)) kinds.add(e.kind)
     }
     expect(kinds).toContain('choice')
-    expect(kinds).toContain('flashcard')
+    expect(kinds).toContain('cloze')
+  })
+
+  it('ne redemande pas l’auto-évaluation de la flashcard quand un test est possible', () => {
+    // Le mot l'a déjà reçue une fois à sa présentation (voir VocabIntro) :
+    // avec un bassin fourni (QCM possible) et un exemple (phrase à trou
+    // possible), la flashcard ne doit plus jamais réapparaître en révision.
+    const kinds = new Set<string>()
+    for (let seed = 0; seed < 20; seed++) {
+      const fragile = entries([{ step: 0 }, { step: 0 }, { step: 1 }, { step: 0 }])
+      for (const e of buildReviewSession(fragile, seed)) kinds.add(e.kind)
+    }
+    expect(kinds).not.toContain('flashcard')
+  })
+
+  it('retombe sur la flashcard en dernier ressort, sans QCM ni phrase à trou possibles', () => {
+    // Une seule carte en session (aucun leurre pour un QCM) et un mot sans
+    // exemple (pas de phrase à trou) : plus aucun test n'est constructible,
+    // l'auto-évaluation reste alors le seul moyen de faire avancer la carte.
+    const bare = word('bare', 'bare', 'nu')
+    const session = buildReviewSession([{ card: createCard('bare', T0), item: { kind: 'vocab', id: 'bare', vocab: bare } }])
+    expect(session.map((e) => e.kind)).toEqual(['flashcard'])
   })
 
   it('fait traduire vers le français avant d’exiger le mot anglais', () => {
