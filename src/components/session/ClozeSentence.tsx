@@ -99,7 +99,7 @@ export function ClozeSentence({
           <div className="flex items-center gap-3">
             {/* Le mot attendu, pas la phrase : c'est lui qu'on apprend, et
                 l'écouter avant d'avoir répondu donnerait la réponse. */}
-            <SpeakButton text={sentence.match} className="shrink-0" />
+            <SpeakButton text={sentence.match} auto className="shrink-0" />
             <Button block tone={checked ? 'success' : 'error'} onClick={() => onAnswer(checked)}>
               Continuer
             </Button>

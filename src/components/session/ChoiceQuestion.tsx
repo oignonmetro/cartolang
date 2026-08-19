@@ -89,7 +89,7 @@ export function ChoiceQuestion({
                 répondre désignerait la bonne case. Sauf quand le son EST la
                 question — il a alors déjà servi d'énoncé, et le bouton reste
                 là-haut. */}
-            {cue !== 'audio' && <SpeakButton text={speechFor(vocab)} className="shrink-0" />}
+            {cue !== 'audio' && <SpeakButton text={speechFor(vocab)} auto className="shrink-0" />}
             <Button block tone={correct ? 'success' : 'error'} onClick={() => onAnswer(correct)}>
               Continuer
             </Button>

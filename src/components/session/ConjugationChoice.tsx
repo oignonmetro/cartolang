@@ -85,7 +85,7 @@ export function ConjugationChoice({
         {checked && (
           <div className="flex items-center gap-3">
             {/* La forme attendue, pas celle qui a été choisie. */}
-            <SpeakButton text={form.answer} className="shrink-0" />
+            <SpeakButton text={form.answer} auto className="shrink-0" />
             <Button block tone={correct ? 'success' : 'error'} onClick={() => onAnswer(correct)}>
               Continuer
             </Button>

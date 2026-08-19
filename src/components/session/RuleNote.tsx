@@ -159,6 +159,11 @@ function RuleBody({ rule, labelClass }: { rule: NoteRule; labelClass: string }) 
               <Rich text={rule.example} />
             </p>
           )}
+          {/* Pas `auto`, à la différence des autres boutons d'écoute de la
+              session : un rappel porte plusieurs règles à la fois, chacune
+              avec la sienne. Toutes lancées au montage se couperaient les
+              unes les autres — `speak()` interrompt la lecture en cours
+              avant de parler — et l'apprenant n'entendrait que des bribes. */}
           {spoken && <SpeakButton text={spoken} size={16} className="shrink-0 !p-1.5" />}
         </div>
       )}

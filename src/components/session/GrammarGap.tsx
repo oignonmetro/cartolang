@@ -124,7 +124,7 @@ export function GrammarGap({
             {/* La phrase entière, une fois complétée : c'est la structure qu'on
                 apprend, pas la forme isolée. Après la réponse seulement —
                 l'entendre plus tôt donnerait la solution. */}
-            <SpeakButton text={fillGap(point.sentence, point.answer)} className="shrink-0" />
+            <SpeakButton text={fillGap(point.sentence, point.answer)} auto className="shrink-0" />
             <Button block tone={checked ? 'success' : 'error'} onClick={() => onAnswer(checked)}>
               Continuer
             </Button>

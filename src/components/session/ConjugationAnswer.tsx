@@ -126,7 +126,7 @@ export function ConjugationAnswer({
           <div className="flex items-center gap-3">
             {/* Les formes composées ne se devinent pas à l'écrit : « would have
                 been » s'entend « would've been ». Après la réponse seulement. */}
-            <SpeakButton text={form.answer} className="shrink-0" />
+            <SpeakButton text={form.answer} auto className="shrink-0" />
             <Button block tone={checked ? 'success' : 'error'} onClick={() => onAnswer(checked)}>
               Continuer
             </Button>
