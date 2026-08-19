@@ -5,7 +5,7 @@ import type { PathCourse, Unit } from '@/content/schema'
 import { courseLabel } from '@/content/course'
 import { buildPath, dayKey, displayedStreak, levelFromXp, type LessonNode } from '@/engine/progress'
 import { dueCards } from '@/engine/srs'
-import { useProgress } from '@/store/progressStore'
+import { EMPTY_CARDS, EMPTY_LESSON_PROGRESS, useProgress } from '@/store/progressStore'
 import { Mascot } from '@/components/Mascot'
 import { BoltIcon, CheckIcon, ChestIcon, FlameIcon, LockIcon, StarIcon, UnitIcon, UNIT_TONES } from '@/components/icons'
 
@@ -17,8 +17,8 @@ import { BoltIcon, CheckIcon, ChestIcon, FlameIcon, LockIcon, StarIcon, UnitIcon
  */
 export function PathScreen({ course }: { course: PathCourse }) {
   const navigate = useNavigate()
-  const lessons = useProgress((state) => state.lessons)
-  const cards = useProgress((state) => state.cards)
+  const lessons = useProgress((state) => state.lessons[course.id] ?? EMPTY_LESSON_PROGRESS)
+  const cards = useProgress((state) => state.cards[course.id] ?? EMPTY_CARDS)
   const xp = useProgress((state) => state.xp)
   const streak = useProgress((state) => state.streak)
 

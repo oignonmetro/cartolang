@@ -1,5 +1,6 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
+import { SELECTED_COURSE_KEY } from '@/content/CourseProvider'
 import {
   accuracyOf,
   bumpStreak,
@@ -29,15 +30,26 @@ export const STORAGE_KEY = 'cartolang.progress.v1'
  * leçons (révision, approfondissement, entraînement).
  * Format 4 : les échéances gonflées par la répétition massée sont ramenées
  * à une valeur réaliste (voir `deflateSchedules`).
+ * Format 5 : `lessons`, `cards` et `steps` sont imbriqués par identifiant de
+ * cours. Plusieurs cours réutilisent les mêmes identifiants de leçon et
+ * d'unité (`v1-l1`, `v1:review-0`…) — c'est voulu, chaque piste suit le même
+ * gabarit d'un niveau à l'autre — mais à plat, terminer une leçon dans l'un
+ * la marquait faite dans tous les autres qui partagent l'identifiant. Voir
+ * `legacyCourseId` pour le rattachement des sauvegardes antérieures.
  * Les sauvegardes plus anciennes sont converties à la lecture.
  */
-export const SAVE_FORMAT = 4
+export const SAVE_FORMAT = 5
+
+/** Le nécessaire d'un cours pour suivre sa propre progression. */
+export interface CourseBucket<T> {
+  [courseId: string]: T
+}
 
 export interface ProgressSnapshot {
-  lessons: LessonProgressMap
-  cards: Record<string, CardState>
+  lessons: CourseBucket<LessonProgressMap>
+  cards: CourseBucket<Record<string, CardState>>
   /** Étapes de parcours franchies : clé `unité:nœud` → nombre de passages. */
-  steps: Record<string, number>
+  steps: CourseBucket<Record<string, number>>
   xp: number
   xpByDay: Record<string, number>
   dailyGoal: number
@@ -52,9 +64,10 @@ export interface ProgressSnapshot {
 
 interface ProgressState extends ProgressSnapshot {
   /** Enregistre la réponse à un élément et met à jour sa carte de révision. */
-  gradeItem: (itemId: string, rating: Rating, now?: number) => void
+  gradeItem: (courseId: string, itemId: string, rating: Rating, now?: number) => void
   /** Clôt une session de leçon : plancher d'acquisition, XP, série. */
   finishLesson: (
+    courseId: string,
     lessonId: string,
     outcome: SessionOutcome,
     now?: number,
@@ -65,13 +78,27 @@ interface ProgressState extends ProgressSnapshot {
    * Clôt une étape de parcours qui n'est pas une leçon. Même comptage qu'une
    * révision, plus la marque qui fait avancer le parcours de l'unité.
    */
-  finishStep: (stepId: string, outcome: SessionOutcome, now?: number) => { xp: number }
+  finishStep: (courseId: string, stepId: string, outcome: SessionOutcome, now?: number) => { xp: number }
   setDailyGoal: (goal: number) => void
   setAutoSpeak: (on: boolean) => void
   exportSave: () => string
   importSave: (payload: string) => void
   reset: () => void
 }
+
+/**
+ * Bloc vide, partagé, à renvoyer quand un cours n'a encore aucune
+ * progression — plutôt qu'un `{}` neuf à chaque rendu.
+ *
+ * Un sélecteur zustand qui renvoie un objet différent à chaque appel casse
+ * la comparaison par référence de l'abonnement : le composant se croit à
+ * chaque fois changé, se re-rend, ce qui relit le sélecteur, qui renvoie de
+ * nouveau un objet différent — une boucle de rendu infinie. Une seule
+ * instance, réutilisée, rend le résultat stable tant que le cours reste vide.
+ */
+export const EMPTY_LESSON_PROGRESS: LessonProgressMap = {}
+export const EMPTY_CARDS: Record<string, CardState> = {}
+export const EMPTY_STEPS: Record<string, number> = {}
 
 const initial: ProgressSnapshot = {
   lessons: {},
@@ -145,6 +172,28 @@ export function deflateSchedules(
   return result
 }
 
+/**
+ * Cours auquel rattacher une sauvegarde antérieure au format 5.
+ *
+ * Une sauvegarde à plat ne dit pas de quel cours vient chaque leçon — c'est
+ * précisément ce que le format 5 corrige. On ne peut donc pas répartir
+ * l'historique correctement ; le rattacher au cours actif au moment de la
+ * conversion est la meilleure approximation possible sans rien connaître du
+ * contenu des cours à cet instant (la conversion est synchrone, le contenu se
+ * charge par le réseau). Les autres cours repartent de zéro, ce qui reste
+ * moins faux que de leur prêter une progression qui n'était pas la leur.
+ */
+function legacyCourseId(): string {
+  if (typeof localStorage === 'undefined') return 'legacy'
+  return localStorage.getItem(SELECTED_COURSE_KEY) ?? 'legacy'
+}
+
+/** Range un bloc à plat sous un seul cours ; `{}` si le bloc est vide. */
+function nestByCourse<T>(flat: Record<string, T> | undefined, courseId: string): CourseBucket<Record<string, T>> {
+  if (!flat || Object.keys(flat).length === 0) return {}
+  return { [courseId]: flat }
+}
+
 /** Enregistre l'activité du jour : XP cumulés et série. */
 function withActivity(state: ProgressSnapshot, xp: number, now: number): Partial<ProgressSnapshot> {
   const today = dayKey(now)
@@ -160,16 +209,18 @@ export const useProgress = create<ProgressState>()(
     (set, get) => ({
       ...initial,
 
-      gradeItem: (itemId, rating, now = Date.now()) =>
+      gradeItem: (courseId, itemId, rating, now = Date.now()) =>
         set((state) => {
-          const card = state.cards[itemId] ?? createCard(itemId, now)
-          return { cards: { ...state.cards, [itemId]: review(card, rating, now) } }
+          const bucket = state.cards[courseId] ?? {}
+          const card = bucket[itemId] ?? createCard(itemId, now)
+          return { cards: { ...state.cards, [courseId]: { ...bucket, [itemId]: review(card, rating, now) } } }
         }),
 
-      finishLesson: (lessonId, outcome, now = Date.now()) => {
+      finishLesson: (courseId, lessonId, outcome, now = Date.now()) => {
         const state = get()
         const passed = isPassed(outcome)
-        const previous = state.lessons[lessonId]
+        const bucket = state.lessons[courseId] ?? {}
+        const previous = bucket[lessonId]
         // Le plancher ne descend jamais : une fois réussie, une leçon reste
         // acquise même si un oubli fait momentanément baisser la maîtrise.
         const level = Math.max(previous?.level ?? 0, passed ? 1 : 0)
@@ -178,11 +229,14 @@ export const useProgress = create<ProgressState>()(
         set({
           lessons: {
             ...state.lessons,
-            [lessonId]: {
-              level,
-              completions: (previous?.completions ?? 0) + 1,
-              lastAt: now,
-              bestAccuracy: Math.max(previous?.bestAccuracy ?? 0, accuracyOf(outcome)),
+            [courseId]: {
+              ...bucket,
+              [lessonId]: {
+                level,
+                completions: (previous?.completions ?? 0) + 1,
+                lastAt: now,
+                bestAccuracy: Math.max(previous?.bestAccuracy ?? 0, accuracyOf(outcome)),
+              },
             },
           },
           ...withActivity(state, xp, now),
@@ -198,11 +252,12 @@ export const useProgress = create<ProgressState>()(
         return { xp }
       },
 
-      finishStep: (stepId, outcome, now = Date.now()) => {
+      finishStep: (courseId, stepId, outcome, now = Date.now()) => {
         const state = get()
         const xp = xpFor(outcome, isPassed(outcome))
+        const bucket = state.steps[courseId] ?? {}
         set({
-          steps: { ...state.steps, [stepId]: (state.steps[stepId] ?? 0) + 1 },
+          steps: { ...state.steps, [courseId]: { ...bucket, [stepId]: (bucket[stepId] ?? 0) + 1 } },
           ...withActivity(state, xp, now),
         })
         return { xp }
@@ -222,18 +277,47 @@ export const useProgress = create<ProgressState>()(
       },
 
       importSave: (payload) => {
-        const parsed = JSON.parse(payload) as Partial<ProgressSnapshot> & { format?: number }
+        const parsed = JSON.parse(payload) as {
+          format?: number
+          lessons?: unknown
+          cards?: unknown
+          steps?: unknown
+          xp?: number
+          xpByDay?: Record<string, number>
+          dailyGoal?: number
+          autoSpeak?: boolean
+          streak?: Streak
+        }
         // Les formats antérieurs n'ont rien perdu : leurs champs manquants
         // prennent simplement leur valeur par défaut ci-dessous.
         const format = parsed.format ?? 0
-        if (![1, 2, 3, SAVE_FORMAT].includes(format)) {
+        if (![1, 2, 3, 4, SAVE_FORMAT].includes(format)) {
           throw new Error(`Format de sauvegarde inconnu (attendu ${SAVE_FORMAT}).`)
         }
-        const cards = migrateCards((parsed.cards ?? {}) as Record<string, unknown>)
+
+        let lessons: ProgressSnapshot['lessons']
+        let cards: ProgressSnapshot['cards']
+        let steps: ProgressSnapshot['steps']
+
+        if (format < SAVE_FORMAT) {
+          // Formats 1 à 4 : lessons/cards/steps sont à plat, sans cours — voir
+          // `legacyCourseId` et le commentaire du format 5 ci-dessus.
+          const rawCards = migrateCards((parsed.cards ?? {}) as Record<string, unknown>)
+          const flatCards = format < 4 ? deflateSchedules(rawCards) : rawCards
+          const courseId = legacyCourseId()
+          lessons = nestByCourse(parsed.lessons as LessonProgressMap | undefined, courseId)
+          cards = nestByCourse(flatCards, courseId)
+          steps = nestByCourse(parsed.steps as Record<string, number> | undefined, courseId)
+        } else {
+          lessons = (parsed.lessons as ProgressSnapshot['lessons']) ?? {}
+          cards = (parsed.cards as ProgressSnapshot['cards']) ?? {}
+          steps = (parsed.steps as ProgressSnapshot['steps']) ?? {}
+        }
+
         set({
-          lessons: parsed.lessons ?? {},
-          cards: format < 4 ? deflateSchedules(cards) : cards,
-          steps: parsed.steps ?? {},
+          lessons,
+          cards,
+          steps,
           xp: parsed.xp ?? 0,
           xpByDay: parsed.xpByDay ?? {},
           dailyGoal: parsed.dailyGoal ?? initial.dailyGoal,
@@ -247,16 +331,22 @@ export const useProgress = create<ProgressState>()(
     {
       name: STORAGE_KEY,
       version: SAVE_FORMAT,
-      migrate: (persisted, version) => {
-        const state = persisted as ProgressSnapshot
-        const cards = migrateCards((state?.cards ?? {}) as Record<string, unknown>)
+      migrate: (persisted, version): ProgressSnapshot => {
+        const state = (persisted ?? {}) as Record<string, unknown> & Partial<ProgressSnapshot>
+        if (version >= SAVE_FORMAT) return state as ProgressSnapshot
+
+        const rawCards = migrateCards((state.cards ?? {}) as Record<string, unknown>)
+        const cards = version < 4 ? deflateSchedules(rawCards) : rawCards
+        const courseId = legacyCourseId()
+
         return {
+          ...initial,
           ...state,
-          // Les sauvegardes d'avant le format 4 portent des échéances gonflées.
-          cards: version < 4 ? deflateSchedules(cards) : cards,
+          lessons: nestByCourse(state.lessons as unknown as LessonProgressMap | undefined, courseId),
+          cards: nestByCourse(cards, courseId),
           // Absent avant le format 3 : un parcours vierge, les leçons déjà
           // faites restant reconnues par `lessons`.
-          steps: state?.steps ?? {},
+          steps: nestByCourse(state.steps as unknown as Record<string, number> | undefined, courseId),
         }
       },
       partialize: ({ lessons, cards, steps, xp, xpByDay, dailyGoal, streak, autoSpeak }) => ({

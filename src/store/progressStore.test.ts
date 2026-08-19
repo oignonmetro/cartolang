@@ -102,3 +102,80 @@ describe('conversion des cartes anciennes', () => {
     expect(migrateCards({ a: null, b: 'x' } as Record<string, unknown>)).toEqual({})
   })
 })
+
+describe('progression isolée par cours', () => {
+  // Plusieurs cours réutilisent les mêmes identifiants de leçon et d'unité
+  // (chaque piste suit le même gabarit d'un niveau à l'autre) : sans cette
+  // isolation, terminer « v1-l1 » en B1 le marquait fait en B2 et en C1.
+  it('ne fait pas déborder une leçon terminée d’un cours à l’autre', () => {
+    useProgress.getState().reset()
+    useProgress.getState().finishLesson('fr-en-b1', 'v1-l1', { correct: 4, total: 4 })
+    expect(useProgress.getState().lessons['fr-en-b1']?.['v1-l1']?.level).toBe(1)
+    expect(useProgress.getState().lessons['fr-en-b2']?.['v1-l1']).toBeUndefined()
+  })
+
+  it('ne fait pas déborder une carte de révision d’un cours à l’autre', () => {
+    useProgress.getState().reset()
+    useProgress.getState().gradeItem('fr-en-b1', 'v1-word', 'good', Date.UTC(2026, 0, 1))
+    expect(useProgress.getState().cards['fr-en-b1']?.['v1-word']).toBeDefined()
+    expect(useProgress.getState().cards['fr-en-b2']?.['v1-word']).toBeUndefined()
+  })
+
+  it('ne fait pas déborder une étape de parcours d’un cours à l’autre', () => {
+    useProgress.getState().reset()
+    useProgress.getState().finishStep('fr-en-b1', 'v1:review-0', { correct: 3, total: 3 })
+    expect(useProgress.getState().steps['fr-en-b1']?.['v1:review-0']).toBe(1)
+    expect(useProgress.getState().steps['fr-en-b2']?.['v1:review-0']).toBeUndefined()
+  })
+
+  it('compte les passages séparément pour chaque cours', () => {
+    useProgress.getState().reset()
+    useProgress.getState().finishLesson('fr-en-b1', 'v1-l1', { correct: 4, total: 4 })
+    useProgress.getState().finishLesson('fr-en-b2', 'v1-l1', { correct: 2, total: 4 })
+    expect(useProgress.getState().lessons['fr-en-b1']?.['v1-l1']?.level).toBe(1)
+    // Échouée en B2 : niveau resté à 0, sans toucher au niveau acquis en B1.
+    expect(useProgress.getState().lessons['fr-en-b2']?.['v1-l1']?.level).toBe(0)
+  })
+})
+
+describe('conversion d’une sauvegarde antérieure au format 5', () => {
+  // `localStorage` est absent de l'environnement de test (`legacyCourseId`
+  // s'y replie sur 'legacy') : la sauvegarde à plat doit se retrouver
+  // intégralement sous ce cours, et nulle part ailleurs.
+  it('range les leçons, cartes et étapes à plat sous un seul cours', () => {
+    useProgress.getState().reset()
+    useProgress.getState().importSave(
+      JSON.stringify({
+        format: 4,
+        lessons: { 'v1-l1': { level: 1, completions: 1, lastAt: 0, bestAccuracy: 1 } },
+        cards: { 'v1-word': { itemId: 'v1-word', ease: 2.5, interval: 1, step: null, lapses: 0, reps: 1, due: 0, lastReviewed: 0 } },
+        steps: { 'v1:review-0': 2 },
+      }),
+    )
+    const state = useProgress.getState()
+    expect(state.lessons.legacy?.['v1-l1']?.level).toBe(1)
+    expect(state.cards.legacy?.['v1-word']).toBeDefined()
+    expect(state.steps.legacy?.['v1:review-0']).toBe(2)
+  })
+
+  it('laisse un cours vide plutôt qu’un objet superflu quand il n’y a rien à ranger', () => {
+    useProgress.getState().reset()
+    useProgress.getState().importSave(JSON.stringify({ format: 4, lessons: {}, cards: {}, steps: {} }))
+    expect(useProgress.getState().lessons).toEqual({})
+  })
+
+  it('lit directement une sauvegarde déjà au format 5, sans la replier', () => {
+    useProgress.getState().reset()
+    useProgress.getState().importSave(
+      JSON.stringify({
+        format: 5,
+        lessons: { 'fr-en-b1': { 'v1-l1': { level: 1, completions: 1, lastAt: 0, bestAccuracy: 1 } } },
+        cards: {},
+        steps: {},
+      }),
+    )
+    const state = useProgress.getState()
+    expect(state.lessons['fr-en-b1']?.['v1-l1']?.level).toBe(1)
+    expect(state.lessons.legacy).toBeUndefined()
+  })
+})

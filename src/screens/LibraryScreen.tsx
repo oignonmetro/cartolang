@@ -7,7 +7,7 @@ import type { LessonProgressMap } from '@/engine/progress'
 import { dayKey, displayedStreak, levelFromXp, masteryOf, unitMastery } from '@/engine/progress'
 import { buildUnitPath } from '@/engine/unitPath'
 import { dueCards } from '@/engine/srs'
-import { useProgress } from '@/store/progressStore'
+import { EMPTY_CARDS, EMPTY_LESSON_PROGRESS, EMPTY_STEPS, useProgress } from '@/store/progressStore'
 import { useCourse } from '@/content/CourseProvider'
 import { availableCourses } from '@/content/loader'
 import { ProgressRing } from '@/components/ProgressRing'
@@ -79,10 +79,10 @@ const TRACK_TONES: Record<string, { text: string; bg: string; soft: string; bord
 
 export function LibraryScreen({ course }: { course: LibraryCourse }) {
   const navigate = useNavigate()
-  const { manifest, switchCourse, itemsById } = useCourse()
-  const lessons = useProgress((state) => state.lessons)
-  const steps = useProgress((state) => state.steps)
-  const cards = useProgress((state) => state.cards)
+  const { manifest, switchCourse } = useCourse()
+  const lessons = useProgress((state) => state.lessons[course.id] ?? EMPTY_LESSON_PROGRESS)
+  const steps = useProgress((state) => state.steps[course.id] ?? EMPTY_STEPS)
+  const cards = useProgress((state) => state.cards[course.id] ?? EMPTY_CARDS)
   const xp = useProgress((state) => state.xp)
   const streak = useProgress((state) => state.streak)
 
@@ -109,12 +109,10 @@ export function LibraryScreen({ course }: { course: LibraryCourse }) {
   )
   const trackMastery = useMemo(() => masteryOf(trackItemIds, cards), [trackItemIds, cards])
 
-  // Toutes pistes confondues, et restreint au cours affiché — les cartes d'un
-  // autre niveau resteraient sinon comptées ici sans être révisables.
-  const due = useMemo(
-    () => dueCards(Object.values(cards).filter((card) => itemsById.has(card.itemId)), Date.now()).length,
-    [cards, itemsById],
-  )
+  // Toutes pistes confondues : mélanger vocabulaire, grammaire et
+  // conjugaison ancre mieux qu'une révision par nature d'exercice. `cards`
+  // est déjà restreint au cours affiché.
+  const due = useMemo(() => dueCards(Object.values(cards), Date.now()).length, [cards])
 
   return (
     <div className="mx-auto flex min-h-full w-full max-w-md flex-col">

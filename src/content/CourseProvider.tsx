@@ -27,7 +27,8 @@ const CourseContext = createContext<CourseContextValue | null>(null)
 
 import { setSpokenLanguage } from '@/lib/speech'
 
-const SELECTED_COURSE_KEY = 'cartolang.course'
+/** Lu aussi par `progressStore.ts`, pour rattacher une sauvegarde antérieure au cours actif. */
+export const SELECTED_COURSE_KEY = 'cartolang.course'
 
 export function CourseProvider({ children }: { children: ReactNode }) {
   const [state, setState] = useState<CourseState | null>(null)

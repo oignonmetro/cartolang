@@ -5,7 +5,7 @@ import { buildReviewSession } from '@/engine/exercises'
 import type { SessionOutcome } from '@/engine/progress'
 import { dueCards, type CardState } from '@/engine/srs'
 import { canSpeak } from '@/lib/speech'
-import { useProgress } from '@/store/progressStore'
+import { EMPTY_CARDS, useProgress } from '@/store/progressStore'
 import { SessionScreen } from './SessionScreen'
 import { SessionResult } from './SessionResult'
 import { Button } from '@/components/Button'
@@ -17,23 +17,21 @@ const REVIEW_LIMIT = 15
 
 export function ReviewRoute() {
   const navigate = useNavigate()
-  const { itemsById } = useCourse()
-  const cards = useProgress((state) => state.cards)
+  const { course, itemsById } = useCourse()
+  const cards = useProgress((state) => state.cards[course.id] ?? EMPTY_CARDS)
   const finishReview = useProgress((state) => state.finishReview)
   const [finished, setFinished] = useState<{ outcome: SessionOutcome; xp: number } | null>(null)
 
   // La file est figée à l'ouverture : les notes données pendant la session ne
   // doivent pas retirer des éléments de la session en cours. Toutes pistes
   // confondues — mélanger vocabulaire, grammaire et conjugaison ancre mieux
-  // que réviser chaque nature d'un bloc.
+  // que réviser chaque nature d'un bloc. `cards` est déjà restreint au cours
+  // affiché.
   const [entries] = useState<{ card: CardState; item: PracticeItem }[]>(() =>
-    // Restreint au cours affiché *avant* de plafonner : sinon les cartes d'un
-    // autre niveau consommeraient les quinze places sans être jouables.
-    dueCards(
-      Object.values(cards).filter((card) => itemsById.has(card.itemId)),
-      Date.now(),
-      REVIEW_LIMIT,
-    ).map((card) => ({ card, item: itemsById.get(card.itemId)!.item })),
+    dueCards(Object.values(cards), Date.now(), REVIEW_LIMIT).map((card) => ({
+      card,
+      item: itemsById.get(card.itemId)!.item,
+    })),
   )
 
   const exercises = useMemo(() => buildReviewSession(entries, undefined, canSpeak), [entries])

@@ -40,14 +40,18 @@ function StepSession({ unitId, stepId }: { unitId: string; stepId: string }) {
   const node = useMemo(() => {
     if (!unit) return null
     const { lessons, steps } = useProgress.getState()
-    return buildUnitPath(unit, lessons, steps).find((candidate) => candidate.id === stepId) ?? null
-  }, [unit, stepId])
+    return (
+      buildUnitPath(unit, lessons[course.id] ?? {}, steps[course.id] ?? {}).find(
+        (candidate) => candidate.id === stepId,
+      ) ?? null
+    )
+  }, [unit, stepId, course.id])
 
   // Figé à l'ouverture : les réponses données pendant la session ne doivent
   // pas remanier la file en cours.
   const [entries] = useState<ConsolidationEntry[]>(() => {
     if (!unit || !node || node.kind === 'lesson') return []
-    return consolidationEntries(useProgress.getState().cards, itemsById, {
+    return consolidationEntries(useProgress.getState().cards[course.id] ?? {}, itemsById, {
       // Seul l'entraînement sort de l'unité : c'est là qu'on va chercher ce
       // qui a été appris ailleurs et qui redemande du travail.
       scope: node.kind === 'workout' ? 'course' : 'unit',
@@ -73,7 +77,11 @@ function StepSession({ unitId, stepId }: { unitId: string; stepId: string }) {
   const backToPath = () => navigate(`/unite/${unit.id}`, { replace: true })
 
   if (finished) {
-    const next = nextNodeAfter(buildUnitPath(unit, useProgress.getState().lessons, useProgress.getState().steps), stepId)
+    const { lessons, steps } = useProgress.getState()
+    const next = nextNodeAfter(
+      buildUnitPath(unit, lessons[course.id] ?? {}, steps[course.id] ?? {}),
+      stepId,
+    )
     return (
       <SessionResult
         outcome={finished.outcome}
@@ -108,7 +116,7 @@ function StepSession({ unitId, stepId }: { unitId: string; stepId: string }) {
       title={`${node.title} — ${unit.title}`}
       exercises={exercises}
       onQuit={backToPath}
-      onFinish={(outcome) => setFinished({ outcome, ...finishStep(stepKey(unit.id, stepId), outcome) })}
+      onFinish={(outcome) => setFinished({ outcome, ...finishStep(course.id, stepKey(unit.id, stepId), outcome) })}
     />
   )
 }

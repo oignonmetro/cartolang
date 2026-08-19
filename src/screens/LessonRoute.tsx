@@ -39,7 +39,7 @@ function LessonSession({ lessonId }: { lessonId: string }) {
   // présentation. Figée à l'ouverture pour que les réponses de la session en
   // cours ne la fassent pas varier en cours de route.
   const [level] = useState(() =>
-    entry ? lessonDifficulty(entry.lesson, useProgress.getState().cards) : 0,
+    entry ? lessonDifficulty(entry.lesson, useProgress.getState().cards[course.id] ?? {}) : 0,
   )
 
   // La graine change à chaque tentative pour que « Recommencer » rebatte les cartes.
@@ -53,11 +53,11 @@ function LessonSession({ lessonId }: { lessonId: string }) {
             entry.lesson,
             level,
             seedFrom(entry.lesson.id, level, attempt),
-            useProgress.getState().cards,
+            useProgress.getState().cards[course.id] ?? {},
             canSpeak,
           )
         : [],
-    [entry, attempt, level],
+    [entry, attempt, level, course.id],
   )
 
   if (!entry) return <Navigate to="/" replace />
@@ -69,8 +69,11 @@ function LessonSession({ lessonId }: { lessonId: string }) {
     // L'enchaînement suit l'ordre du parcours, pas celui des seules leçons :
     // la suite peut être une révision, et la sauter viderait le parcours de
     // son sens.
-    const { lessons: progress, steps } = useProgress.getState()
-    const next = nextNodeAfter(buildUnitPath(unit, progress, steps), lessonId)
+    const { lessons, steps } = useProgress.getState()
+    const next = nextNodeAfter(
+      buildUnitPath(unit, lessons[course.id] ?? {}, steps[course.id] ?? {}),
+      lessonId,
+    )
 
     return (
       <SessionResult
@@ -103,7 +106,7 @@ function LessonSession({ lessonId }: { lessonId: string }) {
       exercises={exercises}
       onQuit={backToPath}
       onFinish={(outcome) => {
-        const result = finishLesson(lessonId, outcome)
+        const result = finishLesson(course.id, lessonId, outcome)
         setFinished({ outcome, ...result })
       }}
     />

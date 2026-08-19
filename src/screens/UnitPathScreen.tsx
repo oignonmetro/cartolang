@@ -5,7 +5,7 @@ import { findUnit } from '@/content/course'
 import { unitMastery } from '@/engine/progress'
 import { buildUnitPath, type UnitPathNode } from '@/engine/unitPath'
 import { placePath } from '@/engine/unitPathLayout'
-import { useProgress } from '@/store/progressStore'
+import { EMPTY_CARDS, EMPTY_LESSON_PROGRESS, EMPTY_STEPS, useProgress } from '@/store/progressStore'
 import { ProgressRing } from '@/components/ProgressRing'
 import { PathNode } from '@/components/PathNode'
 import { PathTrail } from '@/components/PathTrail'
@@ -24,9 +24,9 @@ export function UnitPathScreen() {
   const { unitId = '' } = useParams()
   const navigate = useNavigate()
   const { course } = useCourse()
-  const lessons = useProgress((state) => state.lessons)
-  const steps = useProgress((state) => state.steps)
-  const cards = useProgress((state) => state.cards)
+  const lessons = useProgress((state) => state.lessons[course.id] ?? EMPTY_LESSON_PROGRESS)
+  const steps = useProgress((state) => state.steps[course.id] ?? EMPTY_STEPS)
+  const cards = useProgress((state) => state.cards[course.id] ?? EMPTY_CARDS)
 
   const unit = useMemo(() => findUnit(course, unitId), [course, unitId])
   const path = useMemo(

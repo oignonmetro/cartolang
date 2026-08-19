@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import type { Exercise } from '@/engine/exercises'
 import { isPresentation, itemIdsOf } from '@/engine/exercises'
 import { ratingFromAnswer, type Rating } from '@/engine/srs'
+import { useCourse } from '@/content/CourseProvider'
 import { useProgress } from '@/store/progressStore'
 import { stopSpeaking } from '@/lib/speech'
 import { Flashcard } from '@/components/session/Flashcard'
@@ -42,6 +43,7 @@ interface Attempt {
 }
 
 export function SessionScreen({ title, exercises, onQuit, onFinish }: SessionScreenProps) {
+  const { course } = useCourse()
   const gradeItem = useProgress((state) => state.gradeItem)
   const [queue, setQueue] = useState<Exercise[]>(exercises)
   const [position, setPosition] = useState(0)
@@ -86,12 +88,12 @@ export function SessionScreen({ title, exercises, onQuit, onFinish }: SessionScr
     (exercise: Exercise, correct: boolean, rating?: Rating) => {
       const firstTry = !attempt.seen.has(exercise.id)
       for (const itemId of itemIdsOf(exercise)) {
-        gradeItem(itemId, rating ?? ratingFromAnswer(correct, firstTry))
+        gradeItem(course.id, itemId, rating ?? ratingFromAnswer(correct, firstTry))
       }
       record(exercise, correct)
       advance(!correct)
     },
-    [advance, attempt.seen, gradeItem, record],
+    [advance, attempt.seen, course.id, gradeItem, record],
   )
 
   const answerMatch = useCallback(
@@ -99,13 +101,13 @@ export function SessionScreen({ title, exercises, onQuit, onFinish }: SessionScr
       const missed = new Set(missedItemIds)
       const firstTry = !attempt.seen.has(exercise.id)
       for (const itemId of itemIdsOf(exercise)) {
-        gradeItem(itemId, missed.has(itemId) ? 'again' : ratingFromAnswer(true, firstTry))
+        gradeItem(course.id, itemId, missed.has(itemId) ? 'again' : ratingFromAnswer(true, firstTry))
       }
       record(exercise, missed.size === 0)
       // Les paires sont toutes trouvées à la fin : inutile de rejouer la manche.
       advance(false)
     },
-    [advance, attempt.seen, gradeItem, record],
+    [advance, attempt.seen, course.id, gradeItem, record],
   )
 
   // La file est vide : la session est terminée. Le drapeau évite que le

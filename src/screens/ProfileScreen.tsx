@@ -5,7 +5,7 @@ import { courseLabel, itemsOfCourse } from '@/content/course'
 import { installedAppVersion } from '@/content/appUpdate'
 import { dayKey, displayedStreak, levelFromXp } from '@/engine/progress'
 import { cardStrength, dueCards } from '@/engine/srs'
-import { useProgress } from '@/store/progressStore'
+import { EMPTY_CARDS, useProgress } from '@/store/progressStore'
 import { canSpeak } from '@/lib/speech'
 import { Button } from '@/components/Button'
 import { Mascot } from '@/components/Mascot'
@@ -45,7 +45,7 @@ export function ProfileScreen() {
 
   const today = dayKey(Date.now())
   const { level, into, span } = levelFromXp(state.xp)
-  const cards = useMemo(() => Object.values(state.cards), [state.cards])
+  const cards = useMemo(() => Object.values(state.cards[course.id] ?? EMPTY_CARDS), [state.cards, course.id])
   const due = useMemo(() => dueCards(cards, Date.now()).length, [cards])
   const totalItems = useMemo(() => itemsOfCourse(course).length, [course])
 
