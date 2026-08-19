@@ -120,6 +120,70 @@ function webVoices(): SpeechSynthesis | null {
 export const canSpeak: boolean = native || webVoices() !== null
 
 /**
+ * Sur Android, l'écran système ne s'ouvre que depuis l'app native — dans le
+ * navigateur, les voix se gèrent au niveau du système d'exploitation, hors
+ * de portée de l'app.
+ */
+export const canInstallVoice: boolean = native
+
+/**
+ * Attend la liste des voix du navigateur.
+ *
+ * Certains navigateurs la renvoient vide au premier appel et ne la peuplent
+ * qu'après coup, en déclenchant `voiceschanged` — d'autres ne déclenchent
+ * jamais cet évènement. Le filet d'une seconde couvre ce second cas.
+ */
+function loadWebVoices(synth: SpeechSynthesis): Promise<SpeechSynthesisVoice[]> {
+  const initial = synth.getVoices()
+  if (initial.length > 0) return Promise.resolve(initial)
+  return new Promise((resolve) => {
+    const done = () => {
+      synth.removeEventListener('voiceschanged', done)
+      clearTimeout(timeout)
+      resolve(synth.getVoices())
+    }
+    synth.addEventListener('voiceschanged', done)
+    const timeout = setTimeout(done, 1000)
+  })
+}
+
+/**
+ * La voix de la langue actuellement enseignée est-elle vraiment disponible ?
+ *
+ * `canSpeak` répond si un moteur existe ; celle-ci répond si la langue en
+ * cours a une voix installée dessus — deux choses différentes. Un moteur TTS
+ * présent mais sans le paquet de voix russe reste un moteur « disponible »
+ * qui ne dira jamais un mot de russe, en silence, sans jamais le signaler.
+ * Asynchrone et jamais appelée à l'affichage d'un bouton (voir `canSpeak`) :
+ * elle sert à diagnostiquer, dans le profil, pourquoi le bouton reste muet.
+ */
+export async function isSpokenLanguageInstalled(): Promise<boolean> {
+  try {
+    if (native) {
+      const { supported } = await TextToSpeech.isLanguageSupported({ lang: LANG })
+      return supported
+    }
+    const synth = webVoices()
+    if (!synth) return false
+    const voices = await loadWebVoices(synth)
+    const prefix = LANG.split('-')[0]!.toLowerCase()
+    return voices.some((voice) => voice.lang.toLowerCase().startsWith(prefix))
+  } catch {
+    return false
+  }
+}
+
+/** Ouvre l'écran système d'installation des voix. N'a d'effet que sur Android — voir `canInstallVoice`. */
+export async function installSpokenLanguage(): Promise<void> {
+  if (!canInstallVoice) return
+  try {
+    await TextToSpeech.openInstall()
+  } catch {
+    // Rien à faire si l'écran système ne s'ouvre pas.
+  }
+}
+
+/**
  * Prononce un mot ou une phrase en anglais.
  *
  * Ne renvoie jamais d'erreur : une prononciation est un confort, pas une

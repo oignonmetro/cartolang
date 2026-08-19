@@ -6,7 +6,7 @@ import { installedAppVersion } from '@/content/appUpdate'
 import { dayKey, displayedStreak, levelFromXp } from '@/engine/progress'
 import { cardStrength, dueCards } from '@/engine/srs'
 import { EMPTY_CARDS, useProgress } from '@/store/progressStore'
-import { canSpeak } from '@/lib/speech'
+import { canInstallVoice, canSpeak, installSpokenLanguage, isSpokenLanguageInstalled } from '@/lib/speech'
 import { Button } from '@/components/Button'
 import { Mascot } from '@/components/Mascot'
 import { AppUpdateCard } from '@/components/AppUpdateCard'
@@ -38,10 +38,26 @@ export function ProfileScreen() {
   const [message, setMessage] = useState<string | null>(null)
   const fileInput = useRef<HTMLInputElement>(null)
   const [appVersion, setAppVersion] = useState<{ versionName: string; build: string } | null>(null)
+  const [voiceInstalled, setVoiceInstalled] = useState<boolean | null>(null)
+  const [installing, setInstalling] = useState(false)
 
   useEffect(() => {
     void installedAppVersion().then(setAppVersion)
   }, [])
+
+  // La vérification est propre à la langue du cours affiché ; changer de
+  // cours doit la relancer plutôt que de garder le résultat du précédent.
+  useEffect(() => {
+    if (!canSpeak) return
+    let cancelled = false
+    setVoiceInstalled(null)
+    void isSpokenLanguageInstalled().then((installed) => {
+      if (!cancelled) setVoiceInstalled(installed)
+    })
+    return () => {
+      cancelled = true
+    }
+  }, [course.learning])
 
   const today = dayKey(Date.now())
   const { level, into, span } = levelFromXp(state.xp)
@@ -180,6 +196,38 @@ export function ProfileScreen() {
             Le bouton haut-parleur reste disponible même sans lecture automatique. La voix est celle de votre
             appareil : Android la télécharge dans ses réglages de synthèse vocale.
           </p>
+
+          {/* `null` = vérification en cours ou pas encore lancée : on ne dit
+              rien plutôt que d'annoncer un manque qui n'est peut-être qu'un
+              temps de réponse. Le bouton haut-parleur, lui, reste optimiste
+              par ailleurs (voir `canSpeak`) — cet encart est le seul endroit
+              qui affirme franchement « il n'y a pas de voix ». */}
+          {voiceInstalled === false && (
+            <div className="flex items-center justify-between gap-3 rounded-2xl border-2 border-amber/40 bg-amber/10 px-4 py-3">
+              <p className="text-xs font-bold text-ink">
+                Aucune voix disponible en {course.name.toLowerCase()} sur cet appareil : le bouton haut-parleur
+                restera muet tant qu'elle n'est pas installée.
+              </p>
+              {canInstallVoice && (
+                <Button
+                  tone="neutral"
+                  className="shrink-0 text-xs"
+                  disabled={installing}
+                  onClick={async () => {
+                    setInstalling(true)
+                    await installSpokenLanguage()
+                    setInstalling(false)
+                    // L'écran système ne dit pas si l'utilisateur a réellement
+                    // installé une voix ; on revérifie au retour plutôt que
+                    // de supposer.
+                    setVoiceInstalled(await isSpokenLanguageInstalled())
+                  }}
+                >
+                  {installing ? '…' : 'Installer'}
+                </Button>
+              )}
+            </div>
+          )}
         </section>
       )}
 
