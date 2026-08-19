@@ -15,8 +15,8 @@ lessons:
         pos: expression
         hint: Entre proches uniquement.
         example:
-          text: Привет, как дела?
-          translation: Salut, comment ça va ?
+          text: Привет, Анна!
+          translation: Salut, Anna !
       - id: ru-zdravstvuyte
         term: здравствуйте
         translation: bonjour
@@ -37,8 +37,8 @@ lessons:
         translation: comment ça va
         pos: expression
         example:
-          text: Привет, как дела?
-          translation: Salut, comment ça va ?
+          text: Как дела, Анна?
+          translation: Comment ça va, Anna ?
       - id: ru-khorosho
         term: хорошо
         translation: bien

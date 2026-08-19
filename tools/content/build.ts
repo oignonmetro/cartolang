@@ -338,6 +338,26 @@ function checkVocabLesson(lesson: VocabLesson, problems: string[], learning: str
       accepted.set(key, vocab.term)
     }
   }
+
+  // Le QCM « quel mot convient ici ? » (cue `sentence`, voir exercises.ts)
+  // montre la traduction entière de l'exemple et attend un seul mot en
+  // retour : ça suppose que l'exemple a été construit pour ce mot-là. Deux
+  // mots qui partagent le même exemple — un dialogue à deux répliques recopié
+  // sur ses deux locuteurs, par exemple — font alors deviner un mot dont la
+  // traduction affichée ne couvre que la moitié du sens.
+  const examples = new Map<string, string>()
+  for (const vocab of lesson.vocab) {
+    if (!vocab.example) continue
+    const key = `${vocab.example.text.trim().toLowerCase()} ${vocab.example.translation.trim().toLowerCase()}`
+    const owner = examples.get(key)
+    if (owner && owner !== vocab.term) {
+      problems.push(
+        `mot "${vocab.id}" : son exemple est identique à celui de « ${owner} » ; ` +
+          'le QCM « quel mot convient ici ? » ne peut plus distinguer lequel des deux la traduction affichée désigne',
+      )
+    }
+    examples.set(key, vocab.term)
+  }
 }
 
 /**
