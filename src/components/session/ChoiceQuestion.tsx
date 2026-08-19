@@ -21,7 +21,6 @@ import { SpeakButton } from './SpeakButton'
 const PROMPTS: Record<ChoiceCue, string> = {
   term: 'Choisissez le sens',
   translation: 'Choisissez la traduction',
-  hint: 'De quel mot parle-t-on ?',
   sentence: 'Quel mot convient ici ?',
   audio: 'Quel mot entendez-vous ?',
 }
@@ -63,7 +62,7 @@ export function ChoiceQuestion({
           ) : (
             <span
               lang={choicePromptIsEnglish(cue) ? 'en' : 'fr'}
-              className={`break-words ${cue === 'sentence' || cue === 'hint' ? 'text-base leading-snug font-bold' : 'text-xl font-black'}`}
+              className={`break-words ${cue === 'sentence' ? 'text-base leading-snug font-bold' : 'text-xl font-black'}`}
             >
               {choicePrompt(vocab, cue)}
             </span>

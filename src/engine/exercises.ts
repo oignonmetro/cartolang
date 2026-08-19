@@ -70,17 +70,25 @@ export interface MatchExercise {
  *
  *   `term`        : le mot anglais, on choisit son sens ;
  *   `translation` : le mot français, on choisit la forme anglaise ;
- *   `hint`        : la note d'usage, on retrouve le mot sans que le français
- *                   ne serve de béquille — c'est le rappel le plus exigeant
- *                   des cinq, mais peu de mots en ont une ;
  *   `sentence`    : la phrase d'exemple traduite, on choisit le mot anglais
  *                   qui convient là. Le sens se lit dans le contexte plutôt
  *                   que dans une paire de mots isolés ;
  *   `audio`       : le mot prononcé, on choisit son orthographe. L'anglais
  *                   ne s'écrit pas comme il se dit : sans ça, la moitié du
  *                   mot reste non apprise.
+ *
+ * Un quatrième énoncé a existé, `hint` : la note d'usage du mot (« regarde en
+ * arrière », « faux ami »…) comme énoncé à deviner. Retiré : cette note ne
+ * désigne un mot sans ambiguïté que par rapport aux autres mots de sa leçon
+ * d'origine (« hitherto » s'y distingue de « henceforth », son opposé, écrit
+ * juste à côté) ; dès que les distracteurs viennent d'ailleurs — une lettre
+ * qui partage sa note avec une autre, une leçon qui n'a pas son mot-miroir,
+ * un pool mêlant tout le cours en révision — deviner devient un pari sur une
+ * association, plus un rappel du sens. Le champ `hint` lui-même reste : une
+ * remarque affichée à la découverte d'un mot reste utile, seul son usage
+ * comme énoncé de QCM a été supprimé.
  */
-export type ChoiceCue = 'term' | 'translation' | 'hint' | 'sentence' | 'audio'
+export type ChoiceCue = 'term' | 'translation' | 'sentence' | 'audio'
 
 export interface ChoiceExercise {
   kind: 'choice'
@@ -106,8 +114,6 @@ export function choicePrompt(vocab: Vocab, cue: ChoiceCue): string {
       return vocab.term
     case 'translation':
       return vocab.translation
-    case 'hint':
-      return vocab.hint ?? vocab.translation
     case 'sentence':
       return vocab.example?.translation ?? vocab.translation
     case 'audio':
@@ -381,13 +387,6 @@ function choiceFor(vocab: Vocab, cue: ChoiceCue, pool: readonly Vocab[], rng: Rn
 /** Les énoncés qu'un mot peut réellement soutenir, selon ce que l'auteur a écrit. */
 function cuesFor(vocab: Vocab, canSpeak: boolean): ChoiceCue[] {
   const cues: ChoiceCue[] = ['term', 'translation']
-  // `hint` est une remarque sur le mot (prononciation, faux ami…), pas un
-  // indice conçu pour désigner un mot parmi d'autres. Pour une lettre, cette
-  // remarque décrit souvent un trait partagé par plusieurs lettres à la fois
-  // (« même forme, même son qu'en français ») : le QCM redeviendrait un choix
-  // au hasard entre elles. Les mots ordinaires y échappent, une remarque de
-  // vocabulaire visant en pratique à distinguer le mot qu'elle décrit.
-  if (vocab.hint && vocab.pos !== 'lettre') cues.push('hint')
   if (vocab.example) cues.push('sentence')
   if (canSpeak) cues.push('audio')
   return cues
@@ -1184,19 +1183,7 @@ function buildMixedSession(
     // Le QCM est une deuxième façon de reconnaître, à côté de la flashcard —
     // sans lui, la reconnaissance se ramenait toujours à la même
     // auto-évaluation, quand la leçon d'origine variait déjà l'énoncé.
-    //
-    // `hint` en est exclu ici : c'est une note d'usage, pas un indice pensé
-    // pour désigner un mot sans ambiguïté, et elle ne le fait que par rapport
-    // aux autres mots de la même leçon (« hitherto » se distingue de
-    // « henceforth », son opposé, écrit dans la même leçon). Or `vocabPool`
-    // mélange ici tout le cours : les distracteurs peuvent venir d'une leçon
-    // sans rapport, et deviner devient un pari sur l'association plutôt
-    // qu'un rappel du sens.
-    const cue = sample(
-      cuesFor(vocab, canSpeak).filter((candidate) => candidate !== 'hint'),
-      1,
-      rng,
-    )[0]
+    const cue = sample(cuesFor(vocab, canSpeak), 1, rng)[0]
     const choice = cue ? choiceFor(vocab, cue, vocabPool, rng) : null
     if (choice && rng() < 0.55) return choice
 
