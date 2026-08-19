@@ -12,17 +12,17 @@ lessons:
       Le présent simple dit ce qui est **habituel, permanent ou toujours vrai**.
       Sa seule irrégularité tient en une lettre : le -s de la troisième personne.
 
-      — Cas général : on ajoute __-s__.
+      - Cas général : on ajoute __-s__.
         he works, she plays
-      — Verbe en -y après consonne : __-ies__.
+      - Verbe en -y après consonne : __-ies__.
         study → studies
-      — Verbe en -o, -ch, -sh, -ss, -x : __-es__.
+      - Verbe en -o, -ch, -sh, -ss, -x : __-es__.
         go → goes, watch → watches
 
       À la forme négative et interrogative, c'est **l'auxiliaire qui porte la
       marque**, et le verbe redevient nu.
 
-      — he does not work, does he work (et non « does he works »)
+      - he does not work, does he work (et non « does he works »)
     verbs:
       - verb: to work
         translation: travailler
@@ -75,22 +75,22 @@ lessons:
       `be` + verbe en -ing décrit ce qui se déroule **maintenant**, ou une
       situation **temporaire** par contraste avec l'habitude.
 
-      — Présent simple : l'habitude, ce qui est vrai en général.
+      - Présent simple : l'habitude, ce qui est vrai en général.
         I work in Lyon. Je travaille à Lyon, c'est mon poste.
-      — Présent continu : le moment, ou la parenthèse.
+      - Présent continu : le moment, ou la parenthèse.
         I am working from home this week. Cette semaine, je télétravaille.
 
       Trois règles d'orthographe suffisent pour le participe en -ing.
 
-      — e final muet : il **tombe**.
+      - e final muet : il **tombe**.
         write → writing, make → making
-      — voyelle brève accentuée : la consonne finale **double**.
+      - voyelle brève accentuée : la consonne finale **double**.
         run → running, sit → sitting
-      — -ie final : il devient **y**.
+      - -ie final : il devient **y**.
         lie → lying, die → dying
 
       ! Les verbes d'état (`know`, `want`, `believe`, `belong`) refusent cette
-      forme : on dit `I know`, jamais « I am knowing ».
+      forme : on dit `I know`, jamais « I am knowing ».
     verbs:
       - verb: to write
         translation: écrire

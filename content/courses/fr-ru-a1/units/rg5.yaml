@@ -1,20 +1,20 @@
 id: rg5
 title: Dire où l'on est
-subtitle: « в » et « на », et la finale -е qui les suit
+subtitle: « в » et « на », et la finale -е qui les suit
 icon: clock
 color: sky
 level: A1
 
 lessons:
   - id: rg5-l1
-    title: « в » et la finale -е
+    title: « в » et la finale -е
     notes: |
-      Pour situer, le russe emploie `в` — mais le nom qui suit **change de
+      Pour situer, le russe emploie `в`, mais le nom qui suit **change de
       finale** : il prend un **-е**. C'est le cas dit locatif, et il ne sert
       qu'à ça.
 
-      — магазин → `в магазине`, город → `в городе`
-      — школа → `в школе`, аптека → `в аптеке`
+      - магазин → `в магазине`, город → `в городе`
+      - школа → `в школе`, аптека → `в аптеке`
 
       La règle vaut pour les deux genres : consonne finale, on ajoute -е ;
       finale -а, elle devient -е.
@@ -31,7 +31,7 @@ lessons:
           - и
           - не
         translation: Je suis au magasin.
-        explanation: "Un lieu qu'on pense comme un volume prend « в »."
+        explanation: "Un lieu qu'on pense comme un volume prend « в »."
       - id: rg5-v-2
         sentence: Мой брат в ___.
         answer: школе
@@ -41,7 +41,7 @@ lessons:
           - школы
           - школи
         translation: Mon frère est à l'école.
-        explanation: "Après « в », le -а de школа devient -е."
+        explanation: "Après « в », le -а de школа devient -е."
       - id: rg5-v-3
         sentence: Продавец в ___.
         answer: магазине
@@ -84,18 +84,18 @@ lessons:
         explanation: "Féminin en -а : больница → больнице."
 
   - id: rg5-l2
-    title: « на », et le cas de « дома »
+    title: « на », et le cas de « дома »
     notes: |
       `на` gouverne la même finale en -е que `в`. Ce qui change, c'est le
       choix entre les deux, et il ne se déduit pas du français.
 
-      — Une surface : `на столе`.
-      — La rue, la gare, le travail prennent `на` en russe, là où le français
-        dirait « dans » ou « à ».
+      - Une surface : `на столе`.
+      - La rue, la gare, le travail prennent `на` en russe, là où le français
+        dirait « dans » ou « à ».
         на улице, на вокзале
 
-      ! « À la maison » ne prend aucune préposition : c'est l'adverbe `дома`,
-      à ne pas confondre avec `дома`, pluriel de « дом ».
+      ! « À la maison » ne prend aucune préposition : c'est l'adverbe `дома`,
+      à ne pas confondre avec `дома`, pluriel de « дом ».
     points:
       - id: rg5-na-1
         sentence: Сумка ___ столе.
@@ -106,7 +106,7 @@ lessons:
           - и
           - не
         translation: Le sac est sur la table.
-        explanation: "Une surface appelle « на »."
+        explanation: "Une surface appelle « на »."
       - id: rg5-na-2
         sentence: Я ___ улице.
         answer: на
@@ -116,7 +116,7 @@ lessons:
           - тоже
           - это
         translation: Je suis dans la rue.
-        explanation: "Le russe dit « sur la rue » là où le français dit « dans » — à retenir tel quel."
+        explanation: "Le russe dit « sur la rue » là où le français dit « dans », à retenir tel quel."
       - id: rg5-na-3
         sentence: Мы на ___.
         answer: вокзале
@@ -126,7 +126,7 @@ lessons:
           - вокзалы
           - вокзала
         translation: Nous sommes à la gare.
-        explanation: "La gare prend « на », et le nom sa finale en -е."
+        explanation: "La gare prend « на », et le nom sa finale en -е."
       - id: rg5-na-4
         sentence: Хлеб на ___.
         answer: столе
@@ -146,7 +146,7 @@ lessons:
           - на доме
           - дом
         translation: Mon père est à la maison.
-        explanation: "« дома » se suffit à lui-même : ni « в », ni « на »."
+        explanation: "« дома » se suffit à lui-même : ni « в », ni « на »."
       - id: rg5-na-6
         sentence: Кофе ___ столе.
         answer: на
@@ -156,4 +156,4 @@ lessons:
           - и
           - ещё
         translation: Le café est sur la table.
-        explanation: "Posé sur une surface : « на », et столе derrière."
+        explanation: "Posé sur une surface : « на », et столе derrière."

@@ -9,16 +9,16 @@ lessons:
   - id: g4-l1
     title: Chaque verbe et sa construction
     notes: |
-      Rapporter précisément ne consiste pas à empiler des « he said that ».
+      Rapporter précisément ne consiste pas à empiler des « he said that ».
       **Chaque verbe de parole impose sa propre construction**, et se tromper de
       montage trahit immédiatement le niveau.
 
-      — verbe + that : admit, claim, deny, insist, point out, argue.
-      — verbe + quelqu'un + to : urge, advise, remind, warn, persuade.
-      — verbe + -ing : admit, deny, suggest, recommend.
-      — verbe + préposition + -ing : accuse of, apologise for, insist on.
+      - verbe + that : admit, claim, deny, insist, point out, argue.
+      - verbe + quelqu'un + to : urge, advise, remind, warn, persuade.
+      - verbe + -ing : admit, deny, suggest, recommend.
+      - verbe + préposition + -ing : accuse of, apologise for, insist on.
 
-      ! `suggest` ne se construit jamais avec un infinitif : « suggest to do »
+      ! `suggest` ne se construit jamais avec un infinitif : « suggest to do »
       est faux, on dit `suggest doing`.
     points:
       - id: g4-report-1
@@ -30,7 +30,7 @@ lessons:
           - that know
           - know
         translation: Elle a nié avoir eu connaissance du transfert.
-        explanation: "« Deny » se construit avec un gérondif, jamais un infinitif."
+        explanation: "« Deny » se construit avec un gérondif, jamais un infinitif."
       - id: g4-report-2
         sentence: They urged the committee ___ the vote.
         answer: to postpone
@@ -40,7 +40,7 @@ lessons:
           - postpone
           - that postpone
         translation: Ils ont pressé la commission de reporter le vote.
-        explanation: "« Urge » exige un complément d'objet suivi d'un infinitif."
+        explanation: "« Urge » exige un complément d'objet suivi d'un infinitif."
       - id: g4-report-3
         sentence: He accused the agency ___ withholding evidence.
         answer: of
@@ -50,7 +50,7 @@ lessons:
           - to
           - with
         translation: Il a accusé l'agence d'avoir dissimulé des preuves.
-        explanation: "« Accuse somebody of doing » : préposition « of » obligatoire."
+        explanation: "« Accuse somebody of doing » : préposition « of » obligatoire."
       - id: g4-report-4
         sentence: The report ___ that the risk had been underestimated.
         answer: pointed out
@@ -60,7 +60,7 @@ lessons:
           - point out
           - pointing out
         translation: Le rapport a souligné que le risque avait été sous-estimé.
-        explanation: "« Point out that » introduit un fait présenté comme établi."
+        explanation: "« Point out that » introduit un fait présenté comme établi."
       - id: g4-report-5
         sentence: She suggested ___ the deadline by a week.
         answer: extending
@@ -70,7 +70,7 @@ lessons:
           - extend
           - to extending
         translation: Elle a proposé de repousser l'échéance d'une semaine.
-        explanation: "« Suggest » prend un gérondif ou « that + subjonctif », jamais « to »."
+        explanation: "« Suggest » prend un gérondif ou « that + subjonctif », jamais « to »."
       - id: g4-report-6
         sentence: They apologised ___ misleading the shareholders.
         answer: for
@@ -80,7 +80,7 @@ lessons:
           - to
           - about
         translation: Ils se sont excusés d'avoir induit les actionnaires en erreur.
-        explanation: "« Apologise for doing » : la préposition est « for »."
+        explanation: "« Apologise for doing » : la préposition est « for »."
 
   - id: g4-l2
     title: Concordance et déplacement des repères
@@ -88,15 +88,15 @@ lessons:
       Quand le verbe introducteur est au passé, **tout recule d'un cran** : les
       temps, mais aussi les repères de temps et de lieu.
 
-      — Les temps : présent → prétérit, prétérit → past perfect, will → would.
-      — Les repères : now → then, today → that day,
+      - Les temps : présent → prétérit, prétérit → past perfect, will → would.
+      - Les repères : now → then, today → that day,
         tomorrow → the following day, yesterday → the previous day,
         here → there, this → that.
 
       Deux limites bornent cette mécanique.
 
-      — Le past perfect ne recule pas davantage : il est **déjà au bout**.
-      — Si le fait __reste vrai au moment où l'on parle__, le recul devient
+      - Le past perfect ne recule pas davantage : il est **déjà au bout**.
+      - Si le fait __reste vrai au moment où l'on parle__, le recul devient
         facultatif.
         He explained that water boils at 100°C. (toujours vrai aujourd'hui)
     points:
@@ -119,7 +119,7 @@ lessons:
           - would have
           - had
         translation: Elle nous a dit qu'elle assisterait à la cérémonie.
-        explanation: "« Will » rapporté au passé devient « would »."
+        explanation: "« Will » rapporté au passé devient « would »."
       - id: g4-shift-3
         sentence: They announced that the office would close the ___ day.
         answer: following
@@ -129,7 +129,7 @@ lessons:
           - next to
           - after
         translation: Ils ont annoncé que le bureau fermerait le lendemain.
-        explanation: « Tomorrow » devient « the following day » au discours rapporté.
+        explanation: « Tomorrow » devient « the following day » au discours rapporté.
       - id: g4-shift-4
         sentence: He explained that water ___ at one hundred degrees.
         answer: boils

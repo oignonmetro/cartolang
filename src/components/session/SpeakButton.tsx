@@ -54,7 +54,7 @@ export function SpeakButton({
       whileTap={{ scale: 0.9 }}
       animate={pulsing ? { scale: [1, 1.15, 1] } : {}}
       transition={{ duration: 0.4 }}
-      aria-label={`Écouter « ${text} »`}
+      aria-label={`Écouter « ${text} »`}
       className={`inline-flex items-center justify-center rounded-full border-2 border-line bg-paper p-2 text-teal transition-colors hover:border-teal ${className}`}
     >
       <SpeakerIcon size={size} />

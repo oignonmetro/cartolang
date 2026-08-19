@@ -14,15 +14,15 @@ lessons:
       personne.
 
       On retire le -ть de l'infinitif et on ajoute :
-      — `-л` si le sujet est masculin : `он работал`
-      — `-ла` s'il est féminin : `она работала`
-      — `-ло` s'il est neutre : `оно работало`
-      — `-ли` au pluriel : `они работали`
+      - `-л` si le sujet est masculin : `он работал`
+      - `-ла` s'il est féminin : `она работала`
+      - `-ло` s'il est neutre : `оно работало`
+      - `-ли` au pluriel : `они работали`
 
       Ce qui compte n'est donc pas **qui parle** mais **quel genre a le
       sujet** : une femme dit `я работала`, un homme `я работал`.
 
-      ! Au passé, le verbe « être » réapparaît, là où le présent s'en passait :
+      ! Au passé, le verbe « être » réapparaît, là où le présent s'en passait :
       `Он был дома.`
     verbs:
       - verb: работать
@@ -62,7 +62,7 @@ lessons:
       - verb: любить
         translation: aimer
         tense: passé
-        note: "Le -л- de « люблю » ne concerne que le présent : au passé, любил."
+        note: "Le -л- de « люблю » ne concerne que le présent : au passé, любил."
         forms:
           - id: rc4-lyub-m
             person: он
@@ -83,10 +83,10 @@ lessons:
       Les quatre terminaisons ne changent jamais ; c'est **le radical** qui
       surprend, sur les mêmes verbes qui étaient déjà irréguliers au présent.
 
-      — `есть` donne е- : `он ел`, `она ела`.
-      — `пить` garde son п : `он пил`, `она пила`.
-      — `хотеть` reste régulier : `он хотел`.
-      — `идти` change complètement : `он шёл`, `она шла`.
+      - `есть` donne е- : `он ел`, `она ела`.
+      - `пить` garde son п : `он пил`, `она пила`.
+      - `хотеть` reste régulier : `он хотел`.
+      - `идти` change complètement : `он шёл`, `она шла`.
 
       `шёл` est la seule forme du cours où le masculin ne ressemble pas aux
       trois autres : `шёл`, mais `шла`, `шло`, `шли`.

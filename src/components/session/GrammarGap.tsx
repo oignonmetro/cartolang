@@ -108,7 +108,7 @@ export function GrammarGap({
           }`}
         >
           <p className={`font-extrabold ${checked ? 'text-success' : 'text-error'}`}>
-            {checked ? 'Exact.' : `La réponse attendue était « ${point.answer} ».`}
+            {checked ? 'Exact.' : `La réponse attendue était « ${point.answer} ».`}
           </p>
           {point.explanation && <p className="mt-1 text-ink-soft">{point.explanation}</p>}
         </motion.div>

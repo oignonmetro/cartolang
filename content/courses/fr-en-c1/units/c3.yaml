@@ -13,15 +13,15 @@ lessons:
       **parfaitement régulières** : chaque auxiliaire ajoute une couche de sens,
       toujours dans le même ordre.
 
-      — `have` + participe : le **bilan**.
-      — `be` + -ing : la **durée**, l'activité en cours.
-      — un modal (`will`, `would`) : la **projection**.
+      - `have` + participe : le **bilan**.
+      - `be` + -ing : la **durée**, l'activité en cours.
+      - un modal (`will`, `would`) : la **projection**.
 
       L'ordre ne varie jamais : __modal, have, been, verbe-ing__.
 
-      — will have been working (futur antérieur continu)
-      — would have been waiting (conditionnel passé continu)
-      — had been travelling (past perfect continu)
+      - will have been working (futur antérieur continu)
+      - would have been waiting (conditionnel passé continu)
+      - had been travelling (past perfect continu)
     verbs:
       - verb: to work
         translation: travailler
@@ -74,18 +74,18 @@ lessons:
       Au passif, **`be` prend le temps de la phrase** et le verbe reste au
       participe passé. Les formes s'allongent, la mécanique ne change pas.
 
-      — Present perfect : has been signed.
-      — Past perfect : had been signed.
-      — Futur antérieur : will have been signed.
-      — Passif continu : is being signed, was being signed.
+      - Present perfect : has been signed.
+      - Past perfect : had been signed.
+      - Futur antérieur : will have been signed.
+      - Passif continu : is being signed, was being signed.
 
-      ! Le passif continu perfectif (« has been being signed ») existe en théorie
+      ! Le passif continu perfectif (« has been being signed ») existe en théorie
       mais ne s'emploie pas : on reformule.
     verbs:
       - verb: to sign
         translation: signer
         tense: passif composé
-        note: « Be » porte le temps, « signed » ne bouge plus.
+        note: « Be » porte le temps, « signed » ne bouge plus.
         forms:
           - id: c3-sign-pp-pass
             person: present perfect passif
@@ -118,7 +118,7 @@ lessons:
       - verb: to take
         translation: prendre
         tense: passif composé
-        note: "« A decision has been taken » : collocation à retenir telle quelle."
+        note: "« A decision has been taken » : collocation à retenir telle quelle."
         forms:
           - id: c3-take-pp-pass
             person: present perfect passif

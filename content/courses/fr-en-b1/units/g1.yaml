@@ -12,11 +12,11 @@ lessons:
       L'anglais n'a pas **un** futur mais trois façons d'en parler. Le choix ne
       dépend pas du moment visé, mais de **ce qui motive la phrase**.
 
-      — `will` : décision prise à l'instant, promesse, prédiction.
+      - `will` : décision prise à l'instant, promesse, prédiction.
         That bag looks heavy; I'll help you. (je le décide en parlant)
-      — `be going to` : intention déjà formée, ou indice visible maintenant.
+      - `be going to` : intention déjà formée, ou indice visible maintenant.
         Look at those clouds; it's going to rain. (l'indice est sous nos yeux)
-      — Présent continu : rendez-vous pris, arrangement daté.
+      - Présent continu : rendez-vous pris, arrangement daté.
         We're having dinner with Paul on Friday. (la table est réservée)
 
       Les __horaires officiels__ (trains, cinémas, cours) prennent le présent
@@ -31,7 +31,7 @@ lessons:
           - rains
           - is raining
         translation: Regarde ces nuages, il va pleuvoir.
-        explanation: Un indice visible dans le présent appelle « be going to », pas « will ».
+        explanation: Un indice visible dans le présent appelle « be going to », pas « will ».
       - id: g1-fut-2
         sentence: That bag looks heavy; I ___ help you.
         answer: will
@@ -43,7 +43,7 @@ lessons:
           - go to
           - would
         translation: Ce sac a l'air lourd, je vais t'aider.
-        explanation: "Décision prise au moment où l'on parle : « will »."
+        explanation: "Décision prise au moment où l'on parle : « will »."
       - id: g1-fut-3
         sentence: We ___ dinner with Paul on Friday; the table is booked.
         answer: are having
@@ -63,7 +63,7 @@ lessons:
           - studies
           - would
         translation: Elle va étudier la médecine, elle a déjà déposé sa candidature.
-        explanation: "Intention formée avant le moment de parole : « be going to »."
+        explanation: "Intention formée avant le moment de parole : « be going to »."
       - id: g1-fut-5
         sentence: The last train ___ at 6:04 every evening.
         answer: leaves
@@ -85,7 +85,7 @@ lessons:
           - do not
           - not will
         translation: Je promets que je ne le dirai à personne.
-        explanation: "Promesse : « will », ici à la forme négative."
+        explanation: "Promesse : « will », ici à la forme négative."
 
   - id: g1-l2
     title: Le futur après when, if et as soon as
@@ -94,11 +94,11 @@ lessons:
       présent** là où le français met un futur. C'est une des fautes les plus
       tenaces.
 
-      — Conjonctions concernées : `when`, `as soon as`, `until`, `before`,
+      - Conjonctions concernées : `when`, `as soon as`, `until`, `before`,
         `after`, `the moment`, `if`.
         I will call you as soon as I arrive. Je t'appellerai dès que j'arriverai.
 
-      ! Jamais « as soon as I will arrive » ni « if it will rain » : la
+      ! Jamais « as soon as I will arrive » ni « if it will rain » : la
       subordonnée reste au présent, quoi qu'en dise le français.
 
       __La proposition principale__, elle, garde bien son `will`.
@@ -112,7 +112,7 @@ lessons:
           - am arriving
           - arrived
         translation: Je t'appellerai dès que j'arriverai.
-        explanation: Après « as soon as », présent simple malgré le sens futur.
+        explanation: Après « as soon as », présent simple malgré le sens futur.
       - id: g1-when-2
         sentence: We will wait until she ___ back.
         answer: comes
@@ -122,7 +122,7 @@ lessons:
           - will be
           - came
         translation: Nous attendrons jusqu'à ce qu'elle revienne.
-        explanation: "« Until » est une conjonction de temps : présent."
+        explanation: "« Until » est une conjonction de temps : présent."
       - id: g1-when-3
         sentence: Before you ___, please switch off the lights.
         answer: leave
@@ -132,7 +132,7 @@ lessons:
           - left
           - are leaving
         translation: Avant de partir, éteins les lumières s'il te plaît.
-        explanation: « Before » suit la même règle que « when » et « until ».
+        explanation: « Before » suit la même règle que « when » et « until ».
       - id: g1-when-4
         sentence: When the film ___, we can talk about it.
         answer: ends
@@ -154,7 +154,7 @@ lessons:
           - would cancel
           - are cancelling
         translation: S'il pleut demain, nous annulerons l'excursion.
-        explanation: La subordonnée en « if » est au présent, mais la principale garde « will ».
+        explanation: La subordonnée en « if » est au présent, mais la principale garde « will ».
       - id: g1-when-6
         sentence: I will let you know the moment I ___ something.
         answer: hear
@@ -164,4 +164,4 @@ lessons:
           - heard
           - am hearing
         translation: Je te préviendrai dès que j'aurai des nouvelles.
-        explanation: "« The moment » fonctionne comme « as soon as » : présent."
+        explanation: "« The moment » fonctionne comme « as soon as » : présent."

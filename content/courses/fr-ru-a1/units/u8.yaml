@@ -20,7 +20,7 @@ lessons:
         term: молоко
         translation: lait
         pos: nom
-        hint: "Trois О, et un seul se prononce « o » : « malako »."
+        hint: "Trois О, et un seul se prononce « o » : « malako »."
         example:
           text: Чай с молоком.
           translation: Du thé avec du lait.
@@ -62,7 +62,7 @@ lessons:
         term: есть
         translation: manger
         pos: verbe
-        hint: "Le même mot signifie « il y a » — le contexte tranche."
+        hint: "Le même mot signifie « il y a » (le contexte tranche)."
         example:
           text: Я хочу есть.
           translation: J'ai faim.
@@ -86,7 +86,7 @@ lessons:
         term: счёт
         translation: addition
         pos: nom
-        hint: "Le groupe СЧ se lit « chtch », comme un Щ."
+        hint: "Le groupe СЧ se lit « chtch », comme un Щ."
         example:
           text: Счёт, пожалуйста.
           translation: L'addition, s'il vous plaît.

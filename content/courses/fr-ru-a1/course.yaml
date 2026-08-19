@@ -8,7 +8,7 @@
 #
 # Les lettres sont groupées par rapport à l'alphabet latin, et non par ordre
 # alphabétique : c'est là qu'est la difficulté d'un francophone. Les
-# « traîtresses » (В Н Р С У Х), qui ont l'air latines et se lisent autrement,
+# « traîtresses » (В Н Р С У Х), qui ont l'air latines et se lisent autrement,
 # forment à elles seules une leçon, parce que le réflexe acquis se bat contre
 # la lecture correcte.
 #
@@ -21,8 +21,8 @@
 # manger et boire) supposent cet alphabet acquis — `alphabetGatingRemarks`
 # (tools/content/difficulty.ts) le vérifie sur l'ordre des unités tel qu'il
 # est déclaré ci-dessous. Mais la bibliothèque reste en accès libre : rien
-# n'empêche techniquement d'ouvrir « Manger et boire » avant « Lire le
-# russe ». C'est un compromis assumé, pas un oubli — un enchaînement forcé
+# n'empêche techniquement d'ouvrir « Manger et boire » avant « Lire le
+# russe ». C'est un compromis assumé, pas un oubli — un enchaînement forcé
 # entre unités n'existe nulle part ailleurs dans l'app (les cours d'anglais
 # ont le même accès libre), et u1 reste la première unité listée, celle
 # qu'on ouvre naturellement en premier.

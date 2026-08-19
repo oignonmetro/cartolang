@@ -59,7 +59,7 @@ lessons:
         term: сегодня
         translation: aujourd'hui
         pos: adverbe
-        hint: "Le Г se lit v dans ce mot : « sivodnia ». Une exception à retenir telle quelle."
+        hint: "Le Г se lit v dans ce mot : « sivodnia ». Une exception à retenir telle quelle."
         example:
           text: Сегодня хорошо.
           translation: Aujourd'hui, tout va bien.
@@ -135,7 +135,7 @@ lessons:
         term: двадцать
         translation: vingt
         pos: nombre
-        hint: "Le groupe ДЦ se prononce comme un seul son « ts »."
+        hint: "Le groupe ДЦ se prononce comme un seul son « ts »."
         example:
           text: Двадцать лет.
           translation: Vingt ans.
@@ -196,7 +196,7 @@ lessons:
         term: воскресенье
         translation: dimanche
         pos: nom
-        hint: "Le signe mou avant Е garde le son « ïe » distinct, jusqu'au bout du mot."
+        hint: "Le signe mou avant Е garde le son « ïe » distinct, jusqu'au bout du mot."
         example:
           text: Сегодня воскресенье.
           translation: Aujourd'hui, c'est dimanche.

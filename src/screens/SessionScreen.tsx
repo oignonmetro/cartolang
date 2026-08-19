@@ -229,7 +229,7 @@ function QuitDialog({ title, onCancel, onConfirm }: { title: string; onCancel: (
         onClick={(event) => event.stopPropagation()}
         className="w-full max-w-md rounded-blob bg-paper p-6"
       >
-        <h2 className="text-lg font-extrabold">Quitter « {title} » ?</h2>
+        <h2 className="text-lg font-extrabold">Quitter « {title} » ?</h2>
         <p className="mt-2 text-sm text-ink-soft">
           Les mots déjà répondus restent enregistrés, mais la session ne comptera pas d'étoile.
         </p>

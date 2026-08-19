@@ -13,7 +13,7 @@ lessons:
         term: starter
         translation: entrée
         pos: nom
-        hint: "En anglais américain on dit plutôt « appetizer »."
+        hint: "En anglais américain on dit plutôt « appetizer »."
         example:
           text: The starter was better than the main course.
           translation: L'entrée était meilleure que le plat principal.
@@ -148,7 +148,7 @@ lessons:
         alt:
           - allée
         pos: nom
-        hint: "Le s ne se prononce pas : on entend « I'll »."
+        hint: "Le s ne se prononce pas : on entend « I'll »."
         example:
           text: Milk is in the third aisle.
           translation: Le lait est dans le troisième rayon.

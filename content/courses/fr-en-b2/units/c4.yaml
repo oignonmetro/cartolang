@@ -12,19 +12,19 @@ lessons:
       Après un verbe, l'anglais impose l'une ou l'autre forme. **Cela ne se
       déduit pas du sens** : cela s'apprend verbe par verbe.
 
-      — Suivis d'un **gérondif** (-ing) : enjoy, avoid, finish, mind, suggest,
+      - Suivis d'un **gérondif** (-ing) : enjoy, avoid, finish, mind, suggest,
         keep.
-        I enjoy reading. (et non « I enjoy to read »)
-      — Suivis d'un **infinitif** (to) : want, decide, hope, offer, refuse,
+        I enjoy reading. (et non « I enjoy to read »)
+      - Suivis d'un **infinitif** (to) : want, decide, hope, offer, refuse,
         manage.
         They decided to leave.
-      — Après une **préposition**, toujours le gérondif.
+      - Après une **préposition**, toujours le gérondif.
         good at cooking, interested in learning, instead of waiting
     verbs:
       - verb: to enjoy
         translation: apprécier
         tense: verbe + gérondif
-        note: "Jamais « enjoy to read » : enjoy impose la forme en -ing."
+        note: "Jamais « enjoy to read » : enjoy impose la forme en -ing."
         forms:
           - id: c4-enjoy-ger
             person: forme attendue après le verbe
@@ -35,7 +35,7 @@ lessons:
       - verb: to decide
         translation: décider
         tense: verbe + infinitif
-        note: Verbe de projet ou de volonté, donc infinitif complet avec « to ».
+        note: Verbe de projet ou de volonté, donc infinitif complet avec « to ».
         forms:
           - id: c4-decide-inf
             person: forme attendue après le verbe
@@ -52,12 +52,12 @@ lessons:
             person: forme attendue après le verbe
             answer: avoid making
           - id: c4-avoid-prep
-            person: après la préposition « by »
+            person: après la préposition « by »
             answer: by avoiding
       - verb: to manage
         translation: parvenir à
         tense: verbe + infinitif
-        note: "« Manage to » dit la réussite malgré la difficulté."
+        note: "« Manage to » dit la réussite malgré la difficulté."
         forms:
           - id: c4-manage-inf
             person: forme attendue après le verbe
@@ -72,12 +72,12 @@ lessons:
       Une poignée de verbes acceptent les deux constructions, mais **ne veulent
       alors pas dire la même chose**. C'est là qu'un B2 se distingue.
 
-      — `stop doing` = cesser l'activité / `stop to do` = s'arrêter afin de faire.
+      - `stop doing` = cesser l'activité / `stop to do` = s'arrêter afin de faire.
         He stopped smoking. / He stopped to smoke.
-      — `remember doing` = se souvenir d'un fait / `remember to do` = penser à faire.
+      - `remember doing` = se souvenir d'un fait / `remember to do` = penser à faire.
         I remember locking the door. / Remember to lock the door.
-      — `try doing` = tenter une méthode / `try to do` = s'efforcer de.
-      — `mean doing` = impliquer / `mean to do` = avoir l'intention de.
+      - `try doing` = tenter une méthode / `try to do` = s'efforcer de.
+      - `mean doing` = impliquer / `mean to do` = avoir l'intention de.
     verbs:
       - verb: to stop
         translation: arrêter
@@ -104,7 +104,7 @@ lessons:
       - verb: to try
         translation: essayer
         tense: sens selon la forme
-        note: "« Try calling » teste une méthode ; « try to call » décrit un effort."
+        note: "« Try calling » teste une méthode ; « try to call » décrit un effort."
         forms:
           - id: c4-try-ger
             person: tenter une méthode

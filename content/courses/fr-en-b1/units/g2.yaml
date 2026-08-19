@@ -12,17 +12,17 @@ lessons:
       Pour comparer, l'anglais regarde **la longueur de l'adjectif**, jamais son
       sens. Comptez les syllabes avant de choisir.
 
-      — Une syllabe : __-er + than__.
+      - Une syllabe : __-er + than__.
         short → shorter than
-      — Deux syllabes en -y : le y devient i.
+      - Deux syllabes en -y : le y devient i.
         happy → happier than
-      — Trois syllabes ou plus : __more + adjectif + than__.
+      - Trois syllabes ou plus : __more + adjectif + than__.
         interesting → more interesting than
 
       Quatre irréguliers sont à savoir par cœur : `good` → `better`,
       `bad` → `worse`, `far` → `further`, `little` → `less`.
 
-      ! Ne cumulez jamais les deux procédés : « more shorter » est fautif.
+      ! Ne cumulez jamais les deux procédés : « more shorter » est fautif.
     points:
       - id: g2-comp-1
         sentence: This road is ___ than the other one. (short)
@@ -43,7 +43,7 @@ lessons:
           - most interesting
           - as interesting
         translation: Ton idée est plus intéressante que la mienne.
-        explanation: "Adjectif long : « more » devant, jamais de terminaison -er."
+        explanation: "Adjectif long : « more » devant, jamais de terminaison -er."
       - id: g2-comp-3
         sentence: He speaks English ___ than I do. (good)
         answer: better
@@ -73,7 +73,7 @@ lessons:
           - more careful
           - most carefully
         translation: Elle conduit plus prudemment que son frère.
-        explanation: "On compare la manière de conduire : adverbe, donc « more carefully »."
+        explanation: "On compare la manière de conduire : adverbe, donc « more carefully »."
       - id: g2-comp-6
         sentence: The second book is ___ than the first. (bad)
         answer: worse
@@ -83,7 +83,7 @@ lessons:
           - more bad
           - worst
         translation: Le deuxième livre est moins bon que le premier.
-        explanation: "Irrégulier : bad → worse (et non « worst », qui est le superlatif)."
+        explanation: "Irrégulier : bad → worse (et non « worst », qui est le superlatif)."
 
   - id: g2-l2
     title: Le superlatif et l'égalité
@@ -92,19 +92,19 @@ lessons:
       obligation : **`the` devant, toujours**. C'est lui qui marque le
       superlatif, plus encore que la terminaison.
 
-      — Adjectif court : `the` + adjectif + **-est**.
+      - Adjectif court : `the` + adjectif + **-est**.
         the shortest, the biggest, the earliest
-      — Adjectif long : **`the most`** + adjectif.
+      - Adjectif long : **`the most`** + adjectif.
         the most interesting, the most qualified
-      — Les mêmes irréguliers qu'au comparatif.
+      - Les mêmes irréguliers qu'au comparatif.
         the best, the worst, the furthest
-      — Égalité : on **encadre** l'adjectif entre deux `as`.
+      - Égalité : on **encadre** l'adjectif entre deux `as`.
         She is as tall as her mother. It is not as expensive as I feared.
-      — `much`, `far` et `a lot` renforcent __un comparatif__, jamais un
+      - `much`, `far` et `a lot` renforcent __un comparatif__, jamais un
         superlatif.
         much better, far more expensive
 
-      ! `very` ne renforce pas un comparatif : « very better » est faux,
+      ! `very` ne renforce pas un comparatif : « very better » est faux,
       `much better` est correct.
     points:
       - id: g2-sup-1
@@ -158,7 +158,7 @@ lessons:
           - than
           - such
         translation: Cet appartement n'est pas aussi cher que le précédent.
-        explanation: À la forme négative, « so » est possible mais « as » reste le plus courant.
+        explanation: À la forme négative, « so » est possible mais « as » reste le plus courant.
       - id: g2-sup-6
         sentence: This hotel is ___ better than the last one.
         answer: much
@@ -171,4 +171,4 @@ lessons:
           - more
           - too
         translation: Cet hôtel est bien meilleur que le précédent.
-        explanation: On renforce un comparatif avec « much » ou « far », jamais « very ».
+        explanation: On renforce un comparatif avec « much » ou « far », jamais « very ».

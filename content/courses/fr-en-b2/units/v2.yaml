@@ -33,7 +33,7 @@ lessons:
           - périmètre
           - mandat
         pos: nom
-        hint: Britannique et plutôt formel ; « scope » est plus neutre.
+        hint: Britannique et plutôt formel ; « scope » est plus neutre.
         example:
           text: Budget decisions fall outside my remit.
           translation: Les décisions budgétaires sortent de mes attributions.
@@ -73,7 +73,7 @@ lessons:
         alt:
           - comptable
         pos: adjectif
-        hint: « Accountable for » = devoir rendre des comptes ; plus fort que « responsible ».
+        hint: « Accountable for » = devoir rendre des comptes ; plus fort que « responsible ».
         example:
           text: Managers are accountable for their decisions.
           translation: Les responsables doivent rendre des comptes sur leurs décisions.
@@ -96,7 +96,7 @@ lessons:
         alt:
           - programme
         pos: nom
-        hint: "Faux ami : un agenda de rendez-vous se dit « diary » ou « calendar »."
+        hint: "Faux ami : un agenda de rendez-vous se dit « diary » ou « calendar »."
         example:
           text: That point is not on the agenda.
           translation: Ce point n'est pas à l'ordre du jour.

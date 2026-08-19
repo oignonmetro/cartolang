@@ -11,22 +11,22 @@ lessons:
     notes: |
       Pour marquer qu'on est dans le même cas, l'anglais **ne répète pas le
       verbe : il reprend l'auxiliaire et inverse**. Le français, lui, dit
-      simplement « moi aussi ».
+      simplement « moi aussi ».
 
-      — Accord positif : `so` + auxiliaire + sujet.
+      - Accord positif : `so` + auxiliaire + sujet.
         I like jazz. → So do I.
-      — Accord négatif : `neither` + auxiliaire + sujet.
+      - Accord négatif : `neither` + auxiliaire + sujet.
         I do not smoke. → Neither do I.
 
       L'auxiliaire repris est __celui de la phrase de départ__ : `do` pour un
       verbe lexical, mais `be`, `have` ou le modal s'il y en a un.
 
-      ! `neither` est déjà négatif : on ne dit jamais « neither don't I ».
+      ! `neither` est déjà négatif : on ne dit jamais « neither don't I ».
     verbs:
       - verb: to do (reprise)
         translation: reprise d'un verbe lexical
         tense: après un verbe ordinaire
-        note: "« I like jazz » se reprend par « do », pas par « like »."
+        note: "« I like jazz » se reprend par « do », pas par « like »."
         forms:
           - id: c5-do-so
             person: accord positif
@@ -37,7 +37,7 @@ lessons:
       - verb: to be (reprise)
         translation: reprise de be
         tense: après une phrase en be
-        note: "« I am tired » se reprend par « be », jamais par « do »."
+        note: "« I am tired » se reprend par « be », jamais par « do »."
         forms:
           - id: c5-be-so
             person: accord positif
@@ -59,7 +59,7 @@ lessons:
       - verb: can (reprise)
         translation: reprise d'un modal
         tense: après un modal
-        note: Le modal se reprend tel quel, sans « do ».
+        note: Le modal se reprend tel quel, sans « do ».
         forms:
           - id: c5-can-so
             person: accord positif
@@ -75,23 +75,23 @@ lessons:
       proposition**. C'est une économie que le français ne connaît pas et qui
       s'entend immédiatement à l'oral.
 
-      — Will it rain ? → I think so. Je crois que oui.
-      — Will it rain ? → I hope not. J'espère que non.
+      - Will it rain ? → I think so. Je crois que oui.
+      - Will it rain ? → I hope not. J'espère que non.
 
       La forme négative se partage en deux familles, et le choix n'est pas
       libre.
 
-      — `hope`, `be afraid`, `guess` prennent **`not`** : I hope not.
-      — `think`, `believe`, `expect` préfèrent **la négation du verbe** :
+      - `hope`, `be afraid`, `guess` prennent **`not`** : I hope not.
+      - `think`, `believe`, `expect` préfèrent **la négation du verbe** :
         I do not think so.
 
-      ! « I think not » existe mais sonne très littéraire ; à l'usage courant,
+      ! « I think not » existe mais sonne très littéraire ; à l'usage courant,
       c'est `I do not think so`.
     verbs:
       - verb: to hope
         translation: espérer
         tense: reprise par so / not
-        note: "« Hope » prend « not », jamais la négation du verbe."
+        note: "« Hope » prend « not », jamais la négation du verbe."
         forms:
           - id: c5-hope-so
             person: reprise positive
@@ -102,7 +102,7 @@ lessons:
       - verb: to think
         translation: penser
         tense: reprise par so / not
-        note: "« Think » nie le verbe, pas la reprise."
+        note: "« Think » nie le verbe, pas la reprise."
         forms:
           - id: c5-think-so
             person: reprise positive
@@ -126,7 +126,7 @@ lessons:
       - verb: to expect
         translation: s'attendre à
         tense: reprise par so / not
-        note: Se comporte comme « think » à la forme négative.
+        note: Se comporte comme « think » à la forme négative.
         forms:
           - id: c5-expect-so
             person: reprise positive

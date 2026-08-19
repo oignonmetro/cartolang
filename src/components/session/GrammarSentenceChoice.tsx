@@ -93,7 +93,7 @@ export function GrammarSentenceChoice({
           }`}
         >
           <p className={`font-extrabold ${correct ? 'text-success' : 'text-error'}`}>
-            {correct ? 'Exact.' : `La forme attendue était « ${point.answer} ».`}
+            {correct ? 'Exact.' : `La forme attendue était « ${point.answer} ».`}
           </p>
           {point.explanation && <p className="mt-1 text-ink-soft">{point.explanation}</p>}
         </motion.div>

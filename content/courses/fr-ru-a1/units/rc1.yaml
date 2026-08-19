@@ -9,15 +9,15 @@ lessons:
   - id: rc1-l1
     title: Работать, le modèle régulier
     notes: |
-      Le russe n'a **qu'un seul présent** : pas de distinction entre « je
-      travaille » et « je suis en train de travailler ». Une seule série de
+      Le russe n'a **qu'un seul présent** : pas de distinction entre « je
+      travaille » et « je suis en train de travailler ». Une seule série de
       terminaisons à savoir par groupe.
 
       Le 1er groupe se reconnaît à son `ты` en **-ешь**. Sur `работать`, on
       retire le -ть de l'infinitif et on ajoute les six terminaisons.
 
-      — `я работаю`, `ты работаешь`, `он работает`
-      — `мы работаем`, `вы работаете`, `они работают`
+      - `я работаю`, `ты работаешь`, `он работает`
+      - `мы работаем`, `вы работаете`, `они работают`
 
       ! Le pronom sujet reste presque toujours exprimé, contrairement à
       l'espagnol ou à l'italien : on dit `я работаю`, pas `работаю` seul.
@@ -53,14 +53,14 @@ lessons:
       radical ne se lit pas sur l'infinitif** : il faut l'apprendre avec la
       première personne.
 
-      — `жить` donne un radical жив- : `я живу`, `ты живёшь`.
-      — `идти` donne un radical ид- : `я иду`, `ты идёшь`.
+      - `жить` donne un radical жив- : `я живу`, `ты живёшь`.
+      - `идти` donne un radical ид- : `я иду`, `ты идёшь`.
 
       Quand la terminaison est accentuée, le -е- s'écrit **-ё-** : `живёшь`,
       `идёшь`. C'est la même terminaison, seulement accentuée.
 
-      ! `идти` ne se dit que du déplacement **à pied et en cours** : « Я иду
-      домой » se dit en marchant, pas depuis son fauteuil.
+      ! `идти` ne se dit que du déplacement **à pied et en cours** : « Я иду
+      домой » se dit en marchant, pas depuis son fauteuil.
     verbs:
       - verb: жить
         translation: habiter

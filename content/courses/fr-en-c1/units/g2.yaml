@@ -7,18 +7,18 @@ level: C1
 
 lessons:
   - id: g2-l1
-    title: L'inversion à la place de « if »
+    title: L'inversion à la place de « if »
     notes: |
-      À l'écrit soutenu, l'anglais supprime « if » et inverse le sujet et
+      À l'écrit soutenu, l'anglais supprime « if » et inverse le sujet et
       l'auxiliaire. Le sens est inchangé, le registre monte d'un cran.
-      — Were I in charge, I would resign. (= If I were in charge)
-      — Had we known, we would have acted. (= If we had known)
-      — Should you need help, call me. (= If you should need help)
+      - Were I in charge, I would resign. (= If I were in charge)
+      - Had we known, we would have acted. (= If we had known)
+      - Should you need help, call me. (= If you should need help)
       Trois auxiliaires seulement acceptent ce tour : __were__, __had__,
       __should__.
 
-      ! À la négative, pas de contraction : « Were it not for… », jamais
-      « Weren't it ».
+      ! À la négative, pas de contraction : « Were it not for… », jamais
+      « Weren't it ».
     points:
       - id: g2-inv-1
         sentence: ___ I in your position, I would decline the offer.
@@ -29,7 +29,7 @@ lessons:
           - If
           - Had
         translation: Si j'étais à votre place, je déclinerais l'offre.
-        explanation: "Irréel du présent sans « if » : « Were » + sujet."
+        explanation: "Irréel du présent sans « if » : « Were » + sujet."
       - id: g2-inv-2
         sentence: ___ we known earlier, we would have cancelled.
         answer: Had
@@ -39,7 +39,7 @@ lessons:
           - Were
           - If
         translation: Si nous l'avions su plus tôt, nous aurions annulé.
-        explanation: "Irréel du passé sans « if » : « Had » + sujet + participe."
+        explanation: "Irréel du passé sans « if » : « Had » + sujet + participe."
       - id: g2-inv-3
         sentence: ___ you require assistance, our team is available.
         answer: Should
@@ -49,7 +49,7 @@ lessons:
           - Were
           - Had
         translation: Si vous aviez besoin d'aide, notre équipe est disponible.
-        explanation: "Éventualité polie et formelle : « Should » + sujet."
+        explanation: "Éventualité polie et formelle : « Should » + sujet."
       - id: g2-inv-4
         sentence: ___ it not for her intervention, the deal would have collapsed.
         answer: Were
@@ -59,7 +59,7 @@ lessons:
           - Had
           - If
         translation: Sans son intervention, l'accord se serait effondré.
-        explanation: "Formule figée : « Were it not for… » = « If it were not for… »."
+        explanation: "Formule figée : « Were it not for… » = « If it were not for… »."
       - id: g2-inv-5
         sentence: Had the report been published, the outcome ___ different.
         answer: would have been
@@ -69,7 +69,7 @@ lessons:
           - had been
           - will be
         translation: Si le rapport avait été publié, l'issue aurait été différente.
-        explanation: L'inversion ne touche que la subordonnée ; la principale garde « would have ».
+        explanation: L'inversion ne touche que la subordonnée ; la principale garde « would have ».
       - id: g2-inv-6
         sentence: ___ anyone object, the matter will be reopened.
         answer: Should
@@ -79,7 +79,7 @@ lessons:
           - Were
           - Does
         translation: Si quelqu'un venait à s'y opposer, la question serait rouverte.
-        explanation: « Should » + sujet + base verbale, sans -s de troisième personne.
+        explanation: « Should » + sujet + base verbale, sans -s de troisième personne.
 
   - id: g2-l2
     title: Irréel soutenu et hypothèse détachée
@@ -88,18 +88,18 @@ lessons:
       **placent l'hypothèse à distance**, ou qui la réduisent à un groupe
       nominal.
 
-      — `were to` + base verbale : une éventualité lointaine, souvent fâcheuse.
+      - `were to` + base verbale : une éventualité lointaine, souvent fâcheuse.
         If the scheme were to fail, the losses would be considerable.
-      — `but for` + nom : sans cet élément, tout aurait basculé.
+      - `but for` + nom : sans cet élément, tout aurait basculé.
         But for the storm, the ceremony would have gone ahead.
-      — `otherwise` : la contrefactuelle en un seul mot, après un fait réel.
+      - `otherwise` : la contrefactuelle en un seul mot, après un fait réel.
         We booked early; otherwise we would have paid double.
-      — `it is (high) time` + prétérit : le présent est déjà en retard.
+      - `it is (high) time` + prétérit : le présent est déjà en retard.
         It is high time we settled this.
 
       ! `wish` + `would` ne vaut que pour un **comportement** qu'autrui pourrait
       changer. Pour un état, le prétérit s'impose : `I wish the house had a
-      garden`, jamais « would have ».
+      garden`, jamais « would have ».
     points:
       - id: g2-unreal-1
         sentence: If the scheme ___ to fail, the losses would run into millions.
@@ -110,7 +110,7 @@ lessons:
           - is
           - would be
         translation: Si le dispositif venait à échouer, les pertes se chiffreraient en millions.
-        explanation: "« Were to » + base verbale place l'éventualité à distance, quel que soit le sujet."
+        explanation: "« Were to » + base verbale place l'éventualité à distance, quel que soit le sujet."
       - id: g2-unreal-2
         sentence: ___ the storm, the ceremony would have gone ahead as planned.
         answer: But for
@@ -120,7 +120,7 @@ lessons:
           - Apart from
           - Unless for
         translation: Sans la tempête, la cérémonie se serait déroulée comme prévu.
-        explanation: "Seul « but for » porte la valeur contrefactuelle ; « except for » et « apart from » veulent dire « à cela près »."
+        explanation: "Seul « but for » porte la valeur contrefactuelle ; « except for » et « apart from » veulent dire « à cela près »."
       - id: g2-unreal-3
         sentence: We booked months in advance; ___, we would have paid twice as much.
         answer: otherwise
@@ -130,7 +130,7 @@ lessons:
           - therefore
           - nevertheless
         translation: Nous avons réservé des mois à l'avance ; sans quoi, nous aurions payé le double.
-        explanation: « Otherwise » condense à lui seul l'hypothèse contraire au fait qui précède.
+        explanation: « Otherwise » condense à lui seul l'hypothèse contraire au fait qui précède.
       - id: g2-unreal-4
         sentence: It is high time we ___ this matter once and for all.
         answer: settled
@@ -140,7 +140,7 @@ lessons:
           - will settle
           - have settled
         translation: Il est grand temps que nous réglions cette affaire une bonne fois pour toutes.
-        explanation: « It is high time » entraîne le prétérit, malgré le sens présent.
+        explanation: « It is high time » entraîne le prétérit, malgré le sens présent.
       - id: g2-unreal-5
         sentence: I wish the flat ___ a balcony, but it faces a courtyard.
         answer: had
@@ -150,7 +150,7 @@ lessons:
           - has
           - would
         translation: J'aimerais que l'appartement ait un balcon, mais il donne sur une cour.
-        explanation: "État qu'on ne peut pas changer : prétérit, et non « would have », réservé aux comportements."
+        explanation: "État qu'on ne peut pas changer : prétérit, et non « would have », réservé aux comportements."
       - id: g2-unreal-6
         sentence: Supposing you ___ the post, would you consider moving abroad?
         answer: were offered
@@ -160,4 +160,4 @@ lessons:
           - would be offered
           - had been offered
         translation: À supposer qu'on vous propose le poste, envisageriez-vous de partir à l'étranger ?
-        explanation: "« Supposing » fonctionne comme « if » : prétérit pour l'irréel du présent, ici au passif."
+        explanation: "« Supposing » fonctionne comme « if » : prétérit pour l'irréel du présent, ici au passif."

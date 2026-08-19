@@ -70,11 +70,11 @@ export function ConjugationChoice({
           }`}
         >
           <p className={`font-extrabold ${correct ? 'text-success' : 'text-error'}`}>
-            {correct ? 'Bonne réponse.' : `La forme attendue était « ${form.answer} ».`}
+            {correct ? 'Bonne réponse.' : `La forme attendue était « ${form.answer} ».`}
           </p>
           {fromFrench && (
             <p className="mt-1 text-ink-soft">
-              {verb.translation} — <span lang="en">{verb.verb}</span>
+              {verb.translation} (<span lang="en">{verb.verb}</span>)
             </p>
           )}
           {verb.note && <p className="mt-1 text-ink-soft">{verb.note}</p>}

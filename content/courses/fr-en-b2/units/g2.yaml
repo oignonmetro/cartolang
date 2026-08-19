@@ -12,14 +12,14 @@ lessons:
       Pour raisonner sur ce qui a dû se produire, l'anglais empile un modal et un
       infinitif passé : **modal + `have` + participe passé**.
 
-      — Certitude positive : `must have`.
+      - Certitude positive : `must have`.
         He must have forgotten. Il a dû oublier.
-      — Certitude négative : `can't have` / `couldn't have`.
+      - Certitude négative : `can't have` / `couldn't have`.
         She can't have seen us. Elle n'a pas pu nous voir.
-      — Simple possibilité : `may` / `might` / `could have`.
+      - Simple possibilité : `may` / `might` / `could have`.
         They might have left already. Ils sont peut-être déjà partis.
 
-      ! « Mustn't have » n'exprime pas la déduction négative : c'est
+      ! « Mustn't have » n'exprime pas la déduction négative : c'est
       `can't have` qui joue ce rôle.
     points:
       - id: g2-deduce-1
@@ -46,7 +46,7 @@ lessons:
           - should not have
           - did not have
         translation: Elle n'a pas pu nous voir ; elle était tournée dans l'autre sens.
-        explanation: "Déduction négative : « can't have », jamais « mustn't have »."
+        explanation: "Déduction négative : « can't have », jamais « mustn't have »."
 
       - id: g2-deduce-3
         sentence: I am not sure, but he ___ missed the train.
@@ -79,7 +79,7 @@ lessons:
           - should
           - would
         translation: Personne ne répond. Elle doit dormir.
-        explanation: "Déduction sur le présent : modal seul, sans « have »."
+        explanation: "Déduction sur le présent : modal seul, sans « have »."
 
       - id: g2-deduce-6
         sentence: They ___ have finished by now, but I would not count on it.
@@ -101,17 +101,17 @@ lessons:
       `mustn't` et `don't have to` se ressemblent, mais disent **le contraire
       l'un de l'autre**. C'est le piège le plus coûteux du niveau.
 
-      — `mustn't` : c'est __interdit__.
+      - `mustn't` : c'est __interdit__.
         You mustn't park here. Interdiction de se garer.
-      — `don't have to` / `needn't` : c'est __facultatif__.
+      - `don't have to` / `needn't` : c'est __facultatif__.
         You don't have to come. Tu viens si tu veux.
 
       Au passé, deux formes voisines distinguent ce qui a été fait de ce qui ne
       l'a pas été.
 
-      — `needn't have` + participe : l'action **a eu lieu**, inutilement.
+      - `needn't have` + participe : l'action **a eu lieu**, inutilement.
         We needn't have hurried. Nous nous sommes pressés pour rien.
-      — `didn't need to` : l'obligation n'existait pas, l'action n'a **pas** eu lieu.
+      - `didn't need to` : l'obligation n'existait pas, l'action n'a **pas** eu lieu.
         She didn't need to pay. Elle n'a pas eu à payer.
     points:
       - id: g2-oblig-1
@@ -153,7 +153,7 @@ lessons:
           - must not have
           - should not
         translation: Nous n'avions pas besoin de nous presser, le train avait du retard de toute façon.
-        explanation: "« Needn't have » : l'action a bien été faite, et pour rien."
+        explanation: "« Needn't have » : l'action a bien été faite, et pour rien."
 
       - id: g2-oblig-4
         sentence: Luckily she ___ pay the fine, so she kept her money.
@@ -166,7 +166,7 @@ lessons:
           - must not have
           - could not have
         translation: Heureusement elle n'a pas eu besoin de payer l'amende, elle a donc gardé son argent.
-        explanation: "« Didn't need to » : l'obligation n'existait pas, et l'action n'a pas eu lieu."
+        explanation: "« Didn't need to » : l'obligation n'existait pas, et l'action n'a pas eu lieu."
 
       - id: g2-oblig-5
         sentence: Visitors ___ wear a badge at all times.
@@ -188,5 +188,5 @@ lessons:
           - have better
           - should have
         translation: Tu ferais mieux de vérifier l'adresse avant de partir.
-        explanation: "Conseil pressant : « had better » + base verbale, sans « to »."
+        explanation: "Conseil pressant : « had better » + base verbale, sans « to »."
 

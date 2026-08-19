@@ -26,7 +26,7 @@ export function AppUpdateCard() {
       {status === 'permission-required' && (
         <p className="text-xs text-ink-soft">
           Autorisez Cartolang à installer des applications dans les réglages qui viennent de s'ouvrir, puis retapez
-          sur « Télécharger ».
+          sur « Télécharger ».
         </p>
       )}
       {status === 'failed' && (

@@ -25,14 +25,14 @@ describe('rappels de cours', () => {
   })
 
   it('groupe les règles consécutives en une seule liste', () => {
-    const blocks = parseNotes('— can → could.\n— will → would.\n— may → might.')
+    const blocks = parseNotes('- can → could.\n- will → would.\n- may → might.')
     expect(blocks).toHaveLength(1)
     expect(blocks[0]).toMatchObject({ kind: 'rules' })
     expect(blocks[0].kind === 'rules' && blocks[0].rules).toHaveLength(3)
   })
 
   it('détache l’étiquette d’une règle « cas : contenu »', () => {
-    const blocks = parseNotes('— Une syllabe : -er + than.')
+    const blocks = parseNotes('- Une syllabe : -er + than.')
     expect(blocks[0]).toEqual({
       kind: 'rules',
       rules: [{ label: 'Une syllabe', body: '-er + than.', example: null }],
@@ -41,13 +41,13 @@ describe('rappels de cours', () => {
 
   it('ne coupe pas une règle dont le « : » arrive trop tard', () => {
     // Sinon « If + présent simple, … will + base verbale » se ferait charcuter.
-    const long = '— Quand la condition est plausible et que rien ne s’y oppose : on garde le présent.'
+    const long = '- Quand la condition est plausible et que rien ne s’y oppose : on garde le présent.'
     const blocks = parseNotes(long)
     expect(blocks[0].kind === 'rules' && blocks[0].rules[0].label).toBeNull()
   })
 
   it('rattache une ligne indentée à la règle qu’elle illustre', () => {
-    const blocks = parseNotes('— If + présent simple, … will + base verbale.\n  If it rains, we will stay at home.')
+    const blocks = parseNotes('- If + présent simple, … will + base verbale.\n  If it rains, we will stay at home.')
     expect(blocks[0]).toEqual({
       kind: 'rules',
       rules: [
@@ -87,7 +87,7 @@ describe('rappels de cours', () => {
   })
 
   it('reprend la prose après une liste de règles', () => {
-    const blocks = parseNotes('Avant.\n— Une règle.\nAprès, sur deux\nlignes repliées.')
+    const blocks = parseNotes('Avant.\n- Une règle.\nAprès, sur deux\nlignes repliées.')
     expect(blocks.map((block) => block.kind)).toEqual(['paragraph', 'rules', 'paragraph'])
     expect(blocks[2]).toEqual({ kind: 'paragraph', text: 'Après, sur deux lignes repliées.' })
   })
@@ -226,7 +226,7 @@ describe('ruleSpeech — défauts vus au rendu', () => {
 describe('règle repliée sur plusieurs lignes', () => {
   it('poursuit le corps quand la ligne reste en suspens', () => {
     const blocks = parseNotes(
-      '— `much`, `far` et `a lot` renforcent un comparatif, jamais un\n' +
+      '- `much`, `far` et `a lot` renforcent un comparatif, jamais un\n' +
         '  superlatif.\n' +
         '  much better, far more expensive\n',
     )
@@ -236,7 +236,7 @@ describe('règle repliée sur plusieurs lignes', () => {
   })
 
   it('traite la ligne indentée en exemple quand la règle est achevée', () => {
-    const blocks = parseNotes('— `will` : décision prise à l\'instant.\n  I will help you.\n')
+    const blocks = parseNotes('- `will` : décision prise à l\'instant.\n  I will help you.\n')
     const rule = (blocks[0] as { kind: 'rules'; rules: NoteRule[] }).rules[0]
     expect(rule.example).toBe('I will help you.')
   })
@@ -244,14 +244,14 @@ describe('règle repliée sur plusieurs lignes', () => {
   it('ne se laisse pas abuser par une forme citée en fin de règle', () => {
     // « …that…` » se termine par une ellipse : la règle est achevée, la ligne
     // suivante est bien un exemple.
-    const blocks = parseNotes('— `it is essential that…`\n  It is essential that he remain.\n')
+    const blocks = parseNotes('- `it is essential that…`\n  It is essential that he remain.\n')
     const rule = (blocks[0] as { kind: 'rules'; rules: NoteRule[] }).rules[0]
     expect(rule.body).toBe('`it is essential that…`')
     expect(rule.example).toBe('It is essential that he remain.')
   })
 
   it('recolle un corps replié sur trois lignes', () => {
-    const blocks = parseNotes('— Suivis d\'une proposition : although,\n  even though,\n  whereas.\n')
+    const blocks = parseNotes('- Suivis d\'une proposition : although,\n  even though,\n  whereas.\n')
     const rule = (blocks[0] as { kind: 'rules'; rules: NoteRule[] }).rules[0]
     // L'étiquette est détachée du corps, comme pour toute règle en « … : … ».
     expect(rule.label).toBe("Suivis d'une proposition")

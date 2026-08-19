@@ -12,12 +12,12 @@ lessons:
       Un verbe irrégulier, ce sont **trois colonnes** à savoir ensemble : base,
       prétérit, participe passé. Les deux dernières se confondent souvent.
 
-      — Le **prétérit** s'emploie seul, pour un fait __passé et daté__.
+      - Le **prétérit** s'emploie seul, pour un fait __passé et daté__.
         I wrote the report yesterday. J'ai rédigé le rapport hier.
-      — Le **participe passé** sert à tous les temps composés, __jamais seul__.
+      - Le **participe passé** sert à tous les temps composés, __jamais seul__.
         I have written three reports this week. (`have` + participe)
 
-      ! Un participe ne se conjugue pas tout seul : « I written » n'existe pas.
+      ! Un participe ne se conjugue pas tout seul : « I written » n'existe pas.
     verbs:
       - verb: to write
         translation: écrire
@@ -70,9 +70,9 @@ lessons:
       La frontière entre les deux temps n'est pas **la distance dans le temps**,
       mais __le lien avec le présent__.
 
-      — Prétérit : la période est **close**, souvent datée.
+      - Prétérit : la période est **close**, souvent datée.
         I saw her last week. (la semaine dernière est finie)
-      — Present perfect : la période est **encore ouverte**, ou le résultat compte
+      - Present perfect : la période est **encore ouverte**, ou le résultat compte
         aujourd'hui.
         I have seen her twice this week. (la semaine court toujours)
 
@@ -82,7 +82,7 @@ lessons:
       - verb: to see
         translation: voir
         tense: present perfect
-        note: have / has + seen, jamais « have saw ».
+        note: have / has + seen, jamais « have saw ».
         forms:
           - id: c1-see-pp-1
             person: I / you / we / they
@@ -97,7 +97,7 @@ lessons:
       - verb: to go
         translation: aller
         tense: present perfect
-        note: "« has gone » = parti et pas revenu ; « has been » = y est allé et revenu."
+        note: "« has gone » = parti et pas revenu ; « has been » = y est allé et revenu."
         forms:
           - id: c1-go-pp-1
             person: I / you / we / they
@@ -121,15 +121,15 @@ lessons:
     title: Le past perfect
     notes: |
       Le past perfect situe un événement **avant un autre événement passé**.
-      C'est le « passé du passé » : `had` + participe, invariable en personne.
+      C'est le « passé du passé » : `had` + participe, invariable en personne.
 
-      — When we arrived, the meeting had already started.
+      - When we arrived, the meeting had already started.
         Quand nous sommes arrivés, la réunion avait déjà commencé.
 
       Il est également obligatoire dans deux contextes.
 
-      — Hypothèse irréelle du passé : `if I had known`.
-      — Discours rapporté après un verbe au passé : `he said he had seen her`.
+      - Hypothèse irréelle du passé : `if I had known`.
+      - Discours rapporté après un verbe au passé : `he said he had seen her`.
     verbs:
       - verb: to start
         translation: commencer

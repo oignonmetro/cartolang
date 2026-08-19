@@ -143,7 +143,7 @@ function Feedback({
       animate={{ opacity: 1, y: 0 }}
       className={`text-sm font-bold ${state ? 'text-success' : 'text-error'}`}
     >
-      {state ? `Exact : ${expected} (${translation})` : `La réponse attendue était « ${expected} ».`}
+      {state ? `Exact : ${expected} (${translation})` : `La réponse attendue était « ${expected} ».`}
     </motion.p>
   )
 }

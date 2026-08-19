@@ -50,7 +50,7 @@ lessons:
         term: to breathe
         translation: respirer
         pos: verbe
-        hint: Le verbe prend un e final, le nom « breath » non.
+        hint: Le verbe prend un e final, le nom « breath » non.
         example:
           text: Breathe slowly and count to five.
           translation: Respirez lentement et comptez jusqu'à cinq.
@@ -75,7 +75,7 @@ lessons:
         term: appointment
         translation: rendez-vous
         pos: nom
-        hint: Rendez-vous professionnel ou médical ; « a date » est amoureux.
+        hint: Rendez-vous professionnel ou médical ; « a date » est amoureux.
         example:
           text: I have an appointment at four.
           translation: J'ai un rendez-vous à seize heures.
@@ -182,7 +182,7 @@ lessons:
           - avoir l'habitude de
         pos: expression
         gap: used to
-        hint: "« Be used to » = habitude ; « used to » seul = ancienne habitude révolue."
+        hint: "« Be used to » = habitude ; « used to » seul = ancienne habitude révolue."
         example:
           text: She is used to getting up early.
           translation: Elle est habituée à se lever tôt.
@@ -232,7 +232,7 @@ lessons:
         alt:
           - au bout du compte
         pos: adverbe
-        hint: "Faux ami : « éventuellement » se dit « possibly »."
+        hint: "Faux ami : « éventuellement » se dit « possibly »."
         example:
           text: They eventually agreed on a date.
           translation: Ils se sont finalement mis d'accord sur une date.

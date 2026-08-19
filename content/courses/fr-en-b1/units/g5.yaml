@@ -13,17 +13,17 @@ lessons:
       temps, depuis quand, jusqu'à quand, au plus tard quand. Trouvez la
       question, la préposition suit.
 
-      — Un moment de la journée prend `in` (in the morning), sauf **quand un
+      - Un moment de la journée prend `in` (in the morning), sauf **quand un
         jour précis est nommé** : on Monday morning.
-      — `by` = au plus tard, une échéance ; `until` = jusqu'à, une durée qui
+      - `by` = au plus tard, une échéance ; `until` = jusqu'à, une durée qui
         se prolonge.
         Finish it by Friday. The shop stays open until midnight.
-      — `for` + une durée, `since` + un point de départ, `during` + un nom
+      - `for` + une durée, `since` + un point de départ, `during` + un nom
         d'événement.
         for ten years, since 2015, during the meeting
 
       ! `during` ne se met jamais devant une durée chiffrée : on dit
-      `for three weeks`, jamais « during three weeks ».
+      `for three weeks`, jamais « during three weeks ».
     points:
       - id: g5-time-1
         sentence: The meeting is ___ Monday morning.
@@ -34,7 +34,7 @@ lessons:
           - at
           - during
         translation: La réunion est lundi matin.
-        explanation: "« In the morning » seul, mais « on » dès qu'un jour précis est nommé."
+        explanation: "« In the morning » seul, mais « on » dès qu'un jour précis est nommé."
       - id: g5-time-2
         sentence: The report has to be on my desk ___ Friday at the latest.
         answer: by
@@ -44,7 +44,7 @@ lessons:
           - for
           - since
         translation: Le rapport doit être sur mon bureau vendredi au plus tard.
-        explanation: "« By » pose une échéance ; « until » dirait que cela se prolonge jusque-là."
+        explanation: "« By » pose une échéance ; « until » dirait que cela se prolonge jusque-là."
       - id: g5-time-3
         sentence: The shop stays open ___ midnight on Fridays.
         answer: until
@@ -56,7 +56,7 @@ lessons:
           - at
           - for
         translation: Le magasin reste ouvert jusqu'à minuit le vendredi.
-        explanation: "L'ouverture se prolonge : « until », et non « by » qui marquerait une limite à respecter."
+        explanation: "L'ouverture se prolonge : « until », et non « by » qui marquerait une limite à respecter."
       - id: g5-time-4
         sentence: Nobody said a word ___ the entire meeting.
         answer: during
@@ -66,7 +66,7 @@ lessons:
           - while
           - since
         translation: Personne n'a dit un mot pendant toute la réunion.
-        explanation: "« During » + nom d'événement ; « while » exigerait une proposition avec un verbe."
+        explanation: "« During » + nom d'événement ; « while » exigerait une proposition avec un verbe."
       - id: g5-time-5
         sentence: I have known her ___ 2015.
         answer: since
@@ -76,7 +76,7 @@ lessons:
           - during
           - from
         translation: Je la connais depuis 2015.
-        explanation: « Since » annonce un point de départ ; « for » compterait une durée.
+        explanation: « Since » annonce un point de départ ; « for » compterait une durée.
       - id: g5-time-6
         sentence: They left two hours ___ .
         answer: ago
@@ -86,7 +86,7 @@ lessons:
           - since
           - early
         translation: Ils sont partis il y a deux heures.
-        explanation: « Ago » se place après la durée, en fin de groupe.
+        explanation: « Ago » se place après la durée, en fin de groupe.
 
   - id: g5-l2
     title: Les prépositions de lieu et de mouvement
@@ -96,11 +96,11 @@ lessons:
       où l'on se trouve (`at`). Le même lieu change de préposition selon le
       regard porté sur lui.
 
-      — `arrive in` + ville ou pays, `arrive at` + lieu précis. Jamais
-        « arrive to », calque direct de « arriver à ».
-      — On voyage `in` une voiture, mais `on` un bus, un train, un avion —
-        tout véhicule où l'on peut se lever.
-      — `between` oppose deux éléments identifiés, `among` en noie un dans un
+      - `arrive in` + ville ou pays, `arrive at` + lieu précis. Jamais
+        « arrive to », calque direct de « arriver à ».
+      - On voyage `in` une voiture, mais `on` un bus, un train, un avion
+        (tout véhicule où l'on peut se lever).
+      - `between` oppose deux éléments identifiés, `among` en noie un dans un
         ensemble.
 
       ! `to` marque la destination, sauf devant `home` : on dit `go home`,
@@ -115,7 +115,7 @@ lessons:
           - to
           - on
         translation: Nous sommes arrivés à Madrid tard dans la nuit.
-        explanation: "« Arrive in » devant une ville ; « arrive to » n'existe pas, malgré « arriver à »."
+        explanation: "« Arrive in » devant une ville ; « arrive to » n'existe pas, malgré « arriver à »."
       - id: g5-place-2
         sentence: He is waiting ___ the station, just outside the entrance.
         answer: at
@@ -125,7 +125,7 @@ lessons:
           - on
           - to
         translation: Il attend à la gare, juste devant l'entrée.
-        explanation: "« At » voit le lieu comme un point de rendez-vous ; « in the station » dirait à l'intérieur du bâtiment."
+        explanation: "« At » voit le lieu comme un point de rendez-vous ; « in the station » dirait à l'intérieur du bâtiment."
       - id: g5-place-3
         sentence: We spent six hours ___ the plane.
         answer: on
@@ -135,7 +135,7 @@ lessons:
           - at
           - into
         translation: Nous avons passé six heures dans l'avion.
-        explanation: On voyage « on » un avion, un train ou un bus, mais « in » une voiture.
+        explanation: On voyage « on » un avion, un train ou un bus, mais « in » une voiture.
       - id: g5-place-4
         sentence: We walked ___ the tunnel to reach the beach.
         answer: through
@@ -145,7 +145,7 @@ lessons:
           - over
           - along
         translation: Nous avons traversé le tunnel pour rejoindre la plage.
-        explanation: "« Through » traverse un volume ; « across » traverserait une surface."
+        explanation: "« Through » traverse un volume ; « across » traverserait une surface."
       - id: g5-place-5
         sentence: The cat jumped ___ the wall.
         answer: over
@@ -155,7 +155,7 @@ lessons:
           - above
           - across
         translation: Le chat a sauté par-dessus le mur.
-        explanation: "« Over » franchit par le dessus ; « above » situerait sans mouvement."
+        explanation: "« Over » franchit par le dessus ; « above » situerait sans mouvement."
       - id: g5-place-6
         sentence: The agreement was signed ___ the two governments.
         answer: between
@@ -165,4 +165,4 @@ lessons:
           - within
           - along
         translation: L'accord a été signé entre les deux gouvernements.
-        explanation: "« Between » pour deux parties identifiées ; « among » les fondrait dans un ensemble."
+        explanation: "« Between » pour deux parties identifiées ; « among » les fondrait dans un ensemble."

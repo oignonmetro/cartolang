@@ -12,10 +12,10 @@ lessons:
       L'adjectif se place **devant** le nom et prend sa finale au genre de
       celui-ci. Le modèle le plus courant se reconnaît à son masculin en -ый.
 
-      — Masculin : `новый дом`, `старый стол`.
-      — Féminin : `новая машина`, `старая школа`.
-      — Neutre : `новое молоко`, `старое мясо`.
-      — Pluriel : `новые дома`, une seule forme pour tous les genres.
+      - Masculin : `новый дом`, `старый стол`.
+      - Féminin : `новая машина`, `старая школа`.
+      - Neutre : `новое молоко`, `старое мясо`.
+      - Pluriel : `новые дома`, une seule forme pour tous les genres.
 
       La finale de l'adjectif rime avec celle du nom : c'est le meilleur
       repère au début, même s'il ne vaut pas partout.
@@ -29,7 +29,7 @@ lessons:
           - новое
           - новые
         translation: C'est une voiture neuve.
-        explanation: "« машина » est féminin : l'adjectif prend -ая."
+        explanation: "« машина » est féminin : l'adjectif prend -ая."
       - id: rg2-acc-2
         sentence: Это ___ дом.
         answer: старый
@@ -39,7 +39,7 @@ lessons:
           - старое
           - старые
         translation: C'est une vieille maison.
-        explanation: "« дом » est masculin : l'adjectif garde sa forme en -ый."
+        explanation: "« дом » est masculin : l'adjectif garde sa forme en -ый."
       - id: rg2-acc-3
         sentence: Это ___ молоко.
         answer: белое
@@ -49,7 +49,7 @@ lessons:
           - белое
           - белые
         translation: C'est du lait blanc.
-        explanation: "« молоко » est neutre : l'adjectif prend -ое."
+        explanation: "« молоко » est neutre : l'adjectif prend -ое."
       - id: rg2-acc-4
         sentence: Это ___ сумка.
         answer: чёрная
@@ -59,7 +59,7 @@ lessons:
           - чёрное
           - чёрные
         translation: C'est un sac noir.
-        explanation: "« сумка » finit par -а, féminin : чёрная."
+        explanation: "« сумка » finit par -а, féminin : чёрная."
       - id: rg2-acc-5
         sentence: Это ___ билет.
         answer: жёлтый
@@ -69,7 +69,7 @@ lessons:
           - жёлтое
           - жёлтые
         translation: C'est un billet jaune.
-        explanation: "« билет » finit par une consonne, masculin : жёлтый."
+        explanation: "« билет » finit par une consonne, masculin : жёлтый."
       - id: rg2-acc-6
         sentence: Это ___ мясо.
         answer: красное
@@ -79,7 +79,7 @@ lessons:
           - красное
           - красные
         translation: C'est de la viande rouge.
-        explanation: "« мясо » finit par -о, neutre : красное."
+        explanation: "« мясо » finit par -о, neutre : красное."
 
   - id: rg2-l2
     title: Les adjectifs en -ой et en -ий
@@ -87,10 +87,10 @@ lessons:
       Deux familles s'écartent du modèle en -ый, et il faut les reconnaître
       pour ne pas fabriquer des formes qui n'existent pas.
 
-      — Masculin accentué en **-ой** : `большой`, `плохой`, `дорогой`. Le
+      - Masculin accentué en **-ой** : `большой`, `плохой`, `дорогой`. Le
         féminin et le neutre restent réguliers.
         большой город, большая улица, большое метро
-      — Masculin en **-ий** après une consonne molle ou après к, г, х, ж, ш, щ,
+      - Masculin en **-ий** après une consonne molle ou après к, г, х, ж, ш, щ,
         ч : `синий`, `хороший`, `маленький`.
         синяя дверь, хорошая школа, маленькое молоко
 
@@ -106,7 +106,7 @@ lessons:
           - большое
           - большие
         translation: C'est une grande ville.
-        explanation: "« город » est masculin, et cet adjectif fait son masculin en -ой."
+        explanation: "« город » est masculin, et cet adjectif fait son masculin en -ой."
       - id: rg2-mou-2
         sentence: Это ___ улица.
         answer: большая
@@ -126,7 +126,7 @@ lessons:
           - синее
           - синие
         translation: C'est une porte bleue.
-        explanation: "« дверь » est féminin ; après le н mou, la finale s'écrit -яя et non -ая."
+        explanation: "« дверь » est féminin ; après le н mou, la finale s'écrit -яя et non -ая."
       - id: rg2-mou-4
         sentence: Это ___ день.
         answer: хороший
@@ -136,7 +136,7 @@ lessons:
           - хорошее
           - хорошие
         translation: C'est une bonne journée.
-        explanation: "« день » est masculin ; après ш, on écrit -ий, jamais -ый."
+        explanation: "« день » est masculin ; après ш, on écrit -ий, jamais -ый."
       - id: rg2-mou-5
         sentence: Это ___ школа.
         answer: маленькая
@@ -146,7 +146,7 @@ lessons:
           - маленькое
           - маленькие
         translation: C'est une petite école.
-        explanation: "« школа » est féminin : маленькая, régulier une fois passé le masculin en -ий."
+        explanation: "« школа » est féminin : маленькая, régulier une fois passé le masculin en -ий."
       - id: rg2-mou-6
         sentence: Это ___ суп.
         answer: плохой
@@ -156,4 +156,4 @@ lessons:
           - плохое
           - плохие
         translation: C'est une mauvaise soupe.
-        explanation: "« суп » est masculin, et cet adjectif fait lui aussi son masculin en -ой."
+        explanation: "« суп » est masculin, et cet adjectif fait lui aussi son masculin en -ой."

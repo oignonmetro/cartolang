@@ -13,11 +13,11 @@ lessons:
       C1 se reconnaît moins à son vocabulaire qu'à sa façon de doser ses
       affirmations.
 
-      — Modaux affaiblis : may, might, could + base verbale.
-      — Verbes de tendance : tend to, appear to, seem to.
+      - Modaux affaiblis : may, might, could + base verbale.
+      - Verbes de tendance : tend to, appear to, seem to.
         Prices tend to rise in the autumn. (une tendance, pas une loi)
-      — Adverbes : arguably, seemingly, largely, broadly.
-      — Tournures impersonnelles : it would appear that, it is widely held that.
+      - Adverbes : arguably, seemingly, largely, broadly.
+      - Tournures impersonnelles : it would appear that, it is widely held that.
 
       ! Trop d'atténuation affaiblit le propos : l'enjeu est le dosage, pas
       l'accumulation.
@@ -33,7 +33,7 @@ lessons:
           - appearing
           - are appearing
         translation: Les chiffres semblent indiquer un ralentissement.
-        explanation: « Figures » est pluriel ; « appear to » atténue une affirmation.
+        explanation: « Figures » est pluriel ; « appear to » atténue une affirmation.
       - id: g3-hedge-2
         sentence: Prices ___ to rise sharply in the autumn.
         answer: tend
@@ -43,7 +43,7 @@ lessons:
           - are tending
           - tended
         translation: Les prix ont tendance à fortement augmenter à l'automne.
-        explanation: « Tend to » transforme une règle absolue en tendance.
+        explanation: « Tend to » transforme une règle absolue en tendance.
       - id: g3-hedge-3
         sentence: It ___ appear that the two events are unrelated.
         answer: would
@@ -53,7 +53,7 @@ lessons:
           - should
           - could
         translation: Il semblerait que les deux événements soient sans lien.
-        explanation: "Tournure impersonnelle prudente : « It would appear that… »."
+        explanation: "Tournure impersonnelle prudente : « It would appear that… »."
       - id: g3-hedge-4
         sentence: The policy has been ___ successful, though not entirely.
         answer: largely
@@ -75,7 +75,7 @@ lessons:
           - certainly
           - unquestionably
         translation: Une telle lecture est sans doute défendable, mais ce n'est pas la seule.
-        explanation: « Arguably » ouvre la discussion ; les autres options la ferment.
+        explanation: « Arguably » ouvre la discussion ; les autres options la ferment.
       - id: g3-hedge-6
         sentence: The results are valid ___ some extent.
         answer: to
@@ -85,22 +85,22 @@ lessons:
           - in
           - by
         translation: Les résultats sont valables dans une certaine mesure.
-        explanation: "Collocation figée : « to some extent »."
+        explanation: "Collocation figée : « to some extent »."
 
   - id: g3-l2
     title: Distance, rumeur et responsabilité
     notes: |
       Pour rapporter **sans endosser**, l'anglais dispose d'une série d'adverbes
-      de phrase que le français rend tous par « prétendument ». Chacun situe
+      de phrase que le français rend tous par « prétendument ». Chacun situe
       pourtant l'information autrement, et les confondre coûte cher.
 
-      — `allegedly` : une accusation **non tranchée**, mot du journalisme
+      - `allegedly` : une accusation **non tranchée**, mot du journalisme
         judiciaire ; il protège juridiquement celui qui écrit.
-      — `reportedly` : l'information vient d'une source, sans jugement porté.
-      — `supposedly` : ce qui est affirmé, mais **que l'auteur met en doute**.
-      — `ostensibly` : le motif affiché, par opposition au motif réel.
+      - `reportedly` : l'information vient d'une source, sans jugement porté.
+      - `supposedly` : ce qui est affirmé, mais **que l'auteur met en doute**.
+      - `ostensibly` : le motif affiché, par opposition au motif réel.
 
-      La même distance se prend par l'adjectif — `the alleged fraud` — ou par
+      La même distance se prend par l'adjectif (`the alleged fraud`) ou par
       `so-called`, qui récuse le mot lui-même.
 
       ! `supposedly` et `allegedly` ne sont pas interchangeables : le second
@@ -115,7 +115,7 @@ lessons:
           - ostensibly
           - undoubtedly
         translation: Le suspect aurait agi seul, selon la police.
-        explanation: "Accusation non établie, dans un cadre judiciaire : « allegedly »."
+        explanation: "Accusation non établie, dans un cadre judiciaire : « allegedly »."
       - id: g3-report-2
         sentence: ___, the decision was taken without any consultation.
         answer: Reportedly
@@ -135,7 +135,7 @@ lessons:
           - reportedly
           - admittedly
         translation: Le bâtiment est censé être neutre en énergie, même si ses propres chiffres disent le contraire.
-        explanation: "La suite marque le doute de l'auteur : « supposedly », là où « allegedly » supposerait une accusation."
+        explanation: "La suite marque le doute de l'auteur : « supposedly », là où « allegedly » supposerait une accusation."
       - id: g3-report-4
         sentence: The visit was ___ private, but the press had been informed in advance.
         answer: ostensibly
@@ -145,7 +145,7 @@ lessons:
           - obviously
           - undeniably
         translation: La visite était officiellement privée, mais la presse avait été prévenue à l'avance.
-        explanation: « Ostensibly » oppose le motif affiché au motif réel, que la suite dévoile.
+        explanation: « Ostensibly » oppose le motif affiché au motif réel, que la suite dévoile.
       - id: g3-report-5
         sentence: The minister is ___ to have misled parliament.
         answer: alleged
@@ -155,7 +155,7 @@ lessons:
           - alleging
           - allege
         translation: Le ministre aurait induit le Parlement en erreur.
-        explanation: "Devant un infinitif, c'est le participe qui porte la distance : « is alleged to have », jamais l'adverbe."
+        explanation: "Devant un infinitif, c'est le participe qui porte la distance : « is alleged to have », jamais l'adverbe."
       - id: g3-report-6
         sentence: The ___ reforms have changed almost nothing on the ground.
         answer: so-called
@@ -165,4 +165,4 @@ lessons:
           - such-called
           - said
         translation: Les prétendues réformes n'ont presque rien changé sur le terrain.
-        explanation: « So-called » récuse le mot lui-même, et se place directement devant le nom.
+        explanation: « So-called » récuse le mot lui-même, et se place directement devant le nom.

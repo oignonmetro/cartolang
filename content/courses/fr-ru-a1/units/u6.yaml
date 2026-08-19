@@ -21,7 +21,7 @@ lessons:
         term: здравствуйте
         translation: bonjour
         pos: expression
-        hint: "La forme polie, et le mot le plus long du cours : « zdrastvouïtié »."
+        hint: "La forme polie, et le mot le plus long du cours : « zdrastvouïtié »."
         example:
           text: Здравствуйте, я Анна.
           translation: Bonjour, je suis Anna.
@@ -52,7 +52,7 @@ lessons:
         alt:
           - je vous en prie
         pos: expression
-        hint: Sert aussi à répondre à « merci ».
+        hint: Sert aussi à répondre à « merci ».
         example:
           text: Чай, пожалуйста.
           translation: Un thé, s'il vous plaît.
@@ -64,7 +64,7 @@ lessons:
         term: меня зовут
         translation: je m'appelle
         pos: expression
-        hint: "Mot à mot « on m'appelle » : le russe n'a pas de verbe « s'appeler »."
+        hint: "Mot à mot « on m'appelle » : le russe n'a pas de verbe « s'appeler »."
         example:
           text: Меня зовут Иван.
           translation: Je m'appelle Ivan.
@@ -101,7 +101,7 @@ lessons:
         term: оно
         translation: il (neutre)
         pos: pronom
-        hint: Reprend un nom neutre — ceux qui finissent par -о ou -е.
+        hint: Reprend un nom neutre (ceux qui finissent par -о ou -е).
         example:
           text: Где молоко? Оно здесь.
           translation: Où est le lait ? Il est ici.
@@ -151,7 +151,7 @@ lessons:
         term: семья
         translation: famille
         pos: nom
-        hint: "Le signe mou avant le Я sépare les deux sons : « sem'ya », pas « semya »."
+        hint: "Le signe mou avant le Я sépare les deux sons : « sem'ya », pas « semya »."
         example:
           text: Вот моя семья.
           translation: Voici ma famille.
@@ -166,7 +166,7 @@ lessons:
         term: дочь
         translation: fille
         pos: nom
-        hint: "Se termine par un signe mou : la consonne finale s'adoucit, « dotch' »."
+        hint: "Se termine par un signe mou : la consonne finale s'adoucit, « dotch' »."
         example:
           text: Дочь дома.
           translation: La fille est à la maison.

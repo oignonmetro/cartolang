@@ -69,7 +69,7 @@ export function TypeAnswer({
           animate={{ opacity: 1, y: 0 }}
           className={`text-sm font-bold ${checked ? 'text-success' : 'text-error'}`}
         >
-          {checked ? 'Bonne réponse.' : `La réponse attendue était « ${expected} ».`}
+          {checked ? 'Bonne réponse.' : `La réponse attendue était « ${expected} ».`}
         </motion.p>
       )}
 

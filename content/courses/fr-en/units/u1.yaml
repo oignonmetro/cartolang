@@ -19,7 +19,7 @@ lessons:
         term: hi
         translation: salut
         pos: expression
-        hint: Plus familier que « hello ».
+        hint: Plus familier que « hello ».
         example:
           text: Hi, how are you?
           translation: Salut, comment ça va ?

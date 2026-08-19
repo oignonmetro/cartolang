@@ -16,7 +16,7 @@ lessons:
           - défendre l'idée
           - plaider
         pos: verbe
-        hint: Au sens de « défendre une thèse », pas seulement « se disputer ».
+        hint: Au sens de « défendre une thèse », pas seulement « se disputer ».
         gap: argues
         example:
           text: The report argues that remote work improves retention.

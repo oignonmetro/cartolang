@@ -11,23 +11,23 @@ lessons:
     notes: |
       Deux formes pour l'habitude passée, et un partage net : `used to` accepte
       **les états comme les actions**, `would` **les actions seulement**. Le
-      français ne marque pas cette différence — son imparfait couvre les deux.
+      français ne marque pas cette différence, son imparfait couvre les deux.
 
-      — `used to` + base verbale : une habitude **ou un état** aujourd'hui révolu.
+      - `used to` + base verbale : une habitude **ou un état** aujourd'hui révolu.
         I used to live in Lyon. J'habitais Lyon (ce n'est plus le cas).
-      — `would` + base verbale : une habitude **répétée**, jamais un état.
+      - `would` + base verbale : une habitude **répétée**, jamais un état.
         Every summer we would spend a month there.
 
       `would` suppose __un cadre passé déjà posé__ : on ne commence pas un
       récit par lui.
 
-      ! `would` refuse les états. « I would live in Lyon » ne veut pas dire
+      ! `would` refuse les états. « I would live in Lyon » ne veut pas dire
       que j'y habitais ; seul `used to` le permet.
     verbs:
       - verb: to live
         translation: habiter
         tense: used to
-        note: "État révolu : seul « used to » convient."
+        note: "État révolu : seul « used to » convient."
         forms:
           - id: c6-live-used-aff
             person: affirmatif
@@ -40,7 +40,7 @@ lessons:
       - verb: to smoke
         translation: fumer
         tense: used to
-        note: "Après « did », on écrit « use to » sans -d."
+        note: "Après « did », on écrit « use to » sans -d."
         forms:
           - id: c6-smoke-used-q
             person: interrogatif
@@ -51,7 +51,7 @@ lessons:
       - verb: to spend
         translation: passer du temps
         tense: would, habitude répétée
-        note: Interchangeable avec « used to » quand il s'agit d'une action.
+        note: Interchangeable avec « used to » quand il s'agit d'une action.
         forms:
           - id: c6-spend-would
             person: habitude répétée
@@ -66,11 +66,11 @@ lessons:
       Un seul mot change, et le sens bascule complètement. Ici `used` n'est
       plus un passé mais **un adjectif**, et ce qui suit se met en -ing.
 
-      — `used to` + base verbale : c'était le cas autrefois.
+      - `used to` + base verbale : c'était le cas autrefois.
         I used to work at night. Je travaillais de nuit, autrefois.
-      — `be used to` + -ing : j'y suis habitué, c'est acquis.
+      - `be used to` + -ing : j'y suis habitué, c'est acquis.
         I am used to working at night. Le travail de nuit ne me gêne plus.
-      — `get used to` + -ing : je m'y habitue, c'est en cours.
+      - `get used to` + -ing : je m'y habitue, c'est en cours.
         I am getting used to working at night.
 
       ! La forme du verbe suivant tranche à elle seule : base verbale après
@@ -82,15 +82,15 @@ lessons:
         note: "C'est ici que tout se joue : -ing ou base verbale."
         forms:
           - id: c6-work-bare
-            person: après « used to » seul
+            person: après « used to » seul
             answer: used to work
           - id: c6-work-ing
-            person: après « be used to »
+            person: après « be used to »
             answer: used to working
       - verb: to be used to
         translation: être habitué à
         tense: état acquis
-        note: "« Be » se conjugue normalement, « used to » ne bouge pas."
+        note: "« Be » se conjugue normalement, « used to » ne bouge pas."
         forms:
           - id: c6-beused-pres
             person: présent, je
@@ -101,7 +101,7 @@ lessons:
       - verb: to get used to
         translation: s'habituer à
         tense: processus en cours
-        note: "« Get » marque le passage d'un état à l'autre."
+        note: "« Get » marque le passage d'un état à l'autre."
         forms:
           - id: c6-getused-pres
             person: présent
@@ -115,7 +115,7 @@ lessons:
         note: Le verbe qui suit prend toujours -ing.
         forms:
           - id: c6-travel-getused
-            person: après « get used to »
+            person: après « get used to »
             answer: get used to travelling
           - id: c6-travel-getused-past
             person: prétérit

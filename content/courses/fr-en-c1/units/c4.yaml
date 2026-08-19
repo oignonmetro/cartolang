@@ -13,17 +13,17 @@ lessons:
       l'anglais n'a pas de verbe unique : il place le participe passé après
       l'objet.
 
-      — `have` + objet + participe : le tour neutre.
+      - `have` + objet + participe : le tour neutre.
         We had the car repaired. Nous avons fait réparer la voiture.
-      — `get` + objet + participe : même sens, registre plus familier.
+      - `get` + objet + participe : même sens, registre plus familier.
         We got the car repaired.
 
       Deux autres verbes disent la contrainte et la permission, et tous deux
       se construisent **sans `to`**.
 
-      — `make` + objet + base verbale : contraindre.
+      - `make` + objet + base verbale : contraindre.
         They made him wait. Ils l'ont fait attendre.
-      — `let` + objet + base verbale : autoriser.
+      - `let` + objet + base verbale : autoriser.
         They let her go. Ils l'ont laissée partir.
 
       ! Au passif, `make` retrouve son `to` : `He was made to wait`.
@@ -42,7 +42,7 @@ lessons:
       - verb: to get (causatif)
         translation: faire faire
         tense: get + objet + participe
-        note: Même construction que « have », registre plus courant à l'oral.
+        note: Même construction que « have », registre plus courant à l'oral.
         forms:
           - id: c4-get-caus-pres
             person: présent
@@ -53,7 +53,7 @@ lessons:
       - verb: to make
         translation: contraindre
         tense: make + objet + base verbale
-        note: "Sans « to » à l'actif, avec « to » au passif."
+        note: "Sans « to » à l'actif, avec « to » au passif."
         forms:
           - id: c4-make-caus-past
             person: prétérit actif
@@ -64,7 +64,7 @@ lessons:
       - verb: to let
         translation: laisser
         tense: let + objet + base verbale
-        note: "let / let / let : invariable, et jamais suivi de « to »."
+        note: "let / let / let : invariable, et jamais suivi de « to »."
         forms:
           - id: c4-let-pres
             person: présent
@@ -79,16 +79,16 @@ lessons:
       Les verbes de perception distinguent, par la forme qui les suit, **une
       action vue en entier d'une action saisie en cours**.
 
-      — base verbale : l'action complète, du début à la fin.
+      - base verbale : l'action complète, du début à la fin.
         I saw him leave. Je l'ai vu partir (il est parti).
-      — verbe en -ing : l'action en train de se dérouler.
+      - verbe en -ing : l'action en train de se dérouler.
         I saw him leaving. Je l'ai vu qui partait.
 
       La même construction `have` + objet + participe qui sert au causatif
       exprime aussi ce qu'on **subit**, sans l'avoir voulu. __Seul le contexte
       distingue les deux__.
 
-      — I had my bag stolen. Je me suis fait voler mon sac.
+      - I had my bag stolen. Je me suis fait voler mon sac.
 
       ! `help` accepte les deux formes : `helped me move` et `helped me to
       move` sont également corrects.
@@ -107,7 +107,7 @@ lessons:
       - verb: to hear (perception)
         translation: entendre
         tense: hear + objet + forme verbale
-        note: Même opposition que pour « see ».
+        note: Même opposition que pour « see ».
         forms:
           - id: c4-hear-bare
             person: action complète
@@ -132,8 +132,8 @@ lessons:
         note: Les deux constructions coexistent, sans différence de sens.
         forms:
           - id: c4-help-to
-            person: avec « to »
+            person: avec « to »
             answer: helped me to move
           - id: c4-help-bare
-            person: sans « to »
+            person: sans « to »
             answer: helped me move

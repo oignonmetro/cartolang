@@ -84,8 +84,8 @@ l'exercice d'association ne peut pas se construire.
   title: Le conditionnel mixte
   notes: |                       # rappel affiché avant la pratique
     Le conditionnel mixte relie une hypothèse passée à une conséquence présente.
-    — Hypothèse passée : If + past perfect
-    — Conséquence présente : would + base verbale
+    - Hypothèse passée : If + past perfect
+    - Conséquence présente : would + base verbale
   points:
     - id: g1-mixed-1
       sentence: If I had taken that job, I ___ in Berlin now.   # ___ obligatoire
@@ -113,8 +113,8 @@ notes: |
   Les modaux ne se conjuguent pas : pas de -s à la troisième personne,
   pas de « to » après eux, et pas d'auxiliaire « do » à la négation.
 
-  — can → could, will → would, may → might.
-  — must : pas de passé propre, on emploie « had to ».
+  - can → could, will → would, may → might.
+  - must : pas de passé propre, on emploie « had to ».
     I had to leave early.
 
   ! « She cans » et « she can to swim » sont fautifs.
@@ -124,8 +124,8 @@ notes: |
 |---|---|
 | lignes qui se suivent | un seul paragraphe — repliez librement à 80 colonnes |
 | ligne vide | sépare deux paragraphes |
-| `— …` | une règle, dans un panneau teinté ; les règles voisines forment une liste |
-| `— étiquette : …` | l'étiquette passe en gras coloré (jusqu'à ~48 caractères) |
+| `- …` | une règle, dans un panneau teinté ; les règles voisines forment une liste |
+| `- étiquette : …` | l'étiquette passe en gras coloré (jusqu'à ~48 caractères) |
 | ligne indentée sous une règle | l'exemple de cette règle, en italique |
 | `! …` | un piège, encadré en ambre |
 
@@ -147,7 +147,7 @@ Le premier paragraphe est l'attaque du rappel : il s'affiche plus grand et
 plus sombre. Écrivez-y l'idée directrice, et laissez les détails aux règles.
 
 Un commentaire final entre parenthèses est automatiquement mis en retrait :
-`— I will call you as soon as I arrive. (jamais « as soon as I will arrive »)`.
+`- I will call you as soon as I arrive. (jamais « as soon as I will arrive »)`.
 
 **Une règle peut se replier librement**, comme la prose : tant que sa ligne
 reste en suspens — sans point final — la ligne indentée suivante la poursuit.
@@ -155,7 +155,7 @@ C'est la ponctuation qui décide, pas l'indentation.
 
 ```yaml
   # le corps se poursuit : « superlatif. » complète la règle
-  — `much`, `far` et `a lot` renforcent __un comparatif__, jamais un
+  - `much`, `far` et `a lot` renforcent __un comparatif__, jamais un
     superlatif.
     much better, far more expensive   # ← l'exemple, la règle étant achevée
 ```

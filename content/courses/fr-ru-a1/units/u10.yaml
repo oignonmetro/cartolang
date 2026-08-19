@@ -13,7 +13,7 @@ lessons:
         term: что
         translation: quoi
         pos: pronom
-        hint: "Le Ч s'y lit ш : « chto », pas « tchto » — une exception à retenir telle quelle."
+        hint: "Le Ч s'y lit ш : « chto », pas « tchto », une exception à retenir telle quelle."
         example:
           text: Что это?
           translation: Qu'est-ce que c'est ?
@@ -69,7 +69,7 @@ lessons:
         term: идти
         translation: aller (à pied)
         pos: verbe
-        hint: "Verbe de mouvement « à pied » : à ne pas confondre avec un moyen de transport."
+        hint: "Verbe de mouvement « à pied » : à ne pas confondre avec un moyen de transport."
         example:
           text: Я иду домой.
           translation: Je rentre à la maison.
@@ -117,7 +117,7 @@ lessons:
           - ceci
           - cela
         pos: pronom
-        hint: Présente ou désigne, sans jamais s'accorder — « это дом », « это машина ».
+        hint: Présente ou désigne, sans jamais s'accorder (« это дом », « это машина »).
         example:
           text: Это мой брат.
           translation: C'est mon frère.
@@ -132,7 +132,7 @@ lessons:
         term: не
         translation: ne... pas
         pos: adverbe
-        hint: Se place juste devant le mot qu'il nie — à ne pas confondre avec « нет », qui répond « non ».
+        hint: Se place juste devant le mot qu'il nie, à ne pas confondre avec « нет », qui répond « non ».
         example:
           text: Я не работаю сегодня.
           translation: Je ne travaille pas aujourd'hui.
@@ -142,7 +142,7 @@ lessons:
         alt:
           - en
         pos: préposition
-        hint: Dit où l'on est, pour un lieu qu'on pense comme un volume — « в магазине ».
+        hint: Dit où l'on est, pour un lieu qu'on pense comme un volume (« в магазине »).
         example:
           text: Я в магазине.
           translation: Je suis au magasin.
@@ -150,7 +150,7 @@ lessons:
         term: на
         translation: sur
         pos: préposition
-        hint: Une surface, mais aussi la rue et la gare — « на улице », « на вокзале ».
+        hint: Une surface, mais aussi la rue et la gare (« на улице », « на вокзале »).
         example:
           text: Сумка на столе.
           translation: Le sac est sur la table.

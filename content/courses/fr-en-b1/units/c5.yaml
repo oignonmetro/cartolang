@@ -12,15 +12,15 @@ lessons:
       Pour poser une question ou nier au présent, l'anglais insère un
       auxiliaire : **`do` porte la personne, et le verbe redevient nu**.
 
-      — Affirmatif : She works here.
-      — Interrogatif : Does she work here ? (et non « Does she works »)
-      — Négatif : She does not work here.
+      - Affirmatif : She works here.
+      - Interrogatif : Does she work here ? (et non « Does she works »)
+      - Négatif : She does not work here.
 
       Trois familles __échappent à cette règle__ et se retournent toutes seules.
 
-      — `be` : Is she here ? / She is not here.
-      — Les modaux : Can she swim ? / She cannot swim.
-      — `have got` : Has she got a car ?
+      - `be` : Is she here ? / She is not here.
+      - Les modaux : Can she swim ? / She cannot swim.
+      - `have got` : Has she got a car ?
 
       ! Une fois `do` en place, le verbe perd son -s : c'est la faute la plus
       fréquente à ce niveau.
@@ -41,7 +41,7 @@ lessons:
       - verb: to like
         translation: aimer
         tense: présent, avec auxiliaire do
-        note: Aux autres personnes, l'auxiliaire reste « do ».
+        note: Aux autres personnes, l'auxiliaire reste « do ».
         forms:
           - id: c5-like-q1
             person: interrogatif, tu / vous
@@ -54,7 +54,7 @@ lessons:
       - verb: to be
         translation: être
         tense: présent, sans auxiliaire
-        note: "« Be » se retourne seul : jamais « does she be »."
+        note: "« Be » se retourne seul : jamais « does she be »."
         forms:
           - id: c5-be-q3
             person: interrogatif, il / elle
@@ -71,22 +71,22 @@ lessons:
       Au passé, la mécanique est identique, mais **c'est `did` qui porte le
       temps**, et le verbe repart à la base verbale, sans marque de passé.
 
-      — Affirmatif : She worked late.
-      — Interrogatif : Did she work late ?
-      — Négatif : She did not work late.
+      - Affirmatif : She worked late.
+      - Interrogatif : Did she work late ?
+      - Négatif : She did not work late.
 
       Ici encore, `be` et les modaux se passent d'auxiliaire.
 
-      — Was she late ? / She was not late.
-      — Could she swim ? / She could not swim.
+      - Was she late ? / She was not late.
+      - Could she swim ? / She could not swim.
 
       ! Après `did`, plus aucune marque de prétérit : on dit `did she work`,
-      jamais « did she worked ».
+      jamais « did she worked ».
     verbs:
       - verb: to work
         translation: travailler
         tense: prétérit, avec auxiliaire did
-        note: "« Did » porte le passé, le verbe revient à la base."
+        note: "« Did » porte le passé, le verbe revient à la base."
         forms:
           - id: c5-work-qpast
             person: interrogatif
@@ -99,7 +99,7 @@ lessons:
       - verb: to go
         translation: aller
         tense: prétérit, avec auxiliaire did
-        note: Même un verbe irrégulier perd sa forme de prétérit après « did ».
+        note: Même un verbe irrégulier perd sa forme de prétérit après « did ».
         forms:
           - id: c5-go-qpast
             person: interrogatif
@@ -110,7 +110,7 @@ lessons:
       - verb: to be
         translation: être
         tense: prétérit, sans auxiliaire
-        note: "« Be » garde son autonomie au passé aussi."
+        note: "« Be » garde son autonomie au passé aussi."
         forms:
           - id: c5-be-qpast
             person: interrogatif, il / elle

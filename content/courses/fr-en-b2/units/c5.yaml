@@ -12,20 +12,20 @@ lessons:
       Un verbe à particule se conjugue comme **le verbe simple dont il est
       tiré** : c'est le verbe qui change, la particule ne bouge jamais.
 
-      — take → took → taken, donc take off → took off → taken off
-      — give → gave → given, donc give up → gave up → given up
-      — break → broke → broken, donc break down → broke down → broken down
+      - take → took → taken, donc take off → took off → taken off
+      - give → gave → given, donc give up → gave up → given up
+      - break → broke → broken, donc break down → broke down → broken down
 
       Il suffit donc de savoir conjuguer le verbe de base pour maîtriser
       toute la famille qu'il engendre.
 
       ! La particule ne prend jamais de marque : on dit `taken off`, jamais
-      « taken offed ».
+      « taken offed ».
     verbs:
       - verb: to take off
         translation: décoller
         tense: verbe à particule irrégulier
-        note: "Aussi « enlever » un vêtement : take off your coat."
+        note: "Aussi « enlever » un vêtement : take off your coat."
         forms:
           - id: c5-takeoff-past
             person: prétérit
@@ -75,11 +75,11 @@ lessons:
       le verbe et la particule, et les **inséparables**, où rien ne s'insère
       jamais.
 
-      — **Séparables** : le complément se place avant ou après la particule…
+      - **Séparables** : le complément se place avant ou après la particule…
         turn down the offer / turn the offer down
-      — …mais un **pronom** doit s'insérer au milieu, sans exception.
-        turn it down (et jamais « turn down it »)
-      — **Inséparables** : rien ne s'insère, le complément suit la particule.
+      - …mais un **pronom** doit s'insérer au milieu, sans exception.
+        turn it down (et jamais « turn down it »)
+      - **Inséparables** : rien ne s'insère, le complément suit la particule.
         look after the children / look after them
 
       Aucune règle ne permet de deviner à quelle famille appartient un verbe :
@@ -105,7 +105,7 @@ lessons:
       - verb: to put off
         translation: reporter
         tense: séparable
-        note: "Aussi « rebuter » : the smell put me off."
+        note: "Aussi « rebuter » : the smell put me off."
         forms:
           - id: c5-putoff-noun
             person: avec un nom

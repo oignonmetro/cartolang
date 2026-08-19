@@ -121,7 +121,7 @@ lessons:
         alt:
           - compte rendu
         pos: nom
-        hint: "Faux ami : une revue au sens de magazine se dit « a magazine »."
+        hint: "Faux ami : une revue au sens de magazine se dit « a magazine »."
         example:
           text: The review was harsh but fair.
           translation: La critique était dure mais juste.
@@ -223,7 +223,7 @@ lessons:
         alt:
           - héritage
         pos: nom
-        hint: "Ce qu'une œuvre laisse derrière elle ; « heritage » est collectif et patrimonial."
+        hint: "Ce qu'une œuvre laisse derrière elle ; « heritage » est collectif et patrimonial."
         example:
           text: His legacy is still fiercely debated.
           translation: Son héritage est encore âprement débattu.

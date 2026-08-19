@@ -12,7 +12,7 @@
  *
  *   - les lignes de prose qui se suivent forment un seul paragraphe ;
  *   - une ligne vide sépare deux paragraphes ;
- *   - une ligne ouverte par « — » est une règle, mise en valeur ;
+ *   - une ligne ouverte par « - » est une règle, mise en valeur ;
  *   - une ligne indentée sous une règle en est l'exemple ;
  *   - une ligne ouverte par « ! » est un piège, signalé comme tel.
  *
@@ -83,7 +83,7 @@ export type NoteBlock =
   | { kind: 'rules'; rules: NoteRule[] }
   | { kind: 'warning'; text: string }
 
-const RULE = /^—\s*/
+const RULE = /^-\s*/
 const WARNING = /^!\s*/
 
 /**

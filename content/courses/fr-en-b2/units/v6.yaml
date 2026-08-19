@@ -34,7 +34,7 @@ lessons:
         alt:
           - responsabilité
         pos: nom
-        hint: "Faux ami partiel : rien à voir avec la « liberté »."
+        hint: "Faux ami partiel : rien à voir avec la « liberté »."
         example:
           text: The firm denies any liability for the damage.
           translation: L'entreprise nie toute responsabilité pour les dommages.
@@ -132,7 +132,7 @@ lessons:
           - preuves
           - éléments de preuve
         pos: nom
-        hint: "Faux ami : « évidence » en français se dit plutôt « obviousness »."
+        hint: "Faux ami : « évidence » en français se dit plutôt « obviousness »."
         example:
           text: The lawyer presented new evidence to the jury.
           translation: L'avocate a présenté de nouvelles preuves au jury.
@@ -201,7 +201,7 @@ lessons:
         term: compliance
         translation: conformité
         pos: nom
-        hint: Se construit avec « with » — voir la piste grammaire.
+        hint: Se construit avec « with » (voir la piste grammaire).
         example:
           text: The audit checks compliance with the new rules.
           translation: L'audit vérifie la conformité aux nouvelles règles.

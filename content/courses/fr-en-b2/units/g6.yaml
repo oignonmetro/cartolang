@@ -14,13 +14,13 @@ lessons:
       commande presque tout : dès qu'on parle en général, l'anglais ne met
       __rien__.
 
-      — Général, article zéro : `Life is short.` `Children learn fast.`
-        `Information is power.` — jamais « The life », « The children ».
-      — Spécifique, article défini :
+      - Général, article zéro : `Life is short.` `Children learn fast.`
+        `Information is power.`, jamais « The life », « The children ».
+      - Spécifique, article défini :
         `The water in this bottle is not drinkable.` On désigne cette eau-là.
-      — `most` + nom pluriel se passe d'article : `Most people disagree.`
+      - `most` + nom pluriel se passe d'article : `Most people disagree.`
         `The most` ne s'emploie que dans un superlatif.
-      — Un nom de métier prend `a`, là où le français n'en met aucun :
+      - Un nom de métier prend `a`, là où le français n'en met aucun :
         `She is a teacher.` Elle est enseignante.
 
       ! Un adjectif substantivé prend `the` et ne prend jamais de -s :
@@ -34,7 +34,7 @@ lessons:
           - The life
           - A life
         translation: La vie est courte, et nous en gaspillons beaucoup trop.
-        explanation: "Nom abstrait pris en général : article zéro, là où le français met « la »."
+        explanation: "Nom abstrait pris en général : article zéro, là où le français met « la »."
       - id: g6-gen-2
         sentence: ___ in this bottle is not drinkable.
         answer: The water
@@ -43,7 +43,7 @@ lessons:
           - Water
           - A water
         translation: L'eau de cette bouteille n'est pas potable.
-        explanation: "« In this bottle » restreint à une eau précise : l'article défini redevient obligatoire."
+        explanation: "« In this bottle » restreint à une eau précise : l'article défini redevient obligatoire."
       - id: g6-gen-3
         sentence: ___ people underestimate how long the procedure takes.
         answer: Most
@@ -53,7 +53,7 @@ lessons:
           - Most of
           - The most of
         translation: La plupart des gens sous-estiment le temps que prend la procédure.
-        explanation: "« Most » + nom pluriel se passe d'article ; « the most » ne s'emploie qu'au superlatif."
+        explanation: "« Most » + nom pluriel se passe d'article ; « the most » ne s'emploie qu'au superlatif."
       - id: g6-gen-4
         sentence: After ten years in the lab, she is now ___ at the university.
         answer: a researcher
@@ -72,7 +72,7 @@ lessons:
           - the poors
           - poors
         translation: La réforme devait aider les pauvres, mais elle a fait l'inverse.
-        explanation: "Adjectif substantivé : « the » est obligatoire, et le mot ne prend jamais de -s."
+        explanation: "Adjectif substantivé : « the » est obligatoire, et le mot ne prend jamais de -s."
       - id: g6-gen-6
         sentence: It's ___ once-in-a-lifetime opportunity.
         answer: a
@@ -82,7 +82,7 @@ lessons:
           - the
           - this
         translation: C'est une occasion unique dans une vie.
-        explanation: "« Once » se prononce [wʌns] : le son de consonne impose « a », malgré le « o » écrit."
+        explanation: "« Once » se prononce [wʌns] : le son de consonne impose « a », malgré le « o » écrit."
 
   - id: g6-l2
     title: The avec les noms propres et les emplois figés
@@ -92,19 +92,19 @@ lessons:
       Ireland) et disparaît devant un nom simple (France, Everest). Le reste
       s'apprend par familles.
 
-      — Pays au nom pluriel ou composé d'un nom commun : `the Netherlands`,
-        `the United States`, `the United Kingdom` — mais rien devant un pays
+      - Pays au nom pluriel ou composé d'un nom commun : `the Netherlands`,
+        `the United States`, `the United Kingdom`, mais rien devant un pays
         au nom simple : `France`, `Japan`.
-      — Fleuves, océans, chaînes de montagnes : `the Thames`, `the Atlantic`,
-        `the Alps` — mais rien devant un lac ou une montagne isolée :
+      - Fleuves, océans, chaînes de montagnes : `the Thames`, `the Atlantic`,
+        `the Alps`, mais rien devant un lac ou une montagne isolée :
         `Lake Geneva`, `Everest`.
-      — Instruments de musique après `play` : `to play the piano`.
-      — `school`, `hospital`, `prison`, `church` **sans article** désignent la
+      - Instruments de musique après `play` : `to play the piano`.
+      - `school`, `hospital`, `prison`, `church` **sans article** désignent la
         fonction du lieu ; **avec** `the`, le bâtiment précis.
         She's at school. Elle est en cours (institution).
         She's at the school. Elle est à l'école, ce bâtiment-là.
 
-      ! Cette dernière paire ne se traduit pas : le français dit « à l'école »
+      ! Cette dernière paire ne se traduit pas : le français dit « à l'école »
       dans les deux cas, l'anglais distingue toujours.
     points:
       - id: g6-proper-1
@@ -116,7 +116,7 @@ lessons:
           - This
           - Its
         translation: Les États-Unis ont signé le traité en 1987.
-        explanation: "Nom de pays pluriel ou composé d'un nom commun (« states ») : il prend toujours « the »."
+        explanation: "Nom de pays pluriel ou composé d'un nom commun (« states ») : il prend toujours « the »."
       - id: g6-proper-2
         sentence: They crossed ___ Atlantic in just under six days.
         answer: the
@@ -126,7 +126,7 @@ lessons:
           - this
           - its
         translation: Ils ont traversé l'Atlantique en un peu moins de six jours.
-        explanation: Les océans prennent toujours « the ».
+        explanation: Les océans prennent toujours « the ».
       - id: g6-proper-3
         sentence: This is ___ first time I have seen snow here.
         answer: the
@@ -136,7 +136,7 @@ lessons:
           - its
           - one
         translation: C'est la première fois que je vois de la neige ici.
-        explanation: Les ordinaux (« first », « second »…) fonctionnent comme des superlatifs et imposent « the ».
+        explanation: Les ordinaux (« first », « second »…) fonctionnent comme des superlatifs et imposent « the ».
       - id: g6-proper-4
         sentence: He went to ___ school to pick up his daughter.
         answer: the
@@ -146,7 +146,7 @@ lessons:
           - this
           - some
         translation: Il est allé à l'école pour récupérer sa fille.
-        explanation: "Il se rend à un bâtiment précis, pas à l'école en tant qu'institution : « the school »."
+        explanation: "Il se rend à un bâtiment précis, pas à l'école en tant qu'institution : « the school »."
       - id: g6-proper-5
         sentence: She has been learning to play ___ piano since she was six.
         answer: the
@@ -156,7 +156,7 @@ lessons:
           - his
           - this
         translation: Elle apprend le piano depuis l'âge de six ans.
-        explanation: Un instrument de musique après « play » prend toujours « the ».
+        explanation: Un instrument de musique après « play » prend toujours « the ».
       - id: g6-proper-6
         sentence: What ___ surprise to see you here!
         answer: a
@@ -166,4 +166,4 @@ lessons:
           - the
           - some
         translation: Quelle surprise de te voir ici !
-        explanation: "Exclamation figée « What a + nom » : l'article est indéfini, quel que soit le contexte."
+        explanation: "Exclamation figée « What a + nom » : l'article est indéfini, quel que soit le contexte."

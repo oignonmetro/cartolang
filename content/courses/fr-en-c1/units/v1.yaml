@@ -15,7 +15,7 @@ lessons:
         alt:
           - jusqu'ici
         pos: adverbe
-        hint: Registre écrit et formel ; à l'oral on dirait « until now ».
+        hint: Registre écrit et formel ; à l'oral on dirait « until now ».
         example:
           text: The document was hitherto unknown to historians.
           translation: Le document était jusqu'à présent inconnu des historiens.
@@ -25,7 +25,7 @@ lessons:
         alt:
           - malgré
         pos: préposition
-        hint: "Peut aussi suivre le groupe qu'il régit : « these objections notwithstanding »."
+        hint: "Peut aussi suivre le groupe qu'il régit : « these objections notwithstanding »."
         example:
           text: Notwithstanding these reservations, the plan went ahead.
           translation: Malgré ces réserves, le plan a été mis en œuvre.
@@ -97,7 +97,7 @@ lessons:
         alt:
           - dorénavant
         pos: adverbe
-        hint: Tourné vers l'avenir, quand « hitherto » regarde en arrière.
+        hint: Tourné vers l'avenir, quand « hitherto » regarde en arrière.
         example:
           text: The clause shall henceforth apply to all subsidiaries.
           translation: La clause s'applique désormais à toutes les filiales.
@@ -153,7 +153,7 @@ lessons:
         alt:
           - au lieu de
         pos: préposition
-        hint: "Faux ami trompeur : « lieu » est bien le mot français, mais figé dans cette locution seule."
+        hint: "Faux ami trompeur : « lieu » est bien le mot français, mais figé dans cette locution seule."
         example:
           text: Staff were offered days off in lieu of overtime pay.
           translation: Le personnel s'est vu proposer des jours de congé à la place des heures supplémentaires.
@@ -178,7 +178,7 @@ lessons:
           - vérifier
         pos: verbe
         gap: ascertain
-        hint: Plus fort que « to check » — on établit un fait, on ne le contrôle pas.
+        hint: Plus fort que « to check » (on établit un fait, on ne le contrôle pas).
         example:
           text: Investigators could not ascertain the cause of the fire.
           translation: Les enquêteurs n'ont pu établir avec certitude la cause de l'incendie.
@@ -197,7 +197,7 @@ lessons:
         translation: cesser
         pos: verbe
         gap: ceased
-        hint: "« Stop » à l'oral, « cease » à l'écrit administratif."
+        hint: "« Stop » à l'oral, « cease » à l'écrit administratif."
         example:
           text: The company ceased trading in March.
           translation: L'entreprise a cessé son activité en mars.
@@ -248,7 +248,7 @@ lessons:
         alt:
           - encore existant
         pos: adjectif
-        hint: Se dit de ce qui a survécu au temps — manuscrits, espèces, bâtiments.
+        hint: Se dit de ce qui a survécu au temps (manuscrits, espèces, bâtiments).
         example:
           text: Only three extant copies of the manuscript are known.
           translation: On ne connaît que trois exemplaires subsistants du manuscrit.
@@ -264,7 +264,7 @@ lessons:
           - fuir
         pos: verbe
         gap: eschews
-        hint: On renonce par principe, non par contrainte — la nuance est morale.
+        hint: On renonce par principe, non par contrainte, la nuance est morale.
         example:
           text: The author eschews jargon of any kind.
           translation: L'auteur s'abstient de tout jargon.

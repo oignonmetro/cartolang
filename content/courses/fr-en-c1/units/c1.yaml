@@ -15,12 +15,12 @@ lessons:
       Il apparaît après les verbes et adjectifs d'__exigence__, de
       __recommandation__ et de __nécessité__, et nulle part ailleurs.
 
-      — insist, demand, require, recommend, suggest, ask.
-        I insist that he be present. (et non « that he is »)
-      — `it is essential / vital / crucial that…`
+      - insist, demand, require, recommend, suggest, ask.
+        I insist that he be present. (et non « that he is »)
+      - `it is essential / vital / crucial that…`
         It is essential that the document remain confidential.
 
-      ! La troisième personne perd son -s : `that she apply`, jamais « applies ».
+      ! La troisième personne perd son -s : `that she apply`, jamais « applies ».
 
       L'anglais britannique contourne souvent le subjonctif avec `should` :
       I insist that he should be present.
@@ -28,7 +28,7 @@ lessons:
       - verb: to be
         translation: être
         tense: subjonctif présent
-        note: "Une seule forme pour toutes les personnes : « be »."
+        note: "Une seule forme pour toutes les personnes : « be »."
         forms:
           - id: c1-be-subj
             person: subjonctif (toutes personnes)
@@ -61,7 +61,7 @@ lessons:
       - verb: to have
         translation: avoir
         tense: subjonctif présent
-        note: "« that he have » : forme rare mais correcte après insist, demand."
+        note: "« that he have » : forme rare mais correcte après insist, demand."
         forms:
           - id: c1-have-subj
             person: subjonctif, il / elle
@@ -76,11 +76,11 @@ lessons:
       Un seul mécanisme couvre tout l'irréel : **le prétérit y marque la distance
       au réel, pas le passé**.
 
-      — `were` à toutes les personnes après `if`, `as if`, `wish`.
+      - `were` à toutes les personnes après `if`, `as if`, `wish`.
         If I were you… / He talks as if he were an expert.
-      — `would rather` + sujet + prétérit.
+      - `would rather` + sujet + prétérit.
         I would rather you came tomorrow. Je préférerais que tu viennes demain.
-      — `it is time` + prétérit.
+      - `it is time` + prétérit.
         It is time we left. Il est temps que nous partions.
 
       ! Aucun de ces prétérits ne renvoie au passé : `It is time we left` parle
@@ -89,7 +89,7 @@ lessons:
       - verb: to be
         translation: être
         tense: were-subjunctive
-        note: "« Were » à toutes les personnes, y compris « I » et « he »."
+        note: "« Were » à toutes les personnes, y compris « I » et « he »."
         forms:
           - id: c1-be-were-1
             person: irréel, je / il / elle
@@ -99,34 +99,34 @@ lessons:
             answer: was
       - verb: to come
         translation: venir
-        tense: après « would rather »
-        note: "« Would rather » + sujet + prétérit quand on parle d'autrui."
+        tense: après « would rather »
+        note: "« Would rather » + sujet + prétérit quand on parle d'autrui."
         forms:
           - id: c1-come-rather
-            person: après « I would rather you »
+            person: après « I would rather you »
             answer: came
           - id: c1-come-inf
-            person: après « I would rather » (même sujet)
+            person: après « I would rather » (même sujet)
             answer: come
       - verb: to leave
         translation: partir
-        tense: après « it is time »
-        note: "« It is time we left » : prétérit malgré le sens présent."
+        tense: après « it is time »
+        note: "« It is time we left » : prétérit malgré le sens présent."
         forms:
           - id: c1-leave-time
-            person: après « it is time we »
+            person: après « it is time we »
             answer: left
           - id: c1-leave-inf
-            person: après « it is time to »
+            person: après « it is time to »
             answer: leave
       - verb: to know
         translation: savoir
-        tense: après « as if »
-        note: "« As if he knew » signale que ce n'est pas le cas."
+        tense: après « as if »
+        note: "« As if he knew » signale que ce n'est pas le cas."
         forms:
           - id: c1-know-asif
-            person: irréel après « as if »
+            person: irréel après « as if »
             answer: knew
           - id: c1-know-asif-past
-            person: irréel antérieur après « as if »
+            person: irréel antérieur après « as if »
             answer: had known

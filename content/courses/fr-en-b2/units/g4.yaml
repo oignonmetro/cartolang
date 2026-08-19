@@ -11,18 +11,18 @@ lessons:
     notes: |
       Ces connecteurs ont des sens voisins, mais on ne les choisit pas au sens :
       on les choisit sur **ce qu'on a à mettre derrière**. Une proposition avec
-      son verbe, ou un simple groupe nominal — c'est cela qui décide.
+      son verbe, ou un simple groupe nominal, c'est cela qui décide.
 
-      — Suivis d'une **proposition** (sujet + verbe) : although, even though,
+      - Suivis d'une **proposition** (sujet + verbe) : although, even though,
         whereas, since.
         Although it was raining, the match went ahead.
-      — Suivis d'un **groupe nominal** : despite, in spite of, because of,
+      - Suivis d'un **groupe nominal** : despite, in spite of, because of,
         due to.
         Despite the rain, the match went ahead.
-      — **Seuls en tête de phrase**, suivis d'une virgule : however,
+      - **Seuls en tête de phrase**, suivis d'une virgule : however,
         nevertheless, therefore.
 
-      ! « Despite that he came » est faux ; « despite the fact that he came » est
+      ! « Despite that he came » est faux ; « despite the fact that he came » est
       correct, mais lourd.
     points:
       - id: g4-conn-1
@@ -36,7 +36,7 @@ lessons:
           - Even though
           - However
         translation: Malgré la forte pluie, le match a eu lieu.
-        explanation: "Devant un groupe nominal : despite / in spite of, sans « of » pour despite."
+        explanation: "Devant un groupe nominal : despite / in spite of, sans « of » pour despite."
 
       - id: g4-conn-2
         sentence: ___ it was raining heavily, the match went ahead.
@@ -101,7 +101,7 @@ lessons:
           - unless
           - so that
         translation: Prends un parapluie au cas où il pleuvrait plus tard.
-        explanation: « In case » anticipe une éventualité ; « if » poserait une condition, ce qui n'est pas le sens ici.
+        explanation: « In case » anticipe une éventualité ; « if » poserait une condition, ce qui n'est pas le sens ici.
 
   - id: g4-l2
     title: But, conséquence et conclusion
@@ -111,15 +111,15 @@ lessons:
       proposition complète appelle `so that`, et les adverbes de conséquence ne
       se mettent qu'en tête, jamais au milieu.
 
-      — But visé, devant un **verbe** : to, in order to, so as to.
+      - But visé, devant un **verbe** : to, in order to, so as to.
         She left early so as to avoid the traffic.
-      — But visé, devant une **proposition** : `so that` + sujet + modal.
+      - But visé, devant une **proposition** : `so that` + sujet + modal.
         We moved the meeting so that everyone could attend.
-      — Conséquence, en tête : therefore, thus, hence, consequently.
-      — Conséquence, en incise : as a result, accordingly.
+      - Conséquence, en tête : therefore, thus, hence, consequently.
+      - Conséquence, en incise : as a result, accordingly.
 
       ! La négation s'insère **avant** `to` : `so as not to disturb`, et non
-      « so as to not disturb ».
+      « so as to not disturb ».
     points:
       - id: g4-cons-1
         sentence: She left early ___ to avoid the traffic.
@@ -132,7 +132,7 @@ lessons:
           - for
           - because
         translation: Elle est partie tôt afin d'éviter les embouteillages.
-        explanation: "Devant un infinitif : « so as to » ou « in order to », jamais « so that »."
+        explanation: "Devant un infinitif : « so as to » ou « in order to », jamais « so that »."
       - id: g4-cons-2
         sentence: We moved the meeting ___ everyone could attend.
         answer: so that
@@ -142,7 +142,7 @@ lessons:
           - in order to
           - due to
         translation: Nous avons déplacé la réunion pour que tout le monde puisse venir.
-        explanation: Devant une proposition complète avec son propre sujet, il faut « so that ».
+        explanation: Devant une proposition complète avec son propre sujet, il faut « so that ».
       - id: g4-cons-3
         sentence: The evidence was incomplete; ___, the case was dropped.
         answer: therefore
@@ -167,7 +167,7 @@ lessons:
           - for
           - to
         translation: Il a parlé doucement pour ne pas réveiller le bébé.
-        explanation: "La négation s'insère avant « to » : « so as not to »."
+        explanation: "La négation s'insère avant « to » : « so as not to »."
       - id: g4-cons-5
         sentence: Two suppliers withdrew; ___ a result, production stalled.
         answer: as
@@ -177,7 +177,7 @@ lessons:
           - for
           - with
         translation: Deux fournisseurs se sont retirés ; en conséquence, la production s'est arrêtée.
-        explanation: "Locution figée : « as a result »."
+        explanation: "Locution figée : « as a result »."
       - id: g4-cons-6
         sentence: The deadline was missed, ___ the penalty clause applied.
         answer: hence
@@ -189,4 +189,4 @@ lessons:
           - unless
           - whereas
         translation: L'échéance n'a pas été tenue, d'où l'application de la clause pénale.
-        explanation: « Hence » introduit une conséquence directe, dans un registre soutenu.
+        explanation: « Hence » introduit une conséquence directe, dans un registre soutenu.

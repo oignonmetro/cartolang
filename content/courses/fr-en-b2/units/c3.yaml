@@ -12,12 +12,12 @@ lessons:
       **Modal + `have` + participe passé** : la forme qui permet de raisonner ou
       de regretter après coup. Ni le modal ni `have` ne se conjuguent.
 
-      — must have left : il a dû partir (déduction)
-      — should have left : il aurait dû partir (reproche)
-      — could have left : il aurait pu partir (possibilité non réalisée)
+      - must have left : il a dû partir (déduction)
+      - should have left : il aurait dû partir (reproche)
+      - could have left : il aurait pu partir (possibilité non réalisée)
 
       ! À l'oral, `have` se réduit à /əv/, d'où la faute très répandue
-      « should of » à l'écrit.
+      « should of » à l'écrit.
     verbs:
       - verb: to leave
         translation: partir
@@ -41,7 +41,7 @@ lessons:
       - verb: to know
         translation: savoir
         tense: modal + infinitif passé
-        note: "« I should have known » est une tournure très courante."
+        note: "« I should have known » est une tournure très courante."
         forms:
           - id: c3-know-should
             person: reproche (should)
@@ -53,16 +53,16 @@ lessons:
   - id: c3-l2
     title: Le passif aux temps composés
     notes: |
-      Le passif se forme avec « be » au temps voulu, suivi du participe passé.
-      C'est donc « be » qui porte toute la conjugaison, et le participe qui ne
+      Le passif se forme avec « be » au temps voulu, suivi du participe passé.
+      C'est donc « be » qui porte toute la conjugaison, et le participe qui ne
       bouge jamais.
 
-      — Présent : is written
-      — Prétérit : was written
-      — Present perfect : has been written
-      — Past perfect : had been written
-      — Futur : will be written
-      — Modal : must be written
+      - Présent : is written
+      - Prétérit : was written
+      - Present perfect : has been written
+      - Past perfect : had been written
+      - Futur : will be written
+      - Modal : must be written
 
       Le passif continu n'existe qu'__au présent et au prétérit__ :
       is being written.
@@ -70,7 +70,7 @@ lessons:
       - verb: to write (passif)
         translation: être écrit
         tense: passif, temps composés
-        note: Seul « be » change ; le participe « written » reste identique.
+        note: Seul « be » change ; le participe « written » reste identique.
         forms:
           - id: c3-write-pass-present
             person: présent (it)

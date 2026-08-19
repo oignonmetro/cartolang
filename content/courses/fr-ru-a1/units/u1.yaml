@@ -1,7 +1,7 @@
 # L'alphabet russe en dix étapes, issu de la fusion des cinq unités qui le
 # découpaient autrefois (u1 à u5).
 #
-# Le découpage tenait à une nécessité : on ne peut pas lire « спасибо » avant
+# Le découpage tenait à une nécessité : on ne peut pas lire « спасибо » avant
 # de connaître П, С, И et Б. Mais une nécessité d'ordre n'appelle pas cinq
 # unités enchaînées — le parcours interne d'une unité est déjà ordonné, alors
 # que la bibliothèque qui les contient ne l'est pas. Tout l'alphabet tient donc
@@ -35,7 +35,7 @@ lessons:
         term: К
         translation: k
         pos: lettre
-        hint: Même forme, même son. Toujours dur, jamais « s ».
+        hint: Même forme, même son. Toujours dur, jamais « s ».
       - id: ru-let-m
         term: М
         translation: m
@@ -45,7 +45,7 @@ lessons:
         term: О
         translation: o
         pos: lettre
-        hint: "Se lit « o » quand la syllabe est accentuée, « a » sinon — on y reviendra."
+        hint: "Se lit « o » quand la syllabe est accentuée, « a » sinon, on y reviendra."
       - id: ru-let-t
         term: Т
         translation: t
@@ -57,7 +57,7 @@ lessons:
         alt:
           - e
         pos: lettre
-        hint: "Presque une amie : la forme est la même, mais elle mouille — « ié », comme dans « pièce »."
+        hint: "Presque une amie : la forme est la même, mais elle mouille (« ié », comme dans « pièce »)."
 
   - id: u1-l2
     title: Vos premiers mots russes
@@ -102,7 +102,7 @@ lessons:
         term: В
         translation: v
         pos: lettre
-        hint: "Ressemble au B latin, se lit v — comme dans « vote »."
+        hint: "Ressemble au B latin, se lit v (comme dans « vote »)."
       - id: ru-let-n
         term: Н
         translation: n
@@ -117,7 +117,7 @@ lessons:
         term: С
         translation: s
         pos: lettre
-        hint: "Ressemble au C latin, se lit toujours s — jamais k."
+        hint: "Ressemble au C latin, se lit toujours s, jamais k."
       - id: ru-let-ou
         term: У
         translation: ou
@@ -129,7 +129,7 @@ lessons:
         alt:
           - r raclé
         pos: lettre
-        hint: "Ressemble au X latin, se lit comme la jota espagnole ou le « ch » allemand."
+        hint: "Ressemble au X latin, se lit comme la jota espagnole ou le « ch » allemand."
 
   - id: u2-l2
     title: Lire malgré le réflexe
@@ -140,7 +140,7 @@ lessons:
         alt:
           - voilà
         pos: adverbe
-        hint: "Commence par un V, pas un B : « vot »."
+        hint: "Commence par un V, pas un B : « vot »."
       - id: ru-net
         term: нет
         translation: non
@@ -156,7 +156,7 @@ lessons:
         alt:
           - bras
         pos: nom
-        hint: "Le Р se lit r : « rouka »."
+        hint: "Le Р se lit r : « rouka »."
       - id: ru-sumka
         term: сумка
         translation: sac
@@ -165,7 +165,7 @@ lessons:
         term: метро
         translation: métro
         pos: nom
-        hint: Le même mot qu'en français — mais il faut savoir lire le Р.
+        hint: Le même mot qu'en français, mais il faut savoir lire le Р.
 
   - id: u3-l1
     title: Formes nouvelles, sons connus
@@ -189,7 +189,7 @@ lessons:
         term: И
         translation: i
         pos: lettre
-        hint: "Un N latin renversé, mais se lit i : « i » comme dans « ici »."
+        hint: "Un N latin renversé, mais se lit i : « i » comme dans « ici »."
       - id: ru-let-l
         term: Л
         translation: l
@@ -239,12 +239,12 @@ lessons:
         term: Г
         translation: g
         pos: lettre
-        hint: "Toujours dur, comme dans « gare » — jamais « j »."
+        hint: "Toujours dur, comme dans « gare », jamais « j »."
       - id: ru-let-j
         term: Ж
         translation: j
         pos: lettre
-        hint: "Un scarabée. Se lit comme le j de « jour »."
+        hint: "Un scarabée. Se lit comme le j de « jour »."
       - id: ru-let-f
         term: Ф
         translation: f
@@ -253,17 +253,17 @@ lessons:
         term: Ц
         translation: ts
         pos: lettre
-        hint: "Un seul son, comme le « tsé » de tsé-tsé."
+        hint: "Un seul son, comme le « tsé » de tsé-tsé."
       - id: ru-let-tch
         term: Ч
         translation: tch
         pos: lettre
-        hint: "Comme dans « tchèque »."
+        hint: "Comme dans « tchèque »."
       - id: ru-let-ch
         term: Ш
         translation: ch
         pos: lettre
-        hint: "Comme dans « chat ». Un peigne à trois dents."
+        hint: "Comme dans « chat ». Un peigne à trois dents."
       - id: ru-let-chtch
         term: Щ
         translation: chtch
@@ -291,7 +291,7 @@ lessons:
         term: машина
         translation: voiture
         pos: nom
-        hint: "Le mot dit aussi « machine » — le contexte tranche."
+        hint: "Le mot dit aussi « machine » (le contexte tranche)."
       - id: ru-borshch
         term: борщ
         translation: bortsch
@@ -311,7 +311,7 @@ lessons:
         alt:
           - ya
         pos: lettre
-        hint: "Un R latin renversé. Se lit « ia », et signifie « je » à elle seule."
+        hint: "Un R latin renversé. Se lit « ia », et signifie « je » à elle seule."
       - id: ru-let-you
         term: Ю
         translation: iou
@@ -322,14 +322,14 @@ lessons:
         term: Э
         translation: è
         pos: lettre
-        hint: "Le è ouvert, sans mouillure — là où Е mouille."
+        hint: "Le è ouvert, sans mouillure, là où Е mouille."
       - id: ru-let-io
         term: Ё
         translation: io
         alt:
           - yo
         pos: lettre
-        hint: "Un Е avec deux points. Toujours accentué — et souvent écrit « е » dans les textes courants."
+        hint: "Un Е avec deux points. Toujours accentué, et souvent écrit « е » dans les textes courants."
       - id: ru-let-i-bref
         term: Й
         translation: y
@@ -341,17 +341,17 @@ lessons:
         term: Ы
         translation: y guttural
         pos: lettre
-        hint: Aucun équivalent français — un i prononcé au fond de la gorge.
+        hint: Aucun équivalent français (un i prononcé au fond de la gorge).
       - id: ru-let-mou
         term: Ь
         translation: signe mou
         pos: lettre
-        hint: Ne se prononce pas seul — il mouille la consonne qui précède.
+        hint: Ne se prononce pas seul, il mouille la consonne qui précède.
       - id: ru-let-dur
         term: Ъ
         translation: signe dur
         pos: lettre
-        hint: Muet lui aussi, et rarissime — il sépare, là où le signe mou mouille.
+        hint: Muet lui aussi, et rarissime (il sépare, là où le signe mou mouille).
 
   - id: u5-l2
     title: L'alphabet au complet

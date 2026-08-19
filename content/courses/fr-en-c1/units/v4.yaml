@@ -15,7 +15,7 @@ lessons:
         alt:
           - postulat
         pos: nom
-        hint: "Au pluriel, « premises » désigne des locaux, sens sans rapport."
+        hint: "Au pluriel, « premises » désigne des locaux, sens sans rapport."
         example:
           text: The whole model rests on a shaky premise.
           translation: Tout le modèle repose sur une prémisse fragile.
@@ -104,7 +104,7 @@ lessons:
           - répliquer à
         pos: verbe
         gap: rebuts
-        hint: "Plus procédural que « refute » : on répond à chaque argument dans l'ordre."
+        hint: "Plus procédural que « refute » : on répond à chaque argument dans l'ordre."
         example:
           text: The second chapter rebuts that objection.
           translation: Le deuxième chapitre réfute point par point cette objection.
@@ -114,7 +114,7 @@ lessons:
         alt:
           - clause
         pos: nom
-        hint: "Un « caveat » met en garde ; un « proviso » pose une condition."
+        hint: "Un « caveat » met en garde ; un « proviso » pose une condition."
         example:
           text: The offer stands, with one proviso.
           translation: L'offre tient, à une condition près.
@@ -135,7 +135,7 @@ lessons:
           - assortir de réserves
         pos: verbe
         gap: qualify
-        hint: Sens distinct de « se qualifier » ; ici, atténuer une affirmation.
+        hint: Sens distinct de « se qualifier » ; ici, atténuer une affirmation.
         example:
           text: I would qualify that statement considerably.
           translation: Je nuancerais considérablement cette affirmation.
@@ -154,7 +154,7 @@ lessons:
         alt:
           - souscrire à
         pos: verbe
-        hint: "Registre soutenu de « agree » ; se construit avec « with »."
+        hint: "Registre soutenu de « agree » ; se construit avec « with »."
         example:
           text: Most historians concur with that reading.
           translation: La plupart des historiens abondent dans le sens de cette lecture.
@@ -188,7 +188,7 @@ lessons:
         alt:
           - officiellement
         pos: adverbe
-        hint: "Faux ami : ne veut pas dire « ostensiblement », mais annonce un décalage entre l'affiché et le réel."
+        hint: "Faux ami : ne veut pas dire « ostensiblement », mais annonce un décalage entre l'affiché et le réel."
         example:
           text: The visit was ostensibly a private one.
           translation: La visite était en apparence privée.
@@ -303,7 +303,7 @@ lessons:
           - mériter
         pos: verbe
         gap: warrants
-        hint: "Le nom « a warrant » est tout autre chose : un mandat de justice."
+        hint: "Le nom « a warrant » est tout autre chose : un mandat de justice."
         example:
           text: The claim warrants closer scrutiny.
           translation: L'affirmation justifie un examen plus attentif.

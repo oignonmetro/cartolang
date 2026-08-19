@@ -73,7 +73,7 @@ lessons:
         term: хороший
         translation: bon
         pos: adjectif
-        hint: "Même racine que « хорошо », déjà connu : bien → bon."
+        hint: "Même racine que « хорошо », déjà connu : bien → bon."
         example:
           text: Хороший суп.
           translation: Une bonne soupe.

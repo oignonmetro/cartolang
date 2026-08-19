@@ -1,25 +1,25 @@
 id: rg3
-title: La phrase sans « être »
-subtitle: Présenter, affirmer, nier — sans verbe au présent
+title: La phrase sans « être »
+subtitle: Présenter, affirmer, nier (sans verbe au présent)
 icon: book
 color: teal
 level: A1
 
 lessons:
   - id: rg3-l1
-    title: Le verbe « être » ne se dit pas
+    title: Le verbe « être » ne se dit pas
     notes: |
-      Le russe **n'a pas de verbe « être » au présent**. Là où le français
-      met « est », le russe ne met rien du tout, et la phrase reste complète.
+      Le russe **n'a pas de verbe « être » au présent**. Là où le français
+      met « est », le russe ne met rien du tout, et la phrase reste complète.
 
-      — `Мой брат здесь.` Mon frère est ici.
-      — `Дом большой.` La maison est grande.
-      — `Она дома.` Elle est à la maison.
+      - `Мой брат здесь.` Mon frère est ici.
+      - `Дом большой.` La maison est grande.
+      - `Она дома.` Elle est à la maison.
 
       Pour **présenter** quelque chose, on ouvre avec `это`, qui ne s'accorde
       jamais : `это дом`, `это машина`, `это молоко`.
 
-      ! Ne confondez pas `это` (« c'est ») et `есть` (« manger »). Le second
+      ! Ne confondez pas `это` (« c'est ») et `есть` (« manger »). Le second
       est un vrai verbe, et il ne sert pas à dire ce qu'une chose est.
     points:
       - id: rg3-etre-1
@@ -31,7 +31,7 @@ lessons:
           - Есть
           - Где
         translation: C'est ma maison.
-        explanation: "« это » présente ce qu'on montre, sans s'accorder avec le nom."
+        explanation: "« это » présente ce qu'on montre, sans s'accorder avec le nom."
       - id: rg3-etre-2
         sentence: ___ моя сестра.
         answer: Это
@@ -41,7 +41,7 @@ lessons:
           - Есть
           - Кто
         translation: C'est ma sœur.
-        explanation: "Même présentation, quel que soit le genre : « это » ne change pas."
+        explanation: "Même présentation, quel que soit le genre : « это » ne change pas."
       - id: rg3-etre-3
         sentence: Кто ___? Это мой брат.
         answer: это
@@ -61,7 +61,7 @@ lessons:
           - это
           - где
         translation: Ma maison est grande.
-        explanation: "L'adjectif suffit : rien ne traduit « est » entre le nom et lui."
+        explanation: "L'adjectif suffit : rien ne traduit « est » entre le nom et lui."
       - id: rg3-etre-5
         sentence: Моя сестра ___.
         answer: здесь
@@ -81,17 +81,17 @@ lessons:
           - есть
           - когда
         translation: Qu'est-ce que c'est ? C'est le métro.
-        explanation: "« Что это? » se dit mot pour mot « quoi ceci ? » — deux mots, aucun verbe."
+        explanation: "« Что это? » se dit mot pour mot « quoi ceci ? » (deux mots, aucun verbe)."
 
   - id: rg3-l2
-    title: Nier avec « не »
+    title: Nier avec « не »
     notes: |
       La négation tient dans un seul mot, `не`, posé **juste devant ce qu'on
-      nie**. Il n'y a pas de second élément comme le « pas » français.
+      nie**. Il n'y a pas de second élément comme le « pas » français.
 
-      — Devant le verbe : `Я не работаю сегодня.`
-      — Devant un adjectif : `Суп не вкусный.`
-      — Devant un nom présenté : `Это не мой дом.`
+      - Devant le verbe : `Я не работаю сегодня.`
+      - Devant un adjectif : `Суп не вкусный.`
+      - Devant un nom présenté : `Это не мой дом.`
 
       `нет` est un mot différent : il répond **non** à une question, et
       s'emploie seul, en tête de phrase.
@@ -109,7 +109,7 @@ lessons:
           - Да
           - И
         translation: Non, ce n'est pas ma maison.
-        explanation: "En tête, pour répondre « non », c'est « нет » — « не » ne s'emploie jamais seul."
+        explanation: "En tête, pour répondre « non », c'est « нет », « не » ne s'emploie jamais seul."
       - id: rg3-neg-2
         sentence: Это ___ мой дом, это школа.
         answer: не
@@ -119,7 +119,7 @@ lessons:
           - да
           - тоже
         translation: Ce n'est pas ma maison, c'est une école.
-        explanation: "Devant ce qu'on nie, à l'intérieur de la phrase : « не »."
+        explanation: "Devant ce qu'on nie, à l'intérieur de la phrase : « не »."
       - id: rg3-neg-3
         sentence: Я ___ хочу кофе.
         answer: не
@@ -129,7 +129,7 @@ lessons:
           - ещё
           - и
         translation: Je ne veux pas de café.
-        explanation: "« не » se colle au verbe qu'il nie, et rien ne suit pour compléter la négation."
+        explanation: "« не » se colle au verbe qu'il nie, et rien ne suit pour compléter la négation."
       - id: rg3-neg-4
         sentence: ___, я не работаю сегодня.
         answer: Нет
@@ -139,7 +139,7 @@ lessons:
           - Да
           - Вот
         translation: Non, je ne travaille pas aujourd'hui.
-        explanation: "La réponse « non » et la négation du verbe sont deux mots distincts, présents tous les deux ici."
+        explanation: "La réponse « non » et la négation du verbe sont deux mots distincts, présents tous les deux ici."
       - id: rg3-neg-5
         sentence: Суп ___ вкусный.
         answer: не
@@ -149,7 +149,7 @@ lessons:
           - очень
           - тоже
         translation: La soupe n'est pas bonne.
-        explanation: "Rien ne dit « est » ; « не » se pose donc directement devant l'adjectif."
+        explanation: "Rien ne dit « est » ; « не » se pose donc directement devant l'adjectif."
       - id: rg3-neg-6
         sentence: Мой брат ___ здесь, он дома.
         answer: не
@@ -159,4 +159,4 @@ lessons:
           - да
           - ещё
         translation: Mon frère n'est pas ici, il est à la maison.
-        explanation: "« не » nie l'adverbe de lieu, seul élément de la phrase à nier."
+        explanation: "« не » nie l'adverbe de lieu, seul élément de la phrase à nier."

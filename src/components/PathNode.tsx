@@ -112,7 +112,7 @@ export function PathNode({
           onClick={onOpen}
           disabled={locked}
           whileTap={locked ? undefined : { y: 4 }}
-          aria-label={`${node.title} — ${locked ? 'verrouillé' : done ? 'terminé' : 'à faire'}`}
+          aria-label={`${node.title}, ${locked ? 'verrouillé' : done ? 'terminé' : 'à faire'}`}
           className={`relative flex items-center justify-center rounded-full transition-colors ${circle}`}
           style={{ width: size, height: size, boxShadow: shadow }}
         >

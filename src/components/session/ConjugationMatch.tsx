@@ -27,7 +27,7 @@ export function ConjugationMatch({
       verbs.flatMap((verb) =>
         verb.forms.map((form) => ({
           id: form.id,
-          left: mixed ? `${verb.verb} — ${form.person}` : form.person,
+          left: mixed ? `${verb.verb} (${form.person})` : form.person,
           right: form.answer,
         })),
       ),

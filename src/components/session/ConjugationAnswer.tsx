@@ -104,13 +104,13 @@ export function ConjugationAnswer({
           }`}
         >
           <p className={`font-extrabold ${checked ? 'text-success' : 'text-error'}`}>
-            {checked ? 'Bonne réponse.' : `La forme attendue était « ${form.answer} ».`}
+            {checked ? 'Bonne réponse.' : `La forme attendue était « ${form.answer} ».`}
           </p>
           {/* Le verbe anglais était caché par l'énoncé : la correction est le
               seul endroit où le couple français/anglais peut s'apprendre. */}
           {fromFrench && (
             <p className="mt-1 text-ink-soft">
-              {verb.translation} — <span lang="en">{verb.verb}</span>
+              {verb.translation} (<span lang="en">{verb.verb}</span>)
             </p>
           )}
           {verb.note && <p className="mt-1 text-ink-soft">{verb.note}</p>}

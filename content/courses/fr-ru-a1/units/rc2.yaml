@@ -12,8 +12,8 @@ lessons:
       Le 2e groupe se reconnaît à son `ты` en **-ишь**, là où le 1er groupe
       donnait -ешь. C'est la seule chose qui sépare vraiment les deux séries.
 
-      — `я говорю`, `ты говоришь`, `он говорит`
-      — `мы говорим`, `вы говорите`, `они говорят`
+      - `я говорю`, `ты говоришь`, `он говорит`
+      - `мы говорим`, `вы говорите`, `они говорят`
 
       La plupart des verbes en -ить suivent ce modèle, mais pas tous : `жить`
       appartient au 1er groupe malgré son infinitif.
@@ -52,14 +52,14 @@ lessons:
       singulier insère un **-л-**. Elle seule : les cinq autres formes restent
       régulières.
 
-      — `любить` : `я люблю`, mais `ты любишь`.
-      — `купить` : `я куплю`, mais `ты купишь`.
+      - `любить` : `я люблю`, mais `ты любишь`.
+      - `купить` : `я куплю`, mais `ты купишь`.
 
       `купить` est un **perfectif** : ses formes ne disent pas le présent mais
       le futur, l'action étant vue d'un bloc, menée à son terme.
         Я куплю хлеб. J'achèterai du pain.
 
-      ! C'est pourquoi on ne peut pas dire « je suis en train d'acheter » avec
+      ! C'est pourquoi on ne peut pas dire « je suis en train d'acheter » avec
       `купить` : ce verbe ne regarde que le résultat.
     verbs:
       - verb: любить
@@ -88,7 +88,7 @@ lessons:
       - verb: купить
         translation: acheter
         tense: futur perfectif
-        note: "Même insertion du -л- au « я », et un sens de futur accompli."
+        note: "Même insertion du -л- au « я », et un sens de futur accompli."
         forms:
           - id: rc2-kup-1
             person: я

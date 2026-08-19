@@ -113,7 +113,7 @@ function StepSession({ unitId, stepId }: { unitId: string; stepId: string }) {
 
   return (
     <SessionScreen
-      title={`${node.title} — ${unit.title}`}
+      title={`${node.title} (${unit.title})`}
       exercises={exercises}
       onQuit={backToPath}
       onFinish={(outcome) => setFinished({ outcome, ...finishStep(course.id, stepKey(unit.id, stepId), outcome) })}

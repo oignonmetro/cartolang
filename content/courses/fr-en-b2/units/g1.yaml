@@ -13,15 +13,15 @@ lessons:
       regarde le passé, la conséquence regarde le présent. C'est ce décalage qui
       le distingue des conditionnels ordinaires.
 
-      — Hypothèse passée : `If` + past perfect (`had` + participe passé).
-      — Conséquence présente : `would` + base verbale.
+      - Hypothèse passée : `If` + past perfect (`had` + participe passé).
+      - Conséquence présente : `would` + base verbale.
         If I had accepted the offer, I would be in Berlin now.
         Si j'avais accepté ce poste, je serais à Berlin aujourd'hui.
 
       L'ordre inverse existe aussi : un trait permanent peut expliquer un fait
       passé.
 
-      — If she were more careful, she would not have lost the file.
+      - If she were more careful, she would not have lost the file.
         Si elle était plus soigneuse, elle n'aurait pas perdu le dossier.
     points:
       - id: g1-mixed-1
@@ -59,7 +59,7 @@ lessons:
           - had not been
           - are not
         translation: Si nous étions partis plus tôt, nous ne serions pas coincés dans les bouchons en ce moment.
-        explanation: « Right now » impose la conséquence au présent, malgré l'hypothèse au passé.
+        explanation: « Right now » impose la conséquence au présent, malgré l'hypothèse au passé.
       - id: g1-mixed-4
         sentence: If he ___ so much last night, he would feel fine today.
         answer: had not drunk
@@ -103,14 +103,14 @@ lessons:
       `wish` et `if only` disent l'écart entre ce qui est et ce qu'on voudrait.
       La règle tient en un mot : **le temps recule d'un cran** par rapport au réel.
 
-      — Regret sur le présent : `wish` + prétérit.
+      - Regret sur le présent : `wish` + prétérit.
         I wish I knew. Je regrette de ne pas savoir.
-      — Regret sur le passé : `wish` + past perfect.
+      - Regret sur le passé : `wish` + past perfect.
         I wish I had known. Si seulement j'avais su.
-      — Reproche adressé à autrui : `wish` + `would`.
+      - Reproche adressé à autrui : `wish` + `would`.
         I wish you would listen. J'aimerais que tu écoutes.
 
-      ! « I wish I would » est impossible : pour soi-même, on emploie `could`.
+      ! « I wish I would » est impossible : pour soi-même, on emploie `could`.
     points:
       - id: g1-wish-1
         sentence: I wish I ___ her phone number.
@@ -121,7 +121,7 @@ lessons:
           - had known
           - would know
         translation: Si seulement je connaissais son numéro.
-        explanation: "Regret sur une situation présente : prétérit après « wish »."
+        explanation: "Regret sur une situation présente : prétérit après « wish »."
 
       - id: g1-wish-2
         sentence: I wish I ___ you before signing.
@@ -158,7 +158,7 @@ lessons:
           - would not be
           - is not
         translation: Si seulement il ne pleuvait pas, nous pourrions sortir.
-        explanation: "« If only » fonctionne comme « wish » : présent irréel au prétérit."
+        explanation: "« If only » fonctionne comme « wish » : présent irréel au prétérit."
 
       - id: g1-wish-5
         sentence: She wishes she ___ speak in public without panicking.
@@ -169,7 +169,7 @@ lessons:
           - can
           - will
         translation: Elle aimerait pouvoir parler en public sans paniquer.
-        explanation: "Pour un souhait sur sa propre capacité, « would » est impossible : on emploie « could »."
+        explanation: "Pour un souhait sur sa propre capacité, « would » est impossible : on emploie « could »."
 
       - id: g1-wish-6
         sentence: I wish we ___ that flat when it was still affordable.

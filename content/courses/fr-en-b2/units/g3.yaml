@@ -12,15 +12,15 @@ lessons:
       Une virgule, et la phrase ne dit plus la même chose. Ici, **c'est la
       ponctuation qui porte le sens**, pas le pronom.
 
-      — Déterminative, __sans virgule__ : elle identifie de qui on parle.
+      - Déterminative, __sans virgule__ : elle identifie de qui on parle.
         The students who failed must resit. Seuls ceux qui ont échoué repassent.
-      — Explicative, __entre virgules__ : elle commente un groupe déjà identifié.
+      - Explicative, __entre virgules__ : elle commente un groupe déjà identifié.
         The students, who failed, must resit. Tous ont échoué, tous repassent.
 
       Deux conséquences pratiques en découlent.
 
-      — `that` est impossible dans une explicative.
-      — Le pronom relatif ne s'omet jamais lorsqu'il est sujet.
+      - `that` est impossible dans une explicative.
+      - Le pronom relatif ne s'omet jamais lorsqu'il est sujet.
     points:
       - id: g3-rel-1
         sentence: The report ___ you sent me is missing a page.
@@ -33,7 +33,7 @@ lessons:
           - what
           - whose
         translation: Le rapport que tu m'as envoyé a une page manquante.
-        explanation: "Relative déterminative, pronom complément : « that » ou « which », et l'omission serait même possible."
+        explanation: "Relative déterminative, pronom complément : « that » ou « which », et l'omission serait même possible."
 
       - id: g3-rel-2
         sentence: My sister, ___ lives in Oslo, is visiting next week.
@@ -44,7 +44,7 @@ lessons:
           - which
           - whom
         translation: Ma sœur, qui vit à Oslo, vient nous voir la semaine prochaine.
-        explanation: "Relative explicative : « that » est exclu après une virgule."
+        explanation: "Relative explicative : « that » est exclu après une virgule."
 
       - id: g3-rel-3
         sentence: This is the author ___ book won the prize.
@@ -55,7 +55,7 @@ lessons:
           - which
           - that
         translation: Voici l'auteur dont le livre a remporté le prix.
-        explanation: "Possession : « whose », y compris pour des personnes."
+        explanation: "Possession : « whose », y compris pour des personnes."
 
       - id: g3-rel-4
         sentence: He arrived two hours late, ___ annoyed everyone.
@@ -66,7 +66,7 @@ lessons:
           - what
           - who
         translation: Il est arrivé avec deux heures de retard, ce qui a agacé tout le monde.
-        explanation: « Which » reprend toute la proposition précédente ; « that » ne le peut pas.
+        explanation: « Which » reprend toute la proposition précédente ; « that » ne le peut pas.
       - id: g3-rel-5
         sentence: The village ___ we spent the summer has barely changed.
         answer: where
@@ -76,7 +76,7 @@ lessons:
           - that
           - when
         translation: Le village où nous avons passé l'été a à peine changé.
-        explanation: "Complément de lieu : « where » évite la lourdeur de « in which »."
+        explanation: "Complément de lieu : « where » évite la lourdeur de « in which »."
 
       - id: g3-rel-6
         sentence: Everything ___ she said turned out to be true.
@@ -87,24 +87,24 @@ lessons:
           - what
           - who
         translation: Tout ce qu'elle a dit s'est révélé vrai.
-        explanation: Après « everything », « all », « the only », on emploie « that », jamais « which ».
+        explanation: Après « everything », « all », « the only », on emploie « that », jamais « which ».
 
   - id: g3-l2
     title: Passif et discours rapporté
     notes: |
       Deux mécanismes, réunis par le même usage : rapporter ce que d'autres ont
-      dit ou décidé. Chacun tient en une formule — **`be` + participe passé**
+      dit ou décidé. Chacun tient en une formule, **`be` + participe passé**
       pour le passif, **un cran de recul** pour le discours rapporté.
 
-      — Passif simple : `be` au temps voulu + participe passé.
+      - Passif simple : `be` au temps voulu + participe passé.
         The decision was taken in March. La décision a été prise en mars.
-      — Passif impersonnel, propre à la presse : `It is said that…` / `He is said to…`
+      - Passif impersonnel, propre à la presse : `It is said that…` / `He is said to…`
         He is said to have resigned. Il aurait démissionné.
 
       Au discours rapporté, __quand le verbe introducteur est au passé__, **tout
       recule d'un cran**, les temps comme les repères.
 
-      — I saw her yesterday. → He said he had seen her the day before.
+      - I saw her yesterday. → He said he had seen her the day before.
     points:
       - id: g3-pass-1
         sentence: The bridge ___ two years before the war.
@@ -126,7 +126,7 @@ lessons:
           - has rumoured
           - is rumouring
         translation: Le bruit court que l'entreprise prépare une fusion.
-        explanation: "Passif impersonnel : « it is said / thought / rumoured that… »."
+        explanation: "Passif impersonnel : « it is said / thought / rumoured that… »."
 
       - id: g3-pass-3
         sentence: The minister ___ to have known about the report.
@@ -161,7 +161,7 @@ lessons:
           - what
           - which
         translation: Il m'a demandé si j'avais déjà travaillé à l'étranger.
-        explanation: "Question fermée rapportée : « whether » ou « if », et l'ordre redevient celui d'une affirmation."
+        explanation: "Question fermée rapportée : « whether » ou « if », et l'ordre redevient celui d'une affirmation."
 
       - id: g3-pass-6
         sentence: They are having the roof ___ next month.
@@ -172,5 +172,5 @@ lessons:
           - repairing
           - to repair
         translation: Ils font réparer le toit le mois prochain.
-        explanation: "Structure causative « have something done » : participe passé après l'objet."
+        explanation: "Structure causative « have something done » : participe passé après l'objet."
 

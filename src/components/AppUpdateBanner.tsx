@@ -56,7 +56,7 @@ export function AppUpdateBanner() {
         {status === 'permission-required' && (
           <p className="text-xs text-white/80">
             Autorisez Cartolang à installer des applications dans les réglages qui viennent de s'ouvrir, puis retapez
-            sur « Télécharger ».
+            sur « Télécharger ».
           </p>
         )}
         {status === 'failed' && (

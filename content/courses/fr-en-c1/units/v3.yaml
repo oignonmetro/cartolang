@@ -273,7 +273,7 @@ lessons:
           - tenir bon
         pos: expression
         gap: weathered the storm
-        hint: "« Weather » est ici un verbe : traverser sans sombrer."
+        hint: "« Weather » est ici un verbe : traverser sans sombrer."
         example:
           text: The firm weathered the storm better than its rivals.
           translation: L'entreprise a essuyé la tempête mieux que ses concurrentes.
@@ -301,7 +301,7 @@ lessons:
         alt:
           - pas à la hauteur
         pos: expression
-        hint: Image de la baignade — on n'a plus pied.
+        hint: Image de la baignade (on n'a plus pied).
         example:
           text: He was clearly out of his depth in the negotiations.
           translation: Il était manifestement dépassé dans ces négociations.
