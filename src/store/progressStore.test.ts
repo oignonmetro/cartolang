@@ -138,6 +138,35 @@ describe('progression isolée par cours', () => {
   })
 })
 
+describe('saut d’une leçon ou d’une étape', () => {
+  it('acquiert une leçon sans créer la moindre carte de révision', () => {
+    useProgress.getState().reset()
+    useProgress.getState().skipLesson('fr-ru-a1', 'u1-l1')
+    expect(useProgress.getState().lessons['fr-ru-a1']?.['u1-l1']?.level).toBe(1)
+    expect(useProgress.getState().cards['fr-ru-a1'] ?? {}).toEqual({})
+  })
+
+  it('ne redescend pas une leçon déjà acquise en la sautant', () => {
+    useProgress.getState().reset()
+    useProgress.getState().finishLesson('fr-ru-a1', 'u1-l1', { correct: 4, total: 4 })
+    const before = useProgress.getState().lessons['fr-ru-a1']!['u1-l1']!
+    useProgress.getState().skipLesson('fr-ru-a1', 'u1-l1')
+    expect(useProgress.getState().lessons['fr-ru-a1']!['u1-l1']).toEqual(before)
+  })
+
+  it('reste isolé par cours, comme les autres actions de progression', () => {
+    useProgress.getState().reset()
+    useProgress.getState().skipLesson('fr-ru-a1', 'u1-l1')
+    expect(useProgress.getState().lessons['fr-en-b1']?.['u1-l1']).toBeUndefined()
+  })
+
+  it('marque une étape franchie sans exiger de résultat de session', () => {
+    useProgress.getState().reset()
+    useProgress.getState().skipStep('fr-ru-a1', 'u1:review-0')
+    expect(useProgress.getState().steps['fr-ru-a1']?.['u1:review-0']).toBe(1)
+  })
+})
+
 describe('conversion d’une sauvegarde antérieure au format 5', () => {
   // `localStorage` est absent de l'environnement de test (`legacyCourseId`
   // s'y replie sur 'legacy') : la sauvegarde à plat doit se retrouver

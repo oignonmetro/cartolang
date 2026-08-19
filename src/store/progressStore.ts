@@ -79,6 +79,20 @@ interface ProgressState extends ProgressSnapshot {
    * révision, plus la marque qui fait avancer le parcours de l'unité.
    */
   finishStep: (courseId: string, stepId: string, outcome: SessionOutcome, now?: number) => { xp: number }
+  /**
+   * Marque une leçon acquise sans la jouer : pour qui maîtrise déjà la
+   * matière (l'alphabet russe, par exemple) et veut avancer vers la suite
+   * sans repasser par ce qu'il sait. Aucune carte n'est créée : rien n'a été
+   * rencontré, il n'y a donc rien à réviser derrière. Sans effet si la leçon
+   * est déjà acquise.
+   */
+  skipLesson: (courseId: string, lessonId: string) => void
+  /**
+   * Marque une étape de parcours franchie sans la jouer. Sert surtout de
+   * secours quand une leçon sautée laisse une révision sans rien à réviser
+   * (voir `StepRoute`) : plus rien ne bloquerait sinon le parcours.
+   */
+  skipStep: (courseId: string, stepId: string) => void
   setDailyGoal: (goal: number) => void
   setAutoSpeak: (on: boolean) => void
   exportSave: () => string
@@ -261,6 +275,34 @@ export const useProgress = create<ProgressState>()(
           ...withActivity(state, xp, now),
         })
         return { xp }
+      },
+
+      skipLesson: (courseId, lessonId) => {
+        const state = get()
+        const bucket = state.lessons[courseId] ?? {}
+        const previous = bucket[lessonId]
+        if ((previous?.level ?? 0) >= 1) return
+        set({
+          lessons: {
+            ...state.lessons,
+            [courseId]: {
+              ...bucket,
+              [lessonId]: {
+                level: 1,
+                completions: previous?.completions ?? 0,
+                lastAt: previous?.lastAt ?? 0,
+                bestAccuracy: previous?.bestAccuracy ?? 0,
+              },
+            },
+          },
+        })
+      },
+
+      skipStep: (courseId, stepId) => {
+        const state = get()
+        const bucket = state.steps[courseId] ?? {}
+        if ((bucket[stepId] ?? 0) >= 1) return
+        set({ steps: { ...state.steps, [courseId]: { ...bucket, [stepId]: 1 } } })
       },
 
       setDailyGoal: (goal) => set({ dailyGoal: Math.max(10, Math.round(goal)) }),

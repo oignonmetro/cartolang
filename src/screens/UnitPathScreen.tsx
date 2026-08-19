@@ -27,6 +27,7 @@ export function UnitPathScreen() {
   const lessons = useProgress((state) => state.lessons[course.id] ?? EMPTY_LESSON_PROGRESS)
   const steps = useProgress((state) => state.steps[course.id] ?? EMPTY_STEPS)
   const cards = useProgress((state) => state.cards[course.id] ?? EMPTY_CARDS)
+  const skipLesson = useProgress((state) => state.skipLesson)
 
   const unit = useMemo(() => findUnit(course, unitId), [course, unitId])
   const path = useMemo(
@@ -44,6 +45,7 @@ export function UnitPathScreen() {
   if (!unit || !mastery) return <Navigate to="/" replace />
 
   const tone = TONES[unit.color] ?? TONES.teal
+  const current = currentIndex === -1 ? null : path[currentIndex]!
 
   const open = (node: UnitPathNode) => {
     if (node.status === 'locked') return
@@ -113,6 +115,21 @@ export function UnitPathScreen() {
             />
           ))}
         </div>
+
+        {/* Seules les leçons se sautent : une révision ou un entraînement
+            porte déjà sur ce qui est su, le sauter ne raccourcirait rien.
+            Réservé à qui reconnaît la matière au premier coup d'œil — pas de
+            confirmation, la leçon reste rejouable ensuite comme n'importe
+            quelle étape déjà faite. */}
+        {current?.kind === 'lesson' && (
+          <button
+            type="button"
+            onClick={() => skipLesson(course.id, current.id)}
+            className="mt-4 text-xs font-bold text-ink-faint underline decoration-dotted underline-offset-4 hover:text-ink-soft"
+          >
+            Déjà maîtrisé ? Passer cette leçon
+          </button>
+        )}
       </main>
     </div>
   )

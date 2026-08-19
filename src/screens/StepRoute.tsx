@@ -34,6 +34,7 @@ function StepSession({ unitId, stepId }: { unitId: string; stepId: string }) {
   const navigate = useNavigate()
   const { course, itemsById } = useCourse()
   const finishStep = useProgress((state) => state.finishStep)
+  const skipStep = useProgress((state) => state.skipStep)
   const [finished, setFinished] = useState<{ outcome: SessionOutcome; xp: number } | null>(null)
 
   const unit = useMemo(() => findUnit(course, unitId), [course, unitId])
@@ -99,14 +100,30 @@ function StepSession({ unitId, stepId }: { unitId: string; stepId: string }) {
   }
 
   if (exercises.length === 0) {
+    // Une leçon sautée (voir `skipLesson`) ne laisse aucune carte derrière
+    // elle : l'étape qui la suit se retrouve alors sans rien à réviser, et
+    // rester bloqué là annulerait le saut qui vient d'être fait.
     return (
       <div className="flex min-h-full flex-col items-center justify-center gap-5 px-8 text-center">
         <Mascot mood="think" size={130} />
         <h1 className="text-2xl font-black">Rien à travailler</h1>
         <p className="max-w-xs text-sm text-ink-soft">
-          Cette étape reprend ce que vous avez déjà rencontré. Faites d'abord les leçons qui la précèdent.
+          Cette étape reprend ce que vous avez déjà rencontré. Faites d'abord les leçons qui la précèdent, ou
+          passez cette étape si elles ont été sautées.
         </p>
-        <Button onClick={backToPath}>Retour au parcours</Button>
+        <div className="flex gap-3">
+          <Button tone="neutral" onClick={backToPath}>
+            Retour au parcours
+          </Button>
+          <Button
+            onClick={() => {
+              skipStep(course.id, stepKey(unit.id, stepId))
+              backToPath()
+            }}
+          >
+            Passer cette étape
+          </Button>
+        </div>
       </div>
     )
   }
