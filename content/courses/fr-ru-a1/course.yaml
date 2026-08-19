@@ -36,8 +36,15 @@ level: A1
 tagline: Lire l'alphabet, puis les premiers mots.
 status: available
 layout: library
-version: 5
+version: 6
 
+# Grammaire et conjugaison n'emploient **que des mots de la piste
+# Vocabulaire** — c'est une contrainte tenue, pas une intention : le
+# compilateur la vérifie (`vocabularyScopeRemarks`, tools/content/difficulty.ts)
+# et signale tout mot qui n'y serait pas enseigné. Un exercice de grammaire ne
+# doit jamais buter sur un mot inconnu : la difficulté doit venir de la règle,
+# pas du lexique. En retour, chaque phrase de grammaire rebrasse du vocabulaire
+# déjà vu, et les deux pistes se renforcent.
 tracks:
   - id: vocabulaire
     title: Vocabulaire
@@ -53,3 +60,28 @@ tracks:
       - u9
       - u10
       - u11
+
+  - id: grammaire
+    title: Grammaire
+    subtitle: Genre, accord, pluriel et localisation
+    kind: grammar
+    color: violet
+    icon: compass
+    units:
+      - rg1
+      - rg2
+      - rg3
+      - rg4
+      - rg5
+
+  - id: conjugaison
+    title: Conjugaison
+    subtitle: Les deux groupes du présent, et le passé
+    kind: conjugation
+    color: sky
+    icon: clock
+    units:
+      - rc1
+      - rc2
+      - rc3
+      - rc4

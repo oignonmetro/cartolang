@@ -7,6 +7,7 @@ import {
   initialSound,
   insertedToken,
   phraseNumber,
+  vocabularyScopeRemarks,
 } from './difficulty.ts'
 import type { ConjugationVerb, GrammarPoint } from '../../src/content/schema.ts'
 
@@ -279,5 +280,65 @@ describe('alphabetGatingRemarks', () => {
 
   it('ne s\'active pas sur un cours sans alphabet', () => {
     expect(alphabetGatingRemarks([{ id: 'l1', vocab: [word('hello')] }])).toEqual([])
+  })
+})
+
+describe('vocabularyScopeRemarks', () => {
+  /** Tout ce que le cours fictif enseigne, par la voie de chaque piste. */
+  const lexique = {
+    vocab: ['дом', 'машина', 'магазин', 'мой', 'новый', 'здесь', 'это', 'я', 'и', 'в', 'не'],
+    conjugated: ['работать', 'работаю', 'жить', 'живу'],
+    drilled: ['моя', 'моё'],
+  }
+
+  it('accepte un mot fléchi, reconnu sur son radical', () => {
+    // « магазине » est le locatif de « магазин » : le même mot pour
+    // l'apprenant, qui n'a rien de neuf à y déchiffrer.
+    expect(vocabularyScopeRemarks(lexique, [{ where: 'point "p1"', text: 'Я в магазине.' }])).toEqual([])
+  })
+
+  it('signale un mot que le cours n’enseigne nulle part', () => {
+    const remarks = vocabularyScopeRemarks(lexique, [
+      { where: 'point "p1"', text: 'Это моя книга.' },
+    ])
+    expect(remarks).toHaveLength(1)
+    expect(remarks[0]).toMatch(/книга/)
+    expect(remarks[0]).toMatch(/point "p1"/)
+  })
+
+  it('tient une forme conjuguée pour enseignée', () => {
+    expect(
+      vocabularyScopeRemarks(lexique, [{ where: 'point "p1"', text: 'Я работаю здесь.' }]),
+    ).toEqual([])
+  })
+
+  it('tient une forme mise en jeu par un point de grammaire pour enseignée', () => {
+    // « моя » n'est aucune carte de vocabulaire : c'est une option que la
+    // grammaire fait choisir, donc bien un mot que le cours enseigne.
+    expect(
+      vocabularyScopeRemarks(lexique, [{ where: 'point "p1"', text: 'Моя машина новая.' }]),
+    ).toEqual([])
+  })
+
+  it('exige la forme exacte d’un mot trop court pour porter un radical', () => {
+    // Deux lettres ne suffisent pas à identifier un radical : « он » ne doit
+    // pas passer au prétexte qu'un mot du cours commence pareil.
+    const remarks = vocabularyScopeRemarks(lexique, [{ where: 'point "p1"', text: 'Он дома.' }])
+    expect(remarks).toHaveLength(1)
+    expect(remarks[0]).toMatch(/он/)
+  })
+
+  it('ne signale qu’une fois le même mot au même endroit', () => {
+    expect(
+      vocabularyScopeRemarks(lexique, [{ where: 'point "p1"', text: 'Книга и книга.' }]),
+    ).toHaveLength(1)
+  })
+
+  it('se tait sans lexique de référence', () => {
+    expect(
+      vocabularyScopeRemarks({ vocab: [], conjugated: [], drilled: [] }, [
+        { where: 'point "p1"', text: 'Всё что угодно.' },
+      ]),
+    ).toEqual([])
   })
 })

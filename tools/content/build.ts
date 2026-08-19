@@ -42,6 +42,7 @@ import {
   conjugationVerbRemarks,
   duplicateAcrossCourses,
   grammarPointRemarks,
+  vocabularyScopeRemarks,
 } from './difficulty.ts'
 
 const root = resolve(fileURLToPath(new URL('../..', import.meta.url)))
@@ -243,7 +244,46 @@ function checkCoherence(course: Course, dir: string) {
     .filter((lesson): lesson is VocabLesson => lesson.kind === 'vocab')
   for (const remark of alphabetGatingRemarks(vocabLessons)) warn(`cours "${course.id}"`, remark)
 
+  for (const remark of checkVocabularyScope(course)) warn(`cours "${course.id}"`, remark)
+
   if (problems.length) fail(dir, problems.join('\n    '))
+}
+
+/**
+ * Rassemble le lexique du cours, puis confronte grammaire et conjugaison à lui.
+ *
+ * Le contrôle ne vaut que pour un cours qui écrit dans un alphabet non latin :
+ * ailleurs, le découpage en mots ne dirait rien de fiable (formes verbales
+ * anglaises, apostrophes, traits d'union), et la contrainte n'a jamais été
+ * posée pour ces cours-là. Voir `vocabularyScopeRemarks`.
+ */
+function checkVocabularyScope(course: Course): string[] {
+  const lessons = lessonsOf(course).map(({ lesson }) => lesson)
+  const vocab = lessons
+    .filter((lesson): lesson is VocabLesson => lesson.kind === 'vocab')
+    .flatMap((lesson) => lesson.vocab.map((entry) => entry.term))
+  if (!vocab.some((term) => /\p{Script=Cyrillic}/u.test(term))) return []
+
+  const conjugated: string[] = []
+  const drilled: string[] = []
+  const sentences: { where: string; text: string }[] = []
+
+  for (const lesson of lessons) {
+    if (lesson.kind === 'conjugation') {
+      for (const verb of lesson.verbs) {
+        conjugated.push(verb.verb)
+        for (const form of verb.forms) conjugated.push(form.answer)
+      }
+    }
+    if (lesson.kind === 'grammar') {
+      for (const point of lesson.points) {
+        drilled.push(point.answer, ...point.alt, ...point.options)
+        sentences.push({ where: `point "${point.id}"`, text: point.sentence })
+      }
+    }
+  }
+
+  return vocabularyScopeRemarks({ vocab, conjugated, drilled }, sentences)
 }
 
 function checkVocabLesson(lesson: VocabLesson, problems: string[], learning: string) {

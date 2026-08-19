@@ -1,0 +1,147 @@
+id: rc4
+title: Le passé
+subtitle: Un temps qui ignore la personne, mais pas le genre
+icon: book
+color: teal
+level: A1
+
+lessons:
+  - id: rc4-l1
+    title: Le passé en -л
+    notes: |
+      Le passé russe est **le temps le plus simple de la langue** : une seule
+      série de quatre formes, quel que soit le verbe et quelle que soit la
+      personne.
+
+      On retire le -ть de l'infinitif et on ajoute :
+      — `-л` si le sujet est masculin : `он работал`
+      — `-ла` s'il est féminin : `она работала`
+      — `-ло` s'il est neutre : `оно работало`
+      — `-ли` au pluriel : `они работали`
+
+      Ce qui compte n'est donc pas **qui parle** mais **quel genre a le
+      sujet** : une femme dit `я работала`, un homme `я работал`.
+
+      ! Au passé, le verbe « être » réapparaît, là où le présent s'en passait :
+      `Он был дома.`
+    verbs:
+      - verb: работать
+        translation: travailler
+        tense: passé
+        note: "Retirer -ть, ajouter -л, -ла, -ло, -ли."
+        forms:
+          - id: rc4-rab-m
+            person: он
+            answer: работал
+          - id: rc4-rab-f
+            person: она
+            answer: работала
+          - id: rc4-rab-n
+            person: оно
+            answer: работало
+          - id: rc4-rab-p
+            person: они
+            answer: работали
+      - verb: говорить
+        translation: parler
+        tense: passé
+        note: "Même règle : говорить → говори- + -л."
+        forms:
+          - id: rc4-gov-m
+            person: он
+            answer: говорил
+          - id: rc4-gov-f
+            person: она
+            answer: говорила
+          - id: rc4-gov-n
+            person: оно
+            answer: говорило
+          - id: rc4-gov-p
+            person: они
+            answer: говорили
+      - verb: любить
+        translation: aimer
+        tense: passé
+        note: "Le -л- de « люблю » ne concerne que le présent : au passé, любил."
+        forms:
+          - id: rc4-lyub-m
+            person: он
+            answer: любил
+          - id: rc4-lyub-f
+            person: она
+            answer: любила
+          - id: rc4-lyub-n
+            person: оно
+            answer: любило
+          - id: rc4-lyub-p
+            person: они
+            answer: любили
+
+  - id: rc4-l2
+    title: Les passés irréguliers
+    notes: |
+      Les quatre terminaisons ne changent jamais ; c'est **le radical** qui
+      surprend, sur les mêmes verbes qui étaient déjà irréguliers au présent.
+
+      — `есть` donne е- : `он ел`, `она ела`.
+      — `пить` garde son п : `он пил`, `она пила`.
+      — `хотеть` reste régulier : `он хотел`.
+      — `идти` change complètement : `он шёл`, `она шла`.
+
+      `шёл` est la seule forme du cours où le masculin ne ressemble pas aux
+      trois autres : `шёл`, mais `шла`, `шло`, `шли`.
+
+      ! Ce sont des formes à reconnaître avant de savoir les produire : elles
+      reviennent dans presque toutes les phrases au passé.
+    verbs:
+      - verb: есть
+        translation: manger
+        tense: passé
+        note: "Radical е-, sans le -ст- de l'infinitif."
+        forms:
+          - id: rc4-est-m
+            person: он
+            answer: ел
+          - id: rc4-est-f
+            person: она
+            answer: ела
+          - id: rc4-est-n
+            person: оно
+            answer: ело
+          - id: rc4-est-p
+            person: они
+            answer: ели
+      - verb: пить
+        translation: boire
+        tense: passé
+        note: "Radical пи-, sans le signe mou du présent."
+        forms:
+          - id: rc4-pit-m
+            person: он
+            answer: пил
+          - id: rc4-pit-f
+            person: она
+            answer: пила
+          - id: rc4-pit-n
+            person: оно
+            answer: пило
+          - id: rc4-pit-p
+            person: они
+            answer: пили
+      - verb: идти
+        translation: aller à pied
+        tense: passé
+        note: "Radical suppléé par ш- : шёл au masculin, шл- ailleurs."
+        forms:
+          - id: rc4-idti-m
+            person: он
+            answer: шёл
+          - id: rc4-idti-f
+            person: она
+            answer: шла
+          - id: rc4-idti-n
+            person: оно
+            answer: шло
+          - id: rc4-idti-p
+            person: они
+            answer: шли

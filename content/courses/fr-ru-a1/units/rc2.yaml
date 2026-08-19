@@ -1,0 +1,110 @@
+id: rc2
+title: Le présent, 2e groupe
+subtitle: Les terminaisons en -ишь, et le л qui s'invite
+icon: compass
+color: violet
+level: A1
+
+lessons:
+  - id: rc2-l1
+    title: Говорить, le modèle du 2e groupe
+    notes: |
+      Le 2e groupe se reconnaît à son `ты` en **-ишь**, là où le 1er groupe
+      donnait -ешь. C'est la seule chose qui sépare vraiment les deux séries.
+
+      — `я говорю`, `ты говоришь`, `он говорит`
+      — `мы говорим`, `вы говорите`, `они говорят`
+
+      La plupart des verbes en -ить suivent ce modèle, mais pas tous : `жить`
+      appartient au 1er groupe malgré son infinitif.
+
+      ! Comparez `ты работаешь` et `ты говоришь` : la voyelle de la
+      terminaison suffit à trancher le groupe.
+    verbs:
+      - verb: говорить
+        translation: parler
+        tense: présent
+        note: "Retirer -ить, ajouter -ю, -ишь, -ит, -им, -ите, -ят."
+        forms:
+          - id: rc2-gov-1
+            person: я
+            answer: говорю
+          - id: rc2-gov-2
+            person: ты
+            answer: говоришь
+          - id: rc2-gov-3
+            person: он / она
+            answer: говорит
+          - id: rc2-gov-4
+            person: мы
+            answer: говорим
+          - id: rc2-gov-5
+            person: вы
+            answer: говорите
+          - id: rc2-gov-6
+            person: они
+            answer: говорят
+
+  - id: rc2-l2
+    title: Любить et купить, le л de la 1re personne
+    notes: |
+      Quand le radical finit par **б, п, в, ф ou м**, la première personne du
+      singulier insère un **-л-**. Elle seule : les cinq autres formes restent
+      régulières.
+
+      — `любить` : `я люблю`, mais `ты любишь`.
+      — `купить` : `я куплю`, mais `ты купишь`.
+
+      `купить` est un **perfectif** : ses formes ne disent pas le présent mais
+      le futur, l'action étant vue d'un bloc, menée à son terme.
+        Я куплю хлеб. J'achèterai du pain.
+
+      ! C'est pourquoi on ne peut pas dire « je suis en train d'acheter » avec
+      `купить` : ce verbe ne regarde que le résultat.
+    verbs:
+      - verb: любить
+        translation: aimer
+        tense: présent
+        note: "Le -л- n'apparaît qu'à la première personne : люблю, mais любишь."
+        forms:
+          - id: rc2-lyub-1
+            person: я
+            answer: люблю
+          - id: rc2-lyub-2
+            person: ты
+            answer: любишь
+          - id: rc2-lyub-3
+            person: он / она
+            answer: любит
+          - id: rc2-lyub-4
+            person: мы
+            answer: любим
+          - id: rc2-lyub-5
+            person: вы
+            answer: любите
+          - id: rc2-lyub-6
+            person: они
+            answer: любят
+      - verb: купить
+        translation: acheter
+        tense: futur perfectif
+        note: "Même insertion du -л- au « я », et un sens de futur accompli."
+        forms:
+          - id: rc2-kup-1
+            person: я
+            answer: куплю
+          - id: rc2-kup-2
+            person: ты
+            answer: купишь
+          - id: rc2-kup-3
+            person: он / она
+            answer: купит
+          - id: rc2-kup-4
+            person: мы
+            answer: купим
+          - id: rc2-kup-5
+            person: вы
+            answer: купите
+          - id: rc2-kup-6
+            person: они
+            answer: купят

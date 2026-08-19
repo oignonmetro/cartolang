@@ -97,6 +97,24 @@ lessons:
         example:
           text: Вы дома?
           translation: Êtes-vous à la maison ?
+      - id: ru-ono
+        term: оно
+        translation: il (neutre)
+        pos: pronom
+        hint: Reprend un nom neutre — ceux qui finissent par -о ou -е.
+        example:
+          text: Где молоко? Оно здесь.
+          translation: Où est le lait ? Il est ici.
+      - id: ru-oni
+        term: они
+        translation: ils
+        alt:
+          - elles
+        pos: pronom
+        hint: Un seul mot pour les deux genres, au pluriel.
+        example:
+          text: Где брат и сестра? Они здесь.
+          translation: Où sont le frère et la sœur ? Ils sont ici.
       - id: ru-ochen-priyatno
         term: очень приятно
         translation: enchanté

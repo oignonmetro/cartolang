@@ -1,0 +1,108 @@
+id: rc3
+title: Les verbes irréguliers
+subtitle: Vouloir, manger, boire — trois paradigmes à part
+icon: cup
+color: amber
+level: A1
+
+lessons:
+  - id: rc3-l1
+    title: Хотеть, à cheval sur les deux groupes
+    notes: |
+      `хотеть` est le seul verbe courant à **changer de groupe en cours de
+      route**. Le singulier suit le 1er groupe, le pluriel le 2e.
+
+      — Singulier, avec un ч : `я хочу`, `ты хочешь`, `он хочет`
+      — Pluriel, avec un т : `мы хотим`, `вы хотите`, `они хотят`
+
+      La consonne du radical change avec le groupe : ч au singulier, т au
+      pluriel. Les deux moitiés s'apprennent séparément.
+
+      ! Pour dire « j'ai faim », le russe emploie ce verbe : `Я хочу есть`,
+      mot à mot « je veux manger ».
+    verbs:
+      - verb: хотеть
+        translation: vouloir
+        tense: présent
+        note: "Singulier en хоч-, pluriel en хот- : deux radicaux pour un seul verbe."
+        forms:
+          - id: rc3-khot-1
+            person: я
+            answer: хочу
+          - id: rc3-khot-2
+            person: ты
+            answer: хочешь
+          - id: rc3-khot-3
+            person: он / она
+            answer: хочет
+          - id: rc3-khot-4
+            person: мы
+            answer: хотим
+          - id: rc3-khot-5
+            person: вы
+            answer: хотите
+          - id: rc3-khot-6
+            person: они
+            answer: хотят
+
+  - id: rc3-l2
+    title: Есть et пить, à la table
+    notes: |
+      Deux verbes du quotidien dont le radical ne ressemble plus à
+      l'infinitif. Il n'y a rien à déduire : ils s'apprennent en bloc.
+
+      — `есть` passe à un radical е-/ед- : `я ем`, `ты ешь`, `они едят`.
+      — `пить` passe à un radical пь- : `я пью`, `ты пьёшь`, `они пьют`.
+
+      Le signe mou de `пью` sépare le п du ю : on entend deux sons, pas une
+      syllabe fondue.
+
+      ! `есть` sert aussi à dire « il y a ». Le contexte tranche seul, la
+      forme ne change pas.
+    verbs:
+      - verb: есть
+        translation: manger
+        tense: présent
+        note: "Radical е- au singulier, ед- au pluriel : ем, ешь, ест, едим, едите, едят."
+        forms:
+          - id: rc3-est-1
+            person: я
+            answer: ем
+          - id: rc3-est-2
+            person: ты
+            answer: ешь
+          - id: rc3-est-3
+            person: он / она
+            answer: ест
+          - id: rc3-est-4
+            person: мы
+            answer: едим
+          - id: rc3-est-5
+            person: вы
+            answer: едите
+          - id: rc3-est-6
+            person: они
+            answer: едят
+      - verb: пить
+        translation: boire
+        tense: présent
+        note: "Radical пь-, avec les terminaisons accentuées du 1er groupe."
+        forms:
+          - id: rc3-pit-1
+            person: я
+            answer: пью
+          - id: rc3-pit-2
+            person: ты
+            answer: пьёшь
+          - id: rc3-pit-3
+            person: он / она
+            answer: пьёт
+          - id: rc3-pit-4
+            person: мы
+            answer: пьём
+          - id: rc3-pit-5
+            person: вы
+            answer: пьёте
+          - id: rc3-pit-6
+            person: они
+            answer: пьют

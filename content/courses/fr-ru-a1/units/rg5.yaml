@@ -1,0 +1,159 @@
+id: rg5
+title: Dire où l'on est
+subtitle: « в » et « на », et la finale -е qui les suit
+icon: clock
+color: sky
+level: A1
+
+lessons:
+  - id: rg5-l1
+    title: « в » et la finale -е
+    notes: |
+      Pour situer, le russe emploie `в` — mais le nom qui suit **change de
+      finale** : il prend un **-е**. C'est le cas dit locatif, et il ne sert
+      qu'à ça.
+
+      — магазин → `в магазине`, город → `в городе`
+      — школа → `в школе`, аптека → `в аптеке`
+
+      La règle vaut pour les deux genres : consonne finale, on ajoute -е ;
+      finale -а, elle devient -е.
+
+      ! Sans préposition, le nom reste au nominatif : `магазин здесь` mais
+      `я в магазине`. C'est `в` qui déclenche le changement.
+    points:
+      - id: rg5-v-1
+        sentence: Я ___ магазине.
+        answer: в
+        options:
+          - в
+          - на
+          - и
+          - не
+        translation: Je suis au magasin.
+        explanation: "Un lieu qu'on pense comme un volume prend « в »."
+      - id: rg5-v-2
+        sentence: Мой брат в ___.
+        answer: школе
+        options:
+          - школе
+          - школа
+          - школы
+          - школи
+        translation: Mon frère est à l'école.
+        explanation: "Après « в », le -а de школа devient -е."
+      - id: rg5-v-3
+        sentence: Продавец в ___.
+        answer: магазине
+        options:
+          - магазине
+          - магазин
+          - магазины
+          - магазина
+        translation: Le vendeur est au magasin.
+        explanation: "Nom masculin en consonne : on ajoute -е."
+      - id: rg5-v-4
+        sentence: Мама в ___.
+        answer: аптеке
+        options:
+          - аптеке
+          - аптека
+          - аптеки
+          - аптекы
+        translation: Maman est à la pharmacie.
+        explanation: "Le -а cède la place au -е, comme pour школа."
+      - id: rg5-v-5
+        sentence: Мы в ___.
+        answer: городе
+        options:
+          - городе
+          - город
+          - города
+          - городы
+        translation: Nous sommes en ville.
+        explanation: "Masculin en consonne : городе."
+      - id: rg5-v-6
+        sentence: Сестра в ___.
+        answer: больнице
+        options:
+          - больнице
+          - больница
+          - больницы
+          - больницу
+        translation: Ma sœur est à l'hôpital.
+        explanation: "Féminin en -а : больница → больнице."
+
+  - id: rg5-l2
+    title: « на », et le cas de « дома »
+    notes: |
+      `на` gouverne la même finale en -е que `в`. Ce qui change, c'est le
+      choix entre les deux, et il ne se déduit pas du français.
+
+      — Une surface : `на столе`.
+      — La rue, la gare, le travail prennent `на` en russe, là où le français
+        dirait « dans » ou « à ».
+        на улице, на вокзале
+
+      ! « À la maison » ne prend aucune préposition : c'est l'adverbe `дома`,
+      à ne pas confondre avec `дома`, pluriel de « дом ».
+    points:
+      - id: rg5-na-1
+        sentence: Сумка ___ столе.
+        answer: на
+        options:
+          - на
+          - в
+          - и
+          - не
+        translation: Le sac est sur la table.
+        explanation: "Une surface appelle « на »."
+      - id: rg5-na-2
+        sentence: Я ___ улице.
+        answer: на
+        options:
+          - на
+          - в
+          - тоже
+          - это
+        translation: Je suis dans la rue.
+        explanation: "Le russe dit « sur la rue » là où le français dit « dans » — à retenir tel quel."
+      - id: rg5-na-3
+        sentence: Мы на ___.
+        answer: вокзале
+        options:
+          - вокзале
+          - вокзал
+          - вокзалы
+          - вокзала
+        translation: Nous sommes à la gare.
+        explanation: "La gare prend « на », et le nom sa finale en -е."
+      - id: rg5-na-4
+        sentence: Хлеб на ___.
+        answer: столе
+        options:
+          - столе
+          - стол
+          - столы
+          - стола
+        translation: Le pain est sur la table.
+        explanation: "Masculin en consonne : столе."
+      - id: rg5-na-5
+        sentence: Мой папа ___.
+        answer: дома
+        options:
+          - дома
+          - в доме
+          - на доме
+          - дом
+        translation: Mon père est à la maison.
+        explanation: "« дома » se suffit à lui-même : ni « в », ni « на »."
+      - id: rg5-na-6
+        sentence: Кофе ___ столе.
+        answer: на
+        options:
+          - на
+          - в
+          - и
+          - ещё
+        translation: Le café est sur la table.
+        explanation: "Posé sur une surface : « на », et столе derrière."

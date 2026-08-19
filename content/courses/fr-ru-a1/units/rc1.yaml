@@ -1,0 +1,110 @@
+id: rc1
+title: Le présent, 1er groupe
+subtitle: Les terminaisons en -ешь, sur des verbes du quotidien
+icon: clock
+color: sky
+level: A1
+
+lessons:
+  - id: rc1-l1
+    title: Работать, le modèle régulier
+    notes: |
+      Le russe n'a **qu'un seul présent** : pas de distinction entre « je
+      travaille » et « je suis en train de travailler ». Une seule série de
+      terminaisons à savoir par groupe.
+
+      Le 1er groupe se reconnaît à son `ты` en **-ешь**. Sur `работать`, on
+      retire le -ть de l'infinitif et on ajoute les six terminaisons.
+
+      — `я работаю`, `ты работаешь`, `он работает`
+      — `мы работаем`, `вы работаете`, `они работают`
+
+      ! Le pronom sujet reste presque toujours exprimé, contrairement à
+      l'espagnol ou à l'italien : on dit `я работаю`, pas `работаю` seul.
+    verbs:
+      - verb: работать
+        translation: travailler
+        tense: présent
+        note: "Retirer -ть, ajouter -ю, -ешь, -ет, -ем, -ете, -ют."
+        forms:
+          - id: rc1-rab-1
+            person: я
+            answer: работаю
+          - id: rc1-rab-2
+            person: ты
+            answer: работаешь
+          - id: rc1-rab-3
+            person: он / она
+            answer: работает
+          - id: rc1-rab-4
+            person: мы
+            answer: работаем
+          - id: rc1-rab-5
+            person: вы
+            answer: работаете
+          - id: rc1-rab-6
+            person: они
+            answer: работают
+
+  - id: rc1-l2
+    title: Жить et идти, mêmes terminaisons
+    notes: |
+      Ces deux verbes suivent les terminaisons du 1er groupe, mais **leur
+      radical ne se lit pas sur l'infinitif** : il faut l'apprendre avec la
+      première personne.
+
+      — `жить` donne un radical жив- : `я живу`, `ты живёшь`.
+      — `идти` donne un radical ид- : `я иду`, `ты идёшь`.
+
+      Quand la terminaison est accentuée, le -е- s'écrit **-ё-** : `живёшь`,
+      `идёшь`. C'est la même terminaison, seulement accentuée.
+
+      ! `идти` ne se dit que du déplacement **à pied et en cours** : « Я иду
+      домой » se dit en marchant, pas depuis son fauteuil.
+    verbs:
+      - verb: жить
+        translation: habiter
+        tense: présent
+        note: "Radical жив-, terminaisons accentuées : -у, -ёшь, -ёт, -ём, -ёте, -ут."
+        forms:
+          - id: rc1-zhit-1
+            person: я
+            answer: живу
+          - id: rc1-zhit-2
+            person: ты
+            answer: живёшь
+          - id: rc1-zhit-3
+            person: он / она
+            answer: живёт
+          - id: rc1-zhit-4
+            person: мы
+            answer: живём
+          - id: rc1-zhit-5
+            person: вы
+            answer: живёте
+          - id: rc1-zhit-6
+            person: они
+            answer: живут
+      - verb: идти
+        translation: aller à pied
+        tense: présent
+        note: "Radical ид-, mêmes terminaisons accentuées que жить."
+        forms:
+          - id: rc1-idti-1
+            person: я
+            answer: иду
+          - id: rc1-idti-2
+            person: ты
+            answer: идёшь
+          - id: rc1-idti-3
+            person: он / она
+            answer: идёт
+          - id: rc1-idti-4
+            person: мы
+            answer: идём
+          - id: rc1-idti-5
+            person: вы
+            answer: идёте
+          - id: rc1-idti-6
+            person: они
+            answer: идут

@@ -1,0 +1,162 @@
+id: rg4
+title: Le pluriel
+subtitle: Une finale en -ы, sauf après sept consonnes
+icon: people
+color: amber
+level: A1
+
+lessons:
+  - id: rg4-l1
+    title: Le pluriel en -ы
+    notes: |
+      Le pluriel remplace la finale du singulier ; il ne s'ajoute pas comme le
+      -s français.
+
+      — Masculin en consonne : on ajoute **-ы**.
+        стол → `столы`, билет → `билеты`, магазин → `магазины`
+      — Féminin en -а : le -а devient **-ы**.
+        цена → `цены`, машина → `машины`, школа → `школы`
+
+      L'adjectif suit, avec une seule forme au pluriel pour tous les genres :
+      `новые столы`, `новые машины`.
+
+      ! Quelques masculins courants prennent **-а** accentué au lieu de -ы :
+      дом → `дома`, город → `города`. Ils s'apprennent un par un.
+    points:
+      - id: rg4-plu-1
+        sentence: Вот мои ___.
+        answer: билеты
+        options:
+          - билеты
+          - билета
+          - билеть
+          - билетов
+        translation: Voici mes billets.
+        explanation: "Masculin en consonne : on ajoute -ы au mot entier."
+      - id: rg4-plu-2
+        sentence: Здесь новые ___.
+        answer: магазины
+        options:
+          - магазины
+          - магазина
+          - магазинь
+          - магазином
+        translation: Ici, il y a de nouveaux magasins.
+        explanation: "Même règle, et l'adjectif prend la forme unique du pluriel."
+      - id: rg4-plu-3
+        sentence: Это старые ___.
+        answer: журналы
+        options:
+          - журналы
+          - журнала
+          - журналь
+          - журналов
+        translation: Ce sont de vieux magazines.
+        explanation: "Masculin en consonne : -ы."
+      - id: rg4-plu-4
+        sentence: Здесь новые ___.
+        answer: цены
+        options:
+          - цены
+          - цена
+          - ценые
+          - ценам
+        translation: Ici, les prix sont nouveaux.
+        explanation: "Féminin en -а : le -а cède la place au -ы, il ne s'y ajoute pas."
+      - id: rg4-plu-5
+        sentence: Вот большие ___.
+        answer: столы
+        options:
+          - столы
+          - стола
+          - столь
+          - столам
+        translation: Voici de grandes tables.
+        explanation: "Masculin en consonne : -ы, et l'adjectif au pluriel."
+      - id: rg4-plu-6
+        sentence: Это маленькие ___.
+        answer: школы
+        options:
+          - школы
+          - школа
+          - школь
+          - школам
+        translation: Ce sont de petites écoles.
+        explanation: "Féminin en -а : школа → школы."
+
+  - id: rg4-l2
+    title: Quand le pluriel s'écrit -и
+    notes: |
+      Sept consonnes refusent le -ы derrière elles : **к, г, х, ж, ш, щ, ч**.
+      Le pluriel s'y écrit **-и**, sans que rien ne change au fond.
+
+      — рука → `руки`, сумка → `сумки`, ложка → `ложки`
+      — аптека → `аптеки`, борщ → `борщи`
+
+      Les noms en **-ь** font eux aussi leur pluriel en -и, pour une autre
+      raison : le signe mou disparaît et le -и le remplace.
+        дверь → `двери`, рубль → `рубли`
+
+      ! C'est une règle d'orthographe et non de grammaire : le pluriel reste
+      le même, seule la lettre qui le note change.
+    points:
+      - id: rg4-plu-i-1
+        sentence: Вот мои ___.
+        answer: руки
+        options:
+          - руки
+          - рукы
+          - рука
+          - руков
+        translation: Voici mes mains.
+        explanation: "Après к, le russe écrit -и et jamais -ы."
+      - id: rg4-plu-i-2
+        sentence: Здесь новые ___.
+        answer: сумки
+        options:
+          - сумки
+          - сумкы
+          - сумка
+          - сумкам
+        translation: Ici, il y a de nouveaux sacs.
+        explanation: "Même consonne, même orthographe : сумка → сумки."
+      - id: rg4-plu-i-3
+        sentence: Вот мои ___.
+        answer: ложки
+        options:
+          - ложки
+          - ложкы
+          - ложка
+          - ложкам
+        translation: Voici mes cuillères.
+        explanation: "Le к final impose le -и, comme pour рука et сумка."
+      - id: rg4-plu-i-4
+        sentence: Здесь новые ___.
+        answer: аптеки
+        options:
+          - аптеки
+          - аптекы
+          - аптека
+          - аптеков
+        translation: Ici, il y a de nouvelles pharmacies.
+        explanation: "Toujours le к, toujours -и."
+      - id: rg4-plu-i-5
+        sentence: Это большие ___.
+        answer: двери
+        options:
+          - двери
+          - дверы
+          - дверь
+          - дверов
+        translation: Ce sont de grandes portes.
+        explanation: "Le signe mou laisse la place au -и : дверь → двери."
+      - id: rg4-plu-i-6
+        sentence: Здесь новые ___.
+        answer: цены
+        options:
+          - цены
+          - цени
+          - цена
+          - ценам
+        translation: Ici, les prix sont nouveaux.
+        explanation: "Le ц ne fait pas partie des sept consonnes : le pluriel garde son -ы."

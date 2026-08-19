@@ -1,0 +1,161 @@
+id: rg1
+title: Le genre des noms
+subtitle: Masculin, féminin, neutre — et comment le voir
+icon: compass
+color: violet
+level: A1
+
+lessons:
+  - id: rg1-l1
+    title: Le genre se lit à la finale
+    notes: |
+      Tout nom russe est masculin, féminin ou neutre, et **sa dernière lettre
+      le dit** presque toujours. Pas d'article à retenir : c'est la finale qui
+      porte l'information.
+
+      — Finale **consonne** : masculin, repris par `он`.
+        дом, стол, брат, магазин
+      — Finale **-а** ou **-я** : féminin, repris par `она`.
+        машина, школа, сестра, семья
+      — Finale **-о** ou **-е** : neutre, repris par `оно`.
+        молоко, мясо, метро
+
+      ! Le signe mou final ne tranche pas : `дверь` est féminin, `рубль` est
+      masculin. Ces noms-là s'apprennent avec leur genre.
+    points:
+      - id: rg1-genre-1
+        sentence: Вот дом. ___ большой.
+        answer: Он
+        options:
+          - Он
+          - Она
+          - Оно
+          - Они
+        translation: Voici une maison. Elle est grande.
+        explanation: "« дом » finit par une consonne : masculin, donc « он » — même si « maison » est féminin en français."
+      - id: rg1-genre-2
+        sentence: Вот машина. ___ новая.
+        answer: Она
+        options:
+          - Он
+          - Она
+          - Оно
+          - Они
+        translation: Voici une voiture. Elle est neuve.
+        explanation: "Finale -а : féminin."
+      - id: rg1-genre-3
+        sentence: Вот молоко. ___ здесь.
+        answer: Оно
+        options:
+          - Он
+          - Она
+          - Оно
+          - Они
+        translation: Voici du lait. Il est ici.
+        explanation: "Finale -о : neutre. Le français dit « il », le russe « оно »."
+      - id: rg1-genre-4
+        sentence: Вот стол. ___ старый.
+        answer: Он
+        options:
+          - Он
+          - Она
+          - Оно
+          - Они
+        translation: Voici une table. Elle est vieille.
+        explanation: "Consonne finale : masculin, alors que « table » est féminin en français."
+      - id: rg1-genre-5
+        sentence: Вот метро. ___ здесь.
+        answer: Оно
+        options:
+          - Он
+          - Она
+          - Оно
+          - Они
+        translation: Voici le métro. Il est ici.
+        explanation: "Finale -о : neutre, comme молоко et мясо."
+      - id: rg1-genre-6
+        sentence: Вот сестра. ___ дома.
+        answer: Она
+        options:
+          - Он
+          - Она
+          - Оно
+          - Они
+        translation: Voici ma sœur. Elle est à la maison.
+        explanation: "Finale -а : féminin."
+
+  - id: rg1-l2
+    title: Мой, моя, моё
+    notes: |
+      « Mon » s'accorde avec **le nom qui suit**, jamais avec celui qui parle.
+      Trois formes au singulier, une au pluriel, calquées sur les finales du
+      nom.
+
+      — Masculin : `мой брат`, `мой дом`.
+      — Féminin : `моя сестра`, `моя машина`.
+      — Neutre : `моё молоко`, `моё мясо`.
+      — Pluriel, quel que soit le genre : `мои деньги`.
+
+      ! Le genre décide seul. Un homme dit `моя сестра`, une femme dit
+      `мой брат` — c'est le nom possédé qui commande.
+    points:
+      - id: rg1-moi-1
+        sentence: ___ брат здесь.
+        answer: Мой
+        options:
+          - Мой
+          - Моя
+          - Моё
+          - Мои
+        translation: Mon frère est ici.
+        explanation: "« брат » est masculin : мой."
+      - id: rg1-moi-2
+        sentence: ___ сестра здесь.
+        answer: Моя
+        options:
+          - Мой
+          - Моя
+          - Моё
+          - Мои
+        translation: Ma sœur est ici.
+        explanation: "« сестра » finit par -а, féminin : моя."
+      - id: rg1-moi-3
+        sentence: ___ молоко здесь.
+        answer: Моё
+        options:
+          - Мой
+          - Моя
+          - Моё
+          - Мои
+        translation: Mon lait est ici.
+        explanation: "« молоко » finit par -о, neutre : моё."
+      - id: rg1-moi-4
+        sentence: ___ деньги здесь.
+        answer: Мои
+        options:
+          - Мой
+          - Моя
+          - Моё
+          - Мои
+        translation: Mon argent est ici.
+        explanation: "« деньги » n'existe qu'au pluriel en russe : мои."
+      - id: rg1-moi-5
+        sentence: ___ сумка новая.
+        answer: Моя
+        options:
+          - Мой
+          - Моя
+          - Моё
+          - Мои
+        translation: Mon sac est neuf.
+        explanation: "« сумка » finit par -а, féminin — le français « sac » est masculin, sans effet ici."
+      - id: rg1-moi-6
+        sentence: ___ мясо здесь.
+        answer: Моё
+        options:
+          - Мой
+          - Моя
+          - Моё
+          - Мои
+        translation: Ma viande est ici.
+        explanation: "« мясо » finit par -о, neutre : моё."

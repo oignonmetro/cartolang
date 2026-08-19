@@ -349,3 +349,81 @@ export function alphabetGatingRemarks(
   }
   return remarks
 }
+
+/**
+ * Un exercice de grammaire ne doit buter que sur sa règle, jamais sur un mot.
+ *
+ * Le cours de russe A1 tient une contrainte forte : grammaire et conjugaison
+ * n'emploient que du vocabulaire enseigné par la piste Vocabulaire. Une phrase
+ * à trou qui glisse un mot inconnu déplace la difficulté — l'apprenant échoue
+ * sur le lexique en croyant échouer sur la règle, et ne sait pas lequel des
+ * deux réviser.
+ *
+ * Ce qui compte comme enseigné : un terme de vocabulaire, une forme conjuguée
+ * que la piste Conjugaison fait produire, et une réponse ou une option de
+ * grammaire — un point qui fait choisir entre `мой`, `моя` et `моё` enseigne
+ * ces trois formes par le fait même de les opposer.
+ *
+ * Le russe fléchit tout : « магазин » se lit « магазине » après une
+ * préposition, « новый » devient « новая ». On compare donc sur le radical, et
+ * non sur la forme exacte — deux mots qui partagent leurs `STEM` premières
+ * lettres sont tenus pour le même. C'est volontairement permissif : le but est
+ * d'attraper le mot franchement étranger au cours (« книга », « студент »),
+ * pas d'arbitrer une déclinaison.
+ */
+const STEM = 3
+
+function cyrillicWords(text: string): string[] {
+  return (text.match(/[\p{Script=Cyrillic}]+/gu) ?? []).map((word) => word.toLowerCase())
+}
+
+function sharesStem(word: string, known: ReadonlySet<string>): boolean {
+  if (known.has(word)) return true
+  // Un mot trop court pour porter un radical doit se retrouver tel quel.
+  if (word.length < STEM) return false
+  for (const candidate of known) {
+    if (candidate.length < STEM) continue
+    let shared = 0
+    while (shared < word.length && shared < candidate.length && word[shared] === candidate[shared]) {
+      shared += 1
+    }
+    if (shared >= STEM) return true
+  }
+  return false
+}
+
+export interface LexiconSources {
+  /** Termes de la piste Vocabulaire, tels qu'écrits sur les cartes. */
+  vocab: readonly string[]
+  /** Formes que la piste Conjugaison fait produire, infinitifs compris. */
+  conjugated: readonly string[]
+  /** Réponses et options des points de grammaire : les opposer, c'est les enseigner. */
+  drilled: readonly string[]
+}
+
+export function vocabularyScopeRemarks(
+  sources: LexiconSources,
+  sentences: readonly { where: string; text: string }[],
+): string[] {
+  const known = new Set<string>()
+  for (const group of [sources.vocab, sources.conjugated, sources.drilled]) {
+    for (const entry of group) for (const word of cyrillicWords(entry)) known.add(word)
+  }
+  if (known.size === 0) return []
+
+  const remarks: string[] = []
+  const reported = new Set<string>()
+  for (const { where, text } of sentences) {
+    for (const word of cyrillicWords(text)) {
+      if (sharesStem(word, known)) continue
+      const key = `${where}:${word}`
+      if (reported.has(key)) continue
+      reported.add(key)
+      remarks.push(
+        `${where} : « ${word} » n'est enseigné nulle part dans la piste Vocabulaire ; ` +
+          "l'exercice ferait buter l'apprenant sur le lexique plutôt que sur sa règle",
+      )
+    }
+  }
+  return remarks
+}

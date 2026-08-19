@@ -106,3 +106,58 @@ lessons:
           text: Я люблю чай.
           translation: J'aime le thé.
         gap: люблю
+
+  - id: u10-l3
+    title: Les petits mots
+    vocab:
+      - id: ru-eto
+        term: это
+        translation: c'est
+        alt:
+          - ceci
+          - cela
+        pos: pronom
+        hint: Présente ou désigne, sans jamais s'accorder — « это дом », « это машина ».
+        example:
+          text: Это мой брат.
+          translation: C'est mon frère.
+      - id: ru-i
+        term: и
+        translation: et
+        pos: conjonction
+        example:
+          text: Мама и папа.
+          translation: Maman et papa.
+      - id: ru-ne
+        term: не
+        translation: ne... pas
+        pos: adverbe
+        hint: Se place juste devant le mot qu'il nie — à ne pas confondre avec « нет », qui répond « non ».
+        example:
+          text: Я не работаю сегодня.
+          translation: Je ne travaille pas aujourd'hui.
+      - id: ru-v
+        term: в
+        translation: dans
+        alt:
+          - en
+        pos: préposition
+        hint: Dit où l'on est, pour un lieu qu'on pense comme un volume — « в магазине ».
+        example:
+          text: Я в магазине.
+          translation: Je suis au magasin.
+      - id: ru-na
+        term: на
+        translation: sur
+        pos: préposition
+        hint: Une surface, mais aussi la rue et la gare — « на улице », « на вокзале ».
+        example:
+          text: Сумка на столе.
+          translation: Le sac est sur la table.
+      - id: ru-tozhe
+        term: тоже
+        translation: aussi
+        pos: adverbe
+        example:
+          text: Я тоже здесь.
+          translation: Moi aussi, je suis ici.
