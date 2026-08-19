@@ -1,0 +1,100 @@
+id: u9
+title: Couleurs et description
+subtitle: Décrire ce qu'on voit, en quelques adjectifs
+icon: wave
+color: coral
+level: A1
+
+lessons:
+  - id: u9-l1
+    title: Les couleurs
+    vocab:
+      - id: ru-krasny
+        term: красный
+        translation: rouge
+        pos: adjectif
+        example:
+          text: Красный шкаф.
+          translation: Une armoire rouge.
+      - id: ru-siny
+        term: синий
+        translation: bleu
+        pos: adjectif
+        example:
+          text: Синий стол.
+          translation: Une table bleue.
+      - id: ru-zeliony
+        term: зелёный
+        translation: vert
+        pos: adjectif
+        example:
+          text: Зелёный чай.
+          translation: Du thé vert.
+      - id: ru-zhyolty
+        term: жёлтый
+        translation: jaune
+        pos: adjectif
+        example:
+          text: Жёлтый дом.
+          translation: Une maison jaune.
+      - id: ru-chorny
+        term: чёрный
+        translation: noir
+        pos: adjectif
+        example:
+          text: Чёрный кофе.
+          translation: Un café noir.
+      - id: ru-bely
+        term: белый
+        translation: blanc
+        pos: adjectif
+        example:
+          text: Белый хлеб.
+          translation: Du pain blanc.
+
+  - id: u9-l2
+    title: Grand ou petit ?
+    vocab:
+      - id: ru-bolshoy
+        term: большой
+        translation: grand
+        pos: adjectif
+        example:
+          text: Большой город.
+          translation: Une grande ville.
+      - id: ru-malenky
+        term: маленький
+        translation: petit
+        pos: adjectif
+        example:
+          text: Маленький кот.
+          translation: Un petit chat.
+      - id: ru-khoroshy
+        term: хороший
+        translation: bon
+        pos: adjectif
+        hint: "Même racine que « хорошо », déjà connu : bien → bon."
+        example:
+          text: Хороший суп.
+          translation: Une bonne soupe.
+      - id: ru-plokhoy
+        term: плохой
+        translation: mauvais
+        pos: adjectif
+        example:
+          text: Плохой день.
+          translation: Une mauvaise journée.
+      - id: ru-novy
+        term: новый
+        translation: nouveau
+        pos: adjectif
+        example:
+          text: Новый журнал.
+          translation: Un nouveau magazine.
+      - id: ru-stary
+        term: старый
+        translation: vieux
+        pos: adjectif
+        example:
+          text: Старый дом.
+          translation: Une vieille maison.

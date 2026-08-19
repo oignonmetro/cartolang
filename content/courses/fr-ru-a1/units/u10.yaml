@@ -1,0 +1,108 @@
+id: u10
+title: Mots essentiels
+subtitle: Poser une question, dire ce qu'on fait
+icon: compass
+color: violet
+level: A1
+
+lessons:
+  - id: u10-l1
+    title: Poser une question
+    vocab:
+      - id: ru-chto
+        term: что
+        translation: quoi
+        pos: pronom
+        hint: "Le Ч s'y lit ш : « chto », pas « tchto » — une exception à retenir telle quelle."
+        example:
+          text: Что это?
+          translation: Qu'est-ce que c'est ?
+      - id: ru-kto
+        term: кто
+        translation: qui
+        pos: pronom
+        example:
+          text: Кто там?
+          translation: Qui est là ?
+      - id: ru-gde
+        term: где
+        translation: où
+        pos: adverbe
+        example:
+          text: Где ты?
+          translation: Où es-tu ?
+      - id: ru-kogda
+        term: когда
+        translation: quand
+        pos: adverbe
+        example:
+          text: Когда ты здесь?
+          translation: Quand es-tu ici ?
+      - id: ru-pochemu
+        term: почему
+        translation: pourquoi
+        pos: adverbe
+        example:
+          text: Почему нет?
+          translation: Pourquoi pas ?
+      - id: ru-skolko
+        term: сколько
+        translation: combien
+        pos: adverbe
+        hint: Sert aussi à demander un prix.
+        example:
+          text: Сколько это?
+          translation: Combien ça coûte ?
+
+  - id: u10-l2
+    title: Verbes essentiels
+    vocab:
+      - id: ru-khotet
+        term: хотеть
+        translation: vouloir
+        pos: verbe
+        example:
+          text: Я хочу хлеб.
+          translation: Je veux du pain.
+        gap: хочу
+      - id: ru-idti
+        term: идти
+        translation: aller (à pied)
+        pos: verbe
+        hint: "Verbe de mouvement « à pied » : à ne pas confondre avec un moyen de transport."
+        example:
+          text: Я иду домой.
+          translation: Je rentre à la maison.
+        gap: иду
+      - id: ru-govorit
+        term: говорить
+        translation: parler
+        pos: verbe
+        example:
+          text: Я говорю по-русски.
+          translation: Je parle russe.
+        gap: говорю
+      - id: ru-zhit
+        term: жить
+        translation: habiter
+        pos: verbe
+        example:
+          text: Я живу здесь.
+          translation: J'habite ici.
+        gap: живу
+      - id: ru-rabotat
+        term: работать
+        translation: travailler
+        pos: verbe
+        example:
+          text: Я работаю здесь.
+          translation: Je travaille ici.
+        gap: работаю
+      - id: ru-lyubit
+        term: любить
+        translation: aimer
+        pos: verbe
+        example:
+          text: Я люблю чай.
+          translation: J'aime le thé.
+        gap: люблю

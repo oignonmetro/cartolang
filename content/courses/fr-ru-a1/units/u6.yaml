@@ -104,3 +104,51 @@ lessons:
         example:
           text: Очень приятно, Анна.
           translation: Enchanté, Anna.
+
+  - id: u6-l3
+    title: Ma famille
+    vocab:
+      - id: ru-papa
+        term: папа
+        translation: papa
+        pos: nom
+        example:
+          text: Папа дома.
+          translation: Papa est à la maison.
+      - id: ru-brat
+        term: брат
+        translation: frère
+        pos: nom
+        example:
+          text: Мой брат дома.
+          translation: Mon frère est à la maison.
+      - id: ru-sestra
+        term: сестра
+        translation: sœur
+        pos: nom
+        example:
+          text: Сестра здесь.
+          translation: Ma sœur est ici.
+      - id: ru-semya
+        term: семья
+        translation: famille
+        pos: nom
+        hint: "Le signe mou avant le Я sépare les deux sons : « sem'ya », pas « semya »."
+        example:
+          text: Вот моя семья.
+          translation: Voici ma famille.
+      - id: ru-syn
+        term: сын
+        translation: fils
+        pos: nom
+        example:
+          text: Сын дома.
+          translation: Le fils est à la maison.
+      - id: ru-doch
+        term: дочь
+        translation: fille
+        pos: nom
+        hint: "Se termine par un signe mou : la consonne finale s'adoucit, « dotch' »."
+        example:
+          text: Дочь дома.
+          translation: La fille est à la maison.

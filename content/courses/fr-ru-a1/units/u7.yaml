@@ -99,3 +99,104 @@ lessons:
           text: Спокойной ночи!
           translation: Bonne nuit !
         gap: ночи
+
+  - id: u7-l3
+    title: De sept à cent
+    vocab:
+      - id: ru-sem
+        term: семь
+        translation: sept
+        pos: nombre
+        example:
+          text: Семь дней.
+          translation: Sept jours.
+      - id: ru-vosem
+        term: восемь
+        translation: huit
+        pos: nombre
+        example:
+          text: Восемь часов.
+          translation: Huit heures.
+      - id: ru-devyat
+        term: девять
+        translation: neuf
+        pos: nombre
+        example:
+          text: Девять минут.
+          translation: Neuf minutes.
+      - id: ru-desyat
+        term: десять
+        translation: dix
+        pos: nombre
+        example:
+          text: Десять рублей.
+          translation: Dix roubles.
+      - id: ru-dvadtsat
+        term: двадцать
+        translation: vingt
+        pos: nombre
+        hint: "Le groupe ДЦ se prononce comme un seul son « ts »."
+        example:
+          text: Двадцать лет.
+          translation: Vingt ans.
+      - id: ru-sto
+        term: сто
+        translation: cent
+        pos: nombre
+        example:
+          text: Сто рублей.
+          translation: Cent roubles.
+
+  - id: u7-l4
+    title: Les jours de la semaine
+    vocab:
+      - id: ru-ponedelnik
+        term: понедельник
+        translation: lundi
+        pos: nom
+        example:
+          text: Сегодня понедельник.
+          translation: Aujourd'hui, c'est lundi.
+      - id: ru-vtornik
+        term: вторник
+        translation: mardi
+        pos: nom
+        example:
+          text: Сегодня вторник.
+          translation: Aujourd'hui, c'est mardi.
+      - id: ru-sreda
+        term: среда
+        translation: mercredi
+        pos: nom
+        example:
+          text: Сегодня среда.
+          translation: Aujourd'hui, c'est mercredi.
+      - id: ru-chetverg
+        term: четверг
+        translation: jeudi
+        pos: nom
+        example:
+          text: Сегодня четверг.
+          translation: Aujourd'hui, c'est jeudi.
+      - id: ru-pyatnitsa
+        term: пятница
+        translation: vendredi
+        pos: nom
+        example:
+          text: Сегодня пятница.
+          translation: Aujourd'hui, c'est vendredi.
+      - id: ru-subbota
+        term: суббота
+        translation: samedi
+        pos: nom
+        example:
+          text: Сегодня суббота.
+          translation: Aujourd'hui, c'est samedi.
+      - id: ru-voskresenye
+        term: воскресенье
+        translation: dimanche
+        pos: nom
+        hint: "Le signe mou avant Е garde le son « ïe » distinct, jusqu'au bout du mot."
+        example:
+          text: Сегодня воскресенье.
+          translation: Aujourd'hui, c'est dimanche.

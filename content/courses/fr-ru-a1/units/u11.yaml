@@ -1,0 +1,101 @@
+id: u11
+title: En ville et les achats
+subtitle: Se repérer et acheter ce qu'il faut
+icon: people
+color: sky
+level: A1
+
+lessons:
+  - id: u11-l1
+    title: Se repérer en ville
+    vocab:
+      - id: ru-magazin
+        term: магазин
+        translation: magasin
+        pos: nom
+        example:
+          text: Магазин здесь.
+          translation: Le magasin est ici.
+      - id: ru-ulitsa
+        term: улица
+        translation: rue
+        pos: nom
+        example:
+          text: Улица большая.
+          translation: La rue est grande.
+      - id: ru-shkola
+        term: школа
+        translation: école
+        pos: nom
+        example:
+          text: Новая школа.
+          translation: Une nouvelle école.
+      - id: ru-bolnitsa
+        term: больница
+        translation: hôpital
+        pos: nom
+        example:
+          text: Больница там.
+          translation: L'hôpital est là-bas.
+      - id: ru-vokzal
+        term: вокзал
+        translation: gare
+        pos: nom
+        example:
+          text: Вокзал большой.
+          translation: La gare est grande.
+      - id: ru-apteka
+        term: аптека
+        translation: pharmacie
+        pos: nom
+        example:
+          text: Аптека закрыта.
+          translation: La pharmacie est fermée.
+
+  - id: u11-l2
+    title: Faire les courses
+    vocab:
+      - id: ru-dengi
+        term: деньги
+        translation: argent
+        pos: nom
+        hint: Toujours au pluriel en russe, même pour une petite somme.
+        example:
+          text: Деньги здесь.
+          translation: L'argent est ici.
+      - id: ru-rubl
+        term: рубль
+        translation: rouble
+        pos: nom
+        example:
+          text: Один рубль.
+          translation: Un rouble.
+      - id: ru-prodavets
+        term: продавец
+        translation: vendeur
+        pos: nom
+        example:
+          text: Продавец там.
+          translation: Le vendeur est là-bas.
+      - id: ru-kupit
+        term: купить
+        translation: acheter
+        pos: verbe
+        hint: "Verbe perfectif : une seule fois, jusqu'au bout."
+        example:
+          text: Я хочу купить хлеб.
+          translation: Je veux acheter du pain.
+      - id: ru-deshevo
+        term: дёшево
+        translation: bon marché
+        pos: adverbe
+        example:
+          text: Очень дёшево!
+          translation: Très bon marché !
+      - id: ru-dorogo
+        term: дорого
+        translation: cher
+        pos: adverbe
+        example:
+          text: Очень дорого!
+          translation: Très cher !

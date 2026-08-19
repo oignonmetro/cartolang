@@ -36,7 +36,7 @@ level: A1
 tagline: Lire l'alphabet, puis les premiers mots.
 status: available
 layout: library
-version: 4
+version: 5
 
 tracks:
   - id: vocabulaire
@@ -50,3 +50,6 @@ tracks:
       - u6
       - u7
       - u8
+      - u9
+      - u10
+      - u11
