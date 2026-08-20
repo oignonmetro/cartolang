@@ -86,7 +86,13 @@ export function PathNode({
         : `0 2px 0 0 color-mix(in srgb, ${tone.edge} 18%, var(--color-line))`
 
   const statusLabel =
-    checkpoint && locked ? 'section accessible directement' : locked ? 'verrouillé' : done ? 'terminé' : 'à faire'
+    checkpoint && locked
+      ? 'accessible en passant un test'
+      : locked
+        ? 'verrouillé'
+        : done
+          ? 'terminé'
+          : 'à faire'
 
   return (
     <div

@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import type { ConjugationLesson, GrammarLesson, PracticeItem, Vocab, VocabLesson } from '@/content/schema'
 import {
+  buildCheckpointTest,
   buildLessonSession,
   buildPracticeSession,
   buildReviewSession,
@@ -346,6 +347,44 @@ describe('session de révision', () => {
     expect(session.length).toBeGreaterThan(0)
     expect(session.every((e) => e.kind === 'type' || (e.kind === 'cloze' && e.bank === null))).toBe(true)
     expect(session.every((e) => e.kind !== 'type' || e.direction === 'to-known')).toBe(true)
+  })
+})
+
+describe('test de passage d’un checkpoint', () => {
+  it('ne présente rien et ne demande aucune auto-évaluation', () => {
+    // Une présentation donnerait la réponse avant de la demander, et « je
+    // savais » n'est pas une preuve : un test ne peut poser que des questions
+    // dont la réponse se vérifie.
+    for (let seed = 0; seed < 20; seed++) {
+      const served = kinds(buildCheckpointTest(LESSON, seed))
+      expect(served).not.toContain('intro')
+      expect(served).not.toContain('flashcard')
+    }
+  })
+
+  it('interroge chaque élément au moins une fois', () => {
+    const session = buildCheckpointTest(LESSON, 3)
+    const covered = new Set(session.flatMap((exercise) => itemIdsOf(exercise)))
+    for (const word of LESSON) expect(covered.has(word.id)).toBe(true)
+  })
+
+  it('complète les QCM par des manches d’association', () => {
+    const served = kinds(buildCheckpointTest(LESSON, 4))
+    expect(served).toContain('choice')
+    expect(served).toContain('match')
+  })
+
+  it('ne teste rien sous deux éléments, faute de leurre à opposer', () => {
+    expect(buildCheckpointTest(LESSON.slice(0, 1), 5)).toEqual([])
+    expect(buildCheckpointTest([], 5)).toEqual([])
+  })
+
+  it('rebat les questions d’un essai à l’autre', () => {
+    // « Réessayer » ne doit pas reposer la même grille dans le même ordre :
+    // on la refait alors de mémoire plutôt que de la savoir.
+    const first = buildCheckpointTest(LESSON, 1).map((exercise) => exercise.id)
+    const second = buildCheckpointTest(LESSON, 2).map((exercise) => exercise.id)
+    expect(second).not.toEqual(first)
   })
 })
 

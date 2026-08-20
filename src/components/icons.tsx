@@ -106,6 +106,19 @@ export function FlagIcon(props: IconProps) {
   )
 }
 
+/**
+ * Cœur : les fautes qu'il reste à commettre dans un test de passage (voir
+ * `SessionScreen`). Vidé plutôt que retiré quand il est perdu — le compte
+ * total doit rester lisible, sinon on ne sait plus sur combien on joue.
+ */
+export function HeartIcon({ filled = false, ...props }: IconProps & { filled?: boolean }) {
+  return (
+    <svg {...svgProps(props)} fill={filled ? 'currentColor' : 'none'}>
+      <path d="M12 20.5 4.6 13a4.7 4.7 0 1 1 7.4-5.7A4.7 4.7 0 1 1 19.4 13z" />
+    </svg>
+  )
+}
+
 /** Double chevron : le badge d'un checkpoint du parcours (voir `PathNode`). */
 export function SkipIcon(props: IconProps) {
   return (

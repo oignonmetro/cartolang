@@ -1250,6 +1250,45 @@ export function buildPracticeSession(
   )
 }
 
+/** Manches d'association d'un test de passage, en plus des QCM. */
+const CHECKPOINT_MATCH_ROUNDS = 2
+
+/**
+ * Test de passage d'un checkpoint : la preuve qu'on peut sauter une section
+ * plutôt que la jouer (voir `checkpointTestVocab` et `CheckpointTestRoute`).
+ *
+ * Ce n'est ni une leçon ni une révision, et ça se voit dans ce qui est
+ * construit ici. Pas de présentation : montrer la réponse avant de la demander
+ * viderait le test de son sens. Pas de flashcard non plus, ni d'aucune
+ * auto-évaluation : « je savais » n'est pas une preuve. Aucune carte n'entre
+ * en jeu, parce qu'il n'y a rien à réviser — l'apprenant n'a rien rencontré
+ * dans l'application, il affirme savoir déjà.
+ *
+ * Reste la reconnaissance, sous deux angles : chaque élément est posé une fois
+ * en QCM, l'énoncé tiré parmi ceux qu'il peut soutenir (le mot, son sens, ou
+ * sa prononciation quand l'appareil parle), puis des manches d'association
+ * reprennent l'ensemble — relier douze lettres à leurs sons d'un coup n'est
+ * pas la même épreuve que douze QCM isolés.
+ */
+export function buildCheckpointTest(
+  vocab: readonly Vocab[],
+  seed: number,
+  canSpeak = false,
+): Exercise[] {
+  // Un QCM demande au moins un leurre distinct de la réponse : sous deux
+  // éléments, il n'y a rien à opposer et donc rien à tester.
+  if (vocab.length < 2) return []
+  const rng = createRng(seed)
+
+  const questions = shuffle(vocab, rng).flatMap((word): Exercise[] => {
+    const cue = sample(cuesFor(word, canSpeak), 1, rng)[0]
+    const exercise = cue ? choiceFor(word, cue, vocab, rng) : null
+    return exercise ? [exercise] : []
+  })
+
+  return [...questions, ...matchRounds(vocab, CHECKPOINT_MATCH_ROUNDS, rng)]
+}
+
 /** Découpe une phrase de grammaire autour de son marqueur `___`. */
 export function splitGap(sentence: string): { before: string; after: string } {
   const at = sentence.indexOf(GAP)

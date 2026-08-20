@@ -3,7 +3,7 @@ import { Navigate, useNavigate, useParams } from 'react-router-dom'
 import { useCourse } from '@/content/CourseProvider'
 import { findUnit } from '@/content/course'
 import { unitMastery } from '@/engine/progress'
-import { buildUnitPath, stepKey, type UnitPathNode } from '@/engine/unitPath'
+import { buildUnitPath, type UnitPathNode } from '@/engine/unitPath'
 import { placePath } from '@/engine/unitPathLayout'
 import { EMPTY_CARDS, EMPTY_LESSON_PROGRESS, EMPTY_STEPS, useProgress } from '@/store/progressStore'
 import { ProgressRing } from '@/components/ProgressRing'
@@ -27,7 +27,6 @@ export function UnitPathScreen() {
   const lessons = useProgress((state) => state.lessons[course.id] ?? EMPTY_LESSON_PROGRESS)
   const steps = useProgress((state) => state.steps[course.id] ?? EMPTY_STEPS)
   const cards = useProgress((state) => state.cards[course.id] ?? EMPTY_CARDS)
-  const skipTo = useProgress((state) => state.skipTo)
 
   const unit = useMemo(() => findUnit(course, unitId), [course, unitId])
   const path = useMemo(
@@ -47,21 +46,16 @@ export function UnitPathScreen() {
   const tone = TONES[unit.color] ?? TONES.teal
 
   /**
-   * Un checkpoint reste ouvrable même verrouillé : c'est tout son rôle,
-   * atteindre directement une section plus loin dans l'unité sans rejouer ce
-   * qui précède. Le saut ne touche que ce qui n'est pas encore acquis — pas
-   * d'effet, donc, sur un checkpoint déjà croisé normalement.
+   * Un checkpoint verrouillé reste ouvrable : c'est tout son rôle, atteindre
+   * une section plus loin dans l'unité sans parcourir ce qui précède. Mais il
+   * ne s'ouvre pas d'un simple appui — il passe par son test (voir
+   * `CheckpointTestRoute`), qui seul décide si le saut est mérité. Une fois
+   * franchi, il s'ouvre comme n'importe quelle étape déjà faite.
    */
   const open = (node: UnitPathNode) => {
     if (node.status === 'locked') {
-      if (!node.checkpoint) return
-      const index = path.findIndex((candidate) => candidate.id === node.id)
-      const before = path.slice(0, index)
-      skipTo(
-        course.id,
-        before.filter((candidate) => candidate.lesson).map((candidate) => candidate.lesson!.id),
-        before.filter((candidate) => !candidate.lesson).map((candidate) => stepKey(unit.id, candidate.id)),
-      )
+      if (node.checkpoint) navigate(`/test/${unit.id}/${node.id}`)
+      return
     }
     navigate(node.lesson ? `/lecon/${node.lesson.id}` : `/etape/${unit.id}/${node.id}`)
   }
