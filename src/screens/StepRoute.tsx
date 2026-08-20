@@ -34,7 +34,7 @@ function StepSession({ unitId, stepId }: { unitId: string; stepId: string }) {
   const navigate = useNavigate()
   const { course, itemsById } = useCourse()
   const finishStep = useProgress((state) => state.finishStep)
-  const skipStep = useProgress((state) => state.skipStep)
+  const skipTo = useProgress((state) => state.skipTo)
   const [finished, setFinished] = useState<{ outcome: SessionOutcome; xp: number } | null>(null)
 
   const unit = useMemo(() => findUnit(course, unitId), [course, unitId])
@@ -100,9 +100,10 @@ function StepSession({ unitId, stepId }: { unitId: string; stepId: string }) {
   }
 
   if (exercises.length === 0) {
-    // Une leçon sautée (voir `skipLesson`) ne laisse aucune carte derrière
-    // elle : l'étape qui la suit se retrouve alors sans rien à réviser, et
-    // rester bloqué là annulerait le saut qui vient d'être fait.
+    // Une leçon sautée via un checkpoint (voir `UnitPathScreen`) ne laisse
+    // aucune carte derrière elle : l'étape qui la suit peut alors se
+    // retrouver sans rien à réviser, et rester bloqué là annulerait le saut
+    // qui vient d'être fait.
     return (
       <div className="flex min-h-full flex-col items-center justify-center gap-5 px-8 text-center">
         <Mascot mood="think" size={130} />
@@ -117,7 +118,7 @@ function StepSession({ unitId, stepId }: { unitId: string; stepId: string }) {
           </Button>
           <Button
             onClick={() => {
-              skipStep(course.id, stepKey(unit.id, stepId))
+              skipTo(course.id, [], [stepKey(unit.id, stepId)])
               backToPath()
             }}
           >

@@ -79,6 +79,7 @@ function courseWith(version: number): Course {
                 kind: 'vocab',
                 id: 'l1',
                 title: 'Leçon 1',
+                checkpoint: false,
                 vocab: [{ id: 'w1', term: 'hello', translation: 'bonjour', alt: [] }],
               },
             ],

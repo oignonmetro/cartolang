@@ -2,7 +2,7 @@ import { motion } from 'framer-motion'
 import type { UnitNodeKind } from '@/engine/unitPath'
 import type { PlacedNode } from '@/engine/unitPathLayout'
 import { FINAL_TONE, type Tone } from './pathTone'
-import { BoltIcon, BookIcon, CheckIcon, FlagIcon, LockIcon, RefreshIcon, StarIcon } from './icons'
+import { BoltIcon, BookIcon, CheckIcon, FlagIcon, LockIcon, RefreshIcon, SkipIcon, StarIcon } from './icons'
 
 const NODE_ICONS: Record<UnitNodeKind, (props: { size?: number }) => React.ReactElement> = {
   lesson: BookIcon,
@@ -19,6 +19,12 @@ const NODE_ICONS: Record<UnitNodeKind, (props: { size?: number }) => React.React
  * entraînement ou de la séance finale ; le nom de l'étape s'apprend en
  * l'ouvrant, comme sur le chemin de leçons (voir `PathScreen`). Le titre reste
  * lu par un lecteur d'écran, dans l'aria-label du bouton.
+ *
+ * Un checkpoint fait exception à ce silence : lui seul porte un badge (pour
+ * qu'on le repère de loin, verrouillé ou non) et une bulle affichant ce qu'il
+ * ouvre (les lettres d'une section entière, par exemple) — sans elle, choisir
+ * vers quel checkpoint sauter demanderait de deviner à l'aveugle, ou d'ouvrir
+ * chacun pour voir.
  */
 export function PathNode({
   spot,
@@ -42,6 +48,11 @@ export function PathNode({
   const locked = node.status === 'locked'
   const done = node.status === 'done'
   const current = node.status === 'available'
+  const checkpoint = node.checkpoint
+  // Un checkpoint reste ouvrable même verrouillé : c'est tout son rôle,
+  // atteindre directement une section plus loin dans l'unité (voir
+  // `UnitPathScreen`).
+  const reachable = !locked || checkpoint
   // Le diamètre vient du placement : c'est lui qui a calculé les écarts, deux
   // sources pour la même mesure finiraient par diverger.
   const size = r * 2
@@ -53,22 +64,29 @@ export function PathNode({
 
   // Trois états, trois traitements : le franchi est un pavé plein mais éteint,
   // l'étape courante une face vive, le reste un simple contour. Le chemin se
-  // pave ainsi derrière soi au lieu de changer seulement d'icône.
-  const circle = locked
-    ? `border-2 ${tone.faintBorder} ${tone.faintBg} ${tone.faintText}`
-    : done
-      ? `border-2 ${tone.doneBorder} ${tone.doneBg} ${tone.doneText}`
-      : `${tone.face} text-white`
+  // pave ainsi derrière soi au lieu de changer seulement d'icône. Un
+  // checkpoint verrouillé fait bande à part : sa face reste vive, comme celle
+  // d'une étape jouable, puisqu'il l'est.
+  const circle =
+    locked && !checkpoint
+      ? `border-2 ${tone.faintBorder} ${tone.faintBg} ${tone.faintText}`
+      : done
+        ? `border-2 ${tone.doneBorder} ${tone.doneBg} ${tone.doneText}`
+        : `${tone.face} text-white`
 
   // Chaque cercle porte l'ombre en tranche qui fait le langage visuel du
   // reste de l'app (boutons, cartes) : sans elle, tout ce qui n'est pas
   // l'étape courante retombait à plat, hors style. Elle s'assombrit avec
   // l'importance de l'étape plutôt que de disparaître.
-  const shadow = current
-    ? `0 5px 0 0 ${tone.edge}`
-    : done
-      ? `0 3px 0 0 color-mix(in srgb, ${tone.edge} 55%, var(--color-line))`
-      : `0 2px 0 0 color-mix(in srgb, ${tone.edge} 18%, var(--color-line))`
+  const shadow =
+    current || (checkpoint && locked)
+      ? `0 5px 0 0 ${tone.edge}`
+      : done
+        ? `0 3px 0 0 color-mix(in srgb, ${tone.edge} 55%, var(--color-line))`
+        : `0 2px 0 0 color-mix(in srgb, ${tone.edge} 18%, var(--color-line))`
+
+  const statusLabel =
+    checkpoint && locked ? 'section accessible directement' : locked ? 'verrouillé' : done ? 'terminé' : 'à faire'
 
   return (
     <div
@@ -86,7 +104,9 @@ export function PathNode({
     >
       <div className="relative flex items-center justify-center">
         {/* Halo pulsé sur l'étape courante : attire l'œil sans rien coûter
-            en hauteur, contrairement à une pastille « Commencer ». */}
+            en hauteur, contrairement à une pastille « Commencer ». Réservé à
+            la vraie étape courante — un checkpoint a son propre badge, le
+            confondre avec le halo laisserait croire qu'il y en a deux. */}
         {current && (
           <motion.span
             aria-hidden
@@ -110,19 +130,21 @@ export function PathNode({
         <motion.button
           type="button"
           onClick={onOpen}
-          disabled={locked}
-          whileTap={locked ? undefined : { y: 4 }}
-          aria-label={`${node.title}, ${locked ? 'verrouillé' : done ? 'terminé' : 'à faire'}`}
+          disabled={!reachable}
+          whileTap={reachable ? { y: 4 } : undefined}
+          aria-label={`${node.title}${node.checkpointLabel ? ` — ${node.checkpointLabel}` : ''}, ${statusLabel}`}
           className={`relative flex items-center justify-center rounded-full transition-colors ${circle}`}
           style={{ width: size, height: size, boxShadow: shadow }}
         >
-          {/* Seule une leçon verrouillée porte un cadenas : sans titre pour
+          {/* Un cadenas ne veut rien dire sur un checkpoint : il reste
+              ouvrable, le badge en dessous le dit déjà autrement. Sinon,
+              seule une leçon verrouillée en porte un — sans titre pour
               annoncer son contenu, c'est ce qui dit « quelque chose de
               nouveau vous attend ici ». Une étape garde son icône propre. La
               séance finale garde son drapeau : c'est le symbole de
               l'arrivée, le remplacer par un cadenas défait tout ce qui en
               fait une destination. */}
-          {locked && node.kind === 'lesson' ? (
+          {locked && !checkpoint && node.kind === 'lesson' ? (
             <LockIcon size={Math.round(size * 0.4)} />
           ) : done ? (
             <CheckIcon size={Math.round(size * 0.46)} />
@@ -130,6 +152,40 @@ export function PathNode({
             <Icon size={Math.round(size * 0.46)} />
           )}
         </motion.button>
+
+        {/* Badge du checkpoint : visible qu'il soit verrouillé, courant ou
+            déjà franchi, pour que le chemin garde ses repères de section une
+            fois qu'on les a dépassés. */}
+        {checkpoint && (
+          <span
+            aria-hidden
+            className={`absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full border-2 border-cream ${tone.face} text-white`}
+          >
+            <SkipIcon size={11} />
+          </span>
+        )}
+
+        {/* Bulle du checkpoint : les lettres travaillées dans la section
+            qu'il ouvre, pour choisir où sauter sans avoir à ouvrir chaque
+            checkpoint pour le découvrir. Seule exception au silence du
+            chemin (voir le commentaire de tête), et assumée comme telle. */}
+        {checkpoint && node.checkpointLabel && (
+          <div
+            className="pointer-events-none absolute left-1/2 flex w-max max-w-40 -translate-x-1/2 flex-col items-center"
+            style={{ top: '100%' }}
+          >
+            <span
+              aria-hidden
+              className="h-0 w-0 border-x-[7px] border-b-[7px] border-x-transparent"
+              style={{ borderBottomColor: 'var(--color-line)' }}
+            />
+            <div
+              className={`-mt-px max-w-40 rounded-xl border-2 border-line bg-paper px-2 py-1 text-center text-[11px] leading-tight font-black text-balance ${tone.text}`}
+            >
+              {node.checkpointLabel}
+            </div>
+          </div>
+        )}
       </div>
     </div>
   )

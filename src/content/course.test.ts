@@ -8,7 +8,7 @@ function vocab(id: string): Vocab {
 }
 
 function lesson(id: string) {
-  return { kind: 'vocab' as const, id, title: id, vocab: [vocab(`${id}-w`)] }
+  return { kind: 'vocab' as const, id, title: id, checkpoint: false, vocab: [vocab(`${id}-w`)] }
 }
 
 function unit(id: string, lessonIds: string[]): Unit {
@@ -122,12 +122,12 @@ describe('lessonCountLabel', () => {
     ids.map((id) => ({ id, term: id, translation: id, alt: [], pos: 'lettre' as const }))
 
   it('compte en lettres une leçon qui n’enseigne que des lettres', () => {
-    const alphabet = { kind: 'vocab' as const, id: 'l', title: 'l', vocab: letters(['а', 'к', 'м']) }
+    const alphabet = { kind: 'vocab' as const, id: 'l', title: 'l', checkpoint: false, vocab: letters(['а', 'к', 'м']) }
     expect(lessonCountLabel(alphabet)).toBe('3 lettres')
   })
 
   it('accorde le singulier', () => {
-    const one = { kind: 'vocab' as const, id: 'l', title: 'l', vocab: letters(['а']) }
+    const one = { kind: 'vocab' as const, id: 'l', title: 'l', checkpoint: false, vocab: letters(['а']) }
     expect(lessonCountLabel(one)).toBe('1 lettre')
   })
 
@@ -136,13 +136,14 @@ describe('lessonCountLabel', () => {
       kind: 'vocab' as const,
       id: 'l',
       title: 'l',
+      checkpoint: false,
       vocab: [...letters(['а', 'к']), vocab('мак')],
     }
     expect(lessonCountLabel(mixed)).toBe('3 mots')
   })
 
   it('laisse les autres natures à leur libellé', () => {
-    const words = { kind: 'vocab' as const, id: 'l', title: 'l', vocab: [vocab('a'), vocab('b')] }
+    const words = { kind: 'vocab' as const, id: 'l', title: 'l', checkpoint: false, vocab: [vocab('a'), vocab('b')] }
     expect(lessonCountLabel(words)).toBe('2 mots')
   })
 })

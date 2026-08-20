@@ -40,8 +40,8 @@ const COURSE: PathCourse = {
           color: 'teal',
           kind: 'vocab',
           lessons: [
-            { kind: 'vocab', id: 'l1', title: 'A', vocab: [vocab('a')] },
-            { kind: 'vocab', id: 'l2', title: 'B', vocab: [vocab('b')] },
+            { kind: 'vocab', id: 'l1', title: 'A', checkpoint: false, vocab: [vocab('a')] },
+            { kind: 'vocab', id: 'l2', title: 'B', checkpoint: false, vocab: [vocab('b')] },
           ],
         },
         {
@@ -50,7 +50,7 @@ const COURSE: PathCourse = {
           icon: 'book',
           color: 'violet',
           kind: 'vocab',
-          lessons: [{ kind: 'vocab', id: 'l3', title: 'C', vocab: [vocab('c')] }],
+          lessons: [{ kind: 'vocab', id: 'l3', title: 'C', checkpoint: false, vocab: [vocab('c')] }],
         },
       ],
     },
@@ -97,6 +97,7 @@ describe('difficulté d’une leçon', () => {
     kind: 'vocab',
     id: 'l',
     title: 'L',
+    checkpoint: false,
     vocab: ['a', 'b', 'c', 'd', 'e'].map(vocab),
   }
 

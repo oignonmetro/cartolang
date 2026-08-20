@@ -14,6 +14,11 @@
 # la vraie difficulté d'un francophone. Chaque leçon de lettres porte son
 # groupe dans son titre : c'est là que vit désormais ce que les sous-titres
 # d'unité annonçaient.
+#
+# Chaque leçon de lettres (sauf la toute première, déjà le point de départ
+# naturel du parcours) porte `checkpoint: true` : qui maîtrise déjà l'alphabet
+# latin-compatible peut y sauter directement plutôt que de rejouer les groupes
+# précédents (voir `UnitPathScreen`).
 
 id: u1
 title: Lire le russe
@@ -97,6 +102,7 @@ lessons:
 
   - id: u2-l1
     title: Les lettres traîtresses
+    checkpoint: true
     vocab:
       - id: ru-let-v
         term: В
@@ -169,6 +175,7 @@ lessons:
 
   - id: u3-l1
     title: Formes nouvelles, sons connus
+    checkpoint: true
     vocab:
       - id: ru-let-b
         term: Б
@@ -234,6 +241,7 @@ lessons:
 
   - id: u4-l1
     title: Formes nouvelles, sons nouveaux
+    checkpoint: true
     vocab:
       - id: ru-let-g
         term: Г
@@ -304,6 +312,7 @@ lessons:
 
   - id: u5-l1
     title: Voyelles iotées et signes
+    checkpoint: true
     vocab:
       - id: ru-let-ya
         term: Я

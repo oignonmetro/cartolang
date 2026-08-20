@@ -10,7 +10,7 @@ function vocab(id: string): Vocab {
   return { id, term: id, translation: id, alt: [] }
 }
 
-function unit(id: string, lessonCount: number): Unit {
+function unit(id: string, lessonCount: number, checkpoints: readonly number[] = []): Unit {
   return {
     id,
     title: id,
@@ -21,6 +21,7 @@ function unit(id: string, lessonCount: number): Unit {
       kind: 'vocab' as const,
       id: `${id}-l${index + 1}`,
       title: `${id} leçon ${index + 1}`,
+      checkpoint: checkpoints.includes(index + 1),
       vocab: [vocab(`${id}-w${index + 1}`)],
     })),
   }
@@ -79,6 +80,34 @@ describe('composition du parcours', () => {
 
   it('regroupe chaque leçon avec sa pratique, et isole la séance finale', () => {
     expect(buildUnitPath(U2, {}, {}).map((node) => node.cycle)).toEqual([0, 0, 0, 1, 1, 1, 2])
+  })
+})
+
+describe('checkpoints du parcours', () => {
+  const withCheckpoint = unit('c1', 3, [2])
+
+  it('marque le nœud d’une leçon checkpoint, et lui seul', () => {
+    const path = buildUnitPath(withCheckpoint, {}, {})
+    const lessonNodes = path.filter((node) => node.kind === 'lesson')
+    expect(lessonNodes.map((node) => node.checkpoint)).toEqual([false, true, false])
+  })
+
+  it('n’en marque aucun sans checkpoint déclaré', () => {
+    const path = buildUnitPath(U3, {}, {})
+    expect(path.every((node) => !node.checkpoint)).toBe(true)
+    expect(path.every((node) => node.checkpointLabel === null)).toBe(true)
+  })
+
+  it('déduit le libellé du checkpoint des mots de sa leçon, pas d’un champ séparé', () => {
+    const path = buildUnitPath(withCheckpoint, {}, {})
+    const checkpoint = path.find((node) => node.checkpoint)!
+    expect(checkpoint.checkpointLabel).toBe('c1-w2')
+  })
+
+  it('ne donne de libellé qu’au nœud checkpoint, jamais aux étapes qui l’entourent', () => {
+    const path = buildUnitPath(withCheckpoint, {}, {})
+    const others = path.filter((node) => !node.checkpoint)
+    expect(others.every((node) => node.checkpointLabel === null)).toBe(true)
   })
 })
 

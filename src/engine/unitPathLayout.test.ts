@@ -8,7 +8,17 @@ function node(
   cycle: number,
   id = `${kind}-${cycle}-${status}`,
 ): UnitPathNode {
-  return { id, kind, lesson: null, title: kind, subtitle: 'sous-titre', status, cycle }
+  return {
+    id,
+    kind,
+    lesson: null,
+    title: kind,
+    subtitle: 'sous-titre',
+    status,
+    cycle,
+    checkpoint: false,
+    checkpointLabel: null,
+  }
 }
 
 /** Un bloc complet : une leçon, sa révision, sa consolidation. */

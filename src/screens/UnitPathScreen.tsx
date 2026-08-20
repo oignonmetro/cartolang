@@ -3,7 +3,7 @@ import { Navigate, useNavigate, useParams } from 'react-router-dom'
 import { useCourse } from '@/content/CourseProvider'
 import { findUnit } from '@/content/course'
 import { unitMastery } from '@/engine/progress'
-import { buildUnitPath, type UnitPathNode } from '@/engine/unitPath'
+import { buildUnitPath, stepKey, type UnitPathNode } from '@/engine/unitPath'
 import { placePath } from '@/engine/unitPathLayout'
 import { EMPTY_CARDS, EMPTY_LESSON_PROGRESS, EMPTY_STEPS, useProgress } from '@/store/progressStore'
 import { ProgressRing } from '@/components/ProgressRing'
@@ -27,7 +27,7 @@ export function UnitPathScreen() {
   const lessons = useProgress((state) => state.lessons[course.id] ?? EMPTY_LESSON_PROGRESS)
   const steps = useProgress((state) => state.steps[course.id] ?? EMPTY_STEPS)
   const cards = useProgress((state) => state.cards[course.id] ?? EMPTY_CARDS)
-  const skipLesson = useProgress((state) => state.skipLesson)
+  const skipTo = useProgress((state) => state.skipTo)
 
   const unit = useMemo(() => findUnit(course, unitId), [course, unitId])
   const path = useMemo(
@@ -45,10 +45,24 @@ export function UnitPathScreen() {
   if (!unit || !mastery) return <Navigate to="/" replace />
 
   const tone = TONES[unit.color] ?? TONES.teal
-  const current = currentIndex === -1 ? null : path[currentIndex]!
 
+  /**
+   * Un checkpoint reste ouvrable même verrouillé : c'est tout son rôle,
+   * atteindre directement une section plus loin dans l'unité sans rejouer ce
+   * qui précède. Le saut ne touche que ce qui n'est pas encore acquis — pas
+   * d'effet, donc, sur un checkpoint déjà croisé normalement.
+   */
   const open = (node: UnitPathNode) => {
-    if (node.status === 'locked') return
+    if (node.status === 'locked') {
+      if (!node.checkpoint) return
+      const index = path.findIndex((candidate) => candidate.id === node.id)
+      const before = path.slice(0, index)
+      skipTo(
+        course.id,
+        before.filter((candidate) => candidate.lesson).map((candidate) => candidate.lesson!.id),
+        before.filter((candidate) => !candidate.lesson).map((candidate) => stepKey(unit.id, candidate.id)),
+      )
+    }
     navigate(node.lesson ? `/lecon/${node.lesson.id}` : `/etape/${unit.id}/${node.id}`)
   }
 
@@ -115,21 +129,6 @@ export function UnitPathScreen() {
             />
           ))}
         </div>
-
-        {/* Seules les leçons se sautent : une révision ou un entraînement
-            porte déjà sur ce qui est su, le sauter ne raccourcirait rien.
-            Réservé à qui reconnaît la matière au premier coup d'œil — pas de
-            confirmation, la leçon reste rejouable ensuite comme n'importe
-            quelle étape déjà faite. */}
-        {current?.kind === 'lesson' && (
-          <button
-            type="button"
-            onClick={() => skipLesson(course.id, current.id)}
-            className="mt-4 text-xs font-bold text-ink-faint underline decoration-dotted underline-offset-4 hover:text-ink-soft"
-          >
-            Déjà maîtrisé ? Passer cette leçon
-          </button>
-        )}
       </main>
     </div>
   )

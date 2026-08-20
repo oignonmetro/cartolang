@@ -34,6 +34,19 @@ export interface UnitPathNode {
    * pastilles où rien ne dit que la structure se répète.
    */
   cycle: number
+  /** Point d'entrée du parcours (voir `Lesson.checkpoint`) : peut se rejoindre sans jouer ce qui précède. */
+  checkpoint: boolean
+  /** Libellé du checkpoint, dérivé de son contenu ; nul hors checkpoint. */
+  checkpointLabel: string | null
+}
+
+/**
+ * Libellé d'un checkpoint : les lettres (ou mots) réellement travaillés dans
+ * la section qu'il ouvre, plutôt qu'un titre à tenir à jour séparément — le
+ * contenu de la leçon reste la seule source de vérité.
+ */
+function checkpointLabel(lesson: Lesson): string {
+  return lesson.kind === 'vocab' ? lesson.vocab.map((word) => word.term).join(' ') : lesson.title
 }
 
 const STEP_LABELS: Record<UnitStepKind, { title: string; subtitle: string }> = {
@@ -103,6 +116,8 @@ export function buildUnitPath(
       subtitle: lesson ? lessonCountLabel(lesson) : STEP_LABELS[kind as UnitStepKind].subtitle,
       status,
       cycle,
+      checkpoint: lesson?.checkpoint ?? false,
+      checkpointLabel: lesson?.checkpoint ? checkpointLabel(lesson) : null,
     }
   })
 }

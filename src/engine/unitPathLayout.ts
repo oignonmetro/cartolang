@@ -90,6 +90,13 @@ const SUBTITLE_SPACE = 22
 /** Portée horizontale, de part et d'autre d'un nœud, sur laquelle compter cette respiration. */
 export const LABEL_HALF = 104
 
+/**
+ * Respiration sous un checkpoint, pour sa bulle de libellé (voir `PathNode`).
+ * Deux lignes de texte tiennent large dedans, quel que soit le nombre de
+ * lettres du groupe qu'il ouvre.
+ */
+const CHECKPOINT_SPACE = 44
+
 export interface PlacedNode {
   node: UnitPathNode
   x: number
@@ -107,6 +114,7 @@ export function showsTitle(node: UnitPathNode): boolean {
 }
 
 function textSpaceUnder(node: UnitPathNode): number {
+  if (node.checkpoint) return CHECKPOINT_SPACE
   const title = showsTitle(node) ? TITLE_SPACE : 0
   const subtitle = node.status === 'available' ? SUBTITLE_SPACE : 0
   return title + subtitle

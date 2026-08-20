@@ -138,11 +138,13 @@ describe('progression isolée par cours', () => {
   })
 })
 
-describe('saut d’une leçon ou d’une étape', () => {
-  it('acquiert une leçon sans créer la moindre carte de révision', () => {
+describe('saut vers un checkpoint du parcours', () => {
+  it('acquiert plusieurs leçons d’un coup, sans créer la moindre carte de révision', () => {
     useProgress.getState().reset()
-    useProgress.getState().skipLesson('fr-ru-a1', 'u1-l1')
+    useProgress.getState().skipTo('fr-ru-a1', ['u1-l1', 'u1-l2'], ['u1:review-0'])
     expect(useProgress.getState().lessons['fr-ru-a1']?.['u1-l1']?.level).toBe(1)
+    expect(useProgress.getState().lessons['fr-ru-a1']?.['u1-l2']?.level).toBe(1)
+    expect(useProgress.getState().steps['fr-ru-a1']?.['u1:review-0']).toBe(1)
     expect(useProgress.getState().cards['fr-ru-a1'] ?? {}).toEqual({})
   })
 
@@ -150,20 +152,22 @@ describe('saut d’une leçon ou d’une étape', () => {
     useProgress.getState().reset()
     useProgress.getState().finishLesson('fr-ru-a1', 'u1-l1', { correct: 4, total: 4 })
     const before = useProgress.getState().lessons['fr-ru-a1']!['u1-l1']!
-    useProgress.getState().skipLesson('fr-ru-a1', 'u1-l1')
+    useProgress.getState().skipTo('fr-ru-a1', ['u1-l1'], [])
     expect(useProgress.getState().lessons['fr-ru-a1']!['u1-l1']).toEqual(before)
   })
 
   it('reste isolé par cours, comme les autres actions de progression', () => {
     useProgress.getState().reset()
-    useProgress.getState().skipLesson('fr-ru-a1', 'u1-l1')
+    useProgress.getState().skipTo('fr-ru-a1', ['u1-l1'], ['u1:review-0'])
     expect(useProgress.getState().lessons['fr-en-b1']?.['u1-l1']).toBeUndefined()
+    expect(useProgress.getState().steps['fr-en-b1']?.['u1:review-0']).toBeUndefined()
   })
 
-  it('marque une étape franchie sans exiger de résultat de session', () => {
+  it('marque une seule étape franchie sans exiger de résultat de session (révision devenue vide)', () => {
     useProgress.getState().reset()
-    useProgress.getState().skipStep('fr-ru-a1', 'u1:review-0')
+    useProgress.getState().skipTo('fr-ru-a1', [], ['u1:review-0'])
     expect(useProgress.getState().steps['fr-ru-a1']?.['u1:review-0']).toBe(1)
+    expect(useProgress.getState().lessons['fr-ru-a1'] ?? {}).toEqual({})
   })
 })
 

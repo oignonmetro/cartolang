@@ -17,7 +17,7 @@ import { createCard, type CardState } from './srs'
 
 /** Emballe une liste de mots dans une leçon de vocabulaire. */
 function lessonOf(id: string, vocab: Vocab[]): VocabLesson {
-  return { kind: 'vocab', id, title: id, vocab }
+  return { kind: 'vocab', id, title: id, vocab, checkpoint: false }
 }
 
 const T0 = Date.UTC(2026, 0, 1)
@@ -442,6 +442,7 @@ const GRAMMAR: GrammarLesson = {
   kind: 'grammar',
   id: 'g1-l1',
   title: 'Le conditionnel mixte',
+  checkpoint: false,
   notes: 'Une hypothèse passée, une conséquence présente.',
   points: [
     { id: 'p1', sentence: 'If I had known, I ___ there.', answer: 'would be', alt: [], options: ['would be', 'would have been', 'will be'], translation: 'Si j’avais su, je serais là.' },
@@ -456,6 +457,7 @@ const CONJUGATION: ConjugationLesson = {
   kind: 'conjugation',
   id: 'c1-l1',
   title: 'Present perfect',
+  checkpoint: false,
   notes: 'have / has + participe passé.',
   verbs: [
     {

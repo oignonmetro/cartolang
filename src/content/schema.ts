@@ -113,6 +113,16 @@ const lessonBase = {
   title: z.string().min(1),
   /** Rappel de cours affiché avant la pratique. */
   notes: z.string().optional(),
+  /**
+   * Point d'entrée du parcours d'unité (agencement `library`) : ce nœud peut
+   * être rejoint directement, sans repasser par ce qui précède — voir
+   * `UnitPathScreen`. Réservé aux leçons qui ouvrent une section cohérente de
+   * l'unité ; l'alphabet russe en est l'exemple type, une leçon de lettres
+   * par groupe. Son libellé sur le chemin se déduit du contenu de la leçon
+   * (voir `checkpointLabel` dans `unitPath.ts`), pas d'un champ séparé à
+   * tenir à jour.
+   */
+  checkpoint: z.boolean().default(false),
 }
 
 export const vocabLessonSchema = z.object({
