@@ -171,6 +171,31 @@ export function ProfileScreen() {
         </p>
       </section>
 
+      <section className="card-3d flex flex-col gap-3 px-5 py-5">
+        <h2 className="text-sm font-extrabold uppercase tracking-wide text-ink-faint">Sons</h2>
+        <label className="flex items-center justify-between gap-4">
+          <span className="text-sm font-bold">Une note à chaque bonne réponse</span>
+          <button
+            type="button"
+            role="switch"
+            aria-checked={state.sounds}
+            onClick={() => state.setSounds(!state.sounds)}
+            className={`relative h-7 w-12 shrink-0 rounded-full border-2 transition-colors ${
+              state.sounds ? 'border-teal bg-teal' : 'border-line bg-paper'
+            }`}
+          >
+            <span
+              className={`absolute top-0.5 h-5 w-5 rounded-full transition-all ${
+                state.sounds ? 'left-[1.35rem] bg-white' : 'left-0.5 bg-ink-faint'
+              }`}
+            />
+          </button>
+        </label>
+        <p className="text-xs text-ink-faint">
+          Rien ne se perd à les couper : une bonne réponse se voit déjà à l'écran.
+        </p>
+      </section>
+
       {canSpeak && (
         <section className="card-3d flex flex-col gap-3 px-5 py-5">
           <h2 className="text-sm font-extrabold uppercase tracking-wide text-ink-faint">Prononciation</h2>

@@ -5,6 +5,7 @@ import { fillGap, normalizeForm, splitGap } from '@/engine/exercises'
 import { Button } from '@/components/Button'
 import { OptionList } from './OptionList'
 import { SpeakButton } from './SpeakButton'
+import { useSessionSounds } from './useSessionSounds'
 
 /**
  * Les options ne diffèrent que par la forme qui comble le trou — le reste de
@@ -54,6 +55,7 @@ export function GrammarSentenceChoice({
   const answer = fillGap(point.sentence, point.answer)
   const { before, after } = splitGap(point.sentence)
   const [picked, setPicked] = useState<string | null>(null)
+  const sounds = useSessionSounds()
 
   useEffect(() => {
     setPicked(null)
@@ -78,7 +80,10 @@ export function GrammarSentenceChoice({
         options={options}
         picked={picked}
         isCorrect={(option) => normalizeForm(option) === normalizeForm(answer)}
-        onPick={setPicked}
+        onPick={(option) => {
+          setPicked(option)
+          sounds.success(normalizeForm(option) === normalizeForm(answer))
+        }}
         lang="en"
         size="long"
         renderOption={(option) => highlightGap(option, before, after)}

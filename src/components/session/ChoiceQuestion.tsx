@@ -8,6 +8,7 @@ import { speechFor } from '@/lib/speech'
 import { highlightDiffWords } from './highlightDiffWords'
 import { OptionList } from './OptionList'
 import { SpeakButton } from './SpeakButton'
+import { useSessionSounds } from './useSessionSounds'
 
 /**
  * QCM : reconnaître la bonne réponse parmi des leurres, juste après avoir
@@ -35,6 +36,7 @@ export function ChoiceQuestion({
   const { vocab, cue, options } = exercise
   const answer = choiceAnswer(vocab, cue)
   const [picked, setPicked] = useState<string | null>(null)
+  const sounds = useSessionSounds()
 
   useEffect(() => {
     setPicked(null)
@@ -74,7 +76,10 @@ export function ChoiceQuestion({
         options={options}
         picked={picked}
         isCorrect={(option) => normalizeAnswer(option) === normalizeAnswer(answer)}
-        onPick={setPicked}
+        onPick={(option) => {
+          setPicked(option)
+          sounds.success(normalizeAnswer(option) === normalizeAnswer(answer))
+        }}
         renderOption={highlightDiffWords(options)}
       />
 

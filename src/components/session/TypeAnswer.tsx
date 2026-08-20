@@ -3,6 +3,7 @@ import { motion } from 'framer-motion'
 import type { TypeExercise } from '@/engine/exercises'
 import { isAnswerCorrect } from '@/engine/exercises'
 import { Button } from '@/components/Button'
+import { useSessionSounds } from './useSessionSounds'
 
 /** Traduction au clavier, sans contexte : l'exercice le plus exigeant. */
 export function TypeAnswer({
@@ -18,6 +19,7 @@ export function TypeAnswer({
   const [value, setValue] = useState('')
   const [checked, setChecked] = useState<null | boolean>(null)
   const input = useRef<HTMLInputElement>(null)
+  const sounds = useSessionSounds()
 
   useEffect(() => {
     setValue('')
@@ -28,7 +30,9 @@ export function TypeAnswer({
   const filled = value.trim().length > 0
 
   function check() {
-    setChecked(isAnswerCorrect(vocab, direction, value))
+    const correct = isAnswerCorrect(vocab, direction, value)
+    setChecked(correct)
+    sounds.success(correct)
   }
 
   return (

@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react'
 import { motion } from 'framer-motion'
 import { createRng, seedFrom, shuffle } from '@/engine/rng'
+import { useSessionSounds } from './useSessionSounds'
 
 /**
  * Plateau d'association générique : deux colonnes de jetons à relier.
@@ -38,6 +39,7 @@ export function PairBoard({
   prompt: string
   onDone: (result: { missedIds: string[] }) => void
 }) {
+  const sounds = useSessionSounds()
   const columns = useMemo(() => buildColumns(seed, pairs), [seed, pairs])
   const expected = useMemo(() => new Map(pairs.map((pair) => [pair.id, pair.right])), [pairs])
 
@@ -78,6 +80,10 @@ export function PairBoard({
       const nextPairs = new Set(solvedPairs).add(left.pairId)
       setSolvedPairs(nextPairs)
       setSelected(null)
+      // Chaque paire monte d'un degré de l'accord : la manche s'entend se
+      // remplir, et la dernière paire arrive en haut. C'est ce que le score
+      // final ne dit pas — qu'on progresse, pendant qu'on progresse.
+      sounds.note(nextPairs.size - 1)
       if (nextPairs.size === pairs.length) onDone({ missedIds: [...missed] })
       return
     }

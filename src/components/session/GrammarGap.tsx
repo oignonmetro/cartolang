@@ -4,6 +4,7 @@ import type { GrammarGapExercise } from '@/engine/exercises'
 import { fillGap, matchesAnswer, splitGap } from '@/engine/exercises'
 import { Button } from '@/components/Button'
 import { SpeakButton } from './SpeakButton'
+import { useSessionSounds } from './useSessionSounds'
 
 /**
  * Phrase de grammaire à compléter.
@@ -29,6 +30,7 @@ export function GrammarGap({
   const [value, setValue] = useState('')
   const [checked, setChecked] = useState<null | boolean>(null)
   const input = useRef<HTMLInputElement>(null)
+  const sounds = useSessionSounds()
 
   useEffect(() => {
     setValue('')
@@ -39,8 +41,10 @@ export function GrammarGap({
   const filled = value.trim().length > 0
 
   function check(candidate: string) {
+    const correct = matchesAnswer(point.answer, point.alt, candidate)
     setValue(candidate)
-    setChecked(matchesAnswer(point.answer, point.alt, candidate))
+    setChecked(correct)
+    sounds.success(correct)
   }
 
   return (

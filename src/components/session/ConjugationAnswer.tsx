@@ -4,6 +4,7 @@ import type { ConjugationExercise } from '@/engine/exercises'
 import { matchesAnswer } from '@/engine/exercises'
 import { Button } from '@/components/Button'
 import { SpeakButton } from './SpeakButton'
+import { useSessionSounds } from './useSessionSounds'
 
 /**
  * Production d'une forme conjuguée : verbe, temps et personne sont donnés,
@@ -27,6 +28,7 @@ export function ConjugationAnswer({
   const [value, setValue] = useState('')
   const [checked, setChecked] = useState<null | boolean>(null)
   const input = useRef<HTMLInputElement>(null)
+  const sounds = useSessionSounds()
 
   useEffect(() => {
     setValue('')
@@ -37,7 +39,9 @@ export function ConjugationAnswer({
   const filled = value.trim().length > 0
 
   function check() {
-    setChecked(matchesAnswer(form.answer, form.alt, value))
+    const correct = matchesAnswer(form.answer, form.alt, value)
+    setChecked(correct)
+    sounds.success(correct)
   }
 
   return (

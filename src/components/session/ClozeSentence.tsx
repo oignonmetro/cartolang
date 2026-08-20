@@ -4,6 +4,7 @@ import type { ClozeExercise } from '@/engine/exercises'
 import { normalizeForm } from '@/engine/exercises'
 import { Button } from '@/components/Button'
 import { SpeakButton } from './SpeakButton'
+import { useSessionSounds } from './useSessionSounds'
 
 /**
  * Phrase à trou.
@@ -22,6 +23,7 @@ export function ClozeSentence({
   const [value, setValue] = useState('')
   const [checked, setChecked] = useState<null | boolean>(null)
   const input = useRef<HTMLInputElement>(null)
+  const sounds = useSessionSounds()
 
   useEffect(() => {
     setValue('')
@@ -35,6 +37,7 @@ export function ClozeSentence({
     const correct = normalizeForm(candidate) === normalizeForm(sentence.match)
     setValue(candidate)
     setChecked(correct)
+    sounds.success(correct)
   }
 
   return (

@@ -92,6 +92,36 @@ describe('réglage de prononciation', () => {
   })
 })
 
+describe('réglage des sons de réussite', () => {
+  it('est activé par défaut', () => {
+    useProgress.getState().reset()
+    expect(useProgress.getState().sounds).toBe(true)
+  })
+
+  it('se coupe et revient', () => {
+    useProgress.getState().setSounds(false)
+    expect(useProgress.getState().sounds).toBe(false)
+    useProgress.getState().setSounds(true)
+    expect(useProgress.getState().sounds).toBe(true)
+  })
+
+  it('survit à un aller-retour export / import', () => {
+    useProgress.getState().setSounds(false)
+    const payload = useProgress.getState().exportSave()
+    useProgress.getState().setSounds(true)
+    useProgress.getState().importSave(payload)
+    expect(useProgress.getState().sounds).toBe(false)
+  })
+
+  it('reste activé en important une sauvegarde antérieure au réglage', () => {
+    // Le champ n'existait pas avant : hériter d'un silence qu'on n'a jamais
+    // demandé serait pris pour une panne plutôt que pour un réglage.
+    useProgress.getState().setSounds(false)
+    useProgress.getState().importSave(JSON.stringify({ format: 5, cards: {}, lessons: {} }))
+    expect(useProgress.getState().sounds).toBe(true)
+  })
+})
+
 describe('conversion des cartes anciennes', () => {
   it('renomme vocabId en itemId', () => {
     const migrated = migrateCards({ hello: { vocabId: 'hello', ease: 2.5, interval: 1 } })

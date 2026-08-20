@@ -117,6 +117,9 @@ export function SessionScreen({ title, exercises, onQuit, onFinish, exam }: Sess
           gradeItem(course.id, itemId, rating ?? ratingFromAnswer(correct, firstTry))
         }
       }
+      // Pas de son ici : il a déjà sonné dans l'exercice, à la validation
+      // de la réponse (voir `useSessionSounds`). `answer` n'est appelé qu'à
+      // l'appui sur « Continuer », une ou deux secondes plus tard.
       record(exercise, correct)
       advance(!correct && !exam)
     },
@@ -132,6 +135,9 @@ export function SessionScreen({ title, exercises, onQuit, onFinish, exam }: Sess
           gradeItem(course.id, itemId, missed.has(itemId) ? 'again' : ratingFromAnswer(true, firstTry))
         }
       }
+      // Pas de son ici : chaque paire a déjà sonné en se résolvant (voir
+      // `PairBoard`), et la dernière est la fin de la manche. En rejouer un
+      // par-dessus doublerait la note d'arrivée.
       record(exercise, missed.size === 0)
       // Les paires sont toutes trouvées à la fin : inutile de rejouer la manche.
       advance(false)

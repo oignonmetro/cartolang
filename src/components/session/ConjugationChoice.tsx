@@ -6,6 +6,7 @@ import { Button } from '@/components/Button'
 import { highlightDiffWords } from './highlightDiffWords'
 import { OptionList } from './OptionList'
 import { SpeakButton } from './SpeakButton'
+import { useSessionSounds } from './useSessionSounds'
 
 /**
  * Reconnaître une forme conjuguée parmi celles du paradigme.
@@ -26,6 +27,7 @@ export function ConjugationChoice({
   const { verb, form, cue, options } = exercise
   const fromFrench = cue === 'translation' && Boolean(verb.translation)
   const [picked, setPicked] = useState<string | null>(null)
+  const sounds = useSessionSounds()
 
   useEffect(() => {
     setPicked(null)
@@ -56,7 +58,10 @@ export function ConjugationChoice({
         options={options}
         picked={picked}
         isCorrect={(option) => normalizeForm(option) === normalizeForm(form.answer)}
-        onPick={setPicked}
+        onPick={(option) => {
+          setPicked(option)
+          sounds.success(normalizeForm(option) === normalizeForm(form.answer))
+        }}
         lang="en"
         renderOption={highlightDiffWords(options)}
       />

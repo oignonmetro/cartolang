@@ -60,6 +60,13 @@ export interface ProgressSnapshot {
    * défaut, pas un service. Le bouton, lui, reste toujours disponible.
    */
   autoSpeak: boolean
+  /**
+   * Les petits sons de réussite (voir `lib/sound.ts`). Se coupe pour la même
+   * raison que la prononciation, et plus encore : ceux-là partent à chaque
+   * bonne réponse, sans qu'on les ait demandés une seule fois. Rien ne s'y
+   * joue d'irremplaçable — ce qu'ils signalent est déjà à l'écran.
+   */
+  sounds: boolean
 }
 
 interface ProgressState extends ProgressSnapshot {
@@ -93,6 +100,7 @@ interface ProgressState extends ProgressSnapshot {
   skipTo: (courseId: string, lessonIds: readonly string[], stepIds: readonly string[]) => void
   setDailyGoal: (goal: number) => void
   setAutoSpeak: (on: boolean) => void
+  setSounds: (on: boolean) => void
   exportSave: () => string
   importSave: (payload: string) => void
   reset: () => void
@@ -120,6 +128,7 @@ const initial: ProgressSnapshot = {
   xpByDay: {},
   dailyGoal: 30,
   autoSpeak: true,
+  sounds: true,
   streak: { current: 0, best: 0, lastDay: null },
 }
 
@@ -304,10 +313,12 @@ export const useProgress = create<ProgressState>()(
 
       setAutoSpeak: (on) => set({ autoSpeak: on }),
 
+      setSounds: (on) => set({ sounds: on }),
+
       exportSave: () => {
-        const { lessons, cards, steps, xp, xpByDay, dailyGoal, streak, autoSpeak } = get()
+        const { lessons, cards, steps, xp, xpByDay, dailyGoal, streak, autoSpeak, sounds } = get()
         return JSON.stringify(
-          { format: SAVE_FORMAT, savedAt: Date.now(), lessons, cards, steps, xp, xpByDay, dailyGoal, streak, autoSpeak },
+          { format: SAVE_FORMAT, savedAt: Date.now(), lessons, cards, steps, xp, xpByDay, dailyGoal, streak, autoSpeak, sounds },
           null,
           2,
         )
@@ -323,6 +334,7 @@ export const useProgress = create<ProgressState>()(
           xpByDay?: Record<string, number>
           dailyGoal?: number
           autoSpeak?: boolean
+          sounds?: boolean
           streak?: Streak
         }
         // Les formats antérieurs n'ont rien perdu : leurs champs manquants
@@ -359,6 +371,7 @@ export const useProgress = create<ProgressState>()(
           xpByDay: parsed.xpByDay ?? {},
           dailyGoal: parsed.dailyGoal ?? initial.dailyGoal,
           autoSpeak: parsed.autoSpeak ?? initial.autoSpeak,
+          sounds: parsed.sounds ?? initial.sounds,
           streak: parsed.streak ?? initial.streak,
         })
       },
@@ -386,7 +399,7 @@ export const useProgress = create<ProgressState>()(
           steps: nestByCourse(state.steps as unknown as Record<string, number> | undefined, courseId),
         }
       },
-      partialize: ({ lessons, cards, steps, xp, xpByDay, dailyGoal, streak, autoSpeak }) => ({
+      partialize: ({ lessons, cards, steps, xp, xpByDay, dailyGoal, streak, autoSpeak, sounds }) => ({
         lessons,
         cards,
         steps,
@@ -394,6 +407,7 @@ export const useProgress = create<ProgressState>()(
         xpByDay,
         dailyGoal,
         autoSpeak,
+        sounds,
         streak,
       }),
     },
