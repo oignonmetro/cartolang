@@ -159,9 +159,9 @@ export function PathNode({
         {checkpoint && (
           <span
             aria-hidden
-            className={`absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full border-2 border-cream ${tone.face} text-white`}
+            className={`absolute -top-1.5 -right-1.5 flex h-6 w-6 items-center justify-center rounded-full border-2 border-cream ${tone.face} text-white`}
           >
-            <SkipIcon size={11} />
+            <SkipIcon size={13} />
           </span>
         )}
 
@@ -180,7 +180,7 @@ export function PathNode({
               style={{ borderBottomColor: 'var(--color-line)' }}
             />
             <div
-              className={`-mt-px max-w-40 rounded-xl border-2 border-line bg-paper px-2 py-1 text-center text-[11px] leading-tight font-black text-balance ${tone.text}`}
+              className={`-mt-px max-w-40 rounded-xl border-2 border-line bg-paper px-2 py-1 text-center text-xs leading-tight font-black tracking-wide text-balance ${tone.text}`}
             >
               {node.checkpointLabel}
             </div>
