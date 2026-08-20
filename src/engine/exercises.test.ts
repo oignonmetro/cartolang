@@ -202,6 +202,33 @@ describe('session de leçon', () => {
   })
 })
 
+describe('taille des manches d’association', () => {
+  const BIG_LESSON: Vocab[] = Array.from({ length: 10 }, (_, i) =>
+    word(`w${i}`, `word${i}`, `mot${i}`, `Example ${i}.`),
+  )
+
+  it('grandit avec le bassin disponible, sans dépasser six paires', () => {
+    // Un bassin de dix mots ne tient pas dans un seul bloc (blocsOf en fait
+    // 4 puis 6, voir BLOCK_SIZE) : le second bloc hérite du premier et peut
+    // donc offrir des manches plus grandes que le minimum.
+    const sizes = new Set<number>()
+    for (let seed = 0; seed < 20; seed++) {
+      for (const exercise of buildLessonSession(lessonOf('big', BIG_LESSON), 0, seed, {}, true)) {
+        if (exercise.kind === 'match') sizes.add(exercise.pairs.length)
+      }
+    }
+    expect(Math.max(...sizes)).toBeGreaterThan(4)
+    expect(Math.max(...sizes)).toBeLessThanOrEqual(6)
+  })
+
+  it('reste au minimum quand le bassin n’offre rien de plus', () => {
+    const session = buildLessonSession(lessonOf('u1-l1', LESSON.slice(0, 4)), 0, 1, {}, true)
+    const sizes = session.filter((e) => e.kind === 'match').map((e) => e.pairs.length)
+    expect(sizes.length).toBeGreaterThan(0)
+    expect(sizes.every((size) => size === 4)).toBe(true)
+  })
+})
+
 describe('variété des exercices de vocabulaire', () => {
   /** Signature d'un exercice ciblé : le mot ET la question posée. */
   function signature(exercise: Exercise): string {

@@ -157,9 +157,15 @@ export function SessionScreen({ title, exercises, onQuit, onFinish, exam }: Sess
   if (!current) return null
 
   return (
-    // `h-full overflow-hidden`, pas `min-h-full` : une leçon ne doit jamais
-    // pouvoir défiler, le contenu est conçu pour tenir dans l'écran.
-    <div className="flex h-full flex-col overflow-hidden">
+    // `h-dvh`, pas `h-full` : `#root` ne porte qu'un `min-height` (voir
+    // `CourseProvider`), donc un pourcentage ne résout contre rien et la
+    // div reprenait la hauteur de son seul contenu — sans jamais vraiment
+    // remplir l'écran, ni donc avoir quoi que ce soit à couper avec
+    // `overflow-hidden`. `dvh` se mesure contre le viewport directement,
+    // pas contre le parent. Une leçon ne doit jamais pouvoir défiler, le
+    // contenu est conçu pour tenir dans l'écran — d'où `overflow-hidden`
+    // plutôt que `min-h-dvh`, qui laisserait grandir au lieu de couper.
+    <div className="flex h-dvh flex-col overflow-hidden">
       <header className="flex items-center gap-3 px-4 py-3">
         <button
           type="button"
@@ -196,7 +202,14 @@ export function SessionScreen({ title, exercises, onQuit, onFinish, exam }: Sess
         )}
       </header>
 
-      <main className="flex flex-1 flex-col px-4 pb-6">
+      {/* `min-h-0` : sans lui, un enfant flex-1 en colonne se voit imposer une
+          hauteur minimale égale à son contenu, ce qui neutralise
+          `overflow-y-auto` juste en dessous — le classique piège flexbox.
+          Filet de sécurité, pas le comportement voulu : un rappel de
+          grammaire trop long pour l'écran doit rester lisible en entier
+          plutôt que couper son bouton, même si l'intention reste que rien
+          n'ait normalement besoin de défiler ici. */}
+      <main className="flex min-h-0 flex-1 flex-col overflow-y-auto px-4 pb-6">
         <AnimatePresence mode="wait">
           <motion.div
             key={`${current.id}:${position}`}

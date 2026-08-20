@@ -92,21 +92,26 @@ export function PairBoard({
     <div className="flex flex-1 flex-col gap-6">
       <p className="text-sm font-bold uppercase tracking-wide text-ink-faint">{prompt}</p>
 
-      <div className="grid grid-cols-2 content-start gap-3">
-        {columns.map((column, columnIndex) => (
-          <div key={columnIndex} className="flex flex-col gap-3">
-            {column.map((token) => (
-              <TokenButton
-                key={token.key}
-                token={token}
-                solved={solvedKeys.has(token.key)}
-                selected={selected?.key === token.key}
-                shaking={wrong === token.key}
-                onPick={pick}
-              />
-            ))}
-          </div>
-        ))}
+      {/* La grille se centre dans l'espace disponible plutôt que de s'aligner
+          en haut : avec quatre paires, elle ne remplissait qu'un quart de
+          l'écran et laissait le reste vide, comme une carte oubliée là. */}
+      <div className="flex flex-1 flex-col justify-center">
+        <div className="grid grid-cols-2 gap-3">
+          {columns.map((column, columnIndex) => (
+            <div key={columnIndex} className="flex flex-col gap-3">
+              {column.map((token) => (
+                <TokenButton
+                  key={token.key}
+                  token={token}
+                  solved={solvedKeys.has(token.key)}
+                  selected={selected?.key === token.key}
+                  shaking={wrong === token.key}
+                  onPick={pick}
+                />
+              ))}
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   )
@@ -138,7 +143,7 @@ function TokenButton({
       disabled={solved}
       animate={shaking ? { x: [0, -7, 7, -4, 0] } : { x: 0 }}
       transition={{ duration: 0.3 }}
-      className={`min-h-16 rounded-2xl border-2 px-3 py-3 text-center font-bold break-words transition-colors ${tone}`}
+      className={`min-h-20 rounded-2xl border-2 px-3 py-4 text-center text-lg font-bold break-words transition-colors ${tone}`}
     >
       {token.label}
     </motion.button>

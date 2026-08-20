@@ -252,8 +252,15 @@ export type Exercise =
   | ConjugationChoiceExercise
   | ConjugationMatchExercise
 
-/** Nombre de paires par manche d'association. */
+/** Nombre de paires minimal pour tenter une manche d'association. */
 export const MATCH_SIZE = 4
+/**
+ * Nombre de paires maximal d'une manche : la difficulté grandit avec ce qu'il
+ * y a à mélanger — reconnaître six paires au milieu de douze jetons n'est pas
+ * la même épreuve que quatre au milieu de huit — plutôt que de rester figée à
+ * `MATCH_SIZE` une fois le bassin assez large pour offrir plus de choix.
+ */
+const MATCH_SIZE_MAX = 6
 /** Nombre de mots proposés dans une banque de cloze. */
 const BANK_SIZE = 4
 /** Nombre d'options (bonne réponse comprise) proposées dans un QCM. */
@@ -321,14 +328,17 @@ function buildBank(match: string, vocab: Vocab, pool: readonly Vocab[], rng: Rng
 /**
  * Manches d'association.
  *
- * Le nombre demandé est plafonné par ce que le bassin peut réellement offrir
- * de manches *différentes* : avec exactement quatre mots disponibles, tirer
- * quatre paires rend toujours les mêmes quatre, et l'on enchaînait trois fois
- * de suite la même grille à l'ordre près — la répétition la plus visible de
- * toute la leçon.
+ * La taille grandit avec le bassin (voir `MATCH_SIZE_MAX`), plafonnée à ce
+ * qu'il peut réellement offrir de manches *différentes* : avec exactement
+ * autant de mots disponibles que la taille visée, tirer une manche rend
+ * toujours les mêmes mots, et l'on enchaînait plusieurs fois de suite la
+ * même grille à l'ordre près — la répétition la plus visible de toute la
+ * leçon. La boucle ci-dessous s'en protège en abandonnant une manche qui ne
+ * peut pas se distinguer des précédentes plutôt que de la répéter.
  */
 function matchRounds(pool: readonly Vocab[], rounds: number, rng: Rng): MatchExercise[] {
   if (pool.length < MATCH_SIZE) return []
+  const size = Math.min(MATCH_SIZE_MAX, pool.length)
 
   const result: MatchExercise[] = []
   const seen = new Set<string>()
@@ -338,7 +348,7 @@ function matchRounds(pool: readonly Vocab[], rounds: number, rng: Rng): MatchExe
   for (let round = 0; round < rounds; round++) {
     let pairs: Vocab[] | null = null
     for (let attempt = 0; attempt < 8 && !pairs; attempt++) {
-      const draw = sample(pool, MATCH_SIZE, rng)
+      const draw = sample(pool, size, rng)
       const composition = draw
         .map((word) => word.id)
         .sort()
