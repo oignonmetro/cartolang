@@ -338,17 +338,17 @@ function buildBank(match: string, vocab: Vocab, pool: readonly Vocab[], rng: Rng
 /**
  * Manches d'association.
  *
- * La taille grandit avec le bassin (voir `MATCH_SIZE_MAX`), plafonnée à ce
- * qu'il peut réellement offrir de manches *différentes* : avec exactement
- * autant de mots disponibles que la taille visée, tirer une manche rend
- * toujours les mêmes mots, et l'on enchaînait plusieurs fois de suite la
- * même grille à l'ordre près — la répétition la plus visible de toute la
- * leçon. La boucle ci-dessous s'en protège en abandonnant une manche qui ne
- * peut pas se distinguer des précédentes plutôt que de la répéter.
+ * La taille varie entre `MATCH_SIZE` et `MATCH_SIZE_MAX` — tirée au sort à
+ * chaque manche, pas fixée une fois pour l'appel entier — plafonnée à ce que
+ * le bassin peut réellement offrir. Sans ce tirage, un bassin de six mots ou
+ * plus donnait toujours exactement six paires : `Math.min` retombe sur son
+ * plafond dès qu'il est atteignable, jamais sur une valeur entre les deux.
+ * La variété vaut aussi pour la difficulté que pour l'apparence — la grille
+ * change de forme d'une manche à l'autre plutôt que de toujours remplir
+ * l'écran de la même façon une fois le bassin assez large.
  */
 function matchRounds(pool: readonly Vocab[], rounds: number, rng: Rng): MatchExercise[] {
   if (pool.length < MATCH_SIZE) return []
-  const size = Math.min(MATCH_SIZE_MAX, pool.length)
 
   const result: MatchExercise[] = []
   const seen = new Set<string>()
@@ -356,6 +356,7 @@ function matchRounds(pool: readonly Vocab[], rounds: number, rng: Rng): MatchExe
   // plutôt que d'accepter un doublon. La borne évite de tourner en rond quand
   // le bassin ne peut tout simplement plus offrir de composition inédite.
   for (let round = 0; round < rounds; round++) {
+    const size = between(MATCH_SIZE, Math.min(MATCH_SIZE_MAX, pool.length), rng)
     let pairs: Vocab[] | null = null
     for (let attempt = 0; attempt < 8 && !pairs; attempt++) {
       const draw = sample(pool, size, rng)
