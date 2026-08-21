@@ -262,23 +262,67 @@ describe('taille des manches d’association', () => {
     word(`w${i}`, `word${i}`, `mot${i}`, `Example ${i}.`),
   )
 
-  it('grandit avec le bassin disponible, sans dépasser six paires', () => {
-    // Un bassin de dix mots ne tient pas dans un seul bloc (blocsOf en fait
-    // 4 puis 6, voir BLOCK_SIZE) : le second bloc hérite du premier et peut
-    // donc offrir des manches plus grandes que le minimum.
-    const sizes = new Set<number>()
+  const matchSizes = (lesson: Vocab[], seed: number, rank = 0, id = 'big') =>
+    buildLessonSession(lessonOf(id, lesson), 0, seed, {}, true, rank)
+      .filter((e) => e.kind === 'match')
+      .map((e) => e.pairs.length)
+
+  it('monte d’une paire à la fois et ne redescend jamais', () => {
+    // Régression : la taille était tirée au sort à chaque manche, si bien que
+    // la difficulté sautait dans les deux sens d'une grille à l'autre.
     for (let seed = 0; seed < 20; seed++) {
-      for (const exercise of buildLessonSession(lessonOf('big', BIG_LESSON), 0, seed, {}, true)) {
-        if (exercise.kind === 'match') sizes.add(exercise.pairs.length)
+      const sizes = matchSizes(BIG_LESSON, seed)
+      for (let i = 1; i < sizes.length; i++) {
+        expect(sizes[i]! - sizes[i - 1]!).toBeGreaterThanOrEqual(0)
+        expect(sizes[i]! - sizes[i - 1]!).toBeLessThanOrEqual(1)
       }
     }
-    expect(Math.max(...sizes)).toBeGreaterThan(4)
-    expect(Math.max(...sizes)).toBeLessThanOrEqual(6)
+  })
+
+  it('repart du plancher quand une nouvelle section commence', () => {
+    // C'est le rang zéro qui porte la remise à zéro : la leçon qui ouvre une
+    // section enseigne des lettres neuves, et relier six paires d'un coup
+    // dessus punirait le passage au lieu de l'accompagner.
+    for (let seed = 0; seed < 20; seed++) {
+      expect(matchSizes(BIG_LESSON, seed, 0)[0]).toBe(4)
+    }
+  })
+
+  it('grandit à mesure qu’on avance dans la section', () => {
+    // À graine égale la session est la même manche pour manche — `sample`
+    // mélange tout le bassin avant de couper, donc la taille demandée ne
+    // décale pas le tirage. Seule la difficulté change, et jamais vers le bas.
+    let total = 0
+    for (let seed = 0; seed < 20; seed++) {
+      const early = matchSizes(BIG_LESSON, seed, 0)
+      const late = matchSizes(BIG_LESSON, seed, 2)
+      expect(late.length).toBe(early.length)
+      early.forEach((size, index) => expect(late[index]!).toBeGreaterThanOrEqual(size))
+      total += late.reduce((sum, size) => sum + size, 0) - early.reduce((sum, size) => sum + size, 0)
+    }
+    expect(total).toBeGreaterThan(0)
+  })
+
+  it('atteint six paires au fil d’une section de deux leçons', () => {
+    // Les sections de « Lire le russe » n'ont que deux leçons de six mots :
+    // sans la rampe qui continue de manche en manche à l'intérieur d'une
+    // leçon, le rang seul plafonnerait à cinq et la grille de six ne se
+    // verrait jamais.
+    const section = new Set<number>()
+    for (let seed = 0; seed < 20; seed++) {
+      for (const rank of [0, 1]) for (const size of matchSizes(LESSON, seed, rank, `l${rank}`)) section.add(size)
+    }
+    expect(section.has(6)).toBe(true)
+  })
+
+  it('ne dépasse jamais six paires', () => {
+    for (let seed = 0; seed < 20; seed++) {
+      for (const size of matchSizes(BIG_LESSON, seed, 5)) expect(size).toBeLessThanOrEqual(6)
+    }
   })
 
   it('reste au minimum quand le bassin n’offre rien de plus', () => {
-    const session = buildLessonSession(lessonOf('u1-l1', LESSON.slice(0, 4)), 0, 1, {}, true)
-    const sizes = session.filter((e) => e.kind === 'match').map((e) => e.pairs.length)
+    const sizes = matchSizes(LESSON.slice(0, 4), 1, 3, 'u1-l1')
     expect(sizes.length).toBeGreaterThan(0)
     expect(sizes.every((size) => size === 4)).toBe(true)
   })

@@ -11,6 +11,7 @@ import {
   mistakesAllowed,
   nextNodeAfter,
   pathBefore,
+  sectionRank,
   solidity,
   stepKey,
 } from './unitPath'
@@ -212,6 +213,25 @@ describe('test de passage d’un checkpoint', () => {
     const path = buildUnitPath(U3, {}, {})
     expect(pathBefore('v1', path, 'v1-l1')).toEqual({ lessonIds: [], stepIds: [] })
     expect(pathBefore('v1', path, 'inconnu')).toEqual({ lessonIds: [], stepIds: [] })
+  })
+})
+
+describe('rang d’une leçon dans sa section', () => {
+  // Trois sections de deux leçons, comme « Lire le russe » : des lettres, puis
+  // des mots faits de ces lettres, et un checkpoint ouvre la suivante.
+  const ALPHA = unit('a', 6, [3, 5])
+  const ranks = (u: Unit) => u.lessons.map((lesson) => sectionRank(u, lesson.id))
+
+  it('repart de zéro à chaque checkpoint', () => {
+    expect(ranks(ALPHA)).toEqual([0, 1, 0, 1, 0, 1])
+  })
+
+  it('compte d’un bout à l’autre d’une unité sans checkpoint', () => {
+    expect(ranks(unit('b', 4))).toEqual([0, 1, 2, 3])
+  })
+
+  it('retombe sur le plancher pour une leçon étrangère à l’unité', () => {
+    expect(sectionRank(ALPHA, 'inconnue')).toBe(0)
   })
 })
 

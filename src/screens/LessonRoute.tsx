@@ -5,7 +5,7 @@ import { buildLessonSession } from '@/engine/exercises'
 import { seedFrom } from '@/engine/rng'
 import { findLesson } from '@/content/course'
 import { lessonDifficulty, type SessionOutcome } from '@/engine/progress'
-import { buildUnitPath, nextNodeAfter } from '@/engine/unitPath'
+import { buildUnitPath, nextNodeAfter, sectionRank } from '@/engine/unitPath'
 import { useProgress } from '@/store/progressStore'
 import { canSpeak } from '@/lib/speech'
 import { SessionScreen } from './SessionScreen'
@@ -55,6 +55,7 @@ function LessonSession({ lessonId }: { lessonId: string }) {
             seedFrom(entry.lesson.id, level, attempt),
             useProgress.getState().cards[course.id] ?? {},
             canSpeak,
+            sectionRank(entry.unit, entry.lesson.id),
           )
         : [],
     [entry, attempt, level, course.id],

@@ -162,6 +162,27 @@ function sectionsOf(unit: Unit): Lesson[][] {
   return sections
 }
 
+/**
+ * Rang d'une leçon dans sa section : zéro pour celle qui l'ouvre.
+ *
+ * C'est la mesure d'avancement dont les manches d'association tirent leur
+ * difficulté (voir `buildLessonSession`) : elles grandissent au fil de la
+ * section, puis retombent à leur plancher quand la suivante commence. Le
+ * checkpoint qui l'ouvre enseigne un alphabet neuf, et relier six lettres
+ * découvertes à l'écran précédent punirait ce passage au lieu de
+ * l'accompagner — l'exigence doit suivre la familiarité, pas la précéder.
+ *
+ * Zéro pour une leçon étrangère à l'unité : c'est le plancher, donc le repli
+ * le plus doux qu'un appel malformé puisse recevoir.
+ */
+export function sectionRank(unit: Unit, lessonId: string): number {
+  for (const section of sectionsOf(unit)) {
+    const rank = section.findIndex((lesson) => lesson.id === lessonId)
+    if (rank !== -1) return rank
+  }
+  return 0
+}
+
 /** Nombre de sections sur lesquelles un test de passage interroge. */
 const TESTED_SECTIONS = 2
 

@@ -258,7 +258,8 @@ export const MATCH_SIZE = 4
  * Nombre de paires maximal d'une manche : la difficulté grandit avec ce qu'il
  * y a à mélanger — reconnaître six paires au milieu de douze jetons n'est pas
  * la même épreuve que quatre au milieu de huit — plutôt que de rester figée à
- * `MATCH_SIZE` une fois le bassin assez large pour offrir plus de choix.
+ * `MATCH_SIZE` une fois le bassin assez large pour offrir plus de choix. C'est
+ * aussi ce que la grille peut montrer sans se replier (voir `PairBoard`).
  */
 const MATCH_SIZE_MAX = 6
 /** Nombre de mots proposés dans une banque de cloze. */
@@ -336,18 +337,22 @@ function buildBank(match: string, vocab: Vocab, pool: readonly Vocab[], rng: Rng
 }
 
 /**
- * Manches d'association.
+ * Manches d'association, en rampe : chaque manche ajoute une paire à la
+ * précédente, de `MATCH_SIZE` à `MATCH_SIZE_MAX`.
  *
- * La taille varie entre `MATCH_SIZE` et `MATCH_SIZE_MAX` — tirée au sort à
- * chaque manche, pas fixée une fois pour l'appel entier — plafonnée à ce que
- * le bassin peut réellement offrir. Sans ce tirage, un bassin de six mots ou
- * plus donnait toujours exactement six paires : `Math.min` retombe sur son
- * plafond dès qu'il est atteignable, jamais sur une valeur entre les deux.
- * La variété vaut aussi pour la difficulté que pour l'apparence — la grille
- * change de forme d'une manche à l'autre plutôt que de toujours remplir
- * l'écran de la même façon une fois le bassin assez large.
+ * `from` dit combien de crans la rampe a déjà montés avant cet appel — c'est
+ * lui qui la fait continuer d'un bloc au suivant, et d'une leçon à la
+ * suivante à l'intérieur d'une même section (voir `sectionRank`). Zéro
+ * repart du plancher.
+ *
+ * Ni taille fixe ni tirage au sort, donc. Une taille fixe retombait toujours
+ * sur son plafond dès qu'il était atteignable — six paires, six paires, six
+ * paires — et un tirage aléatoire faisait sauter la difficulté dans les deux
+ * sens d'une manche à l'autre. Monter d'un cran à la fois donne à la place
+ * une progression qui se sent : on relie quatre paires, puis cinq, puis six,
+ * et une nouvelle section redescend au plancher avec ses lettres neuves.
  */
-function matchRounds(pool: readonly Vocab[], rounds: number, rng: Rng): MatchExercise[] {
+function matchRounds(pool: readonly Vocab[], rounds: number, rng: Rng, from: number): MatchExercise[] {
   if (pool.length < MATCH_SIZE) return []
 
   const result: MatchExercise[] = []
@@ -356,7 +361,9 @@ function matchRounds(pool: readonly Vocab[], rounds: number, rng: Rng): MatchExe
   // plutôt que d'accepter un doublon. La borne évite de tourner en rond quand
   // le bassin ne peut tout simplement plus offrir de composition inédite.
   for (let round = 0; round < rounds; round++) {
-    const size = between(MATCH_SIZE, Math.min(MATCH_SIZE_MAX, pool.length), rng)
+    // Le bassin plafonne la rampe autant que `MATCH_SIZE_MAX` : les premiers
+    // blocs d'une leçon n'ont pas encore présenté six mots.
+    const size = Math.min(MATCH_SIZE + from + round, MATCH_SIZE_MAX, pool.length)
     let pairs: Vocab[] | null = null
     for (let attempt = 0; attempt < 8 && !pairs; attempt++) {
       const draw = sample(pool, size, rng)
@@ -373,6 +380,18 @@ function matchRounds(pool: readonly Vocab[], rounds: number, rng: Rng): MatchExe
     result.push({ kind: 'match', id: `match:${round}:${pairs.map((p) => p.id).join('-')}`, pairs })
   }
   return result
+}
+
+/**
+ * Départ d'une rampe calibrée pour finir sur la plus grande grille possible.
+ *
+ * Les sessions hors parcours — révision, entraînement, test de passage — n'ont
+ * pas de position dans une progression : rien n'y commence ni n'y recommence,
+ * et elles ne travaillent que du déjà-rencontré. Elles se règlent donc sur le
+ * haut de l'échelle plutôt que sur le plancher, qui est réservé à la découverte.
+ */
+function rampEndingAtMax(rounds: number): number {
+  return Math.max(0, MATCH_SIZE_MAX - MATCH_SIZE - rounds + 1)
 }
 
 /**
@@ -509,11 +528,18 @@ export function buildLessonSession(
    * session ne dépend pas d'un import à effet de bord.
    */
   canSpeak = false,
+  /**
+   * Rang de la leçon dans sa section (voir `sectionRank`). Fait monter la
+   * taille des manches d'association au fil d'une section, et la ramène à son
+   * plancher quand la suivante commence avec des lettres neuves. Zéro par
+   * défaut : hors parcours, une leçon part du plancher.
+   */
+  rank = 0,
 ): Exercise[] {
   const resolved = seed ?? seedFrom(lesson.id, level)
   switch (lesson.kind) {
     case 'vocab':
-      return buildVocabSession(lesson.vocab, cards, resolved, canSpeak)
+      return buildVocabSession(lesson.vocab, cards, resolved, canSpeak, rank)
     case 'grammar':
       return buildGrammarSession(lesson.id, lesson.points, lesson.notes, lesson.title, level, resolved)
     case 'conjugation':
@@ -620,6 +646,7 @@ function buildVocabSession(
   cards: Record<string, CardState>,
   seed: number,
   canSpeak: boolean,
+  rank: number,
 ): Exercise[] {
   const rng = createRng(seed)
   const blocks = blocksOf(shuffle(vocab, rng))
@@ -627,6 +654,11 @@ function buildVocabSession(
   const exercises: Exercise[] = []
   const pool: Vocab[] = []
   const served: Served = new Map()
+  // La rampe des manches d'association traverse les blocs au lieu de repartir
+  // du plancher à chacun, et démarre au rang de la leçon dans sa section :
+  // c'est ce qui la fait monter d'une leçon à l'autre. Une section n'a souvent
+  // que deux leçons — sans ce report, la sixième paire n'apparaîtrait jamais.
+  let ramp = rank
 
   for (const block of blocks) {
     pool.push(...block)
@@ -635,7 +667,9 @@ function buildVocabSession(
       .filter((word) => !cards[word.id])
       .map((word): IntroExercise => ({ kind: 'intro', id: `intro:${word.id}`, vocab: word }))
 
-    blockExercises.push(...matchRounds(pool, between(...MATCH_ROUNDS_PER_BLOCK, rng), rng))
+    const rounds = matchRounds(pool, between(...MATCH_ROUNDS_PER_BLOCK, rng), rng, ramp)
+    ramp += rounds.length
+    blockExercises.push(...rounds)
 
     // Les QCM vont d'abord aux mots les moins servis, et chacun reçoit un
     // énoncé qu'il n'a pas encore eu : c'est ce qui multiplie les questions
@@ -1237,7 +1271,8 @@ function buildMixedSession(
     return { kind: 'flashcard', id: `flash:${vocab.id}`, vocab, direction: 'to-known' }
   })
 
-  const rounds = matchRounds(vocabPool, vocabPool.length >= MATCH_SIZE ? 1 : 0, rng)
+  const count = vocabPool.length >= MATCH_SIZE ? 1 : 0
+  const rounds = matchRounds(vocabPool, count, rng, rampEndingAtMax(count))
   return [...shuffle(exercises, rng), ...rounds]
 }
 
@@ -1323,7 +1358,10 @@ export function buildCheckpointTest(
     return exercise ? [exercise] : []
   })
 
-  return [...questions, ...matchRounds(vocab, CHECKPOINT_MATCH_ROUNDS, rng)]
+  return [
+    ...questions,
+    ...matchRounds(vocab, CHECKPOINT_MATCH_ROUNDS, rng, rampEndingAtMax(CHECKPOINT_MATCH_ROUNDS)),
+  ]
 }
 
 /** Découpe une phrase de grammaire autour de son marqueur `___`. */
