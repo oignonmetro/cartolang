@@ -8,6 +8,7 @@ import {
   choiceAnswer,
   fillGap,
   isAnswerCorrect,
+  isPresentation,
   itemIdsOf,
   matchesAnswer,
   normalizeAnswer,
@@ -60,18 +61,72 @@ describe('session de leçon', () => {
     }
   })
 
-  it('découpe la leçon en blocs : chaque mot est présenté avant les mots du bloc suivant', () => {
-    // Six mots, blocs de quatre : le reliquat de deux mots rejoint le
-    // premier bloc plutôt que de former son propre bloc trop petit pour une
-    // manche d'association — donc un seul bloc de six ici.
+  it('alterne présentations et exercices au lieu de tout présenter d’un coup', () => {
+    // Six mots donnent deux blocs de trois : on découvre la moitié des mots,
+    // on les travaille, puis on découvre l'autre moitié. Présenter les six
+    // d'affilée demanderait de tout retenir avant le premier exercice.
     const session = kinds(buildLessonSession(lessonOf('u1-l1', LESSON), 0))
     const introIndexes = session
       .map((kind, index) => (kind === 'intro' ? index : -1))
       .filter((index) => index !== -1)
     expect(introIndexes).toHaveLength(LESSON.length)
-    // Tous les intros arrivent groupés avant le premier exercice d'un autre type.
+
+    // Des exercices s'intercalent : les présentations ne sont pas toutes
+    // groupées en tête de session.
     const firstNonIntro = session.findIndex((kind) => kind !== 'intro')
-    expect(introIndexes.every((index) => index < firstNonIntro)).toBe(true)
+    expect(introIndexes.some((index) => index > firstNonIntro)).toBe(true)
+    expect(session.slice(0, firstNonIntro)).toHaveLength(Math.ceil(LESSON.length / 2))
+  })
+
+  it('présente chaque mot avant de le faire travailler', () => {
+    // La contrainte que le découpage en blocs doit préserver : aucun exercice
+    // ne peut porter sur un mot qui n'a pas encore été présenté.
+    for (const seed of [1, 2, 3, 4, 5]) {
+      const session = buildLessonSession(lessonOf('u1-l1', LESSON), 0, seed, {}, true)
+      const introduced = new Set<string>()
+      for (const exercise of session) {
+        if (exercise.kind === 'intro') {
+          introduced.add(exercise.vocab.id)
+          continue
+        }
+        for (const id of itemIdsOf(exercise)) expect(introduced.has(id)).toBe(true)
+      }
+    }
+  })
+
+  it('répartit les mots entre les blocs plutôt que d’entasser le reste', () => {
+    // La taille des blocs vise quatre, mais le reste se répartit : cinq mots
+    // font 3 + 2, six font 3 + 3, sept font 4 + 3. Sans ça, un reliquat trop
+    // maigre était recollé au bloc précédent et l'on retombait sur un bloc
+    // unique — toutes les présentations d'affilée.
+    const introRuns = (count: number): number[] => {
+      const words = Array.from({ length: count }, (_, i) => word(`w${i}`, `word${i}`, `mot${i}`, `Example ${i}.`))
+      const session = kinds(buildLessonSession(lessonOf('u1-l1', words), 0))
+      const runs: number[] = []
+      let run = 0
+      for (const kind of session) {
+        if (kind === 'intro') run += 1
+        else if (run > 0) {
+          runs.push(run)
+          run = 0
+        }
+      }
+      if (run > 0) runs.push(run)
+      return runs
+    }
+
+    expect(introRuns(5)).toEqual([3, 2])
+    expect(introRuns(6)).toEqual([3, 3])
+    expect(introRuns(7)).toEqual([4, 3])
+    expect(introRuns(8)).toEqual([4, 4])
+  })
+
+  it('ne compte pas la découverte d’un mot dans le score de la leçon', () => {
+    // Déclarer nouveau un mot jamais vu n'est pas une faute : compté comme
+    // telle, huit mots annoncés nouveaux suffisaient à faire échouer la
+    // leçon d'un apprenant honnête.
+    const session = buildLessonSession(lessonOf('u1-l1', LESSON), 0)
+    expect(session.filter((exercise) => exercise.kind === 'intro').every(isPresentation)).toBe(true)
   })
 
   it('propose des manches d’association, des QCM puis des phrases à trou après la présentation', () => {

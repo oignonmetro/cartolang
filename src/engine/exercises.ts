@@ -266,9 +266,19 @@ const BANK_SIZE = 4
 /** Nombre d'options (bonne réponse comprise) proposées dans un QCM. */
 const CHOICE_SIZE = 3
 
-/** Les exercices qui présentent sans évaluer : ils ne comptent pas dans le score. */
+/**
+ * Les exercices qui présentent sans évaluer : ils ne comptent pas dans le
+ * score.
+ *
+ * `intro` en fait partie malgré ses trois boutons : découvrir un mot et le
+ * déclarer nouveau n'est pas une faute, c'est l'état normal d'un mot qu'on
+ * n'a jamais vu. Compté comme une erreur, il faisait échouer la leçon de
+ * l'apprenant honnête — huit mots annoncés nouveaux sur une vingtaine
+ * d'exercices suffisaient à passer sous la barre des 70 %. Les boutons
+ * servent à amorcer la révision espacée, pas à noter.
+ */
 export function isPresentation(exercise: Exercise): boolean {
-  return exercise.kind === 'rule'
+  return exercise.kind === 'rule' || exercise.kind === 'intro'
 }
 
 /** Les éléments dont dépend un exercice : ce sont eux qui reçoivent la note. */
@@ -439,18 +449,34 @@ function firstAvailableExercise(
 const BLOCK_SIZE = 4
 
 /**
- * Découpe une leçon en blocs. Un reliquat trop maigre rejoint le bloc
- * précédent plutôt que de former son propre petit bloc solitaire : mieux vaut
- * un dernier bloc un peu plus riche qu'un bloc de un seul élément, qui n'aurait
- * même pas de quoi remplir une manche d'association.
+ * Découpe une leçon en blocs de taille équilibrée.
+ *
+ * `size` est une cible, pas une coupe : le reste se répartit sur tous les
+ * blocs plutôt que de s'accumuler dans le dernier. Six mots donnent donc deux
+ * blocs de trois, là où un découpage strict donnait quatre puis deux — et,
+ * comme un bloc de deux n'a même pas de quoi remplir une manche
+ * d'association, l'ancienne version recollait ce reliquat au bloc précédent
+ * et retombait sur un unique bloc de six.
+ *
+ * C'était le défaut : présenter six mots d'affilée avant le premier exercice
+ * demande de tout retenir d'un coup, exactement ce que les blocs existent
+ * pour éviter. Répartir donne à la place la moitié des mots, les exercices
+ * qui les travaillent, puis l'autre moitié.
  */
 function blocksOf<T>(items: readonly T[], size = BLOCK_SIZE): T[][] {
+  if (items.length === 0) return []
+
+  const count = Math.ceil(items.length / size)
   const blocks: T[][] = []
-  for (let i = 0; i < items.length; i += size) blocks.push(items.slice(i, i + size))
-  const last = blocks[blocks.length - 1]
-  if (blocks.length > 1 && last!.length < size - 1) {
-    const previous = blocks[blocks.length - 2]!
-    blocks.splice(blocks.length - 2, 2, [...previous, ...last!])
+  let start = 0
+  for (let index = 0; index < count; index++) {
+    // Ce qui reste, divisé par les blocs restants : les premiers prennent
+    // l'élément en trop quand la division ne tombe pas juste. Mieux vaut
+    // découvrir un mot de plus tôt que tard, quand il reste des exercices
+    // derrière pour le travailler.
+    const take = Math.ceil((items.length - start) / (count - index))
+    blocks.push(items.slice(start, start + take))
+    start += take
   }
   return blocks
 }

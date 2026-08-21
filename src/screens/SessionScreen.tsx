@@ -120,8 +120,14 @@ export function SessionScreen({ title, exercises, onQuit, onFinish, exam }: Sess
       // Pas de son ici : il a déjà sonné dans l'exercice, à la validation
       // de la réponse (voir `useSessionSounds`). `answer` n'est appelé qu'à
       // l'appui sur « Continuer », une ou deux secondes plus tard.
-      record(exercise, correct)
-      advance(!correct && !exam)
+      if (!isPresentation(exercise)) record(exercise, correct)
+      // Une auto-évaluation (`rating` fourni : découverte d'un mot,
+      // flashcard) ne se refait pas. Reposer la question quelques écrans
+      // plus loin demanderait de réévaluer un mot qu'on vient de déclarer
+      // nouveau — pas un rattrapage, juste du temps perdu. Ce qui est mal su
+      // revient par la révision espacée, une séance plus tard, quand
+      // l'oublier est redevenu possible.
+      advance(!correct && !exam && rating === undefined)
     },
     [advance, attempt.seen, course.id, exam, gradeItem, record],
   )
