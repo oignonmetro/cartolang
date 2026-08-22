@@ -10,12 +10,14 @@ import {
   isAnswerCorrect,
   isPresentation,
   itemIdsOf,
+  lessonProgress,
   matchesAnswer,
   normalizeAnswer,
   splitGap,
   type Exercise,
 } from './exercises'
-import { createCard, type CardState } from './srs'
+import { seedFrom } from './rng'
+import { createCard, review, type CardState } from './srs'
 
 /** Emballe une liste de mots dans une leçon de vocabulaire. */
 function lessonOf(id: string, vocab: Vocab[]): VocabLesson {
@@ -386,6 +388,125 @@ describe('variété des exercices de vocabulaire', () => {
 
 })
 
+describe('ne pas retomber sur les mêmes exercices', () => {
+  const item = (index: number): PracticeItem => ({
+    kind: 'vocab',
+    id: LESSON[index].id,
+    vocab: LESSON[index],
+  })
+
+  /** Ce qu'une carte reçoit à sa `n`-ième révision, tout étant réussi. */
+  const overReviews = (base: Partial<CardState>, count: number): string[] =>
+    Array.from({ length: count }, (_, reps) => {
+      const entries = LESSON.map((_word, index) => ({
+        card: { ...createCard(LESSON[index].id, T0), ...base, reps },
+        item: item(index),
+      }))
+      const session = buildReviewSession(entries, undefined, true)
+      return session.find((exercise) => itemIdsOf(exercise).includes(LESSON[0].id))!.id
+    })
+
+  it('ne sert jamais deux fois de suite le même exercice sur une carte mûre', () => {
+    // Régression : la forme se tirait au sort à chaque révision, sans mémoire
+    // de la précédente. Sur une carte en production — deux formes possibles —
+    // le même exercice revenait jusqu'à treize fois d'affilée.
+    const seen = overReviews({ step: null, interval: 40 }, 12)
+    for (let i = 1; i < seen.length; i++) expect(seen[i]).not.toBe(seen[i - 1])
+  })
+
+  it('ne sert jamais deux fois de suite le même exercice sur une carte jeune', () => {
+    const seen = overReviews({ step: 0 }, 12)
+    for (let i = 1; i < seen.length; i++) expect(seen[i]).not.toBe(seen[i - 1])
+  })
+
+  it('fait le tour des énoncés disponibles plutôt que d’en privilégier un', () => {
+    // Une carte en apprentissage a une phrase à trou et quatre énoncés de QCM.
+    expect(new Set(overReviews({ step: 0 }, 10)).size).toBe(5)
+  })
+
+  it('ne redonne pas la même session quand les cartes ont avancé', () => {
+    const sessionAt = (reps: number) =>
+      buildReviewSession(
+        LESSON.map((_word, index) => ({
+          card: { ...createCard(LESSON[index].id, T0), reps },
+          item: item(index),
+        })),
+        undefined,
+        true,
+      )
+        .map((exercise) => exercise.id)
+        .join('|')
+
+    // Régression : la graine par défaut ne tenait qu'au nombre de cartes et à
+    // la première d'entre elles — deux choses qui se répètent d'un jour à
+    // l'autre, les cartes échues ensemble revenant ensemble.
+    expect(new Set([0, 1, 2, 3].map(sessionAt)).size).toBe(4)
+  })
+
+  it('redonne la même session tant que rien n’a été répondu', () => {
+    // La contrepartie : une session interrompue se reprend à l'identique.
+    const entries = LESSON.map((_word, index) => ({
+      card: createCard(LESSON[index].id, T0),
+      item: item(index),
+    }))
+    expect(buildReviewSession(entries, undefined, true).map((e) => e.id)).toEqual(
+      buildReviewSession(entries, undefined, true).map((e) => e.id),
+    )
+  })
+
+  it('ne redonne pas la même leçon quand on la rejoue', () => {
+    // Régression : la graine d'une leçon tenait au seul compteur de
+    // tentatives, qui ne bouge qu'avec « Recommencer » — rouvrir la leçon
+    // repartait donc de zéro et rejouait la même session. Et l'avancement des
+    // cartes ne suffit pas à lui seul : `srs.review` laisse volontairement où
+    // elle est une carte revue le jour même.
+    const lesson = lessonOf('u1-l1', LESSON)
+    const cards: Record<string, CardState> = {}
+    const sessions: string[] = []
+    let now = T0
+
+    for (let pass = 0; pass < 4; pass++) {
+      const seed = seedFrom(lesson.id, 0, 0, lessonProgress(lesson, cards))
+      sessions.push(
+        buildLessonSession(lesson, 0, seed, cards, true)
+          .map((exercise) => exercise.id)
+          .join('|'),
+      )
+      for (const vocab of LESSON) {
+        now += 30_000
+        cards[vocab.id] = review(cards[vocab.id] ?? createCard(vocab.id, now), 'good', now)
+      }
+    }
+    expect(new Set(sessions).size).toBe(4)
+  })
+
+  it('redonne la même leçon tant que rien n’a été répondu', () => {
+    const lesson = lessonOf('u1-l1', LESSON)
+    const cards: Record<string, CardState> = Object.fromEntries(
+      LESSON.map((vocab) => [vocab.id, createCard(vocab.id, T0)]),
+    )
+    const build = () =>
+      buildLessonSession(lesson, 0, seedFrom(lesson.id, 0, 0, lessonProgress(lesson, cards)), cards, true)
+        .map((exercise) => exercise.id)
+        .join('|')
+    expect(build()).toBe(build())
+  })
+
+  it('ne sert pas le même exercice à la révision et à l’entraînement du jour', () => {
+    // Les deux étapes se suivent sur le parcours : tomber sur le même
+    // exercice à quelques minutes d'intervalle ne teste rien de plus.
+    const entries = LESSON.map((_word, index) => ({
+      card: { ...createCard(LESSON[index].id, T0), step: null, interval: 40, reps: 3 },
+      item: item(index),
+    }))
+    const target = (session: Exercise[]) =>
+      session.find((exercise) => itemIdsOf(exercise).includes(LESSON[0].id))!.id
+    expect(target(buildPracticeSession(entries, undefined, true))).not.toBe(
+      target(buildReviewSession(entries, undefined, true)),
+    )
+  })
+})
+
 describe('session de révision', () => {
   const entries = (states: Partial<CardState>[]): { card: CardState; item: PracticeItem }[] =>
     states.map((state, index) => ({
@@ -428,10 +549,12 @@ describe('session de révision', () => {
   it('varie la reconnaissance entre QCM et phrase à trou', () => {
     // Régression : la carte encore en apprentissage ne recevait jamais de QCM
     // en révision, alors que la leçon d'origine en proposait déjà plusieurs.
+    // La variété se prend d'une révision à l'autre, pas d'une graine à
+    // l'autre : c'est le nombre de répétitions qui fait tourner les formes.
     const kinds = new Set<string>()
-    for (let seed = 0; seed < 20; seed++) {
-      const fragile = entries([{ step: 0 }, { step: 0 }, { step: 1 }, { step: 0 }])
-      for (const e of buildReviewSession(fragile, seed)) kinds.add(e.kind)
+    for (let reps = 0; reps < 6; reps++) {
+      const fragile = entries([{ step: 0, reps }, { step: 0, reps }, { step: 1, reps }, { step: 0, reps }])
+      for (const e of buildReviewSession(fragile)) kinds.add(e.kind)
     }
     expect(kinds).toContain('choice')
     expect(kinds).toContain('cloze')
@@ -782,10 +905,11 @@ describe('révision toutes natures confondues', () => {
       })
     }
     // La révision, elle, reconnaît d'abord : QCM ou phrase à trou avec sa
-    // traduction — jamais la phrase à trou nue, réservée aux cartes mûres.
+    // traduction — jamais la phrase à trou nue, réservée aux cartes mûres. Les
+    // deux se relaient d'une révision à la suivante.
     const kinds = new Set<string>()
-    for (let seed = 0; seed < 20; seed++) {
-      const [review] = buildReviewSession([{ card, item }], seed)
+    for (let reps = 0; reps < 4; reps++) {
+      const [review] = buildReviewSession([{ card: { ...card, reps }, item }])
       kinds.add(review!.kind)
       if (review!.kind === 'grammar-gap') expect(review).toMatchObject({ cue: 'translation' })
     }
@@ -803,8 +927,8 @@ describe('révision toutes natures confondues', () => {
     }
     const mature: CardState = { ...createCard('f1', T0), step: null, interval: 10 }
     const cues = new Set<string>()
-    for (let seed = 0; seed < 20; seed++) {
-      const [exercise] = buildReviewSession([{ card: mature, item }], seed)
+    for (let reps = 0; reps < 4; reps++) {
+      const [exercise] = buildReviewSession([{ card: { ...mature, reps }, item }])
       expect(exercise!.kind).toBe('conjugation')
       if (exercise!.kind === 'conjugation') cues.add(exercise.cue)
     }

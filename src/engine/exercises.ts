@@ -1150,6 +1150,90 @@ function recallStage(card: CardState): RecallStage {
 }
 
 /**
+ * Fait tourner une liste de `by` crans.
+ *
+ * C'est ce qui remplace le tirage au sort dans le choix de la forme d'un
+ * exercice. Un tirage indépendant retombe sur la même forme une fois sur
+ * deux quand il n'y en a que deux, et les tirages successifs d'une carte
+ * revue chaque jour n'ont aucune mémoire l'un de l'autre : mesuré sur une
+ * carte mûre toujours réussie, le même exercice revenait treize fois de
+ * suite. Une rotation, elle, ne peut pas répéter tant que la liste offre
+ * plus d'une forme.
+ */
+function rotate<T>(items: readonly T[], by: number): T[] {
+  if (items.length === 0) return []
+  const at = ((Math.trunc(by) % items.length) + items.length) % items.length
+  return [...items.slice(at), ...items.slice(0, at)]
+}
+
+/**
+ * Combien de fois une carte a déjà été répondue.
+ *
+ * Aucun champ ne le compte à lui seul : `reps` ne démarre qu'à la graduation
+ * (les paliers d'apprentissage, à une puis dix minutes, ne l'incrémentent
+ * pas), et `step` retombe à zéro à chaque rechute. Les trois additionnés
+ * avancent, eux, à chaque réponse — c'est tout ce qu'on demande à un compteur
+ * de rotation. Les deux seules collisions possibles, la graduation et la
+ * rechute, changent aussi d'échelon : la forme servie change donc de toute
+ * façon.
+ */
+function answersTo(card: CardState): number {
+  return card.reps + card.lapses + (card.step ?? 0)
+}
+
+/**
+ * Le rang d'une carte dans sa propre rotation.
+ *
+ * `drill` décale d'un cran, pour que la révision et l'entraînement d'une même
+ * journée — deux étapes qui se suivent sur le parcours — ne servent pas le
+ * même exercice sur le même mot à quelques minutes d'intervalle.
+ */
+function turnOf(card: CardState, drill: boolean): number {
+  return answersTo(card) + (drill ? 1 : 0)
+}
+
+/**
+ * Une façon de faire travailler un mot. Les échelons n'en offrent pas les
+ * mêmes : voir `vocabFormsFor`.
+ */
+type VocabForm =
+  | { kind: 'cloze' }
+  | { kind: 'type'; direction: Direction }
+  | { kind: 'choice'; cue: ChoiceCue }
+
+/**
+ * Les formes qu'un échelon autorise, dans l'ordre où elles se succèdent.
+ *
+ * La production ne redescend jamais vers la reconnaissance : un mot mûr
+ * alterne entre saisie libre et phrase à trou, il ne revient pas au QCM. La
+ * variété se prend donc là où elle est légitime — à la reconnaissance, où les
+ * quatre énoncés du QCM sont autant d'exercices réellement différents.
+ *
+ * Un mot sans phrase d'exemple perd la forme `cloze` en chemin (`clozeFor`
+ * rend `null`) et se rabat sur la suivante ; il n'a alors qu'une forme à son
+ * échelon mûr, et rien ici ne peut y remédier — c'est au contenu de fournir
+ * une phrase.
+ */
+function vocabFormsFor(stage: RecallStage, vocab: Vocab, canSpeak: boolean): VocabForm[] {
+  if (stage === 'produce') return [{ kind: 'type', direction: 'to-learning' }, { kind: 'cloze' }]
+  if (stage === 'comprehend') return [{ kind: 'type', direction: 'to-known' }, { kind: 'cloze' }]
+  return [{ kind: 'cloze' }, ...cuesFor(vocab, canSpeak).map((cue) => ({ kind: 'choice' as const, cue }))]
+}
+
+/** Construit la forme demandée, ou `null` si le mot ne peut pas la soutenir. */
+function vocabFormExercise(
+  form: VocabForm,
+  vocab: Vocab,
+  /** Bassin des leurres et des banques de mots ; `null` retire l'aide. */
+  pool: readonly Vocab[] | null,
+  rng: Rng,
+): Exercise | null {
+  if (form.kind === 'cloze') return clozeFor(vocab, pool, rng)
+  if (form.kind === 'type') return { kind: 'type', id: `type:${vocab.id}`, vocab, direction: form.direction }
+  return pool ? choiceFor(vocab, form.cue, pool, rng) : null
+}
+
+/**
  * Session mélangée à partir de cartes existantes.
  *
  * `unaided` distingue les deux usages : la révision laisse les aides
@@ -1181,14 +1265,16 @@ function buildMixedSession(
 
   const exercises = entries.map(({ card, item }): Exercise => {
     const unaided = drill || card.interval >= UNAIDED_INTERVAL
+    const turn = turnOf(card, drill)
 
     if (item.kind === 'grammar') {
       // Reconnaître avant de produire : tant que la carte est jeune, la
-      // phrase entière (QCM) et la phrase à trou en banque se relaient au
-      // hasard plutôt que de retomber toujours sur le même gabarit — la carte
-      // mûre, elle, reste sur la production, sans repli vers le plus facile.
-      if (!unaided) {
-        const choice = rng() < 0.5 ? grammarChoiceFor(item.point, rng) : null
+      // phrase entière (QCM) et la phrase à trou en banque se relaient d'une
+      // révision à l'autre plutôt que de retomber sur le même gabarit — la
+      // carte mûre, elle, reste sur la production, sans repli vers le plus
+      // facile.
+      if (!unaided && turn % 2 === 1) {
+        const choice = grammarChoiceFor(item.point, rng)
         if (choice) return choice
       }
       return {
@@ -1203,7 +1289,10 @@ function buildMixedSession(
     }
 
     if (item.kind === 'conjugation') {
-      const fromFrench = Boolean(item.verb.translation) && rng() < 0.35
+      // L'infinitif français ne peut ouvrir l'énoncé que si l'auteur l'a
+      // écrit ; sans lui la rotation n'a qu'un énoncé et ne tourne pas.
+      const cues: ConjugationCue[] = item.verb.translation ? ['verb', 'translation'] : ['verb']
+      const fromFrench = rotate(cues, turn)[0] === 'translation'
       // Une carte encore en apprentissage se reconnaît, elle ne se produit
       // pas : réclamer une forme rencontrée le jour même n'enseigne que
       // l'échec. C'est ce que le vocabulaire fait déjà avec sa flashcard.
@@ -1232,38 +1321,24 @@ function buildMixedSession(
     const vocab = item.vocab
     const stage = recallStage(card)
 
-    if (stage === 'produce') {
-      const cloze = clozeFor(vocab, null, rng)
-      if (cloze && rng() < 0.5) return cloze
-      return { kind: 'type', id: `type:${vocab.id}`, vocab, direction: 'to-learning' }
+    // La phrase à trou porte le mot dans la langue apprise : elle reste un
+    // rappel, mais le contexte le tire, là où la page blanche ne tire rien.
+    // Sa banque de mots disparaît dès que la carte tient — et toujours à la
+    // production, où c'est justement l'aide qu'on vient retirer. À la
+    // reconnaissance elle reste même à l'entraînement : la retirer
+    // reviendrait à réclamer de mémoire un mot vu quelques minutes plus tôt.
+    const aided = stage === 'recognize' || !unaided
+    const pool = stage === 'produce' || !aided ? null : vocabPool
+
+    // Chaque révision avance d'un cran dans les formes de l'échelon : le mot
+    // ne peut pas recevoir deux fois de suite le même exercice tant que son
+    // échelon en offre plus d'un. Le QCM ne se construit qu'avec un bassin —
+    // il n'apparaît donc qu'à la reconnaissance, jamais en repli sur une
+    // carte mûre, qui ne doit pas redescendre vers le plus facile.
+    for (const form of rotate(vocabFormsFor(stage, vocab, canSpeak), turn)) {
+      const exercise = vocabFormExercise(form, vocab, form.kind === 'choice' ? vocabPool : pool, rng)
+      if (exercise) return exercise
     }
-
-    if (stage === 'comprehend') {
-      // La phrase à trou porte le mot anglais : elle reste un rappel dans la
-      // langue apprise, mais le contexte le tire, là où la page blanche ne
-      // tire rien. À défaut, on demande le sens — réponse en français.
-      const cloze = clozeFor(vocab, unaided ? null : vocabPool, rng)
-      if (cloze && rng() < 0.5) return cloze
-      return { kind: 'type', id: `type:${vocab.id}`, vocab, direction: 'to-known' }
-    }
-
-    // Carte encore en apprentissage : reconnaissance seulement, et la banque
-    // de mots reste même à l'entraînement — retirer l'aide ici reviendrait à
-    // réclamer de mémoire un mot rencontré quelques minutes plus tôt. Ce que
-    // l'entraînement change, c'est la fréquence de la phrase à trou.
-    const cloze = clozeFor(vocab, vocabPool, rng)
-    if (cloze && rng() < (drill ? 0.55 : 0.35)) return cloze
-
-    // Le QCM est une deuxième façon de reconnaître, à côté de la phrase à
-    // trou : varier l'énoncé plutôt que retomber toujours sur le même gabarit.
-    // L'auto-évaluation de la flashcard ne se redemande pas ici : le mot l'a
-    // déjà reçue une fois, à sa présentation (voir `VocabIntro`) — c'est aux
-    // exercices qui suivent de repérer une fragilité, pas à l'apprenant de la
-    // déclarer une seconde fois.
-    const cue = sample(cuesFor(vocab, canSpeak), 1, rng)[0]
-    const choice = cue ? choiceFor(vocab, cue, vocabPool, rng) : null
-    if (choice) return choice
-    if (cloze) return cloze
 
     // Ni QCM (bassin trop pauvre pour un leurre distinct) ni phrase à trou
     // (pas d'exemple) : aucun test n'est constructible, l'auto-évaluation
@@ -1274,6 +1349,51 @@ function buildMixedSession(
   const count = vocabPool.length >= MATCH_SIZE ? 1 : 0
   const rounds = matchRounds(vocabPool, count, rng, rampEndingAtMax(count))
   return [...shuffle(exercises, rng), ...rounds]
+}
+
+/**
+ * Ce qui a bougé dans un lot de cartes depuis la dernière fois qu'on en a
+ * construit une session.
+ *
+ * Sans cette empreinte, la graine par défaut ne tenait qu'au nombre de cartes
+ * et à la première d'entre elles — deux choses qui se répètent d'un jour à
+ * l'autre, les cartes échues ensemble revenant ensemble. Deux révisions du
+ * même lot rendaient la même session, question pour question et dans le même
+ * ordre.
+ *
+ * Le compte des réponses ne suffit pas seul : `srs.review` laisse
+ * volontairement une carte revue le jour même là où elle est, si bien que
+ * rejouer une leçon deux fois de suite ne le faisait pas bouger.
+ * `lastReviewed`, lui, est réécrit à chaque réponse, massée ou non.
+ *
+ * Reste pur : aucune horloge lue ici, seulement l'état des cartes. La même
+ * entrée rend toujours la même session — c'est ce qui permet de reprendre
+ * une session interrompue là où on l'a laissée, et de la tester.
+ */
+function fingerprintOf(cards: readonly CardState[]): string {
+  let answers = 0
+  let last = 0
+  for (const card of cards) {
+    answers += answersTo(card)
+    last = Math.max(last, card.lastReviewed ?? 0)
+  }
+  return `${answers}:${last}`
+}
+
+function progressOf(entries: readonly { card: CardState }[]): string {
+  return fingerprintOf(entries.map((entry) => entry.card))
+}
+
+/**
+ * La même empreinte, pour une leçon qu'on rejoue.
+ *
+ * Une leçon rouverte repartait de `seedFrom(id, level, 0)` : le compteur de
+ * tentatives ne bouge qu'avec « Recommencer », si bien que revenir sur une
+ * leçon redonnait exactement la même session. Ce que l'apprenant a répondu
+ * entre-temps, lui, a bougé.
+ */
+export function lessonProgress(lesson: Lesson, cards: Record<string, CardState>): string {
+  return fingerprintOf(itemsOfLesson(lesson).flatMap((item) => cards[item.id] ?? []))
 }
 
 /**
@@ -1289,7 +1409,7 @@ export function buildReviewSession(
   if (entries.length === 0) return []
   return buildMixedSession(
     entries,
-    seed ?? seedFrom('review', entries.length, entries[0]!.item.id),
+    seed ?? seedFrom('review', entries.length, entries[0]!.item.id, progressOf(entries)),
     false,
     canSpeak,
   )
@@ -1316,7 +1436,7 @@ export function buildPracticeSession(
   if (entries.length === 0) return []
   return buildMixedSession(
     entries,
-    seed ?? seedFrom('practice', entries.length, entries[0]!.item.id),
+    seed ?? seedFrom('practice', entries.length, entries[0]!.item.id, progressOf(entries)),
     true,
     canSpeak,
   )

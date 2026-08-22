@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react'
 import { Navigate, useNavigate, useParams } from 'react-router-dom'
 import { useCourse } from '@/content/CourseProvider'
-import { buildLessonSession } from '@/engine/exercises'
+import { buildLessonSession, lessonProgress } from '@/engine/exercises'
 import { seedFrom } from '@/engine/rng'
 import { findLesson } from '@/content/course'
 import { lessonDifficulty, type SessionOutcome } from '@/engine/progress'
@@ -46,20 +46,20 @@ function LessonSession({ lessonId }: { lessonId: string }) {
   const [attempt, setAttempt] = useState(0)
   const [finished, setFinished] = useState<Finished | null>(null)
 
-  const exercises = useMemo(
-    () =>
-      entry
-        ? buildLessonSession(
-            entry.lesson,
-            level,
-            seedFrom(entry.lesson.id, level, attempt),
-            useProgress.getState().cards[course.id] ?? {},
-            canSpeak,
-            sectionRank(entry.unit, entry.lesson.id),
-          )
-        : [],
-    [entry, attempt, level, course.id],
-  )
+  const exercises = useMemo(() => {
+    if (!entry) return []
+    const cards = useProgress.getState().cards[course.id] ?? {}
+    return buildLessonSession(
+      entry.lesson,
+      level,
+      // L'avancement entre dans la graine : rouvrir une leçon un autre jour ne
+      // doit pas redonner la même session, exercice pour exercice.
+      seedFrom(entry.lesson.id, level, attempt, lessonProgress(entry.lesson, cards)),
+      cards,
+      canSpeak,
+      sectionRank(entry.unit, entry.lesson.id),
+    )
+  }, [entry, attempt, level, course.id])
 
   if (!entry) return <Navigate to="/" replace />
 
