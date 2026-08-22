@@ -161,3 +161,13 @@ lessons:
         example:
           text: Я тоже здесь.
           translation: Moi aussi, je suis ici.
+      - id: ru-u
+        term: у
+        translation: chez
+        alt:
+          - près de
+        pos: préposition
+        hint: "Introduit le possesseur devant « есть » : « у меня есть » (mot à mot « chez moi il y a »)."
+        example:
+          text: У меня есть чай.
+          translation: J'ai du thé.

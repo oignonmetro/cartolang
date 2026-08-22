@@ -1,0 +1,172 @@
+# Le russe n'a pas de verbe « avoir » : la possession se dit avec « у » et le
+# génitif du possesseur, une construction absente des autres unités de
+# grammaire (qui portent sur le genre, l'accord, la négation, le pluriel et
+# le lieu, mais jamais sur la possession). Deux leçons, comme le reste de la
+# piste : la règle régulière (1re et 2e personnes), puis son exception la
+# plus fréquente (le н qui s'intercale à la 3e personne après une
+# préposition). Ni l'une ni l'autre ne touchent au génitif des noms : la
+# chose possédée reste au nominatif, ce qui garde tout le vocabulaire déjà
+# enseigné réutilisable tel quel.
+
+id: rg6
+title: Avoir, avec « у »
+subtitle: у + génitif, là où le français dirait « avoir »
+icon: cup
+color: violet
+level: A1
+
+lessons:
+  - id: rg6-l1
+    title: У меня есть
+    notes: |
+      Le russe n'a pas de verbe « avoir ». Pour dire ce qu'on possède, on pose
+      trois éléments : `у` suivi du possesseur **au génitif**, puis `есть` ;
+      la chose possédée vient ensuite, et reste au nominatif, sans marque.
+
+      - `я` devient **меня** : `у меня есть брат`.
+      - `ты` devient **тебя** : `у тебя есть сумка`.
+      - `мы` devient **нас** : `у нас есть дом`.
+      - `вы` devient **вас** : `у вас есть чай`.
+
+      ! Ce n'est pas le possesseur qui porte le verbe, comme en français :
+      c'est la chose possédée qui reste inchangée, et le possesseur qui prend
+      une forme nouvelle. « У меня есть брат » se dit mot à mot « chez moi il
+      y a un frère ».
+    points:
+      - id: rg6-est-1
+        sentence: У ___ есть брат.
+        answer: меня
+        options:
+          - меня
+          - тебя
+          - нас
+          - вас
+        translation: J'ai un frère.
+        explanation: "« я » devient « меня » au génitif, la forme que réclame « у »."
+      - id: rg6-est-2
+        sentence: У ___ есть машина.
+        answer: тебя
+        options:
+          - меня
+          - тебя
+          - нас
+          - вас
+        translation: Tu as une voiture.
+        explanation: "« ты » devient « тебя » : même génitif, une autre personne."
+      - id: rg6-est-3
+        sentence: У ___ есть дом.
+        answer: нас
+        options:
+          - меня
+          - тебя
+          - нас
+          - вас
+        translation: Nous avons une maison.
+        explanation: "« мы » devient « нас » au génitif."
+      - id: rg6-est-4
+        sentence: У ___ есть чай?
+        answer: вас
+        options:
+          - меня
+          - тебя
+          - нас
+          - вас
+        translation: Avez-vous du thé ?
+        explanation: "« вы » devient « вас » ; la question se construit exactement comme l'affirmation."
+      - id: rg6-est-5
+        sentence: У ___ есть билет.
+        answer: меня
+        options:
+          - меня
+          - тебя
+          - нас
+          - вас
+        translation: J'ai un billet.
+        explanation: "« меня », déjà vu : la chose possédée change, la forme du possesseur non."
+      - id: rg6-est-6
+        sentence: У ___ есть сумка.
+        answer: тебя
+        options:
+          - меня
+          - тебя
+          - нас
+          - вас
+        translation: Tu as un sac.
+        explanation: "« тебя », comme au point 2."
+
+  - id: rg6-l2
+    title: У него, у неё, у них
+    notes: |
+      À la 3e personne, le génitif attendu (`его`, `её`, `их`) **gagne un н
+      au contact d'une préposition** : `у него`, `у неё`, `у них`. C'est une
+      règle générale du russe — toute préposition suivie d'un de ces trois
+      pronoms déclenche ce н, pas seulement `у`.
+
+      - `он` et `оно` → **него** : `у него есть кот`.
+      - `она` → **неё** : `у неё есть сестра`.
+      - `они` → **них** : `у них есть дом`.
+
+      ! Sans préposition devant, aucun н : `его дом` (« sa maison », dit de
+      lui) s'écrit sans н, parce que rien ne précède. C'est uniquement le
+      contact avec la préposition qui l'ajoute.
+    points:
+      - id: rg6-nego-1
+        sentence: У ___ есть брат.
+        answer: него
+        options:
+          - него
+          - его
+          - неё
+          - них
+        translation: Il a un frère.
+        explanation: "Après « у », « его » gagne un н : него, jamais его."
+      - id: rg6-nego-2
+        sentence: У ___ есть машина.
+        answer: неё
+        options:
+          - неё
+          - её
+          - него
+          - них
+        translation: Elle a une voiture.
+        explanation: "Même н après « у » pour « она » : неё, jamais её."
+      - id: rg6-nego-3
+        sentence: У ___ есть дом.
+        answer: них
+        options:
+          - них
+          - их
+          - него
+          - неё
+        translation: Ils ont une maison.
+        explanation: "« они » suit la même règle : них après une préposition."
+      - id: rg6-nego-4
+        sentence: У ___ есть кот.
+        answer: него
+        options:
+          - него
+          - его
+          - неё
+          - них
+        translation: Il a un chat.
+        explanation: "« него », comme au point 1 : la préposition impose le н."
+      - id: rg6-nego-5
+        sentence: У ___ есть сестра.
+        answer: неё
+        options:
+          - неё
+          - её
+          - него
+          - них
+        translation: Elle a une sœur.
+        explanation: "« неё », comme au point 2."
+      - id: rg6-nego-6
+        sentence: У ___ есть билет.
+        answer: них
+        options:
+          - них
+          - их
+          - него
+          - неё
+        translation: Ils ont un billet.
+        explanation: "« них », comme au point 3."
