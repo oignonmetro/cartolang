@@ -36,7 +36,7 @@ level: A1
 tagline: Lire l'alphabet, puis les premiers mots.
 status: available
 layout: library
-version: 6
+version: 7
 
 # Grammaire et conjugaison n'emploient **que des mots de la piste
 # Vocabulaire** — c'est une contrainte tenue, pas une intention : le
@@ -46,14 +46,27 @@ version: 6
 # pas du lexique. En retour, chaque phrase de grammaire rebrasse du vocabulaire
 # déjà vu, et les deux pistes se renforcent.
 tracks:
+  # Séparée de Vocabulaire, et placée avant elle : cette unité (u1) enseigne
+  # l'alphabet, pas du lexique à retenir, et elle conditionne tout le reste du
+  # cours (voir alphabetGatingRemarks ci-dessus). Un onglet à part le montre
+  # avant même d'ouvrir la piste — l'apprenant sait par où commencer sans
+  # avoir à déplier Vocabulaire pour le découvrir.
+  - id: alphabet
+    title: Lire le russe
+    subtitle: Déchiffrer le cyrillique, puis lire de vrais mots
+    kind: vocab
+    color: coral
+    icon: letters
+    units:
+      - u1
+
   - id: vocabulaire
     title: Vocabulaire
-    subtitle: Déchiffrer le cyrillique, puis lire de vrais mots
+    subtitle: Les premiers mots, une fois l'alphabet en main
     kind: vocab
     color: teal
     icon: book
     units:
-      - u1
       - u6
       - u7
       - u8

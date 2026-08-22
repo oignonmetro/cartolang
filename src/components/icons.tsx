@@ -184,6 +184,12 @@ const UNIT_ICONS: Record<string, (props: IconProps) => React.ReactElement> = {
       <path d="m15.5 8.5-2 5.5-5.5 2 2-5.5z" />
     </svg>
   ),
+  /** Un « А » cyrillique : la piste qui déchiffre l'alphabet, pas le lexique. */
+  letters: (props) => (
+    <svg {...svgProps(props)}>
+      <path d="M12 4 5.5 20M12 4l6.5 16M8 14h8" />
+    </svg>
+  ),
 }
 
 export function UnitIcon({ name, ...props }: IconProps & { name: string }) {
