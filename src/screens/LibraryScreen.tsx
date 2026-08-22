@@ -14,6 +14,19 @@ import { ProgressRing } from '@/components/ProgressRing'
 import { CoursePicker } from '@/components/CoursePicker'
 import { BoltIcon, ChevronLeftIcon, FlameIcon, StarIcon, UnitIcon } from '@/components/icons'
 
+/**
+ * Onglet ouvert par défaut : la première piste qui a effectivement une liste
+ * à montrer.
+ *
+ * Une piste à une seule unité (voir `selectTrack`) n'affiche jamais rien en
+ * elle-même — son clic redirige aussitôt vers le parcours. La retenir comme
+ * onglet par défaut laisserait l'écran s'ouvrir sur une liste à un seul
+ * élément que le clic lui-même ne montre jamais.
+ */
+function defaultTrackId(tracks: readonly Track[]): string {
+  return (tracks.find((track) => track.units.length !== 1) ?? tracks[0]!).id
+}
+
 /** Avancement d'une unité sur son parcours, pour la carte de la bibliothèque. */
 function doneNodes(
   unit: Unit,
@@ -86,7 +99,7 @@ export function LibraryScreen({ course }: { course: LibraryCourse }) {
   const xp = useProgress((state) => state.xp)
   const streak = useProgress((state) => state.streak)
 
-  const [activeTrackId, setActiveTrackId] = useState(course.tracks[0]!.id)
+  const [activeTrackId, setActiveTrackId] = useState(defaultTrackId(course.tracks))
   const [pickerOpen, setPickerOpen] = useState(false)
   const pickableCourses = useMemo(() => availableCourses(manifest), [manifest])
 
@@ -94,8 +107,21 @@ export function LibraryScreen({ course }: { course: LibraryCourse }) {
   // se réinitialise plutôt que de garder celui (potentiellement inexistant)
   // du cours précédent.
   useEffect(() => {
-    setActiveTrackId(course.tracks[0]!.id)
+    setActiveTrackId(defaultTrackId(course.tracks))
   }, [course.id])
+
+  // Une piste à une seule unité (l'alphabet russe) n'a rien à choisir en son
+  // sein : cliquer son onglet mène directement au parcours plutôt que
+  // d'afficher une liste à un seul élément qu'il faudrait rouvrir tout de
+  // suite. Ce n'est donc jamais l'onglet actif — `defaultTrackId` l'exclut.
+  const selectTrack = (id: string) => {
+    const target = course.tracks.find((candidate) => candidate.id === id)
+    if (target && target.units.length === 1) {
+      navigate(`/unite/${target.units[0]!.id}`)
+      return
+    }
+    setActiveTrackId(id)
+  }
 
   const track = course.tracks.find((candidate) => candidate.id === activeTrackId) ?? course.tracks[0]!
   const tone = TRACK_TONES[track.color] ?? TRACK_TONES.teal
@@ -151,7 +177,7 @@ export function LibraryScreen({ course }: { course: LibraryCourse }) {
           </div>
         </div>
 
-        <TrackTabs tracks={course.tracks} activeId={track.id} onSelect={setActiveTrackId} />
+        <TrackTabs tracks={course.tracks} activeId={track.id} onSelect={selectTrack} />
       </header>
 
       <main className="flex flex-1 flex-col gap-3 px-4 pt-4 pb-16">

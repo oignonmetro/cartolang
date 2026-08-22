@@ -36,7 +36,7 @@ level: A1
 tagline: Lire l'alphabet, puis les premiers mots.
 status: available
 layout: library
-version: 7
+version: 8
 
 # Grammaire et conjugaison n'emploient **que des mots de la piste
 # Vocabulaire** — c'est une contrainte tenue, pas une intention : le
@@ -51,8 +51,12 @@ tracks:
   # cours (voir alphabetGatingRemarks ci-dessus). Un onglet à part le montre
   # avant même d'ouvrir la piste — l'apprenant sait par où commencer sans
   # avoir à déplier Vocabulaire pour le découvrir.
+  #
+  # Piste à une seule unité, donc rien à choisir en son sein : l'écran de
+  # bibliothèque saute directement sur le parcours de l'unité au clic plutôt
+  # que d'afficher une liste à un seul élément (voir LibraryScreen).
   - id: alphabet
-    title: Lire le russe
+    title: Alphabet
     subtitle: Déchiffrer le cyrillique, puis lire de vrais mots
     kind: vocab
     color: coral
