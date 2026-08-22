@@ -1,0 +1,174 @@
+# Le cours touchait déjà le futur en passant — `купить` (rc2-l2) est déjà un
+# futur, perfectif, sans particule séparée — mais jamais le futur composé, qui
+# sert à tout le reste du vocabulaire déjà enseigné (travailler, parler,
+# habiter, aimer, manger, boire : aucun de ces verbes n'a d'équivalent
+# perfectif enseigné ici). Sans cette unité, l'apprenant ne peut parler
+# d'avenir qu'avec un seul verbe du cours. Deux leçons, sur le même principe
+# que les unités précédentes : la construction régulière, puis sa négation
+# (qui reprend la distinction «не»/«нет» de rg3-l2 plutôt que de la
+# réexpliquer).
+
+id: rg7
+title: Le futur composé
+subtitle: буду + infinitif, et sa négation
+icon: clock
+color: sky
+level: A1
+
+lessons:
+  - id: rg7-l1
+    title: Буду + infinitif
+    notes: |
+      Le russe distingue deux futurs selon l'aspect du verbe. Un verbe
+      imperfectif — une action sans terme marqué, comme `работать` ou
+      `говорить` — forme son futur avec `буду` **conjugué**, suivi de
+      l'infinitif, qui lui ne change jamais.
+
+      - `я буду работать`, `ты будешь работать`, `он будет работать`
+      - `мы будем работать`, `вы будете работать`, `они будут работать`
+
+      `буду` est le futur du verbe « être », le seul temps où ce verbe
+      reparaît (voir « la phrase sans être »). C'est lui seul qui porte la
+      personne ; l'infinitif reste identique à toutes les six.
+
+      ! Ne confondez pas ce futur avec celui de `купить` (`я куплю`, sans
+      `буду` ni infinitif) : les verbes perfectifs se conjuguent directement
+      au futur, par leurs propres terminaisons, sans passer par cette
+      construction.
+    points:
+      - id: rg7-bud-1
+        sentence: Я ___ работать.
+        answer: буду
+        options:
+          - буду
+          - будешь
+          - будет
+          - будем
+        translation: Je vais travailler.
+        explanation: "«буду», 1re personne du futur de «быть» : l'infinitif работать ne bouge pas."
+      - id: rg7-bud-2
+        sentence: Ты ___ говорить.
+        answer: будешь
+        options:
+          - буду
+          - будешь
+          - будет
+          - будете
+        translation: Tu vas parler.
+        explanation: "«будешь», 2e personne du singulier."
+      - id: rg7-bud-3
+        sentence: Он ___ жить здесь.
+        answer: будет
+        options:
+          - будет
+          - буду
+          - будешь
+          - будут
+        translation: Il va habiter ici.
+        explanation: "«будет», identique pour он, она et оно."
+      - id: rg7-bud-4
+        sentence: Мы ___ любить чай.
+        answer: будем
+        options:
+          - будем
+          - буду
+          - будете
+          - будут
+        translation: Nous allons aimer le thé.
+        explanation: "«будем», 1re personne du pluriel."
+      - id: rg7-bud-5
+        sentence: Вы ___ есть?
+        answer: будете
+        options:
+          - будете
+          - будем
+          - будешь
+          - будут
+        translation: Vous allez manger ?
+        explanation: "«будете», 2e personne du pluriel ; la question se construit sans rien ajouter."
+      - id: rg7-bud-6
+        sentence: Они ___ пить чай.
+        answer: будут
+        options:
+          - будут
+          - будет
+          - будем
+          - будете
+        translation: Ils vont boire du thé.
+        explanation: "«будут», seule forme du futur de «быть» qui se termine en -ут."
+
+  - id: rg7-l2
+    title: Nier le futur composé
+    notes: |
+      La négation suit la même règle qu'ailleurs : `не` se pose juste devant
+      `буду` et ses formes, jamais devant l'infinitif qui suit.
+
+      - `Я не буду работать сегодня.` Je ne vais pas travailler aujourd'hui.
+      - `Она не будет пить кофе.` Elle ne va pas boire de café.
+
+      L'infinitif garde toujours sa place, après le groupe `не буду` : c'est
+      la position de `не` qui compte, exactement comme au présent.
+
+      ! `нет` reste réservé à répondre « non » en tête de phrase ; `не` seul
+      se pose devant `буду`, jamais l'inverse (voir « nier avec не »).
+    points:
+      - id: rg7-neg-1
+        sentence: Я ___ работать сегодня.
+        answer: не буду
+        options:
+          - не буду
+          - буду не
+          - буду
+          - нет
+        translation: Je ne vais pas travailler aujourd'hui.
+        explanation: "«не» se pose devant «буду», jamais après : «не буду», jamais «буду не»."
+      - id: rg7-neg-2
+        sentence: Она ___ пить кофе.
+        answer: не будет
+        options:
+          - не будет
+          - будет не
+          - будет
+          - нет
+        translation: Elle ne va pas boire de café.
+        explanation: "Même ordre : «не» devant «будет»."
+      - id: rg7-neg-3
+        sentence: Мы ___ говорить сегодня.
+        answer: не будем
+        options:
+          - не будем
+          - будем не
+          - будем
+          - не
+        translation: Nous n'allons pas parler aujourd'hui.
+        explanation: "«не будем», jamais «будем не»."
+      - id: rg7-neg-4
+        sentence: Они ___ жить здесь.
+        answer: не будут
+        options:
+          - не будут
+          - будут не
+          - будут
+          - нет
+        translation: Ils ne vont pas habiter ici.
+        explanation: "«не» devant «будут», comme pour toutes les autres personnes."
+      - id: rg7-neg-5
+        sentence: Ты ___ есть?
+        answer: не будешь
+        options:
+          - не будешь
+          - будешь не
+          - будешь
+          - нет
+        translation: Tu ne vas pas manger ?
+        explanation: "La question garde le même ordre que l'affirmation : «не» devant «будешь»."
+      - id: rg7-neg-6
+        sentence: ___, я не буду работать.
+        answer: Нет
+        options:
+          - Нет
+          - Не
+          - Да
+          - И
+        translation: Non, je ne vais pas travailler.
+        explanation: "«нет» répond « non » en tête de phrase ; «не» reste réservé à l'intérieur, devant «буду»."
