@@ -86,7 +86,7 @@ lessons:
             person: они
             answer: живут
       - verb: идти
-        translation: aller à pied
+        translation: aller (à pied)
         tense: présent
         note: "Radical ид-, mêmes terminaisons accentuées que жить."
         forms:

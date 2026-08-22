@@ -129,7 +129,7 @@ lessons:
             person: они
             answer: пили
       - verb: идти
-        translation: aller à pied
+        translation: aller (à pied)
         tense: passé
         note: "Radical suppléé par ш- : шёл au masculin, шл- ailleurs."
         forms:

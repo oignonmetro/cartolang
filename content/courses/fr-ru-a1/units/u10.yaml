@@ -45,6 +45,14 @@ lessons:
         example:
           text: Почему нет?
           translation: Pourquoi pas ?
+      - id: ru-kak
+        term: как
+        translation: comment
+        pos: adverbe
+        hint: "Le même mot que dans « как дела » (déjà vu), mais qui s'emploie seul pour interroger sur la manière."
+        example:
+          text: Как тебя зовут?
+          translation: Comment tu t'appelles ?
       - id: ru-skolko
         term: сколько
         translation: combien
