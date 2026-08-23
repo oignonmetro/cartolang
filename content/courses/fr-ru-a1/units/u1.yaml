@@ -147,15 +147,24 @@ lessons:
           - voilà
         pos: adverbe
         hint: "Commence par un V, pas un B : « vot »."
+        example:
+          text: Вот сумка.
+          translation: Voici le sac.
       - id: ru-net
         term: нет
         translation: non
         pos: adverbe
         hint: "Trois traîtresses d'affilée serait trop : ici seul le Н piège, il se lit n."
+        example:
+          text: Сок? Нет.
+          translation: Du jus ? Non.
       - id: ru-sok
         term: сок
         translation: jus
         pos: nom
+        example:
+          text: Вот сок.
+          translation: Voici le jus.
       - id: ru-ruka
         term: рука
         translation: main
@@ -163,15 +172,24 @@ lessons:
           - bras
         pos: nom
         hint: "Le Р se lit r : « rouka »."
+        example:
+          text: Вот рука.
+          translation: Voici la main.
       - id: ru-sumka
         term: сумка
         translation: sac
         pos: nom
+        example:
+          text: Сумка там.
+          translation: Le sac est là-bas.
       - id: ru-metro
         term: метро
         translation: métro
         pos: nom
         hint: Le même mot qu'en français, mais il faut savoir lire le Р.
+        example:
+          text: Метро там.
+          translation: Le métro est là-bas.
 
   - id: u3-l1
     title: Formes nouvelles, sons connus
@@ -215,29 +233,50 @@ lessons:
         term: да
         translation: oui
         pos: adverbe
+        example:
+          text: Да, спасибо.
+          translation: Oui, merci.
       - id: ru-spasibo
         term: спасибо
         translation: merci
         pos: expression
         hint: Sept lettres, toutes connues désormais.
+        example:
+          text: Спасибо, мама.
+          translation: Merci, maman.
       - id: ru-voda
         term: вода
         translation: eau
         pos: nom
+        example:
+          text: Вот вода.
+          translation: Voici l'eau.
       - id: ru-stol
         term: стол
         translation: table
         pos: nom
+        example:
+          text: Стол там.
+          translation: La table est là-bas.
       - id: ru-dom
         term: дом
         translation: maison
         pos: nom
+        # « дома » est la forme qui dit « à la maison » ; le trou la vise
+        # explicitement, faute de quoi il ne trouverait pas « дом » dedans.
+        example:
+          text: Кот дома.
+          translation: Le chat est à la maison.
+        gap: дома
       - id: ru-bilet
         term: билет
         translation: billet
         alt:
           - ticket
         pos: nom
+        example:
+          text: Вот билет, спасибо.
+          translation: Voici le billet, merci.
 
   - id: u4-l1
     title: Formes nouvelles, sons nouveaux
@@ -285,30 +324,48 @@ lessons:
         term: город
         translation: ville
         pos: nom
+        example:
+          text: Вот город.
+          translation: Voici la ville.
       - id: ru-jurnal
         term: журнал
         translation: revue
         alt:
           - magazine
         pos: nom
+        example:
+          text: Журнал там.
+          translation: La revue est là-bas.
       - id: ru-shkaf
         term: шкаф
         translation: armoire
         pos: nom
+        example:
+          text: Шкаф дома.
+          translation: L'armoire est à la maison.
       - id: ru-mashina
         term: машина
         translation: voiture
         pos: nom
         hint: "Le mot dit aussi « machine » (le contexte tranche)."
+        example:
+          text: Вот машина.
+          translation: Voici la voiture.
       - id: ru-borshch
         term: борщ
         translation: bortsch
         pos: nom
         hint: Le Щ final, celui du peigne à queue.
+        example:
+          text: Борщ? Да, спасибо.
+          translation: Du bortsch ? Oui, merci.
       - id: ru-tsena
         term: цена
         translation: prix
         pos: nom
+        example:
+          text: Цена? Нет, спасибо.
+          translation: Le prix ? Non, merci.
 
   - id: u5-l1
     title: Voyelles iotées et signes
@@ -370,25 +427,43 @@ lessons:
         translation: je
         pos: pronom
         hint: Une seule lettre, un mot entier.
+        example:
+          text: Я дома.
+          translation: Je suis à la maison.
       - id: ru-ty
         term: ты
         translation: tu
         pos: pronom
         hint: Contient le Ы, le son sans équivalent français.
+        example:
+          text: Ты дома?
+          translation: Tu es à la maison ?
       - id: ru-moy
         term: мой
         translation: mon
         pos: adjectif
+        example:
+          text: Вот мой билет.
+          translation: Voici mon billet.
       - id: ru-chay
         term: чай
         translation: thé
         pos: nom
+        example:
+          text: Мой чай там.
+          translation: Mon thé est là-bas.
       - id: ru-dver
         term: дверь
         translation: porte
         pos: nom
         hint: Le signe mou final adoucit le Р, sans s'entendre lui-même.
+        example:
+          text: Вот дверь.
+          translation: Voici la porte.
       - id: ru-eshcho
         term: ещё
         translation: encore
         pos: adverbe
+        example:
+          text: Ещё чай?
+          translation: Encore du thé ?
