@@ -1,4 +1,4 @@
-import { Fragment, useMemo } from 'react'
+import { Fragment, useLayoutEffect, useMemo, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import type { PathCourse, Unit } from '@/content/schema'
@@ -29,6 +29,16 @@ export function PathScreen({ course }: { course: PathCourse }) {
 
   // Le chemin est linéaire ; on le redécoupe par unité pour l'affichage.
   const groups = useMemo(() => groupByUnit(path), [path])
+
+  // Étape courante : celle sur laquelle on doit tomber à l'ouverture, sans
+  // avoir à défiler jusqu'à elle sur un chemin bien avancé. Sans étape
+  // courante (chemin entièrement fait), c'est la dernière qui sert de repère.
+  const currentLessonId = (path.find((node) => node.status === 'available') ?? path[path.length - 1])?.lesson.id
+  const currentRef = useRef<HTMLDivElement>(null)
+
+  useLayoutEffect(() => {
+    currentRef.current?.scrollIntoView({ block: 'center' })
+  }, [course.id])
 
   return (
     <div className="mx-auto flex h-full w-full max-w-md flex-col overflow-hidden">
@@ -78,6 +88,7 @@ export function PathScreen({ course }: { course: PathCourse }) {
                   node={node}
                   offset={serpentine(index)}
                   onOpen={() => navigate(`/lecon/${node.lesson.id}`)}
+                  nodeRef={node.lesson.id === currentLessonId ? currentRef : undefined}
                 />
               ))}
               <ChestNode unlocked={nodes.every((node) => node.status === 'done')} />
@@ -126,14 +137,29 @@ function UnitBanner({ unit, index, nodes }: { unit: Unit; index: number; nodes: 
   )
 }
 
-function LessonBubble({ node, offset, onOpen }: { node: LessonNode; offset: number; onOpen: () => void }) {
+function LessonBubble({
+  node,
+  offset,
+  onOpen,
+  nodeRef,
+}: {
+  node: LessonNode
+  offset: number
+  onOpen: () => void
+  /** Attaché à l'étape courante, pour y défiler directement à l'ouverture (voir `PathScreen`). */
+  nodeRef?: React.RefObject<HTMLDivElement | null>
+}) {
   const tone = UNIT_TONES[node.unit.color]
   const locked = node.status === 'locked'
   const done = node.status === 'done'
   const active = node.status === 'available'
 
   return (
-    <div className="relative flex flex-col items-center py-3" style={{ transform: `translateX(${offset}px)` }}>
+    <div
+      ref={nodeRef}
+      className="relative flex flex-col items-center py-3"
+      style={{ transform: `translateX(${offset}px)` }}
+    >
       {/* Le badge se place sur le côté : au-dessus, il chevaucherait la
           bulle précédente sur le serpentin. */}
       {active && (

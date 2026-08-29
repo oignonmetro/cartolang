@@ -1,4 +1,4 @@
-import { useMemo } from 'react'
+import { useLayoutEffect, useMemo, useRef } from 'react'
 import { Navigate, useNavigate, useParams } from 'react-router-dom'
 import { useCourse } from '@/content/CourseProvider'
 import { findUnit } from '@/content/course'
@@ -40,6 +40,19 @@ export function UnitPathScreen() {
   // Sans repère, un parcours vierge est un mur de cercles identiques.
   const currentIndex = path.findIndex((node) => node.status === 'available')
   const doneCount = path.filter((node) => node.status === 'done').length
+
+  const mainRef = useRef<HTMLElement>(null)
+
+  // On entre directement sur l'étape courante plutôt qu'en haut du chemin :
+  // sur une unité bien avancée, faire défiler jusqu'à elle à chaque ouverture
+  // serait le premier geste obligé, à chaque fois. Sans étape courante (unité
+  // entièrement faite), c'est la dernière qui sert de repère.
+  useLayoutEffect(() => {
+    const main = mainRef.current
+    const target = currentIndex === -1 ? placed.nodes[placed.nodes.length - 1] : placed.nodes[currentIndex]
+    if (!main || !target) return
+    main.scrollTop = Math.max(0, target.y - main.clientHeight / 2)
+  }, [unit?.id])
 
   if (!unit || !mastery) return <Navigate to="/" replace />
 
@@ -102,6 +115,7 @@ export function UnitPathScreen() {
       </header>
 
       <main
+        ref={mainRef}
         className="flex min-h-0 flex-1 flex-col items-center overflow-y-auto px-4 pt-6 pb-10 [&>*]:shrink-0"
         // Un lavis très léger de la teinte de l'unité derrière le chemin :
         // sans lui, l'écran retombe sur le cream générique de partout ailleurs
