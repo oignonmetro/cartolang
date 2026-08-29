@@ -61,8 +61,8 @@ export function HardWordsScreen() {
   const navigate = useNavigate()
 
   return (
-    <div className="mx-auto flex min-h-full w-full max-w-md flex-col">
-      <header className="sticky top-0 z-20 border-b-2 border-line bg-cream/95 px-4 py-3 backdrop-blur">
+    <div className="mx-auto flex h-full w-full max-w-md flex-col overflow-hidden">
+      <header className="sticky top-0 z-20 shrink-0 border-b-2 border-line bg-cream/95 px-4 py-3 backdrop-blur">
         <div className="flex items-center gap-2">
           <button
             type="button"
@@ -76,7 +76,7 @@ export function HardWordsScreen() {
         </div>
       </header>
 
-      <main className="flex flex-1 flex-col gap-5 px-4 pt-5 pb-10">
+      <main className="flex min-h-0 flex-1 flex-col gap-5 overflow-y-auto px-4 pt-5 pb-10 [&>*]:shrink-0">
         {/* L'accroche, sans cadre : elle n'est pas cliquable, et lui donner la
             carte des lignes en dessous laisserait croire le contraire. */}
         <section className="flex items-start gap-3">

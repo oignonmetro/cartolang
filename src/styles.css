@@ -64,18 +64,32 @@
 
 @layer base {
   html {
+    height: 100%;
+    overflow: hidden;
     -webkit-text-size-adjust: 100%;
     -webkit-tap-highlight-color: transparent;
   }
 
   body {
     @apply bg-cream text-ink font-sans antialiased;
+    height: 100%;
+    overflow: hidden;
     overscroll-behavior-y: none;
   }
 
-  /* Zone sûre des téléphones à encoche, utile une fois empaqueté en APK. */
+  /*
+   * Cadre fixé à l'écran, jamais plus grand : la page elle-même ne doit
+   * jamais défiler, quels que soient l'appareil et son contenu — sans quoi
+   * l'en-tête d'un écran peut être repoussé hors champ (un onglet de plus
+   * dans la bibliothèque suffit à le déclencher). Chaque écran est un
+   * en-tête fixe surmontant une seule zone de défilement interne, taillée
+   * pour tenir exactement dans ce qui reste.
+   *
+   * Zone sûre des téléphones à encoche, utile une fois empaqueté en APK.
+   */
   #root {
-    min-height: 100dvh;
+    height: 100dvh;
+    overflow: hidden;
     padding-top: env(safe-area-inset-top);
     padding-bottom: env(safe-area-inset-bottom);
   }

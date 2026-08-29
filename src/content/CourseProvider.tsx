@@ -79,7 +79,7 @@ export function CourseProvider({ children }: { children: ReactNode }) {
 
   if (error) {
     return (
-      <div className="flex min-h-dvh flex-col items-center justify-center gap-4 p-8 text-center">
+      <div className="flex h-full flex-col items-center justify-center gap-4 overflow-y-auto p-8 text-center [&>*]:shrink-0">
         <Mascot mood="reassuring" size={110} />
         <h1 className="text-xl font-extrabold">Le cours n'a pas pu être chargé</h1>
         <p className="max-w-sm text-sm text-ink-soft">{error}</p>
@@ -89,7 +89,7 @@ export function CourseProvider({ children }: { children: ReactNode }) {
 
   if (!value) {
     return (
-      <div className="flex min-h-dvh flex-col items-center justify-center gap-4">
+      <div className="flex h-full flex-col items-center justify-center gap-4 overflow-y-auto [&>*]:shrink-0">
         <Mascot mood="think" size={110} />
         <p className="font-bold text-ink-soft">Chargement…</p>
       </div>

@@ -141,8 +141,8 @@ export function LibraryScreen({ course }: { course: LibraryCourse }) {
   const due = useMemo(() => dueCards(Object.values(cards), Date.now()).length, [cards])
 
   return (
-    <div className="mx-auto flex min-h-full w-full max-w-md flex-col">
-      <header className="sticky top-0 z-20 border-b-2 border-line bg-cream/95 backdrop-blur">
+    <div className="mx-auto flex h-full w-full max-w-md flex-col overflow-hidden">
+      <header className="sticky top-0 z-20 shrink-0 border-b-2 border-line bg-cream/95 backdrop-blur">
         <div className="flex items-center justify-between gap-3 px-4 py-3">
           <button
             type="button"
@@ -180,7 +180,7 @@ export function LibraryScreen({ course }: { course: LibraryCourse }) {
         <TrackTabs tracks={course.tracks} activeId={track.id} onSelect={selectTrack} />
       </header>
 
-      <main className="flex flex-1 flex-col gap-3 px-4 pt-4 pb-16">
+      <main className="flex min-h-0 flex-1 flex-col gap-3 overflow-y-auto px-4 pt-4 pb-16 [&>*]:shrink-0">
         {/* Avant le résumé de piste, et non dedans : c'est l'action du jour,
             celle qui fait revenir ce qui a été appris. Elle vaut pour les
             trois pistes à la fois — mélanger les natures d'exercices vaut

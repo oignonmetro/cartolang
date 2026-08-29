@@ -105,7 +105,7 @@ function StepSession({ unitId, stepId }: { unitId: string; stepId: string }) {
     // retrouver sans rien à réviser, et rester bloqué là annulerait le saut
     // qui vient d'être fait.
     return (
-      <div className="flex min-h-full flex-col items-center justify-center gap-5 px-8 text-center">
+      <div className="flex h-full flex-col items-center justify-center gap-5 overflow-y-auto px-8 text-center [&>*]:shrink-0">
         <Mascot mood="think" size={130} />
         <h1 className="text-2xl font-black">Rien à travailler</h1>
         <p className="max-w-xs text-sm text-ink-soft">

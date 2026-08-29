@@ -31,8 +31,8 @@ export function PathScreen({ course }: { course: PathCourse }) {
   const groups = useMemo(() => groupByUnit(path), [path])
 
   return (
-    <div className="mx-auto flex min-h-full w-full max-w-md flex-col">
-      <header className="sticky top-0 z-10 flex items-center justify-between gap-3 border-b-2 border-line bg-cream/95 px-4 py-3 backdrop-blur">
+    <div className="mx-auto flex h-full w-full max-w-md flex-col overflow-hidden">
+      <header className="sticky top-0 z-10 flex shrink-0 items-center justify-between gap-3 border-b-2 border-line bg-cream/95 px-4 py-3 backdrop-blur">
         <span className="text-2xl" aria-label={courseLabel(course)}>
           {course.flag}
         </span>
@@ -53,21 +53,21 @@ export function PathScreen({ course }: { course: PathCourse }) {
         </div>
       </header>
 
-      {due > 0 && (
-        <button
-          type="button"
-          onClick={() => navigate('/revision')}
-          className="mx-4 mt-4 flex items-center gap-3 rounded-2xl border-2 border-amber bg-amber/15 px-4 py-3 text-left"
-        >
-          <StarIcon filled size={24} className="text-amber" />
-          <span className="flex-1 text-sm font-extrabold">
-            {due} mot{due > 1 ? 's' : ''} à réviser
-          </span>
-          <span className="text-xs font-bold uppercase text-amber">Réviser</span>
-        </button>
-      )}
+      <main className="flex min-h-0 flex-1 flex-col gap-2 overflow-y-auto px-4 pt-4 pb-16 [&>*]:shrink-0">
+        {due > 0 && (
+          <button
+            type="button"
+            onClick={() => navigate('/revision')}
+            className="flex items-center gap-3 rounded-2xl border-2 border-amber bg-amber/15 px-4 py-3 text-left"
+          >
+            <StarIcon filled size={24} className="text-amber" />
+            <span className="flex-1 text-sm font-extrabold">
+              {due} mot{due > 1 ? 's' : ''} à réviser
+            </span>
+            <span className="text-xs font-bold uppercase text-amber">Réviser</span>
+          </button>
+        )}
 
-      <main className="flex flex-1 flex-col gap-2 px-4 pt-4 pb-16">
         {groups.map(({ unit, nodes }, unitIndex) => (
           <Fragment key={unit.id}>
             <UnitBanner unit={unit} index={unitIndex} nodes={nodes} />

@@ -56,11 +56,11 @@ export function CoursePicker({
         animate={{ y: 0 }}
         exit={{ y: 60 }}
         onClick={(event) => event.stopPropagation()}
-        className="flex w-full max-w-md flex-col gap-3 rounded-blob bg-paper p-5"
+        className="flex max-h-[90dvh] w-full max-w-md flex-col gap-3 rounded-blob bg-paper p-5"
       >
-        <h2 className="text-lg font-extrabold">Choisir un niveau</h2>
+        <h2 className="shrink-0 text-lg font-extrabold">Choisir un niveau</h2>
 
-        <div className="flex max-h-[70vh] flex-col gap-4 overflow-y-auto">
+        <div className="flex min-h-0 flex-1 flex-col gap-4 overflow-y-auto [&>*]:shrink-0">
           {groups.map((group) => (
             <div key={group.learning} className="flex flex-col gap-2">
               <p className="flex items-center gap-2 px-1 text-xs font-black tracking-wide text-ink-faint uppercase">
@@ -102,12 +102,12 @@ export function CoursePicker({
           ))}
         </div>
 
-        {error && <p className="text-sm font-bold text-error">{error}</p>}
+        {error && <p className="shrink-0 text-sm font-bold text-error">{error}</p>}
 
         <button
           type="button"
           onClick={onClose}
-          className="mt-1 rounded-2xl border-2 border-line py-3 text-center font-extrabold text-ink-soft"
+          className="mt-1 shrink-0 rounded-2xl border-2 border-line py-3 text-center font-extrabold text-ink-soft"
         >
           Fermer
         </button>

@@ -92,8 +92,8 @@ export function ProfileScreen() {
   }
 
   return (
-    <div className="mx-auto flex min-h-full w-full max-w-md flex-col gap-5 px-4 pt-4 pb-16">
-      <header className="flex items-center gap-2">
+    <div className="mx-auto flex h-full w-full max-w-md flex-col overflow-hidden">
+      <header className="flex shrink-0 items-center gap-2 px-4 pt-4">
         <button
           type="button"
           onClick={() => navigate(-1)}
@@ -105,204 +105,206 @@ export function ProfileScreen() {
         <h1 className="text-xl font-black">Profil</h1>
       </header>
 
-      <section className="card-3d flex items-center gap-4 px-5 py-5">
-        <Mascot mood="idle" size={80} />
-        <div className="flex-1">
-          <p className="text-sm font-bold text-ink-soft">Niveau {level}</p>
-          <div className="mt-2 h-3 overflow-hidden rounded-full bg-line">
-            <div className="h-full rounded-full bg-violet" style={{ width: `${(into / span) * 100}%` }} />
+      <main className="flex min-h-0 flex-1 flex-col gap-5 overflow-y-auto px-4 pt-5 pb-16 [&>*]:shrink-0">
+        <section className="card-3d flex items-center gap-4 px-5 py-5">
+          <Mascot mood="idle" size={80} />
+          <div className="flex-1">
+            <p className="text-sm font-bold text-ink-soft">Niveau {level}</p>
+            <div className="mt-2 h-3 overflow-hidden rounded-full bg-line">
+              <div className="h-full rounded-full bg-violet" style={{ width: `${(into / span) * 100}%` }} />
+            </div>
+            <p className="mt-1 text-xs text-ink-faint">
+              {into} / {span} XP vers le niveau {level + 1}
+            </p>
           </div>
-          <p className="mt-1 text-xs text-ink-faint">
-            {into} / {span} XP vers le niveau {level + 1}
+        </section>
+
+        <section className="grid grid-cols-3 gap-3">
+          <Tile label="Série" value={String(displayedStreak(state.streak, today))} icon={<FlameIcon size={18} />} tone="text-coral" />
+          <Tile label="XP total" value={String(state.xp)} icon={<BoltIcon size={18} />} tone="text-amber" />
+          <Tile label="À réviser" value={String(due)} tone="text-teal" />
+        </section>
+
+        <section className="card-3d px-5 py-5">
+          <h2 className="text-sm font-extrabold uppercase tracking-wide text-ink-faint">Contenu travaillé</h2>
+          <p className="mt-1 text-2xl font-black">
+            {cards.length}
+            <span className="text-base font-bold text-ink-faint"> / {totalItems} éléments rencontrés</span>
           </p>
-        </div>
-      </section>
 
-      <section className="grid grid-cols-3 gap-3">
-        <Tile label="Série" value={String(displayedStreak(state.streak, today))} icon={<FlameIcon size={18} />} tone="text-coral" />
-        <Tile label="XP total" value={String(state.xp)} icon={<BoltIcon size={18} />} tone="text-amber" />
-        <Tile label="À réviser" value={String(due)} tone="text-teal" />
-      </section>
+          <div className="mt-4 flex h-4 overflow-hidden rounded-full bg-line">
+            {STRENGTHS.map((key) => (
+              <div
+                key={key}
+                className={STRENGTH_TONE[key]}
+                style={{ width: cards.length ? `${(breakdown[key] / cards.length) * 100}%` : '0%' }}
+              />
+            ))}
+          </div>
+          <ul className="mt-3 grid grid-cols-2 gap-2 text-xs font-bold text-ink-soft">
+            {STRENGTHS.map((key) => (
+              <li key={key} className="flex items-center gap-2">
+                <span className={`h-3 w-3 rounded-full ${STRENGTH_TONE[key]}`} />
+                {STRENGTH_LABELS[key]} · {breakdown[key]}
+              </li>
+            ))}
+          </ul>
+        </section>
 
-      <section className="card-3d px-5 py-5">
-        <h2 className="text-sm font-extrabold uppercase tracking-wide text-ink-faint">Contenu travaillé</h2>
-        <p className="mt-1 text-2xl font-black">
-          {cards.length}
-          <span className="text-base font-bold text-ink-faint"> / {totalItems} éléments rencontrés</span>
-        </p>
-
-        <div className="mt-4 flex h-4 overflow-hidden rounded-full bg-line">
-          {STRENGTHS.map((key) => (
-            <div
-              key={key}
-              className={STRENGTH_TONE[key]}
-              style={{ width: cards.length ? `${(breakdown[key] / cards.length) * 100}%` : '0%' }}
-            />
-          ))}
-        </div>
-        <ul className="mt-3 grid grid-cols-2 gap-2 text-xs font-bold text-ink-soft">
-          {STRENGTHS.map((key) => (
-            <li key={key} className="flex items-center gap-2">
-              <span className={`h-3 w-3 rounded-full ${STRENGTH_TONE[key]}`} />
-              {STRENGTH_LABELS[key]} · {breakdown[key]}
-            </li>
-          ))}
-        </ul>
-      </section>
-
-      <section className="card-3d flex flex-col gap-3 px-5 py-5">
-        <h2 className="text-sm font-extrabold uppercase tracking-wide text-ink-faint">Objectif quotidien</h2>
-        <div className="flex gap-2">
-          {[20, 30, 50, 80].map((goal) => (
-            <button
-              key={goal}
-              type="button"
-              onClick={() => state.setDailyGoal(goal)}
-              className={`flex-1 rounded-2xl border-2 py-3 text-sm font-extrabold ${
-                state.dailyGoal === goal ? 'border-teal bg-teal/15 text-teal' : 'border-line text-ink-soft'
-              }`}
-            >
-              {goal} XP
-            </button>
-          ))}
-        </div>
-        <p className="text-xs text-ink-faint">
-          Aujourd'hui : {state.xpByDay[today] ?? 0} / {state.dailyGoal} XP
-        </p>
-      </section>
-
-      <section className="card-3d flex flex-col gap-3 px-5 py-5">
-        <h2 className="text-sm font-extrabold uppercase tracking-wide text-ink-faint">Sons</h2>
-        <label className="flex items-center justify-between gap-4">
-          <span className="text-sm font-bold">Une note à chaque bonne réponse</span>
-          <button
-            type="button"
-            role="switch"
-            aria-checked={state.sounds}
-            onClick={() => state.setSounds(!state.sounds)}
-            className={`relative h-7 w-12 shrink-0 rounded-full border-2 transition-colors ${
-              state.sounds ? 'border-teal bg-teal' : 'border-line bg-paper'
-            }`}
-          >
-            <span
-              className={`absolute top-0.5 h-5 w-5 rounded-full transition-all ${
-                state.sounds ? 'left-[1.35rem] bg-white' : 'left-0.5 bg-ink-faint'
-              }`}
-            />
-          </button>
-        </label>
-        <p className="text-xs text-ink-faint">
-          Rien ne se perd à les couper : une bonne réponse se voit déjà à l'écran.
-        </p>
-      </section>
-
-      {canSpeak && (
         <section className="card-3d flex flex-col gap-3 px-5 py-5">
-          <h2 className="text-sm font-extrabold uppercase tracking-wide text-ink-faint">Prononciation</h2>
+          <h2 className="text-sm font-extrabold uppercase tracking-wide text-ink-faint">Objectif quotidien</h2>
+          <div className="flex gap-2">
+            {[20, 30, 50, 80].map((goal) => (
+              <button
+                key={goal}
+                type="button"
+                onClick={() => state.setDailyGoal(goal)}
+                className={`flex-1 rounded-2xl border-2 py-3 text-sm font-extrabold ${
+                  state.dailyGoal === goal ? 'border-teal bg-teal/15 text-teal' : 'border-line text-ink-soft'
+                }`}
+              >
+                {goal} XP
+              </button>
+            ))}
+          </div>
+          <p className="text-xs text-ink-faint">
+            Aujourd'hui : {state.xpByDay[today] ?? 0} / {state.dailyGoal} XP
+          </p>
+        </section>
+
+        <section className="card-3d flex flex-col gap-3 px-5 py-5">
+          <h2 className="text-sm font-extrabold uppercase tracking-wide text-ink-faint">Sons</h2>
           <label className="flex items-center justify-between gap-4">
-            <span className="text-sm font-bold">Écouter le mot à sa découverte</span>
+            <span className="text-sm font-bold">Une note à chaque bonne réponse</span>
             <button
               type="button"
               role="switch"
-              aria-checked={state.autoSpeak}
-              onClick={() => state.setAutoSpeak(!state.autoSpeak)}
+              aria-checked={state.sounds}
+              onClick={() => state.setSounds(!state.sounds)}
               className={`relative h-7 w-12 shrink-0 rounded-full border-2 transition-colors ${
-                state.autoSpeak ? 'border-teal bg-teal' : 'border-line bg-paper'
+                state.sounds ? 'border-teal bg-teal' : 'border-line bg-paper'
               }`}
             >
               <span
                 className={`absolute top-0.5 h-5 w-5 rounded-full transition-all ${
-                  state.autoSpeak ? 'left-[1.35rem] bg-white' : 'left-0.5 bg-ink-faint'
+                  state.sounds ? 'left-[1.35rem] bg-white' : 'left-0.5 bg-ink-faint'
                 }`}
               />
             </button>
           </label>
           <p className="text-xs text-ink-faint">
-            Le bouton haut-parleur reste disponible même sans lecture automatique. La voix est celle de votre
-            appareil : Android la télécharge dans ses réglages de synthèse vocale.
+            Rien ne se perd à les couper : une bonne réponse se voit déjà à l'écran.
           </p>
-
-          {/* `null` = vérification en cours ou pas encore lancée : on ne dit
-              rien plutôt que d'annoncer un manque qui n'est peut-être qu'un
-              temps de réponse. Le bouton haut-parleur, lui, reste optimiste
-              par ailleurs (voir `canSpeak`) — cet encart est le seul endroit
-              qui affirme franchement « il n'y a pas de voix ». */}
-          {voiceInstalled === false && (
-            <div className="flex items-center justify-between gap-3 rounded-2xl border-2 border-amber/40 bg-amber/10 px-4 py-3">
-              <p className="text-xs font-bold text-ink">
-                Aucune voix disponible en {course.name.toLowerCase()} sur cet appareil : le bouton haut-parleur
-                restera muet tant qu'elle n'est pas installée.
-              </p>
-              {canInstallVoice && (
-                <Button
-                  tone="neutral"
-                  className="shrink-0 text-xs"
-                  disabled={installing}
-                  onClick={async () => {
-                    setInstalling(true)
-                    await installSpokenLanguage()
-                    setInstalling(false)
-                    // L'écran système ne dit pas si l'utilisateur a réellement
-                    // installé une voix ; on revérifie au retour plutôt que
-                    // de supposer.
-                    setVoiceInstalled(await isSpokenLanguageInstalled())
-                  }}
-                >
-                  {installing ? '…' : 'Installer'}
-                </Button>
-              )}
-            </div>
-          )}
         </section>
-      )}
 
-      <section className="card-3d flex flex-col gap-3 px-5 py-5">
-        <h2 className="text-sm font-extrabold uppercase tracking-wide text-ink-faint">Sauvegarde</h2>
-        <p className="text-xs text-ink-soft">
-          Toute la progression reste sur cet appareil. Exportez un fichier pour la transférer ou la conserver.
-        </p>
-        <div className="flex gap-3">
-          <Button tone="neutral" className="flex-1 text-xs" onClick={download}>
-            Exporter
+        {canSpeak && (
+          <section className="card-3d flex flex-col gap-3 px-5 py-5">
+            <h2 className="text-sm font-extrabold uppercase tracking-wide text-ink-faint">Prononciation</h2>
+            <label className="flex items-center justify-between gap-4">
+              <span className="text-sm font-bold">Écouter le mot à sa découverte</span>
+              <button
+                type="button"
+                role="switch"
+                aria-checked={state.autoSpeak}
+                onClick={() => state.setAutoSpeak(!state.autoSpeak)}
+                className={`relative h-7 w-12 shrink-0 rounded-full border-2 transition-colors ${
+                  state.autoSpeak ? 'border-teal bg-teal' : 'border-line bg-paper'
+                }`}
+              >
+                <span
+                  className={`absolute top-0.5 h-5 w-5 rounded-full transition-all ${
+                    state.autoSpeak ? 'left-[1.35rem] bg-white' : 'left-0.5 bg-ink-faint'
+                  }`}
+                />
+              </button>
+            </label>
+            <p className="text-xs text-ink-faint">
+              Le bouton haut-parleur reste disponible même sans lecture automatique. La voix est celle de votre
+              appareil : Android la télécharge dans ses réglages de synthèse vocale.
+            </p>
+
+            {/* `null` = vérification en cours ou pas encore lancée : on ne dit
+                rien plutôt que d'annoncer un manque qui n'est peut-être qu'un
+                temps de réponse. Le bouton haut-parleur, lui, reste optimiste
+                par ailleurs (voir `canSpeak`) — cet encart est le seul endroit
+                qui affirme franchement « il n'y a pas de voix ». */}
+            {voiceInstalled === false && (
+              <div className="flex items-center justify-between gap-3 rounded-2xl border-2 border-amber/40 bg-amber/10 px-4 py-3">
+                <p className="text-xs font-bold text-ink">
+                  Aucune voix disponible en {course.name.toLowerCase()} sur cet appareil : le bouton haut-parleur
+                  restera muet tant qu'elle n'est pas installée.
+                </p>
+                {canInstallVoice && (
+                  <Button
+                    tone="neutral"
+                    className="shrink-0 text-xs"
+                    disabled={installing}
+                    onClick={async () => {
+                      setInstalling(true)
+                      await installSpokenLanguage()
+                      setInstalling(false)
+                      // L'écran système ne dit pas si l'utilisateur a réellement
+                      // installé une voix ; on revérifie au retour plutôt que
+                      // de supposer.
+                      setVoiceInstalled(await isSpokenLanguageInstalled())
+                    }}
+                  >
+                    {installing ? '…' : 'Installer'}
+                  </Button>
+                )}
+              </div>
+            )}
+          </section>
+        )}
+
+        <section className="card-3d flex flex-col gap-3 px-5 py-5">
+          <h2 className="text-sm font-extrabold uppercase tracking-wide text-ink-faint">Sauvegarde</h2>
+          <p className="text-xs text-ink-soft">
+            Toute la progression reste sur cet appareil. Exportez un fichier pour la transférer ou la conserver.
+          </p>
+          <div className="flex gap-3">
+            <Button tone="neutral" className="flex-1 text-xs" onClick={download}>
+              Exporter
+            </Button>
+            <Button tone="neutral" className="flex-1 text-xs" onClick={() => fileInput.current?.click()}>
+              Importer
+            </Button>
+          </div>
+          <input
+            ref={fileInput}
+            type="file"
+            accept="application/json"
+            className="hidden"
+            onChange={(event) => {
+              const file = event.target.files?.[0]
+              if (file) void upload(file)
+              event.target.value = ''
+            }}
+          />
+          {message && <p className="text-xs font-bold text-teal">{message}</p>}
+        </section>
+
+        <AppUpdateCard />
+
+        <section className="flex flex-col gap-2">
+          <Button
+            tone="error"
+            onClick={() => {
+              if (confirm('Effacer toute la progression ? Cette action est irréversible.')) {
+                state.reset()
+                setMessage('Progression effacée.')
+              }
+            }}
+          >
+            Réinitialiser
           </Button>
-          <Button tone="neutral" className="flex-1 text-xs" onClick={() => fileInput.current?.click()}>
-            Importer
-          </Button>
-        </div>
-        <input
-          ref={fileInput}
-          type="file"
-          accept="application/json"
-          className="hidden"
-          onChange={(event) => {
-            const file = event.target.files?.[0]
-            if (file) void upload(file)
-            event.target.value = ''
-          }}
-        />
-        {message && <p className="text-xs font-bold text-teal">{message}</p>}
-      </section>
-
-      <AppUpdateCard />
-
-      <section className="flex flex-col gap-2">
-        <Button
-          tone="error"
-          onClick={() => {
-            if (confirm('Effacer toute la progression ? Cette action est irréversible.')) {
-              state.reset()
-              setMessage('Progression effacée.')
-            }
-          }}
-        >
-          Réinitialiser
-        </Button>
-        <p className="text-center text-xs text-ink-faint">
-          {appVersion
-            ? `Cartolang v${appVersion.versionName} (${appVersion.build})`
-            : `${courseLabel(course)} · contenu v${course.version}`}
-        </p>
-      </section>
+          <p className="text-center text-xs text-ink-faint">
+            {appVersion
+              ? `Cartolang v${appVersion.versionName} (${appVersion.build})`
+              : `${courseLabel(course)} · contenu v${course.version}`}
+          </p>
+        </section>
+      </main>
     </div>
   )
 }

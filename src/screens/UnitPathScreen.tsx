@@ -61,8 +61,8 @@ export function UnitPathScreen() {
   }
 
   return (
-    <div className="mx-auto flex min-h-full w-full max-w-md flex-col">
-      <header className="sticky top-0 z-20 border-b border-line bg-cream/95 px-5 py-4 backdrop-blur">
+    <div className="mx-auto flex h-full w-full max-w-md flex-col overflow-hidden">
+      <header className="sticky top-0 z-20 shrink-0 border-b border-line bg-cream/95 px-5 py-4 backdrop-blur">
         <div className="flex items-center gap-3">
           <button
             type="button"
@@ -102,7 +102,7 @@ export function UnitPathScreen() {
       </header>
 
       <main
-        className="flex flex-1 flex-col items-center px-4 pt-6 pb-10"
+        className="flex min-h-0 flex-1 flex-col items-center overflow-y-auto px-4 pt-6 pb-10 [&>*]:shrink-0"
         // Un lavis très léger de la teinte de l'unité derrière le chemin :
         // sans lui, l'écran retombe sur le cream générique de partout ailleurs
         // et l'unité perd sa couleur dès qu'on quitte le fil des cercles.
