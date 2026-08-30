@@ -3,6 +3,7 @@ import { motion } from 'framer-motion'
 import type { GrammarGapExercise } from '@/engine/exercises'
 import { fillGap, matchesAnswer, splitGap } from '@/engine/exercises'
 import { Button } from '@/components/Button'
+import { learningLanguage } from '@/lib/speech'
 import { SpeakButton } from './SpeakButton'
 import { useSessionSounds } from './useSessionSounds'
 
@@ -94,7 +95,9 @@ export function GrammarGap({
           autoCapitalize="off"
           autoCorrect="off"
           spellCheck={false}
-          lang="en"
+          // La forme manquante se tape dans la langue apprise, jamais en
+          // français : c'est elle qui doit décider du clavier proposé.
+          lang={learningLanguage()}
           placeholder="La forme manquante…"
           aria-label="Forme manquante"
           className={`w-full rounded-2xl border-2 bg-paper px-4 py-4 text-lg font-bold outline-none disabled:opacity-70 ${

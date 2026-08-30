@@ -3,6 +3,7 @@ import { motion } from 'framer-motion'
 import type { ConjugationChoiceExercise } from '@/engine/exercises'
 import { normalizeForm } from '@/engine/exercises'
 import { Button } from '@/components/Button'
+import { learningLanguage } from '@/lib/speech'
 import { highlightDiffWords } from './highlightDiffWords'
 import { OptionList } from './OptionList'
 import { SpeakButton } from './SpeakButton'
@@ -41,7 +42,7 @@ export function ConjugationChoice({
       <p className="text-sm font-bold uppercase tracking-wide text-ink-faint">Choisissez la forme</p>
 
       <div className="card-3d flex flex-col items-center gap-3 px-5 py-6 text-center">
-        <span lang={fromFrench ? 'fr' : 'en'} className="text-2xl font-black break-words">
+        <span lang={fromFrench ? 'fr' : learningLanguage()} className="text-2xl font-black break-words">
           {fromFrench ? verb.translation : verb.verb}
         </span>
         <div className="flex flex-wrap items-center justify-center gap-2">
@@ -62,7 +63,7 @@ export function ConjugationChoice({
           setPicked(option)
           sounds.success(normalizeForm(option) === normalizeForm(form.answer))
         }}
-        lang="en"
+        lang={learningLanguage()}
         renderOption={highlightDiffWords(options)}
       />
 
@@ -79,7 +80,7 @@ export function ConjugationChoice({
           </p>
           {fromFrench && (
             <p className="mt-1 text-ink-soft">
-              {verb.translation} (<span lang="en">{verb.verb}</span>)
+              {verb.translation} (<span lang={learningLanguage()}>{verb.verb}</span>)
             </p>
           )}
           {verb.note && <p className="mt-1 text-ink-soft">{verb.note}</p>}

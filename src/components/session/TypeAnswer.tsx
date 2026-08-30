@@ -3,6 +3,7 @@ import { motion } from 'framer-motion'
 import type { TypeExercise } from '@/engine/exercises'
 import { isAnswerCorrect } from '@/engine/exercises'
 import { Button } from '@/components/Button'
+import { learningLanguage, learningLanguageName } from '@/lib/speech'
 import { useSessionSounds } from './useSessionSounds'
 
 /** Traduction au clavier, sans contexte : l'exercice le plus exigeant. */
@@ -38,11 +39,13 @@ export function TypeAnswer({
   return (
     <div className="flex flex-1 flex-col gap-6">
       <p className="text-sm font-bold uppercase tracking-wide text-ink-faint">
-        {direction === 'to-known' ? 'Traduisez en français' : 'Traduisez en anglais'}
+        {direction === 'to-known' ? 'Traduisez en français' : `Traduisez en ${learningLanguageName()}`}
       </p>
 
       <div className="card-3d mt-auto flex flex-col items-center gap-2 px-5 py-8 text-center">
-        <span className="text-4xl font-black break-words">{prompt}</span>
+        <span lang={direction === 'to-known' ? learningLanguage() : 'fr'} className="text-4xl font-black break-words">
+          {prompt}
+        </span>
         {vocab.pos && <span className="text-xs font-bold uppercase tracking-widest text-ink-faint">{vocab.pos}</span>}
       </div>
 
@@ -59,7 +62,11 @@ export function TypeAnswer({
         autoCapitalize="off"
         autoCorrect="off"
         spellCheck={false}
-        lang={direction === 'to-known' ? 'fr' : 'en'}
+        // L'attribut suit la langue réellement tapée, pas un « en » hérité du
+        // cours d'anglais d'origine : c'est lui qui fait proposer au clavier
+        // du téléphone la disposition cyrillique en thème, pourvu qu'elle
+        // soit installée (voir `learningLanguage`).
+        lang={direction === 'to-known' ? 'fr' : learningLanguage()}
         placeholder="Votre réponse…"
         aria-label="Votre réponse"
         className={`w-full rounded-2xl border-2 bg-paper px-4 py-4 text-lg font-bold outline-none disabled:opacity-70 ${

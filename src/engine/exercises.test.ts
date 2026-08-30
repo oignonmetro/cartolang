@@ -137,6 +137,26 @@ describe('session de leçon', () => {
     expect(session).toContain('cloze')
   })
 
+  it('propose un thème vers la langue apprise après avoir fait reconnaître le mot', () => {
+    // Sans lui, la leçon ne teste que la reconnaissance — associer, QCM,
+    // phrase à trou en banque — jamais écrire le mot de mémoire. Pour une
+    // écriture non latine (l'alphabet russe), lire sans jamais tracer laisse
+    // la moitié du travail non fait.
+    for (const seed of [1, 2, 3, 4, 5]) {
+      const session = buildLessonSession(lessonOf('u1-l1', LESSON), 0, seed, {}, true)
+      const themes = session.filter((exercise) => exercise.kind === 'type')
+      expect(themes.length).toBeGreaterThan(0)
+      expect(themes.every((exercise) => exercise.direction === 'to-learning')).toBe(true)
+
+      // Jamais sur un mot que ce même bloc n'a pas déjà fait reconnaître :
+      // écrire de mémoire un mot tout juste découvert ne testerait rien.
+      const recognized = new Set(
+        session.filter((exercise) => exercise.kind === 'choice' || exercise.kind === 'cloze').flatMap(itemIdsOf),
+      )
+      for (const theme of themes) expect(recognized.has(theme.vocab.id)).toBe(true)
+    }
+  })
+
   it('propose toujours une banque de mots pour les phrases à trou', () => {
     const session = buildLessonSession(lessonOf('u1-l1', LESSON), 0).filter((e) => e.kind === 'cloze')
     expect(session.length).toBeGreaterThan(0)
@@ -290,16 +310,21 @@ describe('taille des manches d’association', () => {
   })
 
   it('grandit à mesure qu’on avance dans la section', () => {
-    // À graine égale la session est la même manche pour manche — `sample`
-    // mélange tout le bassin avant de couper, donc la taille demandée ne
-    // décale pas le tirage. Seule la difficulté change, et jamais vers le bas.
+    // Comparer deux sessions terme à terme supposerait qu'elles restent
+    // alignées manche pour manche d'un rang à l'autre — or la taille tirée
+    // influence le nombre de tentatives avant une composition inédite (voir
+    // `matchRounds`), donc le flux aléatoire diverge dès la première manche
+    // où le bassin dépasse le plancher. La moyenne sur toute la session
+    // n'a pas ce défaut : un rang plus élevé part plus haut et atteint le
+    // plafond plus tôt, ce qui la tire vers le haut quelle que soit l'issue
+    // de chaque tentative individuelle.
+    const mean = (sizes: number[]) => sizes.reduce((sum, size) => sum + size, 0) / sizes.length
     let total = 0
     for (let seed = 0; seed < 20; seed++) {
-      const early = matchSizes(BIG_LESSON, seed, 0)
-      const late = matchSizes(BIG_LESSON, seed, 2)
-      expect(late.length).toBe(early.length)
-      early.forEach((size, index) => expect(late[index]!).toBeGreaterThanOrEqual(size))
-      total += late.reduce((sum, size) => sum + size, 0) - early.reduce((sum, size) => sum + size, 0)
+      const early = mean(matchSizes(BIG_LESSON, seed, 0))
+      const late = mean(matchSizes(BIG_LESSON, seed, 2))
+      expect(late).toBeGreaterThanOrEqual(early)
+      total += late - early
     }
     expect(total).toBeGreaterThan(0)
   })

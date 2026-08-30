@@ -126,7 +126,7 @@ export function choicePrompt(vocab: Vocab, cue: ChoiceCue): string {
 }
 
 /** L'énoncé est-il dans la langue apprise ? Sert à l'attribut `lang`. */
-export function choicePromptIsEnglish(cue: ChoiceCue): boolean {
+export function choicePromptIsLearningLanguage(cue: ChoiceCue): boolean {
   return cue === 'term'
 }
 
@@ -552,6 +552,19 @@ const MATCH_ROUNDS_PER_BLOCK = [1, 2] as const
 const CHOICE_ROUNDS_PER_BLOCK = [3, 4] as const
 /** Phrases à trou par bloc, toujours en banque de mots à ce stade. */
 const CLOZE_PER_BLOCK = 2
+/**
+ * Thèmes (français → langue apprise, à la main) par bloc.
+ *
+ * Sans eux, la leçon ne teste que la reconnaissance — association, QCM,
+ * phrase à trou en banque — jamais la production : rien n'oblige à écrire le
+ * mot, seulement à le repérer parmi des choix. Pour une écriture non latine,
+ * cette absence pèse plus lourd qu'ailleurs : lire le cyrillique sans jamais
+ * le tracer laisse la moitié de l'alphabet à l'état passif. Le thème vient
+ * après le QCM et la phrase à trou dans la construction du bloc, pas avant :
+ * il ne teste donc jamais un mot que ce même bloc n'a pas déjà fait
+ * reconnaître au moins une fois.
+ */
+const THEME_PER_BLOCK = 2
 
 /**
  * Ce qu'un mot a déjà reçu dans la session en cours.
@@ -699,6 +712,20 @@ function buildVocabSession(
       markServed(served, word.id, 'cloze')
       blockExercises.push(exercise)
       clozesLeft -= 1
+    }
+
+    // Le thème ne porte que sur un mot que ce bloc a déjà fait reconnaître au
+    // moins une fois (QCM ou phrase à trou ci-dessus) : écrire de mémoire un
+    // mot qu'on vient tout juste de découvrir ne teste rien, ça ne fait
+    // qu'enseigner l'échec — la même raison qui retient la production à la
+    // révision tant qu'une carte n'a pas tenu (voir `PRODUCTION_INTERVAL`).
+    let themesLeft = THEME_PER_BLOCK
+    for (const word of leastServedFirst(pool, served, rng)) {
+      if (themesLeft === 0) break
+      if (servedCount(served, word.id) === 0 || hasServed(served, word.id, 'theme')) continue
+      markServed(served, word.id, 'theme')
+      blockExercises.push({ kind: 'type', id: `type:${word.id}`, vocab: word, direction: 'to-learning' })
+      themesLeft -= 1
     }
 
     // Rattrapage : un bloc peut compter plus de mots que de créneaux, et le

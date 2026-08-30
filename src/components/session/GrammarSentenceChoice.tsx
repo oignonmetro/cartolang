@@ -3,6 +3,7 @@ import { motion } from 'framer-motion'
 import type { GrammarChoiceExercise } from '@/engine/exercises'
 import { fillGap, normalizeForm, splitGap } from '@/engine/exercises'
 import { Button } from '@/components/Button'
+import { learningLanguage } from '@/lib/speech'
 import { OptionList } from './OptionList'
 import { SpeakButton } from './SpeakButton'
 import { useSessionSounds } from './useSessionSounds'
@@ -84,7 +85,7 @@ export function GrammarSentenceChoice({
           setPicked(option)
           sounds.success(normalizeForm(option) === normalizeForm(answer))
         }}
-        lang="en"
+        lang={learningLanguage()}
         size="long"
         renderOption={(option) => highlightGap(option, before, after)}
       />

@@ -2,6 +2,7 @@ import { motion } from 'framer-motion'
 import type { RuleExercise } from '@/engine/exercises'
 import { parseInline, parseNotes, ruleSpeech, splitAside, type Inline, type NoteRule } from '@/content/notes'
 import { Button } from '@/components/Button'
+import { learningLanguage } from '@/lib/speech'
 import { SpeakButton } from './SpeakButton'
 
 /**
@@ -214,7 +215,7 @@ function Spans({ spans }: { spans: Inline[] }) {
             return (
               <span
                 key={index}
-                lang="en"
+                lang={learningLanguage()}
                 className={`rounded bg-ink/6 px-[0.15em] font-bold text-ink ${
                   span.text.length <= 24 ? 'whitespace-nowrap' : ''
                 }`}

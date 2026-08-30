@@ -40,10 +40,41 @@ const VOICES: Record<string, string> = {
 
 const FALLBACK = 'en-US'
 let LANG = FALLBACK
+let LEARNING = 'en'
+let LEARNING_NAME = 'anglais'
 
 /** Appelé au chargement d'un cours (voir `CourseProvider`). */
 export function setSpokenLanguage(learning: string): void {
   LANG = VOICES[learning] ?? FALLBACK
+  LEARNING = learning
+}
+
+/**
+ * Code court de la langue enseignée par le cours actif (« en », « ru »…).
+ *
+ * Sert à l'attribut HTML `lang` des champs où l'on tape la langue apprise
+ * (thème, production en révision) : c'est ce qui fait proposer au clavier du
+ * téléphone la disposition correspondante, pourvu qu'elle soit installée.
+ * Ailleurs qu'à l'oral, le nom peut surprendre — il vient de `setSpokenLanguage`
+ * parce que la voix et le clavier suivent la même langue, et qu'un deuxième
+ * réglage à synchroniser avec le cours n'aurait rien ajouté.
+ */
+export function learningLanguage(): string {
+  return LEARNING
+}
+
+/**
+ * Nom de la langue apprise, tel qu'affiché dans une consigne (« russe »,
+ * « anglais »). Vient de `course.name` — la seule source qui l'écrive en
+ * toutes lettres — et non d'une liste figée ici, qui aurait fini par
+ * diverger du contenu réel à mesure que des cours s'ajoutent.
+ */
+export function setLearningLanguageName(name: string): void {
+  LEARNING_NAME = name.toLowerCase()
+}
+
+export function learningLanguageName(): string {
+  return LEARNING_NAME
 }
 
 /**

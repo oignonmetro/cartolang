@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import type { ChoiceCue, ChoiceExercise } from '@/engine/exercises'
-import { choiceAnswer, choicePrompt, choicePromptIsEnglish, normalizeAnswer } from '@/engine/exercises'
+import { choiceAnswer, choicePrompt, choicePromptIsLearningLanguage, normalizeAnswer } from '@/engine/exercises'
 import { Button } from '@/components/Button'
 import { Mascot } from '@/components/Mascot'
-import { speechFor } from '@/lib/speech'
+import { learningLanguage, speechFor } from '@/lib/speech'
 import { highlightDiffWords } from './highlightDiffWords'
 import { OptionList } from './OptionList'
 import { SpeakButton } from './SpeakButton'
@@ -63,7 +63,7 @@ export function ChoiceQuestion({
             </div>
           ) : (
             <span
-              lang={choicePromptIsEnglish(cue) ? 'en' : 'fr'}
+              lang={choicePromptIsLearningLanguage(cue) ? learningLanguage() : 'fr'}
               className={`break-words ${cue === 'sentence' ? 'text-base leading-snug font-bold' : 'text-xl font-black'}`}
             >
               {choicePrompt(vocab, cue)}

@@ -25,7 +25,7 @@ interface CourseContextValue extends CourseState {
 
 const CourseContext = createContext<CourseContextValue | null>(null)
 
-import { setSpokenLanguage } from '@/lib/speech'
+import { setLearningLanguageName, setSpokenLanguage } from '@/lib/speech'
 
 /** Lu aussi par `progressStore.ts`, pour rattacher une sauvegarde antérieure au cours actif. */
 export const SELECTED_COURSE_KEY = 'cartolang.course'
@@ -52,8 +52,10 @@ export function CourseProvider({ children }: { children: ReactNode }) {
     if (id !== requestId.current) return
     localStorage.setItem(SELECTED_COURSE_KEY, course.id)
     // La voix suit la langue enseignée : un cours de russe ne doit pas être lu
-    // par une voix anglaise.
+    // par une voix anglaise. Le nom affiché dans les consignes de thème suit
+    // la même règle, pour la même raison.
     setSpokenLanguage(course.learning)
+    setLearningLanguageName(course.name)
     setState({ course, itemsById: indexItems(course), manifest })
   }, [])
 
