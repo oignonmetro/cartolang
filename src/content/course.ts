@@ -119,6 +119,21 @@ export function lessonCountLabel(lesson: Lesson): string {
 }
 
 /**
+ * Les lettres qu'une unité enseigne, dans l'ordre où elle les enseigne —
+ * `null` si elle n'en enseigne aucune (l'immense majorité des unités).
+ *
+ * Sert de sous-titre à sa carte dans la bibliothèque (voir `LibraryScreen`) :
+ * pour une unité d'alphabet, les lettres elles-mêmes disent mieux ce qu'il y
+ * a à apprendre qu'une phrase de description, et se lisent d'un coup d'œil.
+ */
+export function unitLetters(unit: Unit): string | null {
+  const letters = unit.lessons.flatMap((lesson) =>
+    lesson.kind === 'vocab' ? lesson.vocab.filter((entry) => entry.pos === 'lettre').map((entry) => entry.term) : [],
+  )
+  return letters.length > 0 ? letters.join(' ') : null
+}
+
+/**
  * `name` ne porte que la langue (« Anglais », « Russe ») ; ce qui identifiait
  * jusqu'ici un cours dans les libellés d'accessibilité — « Anglais B1» —
  * se recompose ici plutôt que de dupliquer le niveau dans `name`.

@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import type { LibraryCourse, Unit, Vocab } from './schema'
-import { courseLabel, findUnit, groupCoursesByLanguage, lessonCountLabel } from './course'
+import { courseLabel, findUnit, groupCoursesByLanguage, lessonCountLabel, unitLetters } from './course'
 import type { ManifestEntry } from './schema'
 
 function vocab(id: string): Vocab {
@@ -144,5 +144,29 @@ describe('lessonCountLabel', () => {
   it('laisse les autres natures à leur libellé', () => {
     const words = { kind: 'vocab' as const, id: 'l', title: 'l', vocab: [vocab('a'), vocab('b')] }
     expect(lessonCountLabel(words)).toBe('2 mots')
+  })
+})
+
+describe('unitLetters', () => {
+  const letters = (ids: string[]): Vocab[] =>
+    ids.map((id) => ({ id, term: id, translation: id, alt: [], pos: 'lettre' as const }))
+
+  it('joint les lettres enseignées, dans l’ordre des leçons', () => {
+    const alphabet: Unit = {
+      id: 'u',
+      title: 'u',
+      icon: 'book',
+      color: 'teal',
+      kind: 'vocab',
+      lessons: [
+        { kind: 'vocab', id: 'l1', title: 'l1', vocab: letters(['а', 'к']) },
+        { kind: 'vocab', id: 'l2', title: 'l2', vocab: [vocab('мак')] },
+      ],
+    }
+    expect(unitLetters(alphabet)).toBe('а к')
+  })
+
+  it('ne renvoie rien pour une unité qui n’enseigne aucune lettre', () => {
+    expect(unitLetters(unit('v1', ['v1-l1']))).toBeNull()
   })
 })

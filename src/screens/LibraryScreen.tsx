@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
 import type { LibraryCourse, Track, Unit } from '@/content/schema'
-import { countLabel, courseLabel, itemsOfUnit } from '@/content/course'
+import { countLabel, courseLabel, itemsOfUnit, unitLetters } from '@/content/course'
 import type { LessonProgressMap } from '@/engine/progress'
 import { dayKey, displayedStreak, levelFromXp, masteryOf, unitMastery } from '@/engine/progress'
 import { buildUnitPath, currentDestination } from '@/engine/unitPath'
@@ -362,6 +362,11 @@ function UnitCard({
   done: { count: number; total: number }
   onOpen: () => void
 }) {
+  // Pour une unité d'alphabet, les lettres qu'elle enseigne disent mieux ce
+  // qui attend l'apprenant qu'une phrase de description — elles remplacent
+  // le sous-titre plutôt que de s'y ajouter.
+  const subtitle = unitLetters(unit) ?? unit.subtitle
+
   return (
     <section className="card-3d overflow-hidden">
       <button type="button" onClick={onOpen} className="flex w-full items-center gap-4 px-4 py-4 text-left">
@@ -375,7 +380,7 @@ function UnitCard({
               affiché : c'était une convention maison, pas une échelle
               officielle, et son badge prêtait à confusion avec le CECRL. */}
           <span className="text-base leading-tight font-extrabold">{unit.title}</span>
-          {unit.subtitle && <span className="mt-0.5 block text-xs text-ink-soft">{unit.subtitle}</span>}
+          {subtitle && <span className="mt-0.5 block text-xs text-ink-soft">{subtitle}</span>}
           <span className={`mt-0.5 block text-xs font-bold ${done.count > 0 ? tone.text : 'text-ink-faint'}`}>
             {done.count} / {done.total} étapes · {countLabel(unit.kind, mastery.total)}
           </span>
