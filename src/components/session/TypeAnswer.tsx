@@ -38,7 +38,11 @@ export function TypeAnswer({
 
   return (
     <div className="flex flex-1 flex-col gap-6">
-      <p className="text-sm font-bold uppercase tracking-wide text-ink-faint">
+      {/* Épinglée en haut de la zone qui défile : sur mobile, le clavier qui
+          s'ouvre au focus du champ réduit la fenêtre visible, et le
+          navigateur fait remonter le champ dans cet espace réduit — sans
+          `sticky`, la consigne se retrouvait poussée au-dessus, hors champ. */}
+      <p className="sticky top-0 z-10 bg-cream py-1 text-sm font-bold uppercase tracking-wide text-ink-faint">
         {direction === 'to-known' ? 'Traduisez en français' : `Traduisez en ${learningLanguageName()}`}
       </p>
 

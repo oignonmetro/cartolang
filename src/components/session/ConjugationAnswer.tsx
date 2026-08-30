@@ -48,7 +48,8 @@ export function ConjugationAnswer({
 
   return (
     <div className="flex flex-1 flex-col gap-5">
-      <p className="text-sm font-bold uppercase tracking-wide text-ink-faint">
+      {/* Épinglée : voir la même remarque dans `TypeAnswer`. */}
+      <p className="sticky top-0 z-10 bg-cream py-1 text-sm font-bold uppercase tracking-wide text-ink-faint">
         {fromFrench ? 'Traduisez et conjuguez' : 'Conjuguez'}
       </p>
 

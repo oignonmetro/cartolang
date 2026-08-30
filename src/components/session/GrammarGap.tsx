@@ -50,7 +50,12 @@ export function GrammarGap({
 
   return (
     <div className="flex flex-1 flex-col gap-5">
-      <p className="text-sm font-bold uppercase tracking-wide text-ink-faint">Complétez la phrase</p>
+      {/* Épinglée : voir la même remarque dans `TypeAnswer`. Vaut surtout
+          quand la réponse se tape (`bank` absent) — sans effet visible
+          sinon, la banque de mots ne réclamant jamais le clavier. */}
+      <p className="sticky top-0 z-10 bg-cream py-1 text-sm font-bold uppercase tracking-wide text-ink-faint">
+        Complétez la phrase
+      </p>
 
       <div className="card-3d flex flex-col gap-3 px-5 py-6">
         <p className="text-xl leading-relaxed font-bold">
