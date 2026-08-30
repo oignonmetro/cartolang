@@ -157,6 +157,22 @@ describe('session de leçon', () => {
     }
   })
 
+  it('ouvre la session par un rappel quand la leçon en porte un', () => {
+    // Le seul endroit où le vocabulaire a besoin d'expliquer une règle plutôt
+    // que de la laisser se déduire des mots : l'accord numéral-nom du russe,
+    // par exemple, change la forme du nom compté sans qu'aucun mot pris
+    // isolément ne le montre.
+    const withNotes: VocabLesson = { kind: 'vocab', id: 'u1-l1', title: 'Les chiffres', vocab: LESSON, notes: 'Le nom compté change de forme selon le nombre.' }
+    const [first] = buildLessonSession(withNotes, 0)
+    expect(first).toMatchObject({ kind: 'rule', topic: 'vocab', title: 'Les chiffres' })
+    expect(isPresentation(first!)).toBe(true)
+  })
+
+  it('ne rajoute rien sans rappel à afficher', () => {
+    const session = buildLessonSession(lessonOf('u1-l1', LESSON), 0)
+    expect(session.some((exercise) => exercise.kind === 'rule')).toBe(false)
+  })
+
   it('propose toujours une banque de mots pour les phrases à trou', () => {
     const session = buildLessonSession(lessonOf('u1-l1', LESSON), 0).filter((e) => e.kind === 'cloze')
     expect(session.length).toBeGreaterThan(0)

@@ -153,7 +153,7 @@ export interface RuleExercise {
   title: string
   notes: string
   /** Nature de la leçon : l'écran s'accorde à la couleur de sa piste. */
-  topic: 'grammar' | 'conjugation'
+  topic: 'grammar' | 'conjugation' | 'vocab'
 }
 
 /**
@@ -539,7 +539,7 @@ export function buildLessonSession(
   const resolved = seed ?? seedFrom(lesson.id, level)
   switch (lesson.kind) {
     case 'vocab':
-      return buildVocabSession(lesson.vocab, cards, resolved, canSpeak, rank)
+      return buildVocabSession(lesson.id, lesson.vocab, lesson.notes, lesson.title, cards, resolved, canSpeak, rank)
     case 'grammar':
       return buildGrammarSession(lesson.id, lesson.points, lesson.notes, lesson.title, level, resolved)
     case 'conjugation':
@@ -653,9 +653,18 @@ function serveLeastFirst<T>(
  * reçoit pas de nouvel écran de présentation : rejouer une leçon déjà sue ne
  * doit pas rouvrir son cours du premier jour, seulement remettre ses mots au
  * travail dans les blocs qui suivent.
+ *
+ * `notes`, quand la leçon en porte, ouvre la session par un rappel — le seul
+ * endroit où le vocabulaire a besoin d'expliquer une règle plutôt que de la
+ * laisser se déduire des mots : l'accord numéral-nom du russe change la
+ * forme du nom compté à chaque leçon de chiffres, sans qu'aucun mot pris
+ * isolément ne le montre.
  */
 function buildVocabSession(
+  lessonId: string,
   vocab: readonly Vocab[],
+  notes: string | undefined,
+  title: string,
   cards: Record<string, CardState>,
   seed: number,
   canSpeak: boolean,
@@ -664,7 +673,9 @@ function buildVocabSession(
   const rng = createRng(seed)
   const blocks = blocksOf(shuffle(vocab, rng))
 
-  const exercises: Exercise[] = []
+  const exercises: Exercise[] = notes
+    ? [{ kind: 'rule', id: `rule:${lessonId}`, title, notes, topic: 'vocab' }]
+    : []
   const pool: Vocab[] = []
   const served: Served = new Map()
   // La rampe des manches d'association traverse les blocs au lieu de repartir

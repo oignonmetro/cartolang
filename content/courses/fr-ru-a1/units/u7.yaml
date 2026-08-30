@@ -8,6 +8,24 @@ level: A1
 lessons:
   - id: u7-l1
     title: De un à six
+    notes: |
+      En russe, la forme d'un nom compté **change selon le nombre qui le
+      précède** — bien plus qu'en français, où seul le pluriel varie. Trois
+      formes possibles pour un même nom : `час` (heure) et `минута` (minute)
+      servent d'exemple, mais la règle vaut pour n'importe quel nom compté.
+
+      - Le nombre finit par **1** (sauf 11) : la forme du dictionnaire.
+        `час`, `минута`
+      - Le nombre finit par **2, 3 ou 4** (sauf 12, 13, 14) : une autre
+        forme, encore au singulier.
+        `два часа`, `три минуты`
+      - Tous les autres nombres, **11 à 19 compris** : une troisième forme,
+        au pluriel.
+        `шесть часов`, `пять минут`
+
+      ! De 11 à 19, c'est toujours la troisième forme, même si le nombre se
+      termine par 1, 2, 3 ou 4 à l'œil : onze se dit `одиннадцать часов`,
+      jamais `одиннадцать час`.
     vocab:
       - id: ru-odin
         term: один

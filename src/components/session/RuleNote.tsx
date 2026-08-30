@@ -40,6 +40,14 @@ const TONES = {
     label: 'text-sky-deep',
     button: 'sky',
   },
+  vocab: {
+    accent: 'bg-teal',
+    eyebrow: 'text-teal-deep',
+    panel: 'bg-teal/8',
+    marker: 'bg-teal',
+    label: 'text-teal-deep',
+    button: 'teal',
+  },
 } as const
 
 export function RuleNote({ exercise, onNext }: { exercise: RuleExercise; onNext: () => void }) {
