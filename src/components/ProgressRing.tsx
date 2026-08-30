@@ -3,9 +3,14 @@
  *
  * Sans parcours imposé, l'anneau est le seul repère : il doit répondre d'un
  * coup d'œil à « où en suis-je ? ». Un arc plein donne la part solidement
- * acquise, un arc pâle la part simplement rencontrée. Sans ce second arc, une
- * unité entièrement travaillée le jour même afficherait 0 % — la maîtrise
- * durable demande plusieurs jours de révision — et le retour serait nul.
+ * acquise, un arc pâle la part simplement rencontrée.
+ *
+ * Le pourcentage affiché au centre suit ce second arc, pas le premier : la
+ * maîtrise durable demande plusieurs jours de révision, si bien qu'une unité
+ * entièrement travaillée le jour même resterait à 0 % — et rien ne dirait
+ * qu'elle est jouée. « Rencontré » redevient 0 % tant que rien n'a été vu,
+ * et grimpe dès la première séance ; c'est l'arc plein, lui, qui continue de
+ * montrer la maîtrise réelle.
  */
 export function ProgressRing({
   ratio,
@@ -39,7 +44,7 @@ export function ProgressRing({
         <Arc size={size} radius={radius} stroke={stroke} color={color} circumference={circumference} value={known} opacity={1} />
       </svg>
       <span className="absolute inset-0 flex items-center justify-center text-[0.65rem] font-black" style={{ color }}>
-        {label ?? `${Math.round(known * 100)}%`}
+        {label ?? `${Math.round(seen * 100)}%`}
       </span>
     </div>
   )
