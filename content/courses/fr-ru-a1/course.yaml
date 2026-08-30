@@ -12,20 +12,24 @@
 # forment à elles seules une leçon, parce que le réflexe acquis se bat contre
 # la lecture correcte.
 #
-# D'où le `layout: library`, comme les cours d'anglais : cette progression a
-# besoin d'un ordre, mais un ordre *interne*, celui du parcours d'unité. Elle
-# tient donc dans une seule unité (u1), qui enseigne l'alphabet en entier avant
-# sa dernière leçon.
+# `layout: library`, comme les cours d'anglais : les cinq unités de l'alphabet
+# (u1 à u5, une par groupe de lettres) s'y suivent en accès libre, exactement
+# comme celles de n'importe quelle autre piste — rien ne les distingue plus
+# techniquement. Ouvrir une unité mène directement à son étape courante (voir
+# `currentDestination`, engine/unitPath.ts) : il n'y a plus d'écran de
+# parcours à traverser pour la retrouver, donc plus besoin non plus d'un
+# mécanisme pour en sauter le début.
 #
-# Les trois unités qui suivent (u6-u8 : se présenter, compter et situer,
-# manger et boire) supposent cet alphabet acquis — `alphabetGatingRemarks`
+# Les unités qui suivent (u6-u8 : se présenter, compter et situer, manger et
+# boire) supposent cet alphabet acquis — `alphabetGatingRemarks`
 # (tools/content/difficulty.ts) le vérifie sur l'ordre des unités tel qu'il
 # est déclaré ci-dessous. Mais la bibliothèque reste en accès libre : rien
-# n'empêche techniquement d'ouvrir « Manger et boire » avant « Lire le
-# russe ». C'est un compromis assumé, pas un oubli — un enchaînement forcé
+# n'empêche techniquement d'ouvrir « Manger et boire » avant d'avoir fait la
+# moindre unité d'alphabet, ni une unité d'alphabet avant celle qui la
+# précède. C'est un compromis assumé, pas un oubli — un enchaînement forcé
 # entre unités n'existe nulle part ailleurs dans l'app (les cours d'anglais
-# ont le même accès libre), et u1 reste la première unité listée, celle
-# qu'on ouvre naturellement en premier.
+# ont le même accès libre), et u1 reste la première unité listée de la
+# première piste, celle qu'on ouvre naturellement en premier.
 
 id: fr-ru-a1
 name: Russe
@@ -46,15 +50,11 @@ version: 12
 # pas du lexique. En retour, chaque phrase de grammaire rebrasse du vocabulaire
 # déjà vu, et les deux pistes se renforcent.
 tracks:
-  # Séparée de Vocabulaire, et placée avant elle : cette unité (u1) enseigne
-  # l'alphabet, pas du lexique à retenir, et elle conditionne tout le reste du
-  # cours (voir alphabetGatingRemarks ci-dessus). Un onglet à part le montre
-  # avant même d'ouvrir la piste — l'apprenant sait par où commencer sans
-  # avoir à déplier Vocabulaire pour le découvrir.
-  #
-  # Piste à une seule unité, donc rien à choisir en son sein : l'écran de
-  # bibliothèque saute directement sur le parcours de l'unité au clic plutôt
-  # que d'afficher une liste à un seul élément (voir LibraryScreen).
+  # Séparée de Vocabulaire, et placée avant elle : ces unités (u1 à u5)
+  # enseignent l'alphabet, pas du lexique à retenir, et elles conditionnent
+  # tout le reste du cours (voir alphabetGatingRemarks ci-dessus). Un onglet à
+  # part le montre avant même d'ouvrir la piste — l'apprenant sait par où
+  # commencer sans avoir à déplier Vocabulaire pour le découvrir.
   - id: alphabet
     title: Alphabet
     subtitle: Déchiffrer le cyrillique, puis lire de vrais mots
@@ -63,6 +63,10 @@ tracks:
     icon: letters
     units:
       - u1
+      - u2
+      - u3
+      - u4
+      - u5
 
   - id: vocabulaire
     title: Vocabulaire

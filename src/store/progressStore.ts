@@ -36,9 +36,14 @@ export const STORAGE_KEY = 'cartolang.progress.v1'
  * gabarit d'un niveau à l'autre — mais à plat, terminer une leçon dans l'un
  * la marquait faite dans tous les autres qui partagent l'identifiant. Voir
  * `legacyCourseId` pour le rattachement des sauvegardes antérieures.
+ * Format 6 : l'alphabet russe, qui tenait dans une seule unité `u1` de dix
+ * leçons, est redécoupé en cinq unités `u1` à `u5` de deux leçons chacune
+ * (voir le README de la piste dans `content/courses/fr-ru-a1/course.yaml`).
+ * Les leçons gardent leurs identifiants, mais les étapes de révision et de
+ * consolidation changent d'unité — voir `migrateAlphabetSteps`.
  * Les sauvegardes plus anciennes sont converties à la lecture.
  */
-export const SAVE_FORMAT = 5
+export const SAVE_FORMAT = 6
 
 /** Le nécessaire d'un cours pour suivre sa propre progression. */
 export interface CourseBucket<T> {
@@ -88,14 +93,14 @@ interface ProgressState extends ProgressSnapshot {
   finishStep: (courseId: string, stepId: string, outcome: SessionOutcome, now?: number) => { xp: number }
   /**
    * Marque acquis, sans les jouer, un ensemble de leçons et d'étapes de
-   * parcours. Deux usages : sauter d'un coup tout ce qui précède un
-   * checkpoint du parcours (voir `UnitPathScreen`), pour qui maîtrise déjà
-   * une matière (l'alphabet russe, par exemple) ; ou, avec une seule étape et
-   * aucune leçon, secourir une révision qui ne trouve plus rien à réviser
-   * parce que les leçons qu'elle reprenait ont été sautées (voir
-   * `StepRoute`). Aucune carte n'est créée pour les leçons sautées : rien
-   * n'a été rencontré, il n'y a donc rien à réviser derrière. Sans effet sur
-   * ce qui est déjà acquis.
+   * parcours — avec une seule étape et aucune leçon, secourt une révision
+   * qui ne trouve plus rien à réviser parce que les leçons qu'elle reprenait
+   * ont été sautées (voir `StepRoute`). Aucune carte n'est créée pour les
+   * leçons sautées : rien n'a été rencontré, il n'y a donc rien à réviser
+   * derrière. Sans effet sur ce qui est déjà acquis.
+   *
+   * Sait aussi sauter plusieurs éléments à la fois, capacité qu'utilisait le
+   * saut de checkpoint du parcours (voir `archive/parcours-visuel`).
    */
   skipTo: (courseId: string, lessonIds: readonly string[], stepIds: readonly string[]) => void
   setDailyGoal: (goal: number) => void
@@ -213,6 +218,54 @@ function legacyCourseId(): string {
 function nestByCourse<T>(flat: Record<string, T> | undefined, courseId: string): CourseBucket<Record<string, T>> {
   if (!flat || Object.keys(flat).length === 0) return {}
   return { [courseId]: flat }
+}
+
+/**
+ * Unité qui recueille, dans le nouveau découpage, chaque paire de leçons de
+ * l'ancienne unité `u1` de l'alphabet russe — dans l'ordre, deux indices par
+ * unité (voir le format 6 ci-dessus).
+ */
+const ALPHABET_UNIT_SPLIT = ['u1', 'u1', 'u2', 'u2', 'u3', 'u3', 'u4', 'u4', 'u5', 'u5']
+
+/**
+ * Reporte sur les cinq nouvelles unités de l'alphabet russe (format 6) la
+ * progression des étapes de révision et de consolidation acquise quand
+ * l'alphabet ne formait qu'une seule unité `u1` de dix leçons.
+ *
+ * Sans idempotence, on ne pourrait pas l'appliquer sans condition à chaque
+ * lecture. Elle l'est : les deux premières leçons de l'ancienne `u1`
+ * correspondent déjà à la nouvelle `u1`, alors ses propres clés se
+ * retrouvent inchangées après passage — `u1:review-0` reste `u1:review-0`.
+ * Idempotente aussi pour tout autre cours : sans le préfixe `u1:`, une clé
+ * traverse sans y toucher.
+ *
+ * `u1:final` n'a pas d'équivalent : un bilan qui portait sur les dix leçons
+ * de l'alphabet n'en fait plus un sur les deux de la nouvelle `u1`. Il se
+ * perd plutôt que d'être mal réattribué.
+ */
+export function migrateAlphabetSteps(steps: CourseBucket<Record<string, number>>): CourseBucket<Record<string, number>> {
+  const bucket = steps['fr-ru-a1']
+  if (!bucket) return steps
+
+  let changed = false
+  const migrated: Record<string, number> = {}
+  for (const [key, value] of Object.entries(bucket)) {
+    if (key === 'u1:final') {
+      changed = true
+      continue
+    }
+    const match = /^u1:(review|consolidate)-(\d+)$/.exec(key)
+    if (!match) {
+      migrated[key] = value
+      continue
+    }
+    const index = Number(match[2])
+    const unit = ALPHABET_UNIT_SPLIT[index]
+    if (!unit) continue // Hors plage : n'a jamais pu exister.
+    changed ||= unit !== 'u1'
+    migrated[`${unit}:${match[1]}-${index % 2}`] = value
+  }
+  return changed ? { ...steps, 'fr-ru-a1': migrated } : steps
 }
 
 /** Enregistre l'activité du jour : XP cumulés et série. */
@@ -340,7 +393,7 @@ export const useProgress = create<ProgressState>()(
         // Les formats antérieurs n'ont rien perdu : leurs champs manquants
         // prennent simplement leur valeur par défaut ci-dessous.
         const format = parsed.format ?? 0
-        if (![1, 2, 3, 4, SAVE_FORMAT].includes(format)) {
+        if (![1, 2, 3, 4, 5, SAVE_FORMAT].includes(format)) {
           throw new Error(`Format de sauvegarde inconnu (attendu ${SAVE_FORMAT}).`)
         }
 
@@ -348,7 +401,7 @@ export const useProgress = create<ProgressState>()(
         let cards: ProgressSnapshot['cards']
         let steps: ProgressSnapshot['steps']
 
-        if (format < SAVE_FORMAT) {
+        if (format < 5) {
           // Formats 1 à 4 : lessons/cards/steps sont à plat, sans cours — voir
           // `legacyCourseId` et le commentaire du format 5 ci-dessus.
           const rawCards = migrateCards((parsed.cards ?? {}) as Record<string, unknown>)
@@ -366,7 +419,7 @@ export const useProgress = create<ProgressState>()(
         set({
           lessons,
           cards,
-          steps,
+          steps: migrateAlphabetSteps(steps),
           xp: parsed.xp ?? 0,
           xpByDay: parsed.xpByDay ?? {},
           dailyGoal: parsed.dailyGoal ?? initial.dailyGoal,
@@ -385,18 +438,34 @@ export const useProgress = create<ProgressState>()(
         const state = (persisted ?? {}) as Record<string, unknown> & Partial<ProgressSnapshot>
         if (version >= SAVE_FORMAT) return state as ProgressSnapshot
 
-        const rawCards = migrateCards((state.cards ?? {}) as Record<string, unknown>)
-        const cards = version < 4 ? deflateSchedules(rawCards) : rawCards
-        const courseId = legacyCourseId()
+        let lessons: ProgressSnapshot['lessons']
+        let cards: ProgressSnapshot['cards']
+        let steps: ProgressSnapshot['steps']
+
+        if (version < 5) {
+          // Formats 1 à 4 : lessons/cards/steps sont à plat, sans cours — voir
+          // `legacyCourseId` et le commentaire du format 5 ci-dessus.
+          const rawCards = migrateCards((state.cards ?? {}) as Record<string, unknown>)
+          const migratedCards = version < 4 ? deflateSchedules(rawCards) : rawCards
+          const courseId = legacyCourseId()
+          lessons = nestByCourse(state.lessons as unknown as LessonProgressMap | undefined, courseId)
+          cards = nestByCourse(migratedCards, courseId)
+          // Absent avant le format 3 : un parcours vierge, les leçons déjà
+          // faites restant reconnues par `lessons`.
+          steps = nestByCourse(state.steps as unknown as Record<string, number> | undefined, courseId)
+        } else {
+          // Format 5 : déjà imbriqué par cours, rien à replier.
+          lessons = (state.lessons as ProgressSnapshot['lessons']) ?? {}
+          cards = (state.cards as ProgressSnapshot['cards']) ?? {}
+          steps = (state.steps as ProgressSnapshot['steps']) ?? {}
+        }
 
         return {
           ...initial,
           ...state,
-          lessons: nestByCourse(state.lessons as unknown as LessonProgressMap | undefined, courseId),
-          cards: nestByCourse(cards, courseId),
-          // Absent avant le format 3 : un parcours vierge, les leçons déjà
-          // faites restant reconnues par `lessons`.
-          steps: nestByCourse(state.steps as unknown as Record<string, number> | undefined, courseId),
+          lessons,
+          cards,
+          steps: migrateAlphabetSteps(steps),
         }
       },
       partialize: ({ lessons, cards, steps, xp, xpByDay, dailyGoal, streak, autoSpeak, sounds }) => ({

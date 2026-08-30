@@ -18,7 +18,7 @@ import { GrammarSentenceChoice } from '@/components/session/GrammarSentenceChoic
 import { ConjugationAnswer } from '@/components/session/ConjugationAnswer'
 import { ConjugationChoice } from '@/components/session/ConjugationChoice'
 import { ConjugationMatch } from '@/components/session/ConjugationMatch'
-import { CloseIcon, HeartIcon } from '@/components/icons'
+import { CloseIcon } from '@/components/icons'
 import type { SessionOutcome } from '@/engine/progress'
 
 /**
@@ -34,24 +34,6 @@ interface SessionScreenProps {
   exercises: Exercise[]
   onQuit: () => void
   onFinish: (outcome: SessionOutcome) => void
-  /**
-   * Épreuve plutôt qu'entraînement (voir `CheckpointTestRoute`). Trois choses
-   * changent, toutes pour la même raison — on mesure ce qui est su, on
-   * n'enseigne pas :
-   *
-   *   - rien n'est noté dans la révision espacée. Une carte créée ici
-   *     priverait ensuite la leçon de sa présentation (`buildVocabSession`
-   *     ne présente que les mots sans carte), et un test raté coûterait
-   *     précisément la découverte qu'il renvoie faire ;
-   *   - un exercice raté ne repart pas en fin de file : le refaire jusqu'à
-   *     le réussir n'est plus une correction mais une triche ;
-   *   - l'en-tête compte les fautes restantes plutôt que les questions vues,
-   *     et la session s'arrête dès qu'il n'en reste plus.
-   *
-   * `allowed` est le nombre de fautes tolérées, annoncé avant le test (voir
-   * `mistakesAllowed`).
-   */
-  exam?: { allowed: number }
 }
 
 interface Attempt {
@@ -60,7 +42,7 @@ interface Attempt {
   total: number
 }
 
-export function SessionScreen({ title, exercises, onQuit, onFinish, exam }: SessionScreenProps) {
+export function SessionScreen({ title, exercises, onQuit, onFinish }: SessionScreenProps) {
   const { course } = useCourse()
   const gradeItem = useProgress((state) => state.gradeItem)
   const [queue, setQueue] = useState<Exercise[]>(exercises)
@@ -71,13 +53,6 @@ export function SessionScreen({ title, exercises, onQuit, onFinish, exam }: Sess
   const current = queue[position]
   const graded = useMemo(() => exercises.filter((exercise) => !isPresentation(exercise)).length, [exercises])
   const progress = graded === 0 ? 1 : Math.min(1, attempt.seen.size / graded)
-
-  // Cœurs d'un test : un de plus que les fautes tolérées, pour que les perdre
-  // tous soit exactement la faute de trop. Le compte annoncé avant le test est
-  // donc celui qu'on voit ici (voir `mistakesAllowed`).
-  const mistakes = attempt.total - attempt.correct
-  const hearts = exam ? exam.allowed + 1 : 0
-  const outOfHearts = exam !== undefined && mistakes >= hearts
 
   /** Avance dans la file, en réinsérant l'exercice raté un peu plus loin. */
   const advance = useCallback(
@@ -112,10 +87,8 @@ export function SessionScreen({ title, exercises, onQuit, onFinish, exam }: Sess
   const answer = useCallback(
     (exercise: Exercise, correct: boolean, rating?: Rating) => {
       const firstTry = !attempt.seen.has(exercise.id)
-      if (!exam) {
-        for (const itemId of itemIdsOf(exercise)) {
-          gradeItem(course.id, itemId, rating ?? ratingFromAnswer(correct, firstTry))
-        }
+      for (const itemId of itemIdsOf(exercise)) {
+        gradeItem(course.id, itemId, rating ?? ratingFromAnswer(correct, firstTry))
       }
       // Pas de son ici : il a déjà sonné dans l'exercice, à la validation
       // de la réponse (voir `useSessionSounds`). `answer` n'est appelé qu'à
@@ -127,19 +100,17 @@ export function SessionScreen({ title, exercises, onQuit, onFinish, exam }: Sess
       // nouveau — pas un rattrapage, juste du temps perdu. Ce qui est mal su
       // revient par la révision espacée, une séance plus tard, quand
       // l'oublier est redevenu possible.
-      advance(!correct && !exam && rating === undefined)
+      advance(!correct && rating === undefined)
     },
-    [advance, attempt.seen, course.id, exam, gradeItem, record],
+    [advance, attempt.seen, course.id, gradeItem, record],
   )
 
   const answerMatch = useCallback(
     (exercise: Exercise, missedItemIds: string[]) => {
       const missed = new Set(missedItemIds)
       const firstTry = !attempt.seen.has(exercise.id)
-      if (!exam) {
-        for (const itemId of itemIdsOf(exercise)) {
-          gradeItem(course.id, itemId, missed.has(itemId) ? 'again' : ratingFromAnswer(true, firstTry))
-        }
+      for (const itemId of itemIdsOf(exercise)) {
+        gradeItem(course.id, itemId, missed.has(itemId) ? 'again' : ratingFromAnswer(true, firstTry))
       }
       // Pas de son ici : chaque paire a déjà sonné en se résolvant (voir
       // `PairBoard`), et la dernière est la fin de la manche. En rejouer un
@@ -148,19 +119,17 @@ export function SessionScreen({ title, exercises, onQuit, onFinish, exam }: Sess
       // Les paires sont toutes trouvées à la fin : inutile de rejouer la manche.
       advance(false)
     },
-    [advance, attempt.seen, course.id, exam, gradeItem, record],
+    [advance, attempt.seen, course.id, gradeItem, record],
   )
 
-  // La file est vide : la session est terminée. Un test s'arrête en plus dès
-  // le dernier cœur perdu — finir une épreuve déjà manquée n'apprend rien et
-  // ne fait qu'ajouter l'humiliation à l'échec. Le drapeau évite que le rendu
+  // La file est vide : la session est terminée. Le drapeau évite que le rendu
   // suivant ne déclenche une seconde clôture.
   const finished = useRef(false)
   useEffect(() => {
-    if ((current && !outOfHearts) || finished.current) return
+    if (current || finished.current) return
     finished.current = true
     onFinish({ correct: attempt.correct, total: attempt.total })
-  }, [attempt.correct, attempt.total, current, onFinish, outOfHearts])
+  }, [attempt.correct, attempt.total, current, onFinish])
 
   // Quitter une session en cours de prononciation laisserait la voix courir
   // sur l'écran suivant, qui n'a plus rien à voir avec le mot.
@@ -194,24 +163,9 @@ export function SessionScreen({ title, exercises, onQuit, onFinish, exam }: Sess
             transition={{ type: 'spring', stiffness: 200, damping: 26 }}
           />
         </div>
-        {/* Un test montre ce qu'il reste à perdre, une leçon ce qui a été
-            parcouru : dans une épreuve, savoir combien de fautes on peut
-            encore commettre est la seule information qui change la façon de
-            répondre. */}
-        {exam ? (
-          <span
-            className="flex shrink-0 items-center gap-0.5 text-error"
-            aria-label={`${hearts - mistakes} faute${hearts - mistakes > 1 ? 's' : ''} encore permise${hearts - mistakes > 1 ? 's' : ''}`}
-          >
-            {Array.from({ length: hearts }, (_, index) => (
-              <HeartIcon key={index} size={17} filled={index < hearts - mistakes} />
-            ))}
-          </span>
-        ) : (
-          <span className="w-12 text-right text-sm font-extrabold text-ink-faint">
-            {attempt.seen.size}/{graded}
-          </span>
-        )}
+        <span className="w-12 text-right text-sm font-extrabold text-ink-faint">
+          {attempt.seen.size}/{graded}
+        </span>
       </header>
 
       {/* `min-h-0` : sans lui, un enfant flex-1 en colonne se voit imposer une

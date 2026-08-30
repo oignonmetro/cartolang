@@ -119,16 +119,6 @@ export function HeartIcon({ filled = false, ...props }: IconProps & { filled?: b
   )
 }
 
-/** Double chevron : le badge d'un checkpoint du parcours (voir `PathNode`). */
-export function SkipIcon(props: IconProps) {
-  return (
-    <svg {...svgProps(props)}>
-      <path d="m4 6 7 6-7 6" />
-      <path d="m13 6 7 6-7 6" />
-    </svg>
-  )
-}
-
 export function BookIcon(props: IconProps) {
   return (
     <svg {...svgProps(props)}>

@@ -1,7 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import type { ConjugationLesson, GrammarLesson, PracticeItem, Vocab, VocabLesson } from '@/content/schema'
 import {
-  buildCheckpointTest,
   buildLessonSession,
   buildPracticeSession,
   buildReviewSession,
@@ -21,7 +20,7 @@ import { createCard, review, type CardState } from './srs'
 
 /** Emballe une liste de mots dans une leçon de vocabulaire. */
 function lessonOf(id: string, vocab: Vocab[]): VocabLesson {
-  return { kind: 'vocab', id, title: id, vocab, checkpoint: false }
+  return { kind: 'vocab', id, title: id, vocab }
 }
 
 const T0 = Date.UTC(2026, 0, 1)
@@ -599,44 +598,6 @@ describe('session de révision', () => {
   })
 })
 
-describe('test de passage d’un checkpoint', () => {
-  it('ne présente rien et ne demande aucune auto-évaluation', () => {
-    // Une présentation donnerait la réponse avant de la demander, et « je
-    // savais » n'est pas une preuve : un test ne peut poser que des questions
-    // dont la réponse se vérifie.
-    for (let seed = 0; seed < 20; seed++) {
-      const served = kinds(buildCheckpointTest(LESSON, seed))
-      expect(served).not.toContain('intro')
-      expect(served).not.toContain('flashcard')
-    }
-  })
-
-  it('interroge chaque élément au moins une fois', () => {
-    const session = buildCheckpointTest(LESSON, 3)
-    const covered = new Set(session.flatMap((exercise) => itemIdsOf(exercise)))
-    for (const word of LESSON) expect(covered.has(word.id)).toBe(true)
-  })
-
-  it('complète les QCM par des manches d’association', () => {
-    const served = kinds(buildCheckpointTest(LESSON, 4))
-    expect(served).toContain('choice')
-    expect(served).toContain('match')
-  })
-
-  it('ne teste rien sous deux éléments, faute de leurre à opposer', () => {
-    expect(buildCheckpointTest(LESSON.slice(0, 1), 5)).toEqual([])
-    expect(buildCheckpointTest([], 5)).toEqual([])
-  })
-
-  it('rebat les questions d’un essai à l’autre', () => {
-    // « Réessayer » ne doit pas reposer la même grille dans le même ordre :
-    // on la refait alors de mémoire plutôt que de la savoir.
-    const first = buildCheckpointTest(LESSON, 1).map((exercise) => exercise.id)
-    const second = buildCheckpointTest(LESSON, 2).map((exercise) => exercise.id)
-    expect(second).not.toEqual(first)
-  })
-})
-
 describe('session d’entraînement', () => {
   const entries = (states: Partial<CardState>[]): { card: CardState; item: PracticeItem }[] =>
     states.map((state, index) => ({
@@ -730,7 +691,6 @@ const GRAMMAR: GrammarLesson = {
   kind: 'grammar',
   id: 'g1-l1',
   title: 'Le conditionnel mixte',
-  checkpoint: false,
   notes: 'Une hypothèse passée, une conséquence présente.',
   points: [
     { id: 'p1', sentence: 'If I had known, I ___ there.', answer: 'would be', alt: [], options: ['would be', 'would have been', 'will be'], translation: 'Si j’avais su, je serais là.' },
@@ -745,7 +705,6 @@ const CONJUGATION: ConjugationLesson = {
   kind: 'conjugation',
   id: 'c1-l1',
   title: 'Present perfect',
-  checkpoint: false,
   notes: 'have / has + participe passé.',
   verbs: [
     {

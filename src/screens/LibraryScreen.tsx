@@ -5,7 +5,7 @@ import type { LibraryCourse, Track, Unit } from '@/content/schema'
 import { countLabel, courseLabel, itemsOfUnit } from '@/content/course'
 import type { LessonProgressMap } from '@/engine/progress'
 import { dayKey, displayedStreak, levelFromXp, masteryOf, unitMastery } from '@/engine/progress'
-import { buildUnitPath } from '@/engine/unitPath'
+import { buildUnitPath, currentDestination } from '@/engine/unitPath'
 import { dueCards } from '@/engine/srs'
 import { EMPTY_CARDS, EMPTY_LESSON_PROGRESS, EMPTY_STEPS, useProgress } from '@/store/progressStore'
 import { useCourse } from '@/content/CourseProvider'
@@ -19,7 +19,7 @@ import { BoltIcon, ChevronLeftIcon, FlameIcon, StarIcon, UnitIcon } from '@/comp
  * à montrer.
  *
  * Une piste à une seule unité (voir `selectTrack`) n'affiche jamais rien en
- * elle-même — son clic redirige aussitôt vers le parcours. La retenir comme
+ * elle-même — son clic redirige aussitôt vers l'unité. La retenir comme
  * onglet par défaut laisserait l'écran s'ouvrir sur une liste à un seul
  * élément que le clic lui-même ne montre jamais.
  */
@@ -110,14 +110,22 @@ export function LibraryScreen({ course }: { course: LibraryCourse }) {
     setActiveTrackId(defaultTrackId(course.tracks))
   }, [course.id])
 
-  // Une piste à une seule unité (l'alphabet russe) n'a rien à choisir en son
-  // sein : cliquer son onglet mène directement au parcours plutôt que
+  // Ouvrir une unité mène droit à son étape courante — pas à un écran de
+  // parcours à traverser pour la retrouver (voir `currentDestination`).
+  const openUnit = (unit: Unit) => {
+    const destination = currentDestination(unit.id, buildUnitPath(unit, lessons, steps))
+    if (!destination) return
+    navigate('lessonId' in destination ? `/lecon/${destination.lessonId}` : `/etape/${destination.unitId}/${destination.stepId}`)
+  }
+
+  // Une piste à une seule unité n'a rien à choisir en son sein : cliquer son
+  // onglet mène directement à l'unité plutôt que
   // d'afficher une liste à un seul élément qu'il faudrait rouvrir tout de
   // suite. Ce n'est donc jamais l'onglet actif — `defaultTrackId` l'exclut.
   const selectTrack = (id: string) => {
     const target = course.tracks.find((candidate) => candidate.id === id)
     if (target && target.units.length === 1) {
-      navigate(`/unite/${target.units[0]!.id}`)
+      openUnit(target.units[0]!)
       return
     }
     setActiveTrackId(id)
@@ -199,7 +207,7 @@ export function LibraryScreen({ course }: { course: LibraryCourse }) {
               tone={tone}
               mastery={unitMastery(unit, cards)}
               done={doneNodes(unit, lessons, steps)}
-              onOpen={() => navigate(`/unite/${unit.id}`)}
+              onOpen={() => openUnit(unit)}
             />
           ))
         )}

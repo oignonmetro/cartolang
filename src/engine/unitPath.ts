@@ -1,6 +1,6 @@
 import type { ItemLocation } from '@/content/course'
 import { lessonCountLabel } from '@/content/course'
-import type { Lesson, PracticeItem, Unit, Vocab } from '@/content/schema'
+import type { Lesson, PracticeItem, Unit } from '@/content/schema'
 import { dueCards, type CardState } from './srs'
 import { levelOf, type LessonProgressMap } from './progress'
 
@@ -34,19 +34,6 @@ export interface UnitPathNode {
    * pastilles où rien ne dit que la structure se répète.
    */
   cycle: number
-  /** Point d'entrée du parcours (voir `Lesson.checkpoint`) : peut se rejoindre sans jouer ce qui précède. */
-  checkpoint: boolean
-  /** Libellé du checkpoint, dérivé de son contenu ; nul hors checkpoint. */
-  checkpointLabel: string | null
-}
-
-/**
- * Libellé d'un checkpoint : les lettres (ou mots) réellement travaillés dans
- * la section qu'il ouvre, plutôt qu'un titre à tenir à jour séparément — le
- * contenu de la leçon reste la seule source de vérité.
- */
-function checkpointLabel(lesson: Lesson): string {
-  return lesson.kind === 'vocab' ? lesson.vocab.map((word) => word.term).join(' ') : lesson.title
 }
 
 const STEP_LABELS: Record<UnitStepKind, { title: string; subtitle: string }> = {
@@ -116,8 +103,6 @@ export function buildUnitPath(
       subtitle: lesson ? lessonCountLabel(lesson) : STEP_LABELS[kind as UnitStepKind].subtitle,
       status,
       cycle,
-      checkpoint: lesson?.checkpoint ?? false,
-      checkpointLabel: lesson?.checkpoint ? checkpointLabel(lesson) : null,
     }
   })
 }
@@ -129,100 +114,34 @@ export function nextNodeAfter(path: readonly UnitPathNode[], nodeId: string): Un
   return path.slice(index + 1).find((node) => node.status !== 'locked') ?? path[index + 1] ?? null
 }
 
+/** Où ouvrir une unité : la leçon d'un cours, ou l'étape d'un parcours (voir `stepKey`). */
+export type UnitDestination = { lessonId: string } | { unitId: string; stepId: string }
+
 /**
- * Ce qu'il faut marquer acquis pour atteindre un nœud sans l'avoir joué : les
- * leçons et les étapes qui le précèdent dans le parcours. Le saut lui-même est
- * confié au store (`skipTo`), qui ne redescend jamais ce qui est déjà fait.
+ * Où envoyer l'apprenant qui ouvre une unité : son étape courante, plutôt
+ * qu'un écran de parcours qu'il faudrait traverser pour la retrouver. Sans
+ * étape courante (unité entièrement faite), la dernière sert de repère —
+ * rouvrir l'unité vaut mieux que ne rien proposer.
  */
-export function pathBefore(
-  unitId: string,
-  path: readonly UnitPathNode[],
-  nodeId: string,
-): { lessonIds: string[]; stepIds: string[] } {
-  const index = path.findIndex((node) => node.id === nodeId)
-  const before = index === -1 ? [] : path.slice(0, index)
-  return {
-    lessonIds: before.flatMap((node) => (node.lesson ? [node.lesson.id] : [])),
-    stepIds: before.flatMap((node) => (node.lesson ? [] : [stepKey(unitId, node.id)])),
-  }
+export function currentDestination(unitId: string, path: readonly UnitPathNode[]): UnitDestination | null {
+  const node = path.find((candidate) => candidate.status === 'available') ?? path[path.length - 1]
+  if (!node) return null
+  return node.lesson ? { lessonId: node.lesson.id } : { unitId, stepId: node.id }
 }
 
 /**
- * Sections d'une unité : sa liste de leçons, coupée à chaque checkpoint.
- *
- * Un checkpoint ouvre une section ; la première commence avec l'unité, et n'en
- * porte pas — on y arrive sans rien avoir à sauter.
- */
-function sectionsOf(unit: Unit): Lesson[][] {
-  const sections: Lesson[][] = []
-  for (const lesson of unit.lessons) {
-    if (lesson.checkpoint || sections.length === 0) sections.push([])
-    sections[sections.length - 1]!.push(lesson)
-  }
-  return sections
-}
-
-/**
- * Rang d'une leçon dans sa section : zéro pour celle qui l'ouvre.
+ * Rang d'une leçon dans son unité : zéro pour la première.
  *
  * C'est la mesure d'avancement dont les manches d'association tirent leur
- * difficulté (voir `buildLessonSession`) : elles grandissent au fil de la
- * section, puis retombent à leur plancher quand la suivante commence. Le
- * checkpoint qui l'ouvre enseigne un alphabet neuf, et relier six lettres
- * découvertes à l'écran précédent punirait ce passage au lieu de
- * l'accompagner — l'exigence doit suivre la familiarité, pas la précéder.
+ * difficulté (voir `buildLessonSession`) : elles grandissent au fil de
+ * l'unité, une leçon connaissant mieux son terrain que la précédente.
  *
  * Zéro pour une leçon étrangère à l'unité : c'est le plancher, donc le repli
  * le plus doux qu'un appel malformé puisse recevoir.
  */
 export function sectionRank(unit: Unit, lessonId: string): number {
-  for (const section of sectionsOf(unit)) {
-    const rank = section.findIndex((lesson) => lesson.id === lessonId)
-    if (rank !== -1) return rank
-  }
-  return 0
-}
-
-/** Nombre de sections sur lesquelles un test de passage interroge. */
-const TESTED_SECTIONS = 2
-
-/**
- * Ce sur quoi porte le test de passage d'un checkpoint : les lettres des deux
- * sections qui le précèdent — d'une seule quand il n'y en a qu'une avant lui.
- *
- * Les lettres, et pas les mots que ces sections enseignent aussi. Un mot russe
- * mobilise un lexique qu'on ne prétend pas connaître en sautant l'alphabet, et
- * le rater ne dirait rien de la lecture ; ce que la section suivante suppose
- * acquis, c'est le déchiffrage, et c'est donc lui seul qu'on vérifie.
- *
- * Le repli sur tout le vocabulaire ne sert pas au russe : il garde le test
- * praticable si une unité sans alphabet se dote un jour de checkpoints, plutôt
- * que d'y ouvrir un saut que rien ne viendrait mériter.
- */
-export function checkpointTestVocab(unit: Unit, checkpointLessonId: string): Vocab[] {
-  const sections = sectionsOf(unit)
-  const index = sections.findIndex((section) => section[0]?.id === checkpointLessonId)
-  if (index <= 0) return []
-
-  const vocab = sections
-    .slice(Math.max(0, index - TESTED_SECTIONS), index)
-    .flatMap((section) => section.flatMap((lesson) => (lesson.kind === 'vocab' ? lesson.vocab : [])))
-
-  const letters = vocab.filter((word) => word.pos === 'lettre')
-  return letters.length > 0 ? letters : vocab
-}
-
-/**
- * Fautes tolérées dans un test de passage.
- *
- * Un quart des questions, plafonné à trois : sur une quinzaine de questions
- * ça laisse la place à l'étourderie sans laisser passer un alphabet à moitié
- * su. Le plancher à une faute garde un test court franchissable — refuser le
- * saut pour une seule erreur sur quatre questions serait décourageant plus
- * qu'exigeant. Le nombre s'annonce avant le test, il ne se découvre pas après.
- */
-export function mistakesAllowed(questions: number): number {
-  return Math.max(1, Math.min(3, Math.floor(questions / 4)))
+  const rank = unit.lessons.findIndex((lesson) => lesson.id === lessonId)
+  return rank === -1 ? 0 : rank
 }
 
 export interface ConsolidationEntry {

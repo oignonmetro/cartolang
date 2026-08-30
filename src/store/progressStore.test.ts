@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { deflateSchedules, migrateCards, useProgress } from './progressStore'
+import { deflateSchedules, migrateAlphabetSteps, migrateCards, useProgress } from './progressStore'
 import { createCard, DAY, review, type CardState } from '@/engine/srs'
 
 const T0 = Date.UTC(2026, 0, 1, 9, 0)
@@ -168,7 +168,7 @@ describe('progression isolée par cours', () => {
   })
 })
 
-describe('saut vers un checkpoint du parcours', () => {
+describe('saut de progression (skipTo)', () => {
   it('acquiert plusieurs leçons d’un coup, sans créer la moindre carte de révision', () => {
     useProgress.getState().reset()
     useProgress.getState().skipTo('fr-ru-a1', ['u1-l1', 'u1-l2'], ['u1:review-0'])
@@ -240,5 +240,67 @@ describe('conversion d’une sauvegarde antérieure au format 5', () => {
     const state = useProgress.getState()
     expect(state.lessons['fr-en-b1']?.['v1-l1']?.level).toBe(1)
     expect(state.lessons.legacy).toBeUndefined()
+  })
+})
+
+describe('redécoupage de l’unité alphabet en cinq unités (format 6)', () => {
+  it('reporte chaque paire de leçons vers sa nouvelle unité', () => {
+    const before = {
+      'fr-ru-a1': {
+        'u1:review-0': 1,
+        'u1:consolidate-1': 2,
+        'u1:review-4': 1,
+        'u1:consolidate-9': 3,
+      },
+    }
+    expect(migrateAlphabetSteps(before)).toEqual({
+      'fr-ru-a1': {
+        'u1:review-0': 1,
+        'u1:consolidate-1': 2,
+        'u3:review-0': 1,
+        'u5:consolidate-1': 3,
+      },
+    })
+  })
+
+  it('perd le bilan de l’ancienne unité, sans le rattacher à la nouvelle', () => {
+    const before = { 'fr-ru-a1': { 'u1:final': 1, 'u1:review-0': 1 } }
+    expect(migrateAlphabetSteps(before)).toEqual({ 'fr-ru-a1': { 'u1:review-0': 1 } })
+  })
+
+  it('laisse les autres cours intacts', () => {
+    const before = { 'fr-en-b1': { 'v1:review-0': 1 } }
+    expect(migrateAlphabetSteps(before)).toBe(before)
+  })
+
+  it('ne touche rien sans progression sur l’alphabet russe', () => {
+    const before = { 'fr-ru-a1': { 'u6:review-0': 1 } }
+    expect(migrateAlphabetSteps(before)).toBe(before)
+  })
+
+  it('reste sans effet sur une sauvegarde déjà au format 6', () => {
+    useProgress.getState().reset()
+    useProgress.getState().importSave(
+      JSON.stringify({
+        format: 6,
+        lessons: {},
+        cards: {},
+        steps: { 'fr-ru-a1': { 'u3:review-0': 1 } },
+      }),
+    )
+    expect(useProgress.getState().steps['fr-ru-a1']).toEqual({ 'u3:review-0': 1 })
+  })
+
+  it('s’applique aussi à l’import d’une sauvegarde au format 5', () => {
+    useProgress.getState().reset()
+    useProgress.getState().importSave(
+      JSON.stringify({
+        format: 5,
+        lessons: {},
+        cards: {},
+        steps: { 'fr-ru-a1': { 'u1:review-4': 1 } },
+      }),
+    )
+    expect(useProgress.getState().steps['fr-ru-a1']).toEqual({ 'u3:review-0': 1 })
   })
 })

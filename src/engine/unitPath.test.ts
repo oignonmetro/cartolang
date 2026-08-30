@@ -6,11 +6,9 @@ import { createCard, DAY, type CardState } from './srs'
 import type { LessonProgressMap } from './progress'
 import {
   buildUnitPath,
-  checkpointTestVocab,
   consolidationEntries,
-  mistakesAllowed,
+  currentDestination,
   nextNodeAfter,
-  pathBefore,
   sectionRank,
   solidity,
   stepKey,
@@ -20,7 +18,7 @@ function vocab(id: string): Vocab {
   return { id, term: id, translation: id, alt: [] }
 }
 
-function unit(id: string, lessonCount: number, checkpoints: readonly number[] = []): Unit {
+function unit(id: string, lessonCount: number): Unit {
   return {
     id,
     title: id,
@@ -31,7 +29,6 @@ function unit(id: string, lessonCount: number, checkpoints: readonly number[] = 
       kind: 'vocab' as const,
       id: `${id}-l${index + 1}`,
       title: `${id} leçon ${index + 1}`,
-      checkpoint: checkpoints.includes(index + 1),
       vocab: [vocab(`${id}-w${index + 1}`)],
     })),
   }
@@ -93,145 +90,40 @@ describe('composition du parcours', () => {
   })
 })
 
-describe('checkpoints du parcours', () => {
-  const withCheckpoint = unit('c1', 3, [2])
+describe('rang d’une leçon dans son unité', () => {
+  const U = unit('a', 4)
 
-  it('marque le nœud d’une leçon checkpoint, et lui seul', () => {
-    const path = buildUnitPath(withCheckpoint, {}, {})
-    const lessonNodes = path.filter((node) => node.kind === 'lesson')
-    expect(lessonNodes.map((node) => node.checkpoint)).toEqual([false, true, false])
-  })
-
-  it('n’en marque aucun sans checkpoint déclaré', () => {
-    const path = buildUnitPath(U3, {}, {})
-    expect(path.every((node) => !node.checkpoint)).toBe(true)
-    expect(path.every((node) => node.checkpointLabel === null)).toBe(true)
-  })
-
-  it('déduit le libellé du checkpoint des mots de sa leçon, pas d’un champ séparé', () => {
-    const path = buildUnitPath(withCheckpoint, {}, {})
-    const checkpoint = path.find((node) => node.checkpoint)!
-    expect(checkpoint.checkpointLabel).toBe('c1-w2')
-  })
-
-  it('ne donne de libellé qu’au nœud checkpoint, jamais aux étapes qui l’entourent', () => {
-    const path = buildUnitPath(withCheckpoint, {}, {})
-    const others = path.filter((node) => !node.checkpoint)
-    expect(others.every((node) => node.checkpointLabel === null)).toBe(true)
-  })
-})
-
-describe('test de passage d’un checkpoint', () => {
-  /**
-   * Une unité d'alphabet, bâtie comme le russe : chaque section enseigne des
-   * lettres, puis des mots composés de ces lettres. Toutes les sections sauf
-   * la première ouvrent sur un checkpoint.
-   */
-  const letters = (ids: string[]): Vocab[] => ids.map((id) => ({ ...vocab(id), pos: 'lettre' as const }))
-  const section = (rank: number, ids: string[]) => [
-    {
-      kind: 'vocab' as const,
-      id: `s${rank}-lettres`,
-      title: `Lettres ${rank}`,
-      checkpoint: rank > 1,
-      vocab: letters(ids),
-    },
-    {
-      kind: 'vocab' as const,
-      id: `s${rank}-mots`,
-      title: `Mots ${rank}`,
-      checkpoint: false,
-      vocab: [vocab(`mot${rank}`)],
-    },
-  ]
-  const ALPHABET: Unit = {
-    id: 'alpha',
-    title: 'alpha',
-    icon: 'book',
-    color: 'teal',
-    kind: 'vocab',
-    lessons: [
-      ...section(1, ['а', 'к']),
-      ...section(2, ['в', 'н']),
-      ...section(3, ['б', 'д']),
-      ...section(4, ['г', 'ж']),
-    ],
-  }
-  const terms = (unit: Unit, id: string) => checkpointTestVocab(unit, id).map((word) => word.term)
-
-  it('n’interroge que sur la section d’avant quand il n’y en a qu’une', () => {
-    expect(terms(ALPHABET, 's2-lettres')).toEqual(['а', 'к'])
-  })
-
-  it('interroge sur les deux sections précédentes dès qu’elles existent', () => {
-    expect(terms(ALPHABET, 's3-lettres')).toEqual(['а', 'к', 'в', 'н'])
-  })
-
-  it('ne remonte jamais plus haut que les deux sections précédentes', () => {
-    // Sauter à la section 4 se mérite sur les sections 2 et 3 : redemander
-    // l'alphabet entier depuis le début ferait du dernier checkpoint le plus
-    // dur à franchir, alors que c'est le plus loin dans le parcours.
-    expect(terms(ALPHABET, 's4-lettres')).toEqual(['в', 'н', 'б', 'д'])
-  })
-
-  it('écarte les mots pour ne garder que les lettres', () => {
-    // Un mot mobilise en plus un lexique qu'on ne prétend pas connaître en
-    // sautant l'alphabet : le rater ne dirait rien de la lecture.
-    expect(terms(ALPHABET, 's3-lettres')).not.toContain('mot1')
-    expect(terms(ALPHABET, 's3-lettres')).not.toContain('mot2')
-  })
-
-  it('ne teste rien sur une leçon qui n’ouvre pas de section', () => {
-    expect(checkpointTestVocab(ALPHABET, 's2-mots')).toEqual([])
-    expect(checkpointTestVocab(ALPHABET, 's1-lettres')).toEqual([])
-  })
-
-  it('retombe sur tout le vocabulaire quand la matière n’a pas de lettres', () => {
-    // Filet pour une future unité sans alphabet : mieux vaut un test sur les
-    // mots qu'un checkpoint qui s'ouvrirait sans rien demander.
-    expect(terms(unit('v1', 4, [3]), 'v1-l3')).toEqual(['v1-w1', 'v1-w2'])
-  })
-
-  it('tolère un quart des fautes, entre une et trois', () => {
-    expect(mistakesAllowed(16)).toBe(3)
-    expect(mistakesAllowed(12)).toBe(3)
-    expect(mistakesAllowed(8)).toBe(2)
-    // Plancher : refuser le saut sur une seule erreur d'un test très court
-    // serait décourageant plus qu'exigeant.
-    expect(mistakesAllowed(3)).toBe(1)
-  })
-
-  it('rassemble tout ce qui précède un nœud, leçons et étapes', () => {
-    const path = buildUnitPath(U3, {}, {})
-    expect(pathBefore('v1', path, 'v1-l2')).toEqual({
-      lessonIds: ['v1-l1'],
-      stepIds: [stepKey('v1', 'review-0'), stepKey('v1', 'consolidate-0')],
-    })
-  })
-
-  it('ne renvoie rien avant le premier nœud, ni pour un nœud inconnu', () => {
-    const path = buildUnitPath(U3, {}, {})
-    expect(pathBefore('v1', path, 'v1-l1')).toEqual({ lessonIds: [], stepIds: [] })
-    expect(pathBefore('v1', path, 'inconnu')).toEqual({ lessonIds: [], stepIds: [] })
-  })
-})
-
-describe('rang d’une leçon dans sa section', () => {
-  // Trois sections de deux leçons, comme « Lire le russe » : des lettres, puis
-  // des mots faits de ces lettres, et un checkpoint ouvre la suivante.
-  const ALPHA = unit('a', 6, [3, 5])
-  const ranks = (u: Unit) => u.lessons.map((lesson) => sectionRank(u, lesson.id))
-
-  it('repart de zéro à chaque checkpoint', () => {
-    expect(ranks(ALPHA)).toEqual([0, 1, 0, 1, 0, 1])
-  })
-
-  it('compte d’un bout à l’autre d’une unité sans checkpoint', () => {
-    expect(ranks(unit('b', 4))).toEqual([0, 1, 2, 3])
+  it('compte d’un bout à l’autre de l’unité', () => {
+    expect(U.lessons.map((lesson) => sectionRank(U, lesson.id))).toEqual([0, 1, 2, 3])
   })
 
   it('retombe sur le plancher pour une leçon étrangère à l’unité', () => {
-    expect(sectionRank(ALPHA, 'inconnue')).toBe(0)
+    expect(sectionRank(U, 'inconnue')).toBe(0)
+  })
+})
+
+describe('destination courante d’une unité', () => {
+  it('mène à la première leçon d’une unité vierge', () => {
+    expect(currentDestination('v1', buildUnitPath(U3, {}, {}))).toEqual({ lessonId: 'v1-l1' })
+  })
+
+  it('mène à l’étape courante, révision ou consolidation comprise', () => {
+    const path = buildUnitPath(U3, { 'v1-l1': done }, {})
+    expect(currentDestination('v1', path)).toEqual({ unitId: 'v1', stepId: 'review-0' })
+  })
+
+  it('reprend la leçon suivante une fois l’étape franchie', () => {
+    const path = buildUnitPath(U3, { 'v1-l1': done }, { [stepKey('v1', 'review-0')]: 1 })
+    expect(currentDestination('v1', path)).toEqual({ unitId: 'v1', stepId: 'consolidate-0' })
+  })
+
+  it('retombe sur la dernière étape quand l’unité est entièrement faite', () => {
+    const path = buildUnitPath(U2, {}, {}).map((node) => ({ ...node, status: 'done' as const }))
+    expect(currentDestination('g1', path)).toEqual({ unitId: 'g1', stepId: 'final' })
+  })
+
+  it('ne renvoie rien pour une unité sans nœud', () => {
+    expect(currentDestination('vide', [])).toBeNull()
   })
 })
 

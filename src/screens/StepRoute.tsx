@@ -75,7 +75,7 @@ function StepSession({ unitId, stepId }: { unitId: string; stepId: string }) {
 
   if (!unit || !node || node.kind === 'lesson') return <Navigate to="/" replace />
 
-  const backToPath = () => navigate(`/unite/${unit.id}`, { replace: true })
+  const backHome = () => navigate('/', { replace: true })
 
   if (finished) {
     const { lessons, steps } = useProgress.getState()
@@ -88,22 +88,21 @@ function StepSession({ unitId, stepId }: { unitId: string; stepId: string }) {
         outcome={finished.outcome}
         passed
         xp={finished.xp}
-        onContinue={backToPath}
+        onContinue={backHome}
         onNext={
           next && next.status !== 'locked'
             ? () => navigate(next.lesson ? `/lecon/${next.lesson.id}` : `/etape/${unit.id}/${next.id}`, { replace: true })
             : undefined
         }
-        onRetry={backToPath}
+        onRetry={backHome}
       />
     )
   }
 
   if (exercises.length === 0) {
-    // Une leçon sautée via un checkpoint (voir `UnitPathScreen`) ne laisse
-    // aucune carte derrière elle : l'étape qui la suit peut alors se
-    // retrouver sans rien à réviser, et rester bloqué là annulerait le saut
-    // qui vient d'être fait.
+    // Une étape peut se retrouver sans rien à réviser (les leçons qui la
+    // précèdent n'ont jamais été jouées) : rester bloqué là serait une
+    // impasse, d'où l'échappatoire ci-dessous.
     return (
       <div className="flex h-full flex-col items-center justify-center gap-5 overflow-y-auto px-8 text-center [&>*]:shrink-0">
         <Mascot mood="think" size={130} />
@@ -113,13 +112,13 @@ function StepSession({ unitId, stepId }: { unitId: string; stepId: string }) {
           passez cette étape si elles ont été sautées.
         </p>
         <div className="flex gap-3">
-          <Button tone="neutral" onClick={backToPath}>
-            Retour au parcours
+          <Button tone="neutral" onClick={backHome}>
+            Retour à l'accueil
           </Button>
           <Button
             onClick={() => {
               skipTo(course.id, [], [stepKey(unit.id, stepId)])
-              backToPath()
+              backHome()
             }}
           >
             Passer cette étape
@@ -133,7 +132,7 @@ function StepSession({ unitId, stepId }: { unitId: string; stepId: string }) {
     <SessionScreen
       title={`${node.title} (${unit.title})`}
       exercises={exercises}
-      onQuit={backToPath}
+      onQuit={backHome}
       onFinish={(outcome) => setFinished({ outcome, ...finishStep(course.id, stepKey(unit.id, stepId), outcome) })}
     />
   )

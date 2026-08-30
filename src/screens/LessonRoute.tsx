@@ -64,7 +64,7 @@ function LessonSession({ lessonId }: { lessonId: string }) {
   if (!entry) return <Navigate to="/" replace />
 
   const unit = entry.unit
-  const backToPath = () => navigate(`/unite/${unit.id}`, { replace: true })
+  const backHome = () => navigate('/', { replace: true })
 
   if (finished) {
     // L'enchaînement suit l'ordre du parcours, pas celui des seules leçons :
@@ -81,7 +81,7 @@ function LessonSession({ lessonId }: { lessonId: string }) {
         outcome={finished.outcome}
         passed={finished.passed}
         xp={finished.xp}
-        onContinue={backToPath}
+        onContinue={backHome}
         onNext={
           next && next.status !== 'locked'
             ? () =>
@@ -105,7 +105,7 @@ function LessonSession({ lessonId }: { lessonId: string }) {
       key={attempt}
       title={entry.lesson.title}
       exercises={exercises}
-      onQuit={backToPath}
+      onQuit={backHome}
       onFinish={(outcome) => {
         const result = finishLesson(course.id, lessonId, outcome)
         setFinished({ outcome, ...result })

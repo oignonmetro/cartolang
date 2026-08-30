@@ -56,7 +56,7 @@ export function SessionResult({
               Étape suivante
             </Button>
             <Button block tone="neutral" onClick={onContinue}>
-              Voir le parcours
+              Retour à l'accueil
             </Button>
           </>
         ) : (
