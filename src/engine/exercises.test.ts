@@ -460,8 +460,8 @@ describe('ne pas retomber sur les mêmes exercices', () => {
   })
 
   it('fait le tour des énoncés disponibles plutôt que d’en privilégier un', () => {
-    // Une carte en apprentissage a une phrase à trou et quatre énoncés de QCM.
-    expect(new Set(overReviews({ step: 0 }, 10)).size).toBe(5)
+    // Une carte en apprentissage a une phrase à trou et trois énoncés de QCM.
+    expect(new Set(overReviews({ step: 0 }, 10)).size).toBe(4)
   })
 
   it('ne redonne pas la même session quand les cartes ont avancé', () => {

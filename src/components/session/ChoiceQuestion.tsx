@@ -15,14 +15,13 @@ import { useSessionSounds } from './useSessionSounds'
  * relié le mot dans une manche d'association — une étape de reconnaissance
  * de plus avant la phrase à trou qui suit.
  *
- * Cinq énoncés possibles pour un même mot (voir `ChoiceCue`), ce qui évite
+ * Trois énoncés possibles pour un même mot (voir `ChoiceCue`), ce qui évite
  * de reposer indéfiniment la même question. Chacun demande un rappel
  * différent, d'où la consigne qui change avec lui.
  */
 const PROMPTS: Record<ChoiceCue, string> = {
   term: 'Choisissez le sens',
   translation: 'Choisissez la traduction',
-  sentence: 'Quel mot convient ici ?',
   audio: 'Quel mot entendez-vous ?',
 }
 
@@ -64,7 +63,7 @@ export function ChoiceQuestion({
           ) : (
             <span
               lang={choicePromptIsLearningLanguage(cue) ? learningLanguage() : 'fr'}
-              className={`break-words ${cue === 'sentence' ? 'text-base leading-snug font-bold' : 'text-xl font-black'}`}
+              className="text-xl font-black break-words"
             >
               {choicePrompt(vocab, cue)}
             </span>

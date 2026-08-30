@@ -66,33 +66,39 @@ export interface MatchExercise {
 /**
  * Ce qu'un QCM montre comme énoncé.
  *
- * Un mot n'a qu'une traduction et qu'une phrase d'exemple, mais il a plusieurs
- * façons d'être demandé — et c'est ce qui manquait : la leçon ne posait qu'une
- * seule question par mot, toujours la même (« voici le français, trouvez
- * l'anglais »), si bien que vingt-trois exercices se ramenaient à quatre
- * gabarits.
+ * Un mot n'a qu'une traduction, mais il a plusieurs façons d'être demandé —
+ * et c'est ce qui manquait : la leçon ne posait qu'une seule question par
+ * mot, toujours la même (« voici le français, trouvez l'anglais »), si bien
+ * que vingt-trois exercices se ramenaient à deux gabarits.
  *
  *   `term`        : le mot anglais, on choisit son sens ;
  *   `translation` : le mot français, on choisit la forme anglaise ;
- *   `sentence`    : la phrase d'exemple traduite, on choisit le mot anglais
- *                   qui convient là. Le sens se lit dans le contexte plutôt
- *                   que dans une paire de mots isolés ;
  *   `audio`       : le mot prononcé, on choisit son orthographe. L'anglais
  *                   ne s'écrit pas comme il se dit : sans ça, la moitié du
  *                   mot reste non apprise.
  *
- * Un quatrième énoncé a existé, `hint` : la note d'usage du mot (« regarde en
- * arrière », « faux ami »…) comme énoncé à deviner. Retiré : cette note ne
- * désigne un mot sans ambiguïté que par rapport aux autres mots de sa leçon
- * d'origine (« hitherto » s'y distingue de « henceforth », son opposé, écrit
- * juste à côté) ; dès que les distracteurs viennent d'ailleurs — une lettre
- * qui partage sa note avec une autre, une leçon qui n'a pas son mot-miroir,
- * un pool mêlant tout le cours en révision — deviner devient un pari sur une
+ * Deux autres énoncés ont existé.
+ *
+ * `hint` : la note d'usage du mot (« regarde en arrière », « faux ami »…)
+ * comme énoncé à deviner. Retiré : cette note ne désigne un mot sans
+ * ambiguïté que par rapport aux autres mots de sa leçon d'origine
+ * (« hitherto » s'y distingue de « henceforth », son opposé, écrit juste à
+ * côté) ; dès que les distracteurs viennent d'ailleurs — une lettre qui
+ * partage sa note avec une autre, une leçon qui n'a pas son mot-miroir, un
+ * pool mêlant tout le cours en révision — deviner devient un pari sur une
  * association, plus un rappel du sens. Le champ `hint` lui-même reste : une
  * remarque affichée à la découverte d'un mot reste utile, seul son usage
  * comme énoncé de QCM a été supprimé.
+ *
+ * `sentence` : la phrase d'exemple traduite comme énoncé, en choisissant
+ * toujours parmi des mots isolés. Retiré aussi : les options ne portant pas
+ * la phrase, rien dans son contexte ne pesait sur le choix — deviner
+ * revenait exactement à `translation`, avec plus de texte à lire pour la
+ * même décision. La reconnaissance en contexte que ce cue visait existe déjà,
+ * en le testant vraiment : voir l'exercice `cloze`, où c'est la phrase
+ * elle-même, trouée, qui porte l'épreuve.
  */
-export type ChoiceCue = 'term' | 'translation' | 'sentence' | 'audio'
+export type ChoiceCue = 'term' | 'translation' | 'audio'
 
 export interface ChoiceExercise {
   kind: 'choice'
@@ -108,18 +114,13 @@ export function choiceAnswer(vocab: Vocab, cue: ChoiceCue): string {
   return cue === 'term' ? vocab.translation : vocab.term
 }
 
-/**
- * L'énoncé affiché. Les replis (`??`) ne servent qu'à garder la fonction
- * totale : `cuesFor` n'a proposé `hint` et `sentence` que si le contenu existe.
- */
+/** L'énoncé affiché. */
 export function choicePrompt(vocab: Vocab, cue: ChoiceCue): string {
   switch (cue) {
     case 'term':
       return vocab.term
     case 'translation':
       return vocab.translation
-    case 'sentence':
-      return vocab.example?.translation ?? vocab.translation
     case 'audio':
       return vocab.term
   }
@@ -428,10 +429,9 @@ function choiceFor(vocab: Vocab, cue: ChoiceCue, pool: readonly Vocab[], rng: Rn
   }
 }
 
-/** Les énoncés qu'un mot peut réellement soutenir, selon ce que l'auteur a écrit. */
-function cuesFor(vocab: Vocab, canSpeak: boolean): ChoiceCue[] {
+/** Les énoncés qu'un mot peut réellement soutenir, selon ce que l'appareil sait faire. */
+function cuesFor(canSpeak: boolean): ChoiceCue[] {
   const cues: ChoiceCue[] = ['term', 'translation']
-  if (vocab.example) cues.push('sentence')
   if (canSpeak) cues.push('audio')
   return cues
 }
@@ -448,7 +448,7 @@ function firstAvailableExercise(
   canSpeak: boolean,
   rng: Rng,
 ): Exercise | null {
-  for (const cue of shuffle(cuesFor(word, canSpeak), rng)) {
+  for (const cue of shuffle(cuesFor(canSpeak), rng)) {
     if (hasServed(served, word.id, `choice:${cue}`)) continue
     const exercise = choiceFor(word, cue, pool, rng)
     if (!exercise) continue
@@ -702,7 +702,7 @@ function buildVocabSession(
     for (const word of leastServedFirst(pool, served, rng)) {
       if (remaining === 0) break
       const cue = sample(
-        cuesFor(word, canSpeak).filter((candidate) => !hasServed(served, word.id, `choice:${candidate}`)),
+        cuesFor(canSpeak).filter((candidate) => !hasServed(served, word.id, `choice:${candidate}`)),
         1,
         rng,
       )[0]
@@ -1245,17 +1245,17 @@ type VocabForm =
  * La production ne redescend jamais vers la reconnaissance : un mot mûr
  * alterne entre saisie libre et phrase à trou, il ne revient pas au QCM. La
  * variété se prend donc là où elle est légitime — à la reconnaissance, où les
- * quatre énoncés du QCM sont autant d'exercices réellement différents.
+ * trois énoncés du QCM sont autant d'exercices réellement différents.
  *
  * Un mot sans phrase d'exemple perd la forme `cloze` en chemin (`clozeFor`
  * rend `null`) et se rabat sur la suivante ; il n'a alors qu'une forme à son
  * échelon mûr, et rien ici ne peut y remédier — c'est au contenu de fournir
  * une phrase.
  */
-function vocabFormsFor(stage: RecallStage, vocab: Vocab, canSpeak: boolean): VocabForm[] {
+function vocabFormsFor(stage: RecallStage, canSpeak: boolean): VocabForm[] {
   if (stage === 'produce') return [{ kind: 'type', direction: 'to-learning' }, { kind: 'cloze' }]
   if (stage === 'comprehend') return [{ kind: 'type', direction: 'to-known' }, { kind: 'cloze' }]
-  return [{ kind: 'cloze' }, ...cuesFor(vocab, canSpeak).map((cue) => ({ kind: 'choice' as const, cue }))]
+  return [{ kind: 'cloze' }, ...cuesFor(canSpeak).map((cue) => ({ kind: 'choice' as const, cue }))]
 }
 
 /** Construit la forme demandée, ou `null` si le mot ne peut pas la soutenir. */
@@ -1373,7 +1373,7 @@ function buildMixedSession(
     // échelon en offre plus d'un. Le QCM ne se construit qu'avec un bassin —
     // il n'apparaît donc qu'à la reconnaissance, jamais en repli sur une
     // carte mûre, qui ne doit pas redescendre vers le plus facile.
-    for (const form of rotate(vocabFormsFor(stage, vocab, canSpeak), turn)) {
+    for (const form of rotate(vocabFormsFor(stage, canSpeak), turn)) {
       const exercise = vocabFormExercise(form, vocab, form.kind === 'choice' ? vocabPool : pool, rng)
       if (exercise) return exercise
     }
