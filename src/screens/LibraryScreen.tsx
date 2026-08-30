@@ -240,7 +240,7 @@ function TrackTabs({
             role="tab"
             aria-selected={active}
             onClick={() => onSelect(track.id)}
-            className="relative flex-1 rounded-xl px-2 py-2 text-center"
+            className="relative min-w-0 flex-1 rounded-xl px-2 py-2 text-center"
           >
             {/* La pilule glisse d'un onglet à l'autre : le changement se voit sans clignoter. */}
             {active && (
@@ -251,12 +251,17 @@ function TrackTabs({
               />
             )}
             <span
-              className={`relative flex flex-col items-center gap-0.5 text-[0.7rem] font-extrabold uppercase tracking-wide ${
+              className={`relative flex min-w-0 flex-col items-center gap-0.5 text-[0.7rem] font-extrabold uppercase tracking-wide ${
                 active ? tone.text : 'text-ink-faint'
               }`}
             >
               <UnitIcon name={track.icon} size={18} />
-              {track.title}
+              {/* `min-w-0` sur les ancêtres flex ne suffit pas à lui seul : un
+                  mot sans espace (« CONJUGAISON ») refuse encore de rétrécir
+                  sous sa propre largeur et pousse la ligne d'onglets hors de
+                  l'écran. `truncate` lui donne enfin une largeur bornée par
+                  la colonne, quitte à finir en points de suspension. */}
+              <span className="w-full truncate">{track.title}</span>
             </span>
           </button>
         )
