@@ -671,7 +671,14 @@ function buildVocabSession(
   rank: number,
 ): Exercise[] {
   const rng = createRng(seed)
-  const blocks = blocksOf(shuffle(vocab, rng))
+  // Les chiffres se comptent : mélanger « un, deux, trois » retire tout ce
+  // que l'ordre enseigne, quand un chiffre appris avant les précédents ne
+  // dit rien tant qu'on ne sait pas encore où il tombe dans la suite. Une
+  // leçon entièrement faite de chiffres garde donc l'ordre de l'auteur ; le
+  // reste continue de mélanger, pour ne pas cimenter par cœur la position
+  // d'un mot dans sa leçon plutôt que le mot lui-même.
+  const presented = vocab.every((word) => word.pos === 'nombre') ? vocab : shuffle(vocab, rng)
+  const blocks = blocksOf(presented)
 
   const exercises: Exercise[] = notes
     ? [{ kind: 'rule', id: `rule:${lessonId}`, title, notes, topic: 'vocab' }]

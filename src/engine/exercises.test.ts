@@ -122,6 +122,38 @@ describe('session de leçon', () => {
     expect(introRuns(8)).toEqual([4, 4])
   })
 
+  it('présente les chiffres dans l’ordre de l’auteur, jamais mélangés', () => {
+    // Mélanger « un, deux, trois » retire tout ce que l'ordre enseigne : un
+    // chiffre appris avant les précédents ne dit rien tant qu'on ne sait pas
+    // encore où il tombe dans la suite. Ne vaut que pour une leçon entièrement
+    // faite de chiffres — le reste continue de mélanger.
+    const numbers: Vocab[] = ['un', 'deux', 'trois', 'quatre', 'cinq', 'six'].map((translation, i) => ({
+      ...word(`n${i}`, `w${i}`, translation),
+      pos: 'nombre',
+    }))
+    for (const seed of [1, 2, 3, 4, 5]) {
+      const session = buildLessonSession(lessonOf('u7-l1', numbers), 0, seed)
+      const order = session.filter((exercise) => exercise.kind === 'intro').map((exercise) => exercise.vocab.id)
+      expect(order).toEqual(numbers.map((n) => n.id))
+    }
+  })
+
+  it('mélange toujours une leçon qui ne porte pas que des chiffres', () => {
+    const mixed: Vocab[] = [
+      { ...word('n0', 'w0', 'un'), pos: 'nombre' },
+      { ...word('n1', 'w1', 'deux'), pos: 'nombre' },
+      { ...word('n2', 'w2', 'trois'), pos: 'nombre' },
+      { ...word('w3', 'w3', 'nombre'), pos: 'nom' },
+    ]
+    const orders = new Set<string>()
+    for (const seed of [1, 2, 3, 4, 5]) {
+      const session = buildLessonSession(lessonOf('u4-l1', mixed), 0, seed)
+      const order = session.filter((exercise) => exercise.kind === 'intro').map((exercise) => exercise.vocab.id)
+      orders.add(order.join())
+    }
+    expect(orders.size).toBeGreaterThan(1)
+  })
+
   it('ne compte pas la découverte d’un mot dans le score de la leçon', () => {
     // Déclarer nouveau un mot jamais vu n'est pas une faute : compté comme
     // telle, huit mots annoncés nouveaux suffisaient à faire échouer la
