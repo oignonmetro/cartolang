@@ -7,6 +7,7 @@ import { learningLanguage } from '@/lib/speech'
 import { highlightDiffWords } from './highlightDiffWords'
 import { OptionList } from './OptionList'
 import { SpeakButton } from './SpeakButton'
+import { useSessionHaptics } from './useSessionHaptics'
 import { useSessionSounds } from './useSessionSounds'
 
 /**
@@ -29,6 +30,7 @@ export function ConjugationChoice({
   const fromFrench = cue === 'translation' && Boolean(verb.translation)
   const [picked, setPicked] = useState<string | null>(null)
   const sounds = useSessionSounds()
+  const haptics = useSessionHaptics()
 
   useEffect(() => {
     setPicked(null)
@@ -60,8 +62,10 @@ export function ConjugationChoice({
         picked={picked}
         isCorrect={(option) => normalizeForm(option) === normalizeForm(form.answer)}
         onPick={(option) => {
+          const wasCorrect = normalizeForm(option) === normalizeForm(form.answer)
           setPicked(option)
-          sounds.success(normalizeForm(option) === normalizeForm(form.answer))
+          sounds.success(wasCorrect)
+          haptics.answered(exercise, wasCorrect)
         }}
         lang={learningLanguage()}
         renderOption={highlightDiffWords(options)}

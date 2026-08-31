@@ -4,6 +4,7 @@ import type { TypeExercise } from '@/engine/exercises'
 import { isAnswerCorrect } from '@/engine/exercises'
 import { Button } from '@/components/Button'
 import { learningLanguage, learningLanguageName } from '@/lib/speech'
+import { useSessionHaptics } from './useSessionHaptics'
 import { useSessionSounds } from './useSessionSounds'
 
 /** Traduction au clavier, sans contexte : l'exercice le plus exigeant. */
@@ -21,6 +22,7 @@ export function TypeAnswer({
   const [checked, setChecked] = useState<null | boolean>(null)
   const input = useRef<HTMLInputElement>(null)
   const sounds = useSessionSounds()
+  const haptics = useSessionHaptics()
 
   useEffect(() => {
     setValue('')
@@ -34,6 +36,7 @@ export function TypeAnswer({
     const correct = isAnswerCorrect(vocab, direction, value)
     setChecked(correct)
     sounds.success(correct)
+    haptics.answered(exercise, correct)
   }
 
   return (

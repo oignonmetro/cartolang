@@ -7,6 +7,7 @@ import { dayKey, displayedStreak, levelFromXp } from '@/engine/progress'
 import { cardStrength, dueCards } from '@/engine/srs'
 import { EMPTY_CARDS, useProgress } from '@/store/progressStore'
 import { canInstallVoice, canSpeak, installSpokenLanguage, isSpokenLanguageInstalled } from '@/lib/speech'
+import { canVibrate } from '@/lib/haptics'
 import { Button } from '@/components/Button'
 import { Mascot } from '@/components/Mascot'
 import { AppUpdateCard } from '@/components/AppUpdateCard'
@@ -174,50 +175,39 @@ export function ProfileScreen() {
 
         <section className="card-3d flex flex-col gap-3 px-5 py-5">
           <h2 className="text-sm font-extrabold uppercase tracking-wide text-ink-faint">Sons</h2>
-          <label className="flex items-center justify-between gap-4">
-            <span className="text-sm font-bold">Une note à chaque bonne réponse</span>
-            <button
-              type="button"
-              role="switch"
-              aria-checked={state.sounds}
-              onClick={() => state.setSounds(!state.sounds)}
-              className={`relative h-7 w-12 shrink-0 rounded-full border-2 transition-colors ${
-                state.sounds ? 'border-teal bg-teal' : 'border-line bg-paper'
-              }`}
-            >
-              <span
-                className={`absolute top-0.5 h-5 w-5 rounded-full transition-all ${
-                  state.sounds ? 'left-[1.35rem] bg-white' : 'left-0.5 bg-ink-faint'
-                }`}
-              />
-            </button>
-          </label>
+          <Switch
+            label="Une note à chaque bonne réponse"
+            on={state.sounds}
+            onToggle={() => state.setSounds(!state.sounds)}
+          />
           <p className="text-xs text-ink-faint">
             Rien ne se perd à les couper : une bonne réponse se voit déjà à l'écran.
           </p>
         </section>
 
+        {canVibrate && (
+          <section className="card-3d flex flex-col gap-3 px-5 py-5">
+            <h2 className="text-sm font-extrabold uppercase tracking-wide text-ink-faint">Vibrations</h2>
+            <Switch
+              label="Sentir les séries et la fin de session"
+              on={state.haptics}
+              onToggle={() => state.setHaptics(!state.haptics)}
+            />
+            <p className="text-xs text-ink-faint">
+              Éteintes par défaut, et volontairement rares : elles ne marquent ni les bonnes ni les mauvaises
+              réponses, seulement une série qui monte, une série qui se casse, et la session qui se termine.
+            </p>
+          </section>
+        )}
+
         {canSpeak && (
           <section className="card-3d flex flex-col gap-3 px-5 py-5">
             <h2 className="text-sm font-extrabold uppercase tracking-wide text-ink-faint">Prononciation</h2>
-            <label className="flex items-center justify-between gap-4">
-              <span className="text-sm font-bold">Écouter le mot à sa découverte</span>
-              <button
-                type="button"
-                role="switch"
-                aria-checked={state.autoSpeak}
-                onClick={() => state.setAutoSpeak(!state.autoSpeak)}
-                className={`relative h-7 w-12 shrink-0 rounded-full border-2 transition-colors ${
-                  state.autoSpeak ? 'border-teal bg-teal' : 'border-line bg-paper'
-                }`}
-              >
-                <span
-                  className={`absolute top-0.5 h-5 w-5 rounded-full transition-all ${
-                    state.autoSpeak ? 'left-[1.35rem] bg-white' : 'left-0.5 bg-ink-faint'
-                  }`}
-                />
-              </button>
-            </label>
+            <Switch
+              label="Écouter le mot à sa découverte"
+              on={state.autoSpeak}
+              onToggle={() => state.setAutoSpeak(!state.autoSpeak)}
+            />
             <p className="text-xs text-ink-faint">
               Le bouton haut-parleur reste disponible même sans lecture automatique. La voix est celle de votre
               appareil : Android la télécharge dans ses réglages de synthèse vocale.
@@ -306,6 +296,30 @@ export function ProfileScreen() {
         </section>
       </main>
     </div>
+  )
+}
+
+/** Interrupteur d'un réglage : la même bascule pour les trois. */
+function Switch({ label, on, onToggle }: { label: string; on: boolean; onToggle: () => void }) {
+  return (
+    <label className="flex items-center justify-between gap-4">
+      <span className="text-sm font-bold">{label}</span>
+      <button
+        type="button"
+        role="switch"
+        aria-checked={on}
+        onClick={onToggle}
+        className={`relative h-7 w-12 shrink-0 rounded-full border-2 transition-colors ${
+          on ? 'border-teal bg-teal' : 'border-line bg-paper'
+        }`}
+      >
+        <span
+          className={`absolute top-0.5 h-5 w-5 rounded-full transition-all ${
+            on ? 'left-[1.35rem] bg-white' : 'left-0.5 bg-ink-faint'
+          }`}
+        />
+      </button>
+    </label>
   )
 }
 

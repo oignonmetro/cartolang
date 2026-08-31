@@ -5,6 +5,7 @@ import { fillGap, matchesAnswer, splitGap } from '@/engine/exercises'
 import { Button } from '@/components/Button'
 import { learningLanguage } from '@/lib/speech'
 import { SpeakButton } from './SpeakButton'
+import { useSessionHaptics } from './useSessionHaptics'
 import { useSessionSounds } from './useSessionSounds'
 
 /**
@@ -32,6 +33,7 @@ export function GrammarGap({
   const [checked, setChecked] = useState<null | boolean>(null)
   const input = useRef<HTMLInputElement>(null)
   const sounds = useSessionSounds()
+  const haptics = useSessionHaptics()
 
   useEffect(() => {
     setValue('')
@@ -46,6 +48,7 @@ export function GrammarGap({
     setValue(candidate)
     setChecked(correct)
     sounds.success(correct)
+    haptics.answered(exercise, correct)
   }
 
   return (

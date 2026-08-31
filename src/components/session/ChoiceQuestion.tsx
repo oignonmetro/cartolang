@@ -8,6 +8,7 @@ import { learningLanguage, speechFor } from '@/lib/speech'
 import { highlightDiffWords } from './highlightDiffWords'
 import { OptionList } from './OptionList'
 import { SpeakButton } from './SpeakButton'
+import { useSessionHaptics } from './useSessionHaptics'
 import { useSessionSounds } from './useSessionSounds'
 
 /**
@@ -36,6 +37,7 @@ export function ChoiceQuestion({
   const answer = choiceAnswer(vocab, cue)
   const [picked, setPicked] = useState<string | null>(null)
   const sounds = useSessionSounds()
+  const haptics = useSessionHaptics()
 
   useEffect(() => {
     setPicked(null)
@@ -76,8 +78,10 @@ export function ChoiceQuestion({
         picked={picked}
         isCorrect={(option) => normalizeAnswer(option) === normalizeAnswer(answer)}
         onPick={(option) => {
+          const wasCorrect = normalizeAnswer(option) === normalizeAnswer(answer)
           setPicked(option)
-          sounds.success(normalizeAnswer(option) === normalizeAnswer(answer))
+          sounds.success(wasCorrect)
+          haptics.answered(exercise, wasCorrect)
         }}
         renderOption={highlightDiffWords(options)}
       />

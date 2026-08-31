@@ -6,6 +6,7 @@ import { Button } from '@/components/Button'
 import { learningLanguage } from '@/lib/speech'
 import { OptionList } from './OptionList'
 import { SpeakButton } from './SpeakButton'
+import { useSessionHaptics } from './useSessionHaptics'
 import { useSessionSounds } from './useSessionSounds'
 
 /**
@@ -57,6 +58,7 @@ export function GrammarSentenceChoice({
   const { before, after } = splitGap(point.sentence)
   const [picked, setPicked] = useState<string | null>(null)
   const sounds = useSessionSounds()
+  const haptics = useSessionHaptics()
 
   useEffect(() => {
     setPicked(null)
@@ -82,8 +84,10 @@ export function GrammarSentenceChoice({
         picked={picked}
         isCorrect={(option) => normalizeForm(option) === normalizeForm(answer)}
         onPick={(option) => {
+          const wasCorrect = normalizeForm(option) === normalizeForm(answer)
           setPicked(option)
-          sounds.success(normalizeForm(option) === normalizeForm(answer))
+          sounds.success(wasCorrect)
+          haptics.answered(exercise, wasCorrect)
         }}
         lang={learningLanguage()}
         size="long"

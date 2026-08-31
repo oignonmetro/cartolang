@@ -72,6 +72,14 @@ export interface ProgressSnapshot {
    * joue d'irremplaçable — ce qu'ils signalent est déjà à l'écran.
    */
   sounds: boolean
+  /**
+   * Le retour haptique (voir `lib/haptics.ts`). Le seul des trois réglages
+   * éteint par défaut, et la raison tient à ce qu'il coûte : une vibration
+   * ne se laisse pas ignorer comme un son qu'on n'écoute pas, elle prend la
+   * main. Un canal aussi insistant se choisit, il ne s'impose pas — d'autant
+   * qu'il ne dit rien d'introuvable ailleurs.
+   */
+  haptics: boolean
 }
 
 interface ProgressState extends ProgressSnapshot {
@@ -106,6 +114,7 @@ interface ProgressState extends ProgressSnapshot {
   setDailyGoal: (goal: number) => void
   setAutoSpeak: (on: boolean) => void
   setSounds: (on: boolean) => void
+  setHaptics: (on: boolean) => void
   exportSave: () => string
   importSave: (payload: string) => void
   reset: () => void
@@ -134,6 +143,7 @@ const initial: ProgressSnapshot = {
   dailyGoal: 30,
   autoSpeak: true,
   sounds: true,
+  haptics: false,
   streak: { current: 0, best: 0, lastDay: null },
 }
 
@@ -368,10 +378,25 @@ export const useProgress = create<ProgressState>()(
 
       setSounds: (on) => set({ sounds: on }),
 
+      setHaptics: (on) => set({ haptics: on }),
+
       exportSave: () => {
-        const { lessons, cards, steps, xp, xpByDay, dailyGoal, streak, autoSpeak, sounds } = get()
+        const { lessons, cards, steps, xp, xpByDay, dailyGoal, streak, autoSpeak, sounds, haptics } = get()
         return JSON.stringify(
-          { format: SAVE_FORMAT, savedAt: Date.now(), lessons, cards, steps, xp, xpByDay, dailyGoal, streak, autoSpeak, sounds },
+          {
+            format: SAVE_FORMAT,
+            savedAt: Date.now(),
+            lessons,
+            cards,
+            steps,
+            xp,
+            xpByDay,
+            dailyGoal,
+            streak,
+            autoSpeak,
+            sounds,
+            haptics,
+          },
           null,
           2,
         )
@@ -388,6 +413,7 @@ export const useProgress = create<ProgressState>()(
           dailyGoal?: number
           autoSpeak?: boolean
           sounds?: boolean
+          haptics?: boolean
           streak?: Streak
         }
         // Les formats antérieurs n'ont rien perdu : leurs champs manquants
@@ -425,6 +451,7 @@ export const useProgress = create<ProgressState>()(
           dailyGoal: parsed.dailyGoal ?? initial.dailyGoal,
           autoSpeak: parsed.autoSpeak ?? initial.autoSpeak,
           sounds: parsed.sounds ?? initial.sounds,
+          haptics: parsed.haptics ?? initial.haptics,
           streak: parsed.streak ?? initial.streak,
         })
       },
@@ -468,7 +495,7 @@ export const useProgress = create<ProgressState>()(
           steps: migrateAlphabetSteps(steps),
         }
       },
-      partialize: ({ lessons, cards, steps, xp, xpByDay, dailyGoal, streak, autoSpeak, sounds }) => ({
+      partialize: ({ lessons, cards, steps, xp, xpByDay, dailyGoal, streak, autoSpeak, sounds, haptics }) => ({
         lessons,
         cards,
         steps,
@@ -477,6 +504,7 @@ export const useProgress = create<ProgressState>()(
         dailyGoal,
         autoSpeak,
         sounds,
+        haptics,
         streak,
       }),
     },

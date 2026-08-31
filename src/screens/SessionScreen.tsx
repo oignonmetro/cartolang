@@ -18,6 +18,7 @@ import { GrammarSentenceChoice } from '@/components/session/GrammarSentenceChoic
 import { ConjugationAnswer } from '@/components/session/ConjugationAnswer'
 import { ConjugationChoice } from '@/components/session/ConjugationChoice'
 import { ConjugationMatch } from '@/components/session/ConjugationMatch'
+import { SessionHapticsProvider, useHaptics, type SessionHaptics } from '@/components/session/useSessionHaptics'
 import { CloseIcon } from '@/components/icons'
 import type { SessionOutcome } from '@/engine/progress'
 
@@ -42,7 +43,28 @@ interface Attempt {
   total: number
 }
 
-export function SessionScreen({ title, exercises, onQuit, onFinish }: SessionScreenProps) {
+/**
+ * Ne fait qu'ouvrir la session au retour haptique : le suiveur de série doit
+ * être créé au-dessus du déroulé pour que les exercices y accèdent par le
+ * contexte (voir `useSessionHaptics`), et `SessionRunner` ne peut pas à la
+ * fois fournir un contexte et le lire.
+ */
+export function SessionScreen(props: SessionScreenProps) {
+  const haptics = useHaptics()
+  return (
+    <SessionHapticsProvider value={haptics}>
+      <SessionRunner {...props} haptics={haptics} />
+    </SessionHapticsProvider>
+  )
+}
+
+function SessionRunner({
+  title,
+  exercises,
+  onQuit,
+  onFinish,
+  haptics,
+}: SessionScreenProps & { haptics: SessionHaptics }) {
   const { course } = useCourse()
   const gradeItem = useProgress((state) => state.gradeItem)
   const [queue, setQueue] = useState<Exercise[]>(exercises)
@@ -115,11 +137,18 @@ export function SessionScreen({ title, exercises, onQuit, onFinish }: SessionScr
       // Pas de son ici : chaque paire a déjà sonné en se résolvant (voir
       // `PairBoard`), et la dernière est la fin de la manche. En rejouer un
       // par-dessus doublerait la note d'arrivée.
+      //
+      // La vibration, elle, se déclenche bien ici, et une seule fois pour
+      // toute la manche : la dernière paire trouvée *est* la fin de
+      // l'exercice, il n'y a pas de « Continuer » qui retarderait la
+      // sensation. Vibrer à chaque paire aurait fait exactement le bruit
+      // que la parcimonie cherche à éviter.
+      haptics.answered(exercise, missed.size === 0)
       record(exercise, missed.size === 0)
       // Les paires sont toutes trouvées à la fin : inutile de rejouer la manche.
       advance(false)
     },
-    [advance, attempt.seen, course.id, gradeItem, record],
+    [advance, attempt.seen, course.id, gradeItem, haptics, record],
   )
 
   // La file est vide : la session est terminée. Le drapeau évite que le rendu
@@ -128,8 +157,10 @@ export function SessionScreen({ title, exercises, onQuit, onFinish }: SessionScr
   useEffect(() => {
     if (current || finished.current) return
     finished.current = true
-    onFinish({ correct: attempt.correct, total: attempt.total })
-  }, [attempt.correct, attempt.total, current, onFinish])
+    const outcome = { correct: attempt.correct, total: attempt.total }
+    haptics.finished(outcome)
+    onFinish(outcome)
+  }, [attempt.correct, attempt.total, current, haptics, onFinish])
 
   // Quitter une session en cours de prononciation laisserait la voix courir
   // sur l'écran suivant, qui n'a plus rien à voir avec le mot.

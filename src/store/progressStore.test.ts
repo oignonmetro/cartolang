@@ -122,6 +122,39 @@ describe('réglage des sons de réussite', () => {
   })
 })
 
+describe('réglage du retour haptique', () => {
+  it('est éteint par défaut', () => {
+    // Le seul des trois à l'être : une vibration prend la main, elle se
+    // choisit (voir `haptics` dans progressStore.ts).
+    useProgress.getState().reset()
+    expect(useProgress.getState().haptics).toBe(false)
+  })
+
+  it('s’allume et s’éteint', () => {
+    useProgress.getState().setHaptics(true)
+    expect(useProgress.getState().haptics).toBe(true)
+    useProgress.getState().setHaptics(false)
+    expect(useProgress.getState().haptics).toBe(false)
+  })
+
+  it('survit à un aller-retour export / import', () => {
+    useProgress.getState().setHaptics(true)
+    const payload = useProgress.getState().exportSave()
+    useProgress.getState().setHaptics(false)
+    useProgress.getState().importSave(payload)
+    expect(useProgress.getState().haptics).toBe(true)
+  })
+
+  it('reste éteint en important une sauvegarde antérieure au réglage', () => {
+    // Symétrique des deux autres réglages, et pour la même raison : une
+    // sauvegarde muette sur ce point n'a jamais rien demandé, elle retombe
+    // donc sur la valeur par défaut — ici, éteint.
+    useProgress.getState().setHaptics(true)
+    useProgress.getState().importSave(JSON.stringify({ format: 6, cards: {}, lessons: {} }))
+    expect(useProgress.getState().haptics).toBe(false)
+  })
+})
+
 describe('conversion des cartes anciennes', () => {
   it('renomme vocabId en itemId', () => {
     const migrated = migrateCards({ hello: { vocabId: 'hello', ease: 2.5, interval: 1 } })
