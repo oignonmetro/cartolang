@@ -4,6 +4,7 @@ import type { GrammarGapExercise } from '@/engine/exercises'
 import { fillGap, matchesAnswer, splitGap } from '@/engine/exercises'
 import { Button } from '@/components/Button'
 import { learningLanguage } from '@/lib/speech'
+import { CorrectionGap } from './CorrectionGap'
 import { ExpectedAnswer } from './ExpectedAnswer'
 import { SpeakButton } from './SpeakButton'
 import { useSessionHaptics } from './useSessionHaptics'
@@ -32,6 +33,7 @@ export function GrammarGap({
   const gap = useMemo(() => splitGap(point.sentence), [point.sentence])
   const [value, setValue] = useState('')
   const [checked, setChecked] = useState<null | boolean>(null)
+  const [gapResolved, setGapResolved] = useState(false)
   const input = useRef<HTMLInputElement>(null)
   const sounds = useSessionSounds()
   const haptics = useSessionHaptics()
@@ -39,6 +41,7 @@ export function GrammarGap({
   useEffect(() => {
     setValue('')
     setChecked(null)
+    setGapResolved(false)
     if (!bank) input.current?.focus()
   }, [exercise.id, bank])
 
@@ -125,10 +128,16 @@ export function GrammarGap({
         >
           {checked ? (
             <p className="font-extrabold text-success">Exact.</p>
-          ) : (
+          ) : bank ? (
+            // Piochée dans une banque, pas écrite : rien à corriger au
+            // clavier, la réponse s'affiche comme avant.
             <div className="flex flex-col gap-1 text-error">
               <p className="font-extrabold">La réponse attendue :</p>
               <ExpectedAnswer typed={value} expected={point.answer} />
+            </div>
+          ) : (
+            <div className="text-error">
+              <CorrectionGap typed={value} expected={point.answer} onResolved={() => setGapResolved(true)} />
             </div>
           )}
           {point.explanation && <p className="mt-1 text-ink-soft">{point.explanation}</p>}
@@ -146,7 +155,12 @@ export function GrammarGap({
                 apprend, pas la forme isolée. Après la réponse seulement —
                 l'entendre plus tôt donnerait la solution. */}
             <SpeakButton text={fillGap(point.sentence, point.answer)} auto className="shrink-0" />
-            <Button block tone={checked ? 'success' : 'error'} onClick={() => onAnswer(checked)}>
+            <Button
+              block
+              tone={checked ? 'success' : 'error'}
+              disabled={!checked && !bank && !gapResolved}
+              onClick={() => onAnswer(checked)}
+            >
               Continuer
             </Button>
           </div>

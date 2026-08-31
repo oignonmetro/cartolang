@@ -4,7 +4,7 @@ import type { TypeExercise } from '@/engine/exercises'
 import { isAnswerCorrect } from '@/engine/exercises'
 import { Button } from '@/components/Button'
 import { learningLanguage, learningLanguageName, speechFor } from '@/lib/speech'
-import { ExpectedAnswer } from './ExpectedAnswer'
+import { CorrectionGap } from './CorrectionGap'
 import { SpeakButton } from './SpeakButton'
 import { useSessionHaptics } from './useSessionHaptics'
 import { useSessionSounds } from './useSessionSounds'
@@ -28,6 +28,7 @@ export function TypeAnswer({
   const expected = direction === 'to-known' ? vocab.translation : vocab.term
   const [value, setValue] = useState('')
   const [checked, setChecked] = useState<null | boolean>(null)
+  const [gapResolved, setGapResolved] = useState(false)
   const input = useRef<HTMLInputElement>(null)
   const sounds = useSessionSounds()
   const haptics = useSessionHaptics()
@@ -35,6 +36,7 @@ export function TypeAnswer({
   useEffect(() => {
     setValue('')
     setChecked(null)
+    setGapResolved(false)
     input.current?.focus()
   }, [exercise.id])
 
@@ -112,10 +114,7 @@ export function TypeAnswer({
           {checked ? (
             <p className="text-sm font-bold">Bonne réponse.</p>
           ) : (
-            <div className="flex flex-col gap-1">
-              <p className="text-sm font-bold">La réponse attendue :</p>
-              <ExpectedAnswer typed={value} expected={expected} />
-            </div>
+            <CorrectionGap typed={value} expected={expected} onResolved={() => setGapResolved(true)} />
           )}
         </motion.div>
       )}
@@ -126,7 +125,12 @@ export function TypeAnswer({
             Vérifier
           </Button>
         ) : (
-          <Button block tone={checked ? 'success' : 'error'} onClick={() => onAnswer(checked)}>
+          <Button
+            block
+            tone={checked ? 'success' : 'error'}
+            disabled={!checked && !gapResolved}
+            onClick={() => onAnswer(checked)}
+          >
             Continuer
           </Button>
         )}

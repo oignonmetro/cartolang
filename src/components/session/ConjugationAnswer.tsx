@@ -4,7 +4,7 @@ import type { ConjugationExercise } from '@/engine/exercises'
 import { matchesAnswer } from '@/engine/exercises'
 import { Button } from '@/components/Button'
 import { learningLanguage } from '@/lib/speech'
-import { ExpectedAnswer } from './ExpectedAnswer'
+import { CorrectionGap } from './CorrectionGap'
 import { SpeakButton } from './SpeakButton'
 import { useSessionHaptics } from './useSessionHaptics'
 import { useSessionSounds } from './useSessionSounds'
@@ -31,6 +31,7 @@ export function ConjugationAnswer({
   const fromFrench = cue === 'translation' && Boolean(verb.translation)
   const [value, setValue] = useState('')
   const [checked, setChecked] = useState<null | boolean>(null)
+  const [gapResolved, setGapResolved] = useState(false)
   const input = useRef<HTMLInputElement>(null)
   const sounds = useSessionSounds()
   const haptics = useSessionHaptics()
@@ -38,6 +39,7 @@ export function ConjugationAnswer({
   useEffect(() => {
     setValue('')
     setChecked(null)
+    setGapResolved(false)
     input.current?.focus()
   }, [exercise.id])
 
@@ -120,9 +122,8 @@ export function ConjugationAnswer({
           {checked ? (
             <p className="font-extrabold text-success">Bonne réponse.</p>
           ) : (
-            <div className="flex flex-col gap-1 text-error">
-              <p className="font-extrabold">La forme attendue :</p>
-              <ExpectedAnswer typed={value} expected={form.answer} />
+            <div className="text-error">
+              <CorrectionGap typed={value} expected={form.answer} onResolved={() => setGapResolved(true)} />
             </div>
           )}
           {/* L'infinitif appris était caché par l'énoncé : la correction est
@@ -146,7 +147,12 @@ export function ConjugationAnswer({
             {/* Les formes composées ne se devinent pas à l'écrit : « would have
                 been » s'entend « would've been ». Après la réponse seulement. */}
             <SpeakButton text={form.answer} auto className="shrink-0" />
-            <Button block tone={checked ? 'success' : 'error'} onClick={() => onAnswer(checked)}>
+            <Button
+              block
+              tone={checked ? 'success' : 'error'}
+              disabled={!checked && !gapResolved}
+              onClick={() => onAnswer(checked)}
+            >
               Continuer
             </Button>
           </div>

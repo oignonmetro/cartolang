@@ -9,8 +9,11 @@
  * d'œil ; un vrai diff, qui chercherait aussi les points de recoupement après
  * la divergence, produirait un passage souligné-non souligné-souligné bien
  * plus dur à lire pour un gain qui ne sert quasiment jamais.
+ *
+ * Exportée : `CorrectionGap` s'appuie sur le même découpage pour transformer
+ * la partie fautive en trou à remplir plutôt qu'en simple soulignement.
  */
-function divergenceAt(typed: string, expected: string): number {
+export function divergenceAt(typed: string, expected: string): number {
   const a = typed.trim().toLowerCase()
   const b = expected.toLowerCase()
   const max = Math.min(a.length, b.length)

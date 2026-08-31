@@ -3,6 +3,7 @@ import { motion } from 'framer-motion'
 import type { ClozeExercise } from '@/engine/exercises'
 import { normalizeForm } from '@/engine/exercises'
 import { Button } from '@/components/Button'
+import { CorrectionGap } from './CorrectionGap'
 import { ExpectedAnswer } from './ExpectedAnswer'
 import { SpeakButton } from './SpeakButton'
 import { useSessionHaptics } from './useSessionHaptics'
@@ -24,6 +25,7 @@ export function ClozeSentence({
   const { vocab, sentence, bank } = exercise
   const [value, setValue] = useState('')
   const [checked, setChecked] = useState<null | boolean>(null)
+  const [gapResolved, setGapResolved] = useState(false)
   const input = useRef<HTMLInputElement>(null)
   const sounds = useSessionSounds()
   const haptics = useSessionHaptics()
@@ -31,6 +33,7 @@ export function ClozeSentence({
   useEffect(() => {
     setValue('')
     setChecked(null)
+    setGapResolved(false)
     if (!bank) input.current?.focus()
   }, [exercise.id, bank])
 
@@ -100,7 +103,14 @@ export function ClozeSentence({
         />
       )}
 
-      <Feedback state={checked} expected={sentence.match} translation={vocab.translation} typed={value} />
+      <Feedback
+        state={checked}
+        expected={sentence.match}
+        translation={vocab.translation}
+        typed={value}
+        bank={bank}
+        onGapResolved={() => setGapResolved(true)}
+      />
 
       <div className="mt-auto">
         {checked === null ? (
@@ -112,7 +122,12 @@ export function ClozeSentence({
             {/* Le mot attendu, pas la phrase : c'est lui qu'on apprend, et
                 l'écouter avant d'avoir répondu donnerait la réponse. */}
             <SpeakButton text={sentence.match} auto className="shrink-0" />
-            <Button block tone={checked ? 'success' : 'error'} onClick={() => onAnswer(checked)}>
+            <Button
+              block
+              tone={checked ? 'success' : 'error'}
+              disabled={!checked && !bank && !gapResolved}
+              onClick={() => onAnswer(checked)}
+            >
               Continuer
             </Button>
           </div>
@@ -144,11 +159,15 @@ function Feedback({
   expected,
   translation,
   typed,
+  bank,
+  onGapResolved,
 }: {
   state: null | boolean
   expected: string
   translation: string
   typed: string
+  bank: string[] | null
+  onGapResolved: () => void
 }) {
   if (state === null) return null
   return (
@@ -161,11 +180,15 @@ function Feedback({
         <p className="text-sm font-bold">
           Exact : {expected} ({translation})
         </p>
-      ) : (
+      ) : bank ? (
+        // Piochée dans une banque, pas écrite : rien à corriger au clavier,
+        // la réponse s'affiche comme avant.
         <div className="flex flex-col gap-1">
           <p className="text-sm font-bold">La réponse attendue :</p>
           <ExpectedAnswer typed={typed} expected={expected} />
         </div>
+      ) : (
+        <CorrectionGap typed={typed} expected={expected} onResolved={onGapResolved} />
       )}
     </motion.div>
   )
