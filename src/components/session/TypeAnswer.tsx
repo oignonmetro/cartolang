@@ -4,6 +4,7 @@ import type { TypeExercise } from '@/engine/exercises'
 import { isAnswerCorrect } from '@/engine/exercises'
 import { Button } from '@/components/Button'
 import { learningLanguage, learningLanguageName } from '@/lib/speech'
+import { ExpectedAnswer } from './ExpectedAnswer'
 import { useSessionHaptics } from './useSessionHaptics'
 import { useSessionSounds } from './useSessionSounds'
 
@@ -82,13 +83,20 @@ export function TypeAnswer({
       />
 
       {checked !== null && (
-        <motion.p
+        <motion.div
           initial={{ opacity: 0, y: 6 }}
           animate={{ opacity: 1, y: 0 }}
-          className={`text-sm font-bold ${checked ? 'text-success' : 'text-error'}`}
+          className={checked ? 'text-success' : 'text-error'}
         >
-          {checked ? 'Bonne réponse.' : `La réponse attendue était « ${expected} ».`}
-        </motion.p>
+          {checked ? (
+            <p className="text-sm font-bold">Bonne réponse.</p>
+          ) : (
+            <div className="flex flex-col gap-1">
+              <p className="text-sm font-bold">La réponse attendue :</p>
+              <ExpectedAnswer typed={value} expected={expected} />
+            </div>
+          )}
+        </motion.div>
       )}
 
       <div className="mt-auto">

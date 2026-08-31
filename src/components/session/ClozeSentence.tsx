@@ -3,6 +3,7 @@ import { motion } from 'framer-motion'
 import type { ClozeExercise } from '@/engine/exercises'
 import { normalizeForm } from '@/engine/exercises'
 import { Button } from '@/components/Button'
+import { ExpectedAnswer } from './ExpectedAnswer'
 import { SpeakButton } from './SpeakButton'
 import { useSessionHaptics } from './useSessionHaptics'
 import { useSessionSounds } from './useSessionSounds'
@@ -99,7 +100,7 @@ export function ClozeSentence({
         />
       )}
 
-      <Feedback state={checked} expected={sentence.match} translation={vocab.translation} />
+      <Feedback state={checked} expected={sentence.match} translation={vocab.translation} typed={value} />
 
       <div className="mt-auto">
         {checked === null ? (
@@ -142,19 +143,30 @@ function Feedback({
   state,
   expected,
   translation,
+  typed,
 }: {
   state: null | boolean
   expected: string
   translation: string
+  typed: string
 }) {
   if (state === null) return null
   return (
-    <motion.p
+    <motion.div
       initial={{ opacity: 0, y: 6 }}
       animate={{ opacity: 1, y: 0 }}
-      className={`text-sm font-bold ${state ? 'text-success' : 'text-error'}`}
+      className={state ? 'text-success' : 'text-error'}
     >
-      {state ? `Exact : ${expected} (${translation})` : `La réponse attendue était « ${expected} ».`}
-    </motion.p>
+      {state ? (
+        <p className="text-sm font-bold">
+          Exact : {expected} ({translation})
+        </p>
+      ) : (
+        <div className="flex flex-col gap-1">
+          <p className="text-sm font-bold">La réponse attendue :</p>
+          <ExpectedAnswer typed={typed} expected={expected} />
+        </div>
+      )}
+    </motion.div>
   )
 }

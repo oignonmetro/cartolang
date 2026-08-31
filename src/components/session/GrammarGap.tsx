@@ -4,6 +4,7 @@ import type { GrammarGapExercise } from '@/engine/exercises'
 import { fillGap, matchesAnswer, splitGap } from '@/engine/exercises'
 import { Button } from '@/components/Button'
 import { learningLanguage } from '@/lib/speech'
+import { ExpectedAnswer } from './ExpectedAnswer'
 import { SpeakButton } from './SpeakButton'
 import { useSessionHaptics } from './useSessionHaptics'
 import { useSessionSounds } from './useSessionSounds'
@@ -122,9 +123,14 @@ export function GrammarGap({
             checked ? 'border-success/40 bg-success/10' : 'border-error/40 bg-error/10'
           }`}
         >
-          <p className={`font-extrabold ${checked ? 'text-success' : 'text-error'}`}>
-            {checked ? 'Exact.' : `La réponse attendue était « ${point.answer} ».`}
-          </p>
+          {checked ? (
+            <p className="font-extrabold text-success">Exact.</p>
+          ) : (
+            <div className="flex flex-col gap-1 text-error">
+              <p className="font-extrabold">La réponse attendue :</p>
+              <ExpectedAnswer typed={value} expected={point.answer} />
+            </div>
+          )}
           {point.explanation && <p className="mt-1 text-ink-soft">{point.explanation}</p>}
         </motion.div>
       )}

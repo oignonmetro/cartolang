@@ -4,6 +4,7 @@ import type { ConjugationExercise } from '@/engine/exercises'
 import { matchesAnswer } from '@/engine/exercises'
 import { Button } from '@/components/Button'
 import { learningLanguage } from '@/lib/speech'
+import { ExpectedAnswer } from './ExpectedAnswer'
 import { SpeakButton } from './SpeakButton'
 import { useSessionHaptics } from './useSessionHaptics'
 import { useSessionSounds } from './useSessionSounds'
@@ -116,9 +117,14 @@ export function ConjugationAnswer({
             checked ? 'border-success/40 bg-success/10' : 'border-error/40 bg-error/10'
           }`}
         >
-          <p className={`font-extrabold ${checked ? 'text-success' : 'text-error'}`}>
-            {checked ? 'Bonne réponse.' : `La forme attendue était « ${form.answer} ».`}
-          </p>
+          {checked ? (
+            <p className="font-extrabold text-success">Bonne réponse.</p>
+          ) : (
+            <div className="flex flex-col gap-1 text-error">
+              <p className="font-extrabold">La forme attendue :</p>
+              <ExpectedAnswer typed={value} expected={form.answer} />
+            </div>
+          )}
           {/* L'infinitif appris était caché par l'énoncé : la correction est
               le seul endroit où le couple avec le français peut s'apprendre. */}
           {fromFrench && (
