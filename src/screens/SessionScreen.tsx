@@ -18,7 +18,13 @@ import { GrammarSentenceChoice } from '@/components/session/GrammarSentenceChoic
 import { ConjugationAnswer } from '@/components/session/ConjugationAnswer'
 import { ConjugationChoice } from '@/components/session/ConjugationChoice'
 import { ConjugationMatch } from '@/components/session/ConjugationMatch'
-import { SessionHapticsProvider, useHaptics, type SessionHaptics } from '@/components/session/useSessionHaptics'
+import {
+  SessionHapticsProvider,
+  useHaptics,
+  type SessionCombo,
+  type SessionHaptics,
+} from '@/components/session/useSessionHaptics'
+import { ComboBadge } from '@/components/session/ComboBadge'
 import { CloseIcon } from '@/components/icons'
 import type { SessionOutcome } from '@/engine/progress'
 
@@ -50,10 +56,10 @@ interface Attempt {
  * fois fournir un contexte et le lire.
  */
 export function SessionScreen(props: SessionScreenProps) {
-  const haptics = useHaptics()
+  const { haptics, combo } = useHaptics()
   return (
     <SessionHapticsProvider value={haptics}>
-      <SessionRunner {...props} haptics={haptics} />
+      <SessionRunner {...props} haptics={haptics} combo={combo} />
     </SessionHapticsProvider>
   )
 }
@@ -64,7 +70,8 @@ function SessionRunner({
   onQuit,
   onFinish,
   haptics,
-}: SessionScreenProps & { haptics: SessionHaptics }) {
+  combo,
+}: SessionScreenProps & { haptics: SessionHaptics; combo: SessionCombo }) {
   const { course } = useCourse()
   const gradeItem = useProgress((state) => state.gradeItem)
   const [queue, setQueue] = useState<Exercise[]>(exercises)
@@ -178,7 +185,7 @@ function SessionRunner({
     // contenu est conçu pour tenir dans l'écran — d'où `overflow-hidden`
     // plutôt que `min-h-dvh`, qui laisserait grandir au lieu de couper.
     <div className="flex h-dvh flex-col overflow-hidden">
-      <header className="flex items-center gap-3 px-4 py-3">
+      <header className="relative flex items-center gap-3 px-4 py-3">
         <button
           type="button"
           onClick={() => setConfirmQuit(true)}
@@ -197,6 +204,7 @@ function SessionRunner({
         <span className="w-12 text-right text-sm font-extrabold text-ink-faint">
           {attempt.seen.size}/{graded}
         </span>
+        <ComboBadge combo={combo} />
       </header>
 
       {/* `min-h-0` : sans lui, un enfant flex-1 en colonne se voit imposer une

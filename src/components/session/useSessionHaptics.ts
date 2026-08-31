@@ -1,4 +1,4 @@
-import { createContext, useContext, useMemo, useRef } from 'react'
+import { createContext, useContext, useMemo, useRef, useState } from 'react'
 import type { Exercise } from '@/engine/exercises'
 import type { SessionOutcome } from '@/engine/progress'
 import { afterAnswer, effortOf, endBuzz, NO_COMBO, type Combo } from '@/engine/combo'
@@ -36,34 +36,62 @@ const SessionHapticsContext = createContext<SessionHaptics>(SILENT)
 export const SessionHapticsProvider = SessionHapticsContext.Provider
 
 /**
- * Crée le suiveur de série d'une session. Appelé par `SessionScreen`, seul,
- * qui le partage ensuite aux exercices par le contexte.
+ * Le pendant visible de la série, pour le badge affiché par `ComboBadge`.
  *
- * Le compteur vit dans une `ref` et non dans un état : le faire re-rendre la
- * session à chaque bonne réponse coûterait un rendu complet pour une donnée
- * que rien n'affiche. La série ne se voit pas, elle se sent.
+ * `tier` est le palier courant, 0 hors série. `bump` n'avance qu'à la montée
+ * d'un palier — jamais à la rupture, qui n'a pas plus droit à l'écran qu'à
+ * la vibration (même règle que `afterAnswer`, voir `combo.ts`) — et sert de
+ * clé pour rejouer l'animation à chaque nouvelle montée.
  */
-export function useHaptics(): SessionHaptics {
+export interface SessionCombo {
+  tier: number
+  bump: number
+}
+
+const NO_VISIBLE_COMBO: SessionCombo = { tier: 0, bump: 0 }
+
+/**
+ * Crée le suiveur de série d'une session. Appelé par `SessionScreen`, seul,
+ * qui partage `haptics` aux exercices par le contexte et affiche `combo`
+ * lui-même — voir `ComboBadge`.
+ *
+ * L'élan complet vit dans une `ref` et non dans un état : le faire
+ * re-rendre la session à chaque bonne réponse coûterait un rendu complet
+ * pour une donnée que rien n'affiche en continu. Seul le palier franchi,
+ * rare par construction, passe par un état — c'est justement l'instant où
+ * un rendu de plus ne coûte rien.
+ */
+export function useHaptics(): { haptics: SessionHaptics; combo: SessionCombo } {
   const enabled = useProgress((state) => state.haptics)
   const combo = useRef<Combo>(NO_COMBO)
+  const bump = useRef(0)
+  const [visible, setVisible] = useState<SessionCombo>(NO_VISIBLE_COMBO)
 
-  return useMemo(
+  const haptics = useMemo<SessionHaptics>(
     () => ({
       answered: (exercise, correct) => {
         // Le compteur avance même réglage éteint : la série reste juste si
         // l'apprenant rallume les vibrations en cours de session.
         const result = afterAnswer(combo.current, effortOf(exercise), correct)
+        const leveledUp = result.combo.tier > combo.current.tier
         combo.current = result.combo
         if (enabled && result.buzz) vibrate(result.buzz)
+        if (leveledUp) {
+          bump.current += 1
+          setVisible({ tier: result.combo.tier, bump: bump.current })
+        }
       },
       finished: (outcome) => {
         combo.current = NO_COMBO
+        setVisible(NO_VISIBLE_COMBO)
         const buzz = endBuzz(outcome)
         if (enabled && buzz) vibrate(buzz)
       },
     }),
     [enabled],
   )
+
+  return { haptics, combo: visible }
 }
 
 /** Le suiveur de la session en cours, pour un exercice. */
