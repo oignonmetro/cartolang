@@ -140,11 +140,26 @@ export interface ClozeExercise {
   bank: string[] | null
 }
 
+/**
+ * D'où vient l'énoncé d'une production libre (`type`).
+ *
+ *   `text`  : le mot est donné à l'écrit, dans l'autre langue — thème ou
+ *             version.
+ *   `audio` : le mot est seulement prononcé, jamais écrit — une dictée. Le
+ *             pendant en production du `audio` de `ChoiceCue`, qui ne teste
+ *             que la reconnaissance ; n'a de sens que pour écrire dans la
+ *             langue apprise (`direction: 'to-learning'`) — dicter un mot
+ *             déjà affiché en russe pour en redemander la traduction ne
+ *             testerait que la lecture, pas l'écoute.
+ */
+export type TypeCue = 'text' | 'audio'
+
 export interface TypeExercise {
   kind: 'type'
   id: string
   vocab: Vocab
   direction: Direction
+  cue: TypeCue
 }
 
 /** Rappel de cours affiché avant la pratique d'un point de grammaire. */
@@ -442,6 +457,13 @@ function cuesFor(canSpeak: boolean): ChoiceCue[] {
   return cues
 }
 
+/** Les énoncés qu'un thème peut soutenir — voir `TypeCue`. */
+function themeCuesFor(canSpeak: boolean): TypeCue[] {
+  const cues: TypeCue[] = ['text']
+  if (canSpeak) cues.push('audio')
+  return cues
+}
+
 /**
  * N'importe quel exercice encore inédit pour ce mot, pour le rattrapage de
  * couverture. On tente le QCM d'abord — il marche pour tout mot, là où la
@@ -571,6 +593,12 @@ const CLOZE_PER_BLOCK = 2
  * après le QCM et la phrase à trou dans la construction du bloc, pas avant :
  * il ne teste donc jamais un mot que ce même bloc n'a pas déjà fait
  * reconnaître au moins une fois.
+ *
+ * Quand l'appareil sait parler, une partie de ces créneaux devient une
+ * dictée plutôt qu'un thème (voir `TypeCue`) : le français écrit disparaît,
+ * seul le mot prononcé reste. Sans cette variante, le mot à écrire est
+ * toujours donné par son sens — jamais par son seul son, la moitié de ce que
+ * l'oreille doit apprendre à transcrire dans un alphabet nouveau.
  */
 const THEME_PER_BLOCK = 2
 
@@ -748,9 +776,15 @@ function buildVocabSession(
     let themesLeft = THEME_PER_BLOCK
     for (const word of leastServedFirst(pool, served, rng)) {
       if (themesLeft === 0) break
-      if (servedCount(served, word.id) === 0 || hasServed(served, word.id, 'theme')) continue
-      markServed(served, word.id, 'theme')
-      blockExercises.push({ kind: 'type', id: `type:${word.id}`, vocab: word, direction: 'to-learning' })
+      if (servedCount(served, word.id) === 0) continue
+      const cue = sample(
+        themeCuesFor(canSpeak).filter((candidate) => !hasServed(served, word.id, `theme:${candidate}`)),
+        1,
+        rng,
+      )[0]
+      if (!cue) continue
+      markServed(served, word.id, `theme:${cue}`)
+      blockExercises.push({ kind: 'type', id: `type:${cue}:${word.id}`, vocab: word, direction: 'to-learning', cue })
       themesLeft -= 1
     }
 
@@ -1251,7 +1285,7 @@ function turnOf(card: CardState, drill: boolean): number {
  */
 type VocabForm =
   | { kind: 'cloze' }
-  | { kind: 'type'; direction: Direction }
+  | { kind: 'type'; direction: Direction; cue: TypeCue }
   | { kind: 'choice'; cue: ChoiceCue }
 
 /**
@@ -1268,8 +1302,16 @@ type VocabForm =
  * une phrase.
  */
 function vocabFormsFor(stage: RecallStage, canSpeak: boolean): VocabForm[] {
-  if (stage === 'produce') return [{ kind: 'type', direction: 'to-learning' }, { kind: 'cloze' }]
-  if (stage === 'comprehend') return [{ kind: 'type', direction: 'to-known' }, { kind: 'cloze' }]
+  if (stage === 'produce') {
+    // La dictée ne s'ajoute qu'en production vers la langue apprise, pour la
+    // même raison qu'au premier passage — voir `TypeCue`.
+    return [
+      { kind: 'type', direction: 'to-learning' as const, cue: 'text' as const },
+      { kind: 'cloze' },
+      ...(canSpeak ? [{ kind: 'type' as const, direction: 'to-learning' as const, cue: 'audio' as const }] : []),
+    ]
+  }
+  if (stage === 'comprehend') return [{ kind: 'type', direction: 'to-known', cue: 'text' }, { kind: 'cloze' }]
   return [{ kind: 'cloze' }, ...cuesFor(canSpeak).map((cue) => ({ kind: 'choice' as const, cue }))]
 }
 
@@ -1282,7 +1324,8 @@ function vocabFormExercise(
   rng: Rng,
 ): Exercise | null {
   if (form.kind === 'cloze') return clozeFor(vocab, pool, rng)
-  if (form.kind === 'type') return { kind: 'type', id: `type:${vocab.id}`, vocab, direction: form.direction }
+  if (form.kind === 'type')
+    return { kind: 'type', id: `type:${form.cue}:${vocab.id}`, vocab, direction: form.direction, cue: form.cue }
   return pool ? choiceFor(vocab, form.cue, pool, rng) : null
 }
 
