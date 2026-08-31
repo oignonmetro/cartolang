@@ -316,6 +316,12 @@ function surfaceForm(vocab: Vocab): string {
  * Phrase à trou. La banque, quand il y en a une, est construite autour de la
  * portion réellement masquée : proposer « to book » alors que la phrase
  * attend « booked » rendrait l'exercice impossible à réussir.
+ *
+ * `pool`, ici, n'a pas besoin d'être borné aux mots déjà rencontrés comme il
+ * l'est pour un QCM : un leurre de banque ne demande que d'être rejeté, pas
+ * reconnu, et peut donc venir de tout le vocabulaire de la leçon. Un bassin
+ * trop court renverrait moins de quatre cases dans une grille à deux
+ * colonnes — une rangée à moitié vide, qui a l'air d'un bug.
  */
 function clozeFor(vocab: Vocab, pool: readonly Vocab[] | null, rng: Rng): ClozeExercise | null {
   if (!vocab.example) return null
@@ -444,6 +450,8 @@ function cuesFor(canSpeak: boolean): ChoiceCue[] {
 function firstAvailableExercise(
   word: Vocab,
   pool: readonly Vocab[],
+  /** Bassin des leurres de banque, voir `clozeFor` — plus large que `pool`. */
+  bankPool: readonly Vocab[],
   served: Served,
   canSpeak: boolean,
   rng: Rng,
@@ -456,7 +464,7 @@ function firstAvailableExercise(
     return exercise
   }
   if (!hasServed(served, word.id, 'cloze')) {
-    const exercise = clozeFor(word, pool, rng)
+    const exercise = clozeFor(word, bankPool, rng)
     if (exercise) {
       markServed(served, word.id, 'cloze')
       return exercise
@@ -725,7 +733,7 @@ function buildVocabSession(
     for (const word of leastServedFirst(pool, served, rng)) {
       if (clozesLeft === 0) break
       if (hasServed(served, word.id, 'cloze')) continue
-      const exercise = clozeFor(word, pool, rng)
+      const exercise = clozeFor(word, presented, rng)
       if (!exercise) continue
       markServed(served, word.id, 'cloze')
       blockExercises.push(exercise)
@@ -752,7 +760,7 @@ function buildVocabSession(
     // interrogé seul. Chaque mot du bloc en reçoit donc au moins un.
     for (const word of block) {
       if (servedCount(served, word.id) > 0) continue
-      const exercise = firstAvailableExercise(word, pool, served, canSpeak, rng)
+      const exercise = firstAvailableExercise(word, pool, presented, served, canSpeak, rng)
       if (!exercise) continue
       blockExercises.push(exercise)
     }

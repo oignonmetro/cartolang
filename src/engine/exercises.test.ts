@@ -217,6 +217,20 @@ describe('session de leçon', () => {
     ).toBe(true)
   })
 
+  it('remplit la banque d’une phrase à trou même tôt dans une petite leçon', () => {
+    // Régression : la banque piochait ses leurres dans les seuls mots déjà
+    // présentés (le bloc en cours), pas dans toute la leçon — un bloc de
+    // trois mots ne pouvait alors rendre que trois cases sur quatre, une
+    // grille à deux colonnes avec une rangée à moitié vide.
+    for (const seed of [1, 2, 3, 4, 5]) {
+      const session = buildLessonSession(lessonOf('u1-l1', LESSON), 0, seed).filter((e) => e.kind === 'cloze')
+      expect(session.length).toBeGreaterThan(0)
+      for (const exercise of session) {
+        expect(exercise.bank).toHaveLength(4)
+      }
+    }
+  })
+
   it('propose au moins deux options distinctes à chaque QCM, dont la bonne réponse', () => {
     // Toutes graines et tous énoncés confondus : la réponse attendue dépend de
     // l'énoncé (le sens quand on montre le mot, la forme sinon), et une option

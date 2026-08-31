@@ -21,6 +21,12 @@ const VISIBLE_MS = 1400
  * qu'on peut regarder plutôt que sentir. Ne réagit qu'aux montées — casser
  * une série n'a pas plus droit à l'écran qu'à la main, pour la même raison
  * (voir `combo.ts`).
+ *
+ * Rendu par `SessionScreen` à l'intérieur de son en-tête (`relative`), et
+ * borné à cette seule boîte (`inset-0`, pas de débordement en dessous) :
+ * il peut bien cacher un instant le bouton fermer ou la barre de
+ * progression, mais jamais la consigne de l'exercice juste en dessous, qui
+ * commence exactement là où l'en-tête finit.
  */
 export function ComboBadge({ combo }: { combo: SessionCombo }) {
   const [visible, setVisible] = useState(false)
@@ -35,7 +41,7 @@ export function ComboBadge({ combo }: { combo: SessionCombo }) {
   const tier = Math.min(combo.tier, MESSAGES.length)
 
   return (
-    <div className="pointer-events-none absolute top-full left-1/2 z-20 mt-1 -translate-x-1/2">
+    <div className="pointer-events-none absolute inset-0 z-20 flex items-center justify-center">
       <AnimatePresence>
         {visible && tier > 0 && (
           <motion.div
