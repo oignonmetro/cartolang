@@ -17,7 +17,7 @@ level: A1
 tagline: Les tout premiers mots, en parcours guidé.
 status: archived
 layout: path
-version: 2
+version: 3
 
 sections:
   - id: s1

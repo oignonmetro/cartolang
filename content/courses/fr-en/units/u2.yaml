@@ -53,7 +53,9 @@ lessons:
           translation: L'enfant joue dehors.
       - id: parents
         term: parents
-        translation: parents
+        translation: père et mère
+        alt:
+          - parents
         pos: nom
         example:
           text: My parents live near the sea.

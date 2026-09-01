@@ -102,14 +102,14 @@ lessons:
     vocab:
       - id: restaurant
         term: restaurant
-        translation: restaurant
+        translation: un restaurant
         pos: nom
         example:
           text: This restaurant opens at noon.
           translation: Ce restaurant ouvre à midi.
       - id: table
         term: table
-        translation: table
+        translation: une table
         pos: nom
         example:
           text: A table for two, please.

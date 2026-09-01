@@ -120,16 +120,16 @@ lessons:
           translation: Leur voiture est très vieille.
       - id: train
         term: train
-        translation: train
+        translation: un train
         pos: nom
         example:
           text: The train is late again.
           translation: Le train est encore en retard.
       - id: bus
         term: bus
-        translation: bus
+        translation: autobus
         alt:
-          - autobus
+          - bus
         pos: nom
         example:
           text: I take the bus to work.
