@@ -15,6 +15,7 @@ interface Finished {
   outcome: SessionOutcome
   passed: boolean
   xp: number
+  peakTier: number
 }
 
 /**
@@ -81,6 +82,7 @@ function LessonSession({ lessonId }: { lessonId: string }) {
         outcome={finished.outcome}
         passed={finished.passed}
         xp={finished.xp}
+        peakTier={finished.peakTier}
         onContinue={backHome}
         onNext={
           next && next.status !== 'locked'
@@ -106,9 +108,9 @@ function LessonSession({ lessonId }: { lessonId: string }) {
       title={entry.lesson.title}
       exercises={exercises}
       onQuit={backHome}
-      onFinish={(outcome) => {
+      onFinish={(outcome, peakTier) => {
         const result = finishLesson(course.id, lessonId, outcome)
-        setFinished({ outcome, ...result })
+        setFinished({ outcome, peakTier, ...result })
       }}
     />
   )

@@ -10,8 +10,12 @@ import type { SessionCombo } from './useSessionHaptics'
  * consécutives, ce qu'il n'est pas. Trois messages, à l'image des trois
  * intensités de vibration qu'ils accompagnent — au-delà, le vocabulaire n'a
  * rien de plus fort à offrir (même plafond que `IMPACTS`, combo.ts).
+ *
+ * Exportés : `SessionResult` reprend les mêmes mots pour son rappel de
+ * meilleure série, plutôt que d'en inventer d'autres pour la même chose.
  */
-const MESSAGES = ['En pleine lancée', 'Ça chauffe', 'Imparable'] as const
+export const COMBO_TIER_LABELS = ['En pleine lancée', 'Ça chauffe', 'Imparable'] as const
+const MESSAGES = COMBO_TIER_LABELS
 
 const VISIBLE_MS = 1400
 

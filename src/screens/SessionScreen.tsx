@@ -40,7 +40,8 @@ interface SessionScreenProps {
   title: string
   exercises: Exercise[]
   onQuit: () => void
-  onFinish: (outcome: SessionOutcome) => void
+  /** `peakTier` : le plus haut palier de série atteint, voir `useSessionHaptics`. */
+  onFinish: (outcome: SessionOutcome, peakTier: number) => void
 }
 
 interface Attempt {
@@ -56,10 +57,10 @@ interface Attempt {
  * fois fournir un contexte et le lire.
  */
 export function SessionScreen(props: SessionScreenProps) {
-  const { haptics, combo } = useHaptics()
+  const { haptics, combo, peakTier } = useHaptics()
   return (
     <SessionHapticsProvider value={haptics}>
-      <SessionRunner {...props} haptics={haptics} combo={combo} />
+      <SessionRunner {...props} haptics={haptics} combo={combo} peakTier={peakTier} />
     </SessionHapticsProvider>
   )
 }
@@ -71,7 +72,8 @@ function SessionRunner({
   onFinish,
   haptics,
   combo,
-}: SessionScreenProps & { haptics: SessionHaptics; combo: SessionCombo }) {
+  peakTier,
+}: SessionScreenProps & { haptics: SessionHaptics; combo: SessionCombo; peakTier: () => number }) {
   const { course } = useCourse()
   const gradeItem = useProgress((state) => state.gradeItem)
   const [queue, setQueue] = useState<Exercise[]>(exercises)
@@ -166,8 +168,8 @@ function SessionRunner({
     finished.current = true
     const outcome = { correct: attempt.correct, total: attempt.total }
     haptics.finished(outcome)
-    onFinish(outcome)
-  }, [attempt.correct, attempt.total, current, haptics, onFinish])
+    onFinish(outcome, peakTier())
+  }, [attempt.correct, attempt.total, current, haptics, onFinish, peakTier])
 
   // Quitter une session en cours de prononciation laisserait la voix courir
   // sur l'écran suivant, qui n'a plus rien à voir avec le mot.

@@ -1,4 +1,4 @@
-import { createContext, useContext, useMemo, useRef, useState } from 'react'
+import { createContext, useCallback, useContext, useMemo, useRef, useState } from 'react'
 import type { Exercise } from '@/engine/exercises'
 import type { SessionOutcome } from '@/engine/progress'
 import { afterAnswer, effortOf, endBuzz, NO_COMBO, type Combo } from '@/engine/combo'
@@ -60,11 +60,17 @@ const NO_VISIBLE_COMBO: SessionCombo = { tier: 0, bump: 0 }
  * pour une donnée que rien n'affiche en continu. Seul le palier franchi,
  * rare par construction, passe par un état — c'est justement l'instant où
  * un rendu de plus ne coûte rien.
+ *
+ * `peakTier` suit le plus haut palier jamais atteint, indépendamment des
+ * ruptures qui ramènent `combo` à zéro entre-temps : c'est ce qui permet à
+ * `SessionResult` de rappeler la meilleure série une fois la session finie,
+ * quand bien même elle se serait cassée sur le tout dernier exercice.
  */
-export function useHaptics(): { haptics: SessionHaptics; combo: SessionCombo } {
+export function useHaptics(): { haptics: SessionHaptics; combo: SessionCombo; peakTier: () => number } {
   const enabled = useProgress((state) => state.haptics)
   const combo = useRef<Combo>(NO_COMBO)
   const bump = useRef(0)
+  const peak = useRef(0)
   const [visible, setVisible] = useState<SessionCombo>(NO_VISIBLE_COMBO)
 
   const haptics = useMemo<SessionHaptics>(
@@ -75,6 +81,7 @@ export function useHaptics(): { haptics: SessionHaptics; combo: SessionCombo } {
         const result = afterAnswer(combo.current, effortOf(exercise), correct)
         const leveledUp = result.combo.tier > combo.current.tier
         combo.current = result.combo
+        peak.current = Math.max(peak.current, result.combo.tier)
         if (enabled && result.buzz) vibrate(result.buzz)
         if (leveledUp) {
           bump.current += 1
@@ -91,7 +98,13 @@ export function useHaptics(): { haptics: SessionHaptics; combo: SessionCombo } {
     [enabled],
   )
 
-  return { haptics, combo: visible }
+  // Identité stable : sans elle, `SessionScreen` la verrait changer à chaque
+  // rendu et son effet de clôture se redéclencherait pour rien à chaque fois
+  // (sans risque — le drapeau `finished` l'empêche d'agir deux fois — mais
+  // sans raison non plus).
+  const peakTier = useCallback(() => peak.current, [])
+
+  return { haptics, combo: visible, peakTier }
 }
 
 /** Le suiveur de la session en cours, pour un exercice. */

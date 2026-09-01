@@ -20,7 +20,7 @@ export function ReviewRoute() {
   const { course, itemsById } = useCourse()
   const cards = useProgress((state) => state.cards[course.id] ?? EMPTY_CARDS)
   const finishReview = useProgress((state) => state.finishReview)
-  const [finished, setFinished] = useState<{ outcome: SessionOutcome; xp: number } | null>(null)
+  const [finished, setFinished] = useState<{ outcome: SessionOutcome; xp: number; peakTier: number } | null>(null)
 
   // La file est figée à l'ouverture : les notes données pendant la session ne
   // doivent pas retirer des éléments de la session en cours. Toutes pistes
@@ -42,6 +42,7 @@ export function ReviewRoute() {
         outcome={finished.outcome}
         passed
         xp={finished.xp}
+        peakTier={finished.peakTier}
         onContinue={() => navigate('/', { replace: true })}
         onRetry={() => navigate('/', { replace: true })}
       />
@@ -66,7 +67,7 @@ export function ReviewRoute() {
       title="Révision"
       exercises={exercises}
       onQuit={() => navigate('/', { replace: true })}
-      onFinish={(outcome) => setFinished({ outcome, ...finishReview(outcome) })}
+      onFinish={(outcome, peakTier) => setFinished({ outcome, peakTier, ...finishReview(outcome) })}
     />
   )
 }

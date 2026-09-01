@@ -35,7 +35,7 @@ function StepSession({ unitId, stepId }: { unitId: string; stepId: string }) {
   const { course, itemsById } = useCourse()
   const finishStep = useProgress((state) => state.finishStep)
   const skipTo = useProgress((state) => state.skipTo)
-  const [finished, setFinished] = useState<{ outcome: SessionOutcome; xp: number } | null>(null)
+  const [finished, setFinished] = useState<{ outcome: SessionOutcome; xp: number; peakTier: number } | null>(null)
 
   const unit = useMemo(() => findUnit(course, unitId), [course, unitId])
   const node = useMemo(() => {
@@ -88,6 +88,7 @@ function StepSession({ unitId, stepId }: { unitId: string; stepId: string }) {
         outcome={finished.outcome}
         passed
         xp={finished.xp}
+        peakTier={finished.peakTier}
         onContinue={backHome}
         onNext={
           next && next.status !== 'locked'
@@ -133,7 +134,9 @@ function StepSession({ unitId, stepId }: { unitId: string; stepId: string }) {
       title={`${node.title} (${unit.title})`}
       exercises={exercises}
       onQuit={backHome}
-      onFinish={(outcome) => setFinished({ outcome, ...finishStep(course.id, stepKey(unit.id, stepId), outcome) })}
+      onFinish={(outcome, peakTier) =>
+        setFinished({ outcome, peakTier, ...finishStep(course.id, stepKey(unit.id, stepId), outcome) })
+      }
     />
   )
 }
