@@ -61,6 +61,15 @@ export interface MatchExercise {
   kind: 'match'
   id: string
   pairs: Vocab[]
+  /**
+   * `text` : les jetons montrent le mot appris et sa traduction, à lire.
+   * `audio` : le jeton de la langue apprise ne s'écrit plus, il se prononce
+   * au toucher — pendant du `audio` de `ChoiceCue`, pour une manche entière
+   * plutôt qu'un seul mot. Sans cette variante, l'association ne teste
+   * jamais l'oreille : la même manche pouvait revenir plusieurs fois par
+   * leçon sans jamais changer de nature, toujours la lecture.
+   */
+  cue: 'text' | 'audio'
 }
 
 /**
@@ -374,7 +383,13 @@ function buildBank(match: string, vocab: Vocab, pool: readonly Vocab[], rng: Rng
  * une progression qui se sent : on relie quatre paires, puis cinq, puis six,
  * et une nouvelle section redescend au plancher avec ses lettres neuves.
  */
-function matchRounds(pool: readonly Vocab[], rounds: number, rng: Rng, from: number): MatchExercise[] {
+function matchRounds(
+  pool: readonly Vocab[],
+  rounds: number,
+  rng: Rng,
+  from: number,
+  canSpeak: boolean,
+): MatchExercise[] {
   if (pool.length < MATCH_SIZE) return []
 
   const result: MatchExercise[] = []
@@ -399,7 +414,11 @@ function matchRounds(pool: readonly Vocab[], rounds: number, rng: Rng, from: num
       }
     }
     if (!pairs) break
-    result.push({ kind: 'match', id: `match:${round}:${pairs.map((p) => p.id).join('-')}`, pairs })
+    // Une manche sur deux en moyenne, quand l'appareil sait parler : assez
+    // pour varier d'un bloc à l'autre sans devenir la norme au point de
+    // rendre la lecture, elle, rare.
+    const cue = canSpeak && rng() < 0.5 ? 'audio' : 'text'
+    result.push({ kind: 'match', id: `match:${round}:${cue}:${pairs.map((p) => p.id).join('-')}`, pairs, cue })
   }
   return result
 }
@@ -734,7 +753,7 @@ function buildVocabSession(
       .filter((word) => !cards[word.id])
       .map((word): IntroExercise => ({ kind: 'intro', id: `intro:${word.id}`, vocab: word }))
 
-    const rounds = matchRounds(pool, between(...MATCH_ROUNDS_PER_BLOCK, rng), rng, ramp)
+    const rounds = matchRounds(pool, between(...MATCH_ROUNDS_PER_BLOCK, rng), rng, ramp, canSpeak)
     ramp += rounds.length
     blockExercises.push(...rounds)
 
@@ -1443,7 +1462,7 @@ function buildMixedSession(
   })
 
   const count = vocabPool.length >= MATCH_SIZE ? 1 : 0
-  const rounds = matchRounds(vocabPool, count, rng, rampEndingAtMax(count))
+  const rounds = matchRounds(vocabPool, count, rng, rampEndingAtMax(count), canSpeak)
   return [...shuffle(exercises, rng), ...rounds]
 }
 

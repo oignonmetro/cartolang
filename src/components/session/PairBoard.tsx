@@ -1,6 +1,8 @@
 import { useMemo, useState } from 'react'
 import { motion } from 'framer-motion'
 import { createRng, seedFrom, shuffle } from '@/engine/rng'
+import { speak } from '@/lib/speech'
+import { SpeakerIcon } from '@/components/icons'
 import { useSessionSounds } from './useSessionSounds'
 
 /**
@@ -16,6 +18,12 @@ export interface Pair {
   id: string
   left: string
   right: string
+  /**
+   * Quand fourni, le jeton `left` ne montre plus `left` : il se prononce au
+   * toucher plutôt que de s'écrire — voir `MatchExercise.cue`. `label` reste
+   * disponible pour l'accessibilité (`aria-label`) même en mode audio.
+   */
+  leftAudio?: string
 }
 
 type Side = 'left' | 'right'
@@ -25,6 +33,7 @@ interface Token {
   pairId: string
   label: string
   side: Side
+  audio?: string
 }
 
 /**
@@ -208,14 +217,28 @@ function TokenButton({
   return (
     <motion.button
       type="button"
-      onClick={() => onPick(token)}
+      onClick={() => {
+        // Toujours reprononcer, y compris pour désélectionner : réentendre un
+        // mot n'est jamais une gêne, là où le taire romprait l'habitude prise
+        // ailleurs (`SpeakButton`) qu'un toucher fait toujours entendre.
+        if (token.audio) void speak(token.audio)
+        onPick(token)
+      }}
       disabled={solved}
       animate={shaking ? { x: [0, -7, 7, -4, 0] } : { x: 0 }}
       transition={{ duration: 0.3 }}
       style={{ minHeight: height }}
+      aria-label={token.audio ? `Écouter « ${token.label} »` : undefined}
       className={`rounded-2xl border-2 text-center font-bold break-words transition-colors ${density} ${tone}`}
     >
-      {token.label}
+      {token.audio ? (
+        <span className="flex flex-col items-center gap-1">
+          <SpeakerIcon size={20} />
+          <span className="text-xs font-bold uppercase tracking-wide">Écouter</span>
+        </span>
+      ) : (
+        token.label
+      )}
     </motion.button>
   )
 }
@@ -223,7 +246,13 @@ function TokenButton({
 /** Les deux colonnes sont mélangées indépendamment : jamais de paire alignée. */
 function buildColumns(seed: string, pairs: readonly Pair[]): [Token[], Token[]] {
   const rng = createRng(seedFrom(seed))
-  const left = pairs.map((pair) => ({ key: `left:${pair.id}`, pairId: pair.id, label: pair.left, side: 'left' as const }))
+  const left = pairs.map((pair) => ({
+    key: `left:${pair.id}`,
+    pairId: pair.id,
+    label: pair.left,
+    side: 'left' as const,
+    audio: pair.leftAudio,
+  }))
   const right = pairs.map((pair) => ({
     key: `right:${pair.id}`,
     pairId: pair.id,

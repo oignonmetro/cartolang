@@ -1,8 +1,12 @@
 import { useMemo } from 'react'
 import type { MatchExercise } from '@/engine/exercises'
+import { speechFor } from '@/lib/speech'
 import { PairBoard, type Pair } from './PairBoard'
 
-/** Association de paires : relier chaque mot à sa traduction. */
+/**
+ * Association de paires : relier chaque mot à sa traduction — ou, en
+ * `cue: 'audio'`, chaque mot prononcé à sa traduction, voir `PairBoard`.
+ */
 export function MatchPairs({
   exercise,
   onDone,
@@ -10,10 +14,24 @@ export function MatchPairs({
   exercise: MatchExercise
   onDone: (result: { missedIds: string[] }) => void
 }) {
+  const audio = exercise.cue === 'audio'
   const pairs = useMemo<Pair[]>(
-    () => exercise.pairs.map((vocab) => ({ id: vocab.id, left: vocab.term, right: vocab.translation })),
-    [exercise],
+    () =>
+      exercise.pairs.map((vocab) => ({
+        id: vocab.id,
+        left: vocab.term,
+        right: vocab.translation,
+        leftAudio: audio ? speechFor(vocab) : undefined,
+      })),
+    [exercise, audio],
   )
 
-  return <PairBoard seed={exercise.id} pairs={pairs} prompt="Reliez les paires" onDone={onDone} />
+  return (
+    <PairBoard
+      seed={exercise.id}
+      pairs={pairs}
+      prompt={audio ? 'Écoutez et associez' : 'Reliez les paires'}
+      onDone={onDone}
+    />
+  )
 }

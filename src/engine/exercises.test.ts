@@ -208,6 +208,24 @@ describe('session de leçon', () => {
     }
   })
 
+  it('propose aussi des manches d’association à l’audio quand l’appareil sait parler', () => {
+    // Sans elle, l'association ne teste jamais l'oreille : toujours la
+    // lecture, quel que soit le nombre de manches sur toute une leçon.
+    const cues = new Set<string>()
+    for (const seed of [1, 2, 3, 4, 5, 6, 7, 8]) {
+      const session = buildLessonSession(lessonOf('u1-l1', LESSON), 0, seed, {}, true)
+      for (const exercise of session.filter((e) => e.kind === 'match')) cues.add(exercise.cue)
+    }
+    expect(cues).toEqual(new Set(['text', 'audio']))
+  })
+
+  it('ne propose jamais de manche d’association à l’audio sans synthèse vocale', () => {
+    for (const seed of [1, 2, 3, 4, 5]) {
+      const session = buildLessonSession(lessonOf('u1-l1', LESSON), 0, seed, {}, false)
+      expect(session.filter((e) => e.kind === 'match').every((e) => e.cue === 'text')).toBe(true)
+    }
+  })
+
   it('ouvre la session par un rappel quand la leçon en porte un', () => {
     // Le seul endroit où le vocabulaire a besoin d'expliquer une règle plutôt
     // que de la laisser se déduire des mots : l'accord numéral-nom du russe,
