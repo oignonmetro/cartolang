@@ -598,9 +598,20 @@ export function buildLessonSession(
 
 /** Manches d'association et de QCM par bloc — un peu de variété d'une leçon à l'autre. */
 const MATCH_ROUNDS_PER_BLOCK = [1, 2] as const
-const CHOICE_ROUNDS_PER_BLOCK = [3, 4] as const
+/**
+ * Un mot peut recevoir jusqu'à trois QCM sur une leçon (un par énoncé — voir
+ * `ChoiceCue`), mais une seule phrase à trou et deux thèmes au plus : sans
+ * plafond au budget du bloc, le QCM finit par peser près de la moitié de
+ * tous les exercices notés d'une leçon (mesuré : ~43 % avant ce plafond,
+ * loin devant la phrase à trou ~19 % et le thème ~25 %), quand bien même
+ * chacune de ses trois formes serait elle-même variée. Abaissé d'un cran, et
+ * la phrase à trou reçoit le créneau libéré : elle reste sous-représentée
+ * (une seule occasion par mot) alors que c'est elle qui teste le mot en
+ * contexte plutôt qu'isolé.
+ */
+const CHOICE_ROUNDS_PER_BLOCK = [2, 3] as const
 /** Phrases à trou par bloc, toujours en banque de mots à ce stade. */
-const CLOZE_PER_BLOCK = 2
+const CLOZE_PER_BLOCK = 3
 /**
  * Thèmes (français → langue apprise, à la main) par bloc.
  *
