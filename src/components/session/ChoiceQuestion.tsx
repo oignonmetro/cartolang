@@ -6,6 +6,7 @@ import { Button } from '@/components/Button'
 import { Mascot } from '@/components/Mascot'
 import { learningLanguage, speechFor } from '@/lib/speech'
 import { highlightDiffWords } from './highlightDiffWords'
+import { ListeningPrompt } from './ListeningPrompt'
 import { OptionList } from './OptionList'
 import { SpeakButton } from './SpeakButton'
 import { useSessionHaptics } from './useSessionHaptics'
@@ -29,9 +30,11 @@ const PROMPTS: Record<ChoiceCue, string> = {
 export function ChoiceQuestion({
   exercise,
   onAnswer,
+  onCantListen,
 }: {
   exercise: ChoiceExercise
   onAnswer: (correct: boolean) => void
+  onCantListen: () => void
 }) {
   const { vocab, cue, options } = exercise
   const answer = choiceAnswer(vocab, cue)
@@ -58,10 +61,7 @@ export function ChoiceQuestion({
             // il ne reste plus rien à reconnaître. Il se rejoue à volonté, et
             // part tout seul à l'affichage — sans quoi l'écran est muet et la
             // question sans énoncé.
-            <div className="flex items-center gap-3 py-1">
-              <SpeakButton text={speechFor(vocab)} auto size={26} className="shrink-0" />
-              <span className="text-sm text-ink-soft">Touchez pour réécouter</span>
-            </div>
+            <ListeningPrompt text={speechFor(vocab)} size={26} onCantListen={onCantListen} />
           ) : (
             <span
               lang={choicePromptIsLearningLanguage(cue) ? learningLanguage() : 'fr'}

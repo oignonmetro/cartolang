@@ -1,10 +1,11 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import type { Exercise } from '@/engine/exercises'
-import { isPresentation, itemIdsOf } from '@/engine/exercises'
+import { isListeningExercise, isPresentation, itemIdsOf } from '@/engine/exercises'
 import { ratingFromAnswer, type Rating } from '@/engine/srs'
 import { useCourse } from '@/content/CourseProvider'
 import { useProgress } from '@/store/progressStore'
+import { isListeningMuted, useListeningMuteStore } from '@/store/listeningMuteStore'
 import { stopSpeaking } from '@/lib/speech'
 import { Flashcard } from '@/components/session/Flashcard'
 import { ChoiceQuestion } from '@/components/session/ChoiceQuestion'
@@ -76,12 +77,17 @@ function SessionRunner({
 }: SessionScreenProps & { haptics: SessionHaptics; combo: SessionCombo; peakTier: () => number }) {
   const { course } = useCourse()
   const gradeItem = useProgress((state) => state.gradeItem)
+  const mutedUntil = useListeningMuteStore((state) => state.mutedUntil)
+  const muteListening = useListeningMuteStore((state) => state.muteListening)
   const [queue, setQueue] = useState<Exercise[]>(exercises)
   const [position, setPosition] = useState(0)
   const [attempt, setAttempt] = useState<Attempt>({ seen: new Set(), correct: 0, total: 0 })
   const [confirmQuit, setConfirmQuit] = useState(false)
 
   const current = queue[position]
+  // Un exercice à l'oreille pendant la sourdine : ni pénalité ni note, il n'a
+  // simplement pas eu lieu cette fois — voir `useListeningMuteStore`.
+  const mustSkipListening = current !== undefined && isListeningExercise(current) && isListeningMuted(mutedUntil)
   const graded = useMemo(() => exercises.filter((exercise) => !isPresentation(exercise)).length, [exercises])
   const progress = graded === 0 ? 1 : Math.min(1, attempt.seen.size / graded)
 
@@ -114,6 +120,29 @@ function SessionRunner({
     },
     [],
   )
+
+  /**
+   * « Je ne peux pas écouter maintenant » : coupe l'écoute pour vingt minutes
+   * (voir `useListeningMuteStore`) et passe l'exercice en cours sans le
+   * compter, ni en bien ni en mal — il n'a simplement pas eu lieu cette fois.
+   * Pas de `record` ici, à la différence de `answer` : le compter comme juste
+   * gonflerait le score sans avoir été répondu, le compter comme faux
+   * pénaliserait une gêne passagère qui n'a rien à voir avec le mot.
+   */
+  const cantListen = useCallback(() => {
+    muteListening()
+    advance(false)
+  }, [advance, muteListening])
+
+  // Les exercices suivants pendant la fenêtre de sourdine se sautent tout
+  // seuls, sans attendre un nouvel appui sur « Je ne peux pas écouter » à
+  // chacun — sans quoi la coupure ne durerait qu'un seul exercice. Rien ne se
+  // rend visible entre-temps (voir plus bas, `!mustSkipListening`) : le temps
+  // d'un rendu suffirait à un `SpeakButton auto` à parler avant d'être
+  // démonté, ce que la coupure existe justement pour éviter.
+  useEffect(() => {
+    if (mustSkipListening) advance(false)
+  }, [mustSkipListening, advance])
 
   const answer = useCallback(
     (exercise: Exercise, correct: boolean, rating?: Rating) => {
@@ -206,6 +235,15 @@ function SessionRunner({
         <span className="w-12 text-right text-sm font-extrabold text-ink-faint">
           {attempt.seen.size}/{graded}
         </span>
+        {/* Seul repère de ce qui vient de se passer : sans lui, les
+            exercices d'écoute sautés silencieusement (voir
+            `mustSkipListening`) donneraient l'impression d'un bug plutôt que
+            d'un choix. */}
+        {mutedUntil !== null && isListeningMuted(mutedUntil) && (
+          <span className="rounded-full bg-line px-2.5 py-1 text-[11px] font-extrabold whitespace-nowrap text-ink-faint">
+            Écoute coupée {Math.max(1, Math.ceil((mutedUntil - Date.now()) / 60_000))} min
+          </span>
+        )}
         <ComboBadge combo={combo} />
       </header>
 
@@ -217,57 +255,81 @@ function SessionRunner({
           plutôt que couper son bouton, même si l'intention reste que rien
           n'ait normalement besoin de défiler ici. */}
       <main className="flex min-h-0 flex-1 flex-col overflow-y-auto px-4 pb-6">
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={`${current.id}:${position}`}
-            initial={{ opacity: 0, x: 24 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -24 }}
-            transition={{ duration: 0.18 }}
-            className="flex flex-1 flex-col"
-          >
-            {current.kind === 'intro' && (
-              <VocabIntro exercise={current} onRate={(rating) => answer(current, rating !== 'again', rating)} />
-            )}
-            {current.kind === 'flashcard' && (
-              <Flashcard
-                exercise={current}
-                onRate={(rating) => answer(current, rating !== 'again', rating)}
-              />
-            )}
-            {current.kind === 'match' && (
-              <MatchPairs exercise={current} onDone={({ missedIds }) => answerMatch(current, missedIds)} />
-            )}
-            {current.kind === 'choice' && (
-              <ChoiceQuestion exercise={current} onAnswer={(correct) => answer(current, correct)} />
-            )}
-            {current.kind === 'rule' && <RuleNote exercise={current} onNext={() => advance(false)} />}
-            {current.kind === 'grammar-gap' && (
-              <GrammarGap exercise={current} onAnswer={(correct) => answer(current, correct)} />
-            )}
-            {current.kind === 'grammar-choice' && (
-              <GrammarSentenceChoice
-                exercise={current}
-                onAnswer={(correct) => answer(current, correct)}
-              />
-            )}
-            {current.kind === 'conjugation' && (
-              <ConjugationAnswer exercise={current} onAnswer={(correct) => answer(current, correct)} />
-            )}
-            {current.kind === 'conjugation-choice' && (
-              <ConjugationChoice exercise={current} onAnswer={(correct) => answer(current, correct)} />
-            )}
-            {current.kind === 'conjugation-match' && (
-              <ConjugationMatch exercise={current} onDone={({ missedIds }) => answerMatch(current, missedIds)} />
-            )}
-            {current.kind === 'cloze' && (
-              <ClozeSentence exercise={current} onAnswer={(correct) => answer(current, correct)} />
-            )}
-            {current.kind === 'type' && (
-              <TypeAnswer exercise={current} onAnswer={(correct) => answer(current, correct)} />
-            )}
-          </motion.div>
-        </AnimatePresence>
+        {/* Le temps d'un rendu, le temps d'un exercice à l'oreille sauté
+            pendant la sourdine — voir `mustSkipListening` et l'effet qui
+            avance juste au-dessus. Rien ne s'y monte, pas même le composant
+            de l'exercice : un `SpeakButton auto` parlerait sinon avant que
+            l'effet n'ait eu le temps de passer à la suite. */}
+        {!mustSkipListening && (
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={`${current.id}:${position}`}
+              initial={{ opacity: 0, x: 24 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -24 }}
+              transition={{ duration: 0.18 }}
+              className="flex flex-1 flex-col"
+            >
+              {current.kind === 'intro' && (
+                <VocabIntro exercise={current} onRate={(rating) => answer(current, rating !== 'again', rating)} />
+              )}
+              {current.kind === 'flashcard' && (
+                <Flashcard
+                  exercise={current}
+                  onRate={(rating) => answer(current, rating !== 'again', rating)}
+                />
+              )}
+              {current.kind === 'match' && (
+                <MatchPairs
+                  exercise={current}
+                  onDone={({ missedIds }) => answerMatch(current, missedIds)}
+                  onCantListen={cantListen}
+                />
+              )}
+              {current.kind === 'choice' && (
+                <ChoiceQuestion
+                  exercise={current}
+                  onAnswer={(correct) => answer(current, correct)}
+                  onCantListen={cantListen}
+                />
+              )}
+              {current.kind === 'rule' && <RuleNote exercise={current} onNext={() => advance(false)} />}
+              {current.kind === 'grammar-gap' && (
+                <GrammarGap exercise={current} onAnswer={(correct) => answer(current, correct)} />
+              )}
+              {current.kind === 'grammar-choice' && (
+                <GrammarSentenceChoice
+                  exercise={current}
+                  onAnswer={(correct) => answer(current, correct)}
+                  onCantListen={cantListen}
+                />
+              )}
+              {current.kind === 'conjugation' && (
+                <ConjugationAnswer exercise={current} onAnswer={(correct) => answer(current, correct)} />
+              )}
+              {current.kind === 'conjugation-choice' && (
+                <ConjugationChoice
+                  exercise={current}
+                  onAnswer={(correct) => answer(current, correct)}
+                  onCantListen={cantListen}
+                />
+              )}
+              {current.kind === 'conjugation-match' && (
+                <ConjugationMatch exercise={current} onDone={({ missedIds }) => answerMatch(current, missedIds)} />
+              )}
+              {current.kind === 'cloze' && (
+                <ClozeSentence exercise={current} onAnswer={(correct) => answer(current, correct)} />
+              )}
+              {current.kind === 'type' && (
+                <TypeAnswer
+                  exercise={current}
+                  onAnswer={(correct) => answer(current, correct)}
+                  onCantListen={cantListen}
+                />
+              )}
+            </motion.div>
+          </AnimatePresence>
+        )}
       </main>
 
       <AnimatePresence>

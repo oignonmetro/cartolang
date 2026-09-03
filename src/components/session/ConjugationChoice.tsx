@@ -5,6 +5,7 @@ import { normalizeForm } from '@/engine/exercises'
 import { Button } from '@/components/Button'
 import { learningLanguage } from '@/lib/speech'
 import { highlightDiffWords } from './highlightDiffWords'
+import { ListeningPrompt } from './ListeningPrompt'
 import { OptionList } from './OptionList'
 import { SpeakButton } from './SpeakButton'
 import { useSessionHaptics } from './useSessionHaptics'
@@ -26,9 +27,11 @@ import { useSessionSounds } from './useSessionSounds'
 export function ConjugationChoice({
   exercise,
   onAnswer,
+  onCantListen,
 }: {
   exercise: ConjugationChoiceExercise
   onAnswer: (correct: boolean) => void
+  onCantListen: () => void
 }) {
   const { verb, form, cue, options } = exercise
   const fromFrench = cue === 'translation' && Boolean(verb.translation)
@@ -53,10 +56,7 @@ export function ConjugationChoice({
           // L'énoncé est le son lui-même : voir la même remarque dans
           // `ChoiceQuestion`. Il part tout seul à l'affichage et se rejoue à
           // volonté, sans jamais s'écrire.
-          <div className="flex items-center gap-3 py-1">
-            <SpeakButton text={verb.verb} auto size={26} className="shrink-0" />
-            <span className="text-sm text-ink-soft">Touchez pour réécouter</span>
-          </div>
+          <ListeningPrompt text={verb.verb} size={26} onCantListen={onCantListen} />
         ) : (
           <span lang={fromFrench ? 'fr' : learningLanguage()} className="text-2xl font-black break-words">
             {fromFrench ? verb.translation : verb.verb}

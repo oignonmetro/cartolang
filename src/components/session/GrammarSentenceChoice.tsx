@@ -4,6 +4,7 @@ import type { GrammarChoiceExercise } from '@/engine/exercises'
 import { fillGap, normalizeForm, splitGap } from '@/engine/exercises'
 import { Button } from '@/components/Button'
 import { learningLanguage } from '@/lib/speech'
+import { ListeningPrompt } from './ListeningPrompt'
 import { OptionList } from './OptionList'
 import { SpeakButton } from './SpeakButton'
 import { useSessionHaptics } from './useSessionHaptics'
@@ -44,16 +45,20 @@ function highlightGap(option: string, before: string, after: string) {
  *
  * Le français donne le sens visé : sans lui, plusieurs de ces phrases seraient
  * défendables, et l'exercice ne porterait plus sur la règle mais sur la
- * devinette.
+ * devinette. En `cue: 'audio'` (voir `GrammarChoiceCue`), c'est la phrase
+ * correcte elle-même, prononcée, qui tranche à sa place : il faut alors la
+ * reconnaître à l'oreille parmi des leurres qui s'écrivent presque pareil.
  */
 export function GrammarSentenceChoice({
   exercise,
   onAnswer,
+  onCantListen,
 }: {
   exercise: GrammarChoiceExercise
   onAnswer: (correct: boolean) => void
+  onCantListen: () => void
 }) {
-  const { point, options } = exercise
+  const { point, cue, options } = exercise
   const answer = fillGap(point.sentence, point.answer)
   const { before, after } = splitGap(point.sentence)
   const [picked, setPicked] = useState<string | null>(null)
@@ -73,10 +78,14 @@ export function GrammarSentenceChoice({
         Quelle phrase est correcte ?
       </p>
 
-      {point.translation && (
-        <div className="card-3d px-5 py-4">
-          <p className="text-lg leading-snug font-bold">{point.translation}</p>
-        </div>
+      {cue === 'audio' ? (
+        <ListeningPrompt text={answer} size={26} onCantListen={onCantListen} />
+      ) : (
+        point.translation && (
+          <div className="card-3d px-5 py-4">
+            <p className="text-lg leading-snug font-bold">{point.translation}</p>
+          </div>
+        )
       )}
 
       <OptionList
@@ -113,8 +122,9 @@ export function GrammarSentenceChoice({
         {checked && (
           <div className="flex items-center gap-3">
             {/* La phrase correcte, pas celle qui a été choisie : c'est le
-                modèle à retenir, y compris quand on s'est trompé. */}
-            <SpeakButton text={answer} auto className="shrink-0" />
+                modèle à retenir, y compris quand on s'est trompé. Sauf en
+                audio — elle a déjà servi d'énoncé, le bouton reste là-haut. */}
+            {cue !== 'audio' && <SpeakButton text={answer} auto className="shrink-0" />}
             <Button block tone={correct ? 'success' : 'error'} onClick={() => onAnswer(correct)}>
               Continuer
             </Button>

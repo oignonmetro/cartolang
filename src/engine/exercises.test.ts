@@ -876,6 +876,26 @@ describe('session de grammaire', () => {
     const { notes: _notes, ...bare } = GRAMMAR
     expect(kinds(buildLessonSession(bare as GrammarLesson, 0))).not.toContain('rule')
   })
+
+  it('propose aussi le QCM de phrase à l’audio quand l’appareil sait parler', () => {
+    // Même raisonnement que la conjugaison : sans cette variante, choisir la
+    // phrase entière ne se jouait jamais qu'à la lecture, alors que les
+    // options ne diffèrent que par une terminaison — exactement ce qui
+    // s'entend à l'oreille.
+    const cues = new Set<string>()
+    for (const seed of [1, 2, 3, 4, 5, 6, 7, 8]) {
+      const session = buildLessonSession(GRAMMAR, 0, seed, {}, true).filter((e) => e.kind === 'grammar-choice')
+      for (const exercise of session) cues.add(exercise.cue)
+    }
+    expect(cues).toContain('audio')
+  })
+
+  it('ne propose jamais le QCM de phrase à l’audio sans synthèse vocale', () => {
+    for (const seed of [1, 2, 3, 4, 5]) {
+      const session = buildLessonSession(GRAMMAR, 0, seed).filter((e) => e.kind === 'grammar-choice')
+      expect(session.every((e) => e.cue !== 'audio')).toBe(true)
+    }
+  })
 })
 
 describe('session de conjugaison', () => {
@@ -1016,6 +1036,17 @@ describe('révision toutes natures confondues', () => {
       if (review!.kind === 'grammar-gap') expect(review).toMatchObject({ cue: 'translation' })
     }
     expect(kinds).toEqual(new Set(['grammar-gap', 'grammar-choice']))
+  })
+
+  it('propose parfois le QCM de grammaire à l’audio en révision', () => {
+    const item: PracticeItem = { kind: 'grammar', id: 'p1', point: GRAMMAR.points[0] }
+    const fresh = createCard('p1', T0)
+    const cues = new Set<string>()
+    for (let reps = 0; reps < 8; reps++) {
+      const [exercise] = buildReviewSession([{ card: { ...fresh, reps }, item }], undefined, true)
+      if (exercise!.kind === 'grammar-choice') cues.add(exercise.cue)
+    }
+    expect(cues).toContain('audio')
   })
 
   it('propose parfois la révision de conjugaison à l’audio', () => {

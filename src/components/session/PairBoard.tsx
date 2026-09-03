@@ -93,12 +93,15 @@ export function PairBoard({
   seed,
   pairs,
   prompt,
+  onCantListen,
   onDone,
 }: {
   /** Graine du mélange : la même manche se présente toujours pareil. */
   seed: string
   pairs: readonly Pair[]
   prompt: string
+  /** Fourni seulement pour une manche à l'audio (voir `MatchExercise.cue`). */
+  onCantListen?: () => void
   onDone: (result: { missedIds: string[] }) => void
 }) {
   const sounds = useSessionSounds()
@@ -160,7 +163,18 @@ export function PairBoard({
 
   return (
     <div className="flex flex-1 flex-col gap-6">
-      <p className="text-sm font-bold uppercase tracking-wide text-ink-faint">{prompt}</p>
+      <div className="flex flex-col gap-1">
+        <p className="text-sm font-bold uppercase tracking-wide text-ink-faint">{prompt}</p>
+        {onCantListen && (
+          <button
+            type="button"
+            onClick={onCantListen}
+            className="self-start text-xs font-bold text-ink-faint underline underline-offset-2"
+          >
+            Je ne peux pas écouter maintenant
+          </button>
+        )}
+      </div>
 
       {/* La grille se centre dans l'espace disponible plutôt que de s'aligner
           en haut : avec quatre paires, elle ne remplissait qu'un quart de

@@ -5,7 +5,7 @@ import { isAnswerCorrect } from '@/engine/exercises'
 import { Button } from '@/components/Button'
 import { learningLanguage, learningLanguageName, speechFor } from '@/lib/speech'
 import { CorrectionGap } from './CorrectionGap'
-import { SpeakButton } from './SpeakButton'
+import { ListeningPrompt } from './ListeningPrompt'
 import { useSessionHaptics } from './useSessionHaptics'
 import { useSessionSounds } from './useSessionSounds'
 
@@ -18,9 +18,11 @@ import { useSessionSounds } from './useSessionSounds'
 export function TypeAnswer({
   exercise,
   onAnswer,
+  onCantListen,
 }: {
   exercise: TypeExercise
   onAnswer: (correct: boolean) => void
+  onCantListen: () => void
 }) {
   const { vocab, direction, cue } = exercise
   const dictation = cue === 'audio'
@@ -68,10 +70,7 @@ export function TypeAnswer({
           // L'énoncé est le son lui-même : voir la même remarque dans
           // `ChoiceQuestion`. Il part tout seul à l'affichage et se rejoue à
           // volonté, sans jamais s'écrire.
-          <div className="flex items-center gap-3 py-1">
-            <SpeakButton text={speechFor(vocab)} auto size={32} className="shrink-0" />
-            <span className="text-sm text-ink-soft">Touchez pour réécouter</span>
-          </div>
+          <ListeningPrompt text={speechFor(vocab)} size={32} onCantListen={onCantListen} />
         ) : (
           <span lang={direction === 'to-known' ? learningLanguage() : 'fr'} className="text-4xl font-black break-words">
             {prompt}

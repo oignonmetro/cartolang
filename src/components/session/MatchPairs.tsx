@@ -10,9 +10,11 @@ import { PairBoard, type Pair } from './PairBoard'
 export function MatchPairs({
   exercise,
   onDone,
+  onCantListen,
 }: {
   exercise: MatchExercise
   onDone: (result: { missedIds: string[] }) => void
+  onCantListen: () => void
 }) {
   const audio = exercise.cue === 'audio'
   const pairs = useMemo<Pair[]>(
@@ -31,6 +33,7 @@ export function MatchPairs({
       seed={exercise.id}
       pairs={pairs}
       prompt={audio ? 'Écoutez et associez' : 'Reliez les paires'}
+      onCantListen={audio ? onCantListen : undefined}
       onDone={onDone}
     />
   )
