@@ -162,7 +162,7 @@ export function LibraryScreen({ course }: { course: LibraryCourse }) {
               {course.flag}
             </span>
             {course.level && (
-              <span className="rounded-full bg-ink px-2 py-0.5 text-[0.65rem] font-black tracking-wide text-white">
+              <span className="rounded-full bg-scrim px-2 py-0.5 text-[0.65rem] font-black tracking-wide text-white">
                 {course.level}
               </span>
             )}

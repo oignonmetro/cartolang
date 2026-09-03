@@ -4,6 +4,28 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1" />
     <meta name="theme-color" content="#14B8A6" />
+    <script>
+      // Pose le thème avant le premier rendu : sans ce geste synchrone,
+      // l'app afficherait un instant le thème système (voir styles.css)
+      // avant que React ne monte et corrige vers un thème choisi
+      // explicitement — un flash visible à chaque démarrage. `lib/theme.ts`
+      // fait le même geste ensuite, pour les changements en cours de
+      // session ; celui-ci ne sert qu'au tout premier rendu.
+      //
+      // La clé et la forme lues ici sont celles de zustand/persist dans
+      // `store/progressStore.ts` (`STORAGE_KEY`, `theme`) — à garder en
+      // phase si l'un des deux change.
+      ;(function () {
+        try {
+          var raw = localStorage.getItem('cartolang.progress.v1')
+          var theme = raw && JSON.parse(raw).state && JSON.parse(raw).state.theme
+          if (theme === 'light' || theme === 'dark') {
+            document.documentElement.dataset.theme = theme
+            if (theme === 'dark') document.querySelector('meta[name="theme-color"]').setAttribute('content', '#1b1a2b')
+          }
+        } catch (e) {}
+      })()
+    </script>
     <meta name="description" content="Apprendre du vocabulaire, leçon par leçon, même hors-ligne." />
     <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
     <link rel="apple-touch-icon" href="./icons/icon-192.png" />

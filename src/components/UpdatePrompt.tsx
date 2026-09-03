@@ -22,7 +22,7 @@ export function UpdatePrompt() {
           initial={{ y: 80, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: 80, opacity: 0 }}
-          className="fixed inset-x-4 bottom-4 z-30 mx-auto flex max-w-md items-center gap-3 rounded-2xl bg-ink px-4 py-3 text-white shadow-lg"
+          className="fixed inset-x-4 bottom-4 z-30 mx-auto flex max-w-md items-center gap-3 rounded-2xl bg-scrim px-4 py-3 text-white shadow-lg"
         >
           <RefreshIcon size={20} />
           <p className="flex-1 text-sm font-bold">Une nouvelle version est disponible.</p>

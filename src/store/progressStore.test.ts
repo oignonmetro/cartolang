@@ -155,6 +155,36 @@ describe('réglage du retour haptique', () => {
   })
 })
 
+describe('réglage de thème', () => {
+  it('suit le système par défaut', () => {
+    useProgress.getState().reset()
+    expect(useProgress.getState().theme).toBe('system')
+  })
+
+  it('se règle sur clair ou sombre', () => {
+    useProgress.getState().setTheme('dark')
+    expect(useProgress.getState().theme).toBe('dark')
+    useProgress.getState().setTheme('light')
+    expect(useProgress.getState().theme).toBe('light')
+    useProgress.getState().setTheme('system')
+    expect(useProgress.getState().theme).toBe('system')
+  })
+
+  it('survit à un aller-retour export / import', () => {
+    useProgress.getState().setTheme('dark')
+    const payload = useProgress.getState().exportSave()
+    useProgress.getState().setTheme('light')
+    useProgress.getState().importSave(payload)
+    expect(useProgress.getState().theme).toBe('dark')
+  })
+
+  it('retombe sur système en important une sauvegarde antérieure au réglage', () => {
+    useProgress.getState().setTheme('dark')
+    useProgress.getState().importSave(JSON.stringify({ format: 6, cards: {}, lessons: {} }))
+    expect(useProgress.getState().theme).toBe('system')
+  })
+})
+
 describe('conversion des cartes anciennes', () => {
   it('renomme vocabId en itemId', () => {
     const migrated = migrateCards({ hello: { vocabId: 'hello', ease: 2.5, interval: 1 } })

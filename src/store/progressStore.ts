@@ -80,6 +80,16 @@ export interface ProgressSnapshot {
    * qu'il ne dit rien d'introuvable ailleurs.
    */
   haptics: boolean
+  /**
+   * `system` suit le réglage de l'appareil et seul lui : c'est le seul des
+   * trois qui reste correct sans jamais être rouvert, y compris quand
+   * l'appareil bascule de lui-même au coucher du soleil. `light`/`dark`
+   * forcent un choix contraire au système — voir `ThemeEffect`, qui applique
+   * ce réglage, et le script de tête dans `index.html`, qui l'applique une
+   * première fois avant le premier rendu pour éviter le flash du mauvais
+   * thème.
+   */
+  theme: 'light' | 'dark' | 'system'
 }
 
 interface ProgressState extends ProgressSnapshot {
@@ -115,6 +125,7 @@ interface ProgressState extends ProgressSnapshot {
   setAutoSpeak: (on: boolean) => void
   setSounds: (on: boolean) => void
   setHaptics: (on: boolean) => void
+  setTheme: (theme: 'light' | 'dark' | 'system') => void
   exportSave: () => string
   importSave: (payload: string) => void
   reset: () => void
@@ -144,6 +155,7 @@ const initial: ProgressSnapshot = {
   autoSpeak: true,
   sounds: true,
   haptics: false,
+  theme: 'system',
   streak: { current: 0, best: 0, lastDay: null },
 }
 
@@ -380,8 +392,10 @@ export const useProgress = create<ProgressState>()(
 
       setHaptics: (on) => set({ haptics: on }),
 
+      setTheme: (theme) => set({ theme }),
+
       exportSave: () => {
-        const { lessons, cards, steps, xp, xpByDay, dailyGoal, streak, autoSpeak, sounds, haptics } = get()
+        const { lessons, cards, steps, xp, xpByDay, dailyGoal, streak, autoSpeak, sounds, haptics, theme } = get()
         return JSON.stringify(
           {
             format: SAVE_FORMAT,
@@ -396,6 +410,7 @@ export const useProgress = create<ProgressState>()(
             autoSpeak,
             sounds,
             haptics,
+            theme,
           },
           null,
           2,
@@ -414,6 +429,7 @@ export const useProgress = create<ProgressState>()(
           autoSpeak?: boolean
           sounds?: boolean
           haptics?: boolean
+          theme?: 'light' | 'dark' | 'system'
           streak?: Streak
         }
         // Les formats antérieurs n'ont rien perdu : leurs champs manquants
@@ -452,6 +468,7 @@ export const useProgress = create<ProgressState>()(
           autoSpeak: parsed.autoSpeak ?? initial.autoSpeak,
           sounds: parsed.sounds ?? initial.sounds,
           haptics: parsed.haptics ?? initial.haptics,
+          theme: parsed.theme ?? initial.theme,
           streak: parsed.streak ?? initial.streak,
         })
       },
@@ -495,7 +512,7 @@ export const useProgress = create<ProgressState>()(
           steps: migrateAlphabetSteps(steps),
         }
       },
-      partialize: ({ lessons, cards, steps, xp, xpByDay, dailyGoal, streak, autoSpeak, sounds, haptics }) => ({
+      partialize: ({ lessons, cards, steps, xp, xpByDay, dailyGoal, streak, autoSpeak, sounds, haptics, theme }) => ({
         lessons,
         cards,
         steps,
@@ -505,6 +522,7 @@ export const useProgress = create<ProgressState>()(
         autoSpeak,
         sounds,
         haptics,
+        theme,
         streak,
       }),
     },

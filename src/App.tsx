@@ -8,6 +8,7 @@ import { HardWordsScreen } from '@/screens/HardWordsScreen'
 import { ProfileScreen } from '@/screens/ProfileScreen'
 import { UpdatePrompt } from '@/components/UpdatePrompt'
 import { AppUpdateBanner } from '@/components/AppUpdateBanner'
+import { ThemeEffect } from '@/components/ThemeEffect'
 
 /**
  * Routage par ancre (`#/...`) : c'est le seul mode qui fonctionne à la fois
@@ -17,6 +18,7 @@ import { AppUpdateBanner } from '@/components/AppUpdateBanner'
 export default function App() {
   return (
     <HashRouter>
+      <ThemeEffect />
       <CourseProvider>
         <Routes>
           <Route path="/" element={<HomeScreen />} />

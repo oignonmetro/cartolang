@@ -36,7 +36,7 @@ export function AppUpdateBanner() {
         initial={{ y: 80, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         exit={{ y: 80, opacity: 0 }}
-        className="fixed inset-x-4 bottom-4 z-30 mx-auto flex max-w-md flex-col gap-2 rounded-2xl bg-ink px-4 py-3 text-white shadow-lg"
+        className="fixed inset-x-4 bottom-4 z-30 mx-auto flex max-w-md flex-col gap-2 rounded-2xl bg-scrim px-4 py-3 text-white shadow-lg"
       >
         <div className="flex items-center gap-3">
           <RefreshIcon size={20} />

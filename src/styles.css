@@ -42,6 +42,15 @@
   --color-paper: #ffffff;
   --color-line: #e7e2d8;
 
+  /*
+   * Surface toujours sombre, jamais inversée par le thème : le fond d'un
+   * bandeau ou d'un badge (texte blanc dessus) et le voile d'une boîte de
+   * dialogue veulent la même chose en clair ou en sombre — assombrir,
+   * jamais l'inverse. `ink` ne peut plus porter ce rôle une fois qu'il
+   * s'inverse lui-même avec le thème (voir plus bas).
+   */
+  --color-scrim: #23253c;
+
   /* Chaque teinte a une ombre plus sombre : c'est elle qui donne le relief. */
   --color-teal: #14b8a6;
   --color-teal-deep: #0b8b7d;
@@ -60,6 +69,39 @@
   --color-error-deep: #cc3232;
 
   --radius-blob: 1.75rem;
+}
+
+/*
+ * Thème sombre : mêmes variables, valeurs inversées — tout le reste de la
+ * feuille les lit par `var(...)`, rien d'autre à changer. Les teintes vives
+ * (teal, corail, succès…) restent telles quelles : déjà saturées pour porter
+ * du texte blanc, elles se détachent aussi bien d'un fond sombre.
+ *
+ * Système par défaut (`@media`, sans condition de sélecteur), qu'un choix
+ * explicite peut forcer dans les deux sens (`data-theme`) — recopié tel
+ * quel : le forçage doit gagner même quand le système, lui, dit le
+ * contraire. Voir `ThemeEffect` et le script de tête dans `index.html`, qui
+ * pose l'attribut avant le premier rendu pour éviter le flash du mauvais
+ * thème.
+ */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --color-ink: #f2f0f7;
+    --color-ink-soft: #b7b4c9;
+    --color-ink-faint: #7d7a94;
+    --color-cream: #1b1a2b;
+    --color-paper: #262540;
+    --color-line: #38364f;
+  }
+}
+
+:root[data-theme='dark'] {
+  --color-ink: #f2f0f7;
+  --color-ink-soft: #b7b4c9;
+  --color-ink-faint: #7d7a94;
+  --color-cream: #1b1a2b;
+  --color-paper: #262540;
+  --color-line: #38364f;
 }
 
 @layer base {

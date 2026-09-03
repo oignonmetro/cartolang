@@ -32,6 +32,12 @@ const STRENGTH_TONE: Record<(typeof STRENGTHS)[number], string> = {
   mastered: 'bg-success',
 }
 
+const THEME_OPTIONS: { value: 'system' | 'light' | 'dark'; label: string }[] = [
+  { value: 'system', label: 'Système' },
+  { value: 'light', label: 'Clair' },
+  { value: 'dark', label: 'Sombre' },
+]
+
 export function ProfileScreen() {
   const navigate = useNavigate()
   const { course } = useCourse()
@@ -171,6 +177,24 @@ export function ProfileScreen() {
           <p className="text-xs text-ink-faint">
             Aujourd'hui : {state.xpByDay[today] ?? 0} / {state.dailyGoal} XP
           </p>
+        </section>
+
+        <section className="card-3d flex flex-col gap-3 px-5 py-5">
+          <h2 className="text-sm font-extrabold uppercase tracking-wide text-ink-faint">Thème</h2>
+          <div className="flex gap-2">
+            {THEME_OPTIONS.map(({ value, label }) => (
+              <button
+                key={value}
+                type="button"
+                onClick={() => state.setTheme(value)}
+                className={`flex-1 rounded-2xl border-2 py-3 text-sm font-extrabold ${
+                  state.theme === value ? 'border-teal bg-teal/15 text-teal' : 'border-line text-ink-soft'
+                }`}
+              >
+                {label}
+              </button>
+            ))}
+          </div>
         </section>
 
         <section className="card-3d flex flex-col gap-3 px-5 py-5">
