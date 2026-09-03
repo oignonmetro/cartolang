@@ -943,6 +943,25 @@ describe('session de conjugaison', () => {
       expect(matches.every((e) => e.verbs.length > 1)).toBe(true)
     }
   })
+
+  it('propose aussi la reconnaissance à l’audio quand l’appareil sait parler', () => {
+    // Sans elle, la conjugaison restait la seule piste à ne jamais faire
+    // travailler l'oreille, alors que le vocabulaire l'a déjà en QCM, thème
+    // et association.
+    const cues = new Set<string>()
+    for (const seed of [1, 2, 3, 4, 5, 6, 7, 8]) {
+      const session = buildLessonSession(CONJUGATION, 0, seed, {}, true).filter((e) => e.kind === 'conjugation-choice')
+      for (const exercise of session) cues.add(exercise.cue)
+    }
+    expect(cues).toContain('audio')
+  })
+
+  it('ne propose jamais la reconnaissance à l’audio sans synthèse vocale', () => {
+    for (const seed of [1, 2, 3, 4, 5]) {
+      const session = buildLessonSession(CONJUGATION, 0, seed).filter((e) => e.kind === 'conjugation-choice')
+      expect(session.every((e) => e.cue !== 'audio')).toBe(true)
+    }
+  })
 })
 
 describe('révision toutes natures confondues', () => {
@@ -997,6 +1016,22 @@ describe('révision toutes natures confondues', () => {
       if (review!.kind === 'grammar-gap') expect(review).toMatchObject({ cue: 'translation' })
     }
     expect(kinds).toEqual(new Set(['grammar-gap', 'grammar-choice']))
+  })
+
+  it('propose parfois la révision de conjugaison à l’audio', () => {
+    const item: PracticeItem = {
+      kind: 'conjugation',
+      id: 'f1',
+      form: CONJUGATION.verbs[0].forms[0],
+      verb: CONJUGATION.verbs[0],
+    }
+    const fresh = createCard('f1', T0)
+    const cues = new Set<string>()
+    for (let reps = 0; reps < 8; reps++) {
+      const [exercise] = buildReviewSession([{ card: { ...fresh, reps }, item }], undefined, true)
+      if (exercise!.kind === 'conjugation-choice') cues.add(exercise.cue)
+    }
+    expect(cues).toContain('audio')
   })
 
   it('fait parfois partir la conjugaison du français sur une carte mûre', () => {

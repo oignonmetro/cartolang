@@ -225,8 +225,14 @@ export interface GrammarChoiceExercise {
  *   `translation` : l'infinitif français (« travailler »). Il faut alors
  *                   retrouver le verbe anglais *avant* de le conjuguer, ce qui
  *                   est le rappel réellement utile pour parler.
+ *   `audio`       : l'infinitif prononcé, jamais écrit — pendant du `audio`
+ *                   de `ChoiceCue`, réservé à la reconnaissance (`choice`) :
+ *                   deviner la forme depuis l'écrit n'est pas ce que teste ce
+ *                   cue, entendre l'infinitif et reconnaître l'orthographe de
+ *                   la forme conjuguée parmi les leurres, si. Toujours côté
+ *                   langue apprise, jamais un remplaçant de `translation`.
  */
-export type ConjugationCue = 'verb' | 'translation'
+export type ConjugationCue = 'verb' | 'translation' | 'audio'
 
 export interface ConjugationExercise {
   kind: 'conjugation'
@@ -592,7 +598,7 @@ export function buildLessonSession(
     case 'grammar':
       return buildGrammarSession(lesson.id, lesson.points, lesson.notes, lesson.title, level, resolved)
     case 'conjugation':
-      return buildConjugationSession(lesson.id, lesson.verbs, lesson.notes, lesson.title, level, resolved)
+      return buildConjugationSession(lesson.id, lesson.verbs, lesson.notes, lesson.title, level, resolved, canSpeak)
   }
 }
 
@@ -1095,27 +1101,36 @@ interface ConjugationVariant {
  * au-dessus le rappel qui part du français, celui dont on a réellement besoin
  * pour parler.
  */
-function conjugationLadder(level: number): Ladder<ConjugationVariant> {
-  if (level <= 0)
-    return [
-      [{ stage: 'choice', cue: 'verb' }],
-      [
-        { stage: 'typed', cue: 'verb' },
-        { stage: 'choice', cue: 'translation' },
-      ],
-      [{ stage: 'typed', cue: 'translation' }],
-    ]
-  if (level === 1)
-    return [
-      [{ stage: 'choice', cue: 'translation' }],
-      [{ stage: 'typed', cue: 'verb' }],
-      [{ stage: 'typed', cue: 'translation' }],
-    ]
-  return [
-    [{ stage: 'typed', cue: 'verb' }],
-    [{ stage: 'typed', cue: 'translation' }],
-    [{ stage: 'choice', cue: 'translation' }],
-  ]
+function conjugationLadder(level: number, canSpeak: boolean): Ladder<ConjugationVariant> {
+  const base: Ladder<ConjugationVariant> =
+    level <= 0
+      ? [
+          [{ stage: 'choice', cue: 'verb' }],
+          [
+            { stage: 'typed', cue: 'verb' },
+            { stage: 'choice', cue: 'translation' },
+          ],
+          [{ stage: 'typed', cue: 'translation' }],
+        ]
+      : level === 1
+        ? [
+            [{ stage: 'choice', cue: 'translation' }],
+            [{ stage: 'typed', cue: 'verb' }],
+            [{ stage: 'typed', cue: 'translation' }],
+          ]
+        : [
+            [{ stage: 'typed', cue: 'verb' }],
+            [{ stage: 'typed', cue: 'translation' }],
+            [{ stage: 'choice', cue: 'translation' }],
+          ]
+  // Un échelon sur trois n'offre que l'écrit à la reconnaissance : sans
+  // cette variante, la piste de conjugaison resterait la seule à n'avoir
+  // jamais fait travailler l'oreille, quand le vocabulaire, lui, l'a côté
+  // QCM, thème et association. Ajoutée comme une alternative de plus au
+  // même échelon plutôt qu'un échelon à part : elle ne durcit rien, elle
+  // varie seulement le canal de l'énoncé.
+  if (!canSpeak) return base
+  return base.map((rung) => (rung.some((variant) => variant.stage === 'choice') ? [...rung, { stage: 'choice', cue: 'audio' }] : rung))
 }
 
 function conjugationExercise(
@@ -1127,8 +1142,9 @@ function conjugationExercise(
 ): Exercise | null {
   // Partir du français suppose que l'auteur l'ait écrit ; sans traduction,
   // l'énoncé n'aurait pas de verbe à montrer et retomberait sur l'anglais.
-  // `climb` écarte alors l'échelon, qui ferait doublon.
-  const cue = verb.translation ? variant.cue : 'verb'
+  // `climb` écarte alors l'échelon, qui ferait doublon. Ne concerne que
+  // `translation` : `audio` ne dépend en rien de la traduction française.
+  const cue = variant.cue === 'translation' && !verb.translation ? 'verb' : variant.cue
   if (variant.stage === 'choice') return conjugationChoiceFor(verb, form, cue, pool, rng)
   return { kind: 'conjugation', id: `conj:${cue}:${form.id}`, verb, form, cue }
 }
@@ -1158,9 +1174,10 @@ function buildConjugationSession(
   title: string,
   level: number,
   seed: number,
+  canSpeak: boolean,
 ): Exercise[] {
   const rng = createRng(seed)
-  const ladder = conjugationLadder(level)
+  const ladder = conjugationLadder(level, canSpeak)
   const blocks = blocksOf(shuffle(verbs, rng), CONJUGATION_BLOCK_SIZE)
 
   const exercises: Exercise[] =
@@ -1423,13 +1440,12 @@ function buildMixedSession(
       // pas : réclamer une forme rencontrée le jour même n'enseigne que
       // l'échec. C'est ce que le vocabulaire fait déjà avec sa flashcard.
       if (!unaided && recallStage(card) === 'recognize') {
-        const choice = conjugationChoiceFor(
-          item.verb,
-          item.form,
-          fromFrench ? 'translation' : 'verb',
-          [item.verb],
-          rng,
-        )
+        // La reconnaissance a une troisième entrée que la production n'a
+        // pas : le son, jamais un remplaçant de `translation` — voir
+        // `ConjugationCue`. `cues` (au-dessus) reste sans lui : c'est aussi
+        // la rotation de la forme produite plus bas, où il n'a pas de sens.
+        const choiceCues = canSpeak ? [...cues, ('audio' as const)] : cues
+        const choice = conjugationChoiceFor(item.verb, item.form, rotate(choiceCues, turn)[0], [item.verb], rng)
         if (choice) return choice
       }
       // Sur une carte mûre, partir du français de temps en temps : c'est le
