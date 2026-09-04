@@ -877,17 +877,22 @@ describe('session de grammaire', () => {
     expect(kinds(buildLessonSession(bare as GrammarLesson, 0))).not.toContain('rule')
   })
 
-  it('propose aussi le QCM de phrase à l’audio quand l’appareil sait parler', () => {
+  it('propose aussi le QCM de phrase à l’audio quand l’appareil sait parler, mais rarement', () => {
     // Même raisonnement que la conjugaison : sans cette variante, choisir la
     // phrase entière ne se jouait jamais qu'à la lecture, alors que les
     // options ne diffèrent que par une terminaison — exactement ce qui
-    // s'entend à l'oreille.
+    // s'entend à l'oreille. Mais l'audio y donne à entendre la phrase déjà
+    // juste, pas l'énoncé (voir `GrammarChoiceCue`) : un entraînement de
+    // l'oreille annexe à la règle elle-même, d'où une fréquence bien plus
+    // basse qu'au vocabulaire — beaucoup de graines pour l'observer au moins
+    // une fois sans que le test devienne hasardeux.
     const cues = new Set<string>()
-    for (const seed of [1, 2, 3, 4, 5, 6, 7, 8]) {
+    for (let seed = 1; seed <= 25; seed++) {
       const session = buildLessonSession(GRAMMAR, 0, seed, {}, true).filter((e) => e.kind === 'grammar-choice')
       for (const exercise of session) cues.add(exercise.cue)
     }
     expect(cues).toContain('audio')
+    expect(cues).toContain('translation')
   })
 
   it('ne propose jamais le QCM de phrase à l’audio sans synthèse vocale', () => {
@@ -1038,15 +1043,19 @@ describe('révision toutes natures confondues', () => {
     expect(kinds).toEqual(new Set(['grammar-gap', 'grammar-choice']))
   })
 
-  it('propose parfois le QCM de grammaire à l’audio en révision', () => {
+  it('propose parfois le QCM de grammaire à l’audio en révision, mais en rotation plus rare', () => {
     const item: PracticeItem = { kind: 'grammar', id: 'p1', point: GRAMMAR.points[0] }
     const fresh = createCard('p1', T0)
     const cues = new Set<string>()
-    for (let reps = 0; reps < 8; reps++) {
+    // `GRAMMAR_CHOICE_CUES` ne met l'audio qu'une fois sur cinq dans la
+    // rotation : plus de passages qu'à la conjugaison pour être sûr de la
+    // croiser, la rotation étant déterministe et non plus tirée au sort.
+    for (let reps = 0; reps < 20; reps++) {
       const [exercise] = buildReviewSession([{ card: { ...fresh, reps }, item }], undefined, true)
       if (exercise!.kind === 'grammar-choice') cues.add(exercise.cue)
     }
     expect(cues).toContain('audio')
+    expect(cues).toContain('translation')
   })
 
   it('propose parfois la révision de conjugaison à l’audio', () => {

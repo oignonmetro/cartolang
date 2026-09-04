@@ -947,45 +947,62 @@ type Ladder<T> = readonly (readonly T[])[]
  * six points (voir `GRAMMAR_PER_POINT_PER_BLOCK`) : le troisième sert aux
  * leçons courtes, où chaque point revient plus souvent.
  */
-function grammarLadder(level: number, canSpeak: boolean): Ladder<GrammarVariant> {
-  const base: Ladder<GrammarVariant> =
-    level <= 0
-      ? [
-          [{ stage: 'choice', cue: 'translation' }],
-          [
-            { stage: 'bank', cue: 'translation' },
-            { stage: 'bank', cue: 'sentence' },
-          ],
-          [{ stage: 'typed', cue: 'translation' }],
-          // Un point sans formes proposées ne peut ni QCM ni banque de mots :
-          // sans ce dernier échelon il traverserait la découverte avec un seul
-          // exercice, exactement le défaut qu'on répare.
-          [{ stage: 'typed', cue: 'sentence' }],
-        ]
-      : level === 1
-        ? [
-            [
-              { stage: 'bank', cue: 'sentence' },
-              { stage: 'choice', cue: 'translation' },
-            ],
-            [{ stage: 'typed', cue: 'translation' }],
-            [{ stage: 'typed', cue: 'sentence' }],
-          ]
-        : [
-            [{ stage: 'typed', cue: 'translation' }],
-            [{ stage: 'typed', cue: 'sentence' }],
-            [{ stage: 'bank', cue: 'sentence' }],
-          ]
-  // Comme la conjugaison (voir `conjugationLadder`) : un échelon de
-  // reconnaissance de plus, à l'oreille, sur les rungs qui proposent déjà le
-  // QCM de phrase entière — jamais sur la banque ni la saisie, qui restent
-  // écrites.
-  if (!canSpeak) return base
-  return base.map((rung) => (rung.some((variant) => variant.stage === 'choice') ? [...rung, { stage: 'choice', cue: 'audio' }] : rung))
+function grammarLadder(level: number): Ladder<GrammarVariant> {
+  if (level <= 0)
+    return [
+      [{ stage: 'choice', cue: 'translation' }],
+      [
+        { stage: 'bank', cue: 'translation' },
+        { stage: 'bank', cue: 'sentence' },
+      ],
+      [{ stage: 'typed', cue: 'translation' }],
+      // Un point sans formes proposées ne peut ni QCM ni banque de mots : sans
+      // ce dernier échelon il traverserait la découverte avec un seul exercice,
+      // exactement le défaut qu'on répare.
+      [{ stage: 'typed', cue: 'sentence' }],
+    ]
+  if (level === 1)
+    return [
+      [
+        { stage: 'bank', cue: 'sentence' },
+        { stage: 'choice', cue: 'translation' },
+      ],
+      [{ stage: 'typed', cue: 'translation' }],
+      [{ stage: 'typed', cue: 'sentence' }],
+    ]
+  return [
+    [{ stage: 'typed', cue: 'translation' }],
+    [{ stage: 'typed', cue: 'sentence' }],
+    [{ stage: 'bank', cue: 'sentence' }],
+  ]
 }
 
-function grammarExercise(point: GrammarPoint, variant: GrammarVariant, rng: Rng): Exercise | null {
-  if (variant.stage === 'choice') return grammarChoiceFor(point, variant.cue, rng)
+/**
+ * Chance qu'un QCM de phrase se joue à l'audio plutôt qu'en traduction.
+ *
+ * Nettement plus bas qu'au vocabulaire ou à l'alphabet (un cue sur trois) :
+ * là-bas l'audio prononce l'énoncé, la réponse reste à trouver. Ici il
+ * prononce la phrase déjà juste (voir `GrammarChoiceCue`) — l'apprenant
+ * reconnaît une terminaison à l'oreille plutôt qu'il n'applique la règle.
+ * Utile en soi pour comprendre du russe parlé, mais annexe à ce que la piste
+ * enseigne : un passage sur cinq y suffit, pas un sur deux.
+ */
+const GRAMMAR_CHOICE_AUDIO_CHANCE = 0.2
+
+/**
+ * Même fréquence basse que `GRAMMAR_CHOICE_AUDIO_CHANCE`, mais en rotation
+ * plutôt qu'au tirage : c'est ainsi que la révision fait déjà varier le cue
+ * de conjugaison (voir plus bas, `rotate(choiceCues, turn)`), et une carte
+ * revue à date fixe doit retomber sur le même cue à traitement égal, pas sur
+ * un nouveau tirage à chaque fois.
+ */
+const GRAMMAR_CHOICE_CUES: readonly GrammarChoiceCue[] = ['translation', 'translation', 'translation', 'translation', 'audio']
+
+function grammarExercise(point: GrammarPoint, variant: GrammarVariant, canSpeak: boolean, rng: Rng): Exercise | null {
+  if (variant.stage === 'choice') {
+    const cue: GrammarChoiceCue = canSpeak && rng() < GRAMMAR_CHOICE_AUDIO_CHANCE ? 'audio' : variant.cue
+    return grammarChoiceFor(point, cue, rng)
+  }
   if (variant.stage === 'bank' && point.options.length < 2) return null
   // Retirer une traduction que l'auteur n'a pas écrite ne durcit rien : c'est
   // le même exercice sous un autre nom.
@@ -1054,7 +1071,7 @@ function buildGrammarSession(
   canSpeak: boolean,
 ): Exercise[] {
   const rng = createRng(seed)
-  const ladder = grammarLadder(level, canSpeak)
+  const ladder = grammarLadder(level)
   const blocks = blocksOf(shuffle(points, rng), GRAMMAR_BLOCK_SIZE)
 
   // Le rappel de cours n'apparaît qu'à la découverte : au-delà, il donnerait
@@ -1074,7 +1091,7 @@ function buildGrammarSession(
       served,
       block.length * GRAMMAR_PER_POINT_PER_BLOCK,
       (point) =>
-        climb(point.id, ladder, served, rng, (variant) => grammarExercise(point, variant, rng)),
+        climb(point.id, ladder, served, rng, (variant) => grammarExercise(point, variant, canSpeak, rng)),
       rng,
     )
 
@@ -1084,7 +1101,7 @@ function buildGrammarSession(
     for (const point of block) {
       if (servedCount(served, point.id) > 0) continue
       const fallback = climb(point.id, ladder, served, rng, (variant) =>
-        grammarExercise(point, variant, rng),
+        grammarExercise(point, variant, canSpeak, rng),
       )
       if (fallback) blockExercises.push(fallback)
     }
@@ -1463,11 +1480,12 @@ function buildMixedSession(
       // carte mûre, elle, reste sur la production, sans repli vers le plus
       // facile.
       if (!unaided && turn % 2 === 1) {
-        // Même logique que le QCM de conjugaison plus bas : l'audio n'est
-        // qu'une variante de plus du même échelon de reconnaissance, jamais
-        // systématique.
-        const cue: GrammarChoiceCue = canSpeak && rng() < 0.5 ? 'audio' : 'translation'
-        const choice = grammarChoiceFor(item.point, cue, rng)
+        // Même rotation que la conjugaison juste en dessous, mais bien plus
+        // rarement à l'audio (voir `GRAMMAR_CHOICE_CUES`) : ici l'audio donne
+        // à entendre la phrase déjà juste, pas l'énoncé — un entraînement de
+        // l'oreille annexe à la règle, pas son test.
+        const choiceCues = canSpeak ? GRAMMAR_CHOICE_CUES : (['translation'] as const)
+        const choice = grammarChoiceFor(item.point, rotate(choiceCues, turn)[0], rng)
         if (choice) return choice
       }
       return {
