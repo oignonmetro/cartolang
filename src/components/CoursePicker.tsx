@@ -14,6 +14,17 @@ import { CheckIcon } from './icons'
  * apprend l'anglais choisit d'abord sa langue, puis son niveau — pas
  * l'inverse, et la liste à plat mélangeait déjà les deux avant que le russe
  * ne s'ajoute à l'anglais.
+ *
+ * Dans un groupe, un cours qui porte une phrase de présentation (`tagline`)
+ * garde sa ligne pleine largeur — c'est elle qui justifie la place. Les
+ * niveaux qui n'en ont pas (B1/B2/C1…, de simples repères sans rien à
+ * expliquer) n'ont pas besoin d'une ligne chacun : les entasser ainsi
+ * n'apportait que du défilement en pure perte. Ils se rangent plutôt côte à
+ * côte, même pastille compacte que le sélecteur d'objectif quotidien du
+ * profil (voir `ProfileScreen`) — pas `layout` (`path`/`library`) : un cours
+ * `library` comme le russe A1 garde sa phrase de présentation tant qu'il
+ * reste le seul niveau de sa langue, et la mérite tout autant qu'un cours
+ * guidé.
  */
 export function CoursePicker({
   courses,
@@ -61,45 +72,74 @@ export function CoursePicker({
         <h2 className="shrink-0 text-lg font-extrabold">Choisir un niveau</h2>
 
         <div className="flex min-h-0 flex-1 flex-col gap-4 overflow-y-auto [&>*]:shrink-0">
-          {groups.map((group) => (
-            <div key={group.learning} className="flex flex-col gap-2">
-              <p className="flex items-center gap-2 px-1 text-xs font-black tracking-wide text-ink-faint uppercase">
-                <span className="text-base" aria-hidden>
-                  {group.flag}
-                </span>
-                {group.name}
-              </p>
-              <ul className="flex flex-col gap-2">
-                {group.courses.map((entry) => (
-                  <li key={entry.id}>
-                    <button
-                      type="button"
-                      onClick={() => pick(entry.id)}
-                      disabled={switchingTo !== null}
-                      className={`flex w-full items-center gap-3 rounded-2xl border-2 px-4 py-3 text-left transition-colors disabled:opacity-60 ${
-                        entry.id === activeId ? 'border-teal bg-teal/10' : 'border-line bg-paper'
-                      }`}
-                    >
-                      <span className="flex-1">
-                        {/* Le drapeau et la langue sont déjà dans l'en-tête du
-                            groupe : la ligne ne porte plus que ce qui distingue
-                            un niveau de l'autre. */}
-                        <span className="text-sm font-extrabold">{entry.level ?? entry.name}</span>
-                        {entry.tagline && (
-                          <span className="mt-0.5 block text-xs text-ink-soft">{entry.tagline}</span>
-                        )}
-                      </span>
-                      {entry.id === activeId ? (
-                        <CheckIcon size={20} className="text-teal" />
-                      ) : switchingTo === entry.id ? (
-                        <span className="text-xs font-bold text-ink-faint">…</span>
-                      ) : null}
-                    </button>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+          {groups.map((group) => {
+            const withTagline = group.courses.filter((entry) => entry.tagline)
+            const bareLevels = group.courses.filter((entry) => !entry.tagline)
+            return (
+              <div key={group.learning} className="flex flex-col gap-2">
+                <p className="flex items-center gap-2 px-1 text-xs font-black tracking-wide text-ink-faint uppercase">
+                  <span className="text-base" aria-hidden>
+                    {group.flag}
+                  </span>
+                  {group.name}
+                </p>
+
+                {withTagline.length > 0 && (
+                  <ul className="flex flex-col gap-2">
+                    {withTagline.map((entry) => (
+                      <li key={entry.id}>
+                        <button
+                          type="button"
+                          onClick={() => pick(entry.id)}
+                          disabled={switchingTo !== null}
+                          className={`flex w-full items-center gap-3 rounded-2xl border-2 px-4 py-3 text-left transition-colors disabled:opacity-60 ${
+                            entry.id === activeId ? 'border-teal bg-teal/10' : 'border-line bg-paper'
+                          }`}
+                        >
+                          <span className="flex-1">
+                            {/* Le drapeau et la langue sont déjà dans l'en-tête
+                                du groupe : la ligne ne porte plus que ce qui
+                                distingue un niveau de l'autre. */}
+                            <span className="text-sm font-extrabold">{entry.level ?? entry.name}</span>
+                            {entry.tagline && (
+                              <span className="mt-0.5 block text-xs text-ink-soft">{entry.tagline}</span>
+                            )}
+                          </span>
+                          {entry.id === activeId ? (
+                            <CheckIcon size={20} className="text-teal" />
+                          ) : switchingTo === entry.id ? (
+                            <span className="text-xs font-bold text-ink-faint">…</span>
+                          ) : null}
+                        </button>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+
+                {/* Pas de phrase de présentation à cette échelle-là (voir la
+                    remarque plus haut) : une pastille compacte par niveau,
+                    côte à côte, plutôt qu'une ligne pleine largeur chacune. */}
+                {bareLevels.length > 0 && (
+                  <ul className="flex gap-2">
+                    {bareLevels.map((entry) => (
+                      <li key={entry.id} className="flex-1">
+                        <button
+                          type="button"
+                          onClick={() => pick(entry.id)}
+                          disabled={switchingTo !== null}
+                          className={`w-full rounded-2xl border-2 py-3 text-center text-sm font-extrabold transition-colors disabled:opacity-60 ${
+                            entry.id === activeId ? 'border-teal bg-teal/15 text-teal' : 'border-line text-ink-soft'
+                          }`}
+                        >
+                          {switchingTo === entry.id ? '…' : entry.level ?? entry.name}
+                        </button>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            )
+          })}
         </div>
 
         {error && <p className="shrink-0 text-sm font-bold text-error">{error}</p>}
