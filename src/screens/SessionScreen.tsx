@@ -56,27 +56,35 @@ interface SessionScreenProps {
 }
 
 /**
- * Icône et libellé de chaque nature de séance — mêmes intitulés que
+ * Icône, libellé et teinte de chaque nature de séance — mêmes intitulés que
  * `STEP_LABELS` dans `unitPath.ts`, « Leçon » en plus pour le seul nœud que
  * ce fichier-là ne nomme pas lui-même (`lesson.title` y tient déjà lieu de
- * titre).
+ * titre). La teinte reprend des couleurs déjà en usage ailleurs plutôt que
+ * d'en inventer : `teal` porte déjà le vocabulaire (voir `RuleNote`),
+ * `amber` la récompense de fin d'unité (voir `ChestNode`, `PathScreen`) — la
+ * séance finale en hérite tout naturellement.
+ *
+ * Les classes de teinte sont écrites en toutes lettres plutôt qu'assemblées
+ * par gabarit (`bg-${tone}/15`) : Tailwind ne génère que les classes qu'il
+ * peut lire littéralement dans le source, un nom composé à l'exécution ne
+ * produirait rien.
  */
-const SESSION_KIND: Record<UnitNodeKind, { label: string; Icon: typeof BookIcon }> = {
-  lesson: { label: 'Leçon', Icon: BookIcon },
-  review: { label: 'Révision', Icon: RefreshIcon },
-  drill: { label: 'Approfondissement', Icon: StarIcon },
-  workout: { label: 'Entraînement', Icon: FlagIcon },
-  final: { label: 'Séance finale', Icon: ChestIcon },
+const SESSION_KIND: Record<UnitNodeKind, { label: string; Icon: typeof BookIcon; tone: string }> = {
+  lesson: { label: 'Leçon', Icon: BookIcon, tone: 'bg-teal/15 text-teal' },
+  review: { label: 'Révision', Icon: RefreshIcon, tone: 'bg-sky/15 text-sky' },
+  drill: { label: 'Approfondissement', Icon: StarIcon, tone: 'bg-violet/15 text-violet' },
+  workout: { label: 'Entraînement', Icon: FlagIcon, tone: 'bg-coral/15 text-coral' },
+  final: { label: 'Séance finale', Icon: ChestIcon, tone: 'bg-amber/15 text-amber' },
 }
 
 function SessionKindBadge({ kind }: { kind: UnitNodeKind }) {
-  const { label, Icon } = SESSION_KIND[kind]
+  const { label, Icon, tone } = SESSION_KIND[kind]
   return (
     <span
       role="img"
       aria-label={label}
       title={label}
-      className="flex shrink-0 items-center justify-center rounded-full bg-line p-2 text-ink-soft"
+      className={`flex shrink-0 items-center justify-center rounded-full p-2 ${tone}`}
     >
       <Icon size={18} />
     </span>
