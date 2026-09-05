@@ -41,9 +41,13 @@ export const STORAGE_KEY = 'cartolang.progress.v1'
  * (voir le README de la piste dans `content/courses/fr-ru-a1/course.yaml`).
  * Les leçons gardent leurs identifiants, mais les étapes de révision et de
  * consolidation changent d'unité — voir `migrateAlphabetSteps`.
+ * Format 7 : les chiffres russes (leçons `u7-l1` et `u7-l3`) n'ont pas
+ * toujours été présentés dans l'ordre — une mise à jour du contenu l'a
+ * corrigé, mais les cartes déjà apprises dans le désordre le restent tant
+ * qu'elles ne sont pas effacées. Voir `resetNumbersLearningOrder`.
  * Les sauvegardes plus anciennes sont converties à la lecture.
  */
-export const SAVE_FORMAT = 6
+export const SAVE_FORMAT = 7
 
 /** Le nécessaire d'un cours pour suivre sa propre progression. */
 export interface CourseBucket<T> {
@@ -290,6 +294,68 @@ export function migrateAlphabetSteps(steps: CourseBucket<Record<string, number>>
   return changed ? { ...steps, 'fr-ru-a1': migrated } : steps
 }
 
+/**
+ * Mots-nombres du russe (voir content/courses/fr-ru-a1/units/u7.yaml,
+ * leçons `u7-l1` « De un à six » et `u7-l3` « De sept à cent »).
+ */
+const RU_NUMBER_ITEM_IDS = [
+  'ru-odin',
+  'ru-dva',
+  'ru-tri',
+  'ru-chetyre',
+  'ru-pyat',
+  'ru-shest',
+  'ru-sem',
+  'ru-vosem',
+  'ru-devyat',
+  'ru-desyat',
+  'ru-dvadtsat',
+  'ru-sto',
+]
+const RU_NUMBER_LESSON_IDS = ['u7-l1', 'u7-l3']
+
+/**
+ * Efface les cartes et le statut des deux leçons de chiffres russes
+ * (format 7).
+ *
+ * Une mise à jour du contenu a corrigé l'ordre dans lequel les chiffres sont
+ * présentés — 1 à 6 puis 7 à 100, plutôt que dans le désordre où certaines
+ * sauvegardes les ont appris. L'ordre d'une leçon ne se corrige pas après
+ * coup pour une carte déjà apprise : il faut la faire redécouvrir. D'où
+ * l'effacement plutôt qu'une simple remise à zéro de l'échéance — la carte
+ * elle-même repart de zéro, comme un mot jamais rencontré.
+ *
+ * Les deux autres leçons de l'unité (`u7-l2` « Aujourd'hui, demain, ici »,
+ * `u7-l4` « Les jours de la semaine ») ne sont pas des chiffres et gardent
+ * leur progression, de même que les étapes de révision et de consolidation
+ * de l'unité, qui couvrent aussi ces deux leçons-là — les y remettre à zéro
+ * ferait reprendre des mots qui n'ont pourtant pas changé d'ordre. L'XP déjà
+ * gagné ne bouge pas non plus : ce n'est pas ce qui doit être corrigé.
+ *
+ * Idempotente : une sauvegarde déjà passée ici n'a plus ces clés, donc plus
+ * rien à effacer au second passage.
+ */
+export function resetNumbersLearningOrder(
+  cards: CourseBucket<Record<string, CardState>>,
+  lessons: CourseBucket<LessonProgressMap>,
+): { cards: CourseBucket<Record<string, CardState>>; lessons: CourseBucket<LessonProgressMap> } {
+  const courseId = 'fr-ru-a1'
+  const cardBucket = cards[courseId]
+  const lessonBucket = lessons[courseId]
+
+  const nextCardBucket = cardBucket
+    ? Object.fromEntries(Object.entries(cardBucket).filter(([id]) => !RU_NUMBER_ITEM_IDS.includes(id)))
+    : cardBucket
+  const nextLessonBucket = lessonBucket
+    ? Object.fromEntries(Object.entries(lessonBucket).filter(([id]) => !RU_NUMBER_LESSON_IDS.includes(id)))
+    : lessonBucket
+
+  return {
+    cards: cardBucket ? { ...cards, [courseId]: nextCardBucket! } : cards,
+    lessons: lessonBucket ? { ...lessons, [courseId]: nextLessonBucket! } : lessons,
+  }
+}
+
 /** Enregistre l'activité du jour : XP cumulés et série. */
 function withActivity(state: ProgressSnapshot, xp: number, now: number): Partial<ProgressSnapshot> {
   const today = dayKey(now)
@@ -435,7 +501,7 @@ export const useProgress = create<ProgressState>()(
         // Les formats antérieurs n'ont rien perdu : leurs champs manquants
         // prennent simplement leur valeur par défaut ci-dessous.
         const format = parsed.format ?? 0
-        if (![1, 2, 3, 4, 5, SAVE_FORMAT].includes(format)) {
+        if (![1, 2, 3, 4, 5, 6, SAVE_FORMAT].includes(format)) {
           throw new Error(`Format de sauvegarde inconnu (attendu ${SAVE_FORMAT}).`)
         }
 
@@ -456,6 +522,15 @@ export const useProgress = create<ProgressState>()(
           lessons = (parsed.lessons as ProgressSnapshot['lessons']) ?? {}
           cards = (parsed.cards as ProgressSnapshot['cards']) ?? {}
           steps = (parsed.steps as ProgressSnapshot['steps']) ?? {}
+        }
+
+        // Une sauvegarde antérieure au format 7 peut porter des chiffres
+        // russes appris dans le désordre (voir `resetNumbersLearningOrder`) —
+        // une déjà au format 7 les a déjà perdues, rien à refaire.
+        if (format < SAVE_FORMAT) {
+          const reset = resetNumbersLearningOrder(cards, lessons)
+          cards = reset.cards
+          lessons = reset.lessons
         }
 
         set({
@@ -504,11 +579,17 @@ export const useProgress = create<ProgressState>()(
           steps = (state.steps as ProgressSnapshot['steps']) ?? {}
         }
 
+        // `version < SAVE_FORMAT` est déjà acquis à ce point (voir le retour
+        // anticipé plus haut) : toute sauvegarde qui arrive jusqu'ici peut
+        // porter des chiffres russes appris dans le désordre (format 7, voir
+        // `resetNumbersLearningOrder`).
+        const reset = resetNumbersLearningOrder(cards, lessons)
+
         return {
           ...initial,
           ...state,
-          lessons,
-          cards,
+          lessons: reset.lessons,
+          cards: reset.cards,
           steps: migrateAlphabetSteps(steps),
         }
       },

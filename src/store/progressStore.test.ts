@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { deflateSchedules, migrateAlphabetSteps, migrateCards, useProgress } from './progressStore'
+import { deflateSchedules, migrateAlphabetSteps, migrateCards, resetNumbersLearningOrder, useProgress } from './progressStore'
 import { createCard, DAY, review, type CardState } from '@/engine/srs'
 
 const T0 = Date.UTC(2026, 0, 1, 9, 0)
@@ -365,5 +365,82 @@ describe('redécoupage de l’unité alphabet en cinq unités (format 6)', () =>
       }),
     )
     expect(useProgress.getState().steps['fr-ru-a1']).toEqual({ 'u3:review-0': 1 })
+  })
+})
+
+describe('réinitialisation des chiffres russes appris dans le désordre (format 7)', () => {
+  const lesson = { level: 1, completions: 1, lastAt: 0, bestAccuracy: 1 }
+  const numberCard = (id: string): CardState => ({ ...createCard(id, 0) })
+
+  it('efface les cartes des chiffres et le statut de leurs deux leçons', () => {
+    const cards = {
+      'fr-ru-a1': {
+        'ru-odin': numberCard('ru-odin'),
+        'ru-sto': numberCard('ru-sto'),
+        'ru-vot': numberCard('ru-vot'), // un mot ordinaire, pas un chiffre.
+      },
+    }
+    const lessons = {
+      'fr-ru-a1': { 'u7-l1': lesson, 'u7-l3': lesson, 'u7-l2': lesson },
+    }
+    const result = resetNumbersLearningOrder(cards, lessons)
+    expect(result.cards['fr-ru-a1']).toEqual({ 'ru-vot': numberCard('ru-vot') })
+    expect(result.lessons['fr-ru-a1']).toEqual({ 'u7-l2': lesson })
+  })
+
+  it('laisse les autres cours intacts', () => {
+    const cards = { 'fr-en-b1': { 'ru-odin': numberCard('ru-odin') } }
+    const lessons = { 'fr-en-b1': { 'u7-l1': lesson } }
+    // Ces identifiants n'existent que dans le cours fr-ru-a1 : ailleurs, ils
+    // ne désignent ni un chiffre ni une de ses leçons.
+    expect(resetNumbersLearningOrder(cards, lessons)).toEqual({ cards, lessons })
+  })
+
+  it('ne touche à rien sans progression sur fr-ru-a1', () => {
+    const cards = { 'fr-en-b1': { w: numberCard('w') } }
+    const lessons = {}
+    const result = resetNumbersLearningOrder(cards, lessons)
+    expect(result.cards).toBe(cards)
+    expect(result.lessons).toBe(lessons)
+  })
+
+  it('est sans effet une seconde fois', () => {
+    const cards = { 'fr-ru-a1': { 'ru-odin': numberCard('ru-odin'), 'ru-vot': numberCard('ru-vot') } }
+    const lessons = { 'fr-ru-a1': { 'u7-l1': lesson, 'u7-l2': lesson } }
+    const once = resetNumbersLearningOrder(cards, lessons)
+    expect(resetNumbersLearningOrder(once.cards, once.lessons)).toEqual(once)
+  })
+
+  it('s’applique à l’import d’une sauvegarde antérieure au format 7', () => {
+    useProgress.getState().reset()
+    useProgress.getState().importSave(
+      JSON.stringify({
+        format: 6,
+        lessons: { 'fr-ru-a1': { 'u7-l1': lesson, 'u7-l2': lesson } },
+        cards: { 'fr-ru-a1': { 'ru-odin': numberCard('ru-odin'), 'ru-vot': numberCard('ru-vot') } },
+        steps: {},
+      }),
+    )
+    const state = useProgress.getState()
+    expect(state.cards['fr-ru-a1']).toEqual({ 'ru-vot': numberCard('ru-vot') })
+    expect(state.lessons['fr-ru-a1']).toEqual({ 'u7-l2': lesson })
+  })
+
+  it('ne rejoue pas la réinitialisation sur une sauvegarde déjà au format 7', () => {
+    useProgress.getState().reset()
+    useProgress.getState().importSave(
+      JSON.stringify({
+        format: 7,
+        lessons: { 'fr-ru-a1': { 'u7-l1': lesson } },
+        cards: { 'fr-ru-a1': { 'ru-odin': numberCard('ru-odin') } },
+        steps: {},
+      }),
+    )
+    const state = useProgress.getState()
+    // Une sauvegarde déjà au format courant a soit déjà perdu ces clés,
+    // soit les a regagnées depuis en les réapprenant : dans les deux cas,
+    // l'import ne doit plus jamais les effacer de force.
+    expect(state.cards['fr-ru-a1']).toEqual({ 'ru-odin': numberCard('ru-odin') })
+    expect(state.lessons['fr-ru-a1']).toEqual({ 'u7-l1': lesson })
   })
 })
