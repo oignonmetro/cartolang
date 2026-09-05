@@ -106,6 +106,7 @@ function LessonSession({ lessonId }: { lessonId: string }) {
       // doit repartir de zéro, sinon l'ancienne file resterait affichée.
       key={attempt}
       title={entry.lesson.title}
+      kind="lesson"
       exercises={exercises}
       onQuit={backHome}
       onFinish={(outcome, peakTier) => {

@@ -65,6 +65,7 @@ export function ReviewRoute() {
   return (
     <SessionScreen
       title="Révision"
+      kind="review"
       exercises={exercises}
       onQuit={() => navigate('/', { replace: true })}
       onFinish={(outcome, peakTier) => setFinished({ outcome, peakTier, ...finishReview(outcome) })}

@@ -26,8 +26,9 @@ import {
   type SessionHaptics,
 } from '@/components/session/useSessionHaptics'
 import { ComboBadge } from '@/components/session/ComboBadge'
-import { CloseIcon } from '@/components/icons'
+import { BookIcon, ChestIcon, CloseIcon, FlagIcon, RefreshIcon, StarIcon } from '@/components/icons'
 import type { SessionOutcome } from '@/engine/progress'
+import type { UnitNodeKind } from '@/engine/unitPath'
 
 /**
  * Déroulé d'une session.
@@ -39,10 +40,47 @@ import type { SessionOutcome } from '@/engine/progress'
 
 interface SessionScreenProps {
   title: string
+  /**
+   * Nature de la séance — leçon, révision, approfondissement, entraînement,
+   * bilan final (voir `UnitNodeKind`). Se lit sur un petit repère dans
+   * l'en-tête (voir `SessionKindBadge`) : depuis l'archivage du parcours
+   * visuel, une leçon enchaîne directement sur sa révision puis sa
+   * consolidation sans jamais repasser par un écran de parcours qui le
+   * disait — sans ce repère, rien à l'écran ne distingue plus les deux.
+   */
+  kind: UnitNodeKind
   exercises: Exercise[]
   onQuit: () => void
   /** `peakTier` : le plus haut palier de série atteint, voir `useSessionHaptics`. */
   onFinish: (outcome: SessionOutcome, peakTier: number) => void
+}
+
+/**
+ * Icône et libellé de chaque nature de séance — mêmes intitulés que
+ * `STEP_LABELS` dans `unitPath.ts`, « Leçon » en plus pour le seul nœud que
+ * ce fichier-là ne nomme pas lui-même (`lesson.title` y tient déjà lieu de
+ * titre).
+ */
+const SESSION_KIND: Record<UnitNodeKind, { label: string; Icon: typeof BookIcon }> = {
+  lesson: { label: 'Leçon', Icon: BookIcon },
+  review: { label: 'Révision', Icon: RefreshIcon },
+  drill: { label: 'Approfondissement', Icon: StarIcon },
+  workout: { label: 'Entraînement', Icon: FlagIcon },
+  final: { label: 'Séance finale', Icon: ChestIcon },
+}
+
+function SessionKindBadge({ kind }: { kind: UnitNodeKind }) {
+  const { label, Icon } = SESSION_KIND[kind]
+  return (
+    <span
+      role="img"
+      aria-label={label}
+      title={label}
+      className="flex shrink-0 items-center justify-center rounded-full bg-line p-2 text-ink-soft"
+    >
+      <Icon size={18} />
+    </span>
+  )
 }
 
 interface Attempt {
@@ -68,6 +106,7 @@ export function SessionScreen(props: SessionScreenProps) {
 
 function SessionRunner({
   title,
+  kind,
   exercises,
   onQuit,
   onFinish,
@@ -225,6 +264,7 @@ function SessionRunner({
         >
           <CloseIcon size={22} />
         </button>
+        <SessionKindBadge kind={kind} />
         <div className="h-4 flex-1 overflow-hidden rounded-full bg-line">
           <motion.div
             className="h-full rounded-full bg-teal"
