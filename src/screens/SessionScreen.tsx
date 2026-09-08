@@ -263,7 +263,7 @@ function SessionRunner({
     // contenu est conçu pour tenir dans l'écran — d'où `overflow-hidden`
     // plutôt que `min-h-dvh`, qui laisserait grandir au lieu de couper.
     <div className="flex h-dvh flex-col overflow-hidden">
-      <header className="relative flex items-center gap-3 px-4 py-3">
+      <header className="flex items-center gap-3 px-4 py-3">
         <button
           type="button"
           onClick={() => setConfirmQuit(true)}
