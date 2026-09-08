@@ -41,14 +41,18 @@ export const SessionHapticsProvider = SessionHapticsContext.Provider
  * `tier` est le palier courant, 0 hors série. `bump` n'avance qu'à la montée
  * d'un palier — jamais à la rupture, qui n'a pas plus droit à l'écran qu'à
  * la vibration (même règle que `afterAnswer`, voir `combo.ts`) — et sert de
- * clé pour rejouer l'animation à chaque nouvelle montée.
+ * clé pour rejouer l'animation à chaque nouvelle montée. `momentum` est
+ * l'élan réellement accumulé à cet instant (voir `Combo`, `combo.ts`) : un
+ * message seul (« Ça chauffe ») ne dit pas ce qui vient de se passer, le
+ * chiffre le rend concret.
  */
 export interface SessionCombo {
   tier: number
   bump: number
+  momentum: number
 }
 
-const NO_VISIBLE_COMBO: SessionCombo = { tier: 0, bump: 0 }
+const NO_VISIBLE_COMBO: SessionCombo = { tier: 0, bump: 0, momentum: 0 }
 
 /**
  * Crée le suiveur de série d'une session. Appelé par `SessionScreen`, seul,
@@ -85,7 +89,7 @@ export function useHaptics(): { haptics: SessionHaptics; combo: SessionCombo; pe
         if (enabled && result.buzz) vibrate(result.buzz)
         if (leveledUp) {
           bump.current += 1
-          setVisible({ tier: result.combo.tier, bump: bump.current })
+          setVisible({ tier: result.combo.tier, bump: bump.current, momentum: result.combo.momentum })
         }
       },
       finished: (outcome) => {

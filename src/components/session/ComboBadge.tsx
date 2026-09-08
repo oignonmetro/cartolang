@@ -4,12 +4,17 @@ import { BoltIcon } from '@/components/icons'
 import type { SessionCombo } from './useSessionHaptics'
 
 /**
- * Ce que dit le badge à chaque palier — jamais un nombre brut : l'élan
- * pondère l'effort de chaque exercice (voir `effortOf`, combo.ts), un
- * compteur en clair laisserait croire à un décompte de bonnes réponses
- * consécutives, ce qu'il n'est pas. Trois messages, à l'image des trois
+ * Ce que dit le badge à chaque palier. Trois messages, à l'image des trois
  * intensités de vibration qu'ils accompagnent — au-delà, le vocabulaire n'a
  * rien de plus fort à offrir (même plafond que `IMPACTS`, combo.ts).
+ *
+ * Le chiffre affiché à côté (voir plus bas, `combo.momentum`) est l'élan
+ * réellement accumulé, pas un décompte de bonnes réponses consécutives :
+ * l'élan pondère l'effort de chaque exercice (voir `effortOf`, combo.ts), si
+ * bien qu'il peut monter de plusieurs points sur une seule réponse, ou
+ * rester muet sur une présentation qui ne compte pour rien. « pts » le dit
+ * en un mot plutôt que de laisser deviner un lien avec le nombre de
+ * réponses.
  *
  * Exportés : `SessionResult` reprend les mêmes mots pour son rappel de
  * meilleure série, plutôt que d'en inventer d'autres pour la même chose.
@@ -61,6 +66,10 @@ export function ComboBadge({ combo }: { combo: SessionCombo }) {
               <BoltIcon key={index} size={14} />
             ))}
             {MESSAGES[tier - 1]}
+            {/* L'élan réellement accumulé, pas un décompte de bonnes réponses
+                (voir la remarque plus haut) : le chiffre donne un sens
+                concret au message plutôt que de le laisser mystérieux. */}
+            <span className="opacity-80">· {combo.momentum} pts</span>
           </motion.div>
         )}
       </AnimatePresence>
