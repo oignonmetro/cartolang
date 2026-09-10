@@ -5,13 +5,14 @@ import { courseLabel, itemsOfCourse } from '@/content/course'
 import { installedAppVersion } from '@/content/appUpdate'
 import { dayKey, displayedStreak, levelFromXp } from '@/engine/progress'
 import { cardStrength, dueCards } from '@/engine/srs'
-import { EMPTY_CARDS, useProgress } from '@/store/progressStore'
+import { ACHIEVEMENTS, achievementStatus, lessonsCompletedCount, wordsLearnedCount } from '@/engine/achievements'
+import { EMPTY_CARDS, EMPTY_LESSON_PROGRESS, useProgress } from '@/store/progressStore'
 import { canInstallVoice, canSpeak, installSpokenLanguage, isSpokenLanguageInstalled } from '@/lib/speech'
 import { canVibrate } from '@/lib/haptics'
 import { Button } from '@/components/Button'
 import { Mascot } from '@/components/Mascot'
 import { AppUpdateCard } from '@/components/AppUpdateCard'
-import { BoltIcon, ChevronLeftIcon, FlameIcon } from '@/components/icons'
+import { BoltIcon, ChestIcon, ChevronLeftIcon, FlameIcon } from '@/components/icons'
 
 const STRENGTHS = ['new', 'learning', 'known', 'mastered'] as const
 
@@ -40,7 +41,7 @@ const THEME_OPTIONS: { value: 'system' | 'light' | 'dark'; label: string }[] = [
 
 export function ProfileScreen() {
   const navigate = useNavigate()
-  const { course } = useCourse()
+  const { course, itemsById } = useCourse()
   const state = useProgress()
   const [message, setMessage] = useState<string | null>(null)
   const fileInput = useRef<HTMLInputElement>(null)
@@ -77,6 +78,20 @@ export function ProfileScreen() {
     for (const card of cards) counts[cardStrength(card)] += 1
     return counts
   }, [cards])
+
+  const achievementValues = useMemo(
+    () => ({
+      words: wordsLearnedCount(state.cards[course.id] ?? EMPTY_CARDS, itemsById),
+      streak: state.streak.best,
+      lessons: lessonsCompletedCount(state.lessons[course.id] ?? EMPTY_LESSON_PROGRESS),
+    }),
+    [state.cards, state.lessons, state.streak.best, course.id, itemsById],
+  )
+  const achievementsUnlocked = ACHIEVEMENTS.reduce(
+    (total, family) => total + achievementStatus(family, achievementValues[family.id]).unlocked,
+    0,
+  )
+  const achievementsTotal = ACHIEVEMENTS.reduce((total, family) => total + family.tiers.length, 0)
 
   function download() {
     const blob = new Blob([state.exportSave()], { type: 'application/json' })
@@ -131,6 +146,23 @@ export function ProfileScreen() {
           <Tile label="XP total" value={String(state.xp)} icon={<BoltIcon size={18} />} tone="text-amber" />
           <Tile label="À réviser" value={String(due)} tone="text-teal" />
         </section>
+
+        <button
+          type="button"
+          onClick={() => navigate('/succes')}
+          className="card-3d flex items-center gap-3 px-5 py-4 text-left"
+        >
+          <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-amber/15 text-amber">
+            <ChestIcon size={20} />
+          </span>
+          <span className="min-w-0 flex-1">
+            <span className="block text-sm font-extrabold">Succès</span>
+            <span className="block text-xs text-ink-faint">
+              {achievementsUnlocked} / {achievementsTotal} paliers débloqués
+            </span>
+          </span>
+          <ChevronLeftIcon size={18} className="rotate-180 shrink-0 text-ink-faint" />
+        </button>
 
         <section className="card-3d px-5 py-5">
           <h2 className="text-sm font-extrabold uppercase tracking-wide text-ink-faint">Contenu travaillé</h2>

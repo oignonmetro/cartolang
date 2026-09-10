@@ -6,6 +6,7 @@ import { ReviewRoute } from '@/screens/ReviewRoute'
 import { StepRoute } from '@/screens/StepRoute'
 import { HardWordsScreen } from '@/screens/HardWordsScreen'
 import { ProfileScreen } from '@/screens/ProfileScreen'
+import { AchievementsScreen } from '@/screens/AchievementsScreen'
 import { UpdatePrompt } from '@/components/UpdatePrompt'
 import { AppUpdateBanner } from '@/components/AppUpdateBanner'
 import { ThemeEffect } from '@/components/ThemeEffect'
@@ -26,6 +27,7 @@ export default function App() {
           <Route path="/revision" element={<ReviewRoute />} />
           <Route path="/etape/:unitId/:stepId" element={<StepRoute />} />
           <Route path="/profil" element={<ProfileScreen />} />
+          <Route path="/succes" element={<AchievementsScreen />} />
           {/* Prototype de conception, données en dur — pas encore relié au moteur. */}
           <Route path="/difficiles" element={<HardWordsScreen />} />
           <Route path="*" element={<Navigate to="/" replace />} />
