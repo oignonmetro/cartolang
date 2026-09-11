@@ -1,0 +1,166 @@
+id: v1
+title: Saludos y presentaciones
+subtitle: Dire bonjour, se présenter
+icon: wave
+color: coral
+level: A1
+
+lessons:
+  - id: v1-l1
+    title: Saludos básicos
+    notes: |
+      L'espagnol distingue le salut selon le moment de la journée, comme
+      « bonjour »/« bonsoir » en français, mais avec **trois tranches** plutôt
+      que deux.
+
+      - `Buenos días` : le matin, jusqu'au déjeuner.
+      - `Buenas tardes` : l'après-midi, jusqu'à la tombée de la nuit.
+      - `Buenas noches` : le soir, et pour dire bonne nuit en partant.
+      - `Hola` marche à toute heure, formel ou non — c'est le salut le plus
+        sûr quand on hésite.
+
+      ! Le point d'interrogation et d'exclamation s'écrivent **deux fois**,
+      à l'envers avant la phrase et à l'endroit après : `¿Qué tal?`, `¡Hola!`.
+    vocab:
+      - id: es-hola
+        term: hola
+        translation: salut
+        pos: expression
+        example:
+          text: Hola, ¿qué tal?
+          translation: Salut, comment ça va ?
+      - id: es-buenos-dias
+        term: buenos días
+        translation: bonjour
+        pos: expression
+        hint: Se dit le matin, jusqu'au déjeuner.
+        example:
+          text: Buenos días, señora.
+          translation: Bonjour, madame.
+      - id: es-buenas-tardes
+        term: buenas tardes
+        translation: bon après-midi
+        pos: expression
+        hint: Se dit l'après-midi, jusqu'à la tombée de la nuit — un « bonjour » qui suit le déjeuner.
+        example:
+          text: Buenas tardes a todos.
+          translation: Bon après-midi à tous.
+      - id: es-buenas-noches
+        term: buenas noches
+        translation: bonsoir
+        alt:
+          - bonne nuit
+        pos: expression
+        hint: Sert aussi bien à saluer le soir qu'à se dire bonne nuit.
+        example:
+          text: Buenas noches, hasta mañana.
+          translation: Bonsoir, à demain.
+      - id: es-adios
+        term: adiós
+        translation: au revoir
+        pos: expression
+        example:
+          text: Adiós, nos vemos pronto.
+          translation: Au revoir, à bientôt.
+      - id: es-por-favor
+        term: por favor
+        translation: s'il te plaît
+        alt:
+          - s'il vous plaît
+        pos: expression
+        example:
+          text: Un café, por favor.
+          translation: Un café, s'il te plaît.
+      - id: es-gracias
+        term: gracias
+        translation: merci
+        pos: expression
+        example:
+          text: Muchas gracias por tu ayuda.
+          translation: Merci beaucoup pour ton aide.
+      - id: es-de-nada
+        term: de nada
+        translation: de rien
+        alt:
+          - je t'en prie
+        pos: expression
+        example:
+          text: Gracias. De nada.
+          translation: Merci. De rien.
+
+  - id: v1-l2
+    title: Presentarse
+    notes: |
+      Se présenter tient en quelques formules toutes faites, à retenir en
+      bloc avant même de savoir conjuguer.
+
+      - `Me llamo…` : littéralement « je m'appelle », de `llamarse`
+        (s'appeler) — inutile de connaître le verbe pour utiliser la formule.
+      - `Soy…` (de `ser`, être) donne le nom, l'origine ou le métier :
+        `Soy Ana`, `Soy de Francia`.
+      - `Tengo… años` (de `tener`, avoir) donne l'âge — l'espagnol dit
+        littéralement « j'ai … ans », comme le français.
+
+      ! Ne confondez pas `¿cómo?` (comment) et `¿cuál?` (lequel) : « comment
+      tu t'appelles » se dit bien `¿Cómo te llamas?`, jamais `¿Cuál?`.
+    vocab:
+      - id: es-me-llamo
+        term: me llamo
+        translation: je m'appelle
+        pos: expression
+        example:
+          text: Hola, me llamo Ana.
+          translation: Salut, je m'appelle Ana.
+      - id: es-como-te-llamas
+        term: ¿cómo te llamas?
+        translation: comment tu t'appelles ?
+        pos: expression
+        example:
+          text: Perdón, ¿cómo te llamas?
+          translation: Pardon, comment tu t'appelles ?
+      - id: es-mucho-gusto
+        term: mucho gusto
+        translation: enchanté
+        alt:
+          - enchantée
+        pos: expression
+        example:
+          text: Mucho gusto, soy Carlos.
+          translation: Enchanté, je suis Carlos.
+      - id: es-soy
+        term: soy
+        translation: je suis
+        pos: verbe
+        hint: De ser (être) — sert pour le nom, l'origine, le métier.
+        example:
+          text: Soy de Francia.
+          translation: Je suis de France.
+      - id: es-tengo
+        term: tengo
+        translation: j'ai
+        pos: verbe
+        hint: "De tener (avoir) — « tengo veinte años » : j'ai vingt ans."
+        example:
+          text: Tengo veinte años.
+          translation: J'ai vingt ans.
+      - id: es-de-donde-eres
+        term: ¿de dónde eres?
+        translation: d'où viens-tu ?
+        pos: expression
+        example:
+          text: Hola, ¿de dónde eres?
+          translation: Salut, d'où viens-tu ?
+      - id: es-si
+        term: sí
+        translation: oui
+        pos: adverbe
+        example:
+          text: Sí, claro.
+          translation: Oui, bien sûr.
+      - id: es-no
+        term: no
+        translation: non
+        pos: adverbe
+        example:
+          text: No, lo siento.
+          translation: Non, désolé.

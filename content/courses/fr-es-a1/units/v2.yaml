@@ -1,0 +1,166 @@
+id: v2
+title: La familia
+subtitle: Parler des siens
+icon: people
+color: amber
+level: A1
+
+lessons:
+  - id: v2-l1
+    title: La familia cercana
+    notes: |
+      La plupart des noms de famille se déclinent en **deux formes**, une en
+      `-o` pour un homme, une en `-a` pour une femme : `hijo` / `hija`,
+      `hermano` / `hermana`. C'est ce même modèle qui décide de l'article —
+      voir la leçon de grammaire sur le genre.
+
+      - Au pluriel, le masculin **inclut** le mixte : `los padres` veut dire
+        « les parents », pas seulement « les pères ».
+      - `familia` est féminin bien qu'il finisse par `-a` en désignant un
+        groupe mixte : rien d'étonnant, la finale décide toujours du genre du
+        mot lui-même, jamais de qui il désigne.
+    vocab:
+      - id: es-familia
+        term: la familia
+        gap: familia
+        translation: la famille
+        pos: nom
+        example:
+          text: Mi familia es grande.
+          translation: Ma famille est grande.
+      - id: es-madre
+        term: la madre
+        gap: madre
+        translation: la mère
+        pos: nom
+        example:
+          text: Mi madre es simpática.
+          translation: Ma mère est sympathique.
+      - id: es-padre
+        term: el padre
+        gap: padre
+        translation: le père
+        pos: nom
+        example:
+          text: Mi padre es alto.
+          translation: Mon père est grand.
+      - id: es-padres
+        term: los padres
+        gap: padres
+        translation: les parents
+        pos: nom
+        hint: Le masculin pluriel inclut le mixte, pas seulement « les pères ».
+        example:
+          text: Mis padres viven aquí.
+          translation: Mes parents vivent ici.
+      - id: es-hermano
+        term: el hermano
+        gap: hermano
+        translation: le frère
+        pos: nom
+        example:
+          text: Mi hermano es joven.
+          translation: Mon frère est jeune.
+      - id: es-hermana
+        term: la hermana
+        gap: hermana
+        translation: la sœur
+        pos: nom
+        example:
+          text: Mi hermana es amable.
+          translation: Ma sœur est aimable.
+      - id: es-hijo
+        term: el hijo
+        gap: hijo
+        translation: le fils
+        pos: nom
+        example:
+          text: Su hijo estudia mucho.
+          translation: Son fils étudie beaucoup.
+      - id: es-hija
+        term: la hija
+        gap: hija
+        translation: la fille
+        alt:
+          - fille
+        pos: nom
+        example:
+          text: Su hija vive en Madrid.
+          translation: Sa fille vit à Madrid.
+
+  - id: v2-l2
+    title: La familia extendida
+    notes: |
+      Le même modèle `-o` / `-a` continue au-delà des parents et enfants :
+      `abuelo` / `abuela`, `tío` / `tía`, `primo` / `prima`.
+
+      ! `Marido` (mari) et `esposa` (épouse) ne se répondent pas comme les
+      autres paires : `esposo` existe aussi (« époux »), mais `marido` reste
+      le mot le plus courant à l'oral.
+    vocab:
+      - id: es-abuelo
+        term: el abuelo
+        gap: abuelo
+        translation: le grand-père
+        pos: nom
+        example:
+          text: Mi abuelo tiene ochenta años.
+          translation: Mon grand-père a quatre-vingts ans.
+      - id: es-abuela
+        term: la abuela
+        gap: abuela
+        translation: la grand-mère
+        pos: nom
+        example:
+          text: Mi abuela cocina muy bien.
+          translation: Ma grand-mère cuisine très bien.
+      - id: es-tio
+        term: el tío
+        gap: tío
+        translation: l'oncle
+        pos: nom
+        example:
+          text: Mi tío vive en Bogotá.
+          translation: Mon oncle vit à Bogotá.
+      - id: es-tia
+        term: la tía
+        gap: tía
+        translation: la tante
+        pos: nom
+        example:
+          text: Mi tía trabaja en un hospital.
+          translation: Ma tante travaille dans un hôpital.
+      - id: es-primo
+        term: el primo
+        gap: primo
+        translation: le cousin
+        pos: nom
+        example:
+          text: Mi primo estudia en Sevilla.
+          translation: Mon cousin étudie à Séville.
+      - id: es-prima
+        term: la prima
+        gap: prima
+        translation: la cousine
+        pos: nom
+        example:
+          text: Mi prima habla tres idiomas.
+          translation: Ma cousine parle trois langues.
+      - id: es-marido
+        term: el marido
+        gap: marido
+        translation: le mari
+        pos: nom
+        example:
+          text: Su marido trabaja mucho.
+          translation: Son mari travaille beaucoup.
+      - id: es-esposa
+        term: la esposa
+        gap: esposa
+        translation: l'épouse
+        alt:
+          - la femme
+        pos: nom
+        example:
+          text: Su esposa es médica.
+          translation: Son épouse est médecin.

@@ -1,0 +1,60 @@
+# Cours d'espagnol grand débutant, pour francophones.
+#
+# Pas d'unité d'alphabet, contrairement au russe (`fr-ru-a1`) : l'espagnol
+# s'écrit dans le même alphabet que le français, à quelques signes près (ñ,
+# les accents, ¿ ¡) qui s'apprennent en les rencontrant plutôt qu'à part.
+# `layout: library`, comme les autres cours à plusieurs pistes : l'apprenant
+# choisit son unité, l'ordre interne d'une unité (leçon, révision,
+# consolidation) reste lui déjà fixé.
+#
+# Construction en cours, sur le modèle du russe A1 : vocabulaire d'abord,
+# grammaire et conjugaison qui n'emploient que ce vocabulaire déjà vu
+# (`vocabularyScopeRemarks`, tools/content/difficulty.ts). Unités prévues,
+# à mesure qu'elles s'écrivent :
+#   vocabulaire  — v1 salutations ✓, v2 famille ✓, v3 nombres, v4 nourriture,
+#                  v5 maison et ville, v6 corps et vêtements, v7 temps et jours
+#   grammaire    — g1 genre et pluriel ✓, g2 articles, g3 ser/estar,
+#                  g4 possessifs et démonstratifs, g5 lieu (estar + en/a/de),
+#                  g6 interrogatifs
+#   conjugaison  — c1 présent des verbes en -ar, c2 présent des verbes en
+#                  -er/-ir, c3 verbes irréguliers clés (ser, estar, tener, ir),
+#                  c4 gustar et verbes semblables
+
+id: fr-es-a1
+name: Espagnol
+learning: es
+known: fr
+flag: 🇪🇸
+level: A1
+tagline: Se présenter, compter, et les premiers mots du quotidien.
+status: available
+layout: library
+version: 1
+
+tracks:
+  - id: vocabulaire
+    title: Vocabulaire
+    subtitle: Les premiers mots du quotidien
+    kind: vocab
+    color: teal
+    icon: book
+    units:
+      - v1
+      - v2
+
+  - id: grammaire
+    title: Grammaire
+    subtitle: Genre, pluriel, et les bases de la phrase
+    kind: grammar
+    color: violet
+    icon: compass
+    units:
+      - g1
+
+  - id: conjugaison
+    title: Conjugaison
+    subtitle: Le présent, pour commencer
+    kind: conjugation
+    color: sky
+    icon: clock
+    units: []

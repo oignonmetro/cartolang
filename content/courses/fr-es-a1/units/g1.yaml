@@ -1,0 +1,141 @@
+id: g1
+title: Le genre et le pluriel
+subtitle: El, la, los, las
+icon: compass
+color: violet
+level: A1
+
+lessons:
+  - id: g1-l1
+    title: "El, la : accorder l'article"
+    notes: |
+      Un nom espagnol est masculin ou féminin, et **rien ne se déduit** du
+      genre français du même mot : « la famille » est féminin en français
+      comme en espagnol, mais bien d'autres mots changent de genre en passant
+      d'une langue à l'autre.
+
+      - Finale **-o** : masculin le plus souvent. `el hijo`, `el tío`,
+        `el primo`, `el abuelo`.
+      - Finale **-a** : féminin le plus souvent. `la hija`, `la tía`,
+        `la prima`, `la abuela`.
+      - Pour une personne, c'est le **sexe désigné** qui décide, pas
+        toujours la finale : `el padre` finit par -e mais reste masculin,
+        `la madre` de même reste féminin.
+
+      ! `la familia` finit par -a et reste féminin même en désignant un
+      groupe d'hommes et de femmes : la finale décide du genre du *mot*,
+      jamais de qui il désigne.
+    points:
+      - id: g1-genero-1
+        sentence: ___ madre es simpática.
+        answer: La
+        alt: []
+        options:
+          - La
+          - El
+          - Las
+        translation: Ma mère est sympathique.
+        explanation: "« madre » finit par -e, mais désigne une femme : la, comme « padre » reste el malgré la même finale."
+      - id: g1-genero-2
+        sentence: ___ padre es alto.
+        answer: El
+        alt: []
+        options:
+          - El
+          - La
+          - Los
+        translation: Mon père est grand.
+        explanation: "« padre » finit par -e mais désigne un homme : el."
+      - id: g1-genero-3
+        sentence: ___ hermano es joven.
+        answer: El
+        alt: []
+        options:
+          - El
+          - La
+          - Los
+        translation: Mon frère est jeune.
+        explanation: "Finale -o : masculin, el."
+      - id: g1-genero-4
+        sentence: ___ tía vive en Bogotá.
+        answer: La
+        alt: []
+        options:
+          - La
+          - El
+          - Las
+        translation: Ma tante vit à Bogotá.
+        explanation: "Finale -a : féminin, la."
+      - id: g1-genero-5
+        sentence: ___ primo estudia en Sevilla.
+        answer: El
+        alt: []
+        options:
+          - El
+          - La
+          - Los
+        translation: Mon cousin étudie à Séville.
+        explanation: "Finale -o : masculin, el."
+      - id: g1-genero-6
+        sentence: ___ abuela cocina muy bien.
+        answer: La
+        alt: []
+        options:
+          - La
+          - El
+          - Las
+        translation: Ma grand-mère cuisine très bien.
+        explanation: "Finale -a : féminin, la."
+
+  - id: g1-l2
+    title: "Los, las : accorder le pluriel"
+    notes: |
+      Le pluriel espagnol ajoute **-s** après une voyelle : `hermano` →
+      `hermanos`, `tía` → `tías`. L'article suit le même modèle que le
+      singulier, avec `los` au masculin et `las` au féminin.
+
+      ! Un groupe qui mélange hommes et femmes prend le masculin pluriel :
+      `los padres` veut dire « les parents », pas seulement « les pères ».
+      C'est déjà vrai au singulier avec `los abuelos` pour « les
+      grands-parents ».
+    points:
+      - id: g1-plural-1
+        sentence: ___ padres viven aquí.
+        answer: Los
+        alt: []
+        options:
+          - Los
+          - Las
+          - El
+        translation: Mes parents vivent ici.
+        explanation: "Groupe mixte (père et mère) : le masculin pluriel s'impose, los."
+      - id: g1-plural-2
+        sentence: ___ hermanas son amables.
+        answer: Las
+        alt: []
+        options:
+          - Las
+          - Los
+          - La
+        translation: Mes sœurs sont aimables.
+        explanation: "Groupe entièrement féminin : las."
+      - id: g1-plural-3
+        sentence: ___ tíos viven en Bogotá.
+        answer: Los
+        alt: []
+        options:
+          - Los
+          - Las
+          - El
+        translation: Mes oncles (et tantes) vivent à Bogotá.
+        explanation: "« tíos » au masculin pluriel peut désigner un groupe mixte, comme « padres » : los."
+      - id: g1-plural-4
+        sentence: ___ primas estudian en Sevilla.
+        answer: Las
+        alt: []
+        options:
+          - Las
+          - Los
+          - La
+        translation: Mes cousines étudient à Séville.
+        explanation: "Groupe entièrement féminin : las."

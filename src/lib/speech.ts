@@ -36,6 +36,7 @@ import type { Vocab } from '@/content/schema'
 const VOICES: Record<string, string> = {
   en: 'en-US',
   ru: 'ru-RU',
+  es: 'es-ES',
 }
 
 const FALLBACK = 'en-US'
