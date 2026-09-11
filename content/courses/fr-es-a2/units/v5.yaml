@@ -1,0 +1,160 @@
+id: v5
+title: La tecnología y la comunicación
+subtitle: Ordinateur, téléphone, internet
+icon: book
+color: violet
+level: A2
+
+lessons:
+  - id: v5-l1
+    title: Los aparatos
+    notes: |
+      Le vocabulaire des appareils du quotidien — attention, certains mots
+      changent selon la région hispanophone, comme `el coche`/`el carro`
+      déjà signalé en A1 (v5).
+
+      ! `el ordenador` (Espagne) et `la computadora` (Amérique latine)
+      désignent la même chose. Ce cours retient `el ordenador`, le plus
+      courant en Espagne.
+    vocab:
+      - id: es-ordenador
+        term: el ordenador
+        gap: ordenador
+        translation: l'ordinateur
+        pos: nom
+        hint: On dit « la computadora » en Amérique latine.
+        example:
+          text: Trabajo en el ordenador.
+          translation: Je travaille sur l'ordinateur.
+      - id: es-movil
+        term: el móvil
+        gap: móvil
+        translation: le téléphone portable
+        pos: nom
+        hint: On dit « el celular » en Amérique latine.
+        example:
+          text: Mi móvil no funciona.
+          translation: Mon portable ne fonctionne pas.
+      - id: es-pantalla
+        term: la pantalla
+        gap: pantalla
+        translation: l'écran
+        pos: nom
+        example:
+          text: La pantalla es grande.
+          translation: L'écran est grand.
+      - id: es-aplicacion
+        term: la aplicación
+        gap: aplicación
+        translation: l'application
+        pos: nom
+        example:
+          text: Descargo una aplicación.
+          translation: Je télécharge une application.
+      - id: es-contrasena
+        term: la contraseña
+        gap: contraseña
+        translation: le mot de passe
+        pos: nom
+        example:
+          text: Olvido mi contraseña.
+          translation: J'oublie mon mot de passe.
+      - id: es-correo
+        term: el correo electrónico
+        gap: correo electrónico
+        translation: l'e-mail
+        pos: nom
+        example:
+          text: Escribo un correo electrónico.
+          translation: J'écris un e-mail.
+      - id: es-bateria
+        term: la batería
+        gap: batería
+        translation: la batterie
+        pos: nom
+        example:
+          text: La batería está baja.
+          translation: La batterie est faible.
+      - id: es-cargo
+        term: cargo
+        translation: je charge (un appareil)
+        pos: verbe
+        hint: De cargar, régulier en -ar comme hablar.
+        example:
+          text: Cargo el móvil por la noche.
+          translation: Je charge le portable la nuit.
+
+  - id: v5-l2
+    title: Comunicarse
+    notes: |
+      Cinq verbes pour parler des échanges numériques, tous réguliers.
+
+      ! `llamar` (appeler quelqu'un) et `llamarse` (s'appeler, déjà vu en
+      A1 avec `me llamo`) ne sont **pas** le même verbe dans le même sens :
+      `llamo a mi madre` (j'appelle ma mère) contre `me llamo Ana` (je
+      m'appelle Ana).
+    vocab:
+      - id: es-llamo-a
+        term: llamo
+        translation: j'appelle (quelqu'un)
+        pos: verbe
+        hint: "Sans « me » : appeler quelqu'un, différent de « me llamo » (s'appeler)."
+        example:
+          text: Llamo a mi madre.
+          translation: J'appelle ma mère.
+      - id: es-envio
+        term: envío
+        translation: j'envoie
+        pos: verbe
+        hint: "De enviar, avec un accent qui se déplace : envío, envías, envía."
+        example:
+          text: Envío un mensaje.
+          translation: J'envoie un message.
+      - id: es-red
+        term: la red
+        gap: red
+        translation: le réseau
+        pos: nom
+        example:
+          text: La red no funciona.
+          translation: Le réseau ne fonctionne pas.
+      - id: es-conexion
+        term: la conexión
+        gap: conexión
+        translation: la connexion
+        pos: nom
+        example:
+          text: Necesito una conexión.
+          translation: J'ai besoin d'une connexion.
+      - id: es-wifi
+        term: el wifi
+        gap: wifi
+        translation: le wifi
+        pos: nom
+        example:
+          text: "¿Hay wifi aquí?"
+          translation: Il y a du wifi ici ?
+      - id: es-descargo
+        term: descargo
+        translation: je télécharge
+        pos: verbe
+        hint: De descargar, régulier en -ar comme hablar.
+        example:
+          text: Descargo la foto.
+          translation: Je télécharge la photo.
+      - id: es-foto
+        term: la foto
+        gap: foto
+        translation: la photo
+        pos: nom
+        example:
+          text: Envío una foto.
+          translation: J'envoie une photo.
+      - id: es-comparto
+        term: comparto
+        translation: je partage
+        pos: verbe
+        hint: De compartir, régulier en -ir comme vivir (c2).
+        example:
+          text: Comparto la foto con mis amigos.
+          translation: Je partage la photo avec mes amis.
