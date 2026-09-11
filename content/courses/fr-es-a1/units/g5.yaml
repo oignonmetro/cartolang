@@ -1,0 +1,116 @@
+id: g5
+title: El lugar
+subtitle: Estar + en, a, de
+icon: compass
+color: violet
+level: A1
+
+lessons:
+  - id: g5-l1
+    title: "En : où l'on se trouve"
+    notes: |
+      `estar en` (vu en g3 pour le lieu) précise **où** se trouve
+      quelqu'un ou quelque chose : à l'intérieur d'un endroit, ou dans une
+      rue, une ville. C'est le sens le plus proche du français « dans » ou
+      « à ».
+
+      - `Estoy en casa` (je suis à la maison), déjà vu en g3.
+      - `La silla está en la cocina` (la chaise est dans la cuisine).
+
+      ! Pas de mot à part pour « à » et « dans » comme en français : `en`
+      couvre les deux, le contexte seul distingue.
+    points:
+      - id: g5-en-1
+        sentence: El hospital está ___ esta calle.
+        answer: en
+        alt: []
+        options:
+          - en
+          - a
+          - de
+        translation: L'hôpital est dans cette rue.
+        explanation: "Situer un lieu à l'intérieur d'un autre : en."
+      - id: g5-en-2
+        sentence: Mis padres están ___ casa.
+        answer: en
+        alt: []
+        options:
+          - en
+          - a
+          - de
+        translation: Mes parents sont à la maison.
+        explanation: "« en casa » (à la maison), déjà vu avec estar en g3."
+      - id: g5-en-3
+        sentence: La silla está ___ la cocina.
+        answer: en
+        alt: []
+        options:
+          - en
+          - a
+          - de
+        translation: La chaise est dans la cuisine.
+        explanation: "Situer un objet dans une pièce : en."
+      - id: g5-en-4
+        sentence: Los zapatos están ___ la habitación.
+        answer: en
+        alt: []
+        options:
+          - en
+          - a
+          - de
+        translation: Les chaussures sont dans la chambre.
+        explanation: "Situer des objets dans une pièce : en."
+
+  - id: g5-l2
+    title: "A, de : l'heure et l'origine"
+    notes: |
+      `a` introduit une heure précise : `a las nueve` (à neuf heures),
+      construit avec les nombres et `la hora` déjà vus en v3 et v7.
+      `de` introduit une origine, déjà rencontré en v1 avec `soy de
+      Francia` — le même `de` sert aussi pour dire de quoi un objet est
+      fait, plus tard dans le cours.
+
+      ! `a la una` (à une heure) garde le féminin singulier `la`, mais
+      `a las dos`, `a las tres`… passent au pluriel `las`, comme pour dire
+      l'heure elle-même (`es la una`, `son las dos`, vu en v7).
+    points:
+      - id: g5-a-1
+        sentence: El desayuno es ___ las ocho.
+        answer: a
+        alt: []
+        options:
+          - a
+          - en
+          - de
+        translation: Le petit-déjeuner est à huit heures.
+        explanation: "Une heure précise : a las ocho."
+      - id: g5-a-2
+        sentence: Llego ___ las tres.
+        answer: a
+        alt: []
+        options:
+          - a
+          - en
+          - de
+        translation: J'arrive à trois heures.
+        explanation: "Une heure précise : a las tres."
+      - id: g5-de-1
+        sentence: Soy ___ Francia.
+        answer: de
+        alt: []
+        options:
+          - de
+          - a
+          - en
+        translation: Je suis de France.
+        explanation: "L'origine, déjà vue en v1 : soy de Francia."
+      - id: g5-de-2
+        sentence: Mi madre es ___ España.
+        answer: de
+        alt: []
+        options:
+          - de
+          - a
+          - en
+        translation: Ma mère est originaire d'Espagne.
+        explanation: "L'origine d'une personne : ser + de."
