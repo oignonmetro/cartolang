@@ -1,0 +1,141 @@
+id: g3
+title: Ser y estar
+subtitle: Deux verbes pour « être »
+icon: compass
+color: violet
+level: A1
+
+lessons:
+  - id: g3-l1
+    title: "Ser : identité et caractéristique"
+    notes: |
+      Le français n'a qu'un seul verbe « être » ; l'espagnol en a **deux**.
+      `ser` sert pour ce qui définit durablement : le nom, l'origine, le
+      métier, la nationalité, ou un trait de caractère qui ne change pas
+      d'un jour à l'autre.
+
+      - `Soy Ana` (je suis Ana), `soy de Francia` (je suis de France),
+        déjà vus en v1.
+      - Se conjugue : `soy`, `eres`, `es`, `somos`, `sois`, `son`.
+
+      ! `ser alto` (être grand) utilise `ser`, pas `estar` : la taille
+      d'une personne ne change pas selon le moment. C'est tout l'inverse de
+      `estar cansado` (être fatigué), vu dans la prochaine leçon.
+    points:
+      - id: g3-ser-1
+        sentence: Ana ___ alta.
+        answer: es
+        alt: []
+        options:
+          - es
+          - está
+          - eres
+        translation: Ana est grande.
+        explanation: "La taille est un trait durable : ser, conjugué es pour elle."
+      - id: g3-ser-2
+        sentence: Yo ___ de Francia.
+        answer: soy
+        alt: []
+        options:
+          - soy
+          - estoy
+          - eres
+        translation: Je suis de France.
+        explanation: "L'origine se dit avec ser : soy, déjà vu dans « soy de Francia »."
+      - id: g3-ser-3
+        sentence: Mis padres ___ simpáticos.
+        answer: son
+        alt: []
+        options:
+          - son
+          - están
+          - somos
+        translation: Mes parents sont sympathiques.
+        explanation: "Un trait de caractère durable : ser, conjugué son au pluriel."
+      - id: g3-ser-4
+        sentence: Tú ___ mi hermano.
+        answer: eres
+        alt: []
+        options:
+          - eres
+          - estás
+          - es
+        translation: Tu es mon frère.
+        explanation: "Un lien de parenté ne change pas : ser, conjugué eres pour « tú »."
+      - id: g3-ser-5
+        sentence: Nosotros ___ estudiantes.
+        answer: somos
+        alt: []
+        options:
+          - somos
+          - estamos
+          - son
+        translation: Nous sommes étudiants.
+        explanation: "Une profession ou un statut : ser, conjugué somos pour « nosotros »."
+
+  - id: g3-l2
+    title: "Estar : état et lieu"
+    notes: |
+      `estar` sert pour ce qui **peut changer** : un état passager (fatigué,
+      malade, content) ou une position dans l'espace (où se trouve
+      quelqu'un ou quelque chose).
+
+      - Se conjugue : `estoy`, `estás`, `está`, `estamos`, `estáis`, `están`.
+      - Le lieu utilise toujours `estar`, jamais `ser` : `¿dónde está…?`
+        (où est…?), vu en v5 pour `el baño`.
+
+      ! Un même adjectif peut suivre `ser` ou `estar` avec un sens
+      différent : `es aburrido` (il est ennuyeux, un trait) contre `está
+      aburrido` (il s'ennuie, un état du moment) — mais ce cours s'en tient
+      aux cas les plus clairs pour commencer.
+    points:
+      - id: g3-estar-1
+        sentence: Yo ___ cansado hoy.
+        answer: estoy
+        alt: []
+        options:
+          - estoy
+          - soy
+          - estás
+        translation: Je suis fatigué aujourd'hui.
+        explanation: "La fatigue est un état passager : estar, conjugué estoy."
+      - id: g3-estar-2
+        sentence: Mis padres ___ en casa.
+        answer: están
+        alt: []
+        options:
+          - están
+          - son
+          - estamos
+        translation: Mes parents sont à la maison.
+        explanation: "Le lieu utilise toujours estar : están au pluriel."
+      - id: g3-estar-3
+        sentence: Tú ___ bien hoy.
+        answer: estás
+        alt: []
+        options:
+          - estás
+          - eres
+          - está
+        translation: Tu vas bien aujourd'hui.
+        explanation: "Un état du moment (comment tu vas) : estar, conjugué estás."
+      - id: g3-estar-4
+        sentence: Nosotros ___ en el parque.
+        answer: estamos
+        alt: []
+        options:
+          - estamos
+          - somos
+          - están
+        translation: Nous sommes au parc.
+        explanation: "Le lieu utilise toujours estar : estamos pour « nosotros »."
+      - id: g3-estar-5
+        sentence: El café ___ frío.
+        answer: está
+        alt: []
+        options:
+          - está
+          - es
+          - estoy
+        translation: Le café est froid.
+        explanation: "La température du café est passagère : estar, conjugué está."
