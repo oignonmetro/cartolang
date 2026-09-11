@@ -1,0 +1,168 @@
+id: v1
+title: El trabajo y los estudios
+subtitle: Métiers, bureau, université
+icon: book
+color: teal
+level: A2
+
+lessons:
+  - id: v1-l1
+    title: Profesiones
+    notes: |
+      La plupart des métiers suivent le modèle `-o`/`-a` déjà vu pour la
+      famille (v2, niveau A1) : `el médico` / `la médica`, `el ingeniero` /
+      `la ingeniera`.
+
+      ! Les métiers en `-ista` (`el/la periodista`, `el/la dentista`) ne
+      changent **jamais** au féminin : seul l'article change, `el
+      periodista` devient `la periodista`, jamais `la periodisto`.
+    vocab:
+      - id: es-medico
+        term: el médico
+        gap: médico
+        translation: le médecin
+        pos: nom
+        hint: Le féminin est « la médica ».
+        example:
+          text: El médico llega tarde.
+          translation: Le médecin arrive en retard.
+      - id: es-enfermera
+        term: la enfermera
+        gap: enfermera
+        translation: l'infirmière
+        pos: nom
+        hint: Le masculin est « el enfermero ».
+        example:
+          text: La enfermera trabaja de noche.
+          translation: L'infirmière travaille de nuit.
+      - id: es-profesor
+        term: el profesor
+        gap: profesor
+        translation: le professeur
+        pos: nom
+        hint: Le féminin est « la profesora ».
+        example:
+          text: El profesor explica bien.
+          translation: Le professeur explique bien.
+      - id: es-ingeniero
+        term: el ingeniero
+        gap: ingeniero
+        translation: l'ingénieur
+        pos: nom
+        hint: Le féminin est « la ingeniera ».
+        example:
+          text: Mi hermano es ingeniero.
+          translation: Mon frère est ingénieur.
+      - id: es-abogado
+        term: el abogado
+        gap: abogado
+        translation: l'avocat
+        pos: nom
+        hint: Le féminin est « la abogada ».
+        example:
+          text: El abogado trabaja aquí.
+          translation: L'avocat travaille ici.
+      - id: es-cocinero
+        term: el cocinero
+        gap: cocinero
+        translation: le cuisinier
+        pos: nom
+        hint: Le féminin est « la cocinera ».
+        example:
+          text: El cocinero prepara la cena.
+          translation: Le cuisinier prépare le dîner.
+      - id: es-periodista
+        term: el periodista
+        gap: periodista
+        translation: le journaliste
+        pos: nom
+        hint: "« -ista » ne change jamais au féminin : la periodista."
+        example:
+          text: El periodista escribe un artículo.
+          translation: Le journaliste écrit un article.
+      - id: es-dentista
+        term: el dentista
+        gap: dentista
+        translation: le dentiste
+        pos: nom
+        hint: Invariable en genre, comme periodista.
+        example:
+          text: Voy al dentista mañana.
+          translation: Je vais chez le dentiste demain.
+
+  - id: v1-l2
+    title: El trabajo y los estudios
+    notes: |
+      Le vocabulaire du bureau et des études, pour aller au-delà des
+      formules déjà vues en A1.
+
+      - `trabajar en` (travailler dans/à un lieu), déjà vu en c1.
+      - `estudiar` suit le modèle régulier en `-ar`, comme `hablar` (c1).
+    vocab:
+      - id: es-trabajo
+        term: el trabajo
+        gap: trabajo
+        translation: le travail
+        pos: nom
+        example:
+          text: Mi trabajo es interesante.
+          translation: Mon travail est intéressant.
+      - id: es-oficina
+        term: la oficina
+        gap: oficina
+        translation: le bureau
+        pos: nom
+        example:
+          text: Trabajo en la oficina.
+          translation: Je travaille au bureau.
+      - id: es-reunion
+        term: la reunión
+        gap: reunión
+        translation: la réunion
+        pos: nom
+        example:
+          text: Tenemos una reunión a las tres.
+          translation: Nous avons une réunion à trois heures.
+      - id: es-jefe
+        term: el jefe
+        gap: jefe
+        translation: le patron
+        alt:
+          - la patronne
+        pos: nom
+        hint: Le féminin est « la jefa ».
+        example:
+          text: Mi jefe es simpático.
+          translation: Mon patron est sympathique.
+      - id: es-universidad
+        term: la universidad
+        gap: universidad
+        translation: l'université
+        pos: nom
+        example:
+          text: Estudio en la universidad.
+          translation: J'étudie à l'université.
+      - id: es-examen
+        term: el examen
+        gap: examen
+        translation: l'examen
+        pos: nom
+        example:
+          text: El examen es mañana.
+          translation: L'examen est demain.
+      - id: es-nota
+        term: la nota
+        gap: nota
+        translation: la note
+        pos: nom
+        example:
+          text: Tengo una buena nota.
+          translation: J'ai une bonne note.
+      - id: es-estudio
+        term: estudio
+        translation: j'étudie
+        pos: verbe
+        hint: De estudiar, régulier en -ar comme hablar.
+        example:
+          text: Estudio español.
+          translation: J'étudie l'espagnol.

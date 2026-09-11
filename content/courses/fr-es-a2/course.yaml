@@ -1,7 +1,16 @@
 # Cours d'espagnol A2, pour francophones ayant déjà le niveau A1
-# (`fr-es-a1`). Squelette pour l'instant — voir « Publier le squelette d'un
-# niveau avant son contenu » dans content/README.md : les pistes sans unité
-# affichent un état « à venir » plutôt qu'une page vide.
+# (`fr-es-a1`). Construction en cours, même méthode que pour A1 :
+# vocabulaire d'abord, grammaire et conjugaison qui n'emploient que du
+# vocabulaire déjà vu (`vocabularyScopeRemarks`, tools/content/difficulty.ts).
+#   vocabulaire  — v1 travail et études ✓, v2 courses et argent, v3 santé
+#                  et corps, v4 voyages et transports, v5 technologie et
+#                  communication, v6 loisirs et sport
+#   grammaire    — g1 comparatifs et superlatifs, g2 futur proche (ir a +
+#                  infinitivo), g3 pronoms compléments (me/te/lo/la…),
+#                  g4 por/para, g5 subordonnées avec que
+#   conjugaison  — c1 pretérito perfecto (haber + participe, réguliers),
+#                  c2 pretérito perfecto (participes irréguliers),
+#                  c3 pretérito imperfecto
 
 id: fr-es-a2
 name: Espagnol
@@ -21,7 +30,8 @@ tracks:
     kind: vocab
     color: teal
     icon: book
-    units: []
+    units:
+      - v1
 
   - id: grammaire
     title: Grammaire
