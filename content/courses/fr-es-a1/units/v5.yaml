@@ -1,0 +1,162 @@
+id: v5
+title: La casa y la ciudad
+subtitle: Les pièces, les meubles, la ville
+icon: wave
+color: violet
+level: A1
+
+lessons:
+  - id: v5-l1
+    title: En casa
+    notes: |
+      Le mot pour « chambre » varie selon les régions hispanophones :
+      `la habitación` est le plus général, `el cuarto` très courant aussi.
+      Les deux se comprennent partout — retenez `la habitación`, le plus sûr
+      à l'écrit.
+
+      ! `el baño` désigne **à la fois** la salle de bain et les toilettes :
+      pas de mot à part comme en français. Demander `el baño` dans un
+      restaurant est parfaitement normal.
+    vocab:
+      - id: es-casa
+        term: la casa
+        gap: casa
+        translation: la maison
+        pos: nom
+        example:
+          text: Mi casa es pequeña.
+          translation: Ma maison est petite.
+      - id: es-habitacion
+        term: la habitación
+        gap: habitación
+        translation: la chambre
+        pos: nom
+        hint: On entend aussi « el cuarto » selon les régions.
+        example:
+          text: Mi habitación tiene una ventana grande.
+          translation: Ma chambre a une grande fenêtre.
+      - id: es-cocina
+        term: la cocina
+        gap: cocina
+        translation: la cuisine
+        pos: nom
+        example:
+          text: Cocino en la cocina.
+          translation: Je cuisine dans la cuisine.
+      - id: es-bano
+        term: el baño
+        gap: baño
+        translation: la salle de bain
+        alt:
+          - les toilettes
+          - les WC
+        pos: nom
+        hint: Désigne aussi les toilettes — pas de mot à part en espagnol.
+        example:
+          text: ¿Dónde está el baño?
+          translation: Où sont les toilettes ?
+      - id: es-puerta
+        term: la puerta
+        gap: puerta
+        translation: la porte
+        pos: nom
+        example:
+          text: Cierra la puerta, por favor.
+          translation: Ferme la porte, s'il te plaît.
+      - id: es-ventana
+        term: la ventana
+        gap: ventana
+        translation: la fenêtre
+        pos: nom
+        example:
+          text: Abro la ventana.
+          translation: J'ouvre la fenêtre.
+      - id: es-mesa
+        term: la mesa
+        gap: mesa
+        translation: la table
+        pos: nom
+        example:
+          text: La mesa está en la cocina.
+          translation: La table est dans la cuisine.
+      - id: es-silla
+        term: la silla
+        gap: silla
+        translation: la chaise
+        pos: nom
+        example:
+          text: Esta silla es cómoda.
+          translation: Cette chaise est confortable.
+
+  - id: v5-l2
+    title: En la ciudad
+    notes: |
+      `el coche` (voiture) est le mot le plus courant en Espagne ; `el carro`
+      lui répond en Amérique latine. Les deux se comprennent partout, ce
+      cours retient `el coche`.
+    vocab:
+      - id: es-calle
+        term: la calle
+        gap: calle
+        translation: la rue
+        pos: nom
+        example:
+          text: Vivo en esta calle.
+          translation: J'habite dans cette rue.
+      - id: es-tienda
+        term: la tienda
+        gap: tienda
+        translation: le magasin
+        pos: nom
+        example:
+          text: La tienda cierra a las ocho.
+          translation: Le magasin ferme à huit heures.
+      - id: es-mercado
+        term: el mercado
+        gap: mercado
+        translation: le marché
+        pos: nom
+        example:
+          text: Compro fruta en el mercado.
+          translation: J'achète des fruits au marché.
+      - id: es-hospital
+        term: el hospital
+        gap: hospital
+        translation: l'hôpital
+        pos: nom
+        example:
+          text: Mi tía trabaja en el hospital.
+          translation: Ma tante travaille à l'hôpital.
+      - id: es-escuela
+        term: la escuela
+        gap: escuela
+        translation: l'école
+        pos: nom
+        example:
+          text: Los niños van a la escuela.
+          translation: Les enfants vont à l'école.
+      - id: es-parque
+        term: el parque
+        gap: parque
+        translation: le parc
+        pos: nom
+        example:
+          text: Caminamos por el parque.
+          translation: Nous marchons dans le parc.
+      - id: es-coche
+        term: el coche
+        gap: coche
+        translation: la voiture
+        pos: nom
+        hint: "« el carro » en Amérique latine — les deux se comprennent partout."
+        example:
+          text: Mi coche es nuevo.
+          translation: Ma voiture est neuve.
+      - id: es-autobus
+        term: el autobús
+        gap: autobús
+        translation: le bus
+        pos: nom
+        example:
+          text: Tomo el autobús cada día.
+          translation: Je prends le bus chaque jour.

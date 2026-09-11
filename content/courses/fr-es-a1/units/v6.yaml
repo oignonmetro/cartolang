@@ -1,0 +1,162 @@
+id: v6
+title: El cuerpo y la ropa
+subtitle: Se décrire, s'habiller
+icon: people
+color: sky
+level: A1
+
+lessons:
+  - id: v6-l1
+    title: El cuerpo
+    notes: |
+      Pour les parties du corps, l'espagnol utilise **l'article**, pas le
+      possessif comme en français : `Levanto la mano` (« je lève la main »,
+      pas « ma main »), sauf si la phrase serait autrement ambiguë.
+
+      ! `los ojos` est toujours au pluriel dans ce sens — comme presque tout
+      ce qui va par deux (`las manos`, `los pies`). Le singulier `el ojo` ne
+      désigne qu'un seul œil, dans un contexte précis.
+    vocab:
+      - id: es-cabeza
+        term: la cabeza
+        gap: cabeza
+        translation: la tête
+        pos: nom
+        example:
+          text: Me duele la cabeza.
+          translation: J'ai mal à la tête.
+      - id: es-ojos
+        term: los ojos
+        gap: ojos
+        translation: les yeux
+        pos: nom
+        hint: Toujours au pluriel dans ce sens, comme la plupart des paires du corps.
+        example:
+          text: Tiene los ojos verdes.
+          translation: Il a les yeux verts.
+      - id: es-boca
+        term: la boca
+        gap: boca
+        translation: la bouche
+        pos: nom
+        example:
+          text: Abre la boca.
+          translation: Ouvre la bouche.
+      - id: es-mano
+        term: la mano
+        gap: mano
+        translation: la main
+        pos: nom
+        hint: Finit par -o mais reste féminin — une exception à retenir.
+        example:
+          text: Levanto la mano.
+          translation: Je lève la main.
+      - id: es-pie
+        term: el pie
+        gap: pie
+        translation: le pied
+        pos: nom
+        example:
+          text: Me duele el pie.
+          translation: J'ai mal au pied.
+      - id: es-brazo
+        term: el brazo
+        gap: brazo
+        translation: le bras
+        pos: nom
+        example:
+          text: Tiene el brazo roto.
+          translation: Il a le bras cassé.
+      - id: es-pierna
+        term: la pierna
+        gap: pierna
+        translation: la jambe
+        pos: nom
+        example:
+          text: Me duele la pierna.
+          translation: J'ai mal à la jambe.
+      - id: es-pelo
+        term: el pelo
+        gap: pelo
+        translation: les cheveux
+        pos: nom
+        example:
+          text: Tiene el pelo largo.
+          translation: Il a les cheveux longs.
+
+  - id: v6-l2
+    title: La ropa
+    notes: |
+      `los pantalones` (le pantalon) est **toujours au pluriel** en espagnol,
+      comme en français familier « les pantalons » — jamais `el pantalón`
+      pour un seul vêtement porté.
+
+      ! `la falda` (jupe) ne se confond pas avec `el falda` : tous les mots
+      en `-a` ne sont pas automatiquement féminins d'habitude, mais celui-ci
+      suit bien la règle générale.
+    vocab:
+      - id: es-camisa
+        term: la camisa
+        gap: camisa
+        translation: la chemise
+        pos: nom
+        example:
+          text: Llevo una camisa azul.
+          translation: Je porte une chemise bleue.
+      - id: es-pantalones
+        term: los pantalones
+        gap: pantalones
+        translation: le pantalon
+        pos: nom
+        hint: Toujours au pluriel en espagnol.
+        example:
+          text: Estos pantalones son nuevos.
+          translation: Ce pantalon est neuf.
+      - id: es-vestido
+        term: el vestido
+        gap: vestido
+        translation: la robe
+        pos: nom
+        example:
+          text: Su vestido es rojo.
+          translation: Sa robe est rouge.
+      - id: es-zapatos
+        term: los zapatos
+        gap: zapatos
+        translation: les chaussures
+        pos: nom
+        example:
+          text: Necesito zapatos nuevos.
+          translation: J'ai besoin de nouvelles chaussures.
+      - id: es-chaqueta
+        term: la chaqueta
+        gap: chaqueta
+        translation: la veste
+        pos: nom
+        example:
+          text: Hace frío, lleva la chaqueta.
+          translation: Il fait froid, prends la veste.
+      - id: es-sombrero
+        term: el sombrero
+        gap: sombrero
+        translation: le chapeau
+        pos: nom
+        example:
+          text: Lleva un sombrero grande.
+          translation: Il porte un grand chapeau.
+      - id: es-falda
+        term: la falda
+        gap: falda
+        translation: la jupe
+        pos: nom
+        example:
+          text: Compro una falda negra.
+          translation: J'achète une jupe noire.
+      - id: es-abrigo
+        term: el abrigo
+        gap: abrigo
+        translation: le manteau
+        pos: nom
+        example:
+          text: En invierno llevo abrigo.
+          translation: En hiver je porte un manteau.
