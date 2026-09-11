@@ -7,19 +7,20 @@
 # choisit son unité, l'ordre interne d'une unité (leçon, révision,
 # consolidation) reste lui déjà fixé.
 #
-# Construction en cours, sur le modèle du russe A1 : vocabulaire d'abord,
-# grammaire et conjugaison qui n'emploient que ce vocabulaire déjà vu
-# (`vocabularyScopeRemarks`, tools/content/difficulty.ts). Unités prévues,
-# à mesure qu'elles s'écrivent :
-#   vocabulaire  — v1 salutations ✓, v2 famille ✓, v3 nombres ✓,
-#                  v4 nourriture ✓, v5 maison et ville ✓, v6 corps et
-#                  vêtements ✓, v7 temps et jours ✓ (piste complète)
-#   grammaire    — g1 genre et pluriel ✓, g2 articles ✓, g3 ser/estar ✓,
-#                  g4 possessifs et démonstratifs ✓, g5 lieu (estar +
-#                  en/a/de) ✓, g6 interrogatifs ✓ (piste complète)
-#   conjugaison  — c1 présent des verbes en -ar ✓, c2 présent des verbes en
-#                  -er/-ir ✓, c3 verbes irréguliers clés (ser, estar, tener,
-#                  ir) ✓, c4 gustar et verbes semblables
+# Construit sur le modèle du russe A1 : vocabulaire d'abord, grammaire et
+# conjugaison qui n'emploient que ce vocabulaire déjà vu
+# (`vocabularyScopeRemarks`, tools/content/difficulty.ts).
+#   vocabulaire  — v1 salutations, v2 famille, v3 nombres, v4 nourriture,
+#                  v5 maison et ville, v6 corps et vêtements, v7 temps et
+#                  jours (piste complète)
+#   grammaire    — g1 genre et pluriel, g2 articles, g3 ser/estar,
+#                  g4 possessifs et démonstratifs, g5 lieu (estar +
+#                  en/a/de), g6 interrogatifs (piste complète)
+#   conjugaison  — c1 présent des verbes en -ar, c2 présent des verbes en
+#                  -er/-ir, c3 verbes irréguliers clés (ser, estar, tener,
+#                  ir), c4 gustar et verbes semblables (piste complète)
+#
+# Cours A1 complet. La suite se construit dans fr-es-a2.
 
 id: fr-es-a1
 name: Espagnol
@@ -72,3 +73,4 @@ tracks:
       - c1
       - c2
       - c3
+      - c4

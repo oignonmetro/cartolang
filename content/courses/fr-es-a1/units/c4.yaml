@@ -1,0 +1,108 @@
+id: c4
+title: Gustar y verbos parecidos
+subtitle: Aimer, à l'envers du français
+icon: clock
+color: sky
+level: A1
+
+lessons:
+  - id: c4-l1
+    title: "Gustar : avec une seule chose"
+    notes: |
+      `gustar` fonctionne **à l'envers** du français : ce n'est pas la
+      personne qui est sujet, mais la chose aimée. `Me gusta el café`
+      signifie littéralement « le café me plaît », pas « j'aime le café ».
+
+      - La personne devient un pronom (`me`, `te`, `le`…), placé avant le
+        verbe.
+      - Le verbe s'accorde avec la chose aimée, pas avec la personne : au
+        singulier, toujours `gusta`.
+
+      ! `Me gusta la lluvia` (j'aime la pluie), déjà vu en v7, suit
+      exactement ce modèle : `la lluvia` est le vrai sujet de `gusta`.
+    verbs:
+      - verb: gustar (una cosa)
+        translation: aimer (une chose)
+        tense: présent
+        note: "gusta reste au singulier : il s'accorde avec la chose aimée, pas la personne."
+        forms:
+          - id: c4-gus-1
+            person: a mí
+            answer: me gusta
+          - id: c4-gus-2
+            person: a ti
+            answer: te gusta
+          - id: c4-gus-3
+            person: a él / ella
+            answer: le gusta
+          - id: c4-gus-4
+            person: a nosotros
+            answer: nos gusta
+          - id: c4-gus-5
+            person: a vosotros
+            answer: os gusta
+          - id: c4-gus-6
+            person: a ellos
+            answer: les gusta
+
+  - id: c4-l2
+    title: "Gustar au pluriel, et encantar"
+    notes: |
+      Quand la chose aimée est **au pluriel**, `gusta` devient `gustan` —
+      toujours l'accord avec la chose, jamais avec la personne : `me
+      gustan los zapatos` (j'aime les chaussures), littéralement « les
+      chaussures me plaisent ».
+
+      `encantar` (adorer) suit exactement le même modèle que `gustar`, en
+      plus fort : `me encanta el café` (j'adore le café).
+
+      ! Ne confondez pas `le gusta` (il/elle aime) et `les gusta` (ils/
+      elles aiment) : un seul `-s` de différence, mais un sens très
+      différent.
+    verbs:
+      - verb: gustar (varias cosas)
+        translation: aimer (plusieurs choses)
+        tense: présent
+        note: "gustan au pluriel : il s'accorde avec les choses aimées, jamais la personne."
+        forms:
+          - id: c4-gusp-1
+            person: a mí
+            answer: me gustan
+          - id: c4-gusp-2
+            person: a ti
+            answer: te gustan
+          - id: c4-gusp-3
+            person: a él / ella
+            answer: le gustan
+          - id: c4-gusp-4
+            person: a nosotros
+            answer: nos gustan
+          - id: c4-gusp-5
+            person: a vosotros
+            answer: os gustan
+          - id: c4-gusp-6
+            person: a ellos
+            answer: les gustan
+      - verb: encantar
+        translation: adorer
+        tense: présent
+        note: "Même construction que gustar, avec une chose au singulier."
+        forms:
+          - id: c4-enc-1
+            person: a mí
+            answer: me encanta
+          - id: c4-enc-2
+            person: a ti
+            answer: te encanta
+          - id: c4-enc-3
+            person: a él / ella
+            answer: le encanta
+          - id: c4-enc-4
+            person: a nosotros
+            answer: nos encanta
+          - id: c4-enc-5
+            person: a vosotros
+            answer: os encanta
+          - id: c4-enc-6
+            person: a ellos
+            answer: les encanta
