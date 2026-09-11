@@ -1,0 +1,154 @@
+id: v7
+title: El tiempo y los días
+subtitle: L'heure, les jours, la météo
+icon: clock
+color: teal
+level: A1
+
+lessons:
+  - id: v7-l1
+    title: Los días de la semana
+    notes: |
+      Les jours de la semaine espagnols ne prennent **jamais de majuscule**,
+      contrairement à l'anglais : `lunes`, pas `Lunes`. Comme en français.
+
+      ! `el lunes` (lundi, un lundi précis) devient `los lunes` (le lundi,
+      tous les lundis) simplement en changeant l'article — la plupart des
+      jours ne changent pas de forme au pluriel (`el lunes` → `los lunes`,
+      sauf `sábado`/`sábados` et `domingo`/`domingos`, qui prennent un -s).
+    vocab:
+      - id: es-hoy
+        term: hoy
+        translation: aujourd'hui
+        pos: adverbe
+        example:
+          text: Hoy es lunes.
+          translation: Aujourd'hui c'est lundi.
+      - id: es-manana
+        term: mañana
+        translation: demain
+        pos: adverbe
+        hint: Le même mot signifie aussi « le matin », selon le contexte.
+        example:
+          text: Mañana trabajo.
+          translation: Demain je travaille.
+      - id: es-lunes
+        term: lunes
+        translation: lundi
+        pos: nom
+        hint: Jamais de majuscule en espagnol, comme en français.
+        example:
+          text: El lunes empieza la semana.
+          translation: Lundi commence la semaine.
+      - id: es-martes
+        term: martes
+        translation: mardi
+        pos: nom
+        example:
+          text: Tengo clase el martes.
+          translation: J'ai cours le mardi.
+      - id: es-miercoles
+        term: miércoles
+        translation: mercredi
+        pos: nom
+        example:
+          text: El miércoles no trabajo.
+          translation: Le mercredi je ne travaille pas.
+      - id: es-jueves
+        term: jueves
+        translation: jeudi
+        pos: nom
+        example:
+          text: Llego el jueves.
+          translation: J'arrive jeudi.
+      - id: es-viernes
+        term: viernes
+        translation: vendredi
+        pos: nom
+        example:
+          text: El viernes salimos.
+          translation: Le vendredi nous sortons.
+      - id: es-sabado
+        term: sábado
+        translation: samedi
+        pos: nom
+        hint: Prend un -s au pluriel (los sábados), contrairement à la plupart des jours.
+        example:
+          text: El sábado descanso.
+          translation: Le samedi je me repose.
+
+  - id: v7-l2
+    title: La hora y el clima
+    notes: |
+      Pour l'heure, l'espagnol utilise `es la una` (il est une heure, au
+      singulier) mais `son las dos`, `son las tres`… (au pluriel, dès deux
+      heures). Comme si on disait « ce sont les deux heures ».
+
+      - Pour la météo, `hace` (il fait) précède un nom : `hace calor`,
+        `hace frío` — jamais un adjectif seul comme en français.
+      - `llueve` (il pleut) et `hace sol` (il fait soleil) s'emploient sans
+        `hace` pour le premier, avec pour le second.
+    vocab:
+      - id: es-hora
+        term: la hora
+        gap: hora
+        translation: l'heure
+        pos: nom
+        example:
+          text: ¿Qué hora es?
+          translation: Quelle heure est-il ?
+      - id: es-domingo
+        term: domingo
+        translation: dimanche
+        pos: nom
+        hint: Prend un -s au pluriel (los domingos), comme sábado.
+        example:
+          text: Domingo es el último día.
+          translation: Dimanche est le dernier jour.
+      - id: es-semana
+        term: la semana
+        gap: semana
+        translation: la semaine
+        pos: nom
+        example:
+          text: Esta semana trabajo mucho.
+          translation: Cette semaine je travaille beaucoup.
+      - id: es-calor
+        term: calor
+        translation: chaud
+        pos: nom
+        hint: "« hace calor » (il fait chaud) — hace précède un nom, pas un adjectif."
+        example:
+          text: Hace mucho calor hoy.
+          translation: Il fait très chaud aujourd'hui.
+      - id: es-frio
+        term: frío
+        translation: froid
+        pos: nom
+        example:
+          text: Hace frío en invierno.
+          translation: Il fait froid en hiver.
+      - id: es-sol
+        term: el sol
+        gap: sol
+        translation: le soleil
+        pos: nom
+        example:
+          text: Hace sol esta mañana.
+          translation: Il fait soleil ce matin.
+      - id: es-lluvia
+        term: la lluvia
+        gap: lluvia
+        translation: la pluie
+        pos: nom
+        example:
+          text: Me gusta la lluvia.
+          translation: J'aime la pluie.
+      - id: es-llueve
+        term: llueve
+        translation: il pleut
+        pos: verbe
+        hint: S'emploie seul, sans « hace ».
+        example:
+          text: Llueve mucho en abril.
+          translation: Il pleut beaucoup en avril.
