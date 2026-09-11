@@ -1,0 +1,133 @@
+id: g2
+title: Les articles indéfinis
+subtitle: Un, una, unos, unas
+icon: compass
+color: violet
+level: A1
+
+lessons:
+  - id: g2-l1
+    title: "Un, una : l'article indéfini singulier"
+    notes: |
+      Comme pour `el`/`la`, l'article indéfini suit le genre du nom : `un`
+      au masculin, `una` au féminin — mêmes règles de finale que pour
+      l'article défini (**-o** masculin, **-a** féminin le plus souvent).
+
+      ! Devant un nom féminin qui commence par un **a** accentué, `una`
+      garde sa forme pleine (contrairement à `el`/`la` : voir `el agua`) :
+      on dit bien `una amiga`, jamais `un amiga`.
+    points:
+      - id: g2-un-1
+        sentence: Tengo ___ hermano en Madrid.
+        answer: un
+        alt: []
+        options:
+          - un
+          - una
+          - unos
+        translation: J'ai un frère à Madrid.
+        explanation: "« hermano » finit par -o : masculin, un."
+      - id: g2-un-2
+        sentence: Busco ___ hermana para el equipo.
+        answer: una
+        alt: []
+        options:
+          - una
+          - un
+          - unas
+        translation: Je cherche une sœur pour l'équipe.
+        explanation: "« hermana » finit par -a : féminin, una."
+      - id: g2-un-3
+        sentence: Compro ___ coche nuevo.
+        answer: un
+        alt: []
+        options:
+          - un
+          - una
+          - unos
+        translation: J'achète une voiture neuve.
+        explanation: "« coche » (el coche) est masculin : un."
+      - id: g2-un-4
+        sentence: Busco ___ casa grande.
+        answer: una
+        alt: []
+        options:
+          - una
+          - un
+          - unas
+        translation: Je cherche une grande maison.
+        explanation: "« casa » (la casa) est féminin : una."
+      - id: g2-un-5
+        sentence: Necesito ___ camisa azul.
+        answer: una
+        alt: []
+        options:
+          - una
+          - un
+          - unos
+        translation: J'ai besoin d'une chemise bleue.
+        explanation: "« camisa » (la camisa) est féminin : una."
+      - id: g2-un-6
+        sentence: Quiero comprar ___ vestido rojo.
+        answer: un
+        alt: []
+        options:
+          - un
+          - una
+          - unas
+        translation: Je veux acheter une robe rouge.
+        explanation: "« vestido » (el vestido) est masculin malgré sa traduction française féminine : un."
+
+  - id: g2-l2
+    title: "Unos, unas : l'article indéfini pluriel"
+    notes: |
+      Au pluriel, `unos`/`unas` correspond à « des » ou « quelques » en
+      français — il se laisse souvent tomber en français (« j'ai des
+      chaussures » → « j'ai des chaussures » ou simplement « j'ai des
+      chaussures »), mais reste obligatoire en espagnol devant le nom.
+
+      ! Ne confondez pas `unos`/`unas` (des, quelques) avec `los`/`las`
+      (les, un ensemble précis et connu) : `unos zapatos` (des chaussures,
+      indéterminées) contre `los zapatos` (les chaussures, celles dont on
+      parle déjà).
+    points:
+      - id: g2-unos-1
+        sentence: Tengo ___ zapatos nuevos.
+        answer: unos
+        alt: []
+        options:
+          - unos
+          - unas
+          - los
+        translation: J'ai de nouvelles chaussures.
+        explanation: "« zapatos » (los zapatos) est masculin pluriel : unos."
+      - id: g2-unos-2
+        sentence: Hay ___ tiendas en esta calle.
+        answer: unas
+        alt: []
+        options:
+          - unas
+          - unos
+          - las
+        translation: Il y a des magasins dans cette rue.
+        explanation: "« tiendas » (la tienda) est féminin pluriel : unas."
+      - id: g2-unos-3
+        sentence: Como ___ huevos cada semana.
+        answer: unos
+        alt: []
+        options:
+          - unos
+          - unas
+          - los
+        translation: Je mange des œufs chaque semaine.
+        explanation: "« huevos » (el huevo) est masculin pluriel : unos."
+      - id: g2-unos-4
+        sentence: Compro ___ camisas azules.
+        answer: unas
+        alt: []
+        options:
+          - unas
+          - unos
+          - las
+        translation: J'achète des chemises bleues.
+        explanation: "« camisas » (la camisa) est féminin pluriel : unas."

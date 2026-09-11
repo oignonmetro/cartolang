@@ -14,7 +14,7 @@
 #   vocabulaire  — v1 salutations ✓, v2 famille ✓, v3 nombres ✓,
 #                  v4 nourriture ✓, v5 maison et ville ✓, v6 corps et
 #                  vêtements ✓, v7 temps et jours ✓ (piste complète)
-#   grammaire    — g1 genre et pluriel ✓, g2 articles, g3 ser/estar,
+#   grammaire    — g1 genre et pluriel ✓, g2 articles ✓, g3 ser/estar,
 #                  g4 possessifs et démonstratifs, g5 lieu (estar + en/a/de),
 #                  g6 interrogatifs
 #   conjugaison  — c1 présent des verbes en -ar, c2 présent des verbes en
@@ -56,6 +56,7 @@ tracks:
     icon: compass
     units:
       - g1
+      - g2
 
   - id: conjugaison
     title: Conjugaison
