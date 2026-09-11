@@ -1,0 +1,130 @@
+id: c3
+title: Verbos irregulares clave
+subtitle: Ser, estar, tener, ir
+icon: clock
+color: sky
+level: A1
+
+lessons:
+  - id: c3-l1
+    title: Ser et estar, la conjugaison complète
+    notes: |
+      Ces deux verbes, vus en détail en grammaire (g3), sont si fréquents
+      qu'ils méritent d'être sus par cœur, sans passer par une règle : les
+      terminaisons en `-ar` ne s'y appliquent pas.
+
+      - `ser` : `soy, eres, es, somos, sois, son`.
+      - `estar` : `estoy, estás, está, estamos, estáis, están`.
+
+      ! `estar` porte un accent sur presque toutes les formes (`estás`,
+      `está`, `están`), `ser` n'en porte aucune : un repère simple pour ne
+      pas les confondre à l'écrit.
+    verbs:
+      - verb: ser
+        translation: être (identité, trait durable)
+        tense: présent
+        note: "Verbe très irrégulier, à apprendre par cœur — voir g3."
+        forms:
+          - id: c3-ser-1
+            person: yo
+            answer: soy
+          - id: c3-ser-2
+            person: tú
+            answer: eres
+          - id: c3-ser-3
+            person: él / ella
+            answer: es
+          - id: c3-ser-4
+            person: nosotros
+            answer: somos
+          - id: c3-ser-5
+            person: vosotros
+            answer: sois
+          - id: c3-ser-6
+            person: ellos
+            answer: son
+      - verb: estar
+        translation: être (état, lieu)
+        tense: présent
+        note: "Accentué sur presque toutes les formes, contrairement à ser."
+        forms:
+          - id: c3-est-1
+            person: yo
+            answer: estoy
+          - id: c3-est-2
+            person: tú
+            answer: estás
+          - id: c3-est-3
+            person: él / ella
+            answer: está
+          - id: c3-est-4
+            person: nosotros
+            answer: estamos
+          - id: c3-est-5
+            person: vosotros
+            answer: estáis
+          - id: c3-est-6
+            person: ellos
+            answer: están
+
+  - id: c3-l2
+    title: Tener et ir
+    notes: |
+      Deux autres verbes indispensables, irréguliers chacun à sa manière.
+
+      - `tener` (avoir) : irrégulier seulement à `yo` (`tengo`) et par un
+        changement `e`→`ie` aux autres personnes sauf `nosotros`/
+        `vosotros` — déjà croisé en v1 (`tengo veinte años`).
+      - `ir` (aller) : l'un des verbes les plus irréguliers de l'espagnol,
+        sans aucun lien visible avec son infinitif — à apprendre en bloc.
+
+      ! `voy`, `vas`, `va`… ne se prononcent presque jamais seuls : `ir a`
+      + lieu (`voy a la escuela`) ou `ir a` + infinitif annonce un futur
+      proche, comme « je vais » en français.
+    verbs:
+      - verb: tener
+        translation: avoir
+        tense: présent
+        note: "Irrégulier à yo (tengo), puis e→ie sauf à nosotros/vosotros."
+        forms:
+          - id: c3-ten-1
+            person: yo
+            answer: tengo
+          - id: c3-ten-2
+            person: tú
+            answer: tienes
+          - id: c3-ten-3
+            person: él / ella
+            answer: tiene
+          - id: c3-ten-4
+            person: nosotros
+            answer: tenemos
+          - id: c3-ten-5
+            person: vosotros
+            answer: tenéis
+          - id: c3-ten-6
+            person: ellos
+            answer: tienen
+      - verb: ir
+        translation: aller
+        tense: présent
+        note: "Très irrégulier, sans lien avec l'infinitif — à apprendre en bloc."
+        forms:
+          - id: c3-ir-1
+            person: yo
+            answer: voy
+          - id: c3-ir-2
+            person: tú
+            answer: vas
+          - id: c3-ir-3
+            person: él / ella
+            answer: va
+          - id: c3-ir-4
+            person: nosotros
+            answer: vamos
+          - id: c3-ir-5
+            person: vosotros
+            answer: vais
+          - id: c3-ir-6
+            person: ellos
+            answer: van

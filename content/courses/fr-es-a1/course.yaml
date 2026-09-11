@@ -19,7 +19,7 @@
 #                  en/a/de) ✓, g6 interrogatifs ✓ (piste complète)
 #   conjugaison  — c1 présent des verbes en -ar ✓, c2 présent des verbes en
 #                  -er/-ir ✓, c3 verbes irréguliers clés (ser, estar, tener,
-#                  ir), c4 gustar et verbes semblables
+#                  ir) ✓, c4 gustar et verbes semblables
 
 id: fr-es-a1
 name: Espagnol
@@ -71,3 +71,4 @@ tracks:
     units:
       - c1
       - c2
+      - c3
