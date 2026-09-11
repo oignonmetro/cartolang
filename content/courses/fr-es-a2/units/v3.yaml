@@ -1,0 +1,163 @@
+id: v3
+title: La salud y el cuerpo
+subtitle: Chez le médecin, se sentir bien ou mal
+icon: book
+color: coral
+level: A2
+
+lessons:
+  - id: v3-l1
+    title: En la consulta
+    notes: |
+      Le vocabulaire du cabinet médical, pour aller plus loin que les
+      parties du corps déjà vues en A1 (v6).
+
+      `tener` (déjà vu en c3) sert à dire ce dont on souffre : `tengo
+      fiebre`, `tengo un resfriado` — littéralement « j'ai de la fièvre »,
+      comme en français.
+    vocab:
+      - id: es-salud
+        term: la salud
+        gap: salud
+        translation: la santé
+        pos: nom
+        example:
+          text: La salud es importante.
+          translation: La santé est importante.
+      - id: es-enfermedad
+        term: la enfermedad
+        gap: enfermedad
+        translation: la maladie
+        pos: nom
+        example:
+          text: Es una enfermedad común.
+          translation: C'est une maladie courante.
+      - id: es-dolor
+        term: el dolor
+        gap: dolor
+        translation: la douleur
+        pos: nom
+        example:
+          text: Tengo un dolor de cabeza.
+          translation: J'ai mal à la tête.
+      - id: es-pastilla
+        term: la pastilla
+        gap: pastilla
+        translation: le comprimé
+        pos: nom
+        example:
+          text: Tomo una pastilla.
+          translation: Je prends un comprimé.
+      - id: es-receta
+        term: la receta
+        gap: receta
+        translation: l'ordonnance
+        pos: nom
+        example:
+          text: Necesito la receta.
+          translation: J'ai besoin de l'ordonnance.
+      - id: es-fiebre
+        term: la fiebre
+        gap: fiebre
+        translation: la fièvre
+        pos: nom
+        example:
+          text: Tengo fiebre.
+          translation: J'ai de la fièvre.
+      - id: es-tos
+        term: la tos
+        gap: tos
+        translation: la toux
+        pos: nom
+        example:
+          text: Tiene mucha tos.
+          translation: Il tousse beaucoup.
+      - id: es-resfriado
+        term: el resfriado
+        gap: resfriado
+        translation: le rhume
+        pos: nom
+        example:
+          text: Tengo un resfriado.
+          translation: J'ai un rhume.
+
+  - id: v3-l2
+    title: Cómo te sientes
+    notes: |
+      Pour dire comment on se sent, deux constructions : `estar` +
+      adjectif (déjà vu en g3) pour un état, et `me duele` pour une
+      douleur précise.
+
+      ! `me duele` fonctionne comme `gustar` (c4) : la partie du corps
+      est le vrai sujet, la personne devient un pronom. `Me duele la
+      cabeza` (j'ai mal à la tête) veut dire littéralement « la tête me
+      fait mal ».
+    vocab:
+      - id: es-enfermo
+        term: enfermo
+        translation: malade
+        pos: adjectif
+        hint: Le féminin est « enferma ».
+        example:
+          text: Mi hermano está enfermo.
+          translation: Mon frère est malade.
+      - id: es-cansado
+        term: cansado
+        translation: fatigué
+        pos: adjectif
+        hint: Le féminin est « cansada ».
+        example:
+          text: Estoy muy cansado.
+          translation: Je suis très fatigué.
+      - id: es-mareado
+        term: mareado
+        translation: qui a le vertige
+        alt:
+          - qui a la nausée
+        pos: adjectif
+        hint: Le féminin est « mareada ».
+        example:
+          text: Estoy mareado hoy.
+          translation: J'ai le vertige aujourd'hui.
+      - id: es-grave
+        term: grave
+        translation: sérieux (état de santé)
+        alt:
+          - grave
+        pos: adjectif
+        hint: "Invariable en genre : una enfermedad grave, un problema grave."
+        example:
+          text: No es grave.
+          translation: Ce n'est pas grave.
+      - id: es-toso
+        term: toso
+        translation: je tousse
+        pos: verbe
+        hint: De toser, régulier en -er comme comer (c2).
+        example:
+          text: Toso mucho por la noche.
+          translation: Je tousse beaucoup la nuit.
+      - id: es-descanso
+        term: descanso
+        translation: je me repose
+        pos: verbe
+        hint: De descansar, régulier en -ar comme hablar.
+        example:
+          text: Descanso los domingos.
+          translation: Je me repose le dimanche.
+      - id: es-mejoro
+        term: mejoro
+        translation: je vais mieux
+        pos: verbe
+        hint: De mejorar, régulier en -ar comme hablar.
+        example:
+          text: Mejoro cada día.
+          translation: Je vais mieux chaque jour.
+      - id: es-me-duele
+        term: me duele
+        translation: j'ai mal (à quelque chose)
+        pos: expression
+        hint: Comme gustar (c4) — la partie du corps est le vrai sujet.
+        example:
+          text: Me duele la cabeza.
+          translation: J'ai mal à la tête.
