@@ -1,0 +1,132 @@
+id: g6
+title: Las preguntas
+subtitle: Qué, quién, cómo, dónde…
+icon: compass
+color: violet
+level: A1
+
+lessons:
+  - id: g6-l1
+    title: "Qué, quién, cómo"
+    notes: |
+      Les mots interrogatifs espagnols portent **toujours un accent écrit**
+      quand ils posent une question, contrairement aux mêmes mots dans
+      d'autres emplois — un point qui n'a pas d'équivalent en français.
+
+      - `qué` (quoi, quel) : `¿Qué hora es?`, déjà vu en v7.
+      - `quién` (qui) : pour une personne.
+      - `cómo` (comment) : `¿Cómo te llamas?`, déjà vu en v1.
+    points:
+      - id: g6-qqc-1
+        sentence: "¿___ es tu madre?"
+        answer: Quién
+        alt: []
+        options:
+          - Quién
+          - Qué
+          - Cómo
+        translation: Qui est ta mère ?
+        explanation: "Demander qui est une personne : quién."
+      - id: g6-qqc-2
+        sentence: "¿___ te llamas?"
+        answer: Cómo
+        alt: []
+        options:
+          - Cómo
+          - Qué
+          - Quién
+        translation: Comment tu t'appelles ?
+        explanation: "Formule déjà vue en v1 : ¿cómo te llamas?"
+      - id: g6-qqc-3
+        sentence: "¿___ hora es?"
+        answer: Qué
+        alt: []
+        options:
+          - Qué
+          - Cómo
+          - Quién
+        translation: Quelle heure est-il ?
+        explanation: "Formule déjà vue en v7 : ¿qué hora es?"
+      - id: g6-qqc-4
+        sentence: "¿___ es esto?"
+        answer: Qué
+        alt: []
+        options:
+          - Qué
+          - Quién
+          - Cómo
+        translation: Qu'est-ce que c'est ?
+        explanation: "Demander ce qu'est une chose : qué."
+      - id: g6-qqc-5
+        sentence: "¿___ es tu hermano?"
+        answer: Quién
+        alt: []
+        options:
+          - Quién
+          - Qué
+          - Cómo
+        translation: Qui est ton frère ?
+        explanation: "Demander qui est une personne : quién."
+
+  - id: g6-l2
+    title: "Dónde, cuándo, cuánto"
+    notes: |
+      Trois autres interrogatifs très courants, eux aussi toujours
+      accentués en question : le lieu, le moment, la quantité.
+
+      - `dónde` (où) : `¿Dónde está el baño?`, déjà vu en v5.
+      - `cuándo` (quand).
+      - `cuánto`/`cuántos` (combien) : s'accorde en nombre avec le nom qui
+        suit, comme un adjectif — `¿cuántos años tienes?` (littéralement
+        « combien d'années as-tu »), déjà croisé avec `tengo… años` en v1.
+    points:
+      - id: g6-dcc-1
+        sentence: "¿___ está el hospital?"
+        answer: Dónde
+        alt: []
+        options:
+          - Dónde
+          - Cuándo
+          - Cuánto
+        translation: Où est l'hôpital ?
+        explanation: "Formule déjà vue en v5 : ¿dónde está el baño?"
+      - id: g6-dcc-2
+        sentence: "¿___ llegas a casa?"
+        answer: Cuándo
+        alt: []
+        options:
+          - Cuándo
+          - Dónde
+          - Cuánto
+        translation: Quand arrives-tu à la maison ?
+        explanation: "Demander un moment : cuándo."
+      - id: g6-dcc-3
+        sentence: "¿___ años tienes?"
+        answer: Cuántos
+        alt: []
+        options:
+          - Cuántos
+          - Cuánto
+          - Dónde
+        translation: Quel âge as-tu ?
+        explanation: "« años » est masculin pluriel : cuánto s'accorde en cuántos."
+      - id: g6-dcc-4
+        sentence: "¿___ hermanos tienes?"
+        answer: Cuántos
+        alt: []
+        options:
+          - Cuántos
+          - Cuánto
+          - Cuándo
+        translation: Combien de frères et sœurs as-tu ?
+        explanation: "« hermanos » est masculin pluriel : cuántos."
+      - id: g6-dcc-5
+        sentence: "¿___ está tu prima?"
+        answer: Dónde
+        alt: []
+        options:
+          - Dónde
+          - Cuándo
+          - Cuántos
+        translation: Où est ta cousine ?
+        explanation: "Demander un lieu : dónde, avec estar comme en g3 et g5."
