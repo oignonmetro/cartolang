@@ -17,7 +17,7 @@
 #   grammaire    — g1 genre et pluriel ✓, g2 articles ✓, g3 ser/estar ✓,
 #                  g4 possessifs et démonstratifs ✓, g5 lieu (estar +
 #                  en/a/de) ✓, g6 interrogatifs ✓ (piste complète)
-#   conjugaison  — c1 présent des verbes en -ar, c2 présent des verbes en
+#   conjugaison  — c1 présent des verbes en -ar ✓, c2 présent des verbes en
 #                  -er/-ir, c3 verbes irréguliers clés (ser, estar, tener, ir),
 #                  c4 gustar et verbes semblables
 
@@ -68,4 +68,5 @@ tracks:
     kind: conjugation
     color: sky
     icon: clock
-    units: []
+    units:
+      - c1

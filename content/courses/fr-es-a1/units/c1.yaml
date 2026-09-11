@@ -1,0 +1,104 @@
+id: c1
+title: El presente, verbos en -ar
+subtitle: Le modèle le plus courant
+icon: clock
+color: sky
+level: A1
+
+lessons:
+  - id: c1-l1
+    title: Hablar, le modèle régulier
+    notes: |
+      La majorité des verbes espagnols se terminent en `-ar` à l'infinitif,
+      et suivent presque tous les **mêmes six terminaisons** au présent : on
+      retire `-ar` et on ajoute `-o`, `-as`, `-a`, `-amos`, `-áis`, `-an`.
+
+      - `yo hablo`, `tú hablas`, `él/ella habla`
+      - `nosotros hablamos`, `vosotros habláis`, `ellos hablan`
+
+      ! Contrairement au français, le pronom sujet se **laisse tomber** la
+      plupart du temps : `hablo español` suffit, `yo hablo español` insiste
+      seulement sur le « moi ».
+    verbs:
+      - verb: hablar
+        translation: parler
+        tense: présent
+        note: "Retirer -ar, ajouter -o, -as, -a, -amos, -áis, -an."
+        forms:
+          - id: c1-hab-1
+            person: yo
+            answer: hablo
+          - id: c1-hab-2
+            person: tú
+            answer: hablas
+          - id: c1-hab-3
+            person: él / ella
+            answer: habla
+          - id: c1-hab-4
+            person: nosotros
+            answer: hablamos
+          - id: c1-hab-5
+            person: vosotros
+            answer: habláis
+          - id: c1-hab-6
+            person: ellos
+            answer: hablan
+
+  - id: c1-l2
+    title: Trabajar et llevar, même modèle
+    notes: |
+      Ces deux verbes suivent exactement les terminaisons de `hablar` —
+      une fois le modèle su, il s'applique tel quel à des centaines de
+      verbes en `-ar`.
+
+      - `trabajar` (travailler) : déjà croisé en v2 et v3 (`Mi tía trabaja
+        en un hospital`, `Trabajo ocho horas`).
+      - `llevar` (porter, un vêtement) : déjà croisé en v6 (`Llevo una
+        camisa azul`, `Lleva un sombrero grande`).
+    verbs:
+      - verb: trabajar
+        translation: travailler
+        tense: présent
+        note: "Mêmes terminaisons que hablar : -o, -as, -a, -amos, -áis, -an."
+        forms:
+          - id: c1-trab-1
+            person: yo
+            answer: trabajo
+          - id: c1-trab-2
+            person: tú
+            answer: trabajas
+          - id: c1-trab-3
+            person: él / ella
+            answer: trabaja
+          - id: c1-trab-4
+            person: nosotros
+            answer: trabajamos
+          - id: c1-trab-5
+            person: vosotros
+            answer: trabajáis
+          - id: c1-trab-6
+            person: ellos
+            answer: trabajan
+      - verb: llevar
+        translation: porter (un vêtement)
+        tense: présent
+        note: "Mêmes terminaisons que hablar : -o, -as, -a, -amos, -áis, -an."
+        forms:
+          - id: c1-llev-1
+            person: yo
+            answer: llevo
+          - id: c1-llev-2
+            person: tú
+            answer: llevas
+          - id: c1-llev-3
+            person: él / ella
+            answer: lleva
+          - id: c1-llev-4
+            person: nosotros
+            answer: llevamos
+          - id: c1-llev-5
+            person: vosotros
+            answer: lleváis
+          - id: c1-llev-6
+            person: ellos
+            answer: llevan
