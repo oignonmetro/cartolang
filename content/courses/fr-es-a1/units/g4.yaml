@@ -1,0 +1,141 @@
+id: g4
+title: Posesivos y demostrativos
+subtitle: Mi, tu, su — este, ese
+icon: compass
+color: violet
+level: A1
+
+lessons:
+  - id: g4-l1
+    title: "Mi, tu, su : les possessifs"
+    notes: |
+      Les possessifs courts espagnols (`mi`, `tu`, `su`) ne changent **pas**
+      selon le genre du nom possédé, seulement selon son nombre : `mi
+      hermano` et `mi hermana` gardent tous deux `mi`, mais `mis hermanos`
+      prend un -s au pluriel.
+
+      - `mi/mis` : mon, ma, mes.
+      - `tu/tus` : ton, ta, tes.
+      - `su/sus` : son, sa, ses — **et aussi** votre/vos (forme polie).
+
+      ! `su coche` peut vouloir dire « sa voiture », « leur voiture » ou
+      « votre voiture » : le contexte seul lève l'ambiguïté, l'espagnol ne
+      distingue pas ces trois sens comme le français.
+    points:
+      - id: g4-pos-1
+        sentence: ___ hermano vive en Madrid.
+        answer: Mi
+        alt: []
+        options:
+          - Mi
+          - Tu
+          - Su
+        translation: Mon frère vit à Madrid.
+        explanation: "« mi » (mon/ma) ne change pas selon le genre du nom."
+      - id: g4-pos-2
+        sentence: "¿Dónde está ___ casa?"
+        answer: tu
+        alt: []
+        options:
+          - tu
+          - mi
+          - su
+        translation: Où est ta maison ?
+        explanation: "« tu » (ton/ta) reste identique devant un nom féminin."
+      - id: g4-pos-3
+        sentence: Este es ___ coche.
+        answer: su
+        alt: []
+        options:
+          - su
+          - sus
+          - tu
+        translation: Voici sa voiture.
+        explanation: "« su » (son/sa/votre) au singulier, un seul coche."
+      - id: g4-pos-4
+        sentence: ___ padres son simpáticos.
+        answer: Mis
+        alt: []
+        options:
+          - Mis
+          - Mi
+          - Tus
+        translation: Mes parents sont sympathiques.
+        explanation: "« padres » est pluriel : mi devient mis."
+      - id: g4-pos-5
+        sentence: ___ zapatos son nuevos.
+        answer: Tus
+        alt: []
+        options:
+          - Tus
+          - Tu
+          - Sus
+        translation: Tes chaussures sont neuves.
+        explanation: "« zapatos » est pluriel : tu devient tus."
+      - id: g4-pos-6
+        sentence: ___ primos viven en Bogotá.
+        answer: Sus
+        alt: []
+        options:
+          - Sus
+          - Su
+          - Mis
+        translation: Ses cousins vivent à Bogotá.
+        explanation: "« primos » est pluriel : su devient sus."
+
+  - id: g4-l2
+    title: "Este, ese : les démonstratifs"
+    notes: |
+      Comme les articles, les démonstratifs s'accordent en genre avec le
+      nom : `este`/`esta` (masculin/féminin) pour ce qui est **proche**,
+      `ese`/`esa` pour ce qui est **plus loin** — la distinction que le
+      français fait entre « -ci » et « -là ».
+
+      - `este coche` (cette voiture-ci, proche) contre `ese coche` (cette
+        voiture-là, plus loin).
+      - Même logique au féminin : `esta mesa` contre `esa mesa`.
+
+      ! Ne confondez pas `esta` (celle-ci, démonstratif) et `está` (il/elle
+      est, de `estar`, vu en g3) : seul l'accent les distingue à l'écrit,
+      mais leur rôle est totalement différent.
+    points:
+      - id: g4-dem-1
+        sentence: ___ mesa es nueva.
+        answer: Esta
+        alt: []
+        options:
+          - Esta
+          - Este
+          - Esa
+        translation: Cette table-ci est neuve.
+        explanation: "« mesa » est féminin, et l'objet est proche : esta."
+      - id: g4-dem-2
+        sentence: ___ coche es rápido.
+        answer: Este
+        alt: []
+        options:
+          - Este
+          - Esta
+          - Ese
+        translation: Cette voiture-ci est rapide.
+        explanation: "« coche » est masculin, et l'objet est proche : este."
+      - id: g4-dem-3
+        sentence: ___ tienda está lejos.
+        answer: Esa
+        alt: []
+        options:
+          - Esa
+          - Esta
+          - Ese
+        translation: Ce magasin-là est loin.
+        explanation: "« tienda » est féminin, et le magasin est plus loin (lejos) : esa."
+      - id: g4-dem-4
+        sentence: ___ parque es bonito.
+        answer: Ese
+        alt: []
+        options:
+          - Ese
+          - Este
+          - Esa
+        translation: Ce parc-là est joli.
+        explanation: "« parque » est masculin, et il est plus loin : ese."

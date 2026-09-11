@@ -15,7 +15,7 @@
 #                  v4 nourriture ✓, v5 maison et ville ✓, v6 corps et
 #                  vêtements ✓, v7 temps et jours ✓ (piste complète)
 #   grammaire    — g1 genre et pluriel ✓, g2 articles ✓, g3 ser/estar ✓,
-#                  g4 possessifs et démonstratifs, g5 lieu (estar + en/a/de),
+#                  g4 possessifs et démonstratifs ✓, g5 lieu (estar + en/a/de),
 #                  g6 interrogatifs
 #   conjugaison  — c1 présent des verbes en -ar, c2 présent des verbes en
 #                  -er/-ir, c3 verbes irréguliers clés (ser, estar, tener, ir),
@@ -58,6 +58,7 @@ tracks:
       - g1
       - g2
       - g3
+      - g4
 
   - id: conjugaison
     title: Conjugaison
