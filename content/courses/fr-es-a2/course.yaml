@@ -5,7 +5,7 @@
 #   vocabulaire  — v1 travail et études ✓, v2 courses et argent ✓, v3 santé
 #                  et corps ✓, v4 voyages et transports ✓, v5 technologie et
 #                  communication ✓, v6 loisirs et sport ✓ (piste complète)
-#   grammaire    — g1 comparatifs et superlatifs, g2 futur proche (ir a +
+#   grammaire    — g1 comparatifs et superlatifs ✓, g2 futur proche (ir a +
 #                  infinitivo), g3 pronoms compléments (me/te/lo/la…),
 #                  g4 por/para, g5 subordonnées avec que
 #   conjugaison  — c1 pretérito perfecto (haber + participe, réguliers),
@@ -44,7 +44,8 @@ tracks:
     kind: grammar
     color: violet
     icon: compass
-    units: []
+    units:
+      - g1
 
   - id: conjugaison
     title: Conjugaison

@@ -1,0 +1,154 @@
+id: g1
+title: Comparativos y superlativos
+subtitle: Más que, tan como, el más
+icon: compass
+color: violet
+level: A2
+
+lessons:
+  - id: g1-l1
+    title: "Más, menos, tan : comparer"
+    notes: |
+      Trois structures pour comparer, toutes très régulières :
+
+      - `más` + adjectif + `que` : supériorité (plus... que).
+      - `menos` + adjectif + `que` : infériorité (moins... que).
+      - `tan` + adjectif + `como` : égalité (aussi... que).
+
+      ! Le mot qui suit change selon la structure : `que` après `más`/
+      `menos`, mais `como` après `tan` — ne les mélangez pas.
+    points:
+      - id: g1-comp-1
+        sentence: Mi hermano es ___ alto que yo.
+        answer: más
+        alt: []
+        options:
+          - más
+          - menos
+          - tan
+        translation: Mon frère est plus grand que moi.
+        explanation: "Supériorité : más + adjectif + que."
+      - id: g1-comp-2
+        sentence: Este coche es ___ caro que ese.
+        answer: menos
+        alt: []
+        options:
+          - menos
+          - más
+          - tan
+        translation: Cette voiture-ci est moins chère que celle-là.
+        explanation: "Infériorité : menos + adjectif + que."
+      - id: g1-comp-3
+        sentence: Mi casa es ___ grande como tu casa.
+        answer: tan
+        alt: []
+        options:
+          - tan
+          - más
+          - menos
+        translation: Ma maison est aussi grande que ta maison.
+        explanation: "Égalité : tan + adjectif + como, jamais que."
+      - id: g1-comp-4
+        sentence: El tren es ___ rápido que el autobús.
+        answer: más
+        alt: []
+        options:
+          - más
+          - menos
+          - tan
+        translation: Le train est plus rapide que le bus.
+        explanation: "Supériorité : más + adjectif + que."
+      - id: g1-comp-5
+        sentence: Estoy ___ cansado que tú.
+        answer: más
+        alt: []
+        options:
+          - más
+          - menos
+          - tan
+        translation: Je suis plus fatigué que toi.
+        explanation: "Supériorité : más + adjectif + que."
+      - id: g1-comp-6
+        sentence: Este libro es ___ interesante que ese.
+        answer: menos
+        alt: []
+        options:
+          - menos
+          - más
+          - tan
+        translation: Ce livre-ci est moins intéressant que celui-là.
+        explanation: "Infériorité : menos + adjectif + que."
+
+  - id: g1-l2
+    title: "El más, mejor, mayor : superlatifs"
+    notes: |
+      Le superlatif ajoute simplement l'article (`el`/`la`) devant `más`/
+      `menos` : `el coche más caro` (la voiture la plus chère).
+
+      Quatre adjectifs ont une forme comparative **irrégulière**, sans
+      `más`/`menos` :
+
+      - `bueno` → `mejor` (meilleur), `malo` → `peor` (pire).
+      - `grande` → `mayor` (plus âgé/grand), `pequeño` → `menor` (plus
+        jeune/petit) — surtout pour l'âge.
+    points:
+      - id: g1-sup-1
+        sentence: Este es ___ coche más caro de la tienda.
+        answer: el
+        alt: []
+        options:
+          - el
+          - la
+          - los
+        translation: C'est la voiture la plus chère du magasin.
+        explanation: "« coche » est masculin : el coche más caro."
+      - id: g1-sup-2
+        sentence: Mi hermana es ___ más alta de la familia.
+        answer: la
+        alt: []
+        options:
+          - la
+          - el
+          - las
+        translation: Ma sœur est la plus grande de la famille.
+        explanation: "« hermana » est féminin : la más alta."
+      - id: g1-sup-3
+        sentence: Este es el ___ restaurante.
+        answer: mejor
+        alt: []
+        options:
+          - mejor
+          - peor
+          - mayor
+        translation: C'est le meilleur restaurant.
+        explanation: "Forme irrégulière de bueno : mejor, pas « más bueno »."
+      - id: g1-sup-4
+        sentence: Mi equipo es el ___ de todos.
+        answer: peor
+        alt: []
+        options:
+          - peor
+          - mejor
+          - menor
+        translation: Mon équipe est la pire de toutes.
+        explanation: "Forme irrégulière de malo : peor, pas « más malo »."
+      - id: g1-sup-5
+        sentence: Mi hermano es ___ que yo.
+        answer: mayor
+        alt: []
+        options:
+          - mayor
+          - menor
+          - mejor
+        translation: Mon frère est plus âgé que moi.
+        explanation: "Pour l'âge, grande devient mayor : más grande ne s'emploie pas ici."
+      - id: g1-sup-6
+        sentence: Mi hermana es ___ que yo.
+        answer: menor
+        alt: []
+        options:
+          - menor
+          - mayor
+          - peor
+        translation: Ma sœur est plus jeune que moi.
+        explanation: "Pour l'âge, pequeño devient menor."
