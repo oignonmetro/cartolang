@@ -3,7 +3,7 @@
 # vocabulaire d'abord, grammaire et conjugaison qui n'emploient que du
 # vocabulaire déjà vu (`vocabularyScopeRemarks`, tools/content/difficulty.ts).
 #   vocabulaire  — v1 travail et études ✓, v2 courses et argent ✓, v3 santé
-#                  et corps ✓, v4 voyages et transports, v5 technologie et
+#                  et corps ✓, v4 voyages et transports ✓, v5 technologie et
 #                  communication, v6 loisirs et sport
 #   grammaire    — g1 comparatifs et superlatifs, g2 futur proche (ir a +
 #                  infinitivo), g3 pronoms compléments (me/te/lo/la…),
@@ -34,6 +34,7 @@ tracks:
       - v1
       - v2
       - v3
+      - v4
 
   - id: grammaire
     title: Grammaire

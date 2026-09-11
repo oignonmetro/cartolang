@@ -1,0 +1,160 @@
+id: v4
+title: Los viajes y el transporte
+subtitle: Aéroport, gare, hôtel
+icon: book
+color: sky
+level: A2
+
+lessons:
+  - id: v4-l1
+    title: En el aeropuerto
+    notes: |
+      Le vocabulaire du départ, pour préparer un voyage sans hésiter sur
+      les mots essentiels.
+
+      `ir a` (déjà vu en c3 et g5) sert à dire où l'on se rend : `voy al
+      aeropuerto` — rappel : `a` + `el` se contracte toujours en `al`.
+    vocab:
+      - id: es-billete
+        term: el billete
+        gap: billete
+        translation: le billet
+        pos: nom
+        example:
+          text: Necesito un billete.
+          translation: J'ai besoin d'un billet.
+      - id: es-vuelo
+        term: el vuelo
+        gap: vuelo
+        translation: le vol (avion)
+        pos: nom
+        example:
+          text: El vuelo sale a las ocho.
+          translation: Le vol part à huit heures.
+      - id: es-avion
+        term: el avión
+        gap: avión
+        translation: l'avion
+        pos: nom
+        example:
+          text: El avión llega tarde.
+          translation: L'avion arrive en retard.
+      - id: es-tren
+        term: el tren
+        gap: tren
+        translation: le train
+        pos: nom
+        example:
+          text: Tomo el tren cada día.
+          translation: Je prends le train chaque jour.
+      - id: es-estacion
+        term: la estación
+        gap: estación
+        translation: la gare
+        pos: nom
+        example:
+          text: La estación está cerca.
+          translation: La gare est proche.
+      - id: es-aeropuerto
+        term: el aeropuerto
+        gap: aeropuerto
+        translation: l'aéroport
+        pos: nom
+        example:
+          text: Voy al aeropuerto.
+          translation: Je vais à l'aéroport.
+      - id: es-maleta
+        term: la maleta
+        gap: maleta
+        translation: la valise
+        pos: nom
+        example:
+          text: Mi maleta es grande.
+          translation: Ma valise est grande.
+      - id: es-pasaporte
+        term: el pasaporte
+        gap: pasaporte
+        translation: le passeport
+        pos: nom
+        example:
+          text: Necesito mi pasaporte.
+          translation: J'ai besoin de mon passeport.
+
+  - id: v4-l2
+    title: Alojarse y moverse
+    notes: |
+      Se loger et se déplacer une fois sur place — trois verbes utiles,
+      dont deux irréguliers seulement à `yo`.
+
+      - `llegar` : régulier, déjà croisé dans `llego a las once` (g5).
+      - `salir` : irrégulier à `yo` (`salgo`), régulier ensuite.
+      - `perderse` : change `e`→`ie` comme `tener`, vu en c3.
+
+      ! `el mapa` finit par `-a` mais reste **masculin** : une exception
+      bien connue au modèle `-o`/`-a` (g1, A1), comme `el día` (le jour).
+    vocab:
+      - id: es-hotel
+        term: el hotel
+        gap: hotel
+        translation: l'hôtel
+        pos: nom
+        example:
+          text: El hotel está en el centro.
+          translation: L'hôtel est dans le centre.
+      - id: es-reserva
+        term: la reserva
+        gap: reserva
+        translation: la réservation
+        pos: nom
+        example:
+          text: Tengo una reserva.
+          translation: J'ai une réservation.
+      - id: es-mapa
+        term: el mapa
+        gap: mapa
+        translation: le plan
+        pos: nom
+        hint: Masculin malgré la finale -a — voir la remarque plus haut.
+        example:
+          text: Necesito un mapa.
+          translation: J'ai besoin d'un plan.
+      - id: es-parada
+        term: la parada
+        gap: parada
+        translation: l'arrêt de bus
+        pos: nom
+        example:
+          text: La parada está aquí.
+          translation: L'arrêt est ici.
+      - id: es-taxi
+        term: el taxi
+        gap: taxi
+        translation: le taxi
+        pos: nom
+        example:
+          text: Tomo un taxi.
+          translation: Je prends un taxi.
+      - id: es-llego
+        term: llego
+        translation: j'arrive
+        pos: verbe
+        hint: De llegar, régulier en -ar — déjà croisé dans « llego a las once » (g5).
+        example:
+          text: Llego a las nueve.
+          translation: J'arrive à neuf heures.
+      - id: es-salgo
+        term: salgo
+        translation: je pars, je sors
+        pos: verbe
+        hint: "De salir, irrégulier seulement à yo : salgo, sales, sale, salimos, salís, salen."
+        example:
+          text: Salgo temprano.
+          translation: Je pars tôt.
+      - id: es-me-pierdo
+        term: me pierdo
+        translation: je me perds
+        pos: expression
+        hint: De perderse (e→ie), comme tener (c3).
+        example:
+          text: Siempre me pierdo aquí.
+          translation: Je me perds toujours ici.
