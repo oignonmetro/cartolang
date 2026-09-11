@@ -1,0 +1,103 @@
+id: c2
+title: El presente, verbos en -er/-ir
+subtitle: Deux modèles très proches
+icon: clock
+color: sky
+level: A1
+
+lessons:
+  - id: c2-l1
+    title: Comer, le modèle en -er
+    notes: |
+      Les verbes en `-er` retirent `-er` et ajoutent `-o`, `-es`, `-e`,
+      `-emos`, `-éis`, `-en` — très proche du modèle en `-ar`, seule la
+      voyelle change (`a` devient `e`, sauf à la première personne).
+
+      - `yo como`, `tú comes`, `él/ella come`
+      - `nosotros comemos`, `vosotros coméis`, `ellos comen`
+
+      `comer` a déjà été croisé plusieurs fois en v4 : `Como fruta todos
+      los días`, `No como carne`.
+    verbs:
+      - verb: comer
+        translation: manger
+        tense: présent
+        note: "Retirer -er, ajouter -o, -es, -e, -emos, -éis, -en."
+        forms:
+          - id: c2-com-1
+            person: yo
+            answer: como
+          - id: c2-com-2
+            person: tú
+            answer: comes
+          - id: c2-com-3
+            person: él / ella
+            answer: come
+          - id: c2-com-4
+            person: nosotros
+            answer: comemos
+          - id: c2-com-5
+            person: vosotros
+            answer: coméis
+          - id: c2-com-6
+            person: ellos
+            answer: comen
+
+  - id: c2-l2
+    title: Vivir et abrir, le modèle en -ir
+    notes: |
+      Les verbes en `-ir` retirent `-ir` et ajoutent `-o`, `-es`, `-e`,
+      `-imos`, `-ís`, `-en` — identiques au modèle en `-er`, sauf à
+      `nosotros` et `vosotros` (`-imos`/`-ís` au lieu de `-emos`/`-éis`).
+
+      - `vivir` (habiter) : déjà croisé en v2 (`Mis padres viven aquí`,
+        `Mi tío vive en Bogotá`).
+      - `abrir` (ouvrir) : déjà croisé en v5 et v6 (`Abro la ventana`,
+        `Abre la boca`).
+    verbs:
+      - verb: vivir
+        translation: habiter, vivre
+        tense: présent
+        note: "Retirer -ir, ajouter -o, -es, -e, -imos, -ís, -en."
+        forms:
+          - id: c2-viv-1
+            person: yo
+            answer: vivo
+          - id: c2-viv-2
+            person: tú
+            answer: vives
+          - id: c2-viv-3
+            person: él / ella
+            answer: vive
+          - id: c2-viv-4
+            person: nosotros
+            answer: vivimos
+          - id: c2-viv-5
+            person: vosotros
+            answer: vivís
+          - id: c2-viv-6
+            person: ellos
+            answer: viven
+      - verb: abrir
+        translation: ouvrir
+        tense: présent
+        note: "Mêmes terminaisons que vivir : -o, -es, -e, -imos, -ís, -en."
+        forms:
+          - id: c2-abr-1
+            person: yo
+            answer: abro
+          - id: c2-abr-2
+            person: tú
+            answer: abres
+          - id: c2-abr-3
+            person: él / ella
+            answer: abre
+          - id: c2-abr-4
+            person: nosotros
+            answer: abrimos
+          - id: c2-abr-5
+            person: vosotros
+            answer: abrís
+          - id: c2-abr-6
+            person: ellos
+            answer: abren
