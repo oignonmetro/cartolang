@@ -2,7 +2,7 @@
 # (`fr-es-a1`). Construction en cours, même méthode que pour A1 :
 # vocabulaire d'abord, grammaire et conjugaison qui n'emploient que du
 # vocabulaire déjà vu (`vocabularyScopeRemarks`, tools/content/difficulty.ts).
-#   vocabulaire  — v1 travail et études ✓, v2 courses et argent, v3 santé
+#   vocabulaire  — v1 travail et études ✓, v2 courses et argent ✓, v3 santé
 #                  et corps, v4 voyages et transports, v5 technologie et
 #                  communication, v6 loisirs et sport
 #   grammaire    — g1 comparatifs et superlatifs, g2 futur proche (ir a +
@@ -32,6 +32,7 @@ tracks:
     icon: book
     units:
       - v1
+      - v2
 
   - id: grammaire
     title: Grammaire

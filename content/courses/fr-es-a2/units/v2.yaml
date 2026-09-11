@@ -1,0 +1,158 @@
+id: v2
+title: Las compras y el dinero
+subtitle: Prix, argent, paiement
+icon: book
+color: amber
+level: A2
+
+lessons:
+  - id: v2-l1
+    title: En la tienda
+    notes: |
+      Le vocabulaire du magasin, pour aller acheter et essayer sans
+      hésiter — `la tienda` elle-même a déjà été vue en A1 (v5).
+
+      ! `caro`/`barato` s'accordent comme n'importe quel adjectif en `-o` :
+      `caro`/`cara`, `barato`/`barata`, avec l'accord au pluriel en `-os`/
+      `-as`.
+    vocab:
+      - id: es-precio
+        term: el precio
+        gap: precio
+        translation: le prix
+        pos: nom
+        example:
+          text: El precio es alto.
+          translation: Le prix est élevé.
+      - id: es-caro
+        term: caro
+        translation: cher
+        pos: adjectif
+        example:
+          text: Este coche es caro.
+          translation: Cette voiture-ci est chère.
+      - id: es-barato
+        term: barato
+        translation: bon marché
+        alt:
+          - pas cher
+        pos: adjectif
+        example:
+          text: Este sombrero es barato.
+          translation: Ce chapeau-ci est bon marché.
+      - id: es-talla
+        term: la talla
+        gap: talla
+        translation: la taille (vêtement)
+        pos: nom
+        example:
+          text: "¿Qué talla usas?"
+          translation: Quelle taille fais-tu ?
+      - id: es-probador
+        term: el probador
+        gap: probador
+        translation: la cabine d'essayage
+        pos: nom
+        example:
+          text: El probador está allí.
+          translation: La cabine d'essayage est là-bas.
+      - id: es-caja
+        term: la caja
+        gap: caja
+        translation: la caisse
+        pos: nom
+        example:
+          text: Pago en la caja.
+          translation: Je paie à la caisse.
+      - id: es-recibo
+        term: el recibo
+        gap: recibo
+        translation: le reçu
+        pos: nom
+        example:
+          text: Necesito el recibo.
+          translation: J'ai besoin du reçu.
+      - id: es-oferta
+        term: la oferta
+        gap: oferta
+        translation: la promotion
+        pos: nom
+        example:
+          text: Hay una oferta hoy.
+          translation: Il y a une promotion aujourd'hui.
+
+  - id: v2-l2
+    title: El dinero
+    notes: |
+      Quatre verbes très utiles pour parler d'argent, tous réguliers en
+      `-ar` sauf `costar`, qui change `o`→`ue` comme `tener` change `e`→`ie`
+      (vu en c3).
+
+      - `pagar`, `gastar`, `ahorrar` : modèle régulier de `hablar` (c1).
+      - `costar` : `cuesta` (ça coûte), `¿cuánto cuesta?` est la question la
+        plus utile du chapitre.
+    vocab:
+      - id: es-dinero
+        term: el dinero
+        gap: dinero
+        translation: l'argent
+        pos: nom
+        example:
+          text: No tengo dinero.
+          translation: Je n'ai pas d'argent.
+      - id: es-tarjeta
+        term: la tarjeta
+        gap: tarjeta
+        translation: la carte bancaire
+        pos: nom
+        example:
+          text: Pago con tarjeta.
+          translation: Je paie par carte.
+      - id: es-efectivo
+        term: el efectivo
+        gap: efectivo
+        translation: les espèces
+        pos: nom
+        example:
+          text: Prefiero pagar en efectivo.
+          translation: Je préfère payer en espèces.
+      - id: es-pago
+        term: pago
+        translation: je paie
+        pos: verbe
+        hint: De pagar, régulier en -ar comme hablar.
+        example:
+          text: Pago la cena.
+          translation: Je paie le dîner.
+      - id: es-cuesta
+        term: cuesta
+        translation: ça coûte
+        pos: verbe
+        hint: De costar (o→ue), 3e personne du singulier.
+        example:
+          text: "¿Cuánto cuesta esto?"
+          translation: Combien ça coûte ?
+      - id: es-gasto
+        term: gasto
+        translation: je dépense
+        pos: verbe
+        hint: De gastar, régulier en -ar comme hablar.
+        example:
+          text: Gasto poco dinero.
+          translation: Je dépense peu d'argent.
+      - id: es-ahorro
+        term: ahorro
+        translation: j'économise
+        pos: verbe
+        hint: De ahorrar, régulier en -ar comme hablar.
+        example:
+          text: Ahorro para el futuro.
+          translation: J'économise pour l'avenir.
+      - id: es-gratis
+        term: gratis
+        translation: gratuit
+        pos: adjectif
+        hint: "Invariable : el autobús es gratis, la entrada es gratis."
+        example:
+          text: El autobús es gratis hoy.
+          translation: Le bus est gratuit aujourd'hui.
