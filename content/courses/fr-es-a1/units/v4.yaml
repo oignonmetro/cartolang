@@ -1,0 +1,160 @@
+id: v4
+title: Comida y bebida
+subtitle: Manger et boire au quotidien
+icon: cup
+color: coral
+level: A1
+
+lessons:
+  - id: v4-l1
+    title: Comidas básicas
+    notes: |
+      Les noms de nourriture suivent le même modèle de genre que la famille
+      (voir la leçon de grammaire) : finale **-o** le plus souvent masculine,
+      finale **-a** le plus souvent féminine — `el pan`, `la leche`.
+
+      ! `el agua` est féminin malgré son article `el` : devant un nom féminin
+      qui commence par un **a** accentué, l'article prend la forme `el` à
+      l'oral, pour éviter deux `a` qui se cognent. L'adjectif, lui, reste
+      bien au féminin : `el agua fría` (l'eau froide), pas `frío`.
+    vocab:
+      - id: es-pan
+        term: el pan
+        gap: pan
+        translation: le pain
+        pos: nom
+        example:
+          text: Compro pan cada mañana.
+          translation: J'achète du pain chaque matin.
+      - id: es-agua
+        term: el agua
+        gap: agua
+        translation: l'eau
+        pos: nom
+        hint: Féminin malgré « el » — voir la remarque plus haut.
+        example:
+          text: Bebo mucha agua.
+          translation: Je bois beaucoup d'eau.
+      - id: es-leche
+        term: la leche
+        gap: leche
+        translation: le lait
+        pos: nom
+        example:
+          text: El café con leche es mi favorito.
+          translation: Le café au lait est mon préféré.
+      - id: es-cafe
+        term: el café
+        gap: café
+        translation: le café
+        pos: nom
+        example:
+          text: Tomo un café por la mañana.
+          translation: Je prends un café le matin.
+      - id: es-te
+        term: el té
+        gap: té
+        translation: le thé
+        pos: nom
+        example:
+          text: Prefiero el té al café.
+          translation: Je préfère le thé au café.
+      - id: es-arroz
+        term: el arroz
+        gap: arroz
+        translation: le riz
+        pos: nom
+        example:
+          text: Comemos arroz con pollo.
+          translation: Nous mangeons du riz avec du poulet.
+      - id: es-carne
+        term: la carne
+        gap: carne
+        translation: la viande
+        pos: nom
+        example:
+          text: No como carne.
+          translation: Je ne mange pas de viande.
+      - id: es-pescado
+        term: el pescado
+        gap: pescado
+        translation: le poisson
+        pos: nom
+        example:
+          text: El pescado es fresco hoy.
+          translation: Le poisson est frais aujourd'hui.
+
+  - id: v4-l2
+    title: En la mesa
+    notes: |
+      Deux repas au nom trompeur : `la cena` (le dîner) n'a rien à voir avec
+      une « cène » unique, c'est le repas du soir ordinaire. Et `el desayuno`
+      se découpe en `des-` (défaire) + `ayuno` (jeûne) : littéralement
+      « rompre le jeûne », comme *breakfast* en anglais.
+    vocab:
+      - id: es-fruta
+        term: la fruta
+        gap: fruta
+        translation: le fruit
+        pos: nom
+        example:
+          text: Como fruta todos los días.
+          translation: Je mange du fruit tous les jours.
+      - id: es-verdura
+        term: la verdura
+        gap: verdura
+        translation: le légume
+        pos: nom
+        example:
+          text: Los niños no comen verdura.
+          translation: Les enfants ne mangent pas de légumes.
+      - id: es-queso
+        term: el queso
+        gap: queso
+        translation: le fromage
+        pos: nom
+        example:
+          text: España tiene buen queso.
+          translation: L'Espagne a du bon fromage.
+      - id: es-huevo
+        term: el huevo
+        gap: huevo
+        translation: l'œuf
+        pos: nom
+        example:
+          text: Como un huevo por la mañana.
+          translation: Je mange un œuf le matin.
+      - id: es-sal
+        term: la sal
+        gap: sal
+        translation: le sel
+        pos: nom
+        example:
+          text: Falta sal en la sopa.
+          translation: Il manque du sel dans la soupe.
+      - id: es-azucar
+        term: el azúcar
+        gap: azúcar
+        translation: le sucre
+        pos: nom
+        example:
+          text: No tomo azúcar en el té.
+          translation: Je ne prends pas de sucre dans le thé.
+      - id: es-desayuno
+        term: el desayuno
+        gap: desayuno
+        translation: le petit-déjeuner
+        pos: nom
+        hint: "« des- » (défaire) + « ayuno » (jeûne) : rompre le jeûne, comme breakfast en anglais."
+        example:
+          text: El desayuno es a las ocho.
+          translation: Le petit-déjeuner est à huit heures.
+      - id: es-cena
+        term: la cena
+        gap: cena
+        translation: le dîner
+        pos: nom
+        hint: Le repas du soir ordinaire — sans rapport avec une cène unique.
+        example:
+          text: La cena está lista.
+          translation: Le dîner est prêt.

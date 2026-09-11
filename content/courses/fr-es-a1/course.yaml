@@ -11,8 +11,9 @@
 # grammaire et conjugaison qui n'emploient que ce vocabulaire déjà vu
 # (`vocabularyScopeRemarks`, tools/content/difficulty.ts). Unités prévues,
 # à mesure qu'elles s'écrivent :
-#   vocabulaire  — v1 salutations ✓, v2 famille ✓, v3 nombres, v4 nourriture,
-#                  v5 maison et ville, v6 corps et vêtements, v7 temps et jours
+#   vocabulaire  — v1 salutations ✓, v2 famille ✓, v3 nombres ✓,
+#                  v4 nourriture ✓, v5 maison et ville, v6 corps et
+#                  vêtements, v7 temps et jours
 #   grammaire    — g1 genre et pluriel ✓, g2 articles, g3 ser/estar,
 #                  g4 possessifs et démonstratifs, g5 lieu (estar + en/a/de),
 #                  g6 interrogatifs
@@ -41,6 +42,8 @@ tracks:
     units:
       - v1
       - v2
+      - v3
+      - v4
 
   - id: grammaire
     title: Grammaire

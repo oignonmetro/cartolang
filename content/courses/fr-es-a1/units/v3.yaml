@@ -1,0 +1,146 @@
+id: v3
+title: Los números
+subtitle: Compter, donner son âge, son numéro
+icon: compass
+color: sky
+level: A1
+
+lessons:
+  - id: v3-l1
+    title: Del cero al siete
+    notes: |
+      Les chiffres espagnols se retiennent un par un jusqu'à quinze, sans
+      motif régulier avant cet âge — comme en français jusqu'à seize.
+
+      ! `uno` perd son **-o** devant un nom masculin : `un hermano` (un
+      frère), jamais `uno hermano`. Seul devant rien, ou devant un nom
+      féminin (`una hermana`), il garde sa forme pleine ou change de finale.
+    vocab:
+      - id: es-cero
+        term: cero
+        translation: zéro
+        pos: nombre
+        example:
+          text: Empezamos desde cero.
+          translation: Nous recommençons à zéro.
+      - id: es-uno
+        term: uno
+        translation: un
+        pos: nombre
+        hint: Perd son -o devant un nom masculin — un hermano, pas uno hermano.
+        example:
+          text: Tengo uno, no dos.
+          translation: J'en ai un, pas deux.
+      - id: es-dos
+        term: dos
+        translation: deux
+        pos: nombre
+        example:
+          text: Tengo dos hermanos.
+          translation: J'ai deux frères.
+      - id: es-tres
+        term: tres
+        translation: trois
+        pos: nombre
+        example:
+          text: Mi prima habla tres idiomas.
+          translation: Ma cousine parle trois langues.
+      - id: es-cuatro
+        term: cuatro
+        translation: quatre
+        pos: nombre
+        example:
+          text: Vivo con cuatro amigos.
+          translation: Je vis avec quatre amis.
+      - id: es-cinco
+        term: cinco
+        translation: cinq
+        pos: nombre
+        example:
+          text: Son las cinco.
+          translation: Il est cinq heures.
+      - id: es-seis
+        term: seis
+        translation: six
+        pos: nombre
+        example:
+          text: Tengo seis primos.
+          translation: J'ai six cousins.
+      - id: es-siete
+        term: siete
+        translation: sept
+        pos: nombre
+        example:
+          text: Trabajo siete horas.
+          translation: Je travaille sept heures.
+
+  - id: v3-l2
+    title: Del ocho al cien
+    notes: |
+      Au-delà de quinze, l'espagnol commence à composer : `dieciséis`
+      (« dix-six »), `diecisiete`… Ce cours s'arrête aux nombres ronds les
+      plus utiles pour commencer — l'essentiel pour donner un âge, une
+      heure, un prix.
+
+      - `veinte` (vingt) et `treinta` (trente) sont eux aussi des mots à
+        part, comme `dix`, `onze`, `douze` en français.
+      - `cien` (cent) perd son `-to` final devant un nom : `cien años`
+        (cent ans), jamais `ciento años`.
+    vocab:
+      - id: es-ocho
+        term: ocho
+        translation: huit
+        pos: nombre
+        example:
+          text: Trabajo ocho horas.
+          translation: Je travaille huit heures.
+      - id: es-nueve
+        term: nueve
+        translation: neuf
+        pos: nombre
+        example:
+          text: Empieza a las nueve.
+          translation: Ça commence à neuf heures.
+      - id: es-diez
+        term: diez
+        translation: dix
+        pos: nombre
+        example:
+          text: Tengo diez dedos.
+          translation: J'ai dix doigts.
+      - id: es-once
+        term: once
+        translation: onze
+        pos: nombre
+        example:
+          text: Llego a las once.
+          translation: J'arrive à onze heures.
+      - id: es-doce
+        term: doce
+        translation: douze
+        pos: nombre
+        example:
+          text: Hay doce meses en un año.
+          translation: Il y a douze mois dans une année.
+      - id: es-veinte
+        term: veinte
+        translation: vingt
+        pos: nombre
+        example:
+          text: Tengo veinte años.
+          translation: J'ai vingt ans.
+      - id: es-treinta
+        term: treinta
+        translation: trente
+        pos: nombre
+        example:
+          text: Mi madre tiene treinta años.
+          translation: Ma mère a trente ans.
+      - id: es-cien
+        term: cien
+        translation: cent
+        pos: nombre
+        hint: Perd son -to devant un nom — cien años, jamais ciento años.
+        example:
+          text: Mi abuela vivió cien años.
+          translation: Ma grand-mère a vécu cent ans.
