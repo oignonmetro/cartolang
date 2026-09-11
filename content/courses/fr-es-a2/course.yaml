@@ -4,7 +4,7 @@
 # vocabulaire déjà vu (`vocabularyScopeRemarks`, tools/content/difficulty.ts).
 #   vocabulaire  — v1 travail et études ✓, v2 courses et argent ✓, v3 santé
 #                  et corps ✓, v4 voyages et transports ✓, v5 technologie et
-#                  communication ✓, v6 loisirs et sport
+#                  communication ✓, v6 loisirs et sport ✓ (piste complète)
 #   grammaire    — g1 comparatifs et superlatifs, g2 futur proche (ir a +
 #                  infinitivo), g3 pronoms compléments (me/te/lo/la…),
 #                  g4 por/para, g5 subordonnées avec que
@@ -36,6 +36,7 @@ tracks:
       - v3
       - v4
       - v5
+      - v6
 
   - id: grammaire
     title: Grammaire

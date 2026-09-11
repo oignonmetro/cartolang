@@ -1,0 +1,157 @@
+id: v6
+title: Los ocios y el deporte
+subtitle: Cinéma, musique, sport
+icon: book
+color: teal
+level: A2
+
+lessons:
+  - id: v6-l1
+    title: El tiempo libre
+    notes: |
+      Le vocabulaire des loisirs, pour parler de ce qu'on aime faire —
+      l'occasion de réutiliser `gustar` (c4), la construction la plus
+      naturelle pour ce sujet.
+
+      Trois verbes réguliers en `-ar` : `bailar`, `pintar`, et `leer`
+      (régulier en `-er`, comme `comer`, c2).
+    vocab:
+      - id: es-pelicula
+        term: la película
+        gap: película
+        translation: le film
+        pos: nom
+        example:
+          text: Me gusta la película.
+          translation: J'aime le film.
+      - id: es-cine
+        term: el cine
+        gap: cine
+        translation: le cinéma
+        pos: nom
+        example:
+          text: Voy al cine.
+          translation: Je vais au cinéma.
+      - id: es-musica
+        term: la música
+        gap: música
+        translation: la musique
+        pos: nom
+        example:
+          text: Me gusta la música.
+          translation: J'aime la musique.
+      - id: es-concierto
+        term: el concierto
+        gap: concierto
+        translation: le concert
+        pos: nom
+        example:
+          text: Hay un concierto hoy.
+          translation: Il y a un concert aujourd'hui.
+      - id: es-leo
+        term: leo
+        translation: je lis
+        pos: verbe
+        hint: De leer, régulier en -er comme comer (c2).
+        example:
+          text: Leo un libro.
+          translation: Je lis un livre.
+      - id: es-bailo
+        term: bailo
+        translation: je danse
+        pos: verbe
+        hint: De bailar, régulier en -ar comme hablar.
+        example:
+          text: Bailo los sábados.
+          translation: Je danse le samedi.
+      - id: es-pinto
+        term: pinto
+        translation: je peins
+        pos: verbe
+        hint: De pintar, régulier en -ar comme hablar.
+        example:
+          text: Pinto en casa.
+          translation: Je peins à la maison.
+      - id: es-libro
+        term: el libro
+        gap: libro
+        translation: le livre
+        pos: nom
+        example:
+          text: El libro es interesante.
+          translation: Le livre est intéressant.
+
+  - id: v6-l2
+    title: El deporte
+    notes: |
+      Le vocabulaire du sport, avec deux verbes déjà connus sous une autre
+      forme et un verbe unique en son genre.
+
+      - `perder` change `e`→`ie`, comme `perderse` (v4) et `tener` (c3).
+      - `jugar` change `u`→`ue` — le seul verbe espagnol avec ce
+        changement précis, à apprendre à part.
+    vocab:
+      - id: es-futbol
+        term: el fútbol
+        gap: fútbol
+        translation: le foot
+        pos: nom
+        example:
+          text: Juego al fútbol los domingos.
+          translation: Je joue au foot le dimanche.
+      - id: es-equipo
+        term: el equipo
+        gap: equipo
+        translation: l'équipe
+        pos: nom
+        example:
+          text: Mi equipo gana siempre.
+          translation: Mon équipe gagne toujours.
+      - id: es-partido
+        term: el partido
+        gap: partido
+        translation: le match
+        pos: nom
+        example:
+          text: El partido es mañana.
+          translation: Le match est demain.
+      - id: es-gano
+        term: gano
+        translation: je gagne
+        pos: verbe
+        hint: De ganar, régulier en -ar comme hablar.
+        example:
+          text: Siempre gano.
+          translation: Je gagne toujours.
+      - id: es-pierdo
+        term: pierdo
+        translation: je perds
+        pos: verbe
+        hint: De perder (e→ie), comme perderse (v4) et tener (c3).
+        example:
+          text: Nunca pierdo.
+          translation: Je ne perds jamais.
+      - id: es-juego
+        term: juego
+        translation: je joue
+        pos: verbe
+        hint: "De jugar (u→ue), le seul verbe espagnol avec ce changement."
+        example:
+          text: Juego bien.
+          translation: Je joue bien.
+      - id: es-nado
+        term: nado
+        translation: je nage
+        pos: verbe
+        hint: De nadar, régulier en -ar comme hablar.
+        example:
+          text: Nado en el mar.
+          translation: Je nage dans la mer.
+      - id: es-corro
+        term: corro
+        translation: je cours
+        pos: verbe
+        hint: De correr, régulier en -er comme comer (c2).
+        example:
+          text: Corro cada mañana.
+          translation: Je cours chaque matin.
