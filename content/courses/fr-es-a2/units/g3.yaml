@@ -1,0 +1,152 @@
+id: g3
+title: Los pronombres de objeto directo
+subtitle: Lo, la, los, las
+icon: compass
+color: violet
+level: A2
+
+lessons:
+  - id: g3-l1
+    title: "Lo, la : remplacer une chose ou une personne"
+    notes: |
+      Le pronom complément d'objet direct remplace le nom déjà mentionné,
+      pour éviter de le répéter — comme « le »/« la » en français. Il se
+      place **avant** le verbe conjugué, jamais après comme en français.
+
+      - `lo` remplace un nom masculin singulier : `el libro` → `lo`.
+      - `la` remplace un nom féminin singulier : `la maleta` → `la`.
+      - `me`/`te` fonctionnent pareil pour « me » et « te » : `te llamo`
+        (je t'appelle).
+    points:
+      - id: g3-lo-1
+        sentence: "¿Compras el libro? Sí, ___ compro."
+        answer: lo
+        alt: []
+        options:
+          - lo
+          - la
+          - los
+        translation: Tu achètes le livre ? Oui, je l'achète.
+        explanation: "« el libro » est masculin singulier : lo."
+      - id: g3-lo-2
+        sentence: "¿Necesitas la contraseña? Sí, ___ necesito."
+        answer: la
+        alt: []
+        options:
+          - la
+          - lo
+          - las
+        translation: Tu as besoin du mot de passe ? Oui, j'en ai besoin.
+        explanation: "« la contraseña » est féminin singulier : la."
+      - id: g3-lo-3
+        sentence: "¿Tienes el pasaporte? Sí, ___ tengo."
+        answer: lo
+        alt: []
+        options:
+          - lo
+          - la
+          - los
+        translation: Tu as le passeport ? Oui, je l'ai.
+        explanation: "« el pasaporte » est masculin singulier : lo."
+      - id: g3-lo-4
+        sentence: "¿Lees el libro? Sí, ___ leo."
+        answer: lo
+        alt: []
+        options:
+          - lo
+          - la
+          - le
+        translation: Tu lis le livre ? Oui, je le lis.
+        explanation: "« el libro » est masculin singulier : lo."
+      - id: g3-lo-5
+        sentence: "¿Llevas la maleta? Sí, ___ llevo."
+        answer: la
+        alt: []
+        options:
+          - la
+          - lo
+          - las
+        translation: Tu portes la valise ? Oui, je la porte.
+        explanation: "« la maleta » est féminin singulier : la."
+      - id: g3-lo-6
+        sentence: "¿Me llamas mañana? Sí, ___ llamo mañana."
+        answer: te
+        alt: []
+        options:
+          - te
+          - me
+          - lo
+        translation: Tu m'appelles demain ? Oui, je t'appelle demain.
+        explanation: "Répondre à « me » (moi) par « te » (toi) : le pronom s'inverse avec la personne."
+
+  - id: g3-l2
+    title: "Los, las : au pluriel"
+    notes: |
+      Au pluriel, `los`/`las` suivent le même modèle, plus `nos`/`os` pour
+      « nous »/« vous » (déjà croisés en filigrane avec `nos gusta`, c4).
+
+      - `los` remplace un nom masculin pluriel.
+      - `las` remplace un nom féminin pluriel.
+      - `nos`/`os` restent identiques au singulier `me`/`te`, seulement au
+        pluriel.
+    points:
+      - id: g3-los-1
+        sentence: "¿Tienes los billetes? Sí, ___ tengo."
+        answer: los
+        alt: []
+        options:
+          - los
+          - las
+          - lo
+        translation: Tu as les billets ? Oui, je les ai.
+        explanation: "« los billetes » est masculin pluriel : los."
+      - id: g3-los-2
+        sentence: "¿Envías las fotos? Sí, ___ envío."
+        answer: las
+        alt: []
+        options:
+          - las
+          - los
+          - la
+        translation: Tu envoies les photos ? Oui, je les envoie.
+        explanation: "« las fotos » est féminin pluriel : las."
+      - id: g3-los-3
+        sentence: "¿Compras los zapatos? Sí, ___ compro."
+        answer: los
+        alt: []
+        options:
+          - los
+          - las
+          - lo
+        translation: Tu achètes les chaussures ? Oui, je les achète.
+        explanation: "« los zapatos » est masculin pluriel : los."
+      - id: g3-los-4
+        sentence: "¿Necesitas las pastillas? Sí, ___ necesito."
+        answer: las
+        alt: []
+        options:
+          - las
+          - los
+          - la
+        translation: Tu as besoin des comprimés ? Oui, j'en ai besoin.
+        explanation: "« las pastillas » est féminin pluriel : las."
+      - id: g3-los-5
+        sentence: Mi madre ___ llama cada día.
+        answer: nos
+        alt: []
+        options:
+          - nos
+          - os
+          - los
+        translation: Ma mère nous appelle chaque jour.
+        explanation: "« nous » complément : nos, pluriel de me."
+      - id: g3-los-6
+        sentence: El profesor ___ llama a vosotros.
+        answer: os
+        alt: []
+        options:
+          - os
+          - nos
+          - las
+        translation: Le professeur vous appelle.
+        explanation: "« vous » complément : os, pluriel de te."
