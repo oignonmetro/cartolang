@@ -1,0 +1,154 @@
+id: g4
+title: Por y para
+subtitle: Deux mots pour « pour »
+icon: compass
+color: violet
+level: A2
+
+lessons:
+  - id: g4-l1
+    title: "Para : but, destination, destinataire"
+    notes: |
+      Le français n'a qu'un seul mot « pour » ; l'espagnol en a deux.
+      `para` regarde **vers l'avant** : un but, une destination, un
+      destinataire, une échéance.
+
+      - But : `estudio para ser médico` (j'étudie pour devenir médecin).
+      - Destination : `salgo para el aeropuerto`.
+      - Destinataire : `este regalo es para mi madre`.
+      - Échéance : `lo necesito para mañana`.
+    points:
+      - id: g4-para-1
+        sentence: Este regalo es ___ mi madre.
+        answer: para
+        alt: []
+        options:
+          - para
+          - por
+          - a
+        translation: Ce cadeau est pour ma mère.
+        explanation: "Destinataire : para."
+      - id: g4-para-2
+        sentence: Estudio ___ ser médico.
+        answer: para
+        alt: []
+        options:
+          - para
+          - por
+          - a
+        translation: J'étudie pour devenir médecin.
+        explanation: "But : para."
+      - id: g4-para-3
+        sentence: Salgo ___ el aeropuerto.
+        answer: para
+        alt: []
+        options:
+          - para
+          - por
+          - a
+        translation: Je pars pour l'aéroport.
+        explanation: "Destination : para."
+      - id: g4-para-4
+        sentence: Necesito esto ___ mañana.
+        answer: para
+        alt: []
+        options:
+          - para
+          - por
+          - en
+        translation: J'ai besoin de ça pour demain.
+        explanation: "Échéance : para."
+      - id: g4-para-5
+        sentence: Trabajo ___ mi jefe.
+        answer: para
+        alt: []
+        options:
+          - para
+          - por
+          - a
+        translation: Je travaille pour mon patron.
+        explanation: "Destinataire du travail : para."
+      - id: g4-para-6
+        sentence: El billete es ___ el tren de las nueve.
+        answer: para
+        alt: []
+        options:
+          - para
+          - por
+          - de
+        translation: Le billet est pour le train de neuf heures.
+        explanation: "Destination/échéance : para."
+
+  - id: g4-l2
+    title: "Por : cause, moyen, durée"
+    notes: |
+      `por` regarde **en arrière** : une cause, un moyen, une durée, un
+      échange — tout ce qui explique ou traverse, plutôt que ce vers quoi
+      on va.
+
+      - Cause : `no trabajo por estar enfermo` (parce que je suis malade).
+      - Moyen : `viajo por avión` (par avion).
+      - Traversée : `caminamos por el parque`, déjà vu en A1 (g5).
+      - Échange : `pago cien euros por el billete`.
+      - Durée/moment : `por la noche`, déjà vu en v3 (A2).
+    points:
+      - id: g4-por-1
+        sentence: No trabajo ___ estar enfermo.
+        answer: por
+        alt: []
+        options:
+          - por
+          - para
+          - a
+        translation: Je ne travaille pas parce que je suis malade.
+        explanation: "Cause : por."
+      - id: g4-por-2
+        sentence: Viajo ___ avión.
+        answer: por
+        alt: []
+        options:
+          - por
+          - para
+          - en
+        translation: Je voyage par avion.
+        explanation: "Moyen : por."
+      - id: g4-por-3
+        sentence: Caminamos ___ el parque.
+        answer: por
+        alt: []
+        options:
+          - por
+          - para
+          - a
+        translation: Nous marchons dans le parc.
+        explanation: "Traversée d'un lieu : por, déjà vu en g5 (A1)."
+      - id: g4-por-4
+        sentence: Pago cien euros ___ el billete.
+        answer: por
+        alt: []
+        options:
+          - por
+          - para
+          - de
+        translation: Je paie cent euros pour le billet.
+        explanation: "Échange : por."
+      - id: g4-por-5
+        sentence: Estudio ___ la noche.
+        answer: por
+        alt: []
+        options:
+          - por
+          - para
+          - en
+        translation: J'étudie le soir.
+        explanation: "Moment de la journée : por la noche."
+      - id: g4-por-6
+        sentence: Gracias ___ tu ayuda.
+        answer: por
+        alt: []
+        options:
+          - por
+          - para
+          - de
+        translation: Merci pour ton aide.
+        explanation: "Cause du remerciement : por."

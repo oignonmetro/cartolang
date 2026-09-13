@@ -7,7 +7,7 @@
 #                  communication ✓, v6 loisirs et sport ✓ (piste complète)
 #   grammaire    — g1 comparatifs et superlatifs ✓, g2 futur proche (ir a +
 #                  infinitivo) ✓, g3 pronoms compléments (me/te/lo/la…) ✓,
-#                  g4 por/para, g5 subordonnées avec que
+#                  g4 por/para ✓, g5 subordonnées avec que
 #   conjugaison  — c1 pretérito perfecto (haber + participe, réguliers),
 #                  c2 pretérito perfecto (participes irréguliers),
 #                  c3 pretérito imperfecto
@@ -48,6 +48,7 @@ tracks:
       - g1
       - g2
       - g3
+      - g4
 
   - id: conjugaison
     title: Conjugaison
