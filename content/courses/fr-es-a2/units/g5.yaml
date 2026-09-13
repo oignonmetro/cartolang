@@ -1,0 +1,154 @@
+id: g5
+title: Las subordinadas con que
+subtitle: Creo que, pienso que, sé que
+icon: compass
+color: violet
+level: A2
+
+lessons:
+  - id: g5-l1
+    title: "Creer que, pensar que : donner son avis"
+    notes: |
+      Pour donner une opinion, l'espagnol relie deux phrases avec `que` —
+      **toujours obligatoire**, contrairement à l'anglais « I think it's
+      good » (sans « that »). En cela, l'espagnol se comporte comme le
+      français : « je pense que… ».
+
+      - `creo que` (je crois que), de `creer`.
+      - `pienso que` (je pense que), de `pensar` (e→ie, comme `tener`).
+
+      ! Après `creo que`/`pienso que` à la forme affirmative, le verbe qui
+      suit reste normal (indicatif) — pas de forme spéciale à apprendre
+      ici.
+    points:
+      - id: g5-creo-1
+        sentence: Creo ___ es interesante.
+        answer: que
+        alt: []
+        options:
+          - que
+          - qué
+          - de
+        translation: Je crois que c'est intéressant.
+        explanation: "que relie l'opinion à ce qu'on pense — jamais accentué ici."
+      - id: g5-creo-2
+        sentence: Pienso ___ el tren es rápido.
+        answer: que
+        alt: []
+        options:
+          - que
+          - qué
+          - si
+        translation: Je pense que le train est rapide.
+        explanation: "que introduit la subordonnée, obligatoire en espagnol."
+      - id: g5-creo-3
+        sentence: Creo ___ mi equipo va a ganar.
+        answer: que
+        alt: []
+        options:
+          - que
+          - qué
+          - a
+        translation: Je crois que mon équipe va gagner.
+        explanation: "que relie creo à la subordonnée."
+      - id: g5-creo-4
+        sentence: Pienso ___ la película es buena.
+        answer: que
+        alt: []
+        options:
+          - que
+          - qué
+          - de
+        translation: Je pense que le film est bon.
+        explanation: "que introduit la subordonnée."
+      - id: g5-creo-5
+        sentence: Creo ___ está enfermo.
+        answer: que
+        alt: []
+        options:
+          - que
+          - qué
+          - si
+        translation: Je crois qu'il est malade.
+        explanation: "que relie creo à la subordonnée."
+      - id: g5-creo-6
+        sentence: Pienso ___ vamos a llegar tarde.
+        answer: que
+        alt: []
+        options:
+          - que
+          - qué
+          - a
+        translation: Je pense que nous allons arriver en retard.
+        explanation: "que introduit la subordonnée."
+
+  - id: g5-l2
+    title: "Saber que, decir que"
+    notes: |
+      Deux verbes de plus, tous deux irréguliers seulement à `yo` :
+      `saber` → `sé`, `decir` → `digo` (mais `dice`/`dicen` aux autres
+      personnes du singulier/pluriel régulières sur ce modèle).
+
+      Même règle qu'avec `creer`/`pensar` : `que` reste obligatoire, et le
+      verbe qui suit garde une forme normale.
+    points:
+      - id: g5-sabe-1
+        sentence: Sé ___ trabajas mucho.
+        answer: que
+        alt: []
+        options:
+          - que
+          - qué
+          - si
+        translation: Je sais que tu travailles beaucoup.
+        explanation: "que relie sé à la subordonnée."
+      - id: g5-sabe-2
+        sentence: Ella dice ___ va a llover.
+        answer: que
+        alt: []
+        options:
+          - que
+          - qué
+          - a
+        translation: Elle dit qu'il va pleuvoir.
+        explanation: "que introduit ce qu'elle dit."
+      - id: g5-sabe-3
+        sentence: Sabemos ___ el examen es difícil.
+        answer: que
+        alt: []
+        options:
+          - que
+          - qué
+          - de
+        translation: Nous savons que l'examen est difficile.
+        explanation: "que relie sabemos à la subordonnée."
+      - id: g5-sabe-4
+        sentence: Dicen ___ hace frío hoy.
+        answer: que
+        alt: []
+        options:
+          - que
+          - qué
+          - si
+        translation: On dit qu'il fait froid aujourd'hui.
+        explanation: "que introduit ce qu'ils disent."
+      - id: g5-sabe-5
+        sentence: Sé ___ es tarde.
+        answer: que
+        alt: []
+        options:
+          - que
+          - qué
+          - a
+        translation: Je sais qu'il est tard.
+        explanation: "que relie sé à la subordonnée."
+      - id: g5-sabe-6
+        sentence: Ella sabe ___ estudio mucho.
+        answer: que
+        alt: []
+        options:
+          - que
+          - qué
+          - de
+        translation: Elle sait que j'étudie beaucoup.
+        explanation: "que introduit ce qu'elle sait."
