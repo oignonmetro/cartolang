@@ -1,0 +1,152 @@
+id: g2
+title: El futuro próximo
+subtitle: Ir a + infinitivo
+icon: compass
+color: violet
+level: A2
+
+lessons:
+  - id: g2-l1
+    title: "Ir a + infinitivo : parler du futur"
+    notes: |
+      Pour parler d'un futur proche, l'espagnol utilise `ir a` + infinitif
+      — exactement comme le français « aller » + infinitif. Il suffit de
+      conjuguer `ir` (déjà vu en c3) et d'ajouter `a` + le verbe à
+      l'infinitif, sans le conjuguer.
+
+      - `voy a hablar`, `vas a hablar`, `va a hablar`
+      - `vamos a hablar`, `vais a hablar`, `van a hablar`
+
+      ! L'infinitif ne change **jamais**, quelle que soit la personne :
+      seul `ir` se conjugue.
+    points:
+      - id: g2-fut-1
+        sentence: Mañana ___ a trabajar.
+        answer: voy
+        alt: []
+        options:
+          - voy
+          - vas
+          - va
+        translation: Demain, je vais travailler.
+        explanation: "yo → voy, de ir (c3)."
+      - id: g2-fut-2
+        sentence: Hoy tú ___ a descansar.
+        answer: vas
+        alt: []
+        options:
+          - vas
+          - va
+          - vamos
+        translation: Aujourd'hui, tu vas te reposer.
+        explanation: "tú → vas."
+      - id: g2-fut-3
+        sentence: Ella ___ a jugar mañana.
+        answer: va
+        alt: []
+        options:
+          - va
+          - van
+          - vais
+        translation: Elle va jouer demain.
+        explanation: "él/ella → va."
+      - id: g2-fut-4
+        sentence: Nosotros ___ a comer aquí.
+        answer: vamos
+        alt: []
+        options:
+          - vamos
+          - van
+          - vais
+        translation: Nous allons manger ici.
+        explanation: "nosotros → vamos."
+      - id: g2-fut-5
+        sentence: Vosotros ___ a nadar.
+        answer: vais
+        alt: []
+        options:
+          - vais
+          - van
+          - vamos
+        translation: Vous allez nager.
+        explanation: "vosotros → vais."
+      - id: g2-fut-6
+        sentence: Ellos ___ a trabajar mucho.
+        answer: van
+        alt: []
+        options:
+          - van
+          - va
+          - vais
+        translation: Ils vont beaucoup travailler.
+        explanation: "ellos → van."
+
+  - id: g2-l2
+    title: Negación y preguntas
+    notes: |
+      La négation se place devant `ir`, pas devant l'infinitif : `no voy a
+      trabajar` (je ne vais pas travailler), jamais `voy a no trabajar`.
+
+      Pour la question, `ir` s'inverse simplement avec le sujet, comme
+      d'habitude en espagnol : `¿vas a estudiar?`.
+    points:
+      - id: g2-neg-1
+        sentence: No ___ a llover hoy.
+        answer: va
+        alt: []
+        options:
+          - va
+          - voy
+          - vamos
+        translation: Il ne va pas pleuvoir aujourd'hui.
+        explanation: "« va » impersonnel, comme dans llueve (v7, A1)."
+      - id: g2-neg-2
+        sentence: "¿___ a estudiar hoy?"
+        answer: Vas
+        alt: []
+        options:
+          - Vas
+          - Va
+          - Van
+        translation: Tu vas étudier aujourd'hui ?
+        explanation: "tú → vas, même à la forme interrogative."
+      - id: g2-neg-3
+        sentence: No ___ a gastar mucho.
+        answer: voy
+        alt: []
+        options:
+          - voy
+          - vas
+          - va
+        translation: Je ne vais pas dépenser beaucoup.
+        explanation: "yo → voy, la négation no précède ir."
+      - id: g2-neg-4
+        sentence: "¿Qué ___ a comer?"
+        answer: vas
+        alt: []
+        options:
+          - vas
+          - va
+          - voy
+        translation: Qu'est-ce que tu vas manger ?
+        explanation: "tú → vas."
+      - id: g2-neg-5
+        sentence: Ellos no ___ a jugar hoy.
+        answer: van
+        alt: []
+        options:
+          - van
+          - va
+          - vamos
+        translation: Ils ne vont pas jouer aujourd'hui.
+        explanation: "ellos → van."
+      - id: g2-neg-6
+        sentence: Nosotros no ___ a salir.
+        answer: vamos
+        alt: []
+        options:
+          - vamos
+          - van
+          - vais
+        translation: Nous n'allons pas sortir.
+        explanation: "nosotros → vamos."
