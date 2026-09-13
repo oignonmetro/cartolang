@@ -9,7 +9,7 @@
 #                  infinitivo) ✓, g3 pronoms compléments (me/te/lo/la…) ✓,
 #                  g4 por/para ✓, g5 subordonnées avec que ✓ (piste
 #                  complète)
-#   conjugaison  — c1 pretérito perfecto (haber + participe, réguliers),
+#   conjugaison  — c1 pretérito perfecto (haber + participe, réguliers) ✓,
 #                  c2 pretérito perfecto (participes irréguliers),
 #                  c3 pretérito imperfecto
 
@@ -58,4 +58,5 @@ tracks:
     kind: conjugation
     color: sky
     icon: clock
-    units: []
+    units:
+      - c1

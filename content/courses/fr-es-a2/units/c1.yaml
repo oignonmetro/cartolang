@@ -1,0 +1,105 @@
+id: c1
+title: El pretérito perfecto (I)
+subtitle: Haber + participios en -ado
+icon: clock
+color: sky
+level: A2
+
+lessons:
+  - id: c1-l1
+    title: "Haber + -ado : verbes en -ar"
+    notes: |
+      Le pretérito perfecto correspond au passé composé français : `haber`
+      (avoir, auxiliaire) conjugué + le participe passé du verbe. Pour un
+      verbe en `-ar`, le participe se forme en retirant `-ar` et en
+      ajoutant `-ado` — invariable, quelle que soit la personne.
+
+      - `haber` : `he, has, ha, hemos, habéis, han`.
+      - `hablado`, `trabajado` : toujours `-ado`, jamais de terminaison qui
+        change.
+
+      ! `haber` ne s'emploie **que** comme auxiliaire ici — ne le
+      confondez pas avec `tener` (avoir, posséder, déjà vu en c3, A1).
+    verbs:
+      - verb: hablar (perfecto)
+        translation: avoir parlé
+        tense: pretérito perfecto
+        note: "haber + hablado, participe invariable."
+        forms:
+          - id: c1-hab-perf-1
+            person: yo
+            answer: he hablado
+          - id: c1-hab-perf-2
+            person: tú
+            answer: has hablado
+          - id: c1-hab-perf-3
+            person: él / ella
+            answer: ha hablado
+          - id: c1-hab-perf-4
+            person: nosotros
+            answer: hemos hablado
+          - id: c1-hab-perf-5
+            person: vosotros
+            answer: habéis hablado
+          - id: c1-hab-perf-6
+            person: ellos
+            answer: han hablado
+
+  - id: c1-l2
+    title: "Haber + -ido : verbes en -er/-ir"
+    notes: |
+      Pour un verbe en `-er` ou `-ir`, le participe se forme en retirant
+      la terminaison et en ajoutant `-ido` — même principe, même
+      invariabilité.
+
+      - `comido` (de comer), `vivido` (de vivir) : toujours `-ido`.
+      - La structure reste identique : `haber` conjugué + participe, sans
+        jamais séparer les deux mots (contrairement au français « j'ai
+        beaucoup parlé »).
+    verbs:
+      - verb: comer (perfecto)
+        translation: avoir mangé
+        tense: pretérito perfecto
+        note: "haber + comido, participe invariable."
+        forms:
+          - id: c1-com-perf-1
+            person: yo
+            answer: he comido
+          - id: c1-com-perf-2
+            person: tú
+            answer: has comido
+          - id: c1-com-perf-3
+            person: él / ella
+            answer: ha comido
+          - id: c1-com-perf-4
+            person: nosotros
+            answer: hemos comido
+          - id: c1-com-perf-5
+            person: vosotros
+            answer: habéis comido
+          - id: c1-com-perf-6
+            person: ellos
+            answer: han comido
+      - verb: vivir (perfecto)
+        translation: avoir vécu
+        tense: pretérito perfecto
+        note: "haber + vivido, participe invariable."
+        forms:
+          - id: c1-viv-perf-1
+            person: yo
+            answer: he vivido
+          - id: c1-viv-perf-2
+            person: tú
+            answer: has vivido
+          - id: c1-viv-perf-3
+            person: él / ella
+            answer: ha vivido
+          - id: c1-viv-perf-4
+            person: nosotros
+            answer: hemos vivido
+          - id: c1-viv-perf-5
+            person: vosotros
+            answer: habéis vivido
+          - id: c1-viv-perf-6
+            person: ellos
+            answer: han vivido
