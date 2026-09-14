@@ -57,7 +57,7 @@ export function TypeAnswer({
           s'ouvre au focus du champ réduit la fenêtre visible, et le
           navigateur fait remonter le champ dans cet espace réduit — sans
           `sticky`, la consigne se retrouvait poussée au-dessus, hors champ. */}
-      <p className="sticky top-0 z-10 bg-cream py-1 text-sm font-bold uppercase tracking-wide text-ink-faint">
+      <p className="sticky top-0 z-10 bg-cream py-1 text-center text-sm font-bold uppercase tracking-wide text-ink-faint">
         {dictation
           ? 'Écrivez le mot que vous entendez'
           : direction === 'to-known'
@@ -108,7 +108,7 @@ export function TypeAnswer({
         <motion.div
           initial={{ opacity: 0, y: 6 }}
           animate={{ opacity: 1, y: 0 }}
-          className={checked ? 'text-success' : 'text-error'}
+          className={`flex flex-col items-center text-center ${checked ? 'text-success' : 'text-error'}`}
         >
           {checked ? (
             <p className="text-sm font-bold">Bonne réponse.</p>

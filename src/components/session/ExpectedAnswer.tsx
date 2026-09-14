@@ -32,7 +32,7 @@ export function divergenceAt(typed: string, expected: string): number {
 export function ExpectedAnswer({ typed, expected }: { typed: string; expected: string }) {
   const at = divergenceAt(typed, expected)
   return (
-    <span className="text-2xl font-black">
+    <span className="text-4xl font-black">
       {expected.slice(0, at)}
       {at < expected.length && (
         <span className="underline decoration-2 underline-offset-4">{expected.slice(at)}</span>

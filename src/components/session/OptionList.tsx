@@ -62,7 +62,7 @@ export function OptionList({
             lang={lang}
             disabled={checked}
             onClick={() => onPick(option)}
-            className={`flex gap-3 rounded-2xl border-2 px-4 py-3 text-left font-bold transition-colors disabled:opacity-100 ${
+            className={`flex justify-center gap-3 rounded-2xl border-2 px-4 py-3 text-center font-bold transition-colors disabled:opacity-100 ${
               size === 'long' ? 'items-start text-sm leading-snug' : 'items-center'
             } ${tone}`}
           >

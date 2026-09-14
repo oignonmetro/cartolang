@@ -23,7 +23,7 @@ export function VocabIntro({ exercise, onRate }: { exercise: IntroExercise; onRa
       {/* Une carte peut porter une lettre plutôt qu'un mot — c'est ainsi que le
           cours de russe enseigne l'alphabet. L'annoncer comme un « mot »
           sonnerait faux pendant toute une section. */}
-      <p className="text-sm font-bold uppercase tracking-wide text-ink-faint">
+      <p className="text-center text-sm font-bold uppercase tracking-wide text-ink-faint">
         {vocab.pos === 'lettre' ? 'Nouvelle lettre' : 'Nouveau mot'}
       </p>
 

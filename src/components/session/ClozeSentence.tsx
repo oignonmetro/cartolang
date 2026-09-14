@@ -52,11 +52,11 @@ export function ClozeSentence({
       {/* Épinglée : voir la même remarque dans `TypeAnswer`. Vaut surtout
           quand la réponse se tape (`bank` absent) — sans effet visible
           sinon, la banque de mots ne réclamant jamais le clavier. */}
-      <p className="sticky top-0 z-10 bg-cream py-1 text-sm font-bold uppercase tracking-wide text-ink-faint">
+      <p className="sticky top-0 z-10 bg-cream py-1 text-center text-sm font-bold uppercase tracking-wide text-ink-faint">
         Complétez la phrase
       </p>
 
-      <div className="card-3d flex flex-col gap-3 px-5 py-6">
+      <div className="card-3d flex flex-col items-center gap-3 px-5 py-6 text-center">
         <p className="text-2xl leading-relaxed font-bold">
           {sentence.before}
           <Blank value={value} state={checked} />
@@ -174,7 +174,7 @@ function Feedback({
     <motion.div
       initial={{ opacity: 0, y: 6 }}
       animate={{ opacity: 1, y: 0 }}
-      className={state ? 'text-success' : 'text-error'}
+      className={`flex flex-col items-center text-center ${state ? 'text-success' : 'text-error'}`}
     >
       {state ? (
         <p className="text-sm font-bold">
@@ -183,10 +183,7 @@ function Feedback({
       ) : bank ? (
         // Piochée dans une banque, pas écrite : rien à corriger au clavier,
         // la réponse s'affiche comme avant.
-        <div className="flex flex-col gap-1">
-          <p className="text-sm font-bold">La réponse attendue :</p>
-          <ExpectedAnswer typed={typed} expected={expected} />
-        </div>
+        <ExpectedAnswer typed={typed} expected={expected} />
       ) : (
         <CorrectionGap typed={typed} expected={expected} onResolved={onGapResolved} />
       )}

@@ -163,13 +163,13 @@ export function PairBoard({
 
   return (
     <div className="flex flex-1 flex-col gap-6">
-      <div className="flex flex-col gap-1">
+      <div className="flex flex-col items-center gap-1 text-center">
         <p className="text-sm font-bold uppercase tracking-wide text-ink-faint">{prompt}</p>
         {onCantListen && (
           <button
             type="button"
             onClick={onCantListen}
-            className="self-start text-xs font-bold text-ink-faint underline underline-offset-2"
+            className="text-xs font-bold text-ink-faint underline underline-offset-2"
           >
             Je ne peux pas écouter maintenant
           </button>

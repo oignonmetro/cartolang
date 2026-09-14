@@ -56,7 +56,7 @@ export function RuleNote({ exercise, onNext }: { exercise: RuleExercise; onNext:
 
   return (
     <div className="flex flex-1 flex-col gap-4">
-      <p className={`text-xs font-black uppercase tracking-widest ${tone.eyebrow}`}>Rappel</p>
+      <p className={`text-center text-xs font-black uppercase tracking-widest ${tone.eyebrow}`}>Rappel</p>
 
       {/* Un rappel se lit de haut en bas : le texte commence tout de suite,
           sous le fil d'Ariane, plutôt que de flotter au centre de l'écran.

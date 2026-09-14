@@ -60,11 +60,11 @@ export function GrammarGap({
       {/* Épinglée : voir la même remarque dans `TypeAnswer`. Vaut surtout
           quand la réponse se tape (`bank` absent) — sans effet visible
           sinon, la banque de mots ne réclamant jamais le clavier. */}
-      <p className="sticky top-0 z-10 bg-cream py-1 text-sm font-bold uppercase tracking-wide text-ink-faint">
+      <p className="sticky top-0 z-10 bg-cream py-1 text-center text-sm font-bold uppercase tracking-wide text-ink-faint">
         Complétez la phrase
       </p>
 
-      <div className="card-3d flex flex-col gap-3 px-5 py-6">
+      <div className="card-3d flex flex-col items-center gap-3 px-5 py-6 text-center">
         <p className="text-xl leading-relaxed font-bold">
           {gap.before}
           <Blank value={value} state={checked} />
@@ -122,7 +122,7 @@ export function GrammarGap({
         <motion.div
           initial={{ opacity: 0, y: 6 }}
           animate={{ opacity: 1, y: 0 }}
-          className={`rounded-2xl border-2 px-4 py-3 text-sm ${
+          className={`flex flex-col items-center rounded-2xl border-2 px-4 py-3 text-center text-sm ${
             checked ? 'border-success/40 bg-success/10' : 'border-error/40 bg-error/10'
           }`}
         >
@@ -131,8 +131,7 @@ export function GrammarGap({
           ) : bank ? (
             // Piochée dans une banque, pas écrite : rien à corriger au
             // clavier, la réponse s'affiche comme avant.
-            <div className="flex flex-col gap-1 text-error">
-              <p className="font-extrabold">La réponse attendue :</p>
+            <div className="text-error">
               <ExpectedAnswer typed={value} expected={point.answer} />
             </div>
           ) : (

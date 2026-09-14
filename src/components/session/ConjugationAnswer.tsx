@@ -55,7 +55,7 @@ export function ConjugationAnswer({
   return (
     <div className="flex flex-1 flex-col gap-5">
       {/* Épinglée : voir la même remarque dans `TypeAnswer`. */}
-      <p className="sticky top-0 z-10 bg-cream py-1 text-sm font-bold uppercase tracking-wide text-ink-faint">
+      <p className="sticky top-0 z-10 bg-cream py-1 text-center text-sm font-bold uppercase tracking-wide text-ink-faint">
         {fromFrench ? 'Traduisez et conjuguez' : 'Conjuguez'}
       </p>
 
@@ -115,7 +115,7 @@ export function ConjugationAnswer({
         <motion.div
           initial={{ opacity: 0, y: 6 }}
           animate={{ opacity: 1, y: 0 }}
-          className={`rounded-2xl border-2 px-4 py-3 text-sm ${
+          className={`flex flex-col items-center rounded-2xl border-2 px-4 py-3 text-center text-sm ${
             checked ? 'border-success/40 bg-success/10' : 'border-error/40 bg-error/10'
           }`}
         >

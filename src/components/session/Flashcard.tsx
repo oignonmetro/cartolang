@@ -26,7 +26,7 @@ export function Flashcard({
 
   return (
     <div className="flex flex-1 flex-col gap-6">
-      <p className="text-sm font-bold uppercase tracking-wide text-ink-faint">
+      <p className="text-center text-sm font-bold uppercase tracking-wide text-ink-faint">
         {direction === 'to-known' ? 'Que veut dire ce mot ?' : 'Comment dit-on ?'}
       </p>
 

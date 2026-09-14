@@ -36,7 +36,7 @@ export function ConjugationMatch({
 
   return (
     <div className="flex flex-1 flex-col gap-4">
-      <div className="rounded-2xl border-2 border-sky bg-sky/10 px-4 py-3">
+      <div className="rounded-2xl border-2 border-sky bg-sky/10 px-4 py-3 text-center">
         <p className="text-lg font-extrabold text-ink">{verbs.map((verb) => verb.verb).join(' · ')}</p>
         <p className="text-xs font-bold uppercase tracking-wide text-sky">{verbs[0]!.tense}</p>
       </div>

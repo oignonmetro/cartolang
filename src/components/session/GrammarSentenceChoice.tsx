@@ -74,7 +74,7 @@ export function GrammarSentenceChoice({
 
   return (
     <div className="flex flex-1 flex-col gap-5">
-      <p className="text-sm font-bold uppercase tracking-wide text-ink-faint">
+      <p className="text-center text-sm font-bold uppercase tracking-wide text-ink-faint">
         Quelle phrase est correcte ?
       </p>
 
@@ -82,7 +82,7 @@ export function GrammarSentenceChoice({
         <ListeningPrompt text={answer} size={26} onCantListen={onCantListen} />
       ) : (
         point.translation && (
-          <div className="card-3d px-5 py-4">
+          <div className="card-3d px-5 py-4 text-center">
             <p className="text-lg leading-snug font-bold">{point.translation}</p>
           </div>
         )
@@ -107,7 +107,7 @@ export function GrammarSentenceChoice({
         <motion.div
           initial={{ opacity: 0, y: 6 }}
           animate={{ opacity: 1, y: 0 }}
-          className={`rounded-2xl border-2 px-4 py-3 text-sm ${
+          className={`flex flex-col items-center rounded-2xl border-2 px-4 py-3 text-center text-sm ${
             correct ? 'border-success/40 bg-success/10' : 'border-error/40 bg-error/10'
           }`}
         >

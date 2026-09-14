@@ -49,7 +49,7 @@ export function ConjugationChoice({
 
   return (
     <div className="flex flex-1 flex-col gap-5">
-      <p className="text-sm font-bold uppercase tracking-wide text-ink-faint">Choisissez la forme</p>
+      <p className="text-center text-sm font-bold uppercase tracking-wide text-ink-faint">Choisissez la forme</p>
 
       <div className="card-3d flex flex-col items-center gap-3 px-5 py-6 text-center">
         {audio ? (
@@ -90,7 +90,7 @@ export function ConjugationChoice({
         <motion.div
           initial={{ opacity: 0, y: 6 }}
           animate={{ opacity: 1, y: 0 }}
-          className={`rounded-2xl border-2 px-4 py-3 text-sm ${
+          className={`flex flex-col items-center rounded-2xl border-2 px-4 py-3 text-center text-sm ${
             correct ? 'border-success/40 bg-success/10' : 'border-error/40 bg-error/10'
           }`}
         >
