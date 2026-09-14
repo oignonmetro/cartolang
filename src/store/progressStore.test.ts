@@ -155,6 +155,37 @@ describe('réglage du retour haptique', () => {
   })
 })
 
+describe('réglage d’auto-correction ciblée', () => {
+  it('est éteint par défaut', () => {
+    // Réécrire le mot entier est le comportement par défaut ; ce réglage
+    // restaure l'ancienne correction partielle (voir `targetedCorrection`
+    // dans progressStore.ts).
+    useProgress.getState().reset()
+    expect(useProgress.getState().targetedCorrection).toBe(false)
+  })
+
+  it('s’allume et s’éteint', () => {
+    useProgress.getState().setTargetedCorrection(true)
+    expect(useProgress.getState().targetedCorrection).toBe(true)
+    useProgress.getState().setTargetedCorrection(false)
+    expect(useProgress.getState().targetedCorrection).toBe(false)
+  })
+
+  it('survit à un aller-retour export / import', () => {
+    useProgress.getState().setTargetedCorrection(true)
+    const payload = useProgress.getState().exportSave()
+    useProgress.getState().setTargetedCorrection(false)
+    useProgress.getState().importSave(payload)
+    expect(useProgress.getState().targetedCorrection).toBe(true)
+  })
+
+  it('reste éteint en important une sauvegarde antérieure au réglage', () => {
+    useProgress.getState().setTargetedCorrection(true)
+    useProgress.getState().importSave(JSON.stringify({ format: 7, cards: {}, lessons: {} }))
+    expect(useProgress.getState().targetedCorrection).toBe(false)
+  })
+})
+
 describe('réglage de thème', () => {
   it('suit le système par défaut', () => {
     useProgress.getState().reset()

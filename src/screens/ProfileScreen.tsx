@@ -304,6 +304,19 @@ export function ProfileScreen() {
         )}
 
         <section className="card-3d flex flex-col gap-3 px-5 py-5">
+          <h2 className="text-sm font-extrabold uppercase tracking-wide text-ink-faint">Correction</h2>
+          <Switch
+            label="Auto-correction ciblée"
+            on={state.targetedCorrection}
+            onToggle={() => state.setTargetedCorrection(!state.targetedCorrection)}
+          />
+          <p className="text-xs text-ink-faint">
+            Après une erreur, réécrivez tout le mot par défaut — ça ancre mieux l'orthographe correcte. Activez pour
+            ne corriger que la partie fautive, le reste de la réponse restant déjà affiché.
+          </p>
+        </section>
+
+        <section className="card-3d flex flex-col gap-3 px-5 py-5">
           <h2 className="text-sm font-extrabold uppercase tracking-wide text-ink-faint">Sauvegarde</h2>
           <p className="text-xs text-ink-soft">
             Toute la progression reste sur cet appareil. Exportez un fichier pour la transférer ou la conserver.

@@ -85,6 +85,15 @@ export interface ProgressSnapshot {
    */
   haptics: boolean
   /**
+   * Après une mauvaise réponse à taper, `CorrectionGap` propose par défaut
+   * de réécrire le mot entier — peu importe où était l'erreur. Ce réglage
+   * bascule sur l'ancien comportement, plus fin : seule la partie qui
+   * diverge de ce qui a été tapé reste à corriger, le reste de la réponse
+   * s'affichant déjà en place. Éteint par défaut : réécrire tout le mot
+   * ancre mieux l'orthographe correcte qu'une correction partielle.
+   */
+  targetedCorrection: boolean
+  /**
    * `system` suit le réglage de l'appareil et seul lui : c'est le seul des
    * trois qui reste correct sans jamais être rouvert, y compris quand
    * l'appareil bascule de lui-même au coucher du soleil. `light`/`dark`
@@ -129,6 +138,7 @@ interface ProgressState extends ProgressSnapshot {
   setAutoSpeak: (on: boolean) => void
   setSounds: (on: boolean) => void
   setHaptics: (on: boolean) => void
+  setTargetedCorrection: (on: boolean) => void
   setTheme: (theme: 'light' | 'dark' | 'system') => void
   exportSave: () => string
   importSave: (payload: string) => void
@@ -159,6 +169,7 @@ const initial: ProgressSnapshot = {
   autoSpeak: true,
   sounds: true,
   haptics: false,
+  targetedCorrection: false,
   theme: 'system',
   streak: { current: 0, best: 0, lastDay: null },
 }
@@ -458,10 +469,13 @@ export const useProgress = create<ProgressState>()(
 
       setHaptics: (on) => set({ haptics: on }),
 
+      setTargetedCorrection: (on) => set({ targetedCorrection: on }),
+
       setTheme: (theme) => set({ theme }),
 
       exportSave: () => {
-        const { lessons, cards, steps, xp, xpByDay, dailyGoal, streak, autoSpeak, sounds, haptics, theme } = get()
+        const { lessons, cards, steps, xp, xpByDay, dailyGoal, streak, autoSpeak, sounds, haptics, targetedCorrection, theme } =
+          get()
         return JSON.stringify(
           {
             format: SAVE_FORMAT,
@@ -476,6 +490,7 @@ export const useProgress = create<ProgressState>()(
             autoSpeak,
             sounds,
             haptics,
+            targetedCorrection,
             theme,
           },
           null,
@@ -495,6 +510,7 @@ export const useProgress = create<ProgressState>()(
           autoSpeak?: boolean
           sounds?: boolean
           haptics?: boolean
+          targetedCorrection?: boolean
           theme?: 'light' | 'dark' | 'system'
           streak?: Streak
         }
@@ -543,6 +559,7 @@ export const useProgress = create<ProgressState>()(
           autoSpeak: parsed.autoSpeak ?? initial.autoSpeak,
           sounds: parsed.sounds ?? initial.sounds,
           haptics: parsed.haptics ?? initial.haptics,
+          targetedCorrection: parsed.targetedCorrection ?? initial.targetedCorrection,
           theme: parsed.theme ?? initial.theme,
           streak: parsed.streak ?? initial.streak,
         })
@@ -593,7 +610,20 @@ export const useProgress = create<ProgressState>()(
           steps: migrateAlphabetSteps(steps),
         }
       },
-      partialize: ({ lessons, cards, steps, xp, xpByDay, dailyGoal, streak, autoSpeak, sounds, haptics, theme }) => ({
+      partialize: ({
+        lessons,
+        cards,
+        steps,
+        xp,
+        xpByDay,
+        dailyGoal,
+        streak,
+        autoSpeak,
+        sounds,
+        haptics,
+        targetedCorrection,
+        theme,
+      }) => ({
         lessons,
         cards,
         steps,
@@ -603,6 +633,7 @@ export const useProgress = create<ProgressState>()(
         autoSpeak,
         sounds,
         haptics,
+        targetedCorrection,
         theme,
         streak,
       }),

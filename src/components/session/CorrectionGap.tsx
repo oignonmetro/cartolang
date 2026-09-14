@@ -1,12 +1,22 @@
 import { useEffect, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
 import { learningLanguage } from '@/lib/speech'
+import { useProgress } from '@/store/progressStore'
 import { divergenceAt } from './ExpectedAnswer'
 
 /**
- * Réponse attendue, mise en valeur, avec en dessous une invite à recopier la
- * partie fautive — recopier grave mieux que lire, mais ce n'est plus un
- * test : la réponse reste affichée pendant qu'on la retape.
+ * Réponse attendue, mise en valeur, avec en dessous une invite à la
+ * réécrire — recopier grave mieux que lire, mais ce n'est plus un test : la
+ * réponse reste affichée pendant qu'on la retape.
+ *
+ * Par défaut, le mot se réécrit en entier, quel que soit l'endroit où
+ * l'erreur s'est produite : réécrire tout ancre mieux l'orthographe correcte
+ * qu'une correction partielle, et évite d'avoir à repérer soi-même où ça a
+ * dérapé. Le réglage « Auto-correction ciblée » (profil) restaure l'ancien
+ * comportement, plus fin : seule la partie qui diverge de ce qui a été tapé
+ * reste à corriger, le reste s'affichant déjà en place — c'est le même
+ * découpage préfixe/reste qu'`ExpectedAnswer` (`divergenceAt`), simplement
+ * réduit à un préfixe vide quand le réglage est éteint.
  *
  * Une première version cachait la partie manquante et la faisait deviner :
  * sur un mot que l'apprenant ne connaît simplement pas du tout (`typed` sans
@@ -16,9 +26,6 @@ import { divergenceAt } from './ExpectedAnswer'
  * peut pas corriger ce qu'on n'a jamais su. La réponse s'affiche donc
  * toujours, et recopier n'est qu'un renfort — sans échappatoire, puisqu'il
  * n'y a plus rien à deviner.
- *
- * Reprend le même découpage préfixe/reste qu'`ExpectedAnswer`
- * (`divergenceAt`), qu'il remplace après une mauvaise réponse.
  */
 export function CorrectionGap({
   typed,
@@ -29,7 +36,8 @@ export function CorrectionGap({
   expected: string
   onResolved: () => void
 }) {
-  const at = divergenceAt(typed, expected)
+  const targeted = useProgress((state) => state.targetedCorrection)
+  const at = targeted ? divergenceAt(typed, expected) : 0
   const prefix = expected.slice(0, at)
   const hole = expected.slice(at)
   const [value, setValue] = useState('')
