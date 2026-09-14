@@ -1,0 +1,132 @@
+id: c3
+title: El pretérito imperfecto
+subtitle: L'imparfait espagnol
+icon: clock
+color: sky
+level: A2
+
+lessons:
+  - id: c3-l1
+    title: "Hablaba, comía : le modèle régulier"
+    notes: |
+      L'imperfecto correspond à l'imparfait français : une action
+      **habituelle** ou **en train de se dérouler** dans le passé, sans
+      date précise de fin — par opposition au pretérito perfecto (c1, c2),
+      qui marque un fait accompli et daté.
+
+      - Verbes en `-ar` : retirer `-ar`, ajouter `-aba`, `-abas`, `-aba`,
+        `-ábamos`, `-abais`, `-aban`.
+      - Verbes en `-er`/`-ir` : retirer la terminaison, ajouter `-ía`,
+        `-ías`, `-ía`, `-íamos`, `-íais`, `-ían`.
+
+      ! C'est l'un des temps **les plus réguliers** de l'espagnol : presque
+      aucun verbe n'y fait exception, contrairement au présent ou au
+      pretérito perfecto (participes irréguliers, c2).
+    verbs:
+      - verb: hablar (imperfecto)
+        translation: parlais (habituellement)
+        tense: pretérito imperfecto
+        note: "Retirer -ar, ajouter -aba, -abas, -aba, -ábamos, -abais, -aban."
+        forms:
+          - id: c3-hab-imp-1
+            person: yo
+            answer: hablaba
+          - id: c3-hab-imp-2
+            person: tú
+            answer: hablabas
+          - id: c3-hab-imp-3
+            person: él / ella
+            answer: hablaba
+          - id: c3-hab-imp-4
+            person: nosotros
+            answer: hablábamos
+          - id: c3-hab-imp-5
+            person: vosotros
+            answer: hablabais
+          - id: c3-hab-imp-6
+            person: ellos
+            answer: hablaban
+      - verb: comer (imperfecto)
+        translation: mangeais (habituellement)
+        tense: pretérito imperfecto
+        note: "Retirer -er, ajouter -ía, -ías, -ía, -íamos, -íais, -ían."
+        forms:
+          - id: c3-com-imp-1
+            person: yo
+            answer: comía
+          - id: c3-com-imp-2
+            person: tú
+            answer: comías
+          - id: c3-com-imp-3
+            person: él / ella
+            answer: comía
+          - id: c3-com-imp-4
+            person: nosotros
+            answer: comíamos
+          - id: c3-com-imp-5
+            person: vosotros
+            answer: comíais
+          - id: c3-com-imp-6
+            person: ellos
+            answer: comían
+
+  - id: c3-l2
+    title: "Era, iba : les deux seuls irréguliers"
+    notes: |
+      L'espagnol ne compte que **deux verbes irréguliers** à l'imperfecto
+      dans tout ce que ce cours couvre : `ser` et `ir` — à apprendre par
+      cœur, comme leurs présents (c3, A1).
+
+      - `ser` : `era, eras, era, éramos, erais, eran`.
+      - `ir` : `iba, ibas, iba, íbamos, ibais, iban`.
+
+      ! `era` (j'étais) sert pour décrire quelqu'un ou quelque chose dans
+      le passé — l'équivalent imperfecto le plus courant pour raconter,
+      par exemple `era alto` (il était grand).
+    verbs:
+      - verb: ser (imperfecto)
+        translation: étais
+        tense: pretérito imperfecto
+        note: "Irrégulier, à apprendre par cœur — pas de radical régulier."
+        forms:
+          - id: c3-ser-imp-1
+            person: yo
+            answer: era
+          - id: c3-ser-imp-2
+            person: tú
+            answer: eras
+          - id: c3-ser-imp-3
+            person: él / ella
+            answer: era
+          - id: c3-ser-imp-4
+            person: nosotros
+            answer: éramos
+          - id: c3-ser-imp-5
+            person: vosotros
+            answer: erais
+          - id: c3-ser-imp-6
+            person: ellos
+            answer: eran
+      - verb: ir (imperfecto)
+        translation: allais
+        tense: pretérito imperfecto
+        note: "Irrégulier, à apprendre par cœur — pas de radical régulier."
+        forms:
+          - id: c3-ir-imp-1
+            person: yo
+            answer: iba
+          - id: c3-ir-imp-2
+            person: tú
+            answer: ibas
+          - id: c3-ir-imp-3
+            person: él / ella
+            answer: iba
+          - id: c3-ir-imp-4
+            person: nosotros
+            answer: íbamos
+          - id: c3-ir-imp-5
+            person: vosotros
+            answer: ibais
+          - id: c3-ir-imp-6
+            person: ellos
+            answer: iban
