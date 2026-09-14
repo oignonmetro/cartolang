@@ -10,7 +10,7 @@
 #                  g4 por/para ✓, g5 subordonnées avec que ✓ (piste
 #                  complète)
 #   conjugaison  — c1 pretérito perfecto (haber + participe, réguliers) ✓,
-#                  c2 pretérito perfecto (participes irréguliers),
+#                  c2 pretérito perfecto (participes irréguliers) ✓,
 #                  c3 pretérito imperfecto
 
 id: fr-es-a2
@@ -60,3 +60,4 @@ tracks:
     icon: clock
     units:
       - c1
+      - c2

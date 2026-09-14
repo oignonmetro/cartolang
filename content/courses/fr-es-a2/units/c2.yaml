@@ -1,0 +1,129 @@
+id: c2
+title: El pretérito perfecto (II)
+subtitle: Participios irregulares
+icon: clock
+color: sky
+level: A2
+
+lessons:
+  - id: c2-l1
+    title: "Hecho, dicho : participes à mémoriser"
+    notes: |
+      Une poignée de verbes très fréquents ont un participe passé qui ne
+      suit **aucune** des règles régulières (`-ado`/`-ido`, vues en c1) —
+      à apprendre par cœur, un par un.
+
+      - `hacer` (faire) → `hecho`, jamais `hacido`.
+      - `decir` (dire, déjà croisé en g5 avec `digo`) → `dicho`, jamais
+        `decido`.
+
+      ! Le reste de la phrase suit exactement la même structure que pour
+      les verbes réguliers : `haber` conjugué + participe invariable.
+    verbs:
+      - verb: hacer (perfecto)
+        translation: avoir fait
+        tense: pretérito perfecto
+        note: "Participe irrégulier : hecho, jamais hacido."
+        forms:
+          - id: c2-hac-perf-1
+            person: yo
+            answer: he hecho
+          - id: c2-hac-perf-2
+            person: tú
+            answer: has hecho
+          - id: c2-hac-perf-3
+            person: él / ella
+            answer: ha hecho
+          - id: c2-hac-perf-4
+            person: nosotros
+            answer: hemos hecho
+          - id: c2-hac-perf-5
+            person: vosotros
+            answer: habéis hecho
+          - id: c2-hac-perf-6
+            person: ellos
+            answer: han hecho
+      - verb: decir (perfecto)
+        translation: avoir dit
+        tense: pretérito perfecto
+        note: "Participe irrégulier : dicho, jamais decido."
+        forms:
+          - id: c2-dic-perf-1
+            person: yo
+            answer: he dicho
+          - id: c2-dic-perf-2
+            person: tú
+            answer: has dicho
+          - id: c2-dic-perf-3
+            person: él / ella
+            answer: ha dicho
+          - id: c2-dic-perf-4
+            person: nosotros
+            answer: hemos dicho
+          - id: c2-dic-perf-5
+            person: vosotros
+            answer: habéis dicho
+          - id: c2-dic-perf-6
+            person: ellos
+            answer: han dicho
+
+  - id: c2-l2
+    title: "Abierto, puesto : encore deux participes"
+    notes: |
+      Deux participes de plus, tout aussi irréguliers, à ajouter à la
+      liste commencée en c2-l1.
+
+      - `abrir` (ouvrir, déjà connu au présent depuis v5/v6, A1) →
+        `abierto`, jamais `abrido`.
+      - `poner` (mettre, poser) → `puesto`, jamais `ponido`.
+
+      ! Ces participes irréguliers ne se limitent pas au pretérito
+      perfecto : ils resteront les mêmes partout où un participe est
+      nécessaire, dans des temps que ce cours ne couvre pas encore.
+    verbs:
+      - verb: abrir (perfecto)
+        translation: avoir ouvert
+        tense: pretérito perfecto
+        note: "Participe irrégulier : abierto, jamais abrido."
+        forms:
+          - id: c2-abr-perf-1
+            person: yo
+            answer: he abierto
+          - id: c2-abr-perf-2
+            person: tú
+            answer: has abierto
+          - id: c2-abr-perf-3
+            person: él / ella
+            answer: ha abierto
+          - id: c2-abr-perf-4
+            person: nosotros
+            answer: hemos abierto
+          - id: c2-abr-perf-5
+            person: vosotros
+            answer: habéis abierto
+          - id: c2-abr-perf-6
+            person: ellos
+            answer: han abierto
+      - verb: poner (perfecto)
+        translation: avoir mis
+        tense: pretérito perfecto
+        note: "Participe irrégulier : puesto, jamais ponido."
+        forms:
+          - id: c2-pon-perf-1
+            person: yo
+            answer: he puesto
+          - id: c2-pon-perf-2
+            person: tú
+            answer: has puesto
+          - id: c2-pon-perf-3
+            person: él / ella
+            answer: ha puesto
+          - id: c2-pon-perf-4
+            person: nosotros
+            answer: hemos puesto
+          - id: c2-pon-perf-5
+            person: vosotros
+            answer: habéis puesto
+          - id: c2-pon-perf-6
+            person: ellos
+            answer: han puesto
