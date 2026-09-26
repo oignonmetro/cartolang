@@ -24,8 +24,13 @@ import { divergenceAt } from './ExpectedAnswer'
  * un pur devinage à l'aveugle, sans la moindre information pour s'en sortir
  * — exactement ce qu'un exercice de correction ne doit jamais être : on ne
  * peut pas corriger ce qu'on n'a jamais su. La réponse s'affiche donc
- * toujours, et recopier n'est qu'un renfort — sans échappatoire, puisqu'il
- * n'y a plus rien à deviner.
+ * toujours, et recopier n'est qu'un renfort.
+ *
+ * En mode forcé (réglage éteint), le trou est le mot entier : sur un mot
+ * long dans une autre écriture (le russe pour « bonjour », par exemple), le
+ * recopier en entier peut être disproportionné pour ce que ça apporte. Un
+ * bouton « Je ne sais pas » saute alors la copie sans pénalité. En mode ciblé,
+ * le trou ne couvre déjà que la partie fautive : il n'y a rien à en sauter.
  */
 export function CorrectionGap({
   typed,
@@ -70,6 +75,12 @@ export function CorrectionGap({
     // se relance, jamais ce qu'il compare.
   }, [value])
 
+  function skip() {
+    setValue(hole)
+    setResolved(true)
+    onResolved()
+  }
+
   const width = Math.max(hole.length, 1)
 
   return (
@@ -98,6 +109,15 @@ export function CorrectionGap({
             style={{ width: `${width}ch` }}
             className="border-b-4 border-ink-faint bg-transparent text-center text-lg font-black outline-none focus:border-teal"
           />
+          {!targeted && (
+            <button
+              type="button"
+              onClick={skip}
+              className="text-xs font-bold text-ink-faint underline underline-offset-2"
+            >
+              Je ne sais pas
+            </button>
+          )}
         </div>
       )}
     </div>
