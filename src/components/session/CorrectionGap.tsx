@@ -29,8 +29,12 @@ import { divergenceAt } from './ExpectedAnswer'
  * En mode forcé (réglage éteint), le trou est le mot entier : sur un mot
  * long dans une autre écriture (le russe pour « bonjour », par exemple), le
  * recopier en entier peut être disproportionné pour ce que ça apporte. Un
- * bouton « Je ne sais pas » saute alors la copie sans pénalité. En mode ciblé,
- * le trou ne couvre déjà que la partie fautive : il n'y a rien à en sauter.
+ * bouton « Passer » saute alors la copie sans pénalité — à ne pas confondre
+ * avec le « Je ne sais pas » de l'écran précédent (avant vérification), qui
+ * porte sur la réponse elle-même : ici, la réponse est déjà connue et
+ * affichée, il ne reste qu'à décider si la recopier vaut le coup. En mode
+ * ciblé, le trou ne couvre déjà que la partie fautive : il n'y a rien à en
+ * sauter.
  */
 export function CorrectionGap({
   typed,
@@ -75,7 +79,7 @@ export function CorrectionGap({
     // se relance, jamais ce qu'il compare.
   }, [value])
 
-  function skip() {
+  function pass() {
     setValue(hole)
     setResolved(true)
     onResolved()
@@ -93,29 +97,31 @@ export function CorrectionGap({
       {resolved ? (
         <p className="text-sm font-bold text-success">Recopiée, bien joué.</p>
       ) : (
-        <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1">
-          <span className="text-sm font-bold">Réécrivez-la :</span>
-          <motion.input
-            ref={input}
-            value={value}
-            onChange={(event) => setValue(event.target.value.slice(0, hole.length))}
-            animate={shake ? { x: [0, -6, 6, -4, 4, 0] } : {}}
-            transition={{ duration: 0.35 }}
-            autoCapitalize="off"
-            autoCorrect="off"
-            spellCheck={false}
-            lang={learningLanguage()}
-            aria-label="Recopier la partie manquante"
-            style={{ width: `${width}ch` }}
-            className="border-b-4 border-ink-faint bg-transparent text-center text-lg font-black outline-none focus:border-teal"
-          />
+        <div className="flex flex-col items-center gap-1">
+          <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1">
+            <span className="text-sm font-bold">Réécrivez-la :</span>
+            <motion.input
+              ref={input}
+              value={value}
+              onChange={(event) => setValue(event.target.value.slice(0, hole.length))}
+              animate={shake ? { x: [0, -6, 6, -4, 4, 0] } : {}}
+              transition={{ duration: 0.35 }}
+              autoCapitalize="off"
+              autoCorrect="off"
+              spellCheck={false}
+              lang={learningLanguage()}
+              aria-label="Recopier la partie manquante"
+              style={{ width: `${width}ch` }}
+              className="border-b-4 border-ink-faint bg-transparent text-center text-lg font-black outline-none focus:border-teal"
+            />
+          </div>
           {!targeted && (
             <button
               type="button"
-              onClick={skip}
+              onClick={pass}
               className="text-xs font-bold text-ink-faint underline underline-offset-2"
             >
-              Je ne sais pas
+              Passer
             </button>
           )}
         </div>

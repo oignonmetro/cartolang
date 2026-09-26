@@ -55,6 +55,13 @@ export function GrammarGap({
     haptics.answered(exercise, correct)
   }
 
+  function dontKnow() {
+    setValue('')
+    setChecked(false)
+    sounds.success(false)
+    haptics.answered(exercise, false)
+  }
+
   return (
     <div className="flex flex-1 flex-col gap-5">
       {/* Épinglée : voir la même remarque dans `TypeAnswer`. Vaut surtout
@@ -145,9 +152,20 @@ export function GrammarGap({
 
       <div className="mt-auto">
         {checked === null ? (
-          <Button block tone="violet" disabled={!filled} onClick={() => check(value)}>
-            Vérifier
-          </Button>
+          <div className="flex flex-col items-center gap-2">
+            <Button block tone="violet" disabled={!filled} onClick={() => check(value)}>
+              Vérifier
+            </Button>
+            {!bank && (
+              <button
+                type="button"
+                onClick={dontKnow}
+                className="text-xs font-bold text-ink-faint underline underline-offset-2"
+              >
+                Je ne sais pas
+              </button>
+            )}
+          </div>
         ) : (
           <div className="flex items-center gap-3">
             {/* La phrase entière, une fois complétée : c'est la structure qu'on

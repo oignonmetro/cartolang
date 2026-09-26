@@ -51,6 +51,13 @@ export function TypeAnswer({
     haptics.answered(exercise, correct)
   }
 
+  function dontKnow() {
+    setValue('')
+    setChecked(false)
+    sounds.success(false)
+    haptics.answered(exercise, false)
+  }
+
   return (
     <div className="flex flex-1 flex-col gap-6">
       {/* Épinglée en haut de la zone qui défile : sur mobile, le clavier qui
@@ -120,9 +127,18 @@ export function TypeAnswer({
 
       <div className="mt-auto">
         {checked === null ? (
-          <Button block disabled={!filled} onClick={check}>
-            Vérifier
-          </Button>
+          <div className="flex flex-col items-center gap-2">
+            <Button block disabled={!filled} onClick={check}>
+              Vérifier
+            </Button>
+            <button
+              type="button"
+              onClick={dontKnow}
+              className="text-xs font-bold text-ink-faint underline underline-offset-2"
+            >
+              Je ne sais pas
+            </button>
+          </div>
         ) : (
           <Button
             block
