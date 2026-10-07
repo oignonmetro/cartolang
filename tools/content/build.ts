@@ -37,7 +37,7 @@ import {
 import { findVocabGap } from '../../src/content/text.ts'
 import { parseNotes } from '../../src/content/notes.ts'
 import { itemsOfCourse, itemsOfLesson, lessonsOf } from '../../src/content/course.ts'
-import { learningForm, normalizeForm } from '../../src/engine/exercises.ts'
+import { learningForm } from '../../src/engine/exercises.ts'
 import { setSpellingLanguage } from '../../src/engine/spelling.ts'
 import {
   alphabetGatingRemarks,
@@ -403,14 +403,16 @@ function checkGrammarLesson(lesson: GrammarLesson, problems: string[]) {
     if (point.options.length > 0 && !point.options.includes(point.answer)) {
       problems.push(`point "${point.id}" : la réponse "${point.answer}" ne figure pas dans les options proposées`)
     }
-    // Deux options que la saisie confondrait — `ddar` et `dar` si l'on
-    // repliait aussi la gémination initiale — compteraient toutes deux justes.
+    // Deux options que la comparaison confondrait — `ddar` et `dar` si l'on
+    // repliait aussi la gémination initiale, « Мой » et « Мои » si l'on
+    // retirait la brève — compteraient toutes deux justes, au clavier comme
+    // au choix.
     const folded = new Map<string, string>()
     for (const option of point.options) {
       const key = learningForm(option)
       const twin = folded.get(key)
-      if (twin !== undefined && normalizeForm(twin) !== normalizeForm(option)) {
-        problems.push(`point "${point.id}" : les options "${twin}" et "${option}" se confondent à la saisie`)
+      if (twin !== undefined && twin !== option) {
+        problems.push(`point "${point.id}" : les options "${twin}" et "${option}" se confondent à la comparaison`)
       }
       folded.set(key, option)
     }

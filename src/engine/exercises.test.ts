@@ -12,6 +12,8 @@ import {
   lessonProgress,
   matchesAnswer,
   normalizeAnswer,
+  normalizeForm,
+  normalizeKnownAnswer,
   splitGap,
   type Exercise,
 } from './exercises'
@@ -804,8 +806,37 @@ describe('correction des réponses saisies', () => {
   })
 
   it('ignore apostrophes droites, typographiques et accents', () => {
-    expect(normalizeAnswer("S’il vous plaît !")).toBe(normalizeAnswer('sil vous plait'))
+    expect(normalizeKnownAnswer("S’il vous plaît !")).toBe(normalizeKnownAnswer('sil vous plait'))
     expect(isAnswerCorrect(LESSON[3], 'to-known', "s’il vous plait")).toBe(true)
+  })
+
+  it('exige les accents dans la langue apprise, pas en français', () => {
+    // Dans la langue apprise l'accent est de l'orthographe : « qué » n'est
+    // pas « que ». Le français tapé, lui, garde sa tolérance.
+    const what = word('que', 'qué', 'quoi')
+    expect(isAnswerCorrect(what, 'to-learning', 'qué')).toBe(true)
+    expect(isAnswerCorrect(what, 'to-learning', 'que')).toBe(false)
+    const year = word('ano', 'año', 'année')
+    expect(isAnswerCorrect(year, 'to-learning', 'ano')).toBe(false)
+    expect(isAnswerCorrect(year, 'to-known', 'annee')).toBe(true)
+  })
+
+  it('accepte une lettre accentuée tapée décomposée', () => {
+    // Selon le clavier, « é » arrive précomposé ou en e + accent combinant.
+    const what = word('que', 'qué', 'quoi')
+    expect(isAnswerCorrect(what, 'to-learning', 'qué'.normalize('NFD'))).toBe(true)
+    expect(normalizeAnswer('мой'.normalize('NFD'))).toBe(normalizeAnswer('мой'))
+  })
+
+  it('distingue Й de И et Ё de Е, même côté français', () => {
+    // Régression : retirer toutes les marques combinantes faisait de « Мой »
+    // et « Мои » la même réponse — la brève de Й est une lettre, pas un accent.
+    const my = word('moi', 'мой', 'mon')
+    expect(isAnswerCorrect(my, 'to-learning', 'мои')).toBe(false)
+    expect(isAnswerCorrect(my, 'to-learning', 'Мой')).toBe(true)
+    expect(normalizeKnownAnswer('мой')).not.toBe(normalizeKnownAnswer('мои'))
+    expect(normalizeKnownAnswer('ёлка')).not.toBe(normalizeKnownAnswer('елка'))
+    expect(normalizeKnownAnswer('Ёлка')).toBe('ёлка')
   })
 })
 
@@ -1240,6 +1271,19 @@ describe('correction grammaire et conjugaison', () => {
     expect(matchesAnswer('to postpone', [], 'postpone')).toBe(false)
     // Une variante réellement acceptable reste déclarée par l'auteur.
     expect(matchesAnswer('boils', ['boiled'], 'boiled')).toBe(true)
+  })
+
+  it('distingue les options qui ne diffèrent que par un accent ou une brève', () => {
+    // Régression : « Мой » / « Мои » (rg1-moi-*) et « que » / « qué »
+    // (g5-creo-*) sont des options d'un même point ; la saisie de l'une
+    // passait pour l'autre, et le choix de l'une comptait juste pour l'autre.
+    expect(matchesAnswer('Мой', [], 'Мои')).toBe(false)
+    expect(matchesAnswer('Мой', [], 'мой')).toBe(true)
+    expect(matchesAnswer('Её', [], 'Ее')).toBe(false)
+    expect(matchesAnswer('qué', [], 'que')).toBe(false)
+    expect(matchesAnswer('que', [], 'qué')).toBe(false)
+    expect(normalizeForm('Мой')).not.toBe(normalizeForm('Мои'))
+    expect(normalizeForm('Qué')).toBe(normalizeForm('qué'.normalize('NFD')))
   })
 
   it('reste souple sur l’article pour le vocabulaire', () => {

@@ -1723,15 +1723,37 @@ function sharesVocab(a: Exercise, b: Exercise): boolean {
   return itemIdsOf(b).some((id) => idsA.has(id))
 }
 
-/** Casse, accents, ponctuation : ce qu'on ignore dans tous les cas. */
+/**
+ * Casse et ponctuation : ce qu'on ignore dans tous les cas.
+ *
+ * Les accents, eux, restent : dans la langue apprise ils sont de
+ * l'orthographe, et souvent l'objet même du point (« que » contre « qué »,
+ * « мой » contre « мои »). NFC ramène la lettre précomposée et sa forme
+ * décomposée — selon le clavier — à une seule écriture.
+ */
 function normalizeCore(value: string): string {
   return value
     .trim()
     .toLowerCase()
-    .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '')
+    .normalize('NFC')
     .replace(/[.,!?;:"“”()]/g, '')
     .replace(/[’‘]/g, "'")
+}
+
+/**
+ * Retire les accents d'un texte en français, où l'on tolère qu'ils manquent.
+ *
+ * La brève et le tréma d'une lettre cyrillique ne sont pas des accents mais
+ * des lettres à part entière (Й, Ё) : ils restent, au cas où un mot russe
+ * passerait par là.
+ */
+function stripAccents(value: string): string {
+  return value
+    .normalize('NFD')
+    .replace(/(\p{Script=Cyrillic}?)([\u0300-\u036f])/gu, (_, base: string, mark: string) =>
+      base !== '' && (mark === '\u0306' || mark === '\u0308') ? base + mark : base,
+    )
+    .normalize('NFC')
 }
 
 function collapse(value: string): string {
@@ -1762,12 +1784,18 @@ export function normalizeAnswer(value: string): string {
   return collapse(normalizeCore(value).replace(/^(le |la |les |l'|un |une |des |to |the |a |an )/, ''))
 }
 
+/** Réponse tapée en français : comme `normalizeAnswer`, accents en moins. */
+export function normalizeKnownAnswer(value: string): string {
+  return stripAccents(normalizeAnswer(value))
+}
+
 export function isAnswerCorrect(vocab: Vocab, direction: Direction, value: string): boolean {
   const expected =
     direction === 'to-known' ? [vocab.translation, ...vocab.alt] : [vocab.term]
-  // Le repli des graphies ne vaut que pour la langue apprise : le français,
-  // lui, s'écrit selon une norme.
-  const comparable = direction === 'to-known' ? normalizeAnswer : (text: string) => foldSpelling(normalizeAnswer(text))
+  // Le français tapé tolère les accents manquants ; la langue apprise, non,
+  // mais elle replie ses graphies équivalentes quand elle en déclare.
+  const comparable =
+    direction === 'to-known' ? normalizeKnownAnswer : (text: string) => foldSpelling(normalizeAnswer(text))
   const given = comparable(value)
   return given.length > 0 && expected.some((candidate) => comparable(candidate) === given)
 }

@@ -35,11 +35,16 @@ const identity: Fold = (value) => value
  *     est l'article assimilé (`ddar`, la maison, contre `dar`, une maison) :
  *     c'est une différence de sens, et la grammaire l'enseigne.
  *
+ * La transcription n'a pas d'accents : un `é` tapé par réflexe de francophone
+ * vaut un `e`.
+ *
  * Les chiffres `3` (ع) et `7` (ح) restent distincts de `a` et `h` : ce sont
  * d'autres sons, et les confondre change le mot.
  */
 export const foldDarija: Fold = (value) =>
   value
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
     .replace(/sh/g, 'ch')
     .replace(/ou/g, 'u')
     .replace(/o/g, 'u')

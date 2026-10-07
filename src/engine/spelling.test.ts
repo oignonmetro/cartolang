@@ -14,6 +14,7 @@ describe('foldDarija', () => {
     expect(foldDarija('mzian')).toBe(foldDarija('mzyan'))
     expect(foldDarija('bezzaf')).toBe(foldDarija('bzaf'))
     expect(foldDarija('lqahwa')).toBe(foldDarija('l9ahwa'))
+    expect(foldDarija('mzyané')).toBe(foldDarija('mzyan'))
   })
 
   it("garde l'article assimilé en tête de mot", () => {
