@@ -23,6 +23,7 @@ lessons:
     vocab:
       - id: ary-smiti
         term: smiti
+        speech: سميتي
         translation: je m'appelle
         alt:
           - mon nom est
@@ -33,6 +34,7 @@ lessons:
           translation: Salut, je m'appelle Karim.
       - id: ary-chno-smitek
         term: chno smitek?
+        speech: شنو سميتك؟
         translation: comment tu t'appelles ?
         alt:
           - quel est ton nom
@@ -44,6 +46,7 @@ lessons:
           translation: Salut, comment tu t'appelles ?
       - id: ary-mnin-nta
         term: mnin nta?
+        speech: منين نتا؟
         translation: d'où es-tu ?
         alt:
           - tu viens d'où
@@ -57,6 +60,7 @@ lessons:
           translation: D'où es-tu ? De France ?
       - id: ary-metcherfin
         term: metcherfin
+        speech: متشرفين
         translation: enchanté
         alt:
           - enchantée
@@ -68,6 +72,7 @@ lessons:
           translation: Moi c'est Sara, enchantée.
       - id: ary-fhemt
         term: fhemt
+        speech: فهمت
         translation: j'ai compris
         alt:
           - je comprends
@@ -78,6 +83,7 @@ lessons:
           translation: Oui, j'ai compris, merci.
       - id: ary-mafhemtch
         term: mafhemtch
+        speech: مافهمتش
         translation: je n'ai pas compris
         alt:
           - je ne comprends pas
@@ -90,6 +96,7 @@ lessons:
           translation: Pardon, je n'ai pas compris.
       - id: ary-3awed
         term: 3awed
+        speech: عاود
         translation: répète
         alt:
           - répétez
@@ -100,6 +107,7 @@ lessons:
           translation: Répète s'il te plaît, doucement.
       - id: ary-chwiya
         term: chwiya
+        speech: شوية
         translation: un peu
         alt:
           - doucement
@@ -128,6 +136,7 @@ lessons:
     vocab:
       - id: ary-bba
         term: bba
+        speech: بّا
         translation: papa
         alt:
           - mon père
@@ -138,6 +147,7 @@ lessons:
           translation: Papa travaille à Casablanca.
       - id: ary-mmi
         term: mmi
+        speech: مّي
         translation: maman
         alt:
           - ma mère
@@ -148,6 +158,7 @@ lessons:
           translation: Maman est à la maison.
       - id: ary-khoya
         term: khoya
+        speech: خويا
         translation: mon frère
         alt:
           - frère
@@ -158,6 +169,7 @@ lessons:
           translation: C'est mon frère Youssef.
       - id: ary-khti
         term: khti
+        speech: ختي
         translation: ma sœur
         alt:
           - sœur
@@ -169,6 +181,7 @@ lessons:
           translation: C'est ma sœur Salma.
       - id: ary-wld
         term: wld
+        speech: ولد
         translation: garçon
         alt:
           - fils
@@ -179,6 +192,7 @@ lessons:
           translation: J'ai un garçon.
       - id: ary-bent
         term: bent
+        speech: بنت
         translation: fille
         alt:
           - la fille
@@ -189,6 +203,7 @@ lessons:
           translation: J'ai une fille.
       - id: ary-rajel
         term: rajel
+        speech: راجل
         translation: homme
         alt:
           - mari
@@ -199,6 +214,7 @@ lessons:
           translation: C'est un homme bien.
       - id: ary-mra
         term: mra
+        speech: مرا
         translation: femme
         alt:
           - épouse

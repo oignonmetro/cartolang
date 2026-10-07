@@ -4,7 +4,7 @@ import { useCourse } from '@/content/CourseProvider'
 import { buildReviewSession } from '@/engine/exercises'
 import type { SessionOutcome } from '@/engine/progress'
 import { dueCards, type CardState } from '@/engine/srs'
-import { canSpeak } from '@/lib/speech'
+import { canSpeakExercises } from '@/lib/speech'
 import { EMPTY_CARDS, useProgress } from '@/store/progressStore'
 import { SessionScreen } from './SessionScreen'
 import { SessionResult } from './SessionResult'
@@ -34,7 +34,7 @@ export function ReviewRoute() {
     })),
   )
 
-  const exercises = useMemo(() => buildReviewSession(entries, undefined, canSpeak()), [entries])
+  const exercises = useMemo(() => buildReviewSession(entries, undefined, canSpeakExercises()), [entries])
 
   if (finished) {
     return (

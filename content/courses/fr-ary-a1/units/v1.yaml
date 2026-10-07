@@ -28,6 +28,7 @@ lessons:
     vocab:
       - id: ary-salam
         term: salam
+        speech: سلام
         translation: salut
         alt:
           - coucou
@@ -38,6 +39,7 @@ lessons:
           translation: Salut, ça va ?
       - id: ary-salam-3likom
         term: salam 3likom
+        speech: السلام عليكم
         translation: la paix sur vous
         alt:
           - que la paix soit sur vous
@@ -49,6 +51,7 @@ lessons:
           translation: La paix sur vous, monsieur.
       - id: ary-wa-3likom-salam
         term: wa 3likom salam
+        speech: وعليكم السلام
         translation: et sur vous la paix
         alt:
           - et sur vous aussi la paix
@@ -60,6 +63,7 @@ lessons:
           translation: Et sur vous la paix, bienvenue !
       - id: ary-sba7-lkhir
         term: sba7 lkhir
+        speech: صباح الخير
         translation: bonjour
         alt:
           - bon matin
@@ -70,6 +74,7 @@ lessons:
           translation: Bonjour, maman.
       - id: ary-msa-lkhir
         term: msa lkhir
+        speech: مسا الخير
         translation: bonsoir
         pos: expression
         hint: Littéralement « soir du bien », à partir de la fin d'après-midi.
@@ -78,6 +83,7 @@ lessons:
           translation: Bonsoir, tu vas bien ?
       - id: ary-labas
         term: labas
+        speech: لاباس
         translation: ça va
         alt:
           - ca va
@@ -89,6 +95,7 @@ lessons:
           translation: Ça va, Dieu merci.
       - id: ary-l7amdolillah
         term: l7amdolillah
+        speech: الحمد لله
         translation: Dieu merci
         alt:
           - grâce à Dieu
@@ -100,6 +107,7 @@ lessons:
           translation: Tout va bien, Dieu merci.
       - id: ary-bslama
         term: bslama
+        speech: بسلامة
         translation: au revoir
         pos: expression
         hint: Littéralement « avec la paix ».
@@ -125,6 +133,7 @@ lessons:
     vocab:
       - id: ary-chokran
         term: chokran
+        speech: شكرا
         translation: merci
         pos: expression
         example:
@@ -132,6 +141,7 @@ lessons:
           translation: Merci beaucoup !
       - id: ary-bla-jmil
         term: bla jmil
+        speech: بلا جميل
         translation: de rien
         alt:
           - je vous en prie
@@ -143,6 +153,7 @@ lessons:
           translation: Merci. — De rien.
       - id: ary-3afak
         term: 3afak
+        speech: عفاك
         translation: s'il te plaît
         alt:
           - s'il vous plaît
@@ -153,6 +164,7 @@ lessons:
           translation: Un thé, s'il te plaît.
       - id: ary-smi7li
         term: smi7li
+        speech: سمحلي
         translation: pardon
         alt:
           - excuse-moi
@@ -165,6 +177,7 @@ lessons:
           translation: Pardon, où est le marché ?
       - id: ary-wakha
         term: wakha
+        speech: واخا
         translation: d'accord
         alt:
           - ok
@@ -175,6 +188,7 @@ lessons:
           translation: D'accord, je te vois demain.
       - id: ary-iyeh
         term: iyeh
+        speech: إيه
         translation: oui
         pos: expression
         example:
@@ -182,6 +196,7 @@ lessons:
           translation: Oui, je suis de France.
       - id: ary-la
         term: la
+        speech: لا
         translation: non
         pos: expression
         hint: Le mot entier veut dire « non » — pas un article.
@@ -190,6 +205,7 @@ lessons:
           translation: Non, merci.
       - id: ary-mre7ba
         term: mre7ba
+        speech: مرحبا
         translation: bienvenue
         alt:
           - sois le bienvenu

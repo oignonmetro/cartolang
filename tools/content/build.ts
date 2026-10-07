@@ -322,6 +322,16 @@ function checkVocabLesson(lesson: VocabLesson, problems: string[], learning: str
       warn(`mot "${vocab.id}"`, `verbe noté sans « to » ("${vocab.term}")`)
     }
 
+    // Le darija se transcrit en lettres latines, que la voix arabe ne sait pas
+    // lire : sans sa forme arabe, le mot reste muet (voir SPOKEN_SCRIPTS,
+    // src/lib/speech.ts).
+    if (learning === 'ary' && !vocab.speech) {
+      warn(`mot "${vocab.id}"`, 'pas de champ `speech` en écriture arabe : le mot restera sans prononciation')
+    }
+    if (vocab.speech && learning === 'ary' && !/^[\p{Script_Extensions=Arabic}\s،؟!?.]+$/u.test(vocab.speech)) {
+      problems.push(`mot "${vocab.id}" : \`speech\` doit être écrit en caractères arabes ("${vocab.speech}")`)
+    }
+
     if (vocab.example && !findVocabGap(vocab.example.text, vocab.term, vocab.gap)) {
       problems.push(
         `mot "${vocab.id}" : la phrase d'exemple ne contient ni "${vocab.term}" ni sa forme nue ; ` +

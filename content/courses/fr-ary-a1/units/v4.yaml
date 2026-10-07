@@ -22,6 +22,7 @@ lessons:
     vocab:
       - id: ary-lma
         term: lma
+        speech: الما
         translation: l'eau
         alt:
           - eau
@@ -32,6 +33,7 @@ lessons:
           translation: Je voudrais de l'eau, s'il te plaît.
       - id: ary-atay
         term: atay
+        speech: أتاي
         translation: le thé
         alt:
           - thé
@@ -43,6 +45,7 @@ lessons:
           translation: Du thé à la menthe.
       - id: ary-l9ahwa
         term: l9ahwa
+        speech: القهوة
         translation: le café
         alt:
           - café
@@ -53,6 +56,7 @@ lessons:
           translation: Le café sans sucre.
       - id: ary-l7lib
         term: l7lib
+        speech: الحليب
         translation: le lait
         alt:
           - lait
@@ -63,6 +67,7 @@ lessons:
           translation: Je bois du lait le matin.
       - id: ary-l3sir
         term: l3sir
+        speech: العصير
         translation: le jus
         alt:
           - jus
@@ -74,6 +79,7 @@ lessons:
           translation: Le jus d'orange.
       - id: ary-lkhobz
         term: lkhobz
+        speech: الخبز
         translation: le pain
         alt:
           - pain
@@ -84,6 +90,7 @@ lessons:
           translation: Le pain est chaud.
       - id: ary-sokkar
         term: sokkar
+        speech: سكر
         translation: le sucre
         alt:
           - sucre
@@ -94,6 +101,7 @@ lessons:
           translation: Du thé avec beaucoup de sucre.
       - id: ary-zit
         term: zit
+        speech: زيت
         translation: l'huile
         alt:
           - huile
@@ -118,6 +126,7 @@ lessons:
     vocab:
       - id: ary-lmakla
         term: lmakla
+        speech: الماكلة
         translation: la nourriture
         alt:
           - nourriture
@@ -129,6 +138,7 @@ lessons:
           translation: La nourriture est très bonne.
       - id: ary-l7am
         term: l7am
+        speech: اللحم
         translation: la viande
         alt:
           - viande
@@ -139,6 +149,7 @@ lessons:
           translation: Je ne mange pas de viande.
       - id: ary-djaj
         term: djaj
+        speech: دجاج
         translation: le poulet
         alt:
           - poulet
@@ -149,6 +160,7 @@ lessons:
           translation: Un tajine au poulet.
       - id: ary-l7out
         term: l7out
+        speech: الحوت
         translation: le poisson
         alt:
           - poisson
@@ -159,6 +171,7 @@ lessons:
           translation: Le poisson est frais aujourd'hui.
       - id: ary-lkhodra
         term: lkhodra
+        speech: الخضرة
         translation: les légumes
         alt:
           - légumes
@@ -169,6 +182,7 @@ lessons:
           translation: J'achète les légumes au marché.
       - id: ary-lbid
         term: lbid
+        speech: البيض
         translation: les œufs
         alt:
           - œufs
@@ -181,6 +195,7 @@ lessons:
           translation: Je voudrais deux œufs.
       - id: ary-tajine
         term: tajine
+        speech: طاجين
         translation: le tajine
         alt:
           - tajine
@@ -192,6 +207,7 @@ lessons:
           translation: Je mange un tajine à la maison.
       - id: ary-bnin
         term: bnin
+        speech: بنين
         translation: délicieux
         alt:
           - bon

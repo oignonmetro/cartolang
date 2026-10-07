@@ -22,6 +22,7 @@ lessons:
     vocab:
       - id: ary-wa7ed
         term: wa7ed
+        speech: واحد
         translation: un
         alt:
           - "1"
@@ -31,6 +32,7 @@ lessons:
           translation: Un thé, s'il te plaît.
       - id: ary-jouj
         term: jouj
+        speech: جوج
         translation: deux
         alt:
           - "2"
@@ -40,6 +42,7 @@ lessons:
           translation: Moi et mon frère, nous sommes deux.
       - id: ary-tlata
         term: tlata
+        speech: تلاتة
         translation: trois
         alt:
           - "3"
@@ -49,6 +52,7 @@ lessons:
           translation: Un et deux, trois.
       - id: ary-reb3a
         term: reb3a
+        speech: ربعة
         translation: quatre
         alt:
           - "4"
@@ -58,6 +62,7 @@ lessons:
           translation: Deux et deux, quatre.
       - id: ary-khamsa
         term: khamsa
+        speech: خمسة
         translation: cinq
         alt:
           - "5"
@@ -68,6 +73,7 @@ lessons:
           translation: Deux et trois, cinq.
       - id: ary-setta
         term: setta
+        speech: ستة
         translation: six
         alt:
           - "6"
@@ -77,6 +83,7 @@ lessons:
           translation: Trois et trois, six.
       - id: ary-seb3a
         term: seb3a
+        speech: سبعة
         translation: sept
         alt:
           - "7"
@@ -86,6 +93,7 @@ lessons:
           translation: Quatre et trois, sept.
       - id: ary-tmenya
         term: tmenya
+        speech: تمنية
         translation: huit
         alt:
           - "8"
@@ -95,6 +103,7 @@ lessons:
           translation: Quatre et quatre, huit.
       - id: ary-tes3od
         term: tes3od
+        speech: تسعود
         translation: neuf
         alt:
           - "9"
@@ -104,6 +113,7 @@ lessons:
           translation: Cinq et quatre, neuf.
       - id: ary-3echra
         term: 3echra
+        speech: عشرة
         translation: dix
         alt:
           - "10"
@@ -128,6 +138,7 @@ lessons:
     vocab:
       - id: ary-3echrin
         term: 3echrin
+        speech: عشرين
         translation: vingt
         alt:
           - "20"
@@ -137,6 +148,7 @@ lessons:
           translation: J'ai vingt ans.
       - id: ary-mya
         term: mya
+        speech: مية
         translation: cent
         alt:
           - "100"
@@ -146,6 +158,7 @@ lessons:
           translation: Ça fait cent dirhams.
       - id: ary-chhal
         term: chhal
+        speech: شحال
         translation: combien
         alt:
           - combien ?
@@ -155,6 +168,7 @@ lessons:
           translation: C'est combien ?
       - id: ary-flous
         term: flous
+        speech: فلوس
         translation: argent
         alt:
           - de l'argent
@@ -166,6 +180,7 @@ lessons:
           translation: Tu as de l'argent ?
       - id: ary-ghali
         term: ghali
+        speech: غالي
         translation: cher
         alt:
           - chère
@@ -176,6 +191,7 @@ lessons:
           translation: C'est trop cher !
       - id: ary-rkhis
         term: rkhis
+        speech: رخيص
         translation: pas cher
         alt:
           - bon marché
@@ -186,6 +202,7 @@ lessons:
           translation: Le thé n'est pas cher ici.
       - id: ary-bzzaf
         term: bzzaf
+        speech: بزاف
         translation: beaucoup
         alt:
           - trop
@@ -196,6 +213,7 @@ lessons:
           translation: J'aime beaucoup le thé.
       - id: ary-safi
         term: safi
+        speech: صافي
         translation: c'est bon
         alt:
           - ça suffit

@@ -37,11 +37,25 @@ const VOICES: Record<string, string | null> = {
   en: 'en-US',
   ru: 'ru-RU',
   es: 'es-ES',
-  // Aucune voix darija n'existe dans les moteurs de synthèse, et le cours
-  // s'écrit en transcription latine : une voix arabe standard la lirait de
-  // travers, une voix française pire encore. Mieux vaut se taire — `null`
-  // retire le bouton d'écoute et les exercices d'écoute pour ce cours.
-  ary: null,
+  // Peu d'appareils ont une voix darija à proprement parler : `ar-MA` prend
+  // la voix marocaine quand elle existe (Edge en propose), sinon une voix
+  // arabe. Elle ne lit que l'écriture arabe — voir `SPOKEN_SCRIPTS`.
+  ary: 'ar-MA',
+}
+
+/**
+ * Écriture que la voix sait lire, pour une langue dont le cours s'écrit dans
+ * une autre.
+ *
+ * Le darija s'enseigne en transcription latine (`chokran`), qu'une voix arabe
+ * ânonnerait lettre à lettre. Chaque mot porte donc sa forme arabe dans
+ * `speech` (`شكرا`), confiée à la voix et jamais affichée ; tout le reste —
+ * phrases d'exemple, grammaire, conjugaison, rappels — n'a que la
+ * transcription, et se tait. Mieux vaut pas de bouton qu'un bouton qui lit
+ * du charabia.
+ */
+const SPOKEN_SCRIPTS: Record<string, RegExp> = {
+  ary: /\p{Script=Arabic}/u,
 }
 
 const FALLBACK = 'en-US'
@@ -133,9 +147,11 @@ const RUSSIAN_LETTER_NAMES: Record<string, string> = {
  * Texte à envoyer au moteur de synthèse pour un mot du vocabulaire.
  *
  * Pour une lettre isolée, c'est son nom épelé (voir `RUSSIAN_LETTER_NAMES`) ;
- * pour un mot ordinaire, c'est le mot lui-même.
+ * pour un mot dont la transcription ne se lit pas telle quelle, sa forme
+ * `speech` (voir `SPOKEN_SCRIPTS`) ; sinon, le mot lui-même.
  */
-export function speechFor(vocab: Pick<Vocab, 'term' | 'pos'>): string {
+export function speechFor(vocab: Pick<Vocab, 'term' | 'pos' | 'speech'>): string {
+  if (vocab.speech) return vocab.speech
   if (vocab.pos !== 'lettre') return vocab.term
   return RUSSIAN_LETTER_NAMES[vocab.term] ?? vocab.term
 }
@@ -159,6 +175,27 @@ const engineAvailable: boolean = native || webVoices() !== null
  */
 export function canSpeak(): boolean {
   return engineAvailable && LANG !== null
+}
+
+/**
+ * La voix peut-elle lire ce texte-là ? Toujours, sauf pour une langue dont
+ * la voix ne lit qu'une autre écriture que celle du cours (`SPOKEN_SCRIPTS`).
+ */
+export function canSpeakText(text: string): boolean {
+  const script = SPOKEN_SCRIPTS[LEARNING]
+  return canSpeak() && (script === undefined || script.test(text))
+}
+
+/**
+ * Le moteur d'exercices peut-il bâtir des exercices d'écoute (dictée,
+ * QCM à l'oreille) ?
+ *
+ * Pas pour une langue lue à travers une autre écriture : seuls les mots y
+ * ont une voix, et une voix approchée — de quoi entendre un mot qu'on vient
+ * de lire, pas de quoi deviner son orthographe à l'oreille.
+ */
+export function canSpeakExercises(): boolean {
+  return canSpeak() && SPOKEN_SCRIPTS[LEARNING] === undefined
 }
 
 /**
@@ -236,7 +273,7 @@ export async function installSpokenLanguage(): Promise<void> {
  */
 export async function speak(text: string): Promise<void> {
   const trimmed = text.trim()
-  if (trimmed.length === 0 || LANG === null) return
+  if (trimmed.length === 0 || LANG === null || !canSpeakText(trimmed)) return
   const lang = LANG
 
   try {
@@ -253,11 +290,31 @@ export async function speak(text: string): Promise<void> {
     synth.cancel()
     const utterance = new SpeechSynthesisUtterance(trimmed)
     utterance.lang = lang
+    const voice = voiceFor(synth.getVoices(), lang)
+    if (voice) utterance.voice = voice
     utterance.rate = 0.95
     synth.speak(utterance)
   } catch {
     // Voix absente, moteur indisponible, permission refusée : on se tait.
   }
+}
+
+/**
+ * La voix du navigateur la plus proche de l'étiquette demandée : la variante
+ * exacte d'abord (`ar-MA`, marocaine), sinon n'importe quelle voix de la même
+ * langue (`ar-SA`). Sans choix explicite, certains navigateurs ne retiennent
+ * que la variante exacte et, faute de la trouver, lisent avec la voix par
+ * défaut — une voix anglaise lisant de l'arabe.
+ */
+export function voiceFor(voices: readonly SpeechSynthesisVoice[], lang: string): SpeechSynthesisVoice | null {
+  const wanted = lang.toLowerCase().replace('_', '-')
+  const prefix = wanted.split('-')[0]!
+  const normalized = (voice: SpeechSynthesisVoice) => voice.lang.toLowerCase().replace('_', '-')
+  return (
+    voices.find((voice) => normalized(voice) === wanted) ??
+    voices.find((voice) => normalized(voice).split('-')[0] === prefix) ??
+    null
+  )
 }
 
 /** Interrompt la lecture en cours, par exemple en quittant un écran. */

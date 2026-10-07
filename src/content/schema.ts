@@ -41,6 +41,9 @@ export const exampleSchema = z.object({
  *                   à trou est généré automatiquement
  * - `gap`         : portion exacte à masquer dans l'exemple, quand la forme
  *                   conjuguée ne se déduit pas du terme (« fell through »)
+ * - `speech`      : texte confié à la synthèse vocale quand `term` ne se lit
+ *                   pas tel quel — l'écriture arabe d'un mot de darija
+ *                   transcrit en lettres latines. Jamais affiché.
  * - `audio`       : réservé pour une version ultérieure, ignoré pour l'instant
  */
 export const vocabSchema = z.object({
@@ -68,6 +71,7 @@ export const vocabSchema = z.object({
     .optional(),
   example: exampleSchema.optional(),
   gap: z.string().min(1).optional(),
+  speech: z.string().min(1).optional(),
   audio: z.string().optional(),
 })
 

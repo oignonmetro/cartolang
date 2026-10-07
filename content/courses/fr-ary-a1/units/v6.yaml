@@ -23,6 +23,7 @@ lessons:
     vocab:
       - id: ary-lyoum
         term: lyoum
+        speech: اليوم
         translation: aujourd'hui
         pos: adverbe
         example:
@@ -30,6 +31,7 @@ lessons:
           translation: Aujourd'hui je suis fatigué.
       - id: ary-ghedda
         term: ghedda
+        speech: غدا
         translation: demain
         pos: adverbe
         example:
@@ -37,6 +39,7 @@ lessons:
           translation: Je te vois demain, si Dieu le veut.
       - id: ary-lbare7
         term: lbare7
+        speech: البارح
         translation: hier
         pos: adverbe
         example:
@@ -44,6 +47,7 @@ lessons:
           translation: Hier je suis allé à l'hôpital.
       - id: ary-daba
         term: daba
+        speech: دابا
         translation: maintenant
         alt:
           - tout de suite
@@ -53,6 +57,7 @@ lessons:
           translation: Où es-tu maintenant ?
       - id: ary-ssba7
         term: ssba7
+        speech: الصباح
         translation: le matin
         alt:
           - matin
@@ -63,6 +68,7 @@ lessons:
           translation: Le matin, il fait très froid.
       - id: ary-l3chiya
         term: l3chiya
+        speech: العشية
         translation: l'après-midi
         alt:
           - après-midi
@@ -74,6 +80,7 @@ lessons:
           translation: Je te vois cet après-midi.
       - id: ary-llil
         term: llil
+        speech: الليل
         translation: la nuit
         alt:
           - nuit
@@ -83,6 +90,7 @@ lessons:
           translation: Je ne sors pas la nuit.
       - id: ary-ssimana
         term: ssimana
+        speech: السيمانة
         translation: la semaine
         alt:
           - semaine
@@ -108,6 +116,7 @@ lessons:
     vocab:
       - id: ary-nhar
         term: nhar
+        speech: نهار
         translation: le jour
         alt:
           - jour
@@ -119,6 +128,7 @@ lessons:
           translation: Toute la journée à la maison.
       - id: ary-letnin
         term: letnin
+        speech: الاثنين
         translation: lundi
         alt:
           - le lundi
@@ -128,6 +138,7 @@ lessons:
           translation: Le lundi, je travaille.
       - id: ary-ttlat
         term: ttlat
+        speech: التلات
         translation: mardi
         alt:
           - le mardi
@@ -137,6 +148,7 @@ lessons:
           translation: Mardi, je vais aller à l'hôpital.
       - id: ary-larb3
         term: larb3
+        speech: الأربع
         translation: mercredi
         alt:
           - le mercredi
@@ -146,6 +158,7 @@ lessons:
           translation: Mercredi après-midi, d'accord ?
       - id: ary-lkhmis
         term: lkhmis
+        speech: الخميس
         translation: jeudi
         alt:
           - le jeudi
@@ -155,6 +168,7 @@ lessons:
           translation: Le marché a lieu le jeudi.
       - id: ary-jjem3a
         term: jjem3a
+        speech: الجمعة
         translation: vendredi
         alt:
           - le vendredi
@@ -164,6 +178,7 @@ lessons:
           translation: Le vendredi, je mange du couscous.
       - id: ary-ssebt
         term: ssebt
+        speech: السبت
         translation: samedi
         alt:
           - le samedi
@@ -173,6 +188,7 @@ lessons:
           translation: Le samedi, je ne travaille pas.
       - id: ary-l7ed
         term: l7ed
+        speech: الحد
         translation: dimanche
         alt:
           - le dimanche

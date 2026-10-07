@@ -23,6 +23,7 @@ lessons:
     vocab:
       - id: ary-mzyan
         term: mzyan
+        speech: مزيان
         translation: bon
         alt:
           - bien
@@ -33,6 +34,7 @@ lessons:
           translation: Le pain est bon.
       - id: ary-khayb
         term: khayb
+        speech: خايب
         translation: mauvais
         alt:
           - laid
@@ -43,6 +45,7 @@ lessons:
           translation: Il fait mauvais aujourd'hui.
       - id: ary-kbir
         term: kbir
+        speech: كبير
         translation: grand
         alt:
           - gros
@@ -53,6 +56,7 @@ lessons:
           translation: Le marché est grand.
       - id: ary-sghir
         term: sghir
+        speech: صغير
         translation: petit
         alt:
           - jeune
@@ -62,6 +66,7 @@ lessons:
           translation: La chambre est petite.
       - id: ary-jdid
         term: jdid
+        speech: جديد
         translation: nouveau
         alt:
           - neuf
@@ -71,6 +76,7 @@ lessons:
           translation: La chaise est neuve.
       - id: ary-9dim
         term: 9dim
+        speech: قديم
         translation: vieux
         alt:
           - ancien
@@ -81,6 +87,7 @@ lessons:
           translation: La porte est vieille.
       - id: ary-zwin
         term: zwin
+        speech: زوين
         translation: beau
         alt:
           - joli
@@ -90,6 +97,7 @@ lessons:
           translation: La mosquée est très belle.
       - id: ary-twil
         term: twil
+        speech: طويل
         translation: long
         alt:
           - grand de taille
@@ -115,6 +123,7 @@ lessons:
     vocab:
       - id: ary-3iyan
         term: 3iyan
+        speech: عيان
         translation: fatigué
         alt:
           - fatiguée
@@ -125,6 +134,7 @@ lessons:
           translation: Je suis très fatigué.
       - id: ary-fer7an
         term: fer7an
+        speech: فرحان
         translation: content
         alt:
           - heureux
@@ -135,6 +145,7 @@ lessons:
           translation: Papa est content aujourd'hui.
       - id: ary-mrid
         term: mrid
+        speech: مريض
         translation: malade
         pos: adjectif
         example:
@@ -142,6 +153,7 @@ lessons:
           translation: Mon frère est malade, à l'hôpital.
       - id: ary-ji3an
         term: ji3an
+        speech: جيعان
         translation: affamé
         alt:
           - j'ai faim
@@ -152,6 +164,7 @@ lessons:
           translation: J'ai faim, je veux manger.
       - id: ary-3atchan
         term: 3atchan
+        speech: عطشان
         translation: assoiffé
         alt:
           - j'ai soif
@@ -162,6 +175,7 @@ lessons:
           translation: J'ai soif, je veux de l'eau.
       - id: ary-skhoun
         term: skhoun
+        speech: سخون
         translation: chaud
         pos: adjectif
         example:
@@ -169,6 +183,7 @@ lessons:
           translation: Le thé est très chaud.
       - id: ary-bared
         term: bared
+        speech: بارد
         translation: froid
         pos: adjectif
         example:
@@ -176,6 +191,7 @@ lessons:
           translation: L'eau est froide.
       - id: ary-mcheghoul
         term: mcheghoul
+        speech: مشغول
         translation: occupé
         alt:
           - occupée

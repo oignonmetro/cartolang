@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
-import { canSpeak, speak } from '@/lib/speech'
+import { canSpeakText, speak } from '@/lib/speech'
 import { SpeakerIcon } from '@/components/icons'
 import { useProgress } from '@/store/progressStore'
 
@@ -32,13 +32,13 @@ export function SpeakButton({
   const spokenFor = useRef<string | null>(null)
 
   useEffect(() => {
-    if (!auto || !autoSpeak || !canSpeak()) return
+    if (!auto || !autoSpeak || !canSpeakText(text)) return
     if (spokenFor.current === text) return
     spokenFor.current = text
     void speak(text)
   }, [auto, autoSpeak, text])
 
-  if (!canSpeak()) return null
+  if (!canSpeakText(text)) return null
 
   return (
     <motion.button

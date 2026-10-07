@@ -24,6 +24,7 @@ lessons:
     vocab:
       - id: ary-ddar
         term: ddar
+        speech: الدار
         translation: la maison
         alt:
           - maison
@@ -34,6 +35,7 @@ lessons:
           translation: Ma maison est grande.
       - id: ary-lbit
         term: lbit
+        speech: البيت
         translation: la chambre
         alt:
           - chambre
@@ -45,6 +47,7 @@ lessons:
           translation: Je suis dans ma chambre.
       - id: ary-lkouzina
         term: lkouzina
+        speech: الكوزينة
         translation: la cuisine
         alt:
           - cuisine
@@ -55,6 +58,7 @@ lessons:
           translation: Maman est dans la cuisine.
       - id: ary-lbab
         term: lbab
+        speech: الباب
         translation: la porte
         alt:
           - porte
@@ -64,6 +68,7 @@ lessons:
           translation: Ferme la porte, s'il te plaît.
       - id: ary-ttebla
         term: ttebla
+        speech: الطبلة
         translation: la table
         alt:
           - table
@@ -73,6 +78,7 @@ lessons:
           translation: Le pain est sur la table.
       - id: ary-lkorsi
         term: lkorsi
+        speech: الكرسي
         translation: la chaise
         alt:
           - chaise
@@ -82,6 +88,7 @@ lessons:
           translation: Assieds-toi sur la chaise.
       - id: ary-ssarout
         term: ssarout
+        speech: الساروت
         translation: la clé
         alt:
           - clé
@@ -93,6 +100,7 @@ lessons:
           translation: Où est la clé ?
       - id: ary-ttellaja
         term: ttellaja
+        speech: التلاجة
         translation: le frigo
         alt:
           - frigo
@@ -120,6 +128,7 @@ lessons:
     vocab:
       - id: ary-lmdina
         term: lmdina
+        speech: المدينة
         translation: la ville
         alt:
           - ville
@@ -132,6 +141,7 @@ lessons:
           translation: La vieille ville est belle.
       - id: ary-ssouq
         term: ssouq
+        speech: السوق
         translation: le marché
         alt:
           - marché
@@ -143,6 +153,7 @@ lessons:
           translation: Je suis allé au marché hier.
       - id: ary-zzen9a
         term: zzen9a
+        speech: الزنقة
         translation: la rue
         alt:
           - rue
@@ -152,6 +163,7 @@ lessons:
           translation: Ma maison est dans cette rue.
       - id: ary-l7anout
         term: l7anout
+        speech: الحانوت
         translation: la boutique
         alt:
           - boutique
@@ -165,6 +177,7 @@ lessons:
           translation: La boutique est fermée maintenant.
       - id: ary-sbitar
         term: sbitar
+        speech: السبيطار
         translation: l'hôpital
         alt:
           - hôpital
@@ -175,6 +188,7 @@ lessons:
           translation: Mon frère est à l'hôpital.
       - id: ary-jjame3
         term: jjame3
+        speech: الجامع
         translation: la mosquée
         alt:
           - mosquée
@@ -184,6 +198,7 @@ lessons:
           translation: La mosquée est très grande.
       - id: ary-hna
         term: hna
+        speech: هنا
         translation: ici
         pos: adverbe
         example:
@@ -191,6 +206,7 @@ lessons:
           translation: Assieds-toi ici, s'il te plaît.
       - id: ary-temma
         term: temma
+        speech: تما
         translation: là-bas
         alt:
           - là

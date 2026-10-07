@@ -11,8 +11,13 @@
 # saisie accepte les variantes usuelles (`foldDarija`, src/engine/spelling.ts)
 # — on évalue le mot, pas la convention.
 #
-# Pas d'audio : aucun moteur de synthèse n'a de voix darija, et une voix
-# arabe standard lirait mal la transcription (`VOICES`, src/lib/speech.ts).
+# Audio : aucun moteur de synthèse n'a de voix darija, et une voix arabe
+# ânonnerait la transcription. Chaque mot porte donc sa forme en écriture
+# arabe (`speech`), jamais affichée, que lit une voix `ar-MA` — marocaine
+# quand l'appareil en a une, arabe sinon. La prononciation reste approchée :
+# elle accompagne le mot (bouton d'écoute), mais ne sert pas d'exercice
+# (pas de dictée) ; phrases, grammaire et conjugaison restent muettes
+# (`SPOKEN_SCRIPTS`, src/lib/speech.ts).
 #
 # Construit sur le modèle de l'espagnol A1 : vocabulaire d'abord, grammaire
 # et conjugaison qui réemploient ce vocabulaire.
@@ -35,7 +40,7 @@ level: A1
 tagline: Saluer, se présenter, et les premiers mots du quotidien marocain.
 status: available
 layout: library
-version: 1
+version: 2
 
 tracks:
   - id: vocabulaire

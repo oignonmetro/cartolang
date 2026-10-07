@@ -7,7 +7,7 @@ import { findLesson } from '@/content/course'
 import { lessonDifficulty, type SessionOutcome } from '@/engine/progress'
 import { buildUnitPath, nextNodeAfter, sectionRank } from '@/engine/unitPath'
 import { useProgress } from '@/store/progressStore'
-import { canSpeak } from '@/lib/speech'
+import { canSpeakExercises } from '@/lib/speech'
 import { SessionScreen } from './SessionScreen'
 import { SessionResult } from './SessionResult'
 
@@ -57,7 +57,7 @@ function LessonSession({ lessonId }: { lessonId: string }) {
       // doit pas redonner la même session, exercice pour exercice.
       seedFrom(entry.lesson.id, level, attempt, lessonProgress(entry.lesson, cards)),
       cards,
-      canSpeak(),
+      canSpeakExercises(),
       sectionRank(entry.unit, entry.lesson.id),
     )
   }, [entry, attempt, level, course.id])

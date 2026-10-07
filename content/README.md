@@ -231,6 +231,18 @@ dans `alt` d'un point de grammaire ou d'une forme conjuguée. Un mot de
 vocabulaire, lui, n'a pas d'`alt` dans la langue apprise : choisissez pour
 `term` la graphie la plus répandue.
 
+Pour la voix, chaque mot de darija porte aussi sa forme en écriture arabe
+dans **`speech`** : c'est elle que lit la synthèse vocale (une voix arabe ne
+sait pas lire la transcription), et elle n'est jamais affichée. Un mot sans
+`speech` reste muet, et la validation le signale.
+
+```yaml
+- id: ary-chokran
+  term: chokran
+  speech: شكرا
+  translation: merci
+```
+
 ## Ajouter une unité
 
 1. Créer `units/v5.yaml` — le nom du fichier doit être l'`id` de l'unité.
