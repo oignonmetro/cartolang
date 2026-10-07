@@ -34,7 +34,7 @@ export function ReviewRoute() {
     })),
   )
 
-  const exercises = useMemo(() => buildReviewSession(entries, undefined, canSpeak), [entries])
+  const exercises = useMemo(() => buildReviewSession(entries, undefined, canSpeak()), [entries])
 
   if (finished) {
     return (

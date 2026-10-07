@@ -56,7 +56,7 @@ export function ProfileScreen() {
   // La vérification est propre à la langue du cours affiché ; changer de
   // cours doit la relancer plutôt que de garder le résultat du précédent.
   useEffect(() => {
-    if (!canSpeak) return
+    if (!canSpeak()) return
     let cancelled = false
     setVoiceInstalled(null)
     void isSpokenLanguageInstalled().then((installed) => {
@@ -256,7 +256,7 @@ export function ProfileScreen() {
           </section>
         )}
 
-        {canSpeak && (
+        {canSpeak() && (
           <section className="card-3d flex flex-col gap-3 px-5 py-5">
             <h2 className="text-sm font-extrabold uppercase tracking-wide text-ink-faint">Prononciation</h2>
             <Switch

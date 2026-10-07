@@ -57,7 +57,7 @@ function LessonSession({ lessonId }: { lessonId: string }) {
       // doit pas redonner la même session, exercice pour exercice.
       seedFrom(entry.lesson.id, level, attempt, lessonProgress(entry.lesson, cards)),
       cards,
-      canSpeak,
+      canSpeak(),
       sectionRank(entry.unit, entry.lesson.id),
     )
   }, [entry, attempt, level, course.id])

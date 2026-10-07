@@ -1,0 +1,203 @@
+id: v4
+title: Manger et boire
+subtitle: À table, au café, au marché
+icon: cup
+color: amber
+level: A1
+
+lessons:
+  - id: v4-l1
+    title: Au café
+    notes: |
+      Les noms se donnent ici avec leur article `l-`, collé au mot comme
+      les Marocains l'écrivent : `lma`, l'eau ; `lkhobz`, le pain. On dit
+      « je veux l'eau » là où le français dit « de l'eau » — le darija n'a
+      pas de partitif.
+
+      - `atay` (le thé, à la menthe d'office) se dit sans article.
+      - `l9ahwa` : le café — le `9` est le « k » du fond de la gorge.
+
+      ! L'article ne s'écrit pas toujours `l` : devant certaines lettres il
+      se transforme (`ddar`, la maison). La règle vient en grammaire (g2).
+    vocab:
+      - id: ary-lma
+        term: lma
+        translation: l'eau
+        alt:
+          - eau
+          - de l'eau
+        pos: nom
+        example:
+          text: Bghit lma 3afak.
+          translation: Je voudrais de l'eau, s'il te plaît.
+      - id: ary-atay
+        term: atay
+        translation: le thé
+        alt:
+          - thé
+          - du thé
+        pos: nom
+        hint: Sans précision, c'est le thé vert à la menthe, très sucré.
+        example:
+          text: Atay b nna3na3.
+          translation: Du thé à la menthe.
+      - id: ary-l9ahwa
+        term: l9ahwa
+        translation: le café
+        alt:
+          - café
+          - du café
+        pos: nom
+        example:
+          text: L9ahwa bla sokkar.
+          translation: Le café sans sucre.
+      - id: ary-l7lib
+        term: l7lib
+        translation: le lait
+        alt:
+          - lait
+          - du lait
+        pos: nom
+        example:
+          text: Kanchreb l7lib f ssba7.
+          translation: Je bois du lait le matin.
+      - id: ary-l3sir
+        term: l3sir
+        translation: le jus
+        alt:
+          - jus
+          - du jus
+          - jus de fruit
+        pos: nom
+        example:
+          text: L3sir dyal llimoun.
+          translation: Le jus d'orange.
+      - id: ary-lkhobz
+        term: lkhobz
+        translation: le pain
+        alt:
+          - pain
+          - du pain
+        pos: nom
+        example:
+          text: Lkhobz skhoun.
+          translation: Le pain est chaud.
+      - id: ary-sokkar
+        term: sokkar
+        translation: le sucre
+        alt:
+          - sucre
+          - du sucre
+        pos: nom
+        example:
+          text: Atay b sokkar bzzaf.
+          translation: Du thé avec beaucoup de sucre.
+      - id: ary-zit
+        term: zit
+        translation: l'huile
+        alt:
+          - huile
+          - de l'huile
+        pos: nom
+        example:
+          text: Zit zitoun mzyana.
+          translation: L'huile d'olive est bonne.
+
+  - id: v4-l2
+    title: À table
+    notes: |
+      Le repas marocain se partage, souvent dans un plat commun, et
+      s'accompagne d'un mot qu'on répète : `bnin`, délicieux.
+
+      - `lmakla` : la nourriture, le repas — tout ce qu'on mange.
+      - `l7am` désigne la viande rouge ; le poulet a son mot, `djaj`.
+      - `tajine` est à la fois le plat de terre et ce qu'on y cuit.
+
+      ! Le `7` de `l7am` (la viande) et de `l7out` (le poisson) est le
+      « h » soufflé fort : sans lui, le mot devient autre chose.
+    vocab:
+      - id: ary-lmakla
+        term: lmakla
+        translation: la nourriture
+        alt:
+          - nourriture
+          - le repas
+          - la cuisine
+        pos: nom
+        example:
+          text: Lmakla bnina bzzaf.
+          translation: La nourriture est très bonne.
+      - id: ary-l7am
+        term: l7am
+        translation: la viande
+        alt:
+          - viande
+          - de la viande
+        pos: nom
+        example:
+          text: Makanakolch l7am.
+          translation: Je ne mange pas de viande.
+      - id: ary-djaj
+        term: djaj
+        translation: le poulet
+        alt:
+          - poulet
+          - du poulet
+        pos: nom
+        example:
+          text: Tajine b djaj.
+          translation: Un tajine au poulet.
+      - id: ary-l7out
+        term: l7out
+        translation: le poisson
+        alt:
+          - poisson
+          - du poisson
+        pos: nom
+        example:
+          text: L7out tri lyoum.
+          translation: Le poisson est frais aujourd'hui.
+      - id: ary-lkhodra
+        term: lkhodra
+        translation: les légumes
+        alt:
+          - légumes
+          - des légumes
+        pos: nom
+        example:
+          text: Kanchri lkhodra mn ssouq.
+          translation: J'achète les légumes au marché.
+      - id: ary-lbid
+        term: lbid
+        translation: les œufs
+        alt:
+          - œufs
+          - des œufs
+          - les oeufs
+          - oeufs
+        pos: nom
+        example:
+          text: Bghit jouj d lbid.
+          translation: Je voudrais deux œufs.
+      - id: ary-tajine
+        term: tajine
+        translation: le tajine
+        alt:
+          - tajine
+          - un tajine
+        pos: nom
+        hint: Le plat de terre à couvercle conique, et le ragoût qu'on y mijote.
+        example:
+          text: Kanakol tajine f ddar.
+          translation: Je mange un tajine à la maison.
+      - id: ary-bnin
+        term: bnin
+        translation: délicieux
+        alt:
+          - bon
+          - délicieuse
+        pos: adjectif
+        hint: Féminin « bnina », quand la chose est féminine (lmakla).
+        example:
+          text: Tajine bnin!
+          translation: Le tajine est délicieux !

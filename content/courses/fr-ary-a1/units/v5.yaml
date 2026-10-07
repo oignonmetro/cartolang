@@ -1,0 +1,201 @@
+id: v5
+title: La maison, la ville
+subtitle: Se repérer chez soi et dehors
+icon: compass
+color: teal
+level: A1
+
+lessons:
+  - id: v5-l1
+    title: À la maison
+    notes: |
+      Une moitié de ces mots commence par une **consonne doublée** :
+      `ddar`, `ttebla`, `ssarout`. Ce n'est pas une faute de frappe, c'est
+      l'article `l-` qui s'est fondu dans la première lettre du nom.
+
+      - `ddar` : la maison, mais aussi « chez soi » — `f ddar`, à la
+        maison.
+      - `lbit` : la pièce, la chambre.
+      - `ttebla`, `lkouzina` viennent du français (table, cuisine) ou de
+        l'espagnol (`cocina`) : le darija en emprunte beaucoup.
+
+      ! `f` veut dire « dans, à » : `f lkouzina`, dans la cuisine ;
+      `3la` veut dire « sur » : `3la ttebla`, sur la table.
+    vocab:
+      - id: ary-ddar
+        term: ddar
+        translation: la maison
+        alt:
+          - maison
+          - chez moi
+        pos: nom
+        example:
+          text: Ddar dyali kbira.
+          translation: Ma maison est grande.
+      - id: ary-lbit
+        term: lbit
+        translation: la chambre
+        alt:
+          - chambre
+          - la pièce
+          - pièce
+        pos: nom
+        example:
+          text: Ana f lbit dyali.
+          translation: Je suis dans ma chambre.
+      - id: ary-lkouzina
+        term: lkouzina
+        translation: la cuisine
+        alt:
+          - cuisine
+        pos: nom
+        hint: La pièce, pas ce qu'on y prépare.
+        example:
+          text: Mmi f lkouzina.
+          translation: Maman est dans la cuisine.
+      - id: ary-lbab
+        term: lbab
+        translation: la porte
+        alt:
+          - porte
+        pos: nom
+        example:
+          text: Sedd lbab 3afak.
+          translation: Ferme la porte, s'il te plaît.
+      - id: ary-ttebla
+        term: ttebla
+        translation: la table
+        alt:
+          - table
+        pos: nom
+        example:
+          text: Lkhobz 3la ttebla.
+          translation: Le pain est sur la table.
+      - id: ary-lkorsi
+        term: lkorsi
+        translation: la chaise
+        alt:
+          - chaise
+        pos: nom
+        example:
+          text: Gles 3la lkorsi.
+          translation: Assieds-toi sur la chaise.
+      - id: ary-ssarout
+        term: ssarout
+        translation: la clé
+        alt:
+          - clé
+          - la clef
+          - clef
+        pos: nom
+        example:
+          text: Fin ssarout?
+          translation: Où est la clé ?
+      - id: ary-ttellaja
+        term: ttellaja
+        translation: le frigo
+        alt:
+          - frigo
+          - le réfrigérateur
+          - réfrigérateur
+        pos: nom
+        example:
+          text: Lma f ttellaja.
+          translation: L'eau est dans le frigo.
+
+  - id: v5-l2
+    title: En ville
+    notes: |
+      La ville marocaine a deux visages : la `lmdina`, la vieille ville aux
+      ruelles étroites, et la ville nouvelle. Le `ssouq` est le marché, au
+      cœur de la première.
+
+      - `l7anout` : la petite boutique du coin, où l'on trouve de tout.
+      - `jjame3` : la mosquée, repère commode pour s'orienter.
+      - `hna` (ici) et `temma` (là-bas) suffisent souvent à indiquer un
+        chemin, avec le doigt.
+
+      ! `l` seul, détaché, veut dire « vers, à » : `mchit l ssouq`, je suis
+      allé au marché.
+    vocab:
+      - id: ary-lmdina
+        term: lmdina
+        translation: la ville
+        alt:
+          - ville
+          - la médina
+          - médina
+          - la vieille ville
+        pos: nom
+        example:
+          text: Lmdina l9dima zwina.
+          translation: La vieille ville est belle.
+      - id: ary-ssouq
+        term: ssouq
+        translation: le marché
+        alt:
+          - marché
+          - le souk
+          - souk
+        pos: nom
+        example:
+          text: Mchit l ssouq lbare7.
+          translation: Je suis allé au marché hier.
+      - id: ary-zzen9a
+        term: zzen9a
+        translation: la rue
+        alt:
+          - rue
+        pos: nom
+        example:
+          text: Ddar dyali f had zzen9a.
+          translation: Ma maison est dans cette rue.
+      - id: ary-l7anout
+        term: l7anout
+        translation: la boutique
+        alt:
+          - boutique
+          - l'épicerie
+          - épicerie
+          - le magasin
+          - magasin
+        pos: nom
+        example:
+          text: L7anout msdouda daba.
+          translation: La boutique est fermée maintenant.
+      - id: ary-sbitar
+        term: sbitar
+        translation: l'hôpital
+        alt:
+          - hôpital
+          - hopital
+        pos: nom
+        example:
+          text: Khoya f sbitar.
+          translation: Mon frère est à l'hôpital.
+      - id: ary-jjame3
+        term: jjame3
+        translation: la mosquée
+        alt:
+          - mosquée
+        pos: nom
+        example:
+          text: Jjame3 kbir bzzaf.
+          translation: La mosquée est très grande.
+      - id: ary-hna
+        term: hna
+        translation: ici
+        pos: adverbe
+        example:
+          text: Gles hna 3afak.
+          translation: Assieds-toi ici, s'il te plaît.
+      - id: ary-temma
+        term: temma
+        translation: là-bas
+        alt:
+          - là
+          - la-bas
+        pos: adverbe
+        example:
+          text: Ssouq temma.
+          translation: Le marché est là-bas.

@@ -210,6 +210,27 @@ deux formes, et la leçon d'au moins quatre au total.
 Deux formes identiques dans un même verbe (`sought` / `sought`) ne posent pas
 de problème : l'association compare les libellés, pas les identifiants.
 
+## Une langue sans orthographe fixée
+
+Le darija (`fr-ary-a1`) s'écrit en transcription latine avec chiffres, et le
+même mot y circule sous plusieurs graphies : `chokran`, `choukran`,
+`shukran`. Écrivez **une** graphie, et tenez-vous-y dans tout le cours ; la
+saisie dans la langue apprise accepte les variantes usuelles grâce au repli
+déclaré pour la langue (`foldDarija`, `src/engine/spelling.ts`) — `sh`/`ch`,
+`ou`/`o`, `q`/`9`, `e` muet, consonne doublée à l'intérieur du mot.
+
+Deux conséquences pour l'écriture :
+
+- une consonne doublée **en tête** de mot n'est pas repliée : c'est l'article
+  assimilé (`ddar`, la maison, contre `dar`), que la grammaire fait choisir ;
+- deux options d'un même point que le repli confondrait font échouer la
+  validation, puisque la saisie les compterait toutes deux justes.
+
+Les variantes que le repli ne couvre pas (`3ndi` / `3andi`) se déclarent
+dans `alt` d'un point de grammaire ou d'une forme conjuguée. Un mot de
+vocabulaire, lui, n'a pas d'`alt` dans la langue apprise : choisissez pour
+`term` la graphie la plus répandue.
+
 ## Ajouter une unité
 
 1. Créer `units/v5.yaml` — le nom du fichier doit être l'`id` de l'unité.

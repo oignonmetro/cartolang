@@ -3,6 +3,7 @@ import { GAP } from '@/content/schema'
 import { itemsOfLesson } from '@/content/course'
 import { findVocabGap, type TermSplit } from '@/content/text'
 import { createRng, sample, seedFrom, shuffle, type Rng } from './rng'
+import { foldSpelling } from './spelling'
 import type { CardState } from './srs'
 
 /**
@@ -1666,8 +1667,17 @@ export function splitGap(sentence: string): { before: string; after: string } {
  * acceptables se déclarent dans `alt`, elles ne se devinent pas.
  */
 export function matchesAnswer(expected: string, alt: readonly string[], value: string): boolean {
-  const given = normalizeForm(value)
-  return given.length > 0 && [expected, ...alt].some((candidate) => normalizeForm(candidate) === given)
+  const given = learningForm(value)
+  return given.length > 0 && [expected, ...alt].some((candidate) => learningForm(candidate) === given)
+}
+
+/**
+ * Forme comparable d'un texte dans la langue apprise : `normalizeForm`, puis
+ * le repli des graphies équivalentes quand la langue en déclare (voir
+ * `spelling.ts`).
+ */
+export function learningForm(value: string): string {
+  return foldSpelling(normalizeForm(value))
 }
 
 /** Nombre d'éléments distincts qu'une leçon fera travailler. */
@@ -1755,6 +1765,9 @@ export function normalizeAnswer(value: string): string {
 export function isAnswerCorrect(vocab: Vocab, direction: Direction, value: string): boolean {
   const expected =
     direction === 'to-known' ? [vocab.translation, ...vocab.alt] : [vocab.term]
-  const given = normalizeAnswer(value)
-  return given.length > 0 && expected.some((candidate) => normalizeAnswer(candidate) === given)
+  // Le repli des graphies ne vaut que pour la langue apprise : le français,
+  // lui, s'écrit selon une norme.
+  const comparable = direction === 'to-known' ? normalizeAnswer : (text: string) => foldSpelling(normalizeAnswer(text))
+  const given = comparable(value)
+  return given.length > 0 && expected.some((candidate) => comparable(candidate) === given)
 }

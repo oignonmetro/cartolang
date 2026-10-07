@@ -1,0 +1,80 @@
+# Cours de darija (arabe marocain) grand débutant, pour francophones.
+#
+# Écriture : la transcription latine avec chiffres (« arabizi »), celle que
+# les Marocains emploient eux-mêmes en ligne — `3` pour ع, `7` pour ح, `9`
+# pour ق, `kh`, `gh`, `ch`. Elle se tape sur n'importe quel clavier et ne
+# demande pas d'apprendre un alphabet avant de parler. L'écriture arabe
+# viendra au niveau suivant (A2), avec sa propre piste.
+#
+# Le darija n'a pas d'orthographe fixée : le même mot s'écrit `chokran`,
+# `choukran` ou `shukran`. Le cours enseigne une graphie et s'y tient, mais la
+# saisie accepte les variantes usuelles (`foldDarija`, src/engine/spelling.ts)
+# — on évalue le mot, pas la convention.
+#
+# Pas d'audio : aucun moteur de synthèse n'a de voix darija, et une voix
+# arabe standard lirait mal la transcription (`VOICES`, src/lib/speech.ts).
+#
+# Construit sur le modèle de l'espagnol A1 : vocabulaire d'abord, grammaire
+# et conjugaison qui réemploient ce vocabulaire.
+#   vocabulaire  — v1 salutations et politesse, v2 se présenter et la
+#                  famille, v3 nombres et argent, v4 manger et boire,
+#                  v5 maison et ville, v6 le temps et les jours,
+#                  v7 décrire et se sentir
+#   grammaire    — g1 pronoms et phrase sans verbe « être », g2 l'article
+#                  et l'assimilation, g3 féminin et démonstratifs,
+#                  g4 possession, g5 négation et « il y a », g6 questions
+#   conjugaison  — c1 présent régulier (ka-), c2 présent de kla, mcha, ja,
+#                  c3 passé, c4 bgha et le futur avec ghadi
+
+id: fr-ary-a1
+name: Darija
+learning: ary
+known: fr
+flag: 🇲🇦
+level: A1
+tagline: Saluer, se présenter, et les premiers mots du quotidien marocain.
+status: available
+layout: library
+version: 1
+
+tracks:
+  - id: vocabulaire
+    title: Vocabulaire
+    subtitle: Les premiers mots du quotidien
+    kind: vocab
+    color: teal
+    icon: book
+    units:
+      - v1
+      - v2
+      - v3
+      - v4
+      - v5
+      - v6
+      - v7
+
+  - id: grammaire
+    title: Grammaire
+    subtitle: Pronoms, article, genre, possession, négation, questions
+    kind: grammar
+    color: violet
+    icon: compass
+    units:
+      - g1
+      - g2
+      - g3
+      - g4
+      - g5
+      - g6
+
+  - id: conjugaison
+    title: Conjugaison
+    subtitle: Le présent, le passé, et le futur avec ghadi
+    kind: conjugation
+    color: sky
+    icon: clock
+    units:
+      - c1
+      - c2
+      - c3
+      - c4

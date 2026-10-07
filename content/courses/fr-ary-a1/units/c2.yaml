@@ -1,0 +1,122 @@
+id: c2
+title: Le présent des verbes courts
+subtitle: kla, mcha, ja
+icon: clock
+color: sky
+level: A1
+
+lessons:
+  - id: c2-l1
+    title: Kla, manger
+    notes: |
+      `kla` (manger) est court et irrégulier : au présent, il devient `-akol`.
+      On garde `ka-` et la lettre de personne, mais devant un `a`.
+
+      - Singulier : `kanakol`, `katakol`, `katakli` (à une femme), `kayakol`,
+        `katakol` (elle).
+      - Pluriel : `kanaklo`, `kataklo`, `kayaklo`.
+
+      ! On ne dit pas « kankla » : la forme `kla` ne sert qu'au passé (« il a
+      mangé »). Au présent, c'est toujours `-akol`.
+    verbs:
+      - verb: kla
+        translation: manger
+        tense: présent
+        note: "ka- + n-/t-/y- + akol ; -i pour « tu » au féminin, -o au pluriel."
+        forms:
+          - id: c2-kla-1
+            person: ana
+            answer: kanakol
+          - id: c2-kla-2
+            person: nta
+            answer: katakol
+          - id: c2-kla-3
+            person: nti
+            answer: katakli
+          - id: c2-kla-4
+            person: howa
+            answer: kayakol
+          - id: c2-kla-5
+            person: hiya
+            answer: katakol
+          - id: c2-kla-6
+            person: 7na
+            answer: kanaklo
+          - id: c2-kla-7
+            person: ntoma
+            answer: kataklo
+          - id: c2-kla-8
+            person: homa
+            answer: kayaklo
+
+  - id: c2-l2
+    title: Mcha et ja, aller et venir
+    notes: |
+      Les verbes qui finissent par `-a` (`mcha`, aller ; `ja`, venir) prennent
+      un `-i` au présent : `kanmchi`, `kanji`.
+
+      - Le féminin « tu » ne change rien : `katmchi` vaut pour `nta`, `nti` et
+        `hiya`.
+      - Le pluriel ajoute `-w` : `kanmchiw`, `katjiw`, `kaymchiw`.
+
+      ! `kanmchi` dit « je vais, j'y vais d'habitude ». Pour « j'irai », on
+      emploie `ghadi`, vu avec le futur (c4).
+    verbs:
+      - verb: mcha
+        translation: aller
+        tense: présent
+        note: "Verbe en -a : ka- + n-/t-/y- + mchi ; -w au pluriel."
+        forms:
+          - id: c2-mcha-1
+            person: ana
+            answer: kanmchi
+          - id: c2-mcha-2
+            person: nta
+            answer: katmchi
+          - id: c2-mcha-3
+            person: nti
+            answer: katmchi
+          - id: c2-mcha-4
+            person: howa
+            answer: kaymchi
+          - id: c2-mcha-5
+            person: hiya
+            answer: katmchi
+          - id: c2-mcha-6
+            person: 7na
+            answer: kanmchiw
+          - id: c2-mcha-7
+            person: ntoma
+            answer: katmchiw
+          - id: c2-mcha-8
+            person: homa
+            answer: kaymchiw
+      - verb: ja
+        translation: venir
+        tense: présent
+        note: "Verbe en -a : ka- + n-/t-/y- + ji ; -w au pluriel."
+        forms:
+          - id: c2-ja-1
+            person: ana
+            answer: kanji
+          - id: c2-ja-2
+            person: nta
+            answer: katji
+          - id: c2-ja-3
+            person: nti
+            answer: katji
+          - id: c2-ja-4
+            person: howa
+            answer: kayji
+          - id: c2-ja-5
+            person: hiya
+            answer: katji
+          - id: c2-ja-6
+            person: 7na
+            answer: kanjiw
+          - id: c2-ja-7
+            person: ntoma
+            answer: katjiw
+          - id: c2-ja-8
+            person: homa
+            answer: kayjiw

@@ -1,0 +1,200 @@
+id: v1
+title: Salam !
+subtitle: Saluer, remercier, être poli
+icon: wave
+color: coral
+level: A1
+
+lessons:
+  - id: v1-l1
+    title: Saluer
+    notes: |
+      Le darija s'écrit ici en **lettres latines et en chiffres**, comme les
+      Marocains l'écrivent eux-mêmes sur leur téléphone. Les chiffres notent
+      les sons que l'alphabet latin n'a pas.
+
+      - `3` : un « a » serré au fond de la gorge (ع) — `3likom`.
+      - `7` : un « h » soufflé fort, comme pour embuer une vitre (ح) —
+        `l7amdolillah`.
+      - `kh` : la jota espagnole, le « ch » allemand de Bach (خ) — `lkhir`.
+      - `gh` : un « r » grasseyé à la française (غ), `9` : un « k » au fond
+        de la gorge (ق).
+      - `ch` se lit comme en français, `j` aussi, `r` est roulé, `s` ne se
+        lit jamais « z ».
+
+      ! Il n'y a pas d'orthographe officielle : `chokran`, `choukran` ou
+      `shukran`, c'est le même mot. Le cours en écrit une, la saisie accepte
+      les autres — mais `3` et `7` comptent, ce sont d'autres sons.
+    vocab:
+      - id: ary-salam
+        term: salam
+        translation: salut
+        alt:
+          - coucou
+        pos: expression
+        hint: Littéralement « paix » — le salut le plus courant, à toute heure.
+        example:
+          text: Salam, labas?
+          translation: Salut, ça va ?
+      - id: ary-salam-3likom
+        term: salam 3likom
+        translation: la paix sur vous
+        alt:
+          - que la paix soit sur vous
+          - paix sur vous
+        pos: expression
+        hint: Salut plus formel, en entrant dans une boutique ou chez quelqu'un.
+        example:
+          text: Salam 3likom, a sidi.
+          translation: La paix sur vous, monsieur.
+      - id: ary-wa-3likom-salam
+        term: wa 3likom salam
+        translation: et sur vous la paix
+        alt:
+          - et sur vous aussi la paix
+          - sur vous la paix
+        pos: expression
+        hint: La réponse obligée à « salam 3likom ».
+        example:
+          text: Wa 3likom salam, mre7ba!
+          translation: Et sur vous la paix, bienvenue !
+      - id: ary-sba7-lkhir
+        term: sba7 lkhir
+        translation: bonjour
+        alt:
+          - bon matin
+        pos: expression
+        hint: Littéralement « matin du bien » ; ne se dit que le matin.
+        example:
+          text: Sba7 lkhir, a mmi.
+          translation: Bonjour, maman.
+      - id: ary-msa-lkhir
+        term: msa lkhir
+        translation: bonsoir
+        pos: expression
+        hint: Littéralement « soir du bien », à partir de la fin d'après-midi.
+        example:
+          text: Msa lkhir, labas 3lik?
+          translation: Bonsoir, tu vas bien ?
+      - id: ary-labas
+        term: labas
+        translation: ça va
+        alt:
+          - ca va
+          - ça va bien
+        pos: expression
+        hint: Question (« labas? ») et réponse (« labas ») à la fois — littéralement « pas de mal ».
+        example:
+          text: Labas, l7amdolillah.
+          translation: Ça va, Dieu merci.
+      - id: ary-l7amdolillah
+        term: l7amdolillah
+        translation: Dieu merci
+        alt:
+          - grâce à Dieu
+          - louange à Dieu
+        pos: expression
+        hint: La réponse attendue à « labas? », croyant ou non.
+        example:
+          text: Kolchi mzyan, l7amdolillah.
+          translation: Tout va bien, Dieu merci.
+      - id: ary-bslama
+        term: bslama
+        translation: au revoir
+        pos: expression
+        hint: Littéralement « avec la paix ».
+        example:
+          text: Bslama, ntla9aw ghedda.
+          translation: Au revoir, on se voit demain.
+
+  - id: v1-l2
+    title: Être poli
+    notes: |
+      Une poignée de mots suffit à être poli au Maroc, et on les entend à
+      chaque coin de rue.
+
+      - `3afak` : s'il te plaît, à placer en fin de demande —
+        `atay 3afak`, un thé s'il te plaît.
+      - `chokran` appelle `bla jmil` (de rien), littéralement « sans
+        faveur ».
+      - `wakha` (d'accord) est le mot qu'on entend le plus : il accepte,
+        il conclut, il rassure.
+
+      ! `la` veut dire **non** : rien à voir avec l'article français. Et
+      `iyeh` (oui) se dit aussi simplement `ah`.
+    vocab:
+      - id: ary-chokran
+        term: chokran
+        translation: merci
+        pos: expression
+        example:
+          text: Chokran bzzaf!
+          translation: Merci beaucoup !
+      - id: ary-bla-jmil
+        term: bla jmil
+        translation: de rien
+        alt:
+          - je vous en prie
+          - je t'en prie
+        pos: expression
+        hint: La réponse habituelle à « chokran ».
+        example:
+          text: Chokran. — Bla jmil.
+          translation: Merci. — De rien.
+      - id: ary-3afak
+        term: 3afak
+        translation: s'il te plaît
+        alt:
+          - s'il vous plaît
+          - stp
+        pos: expression
+        example:
+          text: Atay 3afak.
+          translation: Un thé, s'il te plaît.
+      - id: ary-smi7li
+        term: smi7li
+        translation: pardon
+        alt:
+          - excuse-moi
+          - excusez-moi
+          - désolé
+        pos: expression
+        hint: Pour s'excuser comme pour interpeller quelqu'un.
+        example:
+          text: Smi7li, fin ssouq?
+          translation: Pardon, où est le marché ?
+      - id: ary-wakha
+        term: wakha
+        translation: d'accord
+        alt:
+          - ok
+          - dac
+        pos: expression
+        example:
+          text: Wakha, nchoufok ghedda.
+          translation: D'accord, je te vois demain.
+      - id: ary-iyeh
+        term: iyeh
+        translation: oui
+        pos: expression
+        example:
+          text: Iyeh, ana mn Fransa.
+          translation: Oui, je suis de France.
+      - id: ary-la
+        term: la
+        translation: non
+        pos: expression
+        hint: Le mot entier veut dire « non » — pas un article.
+        example:
+          text: La, chokran.
+          translation: Non, merci.
+      - id: ary-mre7ba
+        term: mre7ba
+        translation: bienvenue
+        alt:
+          - sois le bienvenu
+          - soyez le bienvenu
+        pos: expression
+        example:
+          text: Mre7ba bik f dari.
+          translation: Bienvenue chez moi.

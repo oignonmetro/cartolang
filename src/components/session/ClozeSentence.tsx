@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
 import type { ClozeExercise } from '@/engine/exercises'
-import { normalizeForm } from '@/engine/exercises'
+import { learningForm } from '@/engine/exercises'
 import { Button } from '@/components/Button'
 import { CorrectionGap } from './CorrectionGap'
 import { ExpectedAnswer } from './ExpectedAnswer'
@@ -40,7 +40,7 @@ export function ClozeSentence({
   const filled = value.trim().length > 0
 
   function check(candidate: string) {
-    const correct = normalizeForm(candidate) === normalizeForm(sentence.match)
+    const correct = learningForm(candidate) === learningForm(sentence.match)
     setValue(candidate)
     setChecked(correct)
     sounds.success(correct)

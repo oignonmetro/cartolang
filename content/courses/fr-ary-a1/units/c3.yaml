@@ -1,0 +1,150 @@
+id: c3
+title: Le passé
+subtitle: Les terminaisons de l'accompli
+icon: clock
+color: sky
+level: A1
+
+lessons:
+  - id: c3-l1
+    title: Khdem et chreb au passé
+    notes: |
+      Le passé (l'« accompli ») se forme à l'inverse du présent : rien
+      devant, tout **à la fin**. La forme nue, `khdem`, veut déjà dire « il a
+      travaillé ».
+
+      - `-t` je, `-ti` tu (homme ou femme), rien pour il, `-at` elle.
+        khdemt, khdemti, khdem, khedmat
+      - `-na` nous, `-tiw` vous, `-o` ils.
+        khdemna, khdemtiw, khedmo
+
+      ! Une seule forme pour « tu » au passé, `khdemti`, à un homme comme à une
+      femme — à la différence du présent. `-tiw` (vous) se dit aussi `-tu`
+      dans certaines régions.
+    verbs:
+      - verb: khdem
+        translation: travailler
+        tense: passé
+        note: "-t, -ti, rien, -at, -na, -tiw, -o."
+        forms:
+          - id: c3-khdem-1
+            person: ana
+            answer: khdemt
+          - id: c3-khdem-2
+            person: nta / nti
+            answer: khdemti
+          - id: c3-khdem-3
+            person: howa
+            answer: khdem
+          - id: c3-khdem-4
+            person: hiya
+            answer: khedmat
+          - id: c3-khdem-5
+            person: 7na
+            answer: khdemna
+          - id: c3-khdem-6
+            person: ntoma
+            answer: khdemtiw
+            alt:
+              - khdemtu
+          - id: c3-khdem-7
+            person: homa
+            answer: khedmo
+      - verb: chreb
+        translation: boire
+        tense: passé
+        note: "Comme khdem : -t, -ti, rien, -at, -na, -tiw, -o."
+        forms:
+          - id: c3-chreb-1
+            person: ana
+            answer: chrebt
+          - id: c3-chreb-2
+            person: nta / nti
+            answer: chrebti
+          - id: c3-chreb-3
+            person: howa
+            answer: chreb
+          - id: c3-chreb-4
+            person: hiya
+            answer: cherbat
+          - id: c3-chreb-5
+            person: 7na
+            answer: chrebna
+          - id: c3-chreb-6
+            person: ntoma
+            answer: chrebtiw
+            alt:
+              - chrebtu
+          - id: c3-chreb-7
+            person: homa
+            answer: cherbo
+
+  - id: c3-l2
+    title: Mcha et kla au passé
+    notes: |
+      Les verbes en `-a` gardent leur `a` à la 3ᵉ personne, et prennent un `i`
+      partout ailleurs, devant la terminaison.
+
+      - `mchit`, `mchiti`, `mcha`, `mchat`.
+        Mchit l ssouq lbare7.
+      - `mchina`, `mchitiw`, `mchaw`.
+
+      ! `kla` suit le même modèle au passé — `klit`, j'ai mangé —, alors qu'il
+      est irrégulier au présent (`kanakol`).
+    verbs:
+      - verb: mcha
+        translation: aller
+        tense: passé
+        note: "-it, -iti, -a, -at, -ina, -itiw, -aw."
+        forms:
+          - id: c3-mcha-1
+            person: ana
+            answer: mchit
+          - id: c3-mcha-2
+            person: nta / nti
+            answer: mchiti
+          - id: c3-mcha-3
+            person: howa
+            answer: mcha
+          - id: c3-mcha-4
+            person: hiya
+            answer: mchat
+          - id: c3-mcha-5
+            person: 7na
+            answer: mchina
+          - id: c3-mcha-6
+            person: ntoma
+            answer: mchitiw
+            alt:
+              - mchitu
+          - id: c3-mcha-7
+            person: homa
+            answer: mchaw
+      - verb: kla
+        translation: manger
+        tense: passé
+        note: "Comme mcha : -it, -iti, -a, -at, -ina, -itiw, -aw."
+        forms:
+          - id: c3-kla-1
+            person: ana
+            answer: klit
+          - id: c3-kla-2
+            person: nta / nti
+            answer: kliti
+          - id: c3-kla-3
+            person: howa
+            answer: kla
+          - id: c3-kla-4
+            person: hiya
+            answer: klat
+          - id: c3-kla-5
+            person: 7na
+            answer: klina
+          - id: c3-kla-6
+            person: ntoma
+            answer: klitiw
+            alt:
+              - klitu
+          - id: c3-kla-7
+            person: homa
+            answer: klaw

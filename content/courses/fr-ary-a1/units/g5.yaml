@@ -1,0 +1,151 @@
+id: g5
+title: La négation
+subtitle: machi, ma…ch, et « il y a »
+icon: compass
+color: violet
+level: A1
+
+lessons:
+  - id: g5-l1
+    title: Kayn, makaynch, machi
+    notes: |
+      Deux négations, selon ce qu'on nie. Devant un nom, un adjectif ou un
+      pronom — là où le français aurait « être » — on met `machi`.
+
+      - `machi` : ne… pas, devant ce qui n'est pas un verbe.
+        Ana machi 3iyan.
+      - `kayn` : il y a ; `makaynch` : il n'y a pas — un seul mot.
+        Wach kayn lma? La, makaynch.
+
+      ! `makaynch` ne se coupe pas en « machi kayn » : `kayn` se nie comme
+      un verbe, par `ma…ch` autour du mot (leçon suivante).
+    points:
+      - id: g5-makaynch-1
+        sentence: Wach kayn lma? — La, ___.
+        answer: makaynch
+        alt:
+          - ma kaynch
+        options:
+          - makaynch
+          - machi kayn
+          - kayn
+        translation: Est-ce qu'il y a de l'eau ? — Non, il n'y en a pas.
+        explanation: "« Il n'y a pas » : makaynch, ma… ch autour de kayn."
+      - id: g5-machi-1
+        sentence: Atay ___ skhoun.
+        answer: machi
+        options:
+          - machi
+          - makaynch
+          - kayn
+        translation: Le thé n'est pas chaud.
+        explanation: "Devant un adjectif, sans verbe : machi."
+      - id: g5-kayn-1
+        sentence: Wach ___ atay?
+        answer: kayn
+        options:
+          - kayn
+          - machi
+          - makaynch
+        translation: Est-ce qu'il y a du thé ?
+        explanation: "« Il y a » : kayn ; wach en fait une question."
+      - id: g5-machi-2
+        sentence: Hada ___ khoya.
+        answer: machi
+        options:
+          - machi
+          - makaynch
+          - la
+        translation: Ce n'est pas mon frère.
+        explanation: "Devant un nom : machi. La veut dire « non », il ne nie pas une phrase."
+      - id: g5-machi-3
+        sentence: Ana ___ 3iyan.
+        answer: machi
+        options:
+          - machi
+          - la
+          - makaynch
+        translation: Je ne suis pas fatigué.
+        explanation: "Pas de verbe « être », donc pas de ma…ch : machi devant l'adjectif."
+      - id: g5-makaynch-2
+        sentence: F ttellaja ___ lma.
+        answer: makaynch
+        alt:
+          - ma kaynch
+        options:
+          - makaynch
+          - machi
+          - kayn
+        translation: Il n'y a pas d'eau dans le frigo.
+        explanation: "« Il n'y a pas » : makaynch."
+
+  - id: g5-l2
+    title: Ma…ch autour du verbe
+    notes: |
+      Un verbe se nie en deux morceaux : `ma` devant, `ch` derrière, collés
+      au verbe. C'est le « ne… pas » français, mais soudé au mot.
+
+      - `kanakol` (je mange) → `makanakolch` (je ne mange pas).
+      - `fhemt` (j'ai compris) → `mafhemtch` (je n'ai pas compris).
+      - `3ndi` (j'ai) se nie de même : `ma3ndich`, je n'ai pas.
+
+      ! `machi` ne se met jamais devant un verbe conjugué : « machi
+      kanakol » est fautif. Et les deux morceaux vont ensemble — sans le
+      `ch` final, la négation est incomplète.
+    points:
+      - id: g5-makanakolch
+        sentence: Ana ___ l7am.
+        answer: makanakolch
+        alt:
+          - ma kanakolch
+        options:
+          - makanakolch
+          - machi kanakol
+          - makanakol
+        translation: Je ne mange pas de viande.
+        explanation: "Un verbe se nie par ma… ch : makanakolch."
+      - id: g5-mafhemtch
+        sentence: Smi7li, ___.
+        answer: mafhemtch
+        alt:
+          - ma fhemtch
+        options:
+          - mafhemtch
+          - machi fhemt
+          - mafhemt
+        translation: Pardon, je n'ai pas compris.
+        explanation: "Fhemt est un verbe : ma… ch autour, mafhemtch."
+      - id: g5-makankhdemch
+        sentence: Nhar ssebt ___.
+        answer: makankhdemch
+        alt:
+          - ma kankhdemch
+        options:
+          - makankhdemch
+          - machi kankhdem
+          - kankhdemch
+        translation: Le samedi, je ne travaille pas.
+        explanation: "Il faut les deux morceaux, ma devant et ch derrière : makankhdemch."
+      - id: g5-ma3ndich
+        sentence: Smi7li, ___ flous.
+        answer: ma3ndich
+        alt:
+          - ma 3ndich
+          - ma3andich
+        options:
+          - ma3ndich
+          - machi 3ndi
+          - 3ndich
+        translation: Désolé, je n'ai pas d'argent.
+        explanation: "3ndi se nie comme un verbe : ma3ndich."
+      - id: g5-mabghitch
+        sentence: La, ___ atay, chokran.
+        answer: mabghitch
+        alt:
+          - ma bghitch
+        options:
+          - mabghitch
+          - machi bghit
+          - mabghit
+        translation: Non, je ne veux pas de thé, merci.
+        explanation: "Bghit est un verbe : ma… ch autour, mabghitch."

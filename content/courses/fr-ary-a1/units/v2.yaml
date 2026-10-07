@@ -1,0 +1,209 @@
+id: v2
+title: Se présenter, la famille
+subtitle: Dire son nom, d'où l'on vient, et parler des siens
+icon: people
+color: violet
+level: A1
+
+lessons:
+  - id: v2-l1
+    title: Se présenter
+    notes: |
+      Se présenter tient en quelques formules à retenir **en bloc**, bien
+      avant de savoir conjuguer.
+
+      - `smiti…` : mon nom est…, je m'appelle… — `smiya` (nom) suivi de
+        `-ti`, « mon ».
+      - `chno smitek?` : quel est ton nom ? — `chno` veut dire « quoi ».
+      - `mnin nta?` (à un homme), `mnin nti?` (à une femme) : d'où es-tu ?
+
+      ! Le darija distingue « tu » au masculin (`nta`) et au féminin
+      (`nti`) : on ne s'adresse pas de la même façon à un homme et à une
+      femme.
+    vocab:
+      - id: ary-smiti
+        term: smiti
+        translation: je m'appelle
+        alt:
+          - mon nom est
+          - mon nom
+        pos: expression
+        example:
+          text: Salam, smiti Karim.
+          translation: Salut, je m'appelle Karim.
+      - id: ary-chno-smitek
+        term: chno smitek?
+        translation: comment tu t'appelles ?
+        alt:
+          - quel est ton nom
+          - comment t'appelles-tu
+          - comment tu t'appelles
+        pos: expression
+        example:
+          text: Salam, chno smitek?
+          translation: Salut, comment tu t'appelles ?
+      - id: ary-mnin-nta
+        term: mnin nta?
+        translation: d'où es-tu ?
+        alt:
+          - tu viens d'où
+          - d'où tu viens
+          - d'où es-tu
+          - tu es d'où
+        pos: expression
+        hint: À un homme ; à une femme, « mnin nti? ».
+        example:
+          text: Mnin nta? Mn Fransa?
+          translation: D'où es-tu ? De France ?
+      - id: ary-metcherfin
+        term: metcherfin
+        translation: enchanté
+        alt:
+          - enchantée
+          - ravi de te rencontrer
+        pos: expression
+        hint: Littéralement « honorés » — se dit en serrant la main.
+        example:
+          text: Ana Sara, metcherfin.
+          translation: Moi c'est Sara, enchantée.
+      - id: ary-fhemt
+        term: fhemt
+        translation: j'ai compris
+        alt:
+          - je comprends
+          - compris
+        pos: expression
+        example:
+          text: Iyeh, fhemt, chokran.
+          translation: Oui, j'ai compris, merci.
+      - id: ary-mafhemtch
+        term: mafhemtch
+        translation: je n'ai pas compris
+        alt:
+          - je ne comprends pas
+          - j'ai pas compris
+          - pas compris
+        pos: expression
+        hint: « fhemt » entouré de ma… -ch, la négation darija.
+        example:
+          text: Smi7li, mafhemtch.
+          translation: Pardon, je n'ai pas compris.
+      - id: ary-3awed
+        term: 3awed
+        translation: répète
+        alt:
+          - répétez
+          - recommence
+        pos: verbe
+        example:
+          text: 3awed 3afak, b chwiya.
+          translation: Répète s'il te plaît, doucement.
+      - id: ary-chwiya
+        term: chwiya
+        translation: un peu
+        alt:
+          - doucement
+          - peu
+        pos: adverbe
+        hint: « b chwiya » veut dire doucement, lentement.
+        example:
+          text: Kanhder darija chwiya.
+          translation: Je parle un peu darija.
+
+  - id: v2-l2
+    title: La famille
+    notes: |
+      Les mots de la famille se disent presque toujours avec un possessif
+      collé à la fin : on dit « mon père », « ma sœur » bien plus souvent
+      que « un père » ou « une sœur ».
+
+      - `bba` et `mmi` : papa et maman, ou « mon père » et « ma mère ».
+      - `khoya` (mon frère) et `khti` (ma sœur) portent déjà le « mon » ;
+        les autres possessifs viennent dans la grammaire (g4).
+      - `wld` : garçon ou fils ; `bent` : fille, au sens de l'enfant comme
+        de la jeune femme.
+
+      ! `rajel` veut dire homme **et** mari, `mra` femme **et** épouse —
+      comme « femme » en français.
+    vocab:
+      - id: ary-bba
+        term: bba
+        translation: papa
+        alt:
+          - mon père
+          - père
+        pos: nom
+        example:
+          text: Bba kaykhdem f Casa.
+          translation: Papa travaille à Casablanca.
+      - id: ary-mmi
+        term: mmi
+        translation: maman
+        alt:
+          - ma mère
+          - mère
+        pos: nom
+        example:
+          text: Mmi f ddar.
+          translation: Maman est à la maison.
+      - id: ary-khoya
+        term: khoya
+        translation: mon frère
+        alt:
+          - frère
+        pos: nom
+        hint: Se dit aussi, amicalement, à un inconnu — « mon frère ».
+        example:
+          text: Hada khoya Youssef.
+          translation: C'est mon frère Youssef.
+      - id: ary-khti
+        term: khti
+        translation: ma sœur
+        alt:
+          - sœur
+          - ma soeur
+          - soeur
+        pos: nom
+        example:
+          text: Hadi khti Salma.
+          translation: C'est ma sœur Salma.
+      - id: ary-wld
+        term: wld
+        translation: garçon
+        alt:
+          - fils
+          - le garçon
+        pos: nom
+        example:
+          text: 3ndi wld wa7ed.
+          translation: J'ai un garçon.
+      - id: ary-bent
+        term: bent
+        translation: fille
+        alt:
+          - la fille
+          - jeune fille
+        pos: nom
+        example:
+          text: 3ndi bent wa7da.
+          translation: J'ai une fille.
+      - id: ary-rajel
+        term: rajel
+        translation: homme
+        alt:
+          - mari
+          - un homme
+        pos: nom
+        example:
+          text: Howa rajel mzyan.
+          translation: C'est un homme bien.
+      - id: ary-mra
+        term: mra
+        translation: femme
+        alt:
+          - épouse
+          - une femme
+        pos: nom
+        example:
+          text: Hiya mra mzyana.
+          translation: C'est une femme bien.

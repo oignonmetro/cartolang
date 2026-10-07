@@ -1,0 +1,148 @@
+id: g6
+title: Les questions
+subtitle: Quoi, où, qui, quand, comment, pourquoi
+icon: compass
+color: violet
+level: A1
+
+lessons:
+  - id: g6-l1
+    title: Chno, fin, chkun, imta, wach
+    notes: |
+      Le mot interrogatif se place **en tête** de phrase, et le reste ne
+      bouge pas : pas d'inversion, pas d'« est-ce que ».
+
+      - `chno` : quoi, qu'est-ce que — `chno smitek?`
+      - `fin` : où — `fin ssouq?`
+      - `chkun` : qui ; `imta` : quand.
+      - `wach` : transforme une phrase en question fermée, à laquelle on
+        répond oui ou non.
+        Wach nta mrid?
+
+      ! `wach` ne se traduit pas : c'est l'« est-ce que » français. À
+      l'oral, on peut aussi s'en passer et monter la voix.
+    points:
+      - id: g6-chno-1
+        sentence: ___ smitek?
+        answer: chno
+        options:
+          - chno
+          - chkun
+          - fin
+        translation: Comment tu t'appelles ? (quel est ton nom ?)
+        explanation: "On demande une chose, le nom : chno, quoi."
+      - id: g6-fin-1
+        sentence: ___ ssouq?
+        answer: fin
+        options:
+          - fin
+          - imta
+          - chno
+        translation: Où est le marché ?
+        explanation: "On demande un lieu : fin."
+      - id: g6-chkun-1
+        sentence: ___ f ddar?
+        answer: chkun
+        options:
+          - chkun
+          - chno
+          - fin
+        translation: Qui est à la maison ?
+        explanation: "On demande une personne : chkun."
+      - id: g6-imta-1
+        sentence: ___ ghadi tmchi l Fransa?
+        answer: imta
+        options:
+          - imta
+          - fin
+          - chkun
+        translation: Quand vas-tu aller en France ?
+        explanation: "On demande un moment : imta."
+      - id: g6-wach-1
+        sentence: ___ kayn atay?
+        answer: wach
+        options:
+          - wach
+          - chno
+          - fin
+        translation: Est-ce qu'il y a du thé ?
+        explanation: "On attend oui ou non : wach."
+      - id: g6-chno-2
+        sentence: ___ bghiti?
+        answer: chno
+        options:
+          - chno
+          - chkun
+          - imta
+        translation: Qu'est-ce que tu veux ?
+        explanation: "On demande une chose : chno."
+
+  - id: g6-l2
+    title: Mnin, kifach, 3lach, chhal
+    notes: |
+      Quatre autres mots complètent la panoplie, toujours en tête de
+      phrase.
+
+      - `mnin` : d'où — `mnin nta?`
+      - `kifach` : comment, de quelle façon.
+      - `3lach` : pourquoi — avec le `3` serré de la gorge.
+      - `chhal` : combien ; `b chhal?`, pour combien, au souk.
+
+      ! `3lach` (pourquoi) appelle `7it` (parce que) dans la réponse :
+      `3lach nta 3iyan? — 7it khdemt bzzaf`, parce que j'ai beaucoup
+      travaillé.
+    points:
+      - id: g6-mnin-1
+        sentence: ___ nta? Mn Fransa?
+        answer: mnin
+        options:
+          - mnin
+          - fin
+          - kifach
+        translation: D'où es-tu ? De France ?
+        explanation: "On demande une provenance : mnin, d'où. Fin demanderait où l'on est."
+      - id: g6-chhal-1
+        sentence: B ___ hadchi?
+        answer: chhal
+        options:
+          - chhal
+          - chno
+          - kifach
+        translation: C'est combien ?
+        explanation: "On demande un prix, une quantité : chhal."
+      - id: g6-kifach-1
+        sentence: ___ katgoul « merci » b ddarija?
+        answer: kifach
+        options:
+          - kifach
+          - 3lach
+          - chno
+        translation: Comment dit-on « merci » en darija ?
+        explanation: "On demande une manière : kifach, comment."
+      - id: g6-3lach-1
+        sentence: ___ nta 3iyan?
+        answer: 3lach
+        options:
+          - 3lach
+          - kifach
+          - mnin
+        translation: Pourquoi es-tu fatigué ?
+        explanation: "On demande une raison : 3lach, pourquoi."
+      - id: g6-chhal-2
+        sentence: ___ mn wld 3ndek?
+        answer: chhal
+        options:
+          - chhal
+          - 3lach
+          - mnin
+        translation: Combien de garçons as-tu ?
+        explanation: "On demande un nombre : chhal."
+      - id: g6-3lach-2
+        sentence: ___ l7anout msdouda?
+        answer: 3lach
+        options:
+          - 3lach
+          - kifach
+          - chhal
+        translation: Pourquoi la boutique est-elle fermée ?
+        explanation: "On demande une raison : 3lach."

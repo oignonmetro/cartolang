@@ -1,0 +1,130 @@
+id: g1
+title: Les pronoms
+subtitle: Je, tu, il… et une phrase sans « être »
+icon: people
+color: violet
+level: A1
+
+lessons:
+  - id: g1-l1
+    title: Ana, nta, nti, howa, hiya
+    notes: |
+      Au présent, le darija n'a **pas de verbe « être »** : on pose le
+      pronom, puis ce qu'on dit de lui. `ana 3iyan`, littéralement « moi
+      fatigué », c'est « je suis fatigué ».
+
+      - `ana` : je, moi.
+      - `nta` : tu, à un homme ; `nti` : tu, à une femme.
+      - `howa` : il, lui ; `hiya` : elle.
+        Hiya f lkouzina.
+
+      ! Le « tu » change avec la personne à qui l'on parle : `nta` pour un
+      homme, `nti` pour une femme. Le français ne fait pas la différence,
+      le darija si — toujours.
+    points:
+      - id: g1-ana-1
+        sentence: ___ mn Fransa.
+        answer: ana
+        options:
+          - ana
+          - nta
+          - howa
+        translation: Je suis de France.
+        explanation: "« Je » se dit ana ; pas de verbe « être » derrière."
+      - id: g1-nta-1
+        sentence: ___ 3iyan? (à un homme)
+        answer: nta
+        options:
+          - nta
+          - nti
+          - howa
+        translation: Tu es fatigué ?
+        explanation: "On parle à un homme : nta. À une femme, ce serait nti."
+      - id: g1-nti-1
+        sentence: Mnin ___? (à une femme)
+        answer: nti
+        options:
+          - nti
+          - nta
+          - hiya
+        translation: D'où es-tu ?
+        explanation: "On s'adresse à une femme : nti, et non nta."
+      - id: g1-howa-1
+        sentence: Hada Karim, ___ khoya.
+        answer: howa
+        options:
+          - howa
+          - hiya
+          - nta
+        translation: C'est Karim, il est mon frère.
+        explanation: "On parle de Karim, un homme, sans s'adresser à lui : howa."
+      - id: g1-hiya-1
+        sentence: Salma? ___ f lkouzina.
+        answer: hiya
+        options:
+          - hiya
+          - howa
+          - nti
+        translation: Salma ? Elle est dans la cuisine.
+        explanation: "On parle de Salma, une femme, à quelqu'un d'autre : hiya."
+
+  - id: g1-l2
+    title: 7na, ntoma, homa
+    notes: |
+      Au pluriel, plus de différence entre masculin et féminin : trois
+      pronoms suffisent.
+
+      - `7na` : nous — avec le `7` soufflé, à ne pas confondre avec `hna`,
+        ici.
+      - `ntoma` : vous, à plusieurs personnes.
+      - `homa` : ils, elles.
+        Homa f ssouq.
+
+      ! `ntoma` ne sert **pas** à vouvoyer une seule personne : le darija
+      tutoie, `nta` ou `nti`, même un inconnu ou un aîné.
+    points:
+      - id: g1-7na-1
+        sentence: ___ f ddar.
+        answer: 7na
+        options:
+          - 7na
+          - ntoma
+          - homa
+        translation: Nous sommes à la maison.
+        explanation: "« Nous » se dit 7na, avec le 7 soufflé."
+      - id: g1-ntoma-1
+        sentence: Mnin ___? Mn Fransa?
+        answer: ntoma
+        options:
+          - ntoma
+          - homa
+          - nta
+        translation: D'où êtes-vous (vous tous) ? De France ?
+        explanation: "On s'adresse à plusieurs personnes : ntoma. Nta ne vise qu'un homme."
+      - id: g1-homa-1
+        sentence: Bba w mmi? ___ f ssouq.
+        answer: homa
+        options:
+          - homa
+          - 7na
+          - ntoma
+        translation: Papa et maman ? Ils sont au marché.
+        explanation: "On parle de deux personnes absentes : homa, ils."
+      - id: g1-7na-2
+        sentence: Ana w khti, ___ f lmdina.
+        answer: 7na
+        options:
+          - 7na
+          - homa
+          - ntoma
+        translation: Ma sœur et moi, nous sommes en ville.
+        explanation: "« Moi et ma sœur » font un « nous » : 7na."
+      - id: g1-ntoma-2
+        sentence: Nta w Sara, ___ mn Casa?
+        answer: ntoma
+        options:
+          - ntoma
+          - homa
+          - 7na
+        translation: Toi et Sara, vous êtes de Casablanca ?
+        explanation: "« Toi et Sara » font un « vous » : ntoma."

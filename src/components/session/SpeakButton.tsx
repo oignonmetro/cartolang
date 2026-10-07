@@ -32,13 +32,13 @@ export function SpeakButton({
   const spokenFor = useRef<string | null>(null)
 
   useEffect(() => {
-    if (!auto || !autoSpeak || !canSpeak) return
+    if (!auto || !autoSpeak || !canSpeak()) return
     if (spokenFor.current === text) return
     spokenFor.current = text
     void speak(text)
   }, [auto, autoSpeak, text])
 
-  if (!canSpeak) return null
+  if (!canSpeak()) return null
 
   return (
     <motion.button

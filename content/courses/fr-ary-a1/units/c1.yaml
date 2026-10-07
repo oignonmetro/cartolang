@@ -1,0 +1,125 @@
+id: c1
+title: Le présent
+subtitle: ka- devant le verbe
+icon: clock
+color: sky
+level: A1
+
+lessons:
+  - id: c1-l1
+    title: Khdem, le modèle régulier
+    notes: |
+      Le présent se construit en deux couches : une **lettre de personne**
+      devant le verbe (`n-` je, `t-` tu, `y-` il), puis `ka-` tout devant.
+      `kan-khdem`, je travaille ; `kay-khdem`, il travaille.
+
+      - Singulier : `kankhdem`, `katkhdem`, `katkhdmi` (à une femme),
+        `kaykhdem`, `katkhdem` (elle).
+      - Pluriel : on ajoute `-o` à la fin — `kankhdmo`, `katkhdmo`, `kaykhdmo`.
+      - Le verbe se cite par sa forme « il a travaillé », `khdem` : c'est
+        l'usage des dictionnaires de darija.
+
+      ! « Tu » (à un homme) et « elle » ont la même forme, `katkhdem` : seul
+      le contexte, ou le pronom, les distingue.
+    verbs:
+      - verb: khdem
+        translation: travailler
+        tense: présent
+        note: "ka- + n-/t-/y- + khdem ; -i pour « tu » au féminin, -o au pluriel."
+        forms:
+          - id: c1-khdem-1
+            person: ana
+            answer: kankhdem
+          - id: c1-khdem-2
+            person: nta
+            answer: katkhdem
+          - id: c1-khdem-3
+            person: nti
+            answer: katkhdmi
+          - id: c1-khdem-4
+            person: howa
+            answer: kaykhdem
+          - id: c1-khdem-5
+            person: hiya
+            answer: katkhdem
+          - id: c1-khdem-6
+            person: 7na
+            answer: kankhdmo
+          - id: c1-khdem-7
+            person: ntoma
+            answer: katkhdmo
+          - id: c1-khdem-8
+            person: homa
+            answer: kaykhdmo
+
+  - id: c1-l2
+    title: Chreb et sken, même modèle
+    notes: |
+      `chreb` (boire) et `sken` (habiter) suivent exactement `khdem` : une fois
+      le modèle su, il s'applique à la plupart des verbes.
+
+      - `kanchreb atay` : je bois du thé.
+      - `kansken f Casa` : j'habite à Casablanca.
+
+      ! Devant `-i` et `-o`, le `e` qui précède la dernière consonne tombe :
+      `katchreb` mais `katchrbi`, `kansken` mais `kanskno`. La saisie accepte
+      les deux graphies — ce `e` n'est qu'une voyelle de passage.
+    verbs:
+      - verb: chreb
+        translation: boire
+        tense: présent
+        note: "Comme khdem : kan-, kat-, kay- devant ; -i, -o à la fin."
+        forms:
+          - id: c1-chreb-1
+            person: ana
+            answer: kanchreb
+          - id: c1-chreb-2
+            person: nta
+            answer: katchreb
+          - id: c1-chreb-3
+            person: nti
+            answer: katchrbi
+          - id: c1-chreb-4
+            person: howa
+            answer: kaychreb
+          - id: c1-chreb-5
+            person: hiya
+            answer: katchreb
+          - id: c1-chreb-6
+            person: 7na
+            answer: kanchrbo
+          - id: c1-chreb-7
+            person: ntoma
+            answer: katchrbo
+          - id: c1-chreb-8
+            person: homa
+            answer: kaychrbo
+      - verb: sken
+        translation: habiter
+        tense: présent
+        note: "Comme khdem : kan-, kat-, kay- devant ; -i, -o à la fin."
+        forms:
+          - id: c1-sken-1
+            person: ana
+            answer: kansken
+          - id: c1-sken-2
+            person: nta
+            answer: katsken
+          - id: c1-sken-3
+            person: nti
+            answer: katskni
+          - id: c1-sken-4
+            person: howa
+            answer: kaysken
+          - id: c1-sken-5
+            person: hiya
+            answer: katsken
+          - id: c1-sken-6
+            person: 7na
+            answer: kanskno
+          - id: c1-sken-7
+            person: ntoma
+            answer: katskno
+          - id: c1-sken-8
+            person: homa
+            answer: kayskno

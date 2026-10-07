@@ -1,0 +1,208 @@
+id: v3
+title: Les nombres
+subtitle: Compter, demander un prix
+icon: compass
+color: sky
+level: A1
+
+lessons:
+  - id: v3-l1
+    title: De un à dix
+    notes: |
+      Les dix premiers nombres se retiennent un par un. Deux d'entre eux
+      ne ressemblent pas à l'arabe classique, et ce sont justement les plus
+      fréquents.
+
+      - `wa7ed` (un) a un féminin, `wa7da` : `bent wa7da`, une fille.
+      - `jouj` (deux) est propre au darija — l'arabe standard dit autre
+        chose.
+      - `tes3od` (neuf) garde un `-od` final qu'aucun autre nombre n'a.
+
+      ! Pour compter, `w` veut dire « et » : `jouj w tlata`, deux et trois.
+    vocab:
+      - id: ary-wa7ed
+        term: wa7ed
+        translation: un
+        alt:
+          - "1"
+        pos: nombre
+        example:
+          text: Wa7ed atay 3afak.
+          translation: Un thé, s'il te plaît.
+      - id: ary-jouj
+        term: jouj
+        translation: deux
+        alt:
+          - "2"
+        pos: nombre
+        example:
+          text: Ana w khoya, 7na jouj.
+          translation: Moi et mon frère, nous sommes deux.
+      - id: ary-tlata
+        term: tlata
+        translation: trois
+        alt:
+          - "3"
+        pos: nombre
+        example:
+          text: Wa7ed w jouj, tlata.
+          translation: Un et deux, trois.
+      - id: ary-reb3a
+        term: reb3a
+        translation: quatre
+        alt:
+          - "4"
+        pos: nombre
+        example:
+          text: Jouj w jouj, reb3a.
+          translation: Deux et deux, quatre.
+      - id: ary-khamsa
+        term: khamsa
+        translation: cinq
+        alt:
+          - "5"
+        pos: nombre
+        hint: Comme la main de Fatma, la « khamsa », et ses cinq doigts.
+        example:
+          text: Jouj w tlata, khamsa.
+          translation: Deux et trois, cinq.
+      - id: ary-setta
+        term: setta
+        translation: six
+        alt:
+          - "6"
+        pos: nombre
+        example:
+          text: Tlata w tlata, setta.
+          translation: Trois et trois, six.
+      - id: ary-seb3a
+        term: seb3a
+        translation: sept
+        alt:
+          - "7"
+        pos: nombre
+        example:
+          text: Reb3a w tlata, seb3a.
+          translation: Quatre et trois, sept.
+      - id: ary-tmenya
+        term: tmenya
+        translation: huit
+        alt:
+          - "8"
+        pos: nombre
+        example:
+          text: Reb3a w reb3a, tmenya.
+          translation: Quatre et quatre, huit.
+      - id: ary-tes3od
+        term: tes3od
+        translation: neuf
+        alt:
+          - "9"
+        pos: nombre
+        example:
+          text: Khamsa w reb3a, tes3od.
+          translation: Cinq et quatre, neuf.
+      - id: ary-3echra
+        term: 3echra
+        translation: dix
+        alt:
+          - "10"
+        pos: nombre
+        example:
+          text: Khamsa w khamsa, 3echra.
+          translation: Cinq et cinq, dix.
+
+  - id: v3-l2
+    title: Au souk, les prix
+    notes: |
+      Au souk, tout se négocie, et une poignée de mots suffit pour le faire.
+
+      - `b chhal?` : pour combien ? — la question qu'on pose avant
+        d'acheter quoi que ce soit.
+      - `ghali` (cher) et `rkhis` (pas cher) ouvrent la discussion ;
+        `safi` (c'est bon, ça suffit) la conclut.
+      - `bzzaf` (beaucoup, trop) renforce tout : `ghali bzzaf`, trop cher.
+
+      ! `3echrin` (vingt) se forme sur `3echra` (dix) : c'est le seul
+      nombre au-delà de dix qu'on retient ici, avec `mya` (cent).
+    vocab:
+      - id: ary-3echrin
+        term: 3echrin
+        translation: vingt
+        alt:
+          - "20"
+        pos: nombre
+        example:
+          text: 3ndi 3echrin 3am.
+          translation: J'ai vingt ans.
+      - id: ary-mya
+        term: mya
+        translation: cent
+        alt:
+          - "100"
+        pos: nombre
+        example:
+          text: Hadchi b mya dirham.
+          translation: Ça fait cent dirhams.
+      - id: ary-chhal
+        term: chhal
+        translation: combien
+        alt:
+          - combien ?
+        pos: adverbe
+        example:
+          text: B chhal hadchi?
+          translation: C'est combien ?
+      - id: ary-flous
+        term: flous
+        translation: argent
+        alt:
+          - de l'argent
+          - l'argent
+          - sous
+        pos: nom
+        example:
+          text: 3ndek flous?
+          translation: Tu as de l'argent ?
+      - id: ary-ghali
+        term: ghali
+        translation: cher
+        alt:
+          - chère
+          - coûteux
+        pos: adjectif
+        example:
+          text: Hadchi ghali bzzaf!
+          translation: C'est trop cher !
+      - id: ary-rkhis
+        term: rkhis
+        translation: pas cher
+        alt:
+          - bon marché
+          - bon marche
+        pos: adjectif
+        example:
+          text: Atay rkhis hna.
+          translation: Le thé n'est pas cher ici.
+      - id: ary-bzzaf
+        term: bzzaf
+        translation: beaucoup
+        alt:
+          - trop
+          - très
+        pos: adverbe
+        example:
+          text: Kanbghi atay bzzaf.
+          translation: J'aime beaucoup le thé.
+      - id: ary-safi
+        term: safi
+        translation: c'est bon
+        alt:
+          - ça suffit
+          - ca suffit
+          - c'est fini
+          - assez
+        pos: expression
+        example:
+          text: Safi, chokran.
+          translation: C'est bon, merci.

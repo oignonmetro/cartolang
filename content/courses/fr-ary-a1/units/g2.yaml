@@ -1,0 +1,141 @@
+id: g2
+title: L'article
+subtitle: l- ou consonne doublée
+icon: compass
+color: violet
+level: A1
+
+lessons:
+  - id: g2-l1
+    title: L'article l-
+    notes: |
+      Le darija a un seul article défini, `l-`, collé devant le nom : il
+      vaut pour « le », « la », « les » à la fois. Sans lui, le nom est
+      indéfini.
+
+      - `lma` : l'eau ; `lbab` : la porte ; `lkhobz` : le pain.
+      - Le darija n'a pas de partitif : « je voudrais **de l'**eau » se
+        dit `bghit lma`, avec l'article.
+        Bghit lma 3afak.
+
+      ! L'article ne se met pas devant `atay`, le thé, ni devant un nom
+      suivi d'un possessif collé (`khoya`, mon frère).
+    points:
+      - id: g2-lma
+        sentence: Bghit ___ 3afak.
+        answer: lma
+        options:
+          - lma
+          - mma
+          - ma
+        translation: Je voudrais de l'eau, s'il te plaît.
+        explanation: "m ne fait pas fondre l'article : l reste l, et lma s'écrit avec lui."
+      - id: g2-lbab
+        sentence: Sedd ___ 3afak.
+        answer: lbab
+        options:
+          - lbab
+          - bbab
+          - bab
+        translation: Ferme la porte, s'il te plaît.
+        explanation: "b garde l'article intact : lbab."
+      - id: g2-lkhobz
+        sentence: ___ skhoun.
+        answer: lkhobz
+        options:
+          - lkhobz
+          - kkhobz
+          - khobz
+        translation: Le pain est chaud.
+        explanation: "kh garde l'article intact : lkhobz."
+      - id: g2-lkorsi
+        sentence: Gles 3la ___.
+        answer: lkorsi
+        options:
+          - lkorsi
+          - kkorsi
+          - korsi
+        translation: Assieds-toi sur la chaise.
+        explanation: "k garde l'article intact : lkorsi."
+      - id: g2-lbit
+        sentence: Ana f ___ dyali.
+        answer: lbit
+        options:
+          - lbit
+          - bbit
+          - bit
+        translation: Je suis dans ma chambre.
+        explanation: "Un nom suivi de dyal garde son article : lbit dyali."
+
+  - id: g2-l2
+    title: Quand l'article se fond
+    notes: |
+      Devant certaines consonnes, celles qu'on articule avec le bout de la
+      langue, le `l` de l'article **disparaît** et la consonne se double.
+      On n'écrit pas « ldar » mais `ddar`, on ne dit pas « lsouq » mais
+      `ssouq`.
+
+      - Se fondent : `t`, `d`, `s`, `z`, `ch`, `r`, `n` — et souvent `j`.
+        ddar, ttebla, ssouq, zzen9a, jjame3
+      - Restent `l` : toutes les autres — `b`, `m`, `k`, `kh`, `7`, `3`,
+        `9`…
+        lbab, lma, lkouzina, l7anout, l3sir
+
+      ! C'est le même phénomène qu'en arabe classique (les lettres
+      « solaires ») : `ddar` ne contient pas deux mots, c'est « la maison »
+      d'un seul tenant.
+    points:
+      - id: g2-ddar
+        sentence: Mmi f ___.
+        answer: ddar
+        options:
+          - ddar
+          - ldar
+          - dar
+        translation: Maman est à la maison.
+        explanation: "d fait fondre l'article : on double le d, ddar."
+      - id: g2-ssouq
+        sentence: Mchit l ___ lbare7.
+        answer: ssouq
+        options:
+          - ssouq
+          - lsouq
+          - souq
+        translation: Je suis allé au marché hier.
+        explanation: "s fait fondre l'article : ssouq."
+      - id: g2-ttebla
+        sentence: Lkhobz 3la ___.
+        answer: ttebla
+        options:
+          - ttebla
+          - ltebla
+          - tebla
+        translation: Le pain est sur la table.
+        explanation: "t fait fondre l'article : ttebla."
+      - id: g2-zzen9a
+        sentence: Ddar dyali f had ___.
+        answer: zzen9a
+        options:
+          - zzen9a
+          - lzen9a
+          - zen9a
+        translation: Ma maison est dans cette rue.
+        explanation: "z fait fondre l'article : zzen9a."
+      - id: g2-ssarout
+        sentence: Fin ___?
+        answer: ssarout
+        options:
+          - ssarout
+          - lsarout
+          - sarout
+        translation: Où est la clé ?
+        explanation: "s fait fondre l'article : ssarout."
+      - id: g2-lkouzina
+        sentence: Atay f ___.
+        answer: lkouzina
+        options:
+          - lkouzina
+          - kkouzina
+          - kouzina
+        translation: Le thé est dans la cuisine.
+        explanation: "k ne fait pas fondre l'article : lkouzina garde son l."

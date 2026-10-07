@@ -1,0 +1,182 @@
+id: v6
+title: Le temps, les jours
+subtitle: Aujourd'hui, demain, et la semaine
+icon: clock
+color: sky
+level: A1
+
+lessons:
+  - id: v6-l1
+    title: Aujourd'hui, demain
+    notes: |
+      Ces mots se placent librement, en tête ou en fin de phrase, sans
+      préposition : `ghedda nchoufok`, demain je te vois.
+
+      - `daba` (maintenant) est l'un des mots les plus entendus au Maroc.
+      - `l3chiya` couvre l'après-midi et le début de soirée ; `llil`, la
+        nuit.
+      - `ssimana` vient du français « semaine ».
+
+      ! `lyoum` (aujourd'hui) est littéralement « le jour » : l'article
+      `l-` y est collé, comme dans `lbare7` (hier). `ghedda` (demain), lui,
+      n'en a pas.
+    vocab:
+      - id: ary-lyoum
+        term: lyoum
+        translation: aujourd'hui
+        pos: adverbe
+        example:
+          text: Lyoum ana 3iyan.
+          translation: Aujourd'hui je suis fatigué.
+      - id: ary-ghedda
+        term: ghedda
+        translation: demain
+        pos: adverbe
+        example:
+          text: Nchoufok ghedda, inchallah.
+          translation: Je te vois demain, si Dieu le veut.
+      - id: ary-lbare7
+        term: lbare7
+        translation: hier
+        pos: adverbe
+        example:
+          text: Lbare7 mchit l sbitar.
+          translation: Hier je suis allé à l'hôpital.
+      - id: ary-daba
+        term: daba
+        translation: maintenant
+        alt:
+          - tout de suite
+        pos: adverbe
+        example:
+          text: Fin nta daba?
+          translation: Où es-tu maintenant ?
+      - id: ary-ssba7
+        term: ssba7
+        translation: le matin
+        alt:
+          - matin
+          - ce matin
+        pos: nom
+        example:
+          text: Ssba7 bared bzzaf.
+          translation: Le matin, il fait très froid.
+      - id: ary-l3chiya
+        term: l3chiya
+        translation: l'après-midi
+        alt:
+          - après-midi
+          - le soir
+          - cet après-midi
+        pos: nom
+        example:
+          text: Nchoufok l3chiya.
+          translation: Je te vois cet après-midi.
+      - id: ary-llil
+        term: llil
+        translation: la nuit
+        alt:
+          - nuit
+        pos: nom
+        example:
+          text: Makankhrejch f llil.
+          translation: Je ne sors pas la nuit.
+      - id: ary-ssimana
+        term: ssimana
+        translation: la semaine
+        alt:
+          - semaine
+        pos: nom
+        example:
+          text: Ssimana jaya ghadi nmchi l Fransa.
+          translation: La semaine prochaine, je vais aller en France.
+
+  - id: v6-l2
+    title: Les jours de la semaine
+    notes: |
+      Les jours se nomment presque tous par leur **rang** : lundi est le
+      « deuxième », mardi le « troisième »… La semaine commence le
+      dimanche, `l7ed`, le « premier ».
+
+      - On les précède de `nhar` (jour) : `nhar ssebt`, samedi.
+      - `jjem3a` (vendredi) est le jour de la grande prière, et souvent
+        celui du couscous en famille.
+
+      ! L'article se fond dans la première lettre (`ttlat`, `ssebt`,
+      `jjem3a`) ou reste `l` (`larb3`, `lkhmis`, `l7ed`) — la règle
+      vient en grammaire (g2).
+    vocab:
+      - id: ary-nhar
+        term: nhar
+        translation: le jour
+        alt:
+          - jour
+          - la journée
+          - journée
+        pos: nom
+        example:
+          text: Nhar kamel f ddar.
+          translation: Toute la journée à la maison.
+      - id: ary-letnin
+        term: letnin
+        translation: lundi
+        alt:
+          - le lundi
+        pos: nom
+        example:
+          text: Nhar letnin kankhdem.
+          translation: Le lundi, je travaille.
+      - id: ary-ttlat
+        term: ttlat
+        translation: mardi
+        alt:
+          - le mardi
+        pos: nom
+        example:
+          text: Nhar ttlat ghadi nmchi l sbitar.
+          translation: Mardi, je vais aller à l'hôpital.
+      - id: ary-larb3
+        term: larb3
+        translation: mercredi
+        alt:
+          - le mercredi
+        pos: nom
+        example:
+          text: Nhar larb3 l3chiya, wakha?
+          translation: Mercredi après-midi, d'accord ?
+      - id: ary-lkhmis
+        term: lkhmis
+        translation: jeudi
+        alt:
+          - le jeudi
+        pos: nom
+        example:
+          text: Ssouq kayn nhar lkhmis.
+          translation: Le marché a lieu le jeudi.
+      - id: ary-jjem3a
+        term: jjem3a
+        translation: vendredi
+        alt:
+          - le vendredi
+        pos: nom
+        example:
+          text: Nhar jjem3a kanakol kseksou.
+          translation: Le vendredi, je mange du couscous.
+      - id: ary-ssebt
+        term: ssebt
+        translation: samedi
+        alt:
+          - le samedi
+        pos: nom
+        example:
+          text: Nhar ssebt makankhdemch.
+          translation: Le samedi, je ne travaille pas.
+      - id: ary-l7ed
+        term: l7ed
+        translation: dimanche
+        alt:
+          - le dimanche
+        pos: nom
+        example:
+          text: Nhar l7ed kolchi f ddar.
+          translation: Le dimanche, tout le monde est à la maison.

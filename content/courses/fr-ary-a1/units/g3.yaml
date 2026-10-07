@@ -1,0 +1,150 @@
+id: g3
+title: Le féminin
+subtitle: L'accord en -a, et « ceci, cela »
+icon: compass
+color: violet
+level: A1
+
+lessons:
+  - id: g3-l1
+    title: L'adjectif au féminin
+    notes: |
+      L'adjectif s'accorde avec le nom : au féminin, il prend un `-a`.
+      C'est la marque la plus régulière du darija.
+
+      - `kbir` → `kbira`, `mzyan` → `mzyana`, `3iyan` → `3iyana`.
+        Ddar dyali kbira.
+      - Sont féminins les noms de femmes (`mmi`, `khti`), et presque tous
+        les noms qui finissent par `-a` : `ttebla`, `zzen9a`, `lmakla`.
+      - `ddar`, la maison, est féminin aussi, sans finir par `-a`.
+
+      ! Quand c'est une femme qui parle d'elle-même, l'adjectif s'accorde :
+      elle dit `ana 3iyana`, pas `ana 3iyan`.
+    points:
+      - id: g3-mrida
+        sentence: Khti ___.
+        answer: mrida
+        options:
+          - mrida
+          - mrid
+        translation: Ma sœur est malade.
+        explanation: "Khti est une femme : l'adjectif prend -a, mrida."
+      - id: g3-kbira
+        sentence: Ddar dyali ___.
+        answer: kbira
+        options:
+          - kbira
+          - kbir
+        translation: Ma maison est grande.
+        explanation: "Ddar est féminin, même sans -a final : kbira."
+      - id: g3-zwina
+        sentence: Lmdina ___.
+        answer: zwina
+        options:
+          - zwina
+          - zwin
+        translation: La ville est belle.
+        explanation: "Lmdina est féminin : zwina."
+      - id: g3-fer7ana
+        sentence: Mmi ___ lyoum.
+        answer: fer7ana
+        options:
+          - fer7ana
+          - fer7an
+        translation: Maman est contente aujourd'hui.
+        explanation: "Mmi est une femme : fer7ana."
+      - id: g3-3iyan
+        sentence: Khoya ___.
+        answer: 3iyan
+        options:
+          - 3iyan
+          - 3iyana
+        translation: Mon frère est fatigué.
+        explanation: "Khoya est un homme : l'adjectif reste au masculin, 3iyan."
+      - id: g3-3atchana
+        sentence: Ana ___, bghit lma. (une femme parle)
+        answer: 3atchana
+        options:
+          - 3atchana
+          - 3atchan
+        translation: J'ai soif, je veux de l'eau.
+        explanation: "C'est une femme qui parle d'elle-même : 3atchana."
+      - id: g3-jdida
+        sentence: Ttebla ___.
+        answer: jdida
+        options:
+          - jdida
+          - jdid
+        translation: La table est neuve.
+        explanation: "Ttebla finit par -a, elle est féminine : jdida."
+
+  - id: g3-l2
+    title: Hada, hadi, had
+    notes: |
+      Pour montrer, le darija a trois mots. Deux s'emploient seuls et
+      s'accordent ; le troisième se place devant un nom et ne change
+      jamais.
+
+      - `hada` : celui-ci, c'est (masculin) — `hada khoya`, c'est mon
+        frère.
+      - `hadi` : celle-ci, c'est (féminin) — `hadi khti`, c'est ma sœur.
+      - `had` + nom avec son article : ce, cette, ces — invariable.
+        had ddar, had lkorsi
+
+      ! Après `had`, le nom garde son article : `had ddar` (cette maison),
+      jamais « had dar ». Et `hadchi`, déjà vu au souk, veut dire « ça ».
+    points:
+      - id: g3-hada-1
+        sentence: ___ khoya.
+        answer: hada
+        options:
+          - hada
+          - hadi
+          - had
+        translation: C'est mon frère.
+        explanation: "Seul, devant un homme : hada."
+      - id: g3-hadi-1
+        sentence: ___ khti.
+        answer: hadi
+        options:
+          - hadi
+          - hada
+          - had
+        translation: C'est ma sœur.
+        explanation: "Seul, devant une femme : hadi."
+      - id: g3-had-1
+        sentence: ___ ddar kbira.
+        answer: had
+        options:
+          - had
+          - hadi
+          - hada
+        translation: Cette maison est grande.
+        explanation: "Devant un nom avec article, toujours had, même au féminin."
+      - id: g3-had-2
+        sentence: ___ lkorsi jdid.
+        answer: had
+        options:
+          - had
+          - hada
+          - hadi
+        translation: Cette chaise est neuve.
+        explanation: "Devant un nom avec article : had, invariable."
+      - id: g3-hadi-2
+        sentence: ___ mmi.
+        answer: hadi
+        options:
+          - hadi
+          - hada
+          - had
+        translation: C'est ma mère.
+        explanation: "Seul, pour présenter une femme : hadi."
+      - id: g3-hada-2
+        sentence: ___ bba.
+        answer: hada
+        options:
+          - hada
+          - hadi
+          - had
+        translation: C'est mon père.
+        explanation: "Seul, pour présenter un homme : hada."

@@ -1,0 +1,240 @@
+id: g4
+title: La possession
+subtitle: Ma maison, ta chambre, j'ai…
+icon: compass
+color: violet
+level: A1
+
+lessons:
+  - id: g4-l1
+    title: Les suffixes possessifs
+    notes: |
+      « Mon », « ton », « son » ne se placent pas devant le nom : ils se
+      **collent à la fin**, et le nom perd alors son article. `ddar`, la
+      maison ; `dari`, ma maison.
+
+      - Singulier : `dar-i` (ma), `dar-ek` (ta), `dar-o` (sa, à lui),
+        `dar-ha` (sa, à elle).
+      - Pluriel : `dar-na` (notre), `dar-kom` (votre), `dar-hom` (leur).
+      - Déjà vu sans le savoir : `smiti` (mon nom), `smitek` (ton nom),
+        `khti` (ma sœur).
+
+      ! « Son » se dit de deux façons selon le possesseur : `daro` s'il
+      s'agit d'un homme, `darha` s'il s'agit d'une femme — comme « his » et
+      « her » en anglais.
+    points:
+      - id: g4-dari
+        sentence: ___ kbira.
+        answer: dari
+        options:
+          - dari
+          - darek
+          - daro
+        translation: Ma maison est grande.
+        explanation: "« Ma » : le suffixe -i, dari."
+      - id: g4-darek
+        sentence: Fin ___?
+        answer: darek
+        options:
+          - darek
+          - dari
+          - darha
+        translation: Où est ta maison ?
+        explanation: "« Ta » : le suffixe -ek, darek."
+      - id: g4-daro
+        sentence: Karim f ___.
+        answer: daro
+        options:
+          - daro
+          - darha
+          - darek
+        translation: Karim est chez lui (dans sa maison).
+        explanation: "Le possesseur est un homme, Karim : -o, daro."
+      - id: g4-darha
+        sentence: Salma f ___.
+        answer: darha
+        options:
+          - darha
+          - daro
+          - darhom
+        translation: Salma est chez elle (dans sa maison).
+        explanation: "Le possesseur est une femme, Salma : -ha, darha."
+      - id: g4-darna
+        sentence: ___ f lmdina.
+        answer: darna
+        options:
+          - darna
+          - darkom
+          - darhom
+        translation: Notre maison est en ville.
+        explanation: "« Notre » : le suffixe -na, darna."
+      - id: g4-darhom
+        sentence: Bba w mmi f ___.
+        answer: darhom
+        options:
+          - darhom
+          - darkom
+          - darna
+        translation: Papa et maman sont chez eux.
+        explanation: "« Leur », plusieurs possesseurs absents : -hom, darhom."
+      - id: g4-darkom
+        sentence: Wach ___ kbira?
+        answer: darkom
+        options:
+          - darkom
+          - darhom
+          - darek
+        translation: Est-ce que votre maison est grande ?
+        explanation: "« Votre », à plusieurs personnes : -kom, darkom."
+
+  - id: g4-l2
+    title: Dyal, « de, à »
+    notes: |
+      À côté des suffixes, le darija a un mot pour la possession : `dyal`,
+      « de, à ». Le nom garde alors son article, et c'est `dyal` qui
+      reçoit le suffixe.
+
+      - `lbit dyali` : ma chambre (la chambre à moi).
+      - Mêmes suffixes : `dyali`, `dyalek`, `dyalo`, `dyalha`, `dyalna`,
+        `dyalkom`, `dyalhom`.
+      - Devant un nom, `dyal` reste nu : `lkhobz dyal mmi`, le pain de
+        maman.
+
+      ! Les deux tournures se valent souvent, mais `dyal` est la seule
+      possible pour beaucoup de mots, surtout ceux venus du français
+      (`ttomobil dyali`, ma voiture). Dans le doute, `dyal` ne trompe pas.
+    points:
+      - id: g4-dyali
+        sentence: Lbit ___ sghir.
+        answer: dyali
+        options:
+          - dyali
+          - dyalek
+          - dyalo
+        translation: Ma chambre est petite.
+        explanation: "« Ma » : dyal + -i, dyali."
+      - id: g4-dyalek
+        sentence: Fin ssarout ___?
+        answer: dyalek
+        options:
+          - dyalek
+          - dyali
+          - dyalha
+        translation: Où est ta clé ?
+        explanation: "« Ta » : dyal + -ek, dyalek."
+      - id: g4-dyalha
+        sentence: Lkorsi ___ jdid. (à Salma)
+        answer: dyalha
+        options:
+          - dyalha
+          - dyalo
+          - dyalhom
+        translation: Sa chaise (à elle) est neuve.
+        explanation: "La chaise est à une femme : dyal + -ha, dyalha."
+      - id: g4-dyalhom
+        sentence: L7anout ___ msdouda.
+        answer: dyalhom
+        options:
+          - dyalhom
+          - dyalkom
+          - dyalna
+        translation: Leur boutique est fermée.
+        explanation: "« Leur » : dyal + -hom, dyalhom."
+      - id: g4-dyalna
+        sentence: Ddar ___ f lmdina.
+        answer: dyalna
+        options:
+          - dyalna
+          - dyalkom
+          - dyalhom
+        translation: Notre maison est en ville.
+        explanation: "« Notre » : dyal + -na, dyalna."
+      - id: g4-dyal
+        sentence: Lkhobz ___ mmi bnin.
+        answer: dyal
+        options:
+          - dyal
+          - dyali
+          - dyalha
+        translation: Le pain de maman est délicieux.
+        explanation: "Devant un nom (mmi), dyal reste sans suffixe."
+
+  - id: g4-l3
+    title: 3nd, « avoir »
+    notes: |
+      Le darija n'a pas de verbe « avoir ». Il dit « chez moi il y a » :
+      `3nd` (chez), suivi des mêmes suffixes. `3ndi` veut dire « j'ai ».
+
+      - `3ndi`, `3ndek`, `3ndo`, `3ndha` : j'ai, tu as, il a, elle a.
+      - `3ndna`, `3ndkom`, `3ndhom` : nous avons, vous avez, ils ont.
+        3ndi wld wa7ed.
+
+      ! Pas de verbe à conjuguer : seul le suffixe change. Et `3nd`
+      s'écrit aussi `3and` — `3andi`, `3andek` —, c'est le même mot.
+    points:
+      - id: g4-3ndek
+        sentence: ___ flous? (à un ami)
+        answer: 3ndek
+        alt:
+          - 3andek
+        options:
+          - 3ndek
+          - 3ndi
+          - 3ndo
+        translation: Tu as de l'argent ?
+        explanation: "« Tu as » : 3nd + -ek, 3ndek."
+      - id: g4-3ndi
+        sentence: ___ bent wa7da.
+        answer: 3ndi
+        alt:
+          - 3andi
+        options:
+          - 3ndi
+          - 3ndek
+          - 3ndha
+        translation: J'ai une fille.
+        explanation: "« J'ai » : 3nd + -i, 3ndi."
+      - id: g4-3ndo
+        sentence: Karim ___ wld wa7ed.
+        answer: 3ndo
+        alt:
+          - 3ando
+        options:
+          - 3ndo
+          - 3ndha
+          - 3ndi
+        translation: Karim a un garçon.
+        explanation: "Karim est un homme : 3nd + -o, 3ndo."
+      - id: g4-3ndha
+        sentence: Salma ___ dar kbira.
+        answer: 3ndha
+        alt:
+          - 3andha
+        options:
+          - 3ndha
+          - 3ndo
+          - 3ndhom
+        translation: Salma a une grande maison.
+        explanation: "Salma est une femme : 3nd + -ha, 3ndha."
+      - id: g4-3ndna
+        sentence: ___ atay w sokkar.
+        answer: 3ndna
+        alt:
+          - 3andna
+        options:
+          - 3ndna
+          - 3ndkom
+          - 3ndhom
+        translation: Nous avons du thé et du sucre.
+        explanation: "« Nous avons » : 3nd + -na, 3ndna."
+      - id: g4-3ndkom
+        sentence: Wach ___ lflous?
+        answer: 3ndkom
+        alt:
+          - 3andkom
+        options:
+          - 3ndkom
+          - 3ndhom
+          - 3ndek
+        translation: Est-ce que vous avez l'argent (vous tous) ?
+        explanation: "On s'adresse à plusieurs personnes : 3nd + -kom, 3ndkom."

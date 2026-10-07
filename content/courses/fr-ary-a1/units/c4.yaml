@@ -1,0 +1,167 @@
+id: c4
+title: Vouloir et le futur
+subtitle: bgha, puis ghadi + verbe
+icon: clock
+color: sky
+level: A1
+
+lessons:
+  - id: c4-l1
+    title: Bgha, vouloir
+    notes: |
+      `bgha` est un cas à part : on l'emploie **au passé pour dire le
+      présent**. `bghit` veut dire « je veux », pas « j'ai voulu ».
+
+      - `bghit`, `bghiti`, `bgha`, `bghat` : je veux, tu veux, il veut, elle
+        veut.
+      - `bghina`, `bghitiw`, `bghaw` : nous voulons, vous voulez, ils veulent.
+        Bghit atay 3afak.
+
+      ! Au présent en `ka-`, `kanbghi` change de sens : « j'aime ».
+      `kanbghi atay`, j'aime le thé ; `bghit atay`, je veux un thé.
+    verbs:
+      - verb: bgha
+        translation: vouloir
+        tense: accompli (sens présent)
+        note: "Formes du passé, sens présent : bghit = je veux."
+        forms:
+          - id: c4-bgha-1
+            person: ana
+            answer: bghit
+          - id: c4-bgha-2
+            person: nta / nti
+            answer: bghiti
+          - id: c4-bgha-3
+            person: howa
+            answer: bgha
+          - id: c4-bgha-4
+            person: hiya
+            answer: bghat
+          - id: c4-bgha-5
+            person: 7na
+            answer: bghina
+          - id: c4-bgha-6
+            person: ntoma
+            answer: bghitiw
+            alt:
+              - bghitu
+          - id: c4-bgha-7
+            person: homa
+            answer: bghaw
+
+  - id: c4-l2
+    title: Le futur avec ghadi
+    notes: |
+      Le futur se forme avec `ghadi` devant le verbe au présent… **sans**
+      `ka-`. `kanmchi`, je vais ; `ghadi nmchi`, j'irai.
+
+      - `ghadi nmchi`, `ghadi tmchi`, `ghadi ymchi` : j'irai, tu iras, il ira.
+      - `ghadi nmchiw`, `ghadi tmchiw`, `ghadi ymchiw` : nous irons, vous
+        irez, ils iront.
+      - `ghadi` s'abrège souvent en `gha-` collé au verbe : `ghanmchi`.
+
+      ! `ghadi` peut s'accorder — `ghadya` pour une femme, `ghadyin` au
+      pluriel —, mais la forme invariable est comprise et employée partout.
+    verbs:
+      - verb: mcha
+        translation: aller
+        tense: futur
+        note: "ghadi + n-/t-/y- + mchi, sans ka- ; -w au pluriel."
+        forms:
+          - id: c4-mcha-1
+            person: ana
+            answer: ghadi nmchi
+            alt:
+              - ghanmchi
+              - ghadya nmchi
+          - id: c4-mcha-2
+            person: nta
+            answer: ghadi tmchi
+            alt:
+              - ghatmchi
+          - id: c4-mcha-3
+            person: nti
+            answer: ghadi tmchi
+            alt:
+              - ghadya tmchi
+              - ghatmchi
+          - id: c4-mcha-4
+            person: howa
+            answer: ghadi ymchi
+            alt:
+              - ghaymchi
+          - id: c4-mcha-5
+            person: hiya
+            answer: ghadi tmchi
+            alt:
+              - ghadya tmchi
+              - ghatmchi
+          - id: c4-mcha-6
+            person: 7na
+            answer: ghadi nmchiw
+            alt:
+              - ghadyin nmchiw
+              - ghanmchiw
+          - id: c4-mcha-7
+            person: ntoma
+            answer: ghadi tmchiw
+            alt:
+              - ghadyin tmchiw
+              - ghatmchiw
+          - id: c4-mcha-8
+            person: homa
+            answer: ghadi ymchiw
+            alt:
+              - ghadyin ymchiw
+              - ghaymchiw
+      - verb: kla
+        translation: manger
+        tense: futur
+        note: "ghadi + n-/t-/y- + akol, sans ka- ; -o au pluriel."
+        forms:
+          - id: c4-kla-1
+            person: ana
+            answer: ghadi nakol
+            alt:
+              - ghanakol
+              - ghadya nakol
+          - id: c4-kla-2
+            person: nta
+            answer: ghadi takol
+            alt:
+              - ghatakol
+          - id: c4-kla-3
+            person: nti
+            answer: ghadi takli
+            alt:
+              - ghadya takli
+              - ghatakli
+          - id: c4-kla-4
+            person: howa
+            answer: ghadi yakol
+            alt:
+              - ghayakol
+          - id: c4-kla-5
+            person: hiya
+            answer: ghadi takol
+            alt:
+              - ghadya takol
+              - ghatakol
+          - id: c4-kla-6
+            person: 7na
+            answer: ghadi naklo
+            alt:
+              - ghadyin naklo
+              - ghanaklo
+          - id: c4-kla-7
+            person: ntoma
+            answer: ghadi taklo
+            alt:
+              - ghadyin taklo
+              - ghataklo
+          - id: c4-kla-8
+            person: homa
+            answer: ghadi yaklo
+            alt:
+              - ghadyin yaklo
+              - ghayaklo

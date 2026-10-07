@@ -37,6 +37,8 @@ import {
 import { findVocabGap } from '../../src/content/text.ts'
 import { parseNotes } from '../../src/content/notes.ts'
 import { itemsOfCourse, itemsOfLesson, lessonsOf } from '../../src/content/course.ts'
+import { learningForm, normalizeForm } from '../../src/engine/exercises.ts'
+import { setSpellingLanguage } from '../../src/engine/spelling.ts'
 import {
   alphabetGatingRemarks,
   conjugationVerbRemarks,
@@ -215,6 +217,9 @@ function checkCoherence(course: Course, dir: string) {
   const itemOwner = new Map<string, string>()
   const lessonIds = new Set<string>()
   const problems: string[] = []
+  // Les comparaisons ci-dessous doivent replier les graphies comme le fera
+  // l'application pour ce cours (voir src/engine/spelling.ts).
+  setSpellingLanguage(course.learning)
 
   for (const { lesson, unit } of lessonsOf(course)) {
     if (lessonIds.has(lesson.id)) problems.push(`leçon "${lesson.id}" définie deux fois`)
@@ -397,6 +402,17 @@ function checkGrammarLesson(lesson: GrammarLesson, problems: string[]) {
     }
     if (point.options.length > 0 && !point.options.includes(point.answer)) {
       problems.push(`point "${point.id}" : la réponse "${point.answer}" ne figure pas dans les options proposées`)
+    }
+    // Deux options que la saisie confondrait — `ddar` et `dar` si l'on
+    // repliait aussi la gémination initiale — compteraient toutes deux justes.
+    const folded = new Map<string, string>()
+    for (const option of point.options) {
+      const key = learningForm(option)
+      const twin = folded.get(key)
+      if (twin !== undefined && normalizeForm(twin) !== normalizeForm(option)) {
+        problems.push(`point "${point.id}" : les options "${twin}" et "${option}" se confondent à la saisie`)
+      }
+      folded.set(key, option)
     }
     if (point.options.length === 1) {
       problems.push(`point "${point.id}" : une seule option proposée, il en faut au moins 2 ou aucune`)

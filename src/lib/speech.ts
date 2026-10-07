@@ -33,20 +33,25 @@ import type { Vocab } from '@/content/schema'
  * anglaise ne donnerait pas un accent approximatif mais du charabia : la
  * langue doit suivre le cours, pas être figée.
  */
-const VOICES: Record<string, string> = {
+const VOICES: Record<string, string | null> = {
   en: 'en-US',
   ru: 'ru-RU',
   es: 'es-ES',
+  // Aucune voix darija n'existe dans les moteurs de synthèse, et le cours
+  // s'écrit en transcription latine : une voix arabe standard la lirait de
+  // travers, une voix française pire encore. Mieux vaut se taire — `null`
+  // retire le bouton d'écoute et les exercices d'écoute pour ce cours.
+  ary: null,
 }
 
 const FALLBACK = 'en-US'
-let LANG = FALLBACK
+let LANG: string | null = FALLBACK
 let LEARNING = 'en'
 let LEARNING_NAME = 'anglais'
 
 /** Appelé au chargement d'un cours (voir `CourseProvider`). */
 export function setSpokenLanguage(learning: string): void {
-  LANG = VOICES[learning] ?? FALLBACK
+  LANG = learning in VOICES ? VOICES[learning]! : FALLBACK
   LEARNING = learning
 }
 
@@ -142,14 +147,19 @@ function webVoices(): SpeechSynthesis | null {
   return window.speechSynthesis ?? null
 }
 
+const engineAvailable: boolean = native || webVoices() !== null
+
 /**
  * Y a-t-il une chance qu'on puisse parler ?
  *
  * Sur l'appareil on répond oui sans interroger le moteur : la vérification
  * est asynchrone alors que l'affichage du bouton ne l'est pas, et un bouton
  * qui reste muet une fois sur cent vaut mieux qu'un bouton jamais affiché.
+ * Seule exception : une langue qui n'a pas de voix du tout (voir `VOICES`).
  */
-export const canSpeak: boolean = native || webVoices() !== null
+export function canSpeak(): boolean {
+  return engineAvailable && LANG !== null
+}
 
 /**
  * Sur Android, l'écran système ne s'ouvre que depuis l'app native — dans le
@@ -190,15 +200,17 @@ function loadWebVoices(synth: SpeechSynthesis): Promise<SpeechSynthesisVoice[]> 
  * elle sert à diagnostiquer, dans le profil, pourquoi le bouton reste muet.
  */
 export async function isSpokenLanguageInstalled(): Promise<boolean> {
+  if (LANG === null) return false
+  const lang = LANG
   try {
     if (native) {
-      const { supported } = await TextToSpeech.isLanguageSupported({ lang: LANG })
+      const { supported } = await TextToSpeech.isLanguageSupported({ lang })
       return supported
     }
     const synth = webVoices()
     if (!synth) return false
     const voices = await loadWebVoices(synth)
-    const prefix = LANG.split('-')[0]!.toLowerCase()
+    const prefix = lang.split('-')[0]!.toLowerCase()
     return voices.some((voice) => voice.lang.toLowerCase().startsWith(prefix))
   } catch {
     return false
@@ -224,14 +236,15 @@ export async function installSpokenLanguage(): Promise<void> {
  */
 export async function speak(text: string): Promise<void> {
   const trimmed = text.trim()
-  if (trimmed.length === 0) return
+  if (trimmed.length === 0 || LANG === null) return
+  const lang = LANG
 
   try {
     if (native) {
       // Couper d'abord : deux appuis rapprochés se chevaucheraient, et le
       // moteur Android empile les demandes au lieu de les remplacer.
       await TextToSpeech.stop().catch(() => {})
-      await TextToSpeech.speak({ text: trimmed, lang: LANG, rate: 0.95 })
+      await TextToSpeech.speak({ text: trimmed, lang, rate: 0.95 })
       return
     }
 
@@ -239,7 +252,7 @@ export async function speak(text: string): Promise<void> {
     if (!synth) return
     synth.cancel()
     const utterance = new SpeechSynthesisUtterance(trimmed)
-    utterance.lang = LANG
+    utterance.lang = lang
     utterance.rate = 0.95
     synth.speak(utterance)
   } catch {

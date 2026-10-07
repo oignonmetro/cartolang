@@ -1,0 +1,186 @@
+id: v7
+title: Décrire, se sentir
+subtitle: Les adjectifs du quotidien
+icon: people
+color: coral
+level: A1
+
+lessons:
+  - id: v7-l1
+    title: Décrire
+    notes: |
+      L'adjectif se place **après** le nom, comme le plus souvent en
+      français, et il n'y a pas de verbe « être » au présent : `lbit
+      sghir`, la chambre est petite.
+
+      - `mzyan` (bon, bien) et `khayb` (mauvais, laid) jugent de tout.
+      - `kbir` / `sghir` : grand / petit en taille ou en âge ; `twil` :
+        grand de stature, long.
+      - `zwin` : beau, joli — on l'entend autant que `mzyan`.
+
+      ! Devant un nom féminin, l'adjectif prend un `-a` : `ddar kbira`. On
+      reste ici au masculin ; le féminin est l'objet de la grammaire (g3).
+    vocab:
+      - id: ary-mzyan
+        term: mzyan
+        translation: bon
+        alt:
+          - bien
+          - bonne
+        pos: adjectif
+        example:
+          text: Lkhobz mzyan.
+          translation: Le pain est bon.
+      - id: ary-khayb
+        term: khayb
+        translation: mauvais
+        alt:
+          - laid
+          - moche
+        pos: adjectif
+        example:
+          text: Ljaw khayb lyoum.
+          translation: Il fait mauvais aujourd'hui.
+      - id: ary-kbir
+        term: kbir
+        translation: grand
+        alt:
+          - gros
+          - âgé
+        pos: adjectif
+        example:
+          text: Ssouq kbir.
+          translation: Le marché est grand.
+      - id: ary-sghir
+        term: sghir
+        translation: petit
+        alt:
+          - jeune
+        pos: adjectif
+        example:
+          text: Lbit sghir.
+          translation: La chambre est petite.
+      - id: ary-jdid
+        term: jdid
+        translation: nouveau
+        alt:
+          - neuf
+        pos: adjectif
+        example:
+          text: Lkorsi jdid.
+          translation: La chaise est neuve.
+      - id: ary-9dim
+        term: 9dim
+        translation: vieux
+        alt:
+          - ancien
+        pos: adjectif
+        hint: Pour une chose ; une personne âgée se dit plutôt « kbir ».
+        example:
+          text: Lbab 9dim.
+          translation: La porte est vieille.
+      - id: ary-zwin
+        term: zwin
+        translation: beau
+        alt:
+          - joli
+        pos: adjectif
+        example:
+          text: Jjame3 zwin bzzaf.
+          translation: La mosquée est très belle.
+      - id: ary-twil
+        term: twil
+        translation: long
+        alt:
+          - grand de taille
+        pos: adjectif
+        example:
+          text: Khoya twil.
+          translation: Mon frère est grand.
+
+  - id: v7-l2
+    title: Comment je me sens
+    notes: |
+      Pour dire comment on va, on accole simplement le pronom et
+      l'adjectif : `ana 3iyan`, je suis fatigué. Pas de verbe, pas de
+      « suis ».
+
+      - `ji3an` (j'ai faim) et `3atchan` (j'ai soif) sont des adjectifs :
+        on **est** affamé, on **est** assoiffé.
+      - `skhoun` / `bared` : chaud / froid, pour une boisson, la météo ou
+        une personne.
+
+      ! Le `3` de `3iyan` et `3atchan` est le son serré de la gorge (ع) ;
+      sans lui, le mot devient méconnaissable.
+    vocab:
+      - id: ary-3iyan
+        term: 3iyan
+        translation: fatigué
+        alt:
+          - fatiguée
+          - crevé
+        pos: adjectif
+        example:
+          text: Ana 3iyan bzzaf.
+          translation: Je suis très fatigué.
+      - id: ary-fer7an
+        term: fer7an
+        translation: content
+        alt:
+          - heureux
+          - contente
+        pos: adjectif
+        example:
+          text: Bba fer7an lyoum.
+          translation: Papa est content aujourd'hui.
+      - id: ary-mrid
+        term: mrid
+        translation: malade
+        pos: adjectif
+        example:
+          text: Khoya mrid, f sbitar.
+          translation: Mon frère est malade, à l'hôpital.
+      - id: ary-ji3an
+        term: ji3an
+        translation: affamé
+        alt:
+          - j'ai faim
+          - qui a faim
+        pos: adjectif
+        example:
+          text: Ana ji3an, bghit nakol.
+          translation: J'ai faim, je veux manger.
+      - id: ary-3atchan
+        term: 3atchan
+        translation: assoiffé
+        alt:
+          - j'ai soif
+          - qui a soif
+        pos: adjectif
+        example:
+          text: Ana 3atchan, bghit lma.
+          translation: J'ai soif, je veux de l'eau.
+      - id: ary-skhoun
+        term: skhoun
+        translation: chaud
+        pos: adjectif
+        example:
+          text: Atay skhoun bzzaf.
+          translation: Le thé est très chaud.
+      - id: ary-bared
+        term: bared
+        translation: froid
+        pos: adjectif
+        example:
+          text: Lma bared.
+          translation: L'eau est froide.
+      - id: ary-mcheghoul
+        term: mcheghoul
+        translation: occupé
+        alt:
+          - occupée
+          - pris
+        pos: adjectif
+        example:
+          text: Smi7li, ana mcheghoul daba.
+          translation: Pardon, je suis occupé maintenant.
