@@ -280,9 +280,12 @@ function SessionRunner({
             transition={{ type: 'spring', stiffness: 200, damping: 26 }}
           />
         </div>
-        <span className="w-12 text-right text-sm font-extrabold text-ink-faint">
-          {attempt.seen.size}/{graded}
-        </span>
+        {/* Une lecture seule n'a rien à compter : « 0/0 » ferait croire à un bug. */}
+        {graded > 0 && (
+          <span className="w-12 text-right text-sm font-extrabold text-ink-faint">
+            {attempt.seen.size}/{graded}
+          </span>
+        )}
         {/* Seul repère de ce qui vient de se passer : sans lui, les
             exercices d'écoute sautés silencieusement (voir
             `mustSkipListening`) donneraient l'impression d'un bug plutôt que
@@ -341,7 +344,9 @@ function SessionRunner({
                   onCantListen={cantListen}
                 />
               )}
-              {current.kind === 'rule' && <RuleNote exercise={current} onNext={() => advance(false)} />}
+              {current.kind === 'rule' && (
+                <RuleNote exercise={current} readingOnly={graded === 0} onNext={() => advance(false)} />
+              )}
               {current.kind === 'grammar-gap' && (
                 <GrammarGap exercise={current} onAnswer={(correct) => answer(current, correct)} />
               )}

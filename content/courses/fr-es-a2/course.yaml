@@ -7,14 +7,16 @@
 #                  communication, v6 loisirs et sport (piste complète)
 #   grammaire    — g1 comparatifs et superlatifs, g2 futur proche (ir a +
 #                  infinitivo), g3 pronoms compléments (me/te/lo/la…),
-#                  g4 por/para, g5 subordonnées avec que (piste complète)
+#                  g4 por/para, g5 subordonnées avec que, g6 périphrases
+#                  fréquentes
 #   conjugaison  — c1 pretérito perfecto (haber + participe, réguliers),
 #                  c2 pretérito perfecto (participes irréguliers),
 #                  c3 pretérito imperfecto, c4 pretérito indefinido
 #                  (réguliers), c5 pretérito indefinido (irréguliers),
 #                  c6 gérondif et estar + gerundio, c7 impératif affirmatif
 #
-# c4 à c7 sont des rappels seuls, sans exercices : ces points de l'A2 (PCIC)
+# grammaire g6 (périphrases fréquentes : empezar a, acabar de, volver a,
+# tener que, hay que, poder) et conjugaison c4 à c7 sont des rappels seuls, sans exercices : ces points de l'A2 (PCIC)
 # manquaient au cours, et les niveaux C1 et C2 s'appuient dessus. Leurs
 # exercices restent à écrire.
 
@@ -56,6 +58,7 @@ tracks:
       - g3
       - g4
       - g5
+      - g6
 
   - id: conjugaison
     title: Conjugaison

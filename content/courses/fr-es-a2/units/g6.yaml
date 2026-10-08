@@ -1,0 +1,43 @@
+id: g6
+title: Las perífrasis frecuentes
+subtitle: Empezar a, acabar de, tener que
+icon: compass
+color: violet
+level: A2
+
+lessons:
+  - id: g6-l1
+    title: "Empezar a, acabar de, volver a"
+    notes: |
+      Comme `ir a` + infinitif (g2), d'autres verbes suivis d'une
+      préposition et d'un infinitif indiquent **où en est** l'action : son
+      début, sa fin toute récente, sa répétition. Seul le premier verbe se
+      conjugue.
+
+      - Empezar a + infinitif : commencer à. `empiezo`, `empiezas` (e → ie).
+        Empiezo a entender. Je commence à comprendre.
+      - Acabar de + infinitif : venir de, l'action vient juste de finir.
+        Acabo de llegar. Je viens d'arriver.
+      - Volver a + infinitif : refaire, « re- ». `vuelvo`, `vuelves` (o → ue).
+        Vuelvo a llamar mañana. Je rappelle demain.
+
+      ! `acabo de comer` ne veut pas dire « je finis de manger » mais « je
+      viens de manger ». Le français « venir de » ne se traduit jamais par
+      `venir de`.
+
+  - id: g6-l2
+    title: "Tener que, hay que, poder"
+    notes: |
+      Pour dire l'**obligation** et la **possibilité**, l'espagnol emploie
+      trois verbes suivis de l'infinitif.
+
+      - Tener que + infinitif : obligation personnelle, « devoir ».
+        Tengo que trabajar mañana. Je dois travailler demain.
+      - Hay que + infinitif : obligation générale, impersonnelle, « il faut ».
+        Hay que reservar antes. Il faut réserver à l'avance.
+      - Poder + infinitif : pouvoir. `puedo`, `puedes` (o → ue).
+        ¿Puedo abrir la ventana? Je peux ouvrir la fenêtre ?
+      - Les pronoms se placent devant le verbe conjugué ou après l'infinitif : `lo tengo que hacer` ou `tengo que hacerlo`.
+
+      ! Avec `hay que`, le pronom se place toujours après l'infinitif :
+      `hay que hacerlo`, jamais « lo hay que hacer ».

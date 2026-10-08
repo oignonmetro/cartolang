@@ -50,7 +50,20 @@ const TONES = {
   },
 } as const
 
-export function RuleNote({ exercise, onNext }: { exercise: RuleExercise; onNext: () => void }) {
+/**
+ * `readingOnly` : la session ne contient que ce rappel (leçon sans exercices,
+ * voir `isReadingOnly`). Rien ne suit, le bouton clôt donc la lecture au lieu
+ * d'annoncer une pratique.
+ */
+export function RuleNote({
+  exercise,
+  onNext,
+  readingOnly = false,
+}: {
+  exercise: RuleExercise
+  onNext: () => void
+  readingOnly?: boolean
+}) {
   const blocks = parseNotes(exercise.notes)
   const tone = TONES[exercise.topic]
 
@@ -126,7 +139,7 @@ export function RuleNote({ exercise, onNext }: { exercise: RuleExercise; onNext:
 
       <div className="mt-auto w-full max-w-lg self-center pt-4">
         <Button block tone={tone.button} onClick={onNext}>
-          C'est parti
+          {readingOnly ? 'Terminer la lecture' : "C'est parti"}
         </Button>
       </div>
     </div>
