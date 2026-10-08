@@ -270,6 +270,28 @@ le sélecteur avant d'avoir leur contenu ; aujourd'hui les trois cours sont
 remplis, mais le mécanisme reste disponible pour ouvrir un nouveau niveau
 avant de l'écrire.
 
+## Publier le cours avant les exercices
+
+Une leçon de grammaire ou de conjugaison peut ne porter que son rappel :
+`notes` sans `points` (ou sans `verbs`). Elle se lit sans se noter, et sa
+lecture suffit à la valider ; le parcours de l'unité ne lui ajoute ni
+révision ni consolidation, et une unité qui ne contient que de telles leçons
+n'a pas de séance finale. C'est ainsi que les niveaux C1 et C2 d'espagnol
+ont publié leur cours avant leurs exercices.
+
+```yaml
+- id: g1-l1
+  title: Digan lo que digan
+  notes: |
+    …
+  # pas de points : exercices à écrire
+```
+
+La validation exige alors le rappel, et compte ces leçons dans une remarque
+par cours (« N leçon(s) en rappel seul, exercices à écrire »). Ajouter les
+exercices plus tard ne renomme aucune étape : les identifiants de révision
+gardent l'indice de leur leçon.
+
 ## Le cours proposé par défaut
 
 Un seul cours devrait porter `default: true` dans son `course.yaml` : c'est

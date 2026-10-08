@@ -3,7 +3,7 @@ import { Navigate, useNavigate, useParams } from 'react-router-dom'
 import { useCourse } from '@/content/CourseProvider'
 import { buildLessonSession, lessonProgress } from '@/engine/exercises'
 import { seedFrom } from '@/engine/rng'
-import { findLesson } from '@/content/course'
+import { findLesson, isReadingOnly } from '@/content/course'
 import { lessonDifficulty, type SessionOutcome } from '@/engine/progress'
 import { buildUnitPath, nextNodeAfter, sectionRank } from '@/engine/unitPath'
 import { useProgress } from '@/store/progressStore'
@@ -32,6 +32,7 @@ function LessonSession({ lessonId }: { lessonId: string }) {
   const navigate = useNavigate()
   const { course } = useCourse()
   const finishLesson = useProgress((state) => state.finishLesson)
+  const skipTo = useProgress((state) => state.skipTo)
 
   const entry = useMemo(() => findLesson(course, lessonId), [course, lessonId])
 
@@ -110,6 +111,26 @@ function LessonSession({ lessonId }: { lessonId: string }) {
       exercises={exercises}
       onQuit={backHome}
       onFinish={(outcome, peakTier) => {
+        if (isReadingOnly(entry.lesson)) {
+          // Un rappel seul se lit sans se noter : sa lecture le valide, et
+          // un écran de score n'aurait rien à afficher. On enchaîne donc
+          // directement sur la suite du parcours.
+          skipTo(course.id, [lessonId], [])
+          const { lessons, steps } = useProgress.getState()
+          const next = nextNodeAfter(
+            buildUnitPath(unit, lessons[course.id] ?? {}, steps[course.id] ?? {}),
+            lessonId,
+          )
+          navigate(
+            next && next.status !== 'locked'
+              ? next.lesson
+                ? `/lecon/${next.lesson.id}`
+                : `/etape/${unit.id}/${next.id}`
+              : '/',
+            { replace: true },
+          )
+          return
+        }
         const result = finishLesson(course.id, lessonId, outcome)
         setFinished({ outcome, peakTier, ...result })
       }}

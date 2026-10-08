@@ -1,5 +1,5 @@
 import type { ItemLocation } from '@/content/course'
-import { lessonCountLabel } from '@/content/course'
+import { isReadingOnly, itemsOfUnit, lessonCountLabel } from '@/content/course'
 import type { Lesson, PracticeItem, Unit } from '@/content/schema'
 import { dueCards, type CardState } from './srs'
 import { levelOf, type LessonProgressMap } from './progress'
@@ -57,12 +57,19 @@ export function stepKey(unitId: string, nodeId: string): string {
  * s'ouvre par l'entraînement. Rien n'a le temps de s'oublier entre deux
  * leçons. L'unité se clôt par une séance finale unique, bilan complet une
  * fois toutes les leçons vues.
+ *
+ * Une leçon qui n'est qu'un rappel (`isReadingOnly`) n'a rien à réviser : elle
+ * entre seule dans le parcours, sans révision ni consolidation, et une unité
+ * qui n'en contient que de telles n'a pas de séance finale. Les identifiants
+ * des étapes gardent l'indice de leur leçon, pour que l'arrivée des exercices
+ * n'en renomme aucune.
  */
 function layout(unit: Unit): { id: string; kind: UnitNodeKind; lesson: Lesson | null; cycle: number }[] {
   const nodes: { id: string; kind: UnitNodeKind; lesson: Lesson | null; cycle: number }[] = []
 
   unit.lessons.forEach((lesson, index) => {
     nodes.push({ id: lesson.id, kind: 'lesson', lesson, cycle: index })
+    if (isReadingOnly(lesson)) return
     nodes.push({ id: `review-${index}`, kind: 'review', lesson: null, cycle: index })
     nodes.push({
       id: `consolidate-${index}`,
@@ -71,7 +78,9 @@ function layout(unit: Unit): { id: string; kind: UnitNodeKind; lesson: Lesson | 
       cycle: index,
     })
   })
-  nodes.push({ id: 'final', kind: 'final', lesson: null, cycle: unit.lessons.length })
+  if (itemsOfUnit(unit).length > 0) {
+    nodes.push({ id: 'final', kind: 'final', lesson: null, cycle: unit.lessons.length })
+  }
   return nodes
 }
 

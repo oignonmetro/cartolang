@@ -58,6 +58,14 @@ export function itemsOfLesson(lesson: Lesson): PracticeItem[] {
   }
 }
 
+/**
+ * Leçon qui ne porte que son rappel de cours : rien à pratiquer, donc rien à
+ * noter ni à réviser. Elle se lit, et sa lecture suffit à la valider.
+ */
+export function isReadingOnly(lesson: Lesson): boolean {
+  return itemsOfLesson(lesson).length === 0
+}
+
 export function itemsOfUnit(unit: Unit): PracticeItem[] {
   return unit.lessons.flatMap(itemsOfLesson)
 }
@@ -112,6 +120,7 @@ export function countLabel(kind: LessonKind, count: number): string {
  */
 export function lessonCountLabel(lesson: Lesson): string {
   const items = itemsOfLesson(lesson)
+  if (items.length === 0) return 'Rappel de cours'
   if (lesson.kind === 'vocab' && lesson.vocab.every((entry) => entry.pos === 'lettre')) {
     return `${items.length} ${items.length > 1 ? 'lettres' : 'lettre'}`
   }

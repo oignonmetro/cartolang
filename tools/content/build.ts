@@ -36,7 +36,7 @@ import {
 } from '../../src/content/schema.ts'
 import { findVocabGap } from '../../src/content/text.ts'
 import { parseNotes } from '../../src/content/notes.ts'
-import { itemsOfCourse, itemsOfLesson, lessonsOf } from '../../src/content/course.ts'
+import { isReadingOnly, itemsOfCourse, itemsOfLesson, lessonsOf } from '../../src/content/course.ts'
 import { learningForm } from '../../src/engine/exercises.ts'
 import { setSpellingLanguage } from '../../src/engine/spelling.ts'
 import {
@@ -217,6 +217,7 @@ function checkCoherence(course: Course, dir: string) {
   const itemOwner = new Map<string, string>()
   const lessonIds = new Set<string>()
   const problems: string[] = []
+  let readingOnly = 0
   // Les comparaisons ci-dessous doivent replier les graphies comme le fera
   // l'application pour ce cours (voir src/engine/spelling.ts).
   setSpellingLanguage(course.learning)
@@ -231,8 +232,22 @@ function checkCoherence(course: Course, dir: string) {
 
     checkNotesMarkup(lesson.id, 'notes' in lesson ? lesson.notes : undefined)
     if (lesson.kind === 'vocab') checkVocabLesson(lesson, problems, course.learning)
+
+    // Une leçon de grammaire ou de conjugaison peut ne porter que son rappel,
+    // en attendant ses exercices — mais alors le rappel est tout ce qu'elle a.
+    if (lesson.kind !== 'vocab' && isReadingOnly(lesson)) {
+      if (!lesson.notes?.trim()) problems.push(`leçon "${lesson.id}" : ni exercice ni rappel de cours`)
+      readingOnly += 1
+      continue
+    }
     if (lesson.kind === 'grammar') checkGrammarLesson(lesson, problems)
     if (lesson.kind === 'conjugation') checkConjugationLesson(lesson, problems, course.level ?? '')
+  }
+
+  // Une remarque par cours plutôt qu'une par leçon : c'est un chantier en
+  // cours, pas une anomalie à examiner leçon par leçon.
+  if (readingOnly > 0) {
+    warn(`cours "${course.id}"`, `${readingOnly} leçon(s) en rappel seul, exercices à écrire`)
   }
 
   for (const { lesson } of lessonsOf(course)) {

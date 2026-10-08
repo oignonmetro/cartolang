@@ -125,16 +125,23 @@ export const vocabLessonSchema = z.object({
   vocab: z.array(vocabSchema).min(1),
 })
 
+/*
+ * Une leçon de grammaire ou de conjugaison peut ne porter que son rappel
+ * (`notes`), sans point ni verbe : c'est ainsi qu'un niveau publie son cours
+ * avant ses exercices. Elle se lit sans se noter, et le parcours de l'unité
+ * ne lui ajoute ni révision ni consolidation (voir `isReadingOnly`). Le
+ * compilateur exige alors le rappel, faute de quoi la leçon serait vide.
+ */
 export const grammarLessonSchema = z.object({
   ...lessonBase,
   kind: z.literal('grammar'),
-  points: z.array(grammarPointSchema).min(1),
+  points: z.array(grammarPointSchema).default([]),
 })
 
 export const conjugationLessonSchema = z.object({
   ...lessonBase,
   kind: z.literal('conjugation'),
-  verbs: z.array(conjugationVerbSchema).min(1),
+  verbs: z.array(conjugationVerbSchema).default([]),
 })
 
 export const lessonSchema = z.discriminatedUnion('kind', [

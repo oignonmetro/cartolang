@@ -382,7 +382,9 @@ function UnitCard({
           <span className="text-base leading-tight font-extrabold">{unit.title}</span>
           {subtitle && <span className="mt-0.5 block text-xs text-ink-soft">{subtitle}</span>}
           <span className={`mt-0.5 block text-xs font-bold ${done.count > 0 ? tone.text : 'text-ink-faint'}`}>
-            {done.count} / {done.total} étapes · {countLabel(unit.kind, mastery.total)}
+            {done.count} / {done.total} étapes ·{' '}
+            {/* Une unité de rappels seuls n'a encore rien à pratiquer : « 0 règle » se lirait comme un oubli. */}
+            {mastery.total === 0 ? 'rappels de cours' : countLabel(unit.kind, mastery.total)}
           </span>
         </span>
         <span className="-rotate-180 text-ink-faint">

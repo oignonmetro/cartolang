@@ -889,6 +889,11 @@ describe('session de grammaire', () => {
     expect(kinds(buildLessonSession(GRAMMAR, 1))).not.toContain('rule')
   })
 
+  it('réduit une leçon de rappel seul à son rappel', () => {
+    const reading = { ...GRAMMAR, points: [] }
+    expect(kinds(buildLessonSession(reading, 0))).toEqual(['rule'])
+  })
+
   it('teste chaque point de la leçon', () => {
     const points = buildLessonSession(GRAMMAR, 1).flatMap(itemIdsOf)
     expect(new Set(points)).toEqual(new Set(['p1', 'p2', 'p3']))

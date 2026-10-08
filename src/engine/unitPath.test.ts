@@ -88,6 +88,41 @@ describe('composition du parcours', () => {
   it('regroupe chaque leçon avec sa pratique, et isole la séance finale', () => {
     expect(buildUnitPath(U2, {}, {}).map((node) => node.cycle)).toEqual([0, 0, 0, 1, 1, 1, 2])
   })
+  it('laisse seules les leçons de rappel, sans révision ni consolidation', () => {
+    const mixed: Unit = {
+      ...U2,
+      kind: 'grammar',
+      lessons: [
+        { kind: 'grammar', id: 'r1', title: 'Rappel', notes: 'Une règle.', points: [] },
+        {
+          kind: 'grammar',
+          id: 'p1',
+          title: 'Pratique',
+          points: [{ id: 'p1-1', sentence: 'A ___ b', answer: 'x', alt: [], options: [] }],
+        },
+      ],
+    }
+    const path = buildUnitPath(mixed, {}, {})
+    expect(kinds(path)).toEqual(['lesson', 'lesson', 'review', 'drill', 'final'])
+    // L'indice de la leçon reste dans l'identifiant : les exercices ajoutés
+    // plus tard ne renommeront pas les étapes déjà franchies.
+    expect(path.map((node) => node.id)).toEqual(['r1', 'p1', 'review-1', 'consolidate-1', 'final'])
+    expect(path[0].subtitle).toBe('Rappel de cours')
+  })
+
+  it('n’ajoute pas de séance finale à une unité de rappels seuls', () => {
+    const reading: Unit = {
+      ...U2,
+      kind: 'conjugation',
+      lessons: [
+        { kind: 'conjugation', id: 'r1', title: 'Un', notes: 'Une règle.', verbs: [] },
+        { kind: 'conjugation', id: 'r2', title: 'Deux', notes: 'Une autre.', verbs: [] },
+      ],
+    }
+    const path = buildUnitPath(reading, { r1: done }, {})
+    expect(kinds(path)).toEqual(['lesson', 'lesson'])
+    expect(statuses(path)).toEqual(['done', 'available'])
+  })
 })
 
 describe('rang d’une leçon dans son unité', () => {
