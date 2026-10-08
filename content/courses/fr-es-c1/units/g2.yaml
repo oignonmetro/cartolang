@@ -1,0 +1,47 @@
+id: g2
+title: Las condicionales marcadas
+subtitle: Como me engañes, en caso de que, a menos que
+icon: compass
+color: violet
+level: C1
+
+lessons:
+  - id: g2-l1
+    title: "Como + subjonctif : la condition redoutée"
+    notes: |
+      En tête de phrase et suivi du **subjonctif**, `como` n'est plus causal :
+      il pose une condition **qu'on ne souhaite pas**. Selon le contexte, la
+      phrase sonne comme une **menace** ou comme une **crainte**.
+
+      - Menace : la suite annonce une sanction.
+        Como me des plantón, te vas a enterar. Si tu me poses un lapin, tu vas m'entendre.
+      - Crainte, sans menace.
+        Como me echen del trabajo, no sé qué voy a hacer. Si on me renvoie, je ne sais pas ce que je vais faire.
+      - Suspendue : la menace reste implicite, la phrase s'arrête.
+        ¡Como vuelvas a llegar tarde…! Si jamais tu arrives encore en retard…
+      - Indicatif = cause : `como llueve, me quedo` (comme il pleut, je reste). Le mode seul sépare les deux sens.
+
+      ! Jamais de futur ni de conditionnel après ce `como` : « como me
+      echarán » est fautif.
+
+  - id: g2-l2
+    title: "A menos que, en caso de que, et les conditions sans si"
+    notes: |
+      La condition peut s'exprimer sans `si`, par des locutions qui exigent
+      le subjonctif, par une forme non personnelle, ou par un impératif.
+
+      - A menos que, excepto que : « à moins que » ; toujours le __subjonctif__.
+        Iremos a pie, a menos que llueva. Nous irons à pied, à moins qu'il ne pleuve.
+      - Menos si, excepto si : même sens, mais `si` impose l'__indicatif__.
+        Iremos a pie, menos si llueve.
+      - En caso de que + subjonctif : condition éventuelle, registre soigné.
+        En caso de que no pueda venir, avíseme. Au cas où vous ne pourriez pas venir, prévenez-moi.
+      - En caso de + nom ou infinitif : formule des consignes et des notices. `en caso de duda`, `en caso de incendio`.
+      - Gérondif en tête : la manière vaut condition.
+        Comiendo más despacio, engordarás menos. En mangeant plus lentement, tu grossiras moins.
+      - Phrase suspendue, au subjonctif imparfait : le souhait qu'on n'ose pas finir.
+        ¡Ay, si me llamara…! Ah, s'il pouvait m'appeler…
+
+      ! À l'oral, le présent de l'indicatif remplace souvent le subjonctif :
+      `si llegas un minuto antes, lo habrías visto`. À comprendre, pas à
+      imiter à l'écrit.

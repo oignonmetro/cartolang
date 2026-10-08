@@ -1,0 +1,44 @@
+id: c3
+title: El subjuntivo independiente
+subtitle: Así te lleves un susto. ¡Quién tuviera tus años!
+icon: clock
+color: sky
+level: C1
+
+lessons:
+  - id: c3-l1
+    title: "Así te lleves un susto, ¡que te calles!"
+    notes: |
+      Le subjonctif n'a pas toujours besoin d'un verbe principal. Au C1, il
+      sert seul à **maudire** et à **ordonner avec insistance**.
+
+      - Así + subjonctif présent : souhait malveillant, « puisses-tu… ».
+        Así te lleves un buen susto. J'espère que tu vas avoir une bonne frayeur.
+      - Dans les malédictions figées : `¡así te parta un rayo!` (que la foudre t'emporte !).
+      - Que + subjonctif présent, sans impératif préalable : ordre sec, souvent agacé.
+        ¡Que te calles de una vez! Tais-toi, à la fin !
+      - À distinguer du B2, où `¡que te vayas!` répète un ordre déjà donné : ici, rien n'a été dit avant.
+
+      ! Ce `así` n'a rien de « ainsi » : suivi du subjonctif en tête de
+      phrase, il exprime le souhait. `así lo maten` (même si on le tue)
+      relève lui de la concession, au C2.
+
+  - id: c3-l2
+    title: "¡Quién tuviera tus años! : le souhait impossible"
+    notes: |
+      `quién` + subjonctif imparfait à la 3e personne du singulier exprime
+      un **regret** : « ah, si je pouvais… ». Le locuteur parle de lui, mais
+      le verbe reste à la 3e personne.
+
+      - Quién + imparfait du subjonctif : souhait irréalisable dans le présent.
+        ¡Quién tuviera tus años! Ah, si j'avais ton âge !
+      - Au plus-que-parfait, une formule figée de surprise, sans regret.
+        ¡Quién lo hubiera dicho! Qui l'eût cru !
+      - Qué más quisiera yo : « je ne demanderais pas mieux ».
+        ¿Vacaciones? ¡Qué más quisiera yo! Des vacances ? Je ne demanderais pas mieux !
+      - Ojalá reste l'outil neutre ; `quién` ajoute l'envie et la nostalgie.
+
+      ! Le verbe reste à la 3e personne du singulier, accordé avec `quién`,
+      même quand on parle de soi ou d'un groupe : « ¡quién tuviéramos
+      veinte años! » est fautif. Les formes en `-se` conviennent aussi :
+      `¡quién tuviese tus años!`.

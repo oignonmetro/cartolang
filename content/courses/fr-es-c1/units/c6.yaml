@@ -1,0 +1,43 @@
+id: c6
+title: El imperativo expresivo
+subtitle: Mira que eres terco. Abre la caja y verás.
+icon: clock
+color: sky
+level: C1
+
+lessons:
+  - id: c6-l1
+    title: "Mira que eres terco, ¡dale!, anda… : impératifs figés"
+    notes: |
+      Certains impératifs ont perdu leur sens propre : `mira` ne demande plus
+      de regarder, `anda` de marcher. Ils colorent la phrase d'un **jugement**,
+      d'une **irritation** ou d'une **prière**.
+
+      - Mira que + indicatif : souligne une qualité, souvent un défaut.
+        ¡Mira que eres terco! Qu'est-ce que tu peux être têtu !
+      - ¡Dale! (ou `¡dale que dale!`) : agacement devant l'insistance.
+        Y él, dale con lo mismo. Et lui, toujours à ressasser la même chose.
+      - Anda… : prière insistante, adoucie.
+        Anda, ve tú, que yo estoy cansado. Allez, vas-y, toi, moi je suis fatigué.
+      - Ironie : `¡mira qué bien!`, `¡vaya, vaya!`, `¡mira tú!` saluent une mauvaise nouvelle.
+      - Renfort : l'ordre est répété ou appuyé par `he dicho`.
+        Vete ya, he dicho. Va-t'en, j'ai dit.
+
+      ! `mira que` n'introduit pas un ordre : le verbe qui suit est à
+      l'**indicatif** (`eres`), pas au subjonctif.
+
+  - id: c6-l2
+    title: "Abre la caja y verás : l'impératif conditionnel"
+    notes: |
+      Suivi de `y` et d'une seconde proposition, l'impératif devient une
+      **condition** : « si tu fais ceci, il arrivera cela ». Le futur ou le
+      présent de la seconde partie annonce la conséquence.
+
+      - Impératif + y + futur : condition et conséquence, souvent une promesse.
+        Abre la caja y verás qué sorpresa. Ouvre la boîte, et tu verras quelle surprise.
+      - Même structure, conseil implicite.
+        Pregúntale a él y saldrás de dudas. Demande-lui, et tu en auras le cœur net.
+      - Équivaut à `si` + présent : `si abres la caja, verás…`.
+
+      ! La seconde partie est au futur ou au présent, jamais au
+      conditionnel : « abre la caja y verías » est fautif.

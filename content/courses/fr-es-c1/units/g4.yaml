@@ -1,0 +1,48 @@
+id: g4
+title: Los relativos cultos
+subtitle: El cual, lo cual, cuyo, quien
+icon: compass
+color: violet
+level: C1
+
+lessons:
+  - id: g4-l1
+    title: "El cual, lo cual, cosa que"
+    notes: |
+      `el cual` (`la cual`, `los cuales`, `las cuales`) est le relatif du
+      registre soigné : il alterne avec `el que` après une préposition, et
+      reprend une **proposition entière** sous la forme `lo cual`.
+
+      - Après préposition, `el cual` = `el que`, en plus soutenu ; l'article s'accorde avec l'antécédent.
+        Es un proyecto con el cual (con el que) nunca estuve de acuerdo. C'est un projet avec lequel je n'ai jamais été d'accord.
+      - Après une préposition longue ou une locution, `el cual` est presque obligé : `según el cual`, `gracias al cual`, `a raíz de la cual`.
+      - Lo cual, lo que : reprennent toute la phrase précédente (« ce qui »).
+        Me gritó delante de todos, lo cual me ofendió. Il m'a crié dessus devant tout le monde, ce qui m'a vexé.
+      - Cosa que : même rôle, plus familier.
+        Me preguntó por ti, cosa que no me gustó.
+      - Après un point, `el cual` peut relancer un récit : `A la cual, por cierto, han despedido.`
+
+      ! Sans préposition, `el cual` ne peut pas ouvrir une relative
+      déterminative : « la chica la cual conocí » est fautif ; on dit `la
+      chica que conocí`.
+
+  - id: g4-l2
+    title: "Cuyo, quien, cuanto"
+    notes: |
+      Trois relatifs que le français rend mal : `cuyo` (« dont le »), `quien`
+      sans antécédent (« celui qui ») et `cuanto` (« tout ce que »).
+
+      - Cuyo s'accorde avec ce qui est __possédé__, pas avec le possesseur.
+        La chica cuyos padres viven al lado. La fille dont les parents habitent à côté.
+      - Cuyo remplace aussi l'article : `cuyo libro`, jamais « cuyo el libro ».
+      - Quien sans antécédent : « celui qui », dans les sentences et les généralités.
+        Quien habla así no tiene razón. Celui qui parle ainsi n'a pas raison.
+      - Quien après virgule, pour une personne : plus soutenu que `que`.
+        Los estudiantes, quienes habían convocado la huelga, se reunieron.
+      - Cuanto, cuantos : « tout ce que, tous ceux que » ; s'accorde avec ce qu'il désigne.
+        Di cuantas mentiras quieras. Dis tous les mensonges que tu veux.
+      - Relative en cascade, très courante à l'oral : `el informe que creo que nos pidió` (le rapport qu'il nous a demandé, je crois).
+
+      ! « del cual » ne remplace pas `cuyo` devant un nom : « la chica de
+      la cual los padres » est fautif. Le français « dont » se rend par
+      `cuyo` dès qu'il annonce un nom possédé.

@@ -1,0 +1,47 @@
+id: c5
+title: Participio, gerundio, infinitivo
+subtitle: Terminada la reunión, ¿decírselo yo?
+icon: clock
+color: sky
+level: C1
+
+lessons:
+  - id: c5-l1
+    title: "Participes doubles et passif de résultat"
+    notes: |
+      Quelques verbes ont **deux participes** : une forme régulière, qui sert
+      aux temps composés, et une forme ancienne, devenue adjectif. Le choix
+      dépend de l'auxiliaire.
+
+      - Avec `haber` : le participe régulier, ou l'un des deux quand l'usage les admet.
+        He freído / he frito las patatas. J'ai fait frire les pommes de terre.
+      - Avec `estar` ou devant un nom : la forme courte, adjectivale. `patatas fritas`, `un libro impreso`, `está maldito`.
+      - Paires à connaître : `freído / frito`, `imprimido / impreso`, `proveído / provisto`, `maldecido / maldito`, `bendecido / bendito`.
+      - Passif de résultat, avec `estar` : il décrit un état, sans auteur.
+        Las puertas están abiertas desde las diez. Les portes sont ouvertes depuis dix heures.
+      - Passif d'action, avec `ser` : il décrit l'événement, et accepte l'auteur avec `por`.
+        Las puertas fueron abiertas por el portero. Les portes ont été ouvertes par le gardien.
+
+      ! `estar` + participe refuse le complément d'agent : « las puertas
+      estarán abiertas por el portero » est fautif. Et `maldito`, `bendito`
+      ne s'emploient jamais après `haber`.
+
+  - id: c5-l2
+    title: "Terminada la reunión : formes absolues et exclamatives"
+    notes: |
+      Le participe, le gérondif et l'infinitif peuvent fonctionner **sans
+      verbe conjugué**, soit pour condenser une subordonnée, soit pour
+      s'exclamer.
+
+      - Participe absolu en tête : « une fois… », action achevée avant la principale.
+        Terminada la investigación, se cerró el caso. L'enquête terminée, l'affaire a été classée.
+      - Gérondif avec son propre sujet, placé après lui.
+        Estando yo presente, no se atreverán. Moi présent, ils n'oseront pas.
+      - Infinitif en question indignée : « moi, faire ça ? ».
+        ¿Decírselo yo? Ni loco. Moi, le lui dire ? Jamais de la vie.
+      - Gérondif exclamatif : agacement devant une habitude.
+        ¡Siempre protestando por todo! Toujours à se plaindre de tout !
+      - Infinitif substantivé, avec article : `el cantar de los pájaros` (le chant des oiseaux), `el ir y venir de la gente`.
+
+      ! Le participe absolu s'accorde avec son nom : `terminadas las
+      obras`, `resuelto el problema`. Et son sujet le suit, jamais l'inverse.

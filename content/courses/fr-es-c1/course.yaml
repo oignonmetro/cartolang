@@ -1,0 +1,62 @@
+# Cours d'espagnol C1, pour francophones ayant le niveau B2.
+#
+# Contenu calé sur le Plan curricular del Instituto Cervantes (PCIC), colonne
+# C1 de l'inventaire de grammaire ; voir docs/recherche-espagnol-c1.md. Le
+# C1 n'ajoute presque aucun temps : tout le système verbal est en place au
+# B2. Il ajoute des valeurs nouvelles à des formes connues, des nuances de
+# mode et des connecteurs de registre soutenu. La piste « Conjugaison »
+# enseigne donc des emplois plutôt que des tableaux.
+#
+# Publié en rappels seuls : les leçons portent leur cours (`notes`), les
+# exercices restent à écrire. Pas de piste de vocabulaire pour l'instant.
+# Ce qui relève du B1 ou du B2 a été mis de côté dans
+# docs/espagnol-b1-b2-en-attente.md.
+#
+#   grammaire    — g1 concessives, g2 conditions marquées, g3 consécutives
+#                  et finales soutenues, g4 relatifs soutenus, g5 le mode qui
+#                  change le sens, g6 emphase, g7 temporelles
+#   conjugaison  — c1 futur et conditionnel d'objection, c2 imparfait
+#                  expressif, c3 subjonctif en phrase indépendante,
+#                  c4 périphrases, c5 participe et formes non personnelles,
+#                  c6 impératif expressif
+
+id: fr-es-c1
+name: Espagnol
+learning: es
+known: fr
+flag: 🇪🇸
+level: C1
+tagline: "Nuancer, concéder, insister : l'espagnol du locuteur autonome."
+status: available
+layout: library
+version: 1
+
+tracks:
+  - id: grammaire
+    title: Grammaire
+    subtitle: Concession, mode et registre soutenu
+    kind: grammar
+    color: violet
+    icon: compass
+    units:
+      - g1
+      - g2
+      - g3
+      - g4
+      - g5
+      - g6
+      - g7
+
+  - id: conjugaison
+    title: Conjugaison
+    subtitle: Les valeurs rares des temps connus
+    kind: conjugation
+    color: sky
+    icon: clock
+    units:
+      - c1
+      - c2
+      - c3
+      - c4
+      - c5
+      - c6

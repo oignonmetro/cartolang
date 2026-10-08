@@ -1,0 +1,46 @@
+id: g5
+title: El modo que cambia el sentido
+subtitle: No niega que es él, no niega que sea él
+icon: compass
+color: violet
+level: C1
+
+lessons:
+  - id: g5-l1
+    title: "Percevoir, dire, comprendre : deux modes, deux sens"
+    notes: |
+      Au B2, le mode suit des règles : opinion affirmée → indicatif, opinion
+      niée → subjonctif. Au C1, certains verbes **changent de sens** selon le
+      mode qui les suit, et le subjonctif devient un outil de nuance.
+
+      - Entender que + indicatif : comprendre une information. + subjonctif : trouver normal.
+        Entiende que es la mejor solución. / Entiende que reacciones así. Il comprend que c'est la meilleure solution. / Il comprend que tu réagisses ainsi.
+      - No ver que + subjonctif : ne pas trouver, ne pas juger. + indicatif : ne pas voir, au sens propre.
+        No veo que tengas motivos. / No vio que había un cartel. Je ne vois pas en quoi tu aurais des raisons. / Il n'a pas vu qu'il y avait un panneau.
+      - No negar que + indicatif : on admet le fait. + subjonctif : on garde ses distances.
+        No niega que es él. / No niega que sea él. Il ne nie pas que c'est lui (il l'admet). / Il ne nie pas que ce soit lui (sans le confirmer).
+      - No decir que : l'indicatif engage la vérité du fait, le subjonctif non.
+        No te dije que tenía novia. / No te dije que tuviera novia. Je ne t'ai pas dit que j'avais une copine (j'en ai une). / Je ne t'ai pas dit que j'en avais une (rien n'est affirmé).
+
+      ! La règle scolaire « verbe nié → subjonctif » ne suffit plus : c'est
+      **ce que le locuteur tient pour vrai** qui choisit le mode.
+
+  - id: g5-l2
+    title: "Causales niées et subordonnée en tête de phrase"
+    notes: |
+      Le mode sert aussi à dire **ce que la négation touche**, et à faire
+      d'une proposition entière le sujet de la phrase.
+
+      - No… porque + indicatif : on nie l'action principale ; la cause, elle, est vraie.
+        No se marcha porque está cansado. Il ne part pas, parce qu'il est fatigué.
+      - No… porque + subjonctif : on nie la cause ; l'action, elle, a lieu.
+        No se marcha porque esté cansado (sino porque se aburre). S'il part, ce n'est pas parce qu'il est fatigué (mais parce qu'il s'ennuie).
+      - Que + subjonctif en tête : la subordonnée est le sujet, avec un verbe d'effet (`acabar con`, `molestar`, `extrañar`).
+        Que dijeras eso acabó con su paciencia. Le fait que tu dises cela a eu raison de sa patience.
+      - Que + indicatif en tête : avec un verbe de preuve ou de conséquence (`implicar`, `demostrar`, `significar`).
+        Que no hayas aprobado implica que repetirás. Que tu n'aies pas réussi implique que tu redoubleras.
+      - Après un verbe de croyance nié, le subjonctif passé remplace le futur de probabilité.
+        Creo que se habrá dormido. / No creo que se haya dormido.
+
+      ! À l'écrit, la virgule aide : `No se marcha, porque está cansado`
+      lève l'ambiguïté que l'oral règle par l'intonation.

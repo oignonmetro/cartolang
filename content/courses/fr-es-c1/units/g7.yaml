@@ -1,0 +1,47 @@
+id: g7
+title: Las temporales
+subtitle: Antes que, a medida que, mientras
+icon: compass
+color: violet
+level: C1
+
+lessons:
+  - id: g7-l1
+    title: "Antes de, antes que : l'action qui n'aura pas lieu"
+    notes: |
+      `antes de` ne situe pas toujours dans le temps : il peut présenter
+      une action comme **non réalisée**, ou si invraisemblable qu'on lui
+      préfère n'importe quoi d'autre.
+
+      - Action évitée : l'infinitif n'a jamais eu lieu.
+        Se fue antes de gritar a alguien. Il est parti avant de crier sur quelqu'un (et n'a crié sur personne).
+      - Préférence : « plutôt… que ». `antes que` + infinitif, sans `de`.
+        Antes que pedirte ayuda, me muero de hambre. Plutôt mourir de faim que de te demander de l'aide.
+      - Invraisemblance : la principale annonce un événement lointain.
+        Antes de que me saque el carné, me saldrán canas. J'aurai des cheveux blancs avant d'avoir mon permis.
+      - Après `después de que`, le subjonctif présent vise l'avenir, avec deux sujets différents.
+        Después de que terminemos el proyecto, presentaré mi dimisión. Une fois le projet terminé, je démissionnerai.
+      - Tras + infinitif : « après », registre soutenu ou journalistique. `tras ser detenido`, `tras haber dimitido`.
+
+      ! Le sens contrefactuel disparaît à la négation : « no se fue antes
+      de gritar a alguien » ne signifie pas qu'il a évité de crier.
+
+  - id: g7-l2
+    title: "A medida que, mientras, cuando + nom"
+    notes: |
+      Trois emplois temporels qui dépassent la simple simultanéité : la
+      **progression**, la **condition déguisée** et le **repère nominal**.
+
+      - A medida que, conforme, según : progression parallèle ; subjonctif si l'on parle de l'avenir.
+        A medida que vayas leyendo, te irás dando cuenta. Au fur et à mesure de ta lecture, tu t'en rendras compte.
+      - Mientras + subjonctif : « tant que », la durée devient condition.
+        Me quedaré mientras haya dinero. Je resterai tant qu'il y aura de l'argent.
+      - Mientras + indicatif : simple simultanéité. `mientras él cocina, yo leo`.
+      - Cuando + nom d'événement, à l'oral : « à l'époque de, au moment de ».
+        Cuando la guerra, vivían en el campo. Pendant la guerre, ils vivaient à la campagne.
+      - Hasta que no, desde que no : la négation explétive, fréquente à l'oral.
+        No me voy hasta que no me pagues. Je ne pars pas tant que tu ne m'as pas payé.
+
+      ! `cuando` + nom ne vaut que pour le passé : « iré cuando la próxima
+      reunión » est fautif. Et `mientras`, contrairement à `cuando`, refuse
+      le nom : « mientras el accidente » est fautif.

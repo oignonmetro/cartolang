@@ -1,0 +1,46 @@
+id: g3
+title: Consecutivas y finales
+subtitle: De ahí que, luego, con el fin de que
+icon: compass
+color: violet
+level: C1
+
+lessons:
+  - id: g3-l1
+    title: "De ahí que, luego, así pues : tirer une conséquence"
+    notes: |
+      Le C1 ajoute aux conséquences courantes (`por eso`, `así que`) des
+      connecteurs **argumentatifs**, propres à l'écrit et au discours soigné.
+      Le plus délicat, `de ahí que`, exige le **subjonctif**.
+
+      - De ahí que + subjonctif : « d'où le fait que ». La conséquence est présentée comme connue ; on en donne l'origine.
+        No estaba entre nosotros; de ahí que nadie confesara. Il n'était pas parmi nous, d'où le fait que personne n'ait avoué.
+      - De ahí + nom : `de ahí su negativa` (d'où son refus).
+      - Luego : « donc », conclusion logique.
+        Estaban las luces encendidas, luego había alguien en casa. Les lumières étaient allumées, donc il y avait quelqu'un.
+      - Así pues, pues : « ainsi donc » ; `pues` se place après le verbe, entre virgules.
+        No hubo acuerdo; así pues, habrá otra asamblea. Il n'y a pas eu d'accord : il y aura donc une autre assemblée.
+      - Consecuentemente, por consiguiente : registre administratif ou scientifique.
+
+      ! `luego` « donc » n'est pas `luego` « ensuite » : seule la virgule et
+      la logique de la phrase les distinguent.
+
+  - id: g3-l2
+    title: "Con el fin de que, para que incise, como para"
+    notes: |
+      La finalité aussi a son registre soutenu, et `para` sait faire plus
+      qu'indiquer un but : commenter ce qu'on dit, ou mesurer un degré.
+
+      - Con el fin de que, con la intención de que, a fin de que : + __subjonctif__, comme `para que`.
+        Se lo dije con el fin de que reflexionara. Je le lui ai dit pour qu'il réfléchisse.
+      - Con el fin de, con miras a + infinitif ou nom : même sujet, ou visée lointaine. `con miras a las elecciones`.
+      - Para que en incise : ce n'est plus le but de l'action, c'est la raison de **dire**.
+        Para que te enteres, estoy harta. Pour ta gouverne, j'en ai assez.
+      - Para + infinitif à nuance concessive : « pour quelqu'un qui… ».
+        No habla mal para llevar aquí un año. Il ne parle pas mal, pour quelqu'un qui est ici depuis un an.
+      - Como para + infinitif ou subjonctif : « assez… pour », degré suffisant ou insuffisant.
+        No es tan tonto como para no entenderlo. Il n'est pas bête au point de ne pas comprendre.
+
+      ! Quand le sujet ne change pas, l'infinitif s'impose : « con el fin
+      de que yo lo vea » pour un même sujet est fautif, on dit `con el fin
+      de verlo`.

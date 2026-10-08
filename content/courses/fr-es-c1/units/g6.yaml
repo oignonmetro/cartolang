@@ -1,0 +1,50 @@
+id: g6
+title: El énfasis
+subtitle: Lo mal que cantó, menudo lío, la mayoría creen
+icon: compass
+color: violet
+level: C1
+
+lessons:
+  - id: g6-l1
+    title: "Lo mal que cantó, la cara que puso"
+    notes: |
+      Pour insister sur un **degré** sans dire « tellement », l'espagnol
+      met en tête `lo` + adjectif ou adverbe + `que`, ou un article suivi
+      d'un nom et d'une relative. La phrase se suffit à elle-même, ou sert
+      de complément à un verbe de réaction.
+
+      - Lo + adjectif ou adverbe + que : « à quel point ». L'adjectif s'accorde avec le nom, malgré `lo` neutre.
+        ¡Lo cansada que estaba! Ce qu'elle était fatiguée !
+      - En complément : `no te imaginas lo mal que cantó` (tu n'imagines pas à quel point il a mal chanté).
+      - Article + nom + que : l'emphase porte sur une chose.
+        ¡La cara que puso! Si tu avais vu la tête qu'il a faite !
+      - La de + nom pluriel + que : « tous ces… ».
+        ¡La de veces que te lo he dicho! Combien de fois je te l'ai dit !
+      - Un, una + nom + de + nom : jugement en apposition.
+        Es un encanto de persona. C'est une personne adorable.
+
+      ! Ce `lo` emphatique n'est pas le `lo` + adjectif du B2 (`lo bueno`,
+      le bon côté) : ici, c'est le `que` qui suit qui en fait une
+      exclamation de degré.
+
+  - id: g6-l2
+    title: "Menudo, vaya, bonito : l'exclamation ironique"
+    notes: |
+      Placés devant le nom et sans article, quelques adjectifs perdent leur
+      sens propre et deviennent des **intensifs**, souvent ironiques. L'ordre
+      des mots, ensuite, met en relief ce qu'on veut souligner.
+
+      - Menudo, menuda : « sacré », jamais « menu ».
+        ¡Menudo coche se ha comprado! Il s'est acheté une sacrée voiture !
+      - Vaya + nom (+ que) : admiration ou consternation.
+        ¡Vaya casa que tiene! Quelle maison il a !
+      - Bonito, valiente, buen : ironiques en tête de phrase.
+        En bonito lío me has metido. Tu m'as mis dans un joli pétrin.
+      - Complément en tête, sans pronom de reprise, pour corriger.
+        Este coche he elegido, no aquel. C'est cette voiture que j'ai choisie, pas l'autre.
+      - Accord selon le sens : un collectif suivi de `de` + pluriel accepte le verbe au pluriel.
+        La mayoría de los españoles creen que… / La mitad votaron en contra.
+
+      ! L'accord selon le sens exige le complément au pluriel : « la gente
+      piensan » ou « la familia se compraron » restent fautifs.

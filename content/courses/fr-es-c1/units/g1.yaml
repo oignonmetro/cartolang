@@ -1,0 +1,47 @@
+id: g1
+title: Las concesivas
+subtitle: Digan lo que digan, si bien, con lo que
+icon: compass
+color: violet
+level: C1
+
+lessons:
+  - id: g1-l1
+    title: "Digan lo que digan : la concession redoublée"
+    notes: |
+      Pour dire « quoi que », « où que », « quoi qu'il arrive », l'espagnol
+      **répète le verbe au subjonctif** autour d'un relatif. La tournure ne
+      dit pas « bien que » : elle balaie **toutes les possibilités** et
+      annonce qu'aucune ne changera la suite.
+
+      - Verbe + relatif + même verbe : les deux au __subjonctif__.
+        Digan lo que digan, pienso hacer ese viaje. Quoi qu'on dise, je compte faire ce voyage.
+      - Formules figées : `pase lo que pase` (quoi qu'il arrive), `sea como sea` (coûte que coûte), `cueste lo que cueste` (coûte que coûte).
+      - Avec un lieu ou une manière : `vayas donde vayas` (où que tu ailles), `lo hagas como lo hagas` (quelle que soit ta façon de faire).
+      - Au passé, les deux verbes passent à l'imparfait du subjonctif.
+        Dijeran lo que dijeran, siguió adelante. Quoi qu'on ait dit, il a continué.
+      - Polaire, sans relatif : `quieras o no` (que tu le veuilles ou non), `llueva o no llueva`.
+
+      ! Le second verbe est le **même** que le premier, au même temps :
+      « digan lo que dicen » est fautif.
+
+  - id: g1-l2
+    title: "Aun cuando, si bien, con lo que"
+    notes: |
+      Au-delà d'`aunque`, le C1 dispose de concessives plus marquées :
+      une concession **renforcée** (`aun cuando`), une concession
+      **soutenue** (`si bien`) et une concession **indignée** (`con lo que`).
+
+      - Aun cuando : « même quand, même si » ; indicatif pour un fait, subjonctif pour une hypothèse.
+        Me rechazaron aun cuando tenía el mejor expediente. On m'a refusé alors même que j'avais le meilleur dossier.
+      - Incluso si, ni siquiera si : concession sur une échelle ; le __subjonctif__ y est préféré.
+        Ni siquiera si me lo pidiera el director lo haría. Même si le directeur me le demandait, je ne le ferais pas.
+      - Si bien : « bien que », registre écrit, toujours à l'__indicatif__.
+        Si bien reconocía lo ocurrido, no asumió responsabilidades. Bien qu'il reconnaisse les faits, il n'a pas assumé ses responsabilités.
+      - Con lo que + indicatif : « alors que… tellement », reproche ou étonnement.
+        Con lo que le rogué, y no conseguí nada. Moi qui l'ai tant supplié, je n'ai rien obtenu.
+      - Con el, la, los, las + nom + que : même valeur, centrée sur une quantité.
+        Con la de camisas que tienes y te pones una sucia. Avec toutes les chemises que tu as, tu en mets une sale.
+
+      ! `si bien` n'a rien de conditionnel : « si bien… » ne se traduit
+      jamais par « si… bien ». Et il refuse le subjonctif.

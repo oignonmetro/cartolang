@@ -1,0 +1,44 @@
+id: c2
+title: El imperfecto expresivo
+subtitle: ¡Y yo qué sabía! María se casaba mañana.
+icon: clock
+color: sky
+level: C1
+
+lessons:
+  - id: c2-l1
+    title: "Excuse, surprise, reproche"
+    notes: |
+      Hors du récit, l'imparfait sert à **commenter** une situation : se
+      dédouaner, s'étonner, reprocher. Dans les trois cas, il renvoie à ce
+      qu'on croyait ou à ce qui était prévu, et que la réalité contredit.
+
+      - Excuse : je ne pouvais pas savoir.
+        ¡Y yo qué sabía! Et comment voulais-tu que je le sache !
+      - Surprise : ce que je croyais est démenti.
+        Anda, ¿estabas aquí? Pero ¿no estabas en París? Tiens, tu étais là ? Tu n'étais pas à Paris ?
+      - Reproche : ce qui était prévu n'a pas été fait.
+        ¿Tú no tenías que hacer los deberes? Tu ne devais pas faire tes devoirs, toi ?
+      - Plus-que-parfait de tentative : l'action a failli se faire, ou a été envisagée puis abandonnée.
+        Había estado a punto de equivocarse otra vez. Il avait été sur le point de se tromper encore.
+
+      ! Dans ces phrases, l'imparfait ne situe rien dans le passé :
+      `¿no estabas en París?` porte sur maintenant.
+
+  - id: c2-l2
+    title: "María se casaba mañana : l'imparfait de distance"
+    notes: |
+      Avec un repère de présent ou de futur, l'imparfait **rapporte** une
+      information sans la prendre en charge. C'est un discours indirect
+      sans verbe introducteur : « à ce qu'on m'a dit », « paraît-il ».
+
+      - Rumeur ou information reçue : l'imparfait remplace « on m'a dit que… ».
+        María se casaba mañana, ¿no? María se marie demain, c'est bien ça ?
+      - Avec `al parecer`, `según dicen` : la distance est explicite.
+        Al parecer, hoy la veía el médico. Apparemment, le médecin devait la voir aujourd'hui.
+      - Pour vérifier un programme : `¿Cuándo salía el tren?` (à quelle heure part le train, déjà ?).
+      - Présent historique : à l'inverse, le présent rapproche le passé, en histoire et dans les récits vivants.
+        Colón llega a América en 1492. Colomb arrive en Amérique en 1492.
+
+      ! Le repère temporel (`mañana`, `hoy`) est ce qui signale la valeur
+      de distance : sans lui, l'imparfait se lit comme un passé ordinaire.

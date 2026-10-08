@@ -1,0 +1,46 @@
+id: c1
+title: El futuro y el condicional
+subtitle: Será listo, pero… Harás lo que te diga.
+icon: clock
+color: sky
+level: C1
+
+lessons:
+  - id: c1-l1
+    title: "Será muy listo, pero… : concéder pour objecter"
+    notes: |
+      Au B2, le futur et le conditionnel expriment la **probabilité**
+      (`serán las diez`, il doit être dix heures). Au C1, cette valeur glisse
+      vers la **concession** : on accorde un point à l'interlocuteur pour
+      mieux lui opposer un `pero`.
+
+      - Futur simple : on concède sur le présent.
+        Será muy listo, pero no sabe escuchar. Il est peut-être très malin, mais il ne sait pas écouter.
+      - Futur antérieur : on concède sur un passé récent ou un passé lié au présent.
+        Habrá estudiado mucho, pero no ha aprobado. Il a sans doute beaucoup travaillé, mais il n'a pas réussi.
+      - Conditionnel simple : on concède sur un passé révolu.
+        Sería muy listo, pero lo engañaron. Il était peut-être très malin, mais on l'a eu.
+      - Conditionnel passé : on concède sur un passé antérieur à un autre.
+        Habría estudiado mucho, pero aquel día se quedó en blanco. Il avait sans doute beaucoup travaillé, mais ce jour-là il a eu un trou.
+      - La même valeur oppose deux personnes : `a ti te dará igual, pero a mí no` (toi, ça t'est peut-être égal, mais pas à moi).
+
+      ! Ce futur ne parle pas de l'avenir : `será muy listo` porte sur le
+      présent. On le traduit par « peut-être », « sans doute », jamais par
+      un futur français.
+
+  - id: c1-l2
+    title: "Harás lo que te diga : ordonner, s'inquiéter"
+    notes: |
+      Deux autres emplois du futur sortent de l'avenir : l'**ordre**
+      catégorique, qui ne laisse pas de choix, et l'**inquiétude** à la forme
+      négative, qui demande confirmation.
+
+      - Futur d'ordre : plus sec que l'impératif, il présente l'ordre comme inévitable.
+        Harás lo que te diga. Tu feras ce que je te dirai.
+      - Dans les règlements, à la 3e personne : `el alumno entregará el trabajo antes del lunes`.
+      - Futur antérieur négatif, en question : une crainte qu'on veut voir démentie.
+        ¿No me habré olvidado de algo? Je n'aurais pas oublié quelque chose, par hasard ?
+      - Même valeur au futur simple, sur le présent : `¿no estará enfermo?` (il ne serait pas malade, au moins ?).
+
+      ! Le futur d'ordre suppose une **autorité** : entre égaux, il sonne
+      autoritaire, voire menaçant.

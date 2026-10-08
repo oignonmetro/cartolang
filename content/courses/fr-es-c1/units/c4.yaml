@@ -1,0 +1,56 @@
+id: c4
+title: Las perífrasis verbales
+subtitle: Acabar por, romper a, andar diciendo, llevar escrito
+icon: clock
+color: sky
+level: C1
+
+lessons:
+  - id: c4-l1
+    title: "Acabar por, llegar a, romper a : l'aboutissement et le déclenchement"
+    notes: |
+      Les périphrases d'infinitif du C1 ajoutent au verbe une **phase** de
+      l'action : son aboutissement après un effort, ou son déclenchement
+      brusque. Elles s'ajoutent à celles du B1 et du B2 (`volver a`,
+      `dejar de`, `ponerse a`).
+
+      - Acabar por + infinitif : « finir par », après résistance ou détours.
+        Acabó por aceptar la oferta. Il a fini par accepter l'offre.
+      - Llegar a + infinitif : atteindre un point extrême ou inattendu.
+        Llegó a dormir en la calle. Il en est arrivé à dormir dans la rue.
+      - No alcanzar a + infinitif : ne pas parvenir à.
+        No alcanzo a entender su decisión. Je n'arrive pas à comprendre sa décision.
+      - Echarse a, romper a + infinitif : début soudain, surtout avec les émotions (`llorar`, `reír`, `correr`).
+        Al oír la noticia, rompió a llorar. En apprenant la nouvelle, elle a fondu en larmes.
+      - Venir a + infinitif : approximation, « revenir à, à peu près ».
+        Viene a costar unos cien euros. Ça coûte dans les cent euros.
+      - Estar para + infinitif : « être sur le point de ». Estar por + infinitif : « être tenté de ».
+        Está para salir. / Estoy por decírselo. Il est sur le point de sortir. / J'ai bien envie de le lui dire.
+
+      ! `echar a perder` (gâcher) est une locution figée, pas la
+      périphrase de début : « echar a » + infinitif ne marque le
+      déclenchement qu'avec les verbes de mouvement (`echar a correr`).
+
+  - id: c4-l2
+    title: "Andar diciendo, llevar escrito : gérondif et participe"
+    notes: |
+      Avec un gérondif, la périphrase décrit le **déroulement** de l'action ;
+      avec un participe, elle en fait le **bilan**. Ces formes complètent
+      `estar` + gérondif (A2) et `llevar` + gérondif (B1).
+
+      - Ir + gérondif : progression graduelle, pas à pas.
+        La situación va mejorando. La situation s'améliore peu à peu.
+      - Venir + gérondif : action qui dure depuis un moment jusqu'à maintenant.
+        Lo vengo diciendo desde hace meses. Ça fait des mois que je le dis.
+      - Andar + gérondif : action répétée, dispersée, souvent jugée négativement.
+        Anda diciendo que lo despidieron. Il raconte partout qu'on l'a renvoyé.
+      - Llevar + participe : bilan chiffré ; le participe s'accorde avec l'objet.
+        Llevo escritas veinte páginas. J'ai déjà écrit vingt pages.
+      - Tener + participe : résultat acquis, accord avec l'objet.
+        Tengo pensado irme en julio. J'ai prévu de partir en juillet.
+      - Dejar + participe : résultat laissé derrière soi.
+        Dejó dicho que volvería. Il a fait savoir qu'il reviendrait.
+
+      ! Avec `llevar` et `tener`, le participe s'**accorde** (`escritas`,
+      `pensado`), contrairement au temps composé avec `haber`, où il reste
+      invariable : `he escrito veinte páginas`.
