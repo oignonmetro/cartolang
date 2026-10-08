@@ -149,8 +149,8 @@ export function RuleNote({
 function RuleBody({ rule, labelClass }: { rule: NoteRule; labelClass: string }) {
   const { main, aside } = splitAside(rule.body)
   // Rien à entendre pour une règle purement française : le bouton ne s'affiche
-  // que là où une forme anglaise est sûrement identifiable (voir ruleSpeech).
-  const spoken = ruleSpeech(rule)
+  // que là où une forme de la langue apprise est sûrement identifiable (voir ruleSpeech).
+  const spoken = ruleSpeech(rule, learningLanguage())
 
   return (
     <div className="flex min-w-0 flex-col gap-1">

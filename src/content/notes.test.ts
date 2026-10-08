@@ -223,6 +223,46 @@ describe('ruleSpeech — défauts vus au rendu', () => {
   })
 })
 
+describe('ruleSpeech — espagnol', () => {
+  const rule = (body: string, example: string | null = null): NoteRule => ({ label: null, body, example })
+  const es = (example: string) => ruleSpeech(rule('x', example), 'es')
+
+  it('accepte « que » et les accents espagnols, sans la traduction', () => {
+    expect(es('Digan lo que digan, pienso hacer ese viaje. Quoi qu\'ils disent, je compte faire ce voyage.'))
+      .toBe('Digan lo que digan, pienso hacer ese viaje.')
+  })
+
+  it('accepte une phrase ouverte par ¿ ou ¡', () => {
+    expect(es('¿No me habré olvidado de algo? Je n\'aurais pas oublié quelque chose ?'))
+      .toBe('¿No me habré olvidado de algo?')
+    expect(es('¡Quién tuviera tus años! Si seulement j\'avais ton âge !')).toBe('¡Quién tuviera tus años!')
+  })
+
+  it('accepte une phrase de deux mots, sujet omis', () => {
+    expect(es('¡Será egoísta! Ce qu\'il peut être égoïste !')).toBe('¡Será egoísta!')
+    expect(es('Debieras disculparte. Tu devrais t\'excuser.')).toBe('Debieras disculparte.')
+  })
+
+  it('ne prend pas « está » pour le français « est »', () => {
+    expect(es('Está en casa. Il est à la maison.')).toBe('Está en casa.')
+  })
+
+  it('écarte une traduction française sans accent ni élision', () => {
+    expect(es('¿Que ha aprobado? ¡Anda ya! Il a réussi ? Tu parles !')).toBe('¿Que ha aprobado? ¡Anda ya!')
+    expect(es('Anda que no sabes tú. Tu en sais des choses, toi.')).toBe('Anda que no sabes tú.')
+  })
+
+  it('se tait sur une liste de formes en minuscules', () => {
+    expect(es('hablare, hablares, hablare, habláremos, hablareis, hablaren')).toBeNull()
+  })
+
+  it('garde le comportement anglais par défaut', () => {
+    expect(ruleSpeech(rule('x', 'Digan lo que digan, pienso hacer ese viaje.'))).toBeNull()
+    expect(ruleSpeech(rule('x', 'If it rains, we will stay at home. S\'il pleut, nous resterons à la maison.'), 'en'))
+      .toBe('If it rains, we will stay at home.')
+  })
+})
+
 describe('règle repliée sur plusieurs lignes', () => {
   it('poursuit le corps quand la ligne reste en suspens', () => {
     const blocks = parseNotes(

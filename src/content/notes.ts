@@ -196,22 +196,62 @@ export function splitAside(text: string): { main: string; aside: string | null }
 const FRENCH = /[àâäçéèêëîïôöûùüÿœ]|\b(nous|vous|je|j'|qui|que|qu'|dans|pour|avec|sans|cette|leur|leurs|est|sont|une|des|les|aux|sur|elle|ils|elles|tout|toute|jamais|toujours|ne|pas|mais|donc|alors|ici|là)\b/i
 
 /**
- * Une portion se lit-elle comme une phrase anglaise à part entière ?
+ * Comment reconnaître une phrase de la langue apprise, à côté du français.
  *
- * On exige une majuscule initiale et trois mots : les fragments de liste
+ * `FRENCH` ne vaut que pour l'anglais : l'espagnol a lui aussi `que` et des
+ * `é`, et toute phrase espagnole y serait prise pour du français. D'où un
+ * profil par langue, l'anglais restant celui par défaut.
+ */
+interface SentenceProfile {
+  /** Marques sûrement françaises, absentes de la langue apprise. */
+  french: RegExp
+  /** Début de phrase attendu. */
+  start: RegExp
+  /** Nombre de mots minimal. */
+  minWords: number
+}
+
+/**
+ * Marques françaises qui ne peuvent pas être espagnoles.
+ *
+ * Restent permis : `á é í ó ú ñ ü`, et les mots communs aux deux langues
+ * (`que`, `de`, `la`, `le`, `en`, `si`, `son`, `sur`…). Ce qui trahit sûrement
+ * le français, ce sont ses autres accents, l'élision (`j'`, `qu'`, `m'a` —
+ * l'espagnol n'a pas d'apostrophe), l'espace avant `?` ou `!`, et une poignée
+ * de mots outils sans équivalent homographe. Les bornes de mot sont écrites
+ * avec `\p{L}` : `\b` ne connaît que l'ASCII, et `está` y passerait pour `est`.
+ */
+const FRENCH_NOT_SPANISH =
+  /[àâäçèêëîïôöûùÿœ]|\p{L}'|\s[?!;:]|(?<!\p{L})(nous|vous|je|tu|il|ils|elle|elles|qui|est|sont|une|des|les|aux|du|au|et|ou|pour|avec|dans|sans|ce|cette|ces|leur|leurs|pas|mais|donc|ne|toi|moi|lui|tout|toute|jamais|toujours|ici)(?!\p{L})/iu
+
+const PROFILES: Record<string, SentenceProfile> = {
+  en: { french: FRENCH, start: /^[A-Z]/, minWords: 3 },
+  // L'espagnol omet volontiers le sujet : « ¡Será egoísta! », « Debieras
+  // disculparte. » sont des modèles complets en deux mots.
+  es: { french: FRENCH_NOT_SPANISH, start: /^[¿¡]?[A-ZÁÉÍÓÚÑ]/, minWords: 2 },
+}
+
+/**
+ * Une portion se lit-elle comme une phrase de la langue apprise à part
+ * entière ?
+ *
+ * On exige une majuscule initiale et quelques mots : les fragments de liste
  * (« for ten years, since 2015 ») et les résidus de repli de ligne
  * (« jour précis est nommé** : … ») ne sont pas des modèles à faire entendre.
  */
-function isEnglishSentence(segment: string): boolean {
+function isLearnedSentence(segment: string, profile: SentenceProfile): boolean {
   const bare = segment.replace(/[`*_]/g, '').trim()
   if (bare.length === 0) return false
-  if (FRENCH.test(bare)) return false
-  if (!/^[A-Z]/.test(bare)) return false
-  return bare.split(/\s+/).length >= 3
+  if (profile.french.test(bare)) return false
+  if (!profile.start.test(bare)) return false
+  return bare.split(/\s+/).length >= profile.minWords
 }
 
 /**
  * Ce qu'il y a à faire entendre dans une règle de rappel, ou `null`.
+ *
+ * `learning` est la langue du cours (`en`, `es`…) : elle décide de ce qui
+ * passe pour une phrase à faire entendre.
  *
  * L'anglais et le français cohabitent dans ces notes, souvent sur la même
  * ligne (« If it rains, we will stay at home. S'il pleut, nous resterons à la
@@ -222,8 +262,9 @@ function isEnglishSentence(segment: string): boolean {
  * citées entre accents graves, que l'auteur a explicitement marquées comme
  * anglaises.
  */
-export function ruleSpeech(rule: NoteRule): string | null {
+export function ruleSpeech(rule: NoteRule, learning = 'en'): string | null {
   if (rule.example) {
+    const profile = PROFILES[learning] ?? PROFILES.en
     // Retirer les marques avant de découper : « `She is a teacher.` Elle est
     // enseignante. » n'a pas d'espace après le point, l'accent grave s'y
     // intercale, et la phrase française resterait collée à l'anglaise.
@@ -231,7 +272,7 @@ export function ruleSpeech(rule: NoteRule): string | null {
       .main.replace(/[`*_]/g, '')
       .split(/(?<=[.!?])\s+/)
       .map((segment) => segment.trim())
-      .filter(isEnglishSentence)
+      .filter((segment) => isLearnedSentence(segment, profile))
     if (sentences.length > 0) return sentences.join(' ')
   }
 
