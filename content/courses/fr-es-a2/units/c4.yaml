@@ -1,0 +1,40 @@
+id: c4
+title: El pretérito indefinido (I)
+subtitle: Le passé simple, verbes réguliers
+icon: clock
+color: sky
+level: A2
+
+lessons:
+  - id: c4-l1
+    title: "Hablé, hablaste : les verbes en -ar"
+    notes: |
+      Le pretérito indefinido raconte une action **terminée** dans un passé
+      **coupé du présent** : hier, l'an dernier, en 2010. C'est le temps du
+      récit, là où le français parlé emploie le passé composé.
+
+      - Terminaisons en -ar : `-é`, `-aste`, `-ó`, `-amos`, `-asteis`, `-aron`.
+        hablé, hablaste, habló, hablamos, hablasteis, hablaron
+      - L'accent écrit de `hablé` et `habló` est obligatoire : `hablo` (je parle) n'est pas `habló` (il parla).
+      - Avec un repère révolu : `ayer`, `el año pasado`, `en 2010`, `hace dos días`.
+        Ayer hablé con mi madre. Hier, j'ai parlé avec ma mère.
+
+      ! `hablamos` sert au présent comme au passé : seul le contexte
+      (`ayer`, `hoy`) les distingue.
+
+  - id: c4-l2
+    title: "Comí, viví : les verbes en -er et -ir"
+    notes: |
+      Les verbes en `-er` et en `-ir` partagent les mêmes terminaisons au
+      pretérito indefinido.
+
+      - Terminaisons en -er et -ir : `-í`, `-iste`, `-ió`, `-imos`, `-isteis`, `-ieron`.
+        comí, comiste, comió, comimos, comisteis, comieron
+      - Même modèle pour vivir.
+        viví, viviste, vivió, vivimos, vivisteis, vivieron
+      - Contraste avec le pretérito perfecto : `hoy he comido` (aujourd'hui, période non close), `ayer comí` (hier, période close).
+        Ayer comí en casa de Ana. Hier, j'ai mangé chez Ana.
+
+      ! Pour la plupart des Espagnols, la frontière entre `he comido` et
+      `comí` suit le repère temporel ; en Amérique, `comí` s'emploie
+      presque partout.

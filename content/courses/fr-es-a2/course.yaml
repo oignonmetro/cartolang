@@ -10,9 +10,13 @@
 #                  g4 por/para, g5 subordonnées avec que (piste complète)
 #   conjugaison  — c1 pretérito perfecto (haber + participe, réguliers),
 #                  c2 pretérito perfecto (participes irréguliers),
-#                  c3 pretérito imperfecto (piste complète)
+#                  c3 pretérito imperfecto, c4 pretérito indefinido
+#                  (réguliers), c5 pretérito indefinido (irréguliers),
+#                  c6 gérondif et estar + gerundio, c7 impératif affirmatif
 #
-# Cours A2 complet.
+# c4 à c7 sont des rappels seuls, sans exercices : ces points de l'A2 (PCIC)
+# manquaient au cours, et les niveaux C1 et C2 s'appuient dessus. Leurs
+# exercices restent à écrire.
 
 id: fr-es-a2
 name: Espagnol
@@ -23,7 +27,7 @@ level: A2
 tagline: Raconter, comparer, se projeter dans le passé et le futur proche.
 status: available
 layout: library
-version: 1
+version: 2
 
 tracks:
   - id: vocabulaire
@@ -55,7 +59,7 @@ tracks:
 
   - id: conjugaison
     title: Conjugaison
-    subtitle: Passé composé et imparfait
+    subtitle: Passés, gérondif et impératif
     kind: conjugation
     color: sky
     icon: clock
@@ -63,3 +67,7 @@ tracks:
       - c1
       - c2
       - c3
+      - c4
+      - c5
+      - c6
+      - c7

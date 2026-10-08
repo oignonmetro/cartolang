@@ -1,0 +1,39 @@
+id: c6
+title: El gerundio
+subtitle: Estoy comiendo, está leyendo
+icon: clock
+color: sky
+level: A2
+
+lessons:
+  - id: c6-l1
+    title: "Estar + gerundio : l'action en cours"
+    notes: |
+      Pour dire qu'une action est **en train de se dérouler**, l'espagnol
+      emploie `estar` suivi du gérondif. Le gérondif est invariable.
+
+      - Verbes en -ar : radical + `-ando`. `hablar` → `hablando`.
+        Estoy hablando por teléfono. Je suis en train de parler au téléphone.
+      - Verbes en -er et -ir : radical + `-iendo`. `comer` → `comiendo`, `vivir` → `viviendo`.
+        Estamos comiendo. Nous sommes en train de manger.
+      - Seul `estar` se conjugue : `estoy`, `estás`, `está`, `estamos`, `estáis`, `están`.
+
+      ! Le présent simple suffit souvent en espagnol (`¿qué haces?`, que
+      fais-tu ?) ; `estar` + gérondif insiste sur le **moment présent**.
+
+  - id: c6-l2
+    title: "Leyendo, durmiendo, diciendo : les gérondifs irréguliers"
+    notes: |
+      Quelques gérondifs changent de forme, pour la prononciation ou parce
+      que le radical du verbe change.
+
+      - Voyelle + `-iendo` devient `-yendo` : `leer` → `leyendo`, `oír` → `oyendo`, `ir` → `yendo`.
+        Está leyendo el periódico. Il est en train de lire le journal.
+      - Verbes en -ir à radical en e : e devient i. `decir` → `diciendo`, `pedir` → `pidiendo`, `sentir` → `sintiendo`.
+      - Dormir et morir : o devient u. `durmiendo`, `muriendo`.
+        El niño está durmiendo. L'enfant est en train de dormir.
+      - Les pronoms se collent au gérondif, avec un accent : `estoy comiéndolo` ; ou se placent devant `estar` : `lo estoy comiendo`.
+
+      ! Le gérondif espagnol n'est pas le participe présent français :
+      « une femme parlant trois langues » ne se dit pas avec `hablando`,
+      mais `una mujer que habla tres idiomas`.

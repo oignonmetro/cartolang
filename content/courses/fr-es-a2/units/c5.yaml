@@ -1,0 +1,39 @@
+id: c5
+title: El pretérito indefinido (II)
+subtitle: Le passé simple, verbes irréguliers
+icon: clock
+color: sky
+level: A2
+
+lessons:
+  - id: c5-l1
+    title: "Fui, estuve, tuve : les irréguliers les plus fréquents"
+    notes: |
+      Les verbes les plus courants sont irréguliers au pretérito indefinido.
+      Bonne nouvelle : `ser` et `ir` y ont **exactement les mêmes formes**.
+
+      - Ser et ir : `fui`, `fuiste`, `fue`, `fuimos`, `fuisteis`, `fueron`.
+        Fui a Madrid. / Fue un buen día. Je suis allé à Madrid. / Ce fut une bonne journée.
+      - Estar : `estuve`, `estuviste`, `estuvo`, `estuvimos`, `estuvisteis`, `estuvieron`.
+      - Tener : `tuve`, `tuviste`, `tuvo`, `tuvimos`, `tuvisteis`, `tuvieron`.
+      - Hacer : `hice`, `hiciste`, `hizo`, `hicimos`, `hicisteis`, `hicieron`.
+
+      ! Ces formes irrégulières ne portent **pas d'accent** écrit :
+      `estuve`, `tuvo`, `hizo` (et non « estuvé »).
+
+  - id: c5-l2
+    title: "Pude, puse, dije : le radical en u, en i ou en j"
+    notes: |
+      La plupart des autres irréguliers suivent un même schéma : un radical
+      modifié, puis les terminaisons `-e`, `-iste`, `-o`, `-imos`, `-isteis`,
+      `-ieron`.
+
+      - Radical en u : `poder` → `pude`, `poner` → `puse`, `saber` → `supe`.
+        No pude venir. Je n'ai pas pu venir.
+      - Radical en i : `querer` → `quise`, `venir` → `vine`.
+      - Radical en j : `decir` → `dije`, `traer` → `traje` ; la 3e personne du pluriel perd le i : `dijeron`, `trajeron`.
+        Me dijeron la verdad. Ils m'ont dit la vérité.
+      - Dar se conjugue comme un verbe en -er : `di`, `diste`, `dio`, `dimos`, `disteis`, `dieron`.
+
+      ! `dijeron`, jamais « dijieron » : après le j, la terminaison est
+      `-eron`.

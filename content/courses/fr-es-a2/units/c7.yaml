@@ -1,0 +1,39 @@
+id: c7
+title: El imperativo
+subtitle: Habla, come, ven
+icon: clock
+color: sky
+level: A2
+
+lessons:
+  - id: c7-l1
+    title: "Habla, comed : l'impératif affirmatif régulier"
+    notes: |
+      L'impératif sert à **demander** ou à **conseiller**. Pour `tú`, il a
+      la forme de la 3e personne du présent ; pour `vosotros`, on remplace
+      le `-r` de l'infinitif par `-d`.
+
+      - Tú : 3e personne du singulier du présent. `hablar` → `habla`, `comer` → `come`, `escribir` → `escribe`.
+        Habla más despacio, por favor. Parle plus lentement, s'il te plaît.
+      - Vosotros : infinitif sans `-r`, plus `-d`. `hablad`, `comed`, `escribid`.
+        Escribid vuestro nombre aquí. Écrivez votre nom ici.
+      - Les pronoms se collent à la fin, avec un accent si besoin : `cómelo`, `dímelo`.
+
+      ! Cette forme ne vaut que pour l'affirmatif : à la forme négative,
+      l'espagnol change de forme (`no hables`), ce qui se voit plus tard.
+
+  - id: c7-l2
+    title: "Ven, haz, pon : les irréguliers, et usted"
+    notes: |
+      Huit verbes très fréquents ont un impératif irrégulier pour `tú`,
+      souvent une syllabe seulement. Pour `usted` et `ustedes`, l'impératif
+      emprunte la forme du subjonctif présent.
+
+      - Tú, irréguliers : `ven` (venir), `ten` (tener), `pon` (poner), `sal` (salir), `haz` (hacer), `di` (decir), `ve` (ir), `sé` (ser).
+        Ven aquí. / Haz los deberes. Viens ici. / Fais tes devoirs.
+      - Usted, ustedes : terminaison inversée, `-e` pour les verbes en -ar, `-a` pour les verbes en -er et -ir.
+        Pase, por favor. / Coman tranquilos. Entrez, je vous en prie. / Mangez tranquillement.
+      - Irréguliers fréquents de `usted` : `venga`, `tenga`, `haga`, `diga`, `vaya`.
+
+      ! `ve` (va, de `ir`) et `ve` (vois, de `ver`) s'écrivent de la même
+      façon : c'est la phrase qui les distingue.
