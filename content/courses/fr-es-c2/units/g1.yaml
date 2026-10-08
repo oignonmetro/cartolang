@@ -1,0 +1,47 @@
+id: g1
+title: Concesivas y condicionales raras
+subtitle: Así lo maten, de haberlo sabido
+icon: compass
+color: violet
+level: C2
+
+lessons:
+  - id: g1-l1
+    title: "Así lo maten, porque grites : concessions inattendues"
+    notes: |
+      Au C2, des mots courants prennent un sens **concessif** quand ils sont
+      suivis du subjonctif : `así` et `porque` ne veulent plus dire
+      « ainsi » ni « parce que », mais « même si ».
+
+      - Así + subjonctif : « même si », registre familier et catégorique.
+        No se tira al agua así lo maten. Il ne sautera pas à l'eau, même si on le tue.
+      - Porque + subjonctif, en tête : « ce n'est pas parce que… que ».
+        Porque grites más no vas a tener razón. Ce n'est pas parce que tu cries plus fort que tu auras raison.
+      - A riesgo de que + subjonctif : « au risque que ».
+        A riesgo de que me echen, me negaré. Au risque d'être renvoyé, je refuserai.
+      - Ya… ya, que… o que : alternative concessive, « que… ou que ».
+        Que llore o que grite, me da igual. Qu'il pleure ou qu'il crie, ça m'est égal.
+      - Tan + adjectif ou adverbe + como + indicatif : concession indignée.
+        Tan lejos como vive, y ni le ofreció el coche. Lui qui habite si loin, il ne lui a même pas proposé la voiture.
+
+      ! Le mode décide : `porque gritas` (parce que tu cries) donne la cause,
+      `porque grites` (ce n'est pas parce que tu cries) la nie.
+
+  - id: g1-l2
+    title: "De haberlo sabido, que te apetece, vas"
+    notes: |
+      La condition se passe de `si` dans deux tournures du C2 : `de` +
+      infinitif, à l'écrit, et la condition alternative, à l'oral.
+
+      - De + infinitif simple : condition sur le présent ou l'avenir.
+        De seguir así, tendremos que cerrar. Si ça continue ainsi, nous devrons fermer.
+      - De + infinitif composé : condition irréelle dans le passé.
+        De haberlo sabido, no habría venido. Si je l'avais su, je ne serais pas venu.
+      - Que… que… + indicatif : « si… et si… », les deux branches d'une alternative.
+        Que te apetece, vas; que no, te quedas. Si ça te dit, tu y vas ; sinon, tu restes.
+      - Impératif + y, avec menace ou promesse.
+        Tú vuelve a contestarme y te quedas sin salir. Réponds-moi encore une fois et tu es privé de sortie.
+
+      ! La valeur conditionnelle n'existe que pour une proposition détachée,
+      en tête ou entre virgules : dans `es difícil de entender`, `de` +
+      infinitif complète l'adjectif et n'a rien de conditionnel.

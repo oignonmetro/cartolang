@@ -1,0 +1,46 @@
+id: c5
+title: Infinitivo y gerundio
+subtitle: ¡Haberlo dicho antes! Habiendo volado tanto…
+icon: clock
+color: sky
+level: C2
+
+lessons:
+  - id: c5-l1
+    title: "¡Haberlo dicho antes! : l'infinitif de reproche"
+    notes: |
+      L'infinitif composé, seul en exclamation, reproche à quelqu'un ce
+      qu'il **aurait dû faire**. À l'oral familier, l'infinitif simple
+      remplace aussi l'impératif pluriel.
+
+      - Haber + participe, en exclamation : « il fallait… ».
+        ¡Haberlo dicho antes! Il fallait le dire avant !
+      - Avec un sujet exprimé, pour viser une personne.
+        ¡Haberte presentado tú antes! Tu n'avais qu'à te présenter avant !
+      - Infinitif substantivé, avec article et compléments.
+        El esperar angustiosamente durante horas la agotó. Cette attente angoissée pendant des heures l'a épuisée.
+      - Infinitif à la place de l'impératif `vosotros`, à l'oral.
+        ¡Callaros! (pour `¡callaos!`) ¡Seguir recto! (pour `¡seguid recto!`)
+
+      ! « ¡Callaros! » est très répandu en Espagne mais fautif : la norme
+      exige `¡callaos!`. À reconnaître, à éviter à l'écrit.
+
+  - id: c5-l2
+    title: "Habiendo volado tanto : le gérondif de cause et de concession"
+    notes: |
+      Placé en tête et détaché par une virgule, le gérondif peut exprimer
+      une **cause** ou une **concession**. Le gérondif composé situe cette
+      circonstance avant la principale.
+
+      - Cause : « comme ».
+        No teniendo qué comer, se puso a pedir. N'ayant rien à manger, il se mit à mendier.
+      - Concession, souvent avec `y todo` ou `aun`.
+        Lloviendo y todo, salió sin paraguas. Malgré la pluie, il est sorti sans parapluie.
+      - Gérondif composé, antérieur à la principale.
+        Habiendo volado tanto, todavía le tiene miedo al avión. Bien qu'il ait tant volé, il a encore peur de l'avion.
+      - Légendes et titres : `El presidente, saludando a los embajadores`.
+      - Participe absolu introduit par une préposition de temps : `hasta concluidas las tres horas`.
+
+      ! Le gérondif ne marque jamais une action **postérieure** :
+      « chocó, muriendo al instante » est un tour fautif, quoique
+      fréquent dans la presse ; on écrit `chocó y murió al instante`.

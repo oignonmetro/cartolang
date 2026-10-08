@@ -1,0 +1,41 @@
+id: c2
+title: El pretérito anterior
+subtitle: En cuanto hubo saludado, se sentó.
+icon: clock
+color: sky
+level: C2
+
+lessons:
+  - id: c2-l1
+    title: "Hube terminado : la forme"
+    notes: |
+      Le passé antérieur correspond au passé antérieur français (« il eut
+      terminé »). Il se forme avec `haber` au **passé simple** suivi du
+      participe passé, invariable.
+
+      - Haber au passé simple : `hube`, `hubiste`, `hubo`, `hubimos`, `hubisteis`, `hubieron`.
+      - Suivi du participe, invariable.
+        hube terminado, hubiste terminado, hubo terminado, hubimos terminado, hubisteis terminado, hubieron terminado
+      - Participes irréguliers inchangés : `hubo dicho`, `hubo hecho`, `hubo vuelto`.
+      - Pronoms devant l'auxiliaire : `se hubo marchado`, `lo hubo dicho`.
+
+      ! Ne pas confondre `hubo terminado` (passé antérieur) et `había
+      terminado` (plus-que-parfait) : le premier n'apparaît qu'après une
+      conjonction d'immédiateté.
+
+  - id: c2-l2
+    title: "En cuanto hubo saludado : l'emploi"
+    notes: |
+      Le passé antérieur marque une action **immédiatement antérieure** à
+      une autre action passée. Il ne s'emploie qu'après une conjonction
+      d'immédiateté, et seulement dans un **récit littéraire**.
+
+      - Après `en cuanto`, `apenas`, `no bien`, `luego que`, `así que` (dès que), `cuando`.
+        En cuanto hubo saludado a todos, se sentó. Dès qu'il eut salué tout le monde, il s'assit.
+      - Toujours en concurrence avec le passé simple, plus naturel.
+        Cuando hube terminado / Cuando terminé, lo ordené todo.
+      - Ou avec le plus-que-parfait, qui insiste moins sur l'enchaînement.
+        Te llamé cuando se hubo ido / se había ido la gente.
+
+      ! À l'oral et dans presque toute l'Amérique, la forme a disparu : on
+      la reconnaît en lisant, on emploie le passé simple en parlant.

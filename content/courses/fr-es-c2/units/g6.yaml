@@ -1,0 +1,46 @@
+id: g6
+title: Relieve y temporales literarias
+subtitle: Lo que tú eres es…, no bien, desde que llegara
+icon: compass
+color: violet
+level: C2
+
+lessons:
+  - id: g6-l1
+    title: "Lo que tú eres es un egoísta : la mise en relief"
+    notes: |
+      Pour mettre un élément en relief, l'espagnol n'a pas d'équivalent
+      direct de « c'est… que ». Il emploie une **relative** suivie de `ser`,
+      qui s'accorde avec ce qu'on veut souligner.
+
+      - Lo que + verbe + ser + élément mis en relief.
+        Lo que tú eres es un egoísta. Ce que tu es, toi, c'est un égoïste.
+      - Quien, el que + ser, pour une personne ; `ser` s'accorde avec la personne mise en relief.
+        Quien es un egoísta eres tú. L'égoïste, c'est toi.
+      - Ser + moment + cuando : le relatif reprend la nature de l'élément mis en relief.
+        Es cuando yo te falte al respeto cuando podrás hablarme así. C'est quand je te manquerai de respect que tu pourras me parler ainsi.
+      - Ser + lieu + donde, ser + manière + como.
+        Fue en Madrid donde se conocieron. C'est à Madrid qu'ils se sont connus.
+
+      ! Calquer le français donne une faute courante : « fue en Madrid que
+      se conocieron » est à éviter dans un écrit soigné ; on reprend le
+      relatif adapté : `donde`, `cuando`, `como`.
+
+  - id: g6-l2
+    title: "No bien, desde que llegara : les temporelles littéraires"
+    notes: |
+      La langue écrite dispose de connecteurs temporels rares, et emploie
+      parfois l'imparfait du subjonctif en `-ra` avec une valeur de passé
+      simple.
+
+      - No bien : « à peine », immédiateté.
+        No bien hubo terminado, se marchó. À peine eut-il fini qu'il partit.
+      - Desde que, hasta que + forme en `-ra` : passé simple de registre journalistique ou littéraire.
+        Es el primer comunicado desde que se produjeran los incidentes. C'est le premier communiqué depuis que les incidents se sont produits.
+      - Même valeur avec un relatif : `el libro que escribiera en su juventud` (le livre qu'il avait écrit dans sa jeunesse).
+      - Coordination de deux temporelles : seulement si elles décrivent le même moment.
+        Me bajé cuando me desperté y vi que era mi parada. Je suis descendu quand je me suis réveillé et que j'ai vu que c'était mon arrêt.
+
+      ! Cette forme en `-ra` reste un indicatif déguisé : on peut toujours
+      la remplacer par le passé simple (`se produjeron`), jamais par une
+      forme en `-se`.

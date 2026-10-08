@@ -1,0 +1,43 @@
+id: c6
+title: Valores raros y participios fuertes
+subtitle: ¡Ya llegaron! ¿Me había llamado el señor? Electo, elegido
+icon: clock
+color: sky
+level: C2
+
+lessons:
+  - id: c6-l1
+    title: "¡Ya llegaron!, ¿me había llamado el señor? : temps décalés"
+    notes: |
+      Chaque temps garde, au C2, quelques emplois **décalés** : un passé
+      pour un fait pas encore accompli, un plus-que-parfait pour une
+      question présente, un présent pour une menace.
+
+      - Passé simple anticipé : l'action est vue comme déjà faite.
+        ¡Ya llegaron! Les voilà ! (dit avant que l'avion ait atterri)
+      - Plus-que-parfait de politesse : la question porte sur maintenant.
+        ¿Me había llamado el señor? Monsieur m'a appelé ?
+      - Présent de menace ou de décision.
+        ¡Antes te mato que dejar que te acerques! Je te tue plutôt que de te laisser approcher !
+      - Présent des légendes de photos, pour un fait passé : `El presidente se dirige a la audiencia.`
+      - Imparfait de constat ironique : `Todo el día buscándolo y mira dónde estaba.`
+
+      ! Le plus-que-parfait de politesse s'emploie surtout dans le service
+      et les rapports hiérarchiques : entre amis, il paraîtrait affecté.
+
+  - id: c6-l2
+    title: "Electo, elegido : participes forts et faibles"
+    notes: |
+      Certains verbes ont gardé un ancien participe **fort**, devenu adjectif
+      ou nom, à côté du participe **faible** régulier, seul employé dans les
+      temps composés. Le C1 a vu les paires où les deux formes cohabitent
+      avec `haber` (`frito`, `impreso`) ; ici, la forme forte ne le peut pas.
+
+      - Elegido / electo : `ha sido elegido`, mais `el presidente electo` (élu, pas encore investi).
+      - Concluido / concluso : `hemos concluido`, mais `el caso queda concluso` (langue juridique).
+      - Abstraído / abstracto : `estaba abstraído` (absorbé), mais `un arte abstracto`.
+      - Corregido / correcto, confundido / confuso, despertado / despierto, soltado / suelto.
+      - Chute du -d- à l'oral familier : `comprao`, `cansao`. À reconnaître, jamais à écrire.
+
+      ! La forme forte ne se met jamais après `haber` : « ha electo », « he
+      despierto » sont fautifs ; `he despertado`.

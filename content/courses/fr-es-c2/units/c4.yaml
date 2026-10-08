@@ -1,0 +1,44 @@
+id: c4
+title: Alternancias de tiempos
+subtitle: Si me hubieras llamado, hubiera ido. Si pudiera, me iba.
+icon: clock
+color: sky
+level: C2
+
+lessons:
+  - id: c4-l1
+    title: "Hubiera ido, debieras : la forme en -ra hors du subjonctif"
+    notes: |
+      La forme en `-ra` vient d'un ancien plus-que-parfait de l'indicatif.
+      Elle en garde des traces : elle peut **remplacer le conditionnel**,
+      jamais la forme en `-se`.
+
+      - Hubiera + participe à la place de `habría` dans la principale d'une hypothèse passée.
+        Si me hubieras llamado, hubiera ido. Si tu m'avais appelé, je serais venu.
+      - Avec `deber`, `poder`, `querer` : `debieras` = `deberías`, `quisiera` = `querría`.
+        Debieras disculparte. Tu devrais t'excuser.
+      - Les trois formes se valent avec `deber` : `deberías`, `debieras`, `debías` (cette dernière, familière).
+      - Dans la condition, `-ra` et `-se` alternent librement : `si me hubieras / hubieses llamado`.
+
+      ! Dans la **principale**, seule la forme en `-ra` remplace le
+      conditionnel : « si me hubieras llamado, hubiese ido » est
+      déconseillé par la norme, même s'il s'entend.
+
+  - id: c4-l2
+    title: "Si pudiera, me iba : l'imparfait à la place du conditionnel"
+    notes: |
+      À l'oral familier, l'imparfait de l'indicatif remplace souvent le
+      conditionnel dans la principale. La phrase gagne en spontanéité et
+      perd en correction formelle.
+
+      - Après une condition au subjonctif imparfait.
+        Si tuviera tiempo, me iba de vacaciones dos meses. Si j'avais le temps, je partirais deux mois en vacances.
+      - Après une condition à l'indicatif passé.
+        Si se quedó hasta las dos, no tenía mucho trabajo. S'il est resté jusqu'à deux heures, il n'avait pas beaucoup de travail.
+      - En Amérique, `ir a` à l'imparfait remplace le conditionnel passé.
+        Si no veníamos, íbamos a quedar mal. Si nous n'étions pas venus, nous aurions fait mauvaise impression.
+      - Présent à la place du conditionnel passé, en Amérique et à l'oral espagnol.
+        Si hubiera estado yo, no te pasa nada. Si j'avais été là, il ne te serait rien arrivé.
+
+      ! Ces substitutions sont à **comprendre**, pas à imiter à l'écrit :
+      un texte soigné garde le conditionnel.

@@ -1,0 +1,46 @@
+id: c1
+title: El futuro de subjuntivo
+subtitle: Sea como fuere, si procediere
+icon: clock
+color: sky
+level: C2
+
+lessons:
+  - id: c1-l1
+    title: "Hablare, comiere, fuere : la forme"
+    notes: |
+      Le futur du subjonctif a disparu de la langue courante, mais il survit
+      dans les **textes juridiques et administratifs** et dans quelques
+      **proverbes**. Sa forme se déduit de l'imparfait du subjonctif : on
+      remplace le `-ra` final par `-re`.
+
+      - Même radical que l'imparfait du subjonctif, donc que la 3e personne du pluriel du passé simple : `hablaron` → `hablare`, `tuvieron` → `tuviere`, `fueron` → `fuere`.
+      - Terminaisons en -ar : `-are`, `-ares`, `-are`, `-áremos`, `-areis`, `-aren`.
+        hablare, hablares, hablare, habláremos, hablareis, hablaren
+      - Terminaisons en -er et -ir : `-iere`, `-ieres`, `-iere`, `-iéremos`, `-iereis`, `-ieren`.
+        comiere, comieres, comiere, comiéremos, comiereis, comieren
+      - Irréguliers, par le passé simple : `fuere` (ser, ir), `hubiere` (haber), `dijere`, `hiciere`, `pudiere`, `quisiere`.
+      - Forme composée : `hubiere` + participe. `si hubiere habido una réplica`.
+
+      ! Ne pas confondre `hablare` (futur du subjonctif) avec `hablara`
+      (imparfait) : une seule lettre les sépare, et seule la forme en `-ra`
+      appartient à la langue courante.
+
+  - id: c1-l2
+    title: "Sea como fuere : les emplois"
+    notes: |
+      Le futur du subjonctif se rencontre en **lecture** ; on ne le produit
+      que pour citer un texte de loi ou une formule figée. Partout ailleurs,
+      il est remplacé par le présent du subjonctif, ou par l'indicatif
+      après `si`.
+
+      - Formules figées : `sea como fuere` (quoi qu'il en soit), `venga lo que viniere` (advienne que pourra).
+      - Proverbe : `donde fueres, haz lo que vieres`.
+        Donde fueres, haz lo que vieres. À Rome, fais comme les Romains.
+      - Langue juridique, dans les conditions et les relatives éventuelles.
+        Si procediere, se aplicará la sanción. S'il y a lieu, la sanction sera appliquée.
+      - Formule administrative : `a quien correspondiere`, aujourd'hui souvent `a quien corresponda` (à qui de droit).
+      - Équivalents courants : `si procede`, `sea como sea`, `donde vayas`.
+
+      ! En Amérique comme en Espagne, ces formes sont **archaïques** :
+      les employer dans une conversation sonne pédant ou parodique.

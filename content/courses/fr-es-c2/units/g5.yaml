@@ -1,0 +1,44 @@
+id: g5
+title: Los matices del modo
+subtitle: Me temo que, ¿acaso lo niegas porque esté él?
+icon: compass
+color: violet
+level: C2
+
+lessons:
+  - id: g5-l1
+    title: "Temerse, decidir, acordar : des verbes à double sens"
+    notes: |
+      Au C1, le mode change le sens de quelques verbes de perception et de
+      parole. Le C2 étend ce jeu à d'autres verbes, dont le sens dépend du
+      mode de la subordonnée.
+
+      - Me temo que + indicatif : « je crains que », au sens d'une supposition qu'on regrette.
+        Me temo que no podré ir. Je crains de ne pas pouvoir venir.
+      - Temer que + subjonctif : la crainte proprement dite.
+        Temo que se haga daño. Je crains qu'il ne se fasse mal.
+      - Decidir, acordar que + indicatif : on décide d'un fait. + subjonctif : on décide qu'une autre personne fera.
+        Acordaron que la reunión era inútil. / Acordaron que la reunión se celebrara en mayo. Ils sont convenus que la réunion était inutile. / Ils ont décidé que la réunion aurait lieu en mai.
+      - Entender que : au C2, l'opposition du C1 se combine avec la négation et le passé.
+        No entendí que estuvieras tan agobiada. Je n'avais pas compris que tu étais si débordée.
+
+      ! `me temo que` + indicatif n'exprime pas la peur : c'est une
+      formule de politesse pour annoncer une mauvaise nouvelle.
+
+  - id: g5-l2
+    title: "Que causal et final, porque interrogatif"
+    notes: |
+      La conjonction `que` seule peut introduire une **cause** ou un **but**
+      à l'oral, et `porque` + subjonctif sert à mettre en doute une cause.
+
+      - Que causal, après un ordre ou une décision : « car », familier.
+        Me voy, que tengo prisa. Je file, je suis pressé.
+      - Que final, après un impératif : « pour que », avec le subjonctif.
+        Habla alto, que te oiga bien. Parle fort, que je t'entende bien.
+      - Para que + subjonctif de déception : le résultat contredit l'effort.
+        Me vestí de gala para que no me hiciera ni caso. Je me suis mis sur mon trente-et-un pour qu'il ne me prête aucune attention.
+      - ¿Acaso…, es que… porque + subjonctif? : on interroge la cause supposée.
+        ¿Es que lo niegas porque esté él delante? Tu le nies parce qu'il est là, c'est ça ?
+
+      ! Le `que` causal ne prend jamais le subjonctif ; le `que` final le
+      prend toujours. Le mode suffit à les distinguer.

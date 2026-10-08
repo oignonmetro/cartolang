@@ -1,0 +1,47 @@
+id: c7
+title: El imperativo
+subtitle: ¡Anda ya! ¡Toma! Grita lo que quieras.
+icon: clock
+color: sky
+level: C2
+
+lessons:
+  - id: c7-l1
+    title: "¡Anda ya!, ¡toma!, fíjate : interjections verbales"
+    notes: |
+      Au C2, le répertoire des impératifs figés s'élargit : ils marquent
+      l'**incrédulité**, la **satisfaction**, l'**admiration** ou servent à
+      relancer le discours.
+
+      - ¡Anda ya!, ¡venga ya! : incrédulité, « tu parles ! ».
+        ¿Que ha aprobado? ¡Anda ya! Il a réussi ? Tu parles !
+      - ¡Toma! : satisfaction devant le malheur d'autrui, ou admiration.
+        ¡Toma, por engreído! Bien fait pour lui, ce prétentieux !
+      - ¡Toma ya! : admiration devant un exploit. `¡Toma ya, qué golazo!`
+      - Fíjate, date cuenta : mots de liaison qui prennent l'interlocuteur à témoin.
+        Fíjate, con todo lo que tiene y se queja. Tu te rends compte, avec tout ce qu'il a, il se plaint.
+      - Anda que no + verbe : affirmation ironique, « et comment que… ».
+        Anda que no sabes tú. Tu en sais des choses, toi.
+      - Mira que + infinitif : reproche. `¡Mira que olvidarte las llaves!`
+
+      ! `anda que no sabes tú` est affirmatif malgré le `no` : il signifie
+      « tu en sais beaucoup ».
+
+  - id: c7-l2
+    title: "Grita lo que quieras, que… : l'impératif concessif"
+    notes: |
+      L'impératif peut aussi **concéder** : « tu peux bien faire ceci, ça ne
+      changera rien ». Une seconde proposition, souvent introduite par
+      `que`, en donne la raison.
+
+      - Impératif + lo que quieras, todo lo que quieras + que : « tu as beau… ».
+        Grita todo lo que quieras, que no me vas a convencer. Tu as beau crier, tu ne me convaincras pas.
+      - Impératif + y : menace, quand l'action est déjà amorcée.
+        Atrévete a hacerlo y verás. Ose seulement le faire, et tu verras.
+      - Impératif + y : promesse.
+        Aprueba las matemáticas y te compro la bicicleta. Réussis en maths et je t'achète le vélo.
+      - Impératif + que + indicatif : avertissement.
+        Deja de interrumpirme, que no te lo cuento. Arrête de m'interrompre, sinon je ne te le raconte pas.
+
+      ! Le sens dépend de la situation : `atrévete y verás` menace, `aprueba
+      y te lo compro` promet, avec la même structure.

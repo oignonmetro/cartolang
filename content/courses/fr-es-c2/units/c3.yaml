@@ -1,0 +1,47 @@
+id: c3
+title: Futuro y condicional expresivos
+subtitle: ¡Será egoísta! Según el comunicado, sería inminente.
+icon: clock
+color: sky
+level: C2
+
+lessons:
+  - id: c3-l1
+    title: "¡Será egoísta!, ¡si lo sabré yo!, ¡tú verás!"
+    notes: |
+      Dans l'exclamation et la question, le futur exprime l'**indignation**,
+      l'**affirmation catégorique** ou le **renvoi de responsabilité**. Il ne
+      parle plus de l'avenir ni de la probabilité.
+
+      - Futur de reproche ou d'étonnement, en exclamation.
+        ¡Será egoísta! Ce qu'il peut être égoïste !
+      - En question négative : « tu ne vas tout de même pas… ».
+        ¿No tendrás el valor de decírselo? Tu n'auras tout de même pas le culot de le lui dire ?
+      - Si + futur : affirmation catégorique, « et comment ! ».
+        ¡Si lo sabré yo! Je suis bien placé pour le savoir !
+      - Futur antérieur, même valeur, sur le passé.
+        ¡No se lo habré advertido yo veces! Je l'ai assez prévenu !
+      - Tú verás, usted sabrá : on laisse l'autre face à sa responsabilité.
+        Tú verás lo que haces. À toi de voir ce que tu fais.
+
+      ! `¡Si lo sabré yo!` n'a rien de conditionnel : le `si` y est
+      exclamatif et n'attend aucune suite.
+
+  - id: c3-l2
+    title: "Según el comunicado, sería inminente : le conditionnel de presse"
+    notes: |
+      Comme en français (« la grève serait imminente »), le conditionnel
+      rapporte une information **sans la garantir**. Il sert aussi à
+      exprimer la crainte sous forme de question.
+
+      - Conditionnel journalistique : information non confirmée.
+        Según el comunicado, la huelga sería inminente. D'après le communiqué, la grève serait imminente.
+      - Conditionnel passé, pour un fait antérieur non confirmé.
+        Los atentados se habrían producido entre las dos y las tres. Les attentats se seraient produits entre deux et trois heures.
+      - Question négative, crainte que l'autre se soit trompé.
+        ¿No pensarías que fui yo? Tu n'as quand même pas cru que c'était moi ?
+      - Même valeur au futur antérieur : `¿no habrás pensado que he sido yo?`.
+
+      ! Ce conditionnel de presse est critiqué par les guides de style
+      espagnols, qui le jugent calqué du français : on le lit, mais
+      `según fuentes…` + indicatif est plus sûr à l'écrit.

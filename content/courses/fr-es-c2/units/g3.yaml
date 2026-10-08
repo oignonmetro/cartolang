@@ -1,0 +1,48 @@
+id: g3
+title: Los relativos literarios y enfáticos
+subtitle: Dondequiera que, hecho lo cual, ¡vaya cara que tiene!
+icon: compass
+color: violet
+level: C2
+
+lessons:
+  - id: g3-l1
+    title: "Dondequiera que, comoquiera que, por doquier"
+    notes: |
+      Le suffixe `-quiera` fabrique des relatifs **indéfinis** de registre
+      cultivé : « où que », « de quelque manière que », « quand que ce soit ».
+      Ils prennent le subjonctif pour l'éventuel, l'indicatif pour l'habituel.
+
+      - Dondequiera que : « où que ».
+        Dondequiera que mires, solo encuentras miseria. Où que tu regardes, tu ne trouves que la misère.
+      - Avec l'indicatif, pour une vérité d'expérience.
+        Dondequiera que voy, encuentro amigos. Partout où je vais, je trouve des amis.
+      - Comoquiera que : « de quelque façon que ».
+        Comoquiera que lo hiciese, siempre lo hacía bien. Quelle que fût sa manière, il le faisait toujours bien.
+      - Cuandoquiera que : « chaque fois que, quel que soit le moment ».
+        Cuandoquiera que llegue, lo recibiremos con los brazos abiertos.
+      - Por doquier : « partout », littéraire.
+        Había pobreza por doquier. Il y avait de la pauvreté partout.
+
+      ! Ces formes sont **écrites** et soutenues : à l'oral, on dit
+      `donde sea que`, `como sea`, `cuando sea`.
+
+  - id: g3-l2
+    title: "Hecho lo cual, asunto que…, ¡vaya cara que tiene!"
+    notes: |
+      La relative peut se **détacher** de sa phrase, reprendre un nom pour le
+      commenter, ou devenir le cœur d'une exclamation.
+
+      - Hecho lo cual : relative absolue, « ce qui fait », style administratif ou narratif.
+        Nos deshicimos de las pruebas. Hecho lo cual, nos marchamos. Nous nous sommes débarrassés des preuves, après quoi nous sommes partis.
+      - Nom repris + que : relance après un point.
+        Hablamos de la crisis. Crisis que nos afectaría a todos. Nous avons parlé de la crise. Une crise qui nous toucherait tous.
+      - Relative exclamative : elle remplace un `qué` ou un `cuánto`.
+        ¡Vaya cara que tiene! A saber el dinero que habrá pagado. Quel culot il a ! Allez savoir combien il a payé.
+      - Yo soy de los que + 3e personne du pluriel : l'accord se fait avec `los que`.
+        Yo soy de los que prefieren callar. Je suis de ceux qui préfèrent se taire.
+      - Relative attribut d'un complément, avec un verbe de perception.
+        La vi que se ponía mala. Je l'ai vue qui se sentait mal.
+
+      ! « Yo soy de los que prefiero » est un accord fréquent à l'oral mais
+      fautif à l'écrit : le verbe suit `los que`, au pluriel.

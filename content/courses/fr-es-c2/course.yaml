@@ -1,0 +1,61 @@
+# Cours d'espagnol C2, pour francophones ayant le niveau C1 (`fr-es-c1`).
+#
+# Contenu calé sur la colonne C2 de l'inventaire de grammaire du Plan
+# curricular del Instituto Cervantes (PCIC) ; voir
+# docs/recherche-espagnol-c1.md. C'est au C2 qu'arrivent les seules formes
+# verbales vraiment nouvelles depuis le B2 : le futur du subjonctif et le
+# passé antérieur. Le reste relève du registre : écrit littéraire,
+# juridique ou journalistique d'un côté, oral très familier de l'autre.
+#
+# Publié en rappels seuls, comme le C1 : les exercices restent à écrire.
+#
+#   grammaire    — g1 concessives et conditions rares, g2 consécutives
+#                  intensives, g3 relatifs littéraires et emphatiques,
+#                  g4 comparaisons soutenues, g5 nuances du mode,
+#                  g6 mise en relief et temporelles littéraires
+#   conjugaison  — c1 futur du subjonctif, c2 passé antérieur, c3 futur et
+#                  conditionnel expressifs, c4 la forme en -ra et
+#                  l'imparfait à la place du conditionnel, c5 infinitif et
+#                  gérondif, c6 valeurs rares et participes forts,
+#                  c7 impératif
+
+id: fr-es-c2
+name: Espagnol
+learning: es
+known: fr
+flag: 🇪🇸
+level: C2
+tagline: "Du registre juridique à l'oral le plus vif : l'espagnol dans toutes ses nuances."
+status: available
+layout: library
+version: 1
+
+tracks:
+  - id: grammaire
+    title: Grammaire
+    subtitle: Registres littéraire, soutenu et familier
+    kind: grammar
+    color: violet
+    icon: compass
+    units:
+      - g1
+      - g2
+      - g3
+      - g4
+      - g5
+      - g6
+
+  - id: conjugaison
+    title: Conjugaison
+    subtitle: Formes rares et valeurs de registre
+    kind: conjugation
+    color: sky
+    icon: clock
+    units:
+      - c1
+      - c2
+      - c3
+      - c4
+      - c5
+      - c6
+      - c7

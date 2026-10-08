@@ -1,0 +1,49 @@
+id: g4
+title: Las comparativas cultas
+subtitle: Tan sincero como yo tonto, cual una sirena
+icon: compass
+color: violet
+level: C2
+
+lessons:
+  - id: g4-l1
+    title: "Es tan sincero como yo tonto : comparer en croisant"
+    notes: |
+      La comparaison du C2 met en regard **deux sujets et deux qualités** à
+      la fois, avec une ellipse du verbe dans le second terme. L'effet est
+      souvent ironique.
+
+      - Tan… como, entre deux sujets et deux qualités.
+        Es tan sincero como yo tonto. Il est aussi sincère que je suis bête.
+      - Tanto… como, avec deux actions différentes.
+        Descansa tanto como yo trabajo. Il se repose autant que je travaille.
+      - Más… que, avec deux quantités d'objets différents.
+        Tiene más libros publicados que yo tesis leídas. Il a publié plus de livres que je n'ai lu de thèses.
+      - Cuanto à la place de `como`, en registre cultivé.
+        Es tan sincero cuanto listo. Il est aussi sincère qu'intelligent.
+      - Cuanto más… (más, menos) : progression proportionnelle ; au futur, le subjonctif.
+        Cuanto más le pides, menos hace. Plus tu lui demandes, moins il en fait.
+      - L'ordre peut s'inverser, la proportion en second.
+        Hará menos cuanto más le pidas. Il en fera d'autant moins que tu lui en demanderas plus.
+
+      ! Dans `cuanto más`, `cuanto` s'accorde devant un nom : `cuantos más
+      problemas`, `cuantas más horas`.
+
+  - id: g4-l2
+    title: "Como… así, cual : la comparaison littéraire"
+    notes: |
+      La langue littéraire construit des comparaisons en deux temps, à la
+      manière de « de même que… ainsi… », et garde le vieux `cual` au sens
+      de « tel, comme ».
+
+      - Como… así : « de même que… de même ».
+        Como el avaro del cuento, así cuentas tú cada día tus monedas. Comme l'avare du conte, tu comptes chaque jour tes pièces.
+      - Así como… así también : registre soutenu, argumentatif.
+        Así como el agua es fuente de vida, así también puede serlo de desastres. De même que l'eau est source de vie, elle peut l'être de désastres.
+      - Cual : « tel, comme », poétique.
+        Cual una sirena, se hundió en las aguas. Telle une sirène, elle s'enfonça dans les eaux.
+      - A lo + nom propre : « à la manière de », familier.
+        Baila a lo Elvis. Il danse à la Elvis.
+
+      ! `cual` comparatif n'a pas d'accent et ne se confond pas avec
+      l'interrogatif `cuál` ni avec le relatif `el cual`.

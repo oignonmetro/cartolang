@@ -1,0 +1,48 @@
+id: g2
+title: Las consecutivas intensivas
+subtitle: De suerte que, conque, es de un patoso…
+icon: compass
+color: violet
+level: C2
+
+lessons:
+  - id: g2-l1
+    title: "De suerte que, conque, a tal extremo que"
+    notes: |
+      Le C2 complète les consécutives par deux extrêmes de registre :
+      `de suerte que`, littéraire, et `conque`, très familier, qui pousse
+      l'interlocuteur à agir.
+
+      - De (tal) suerte que : « de sorte que », registre soutenu.
+        Actuó de tal suerte que todos nos sentimos ofendidos. Il a agi de telle sorte que nous nous sommes tous sentis offensés.
+      - Conque : « alors », familier ; il précède souvent un ordre brusque.
+        No tengo tiempo para tonterías, conque sal de aquí. Je n'ai pas de temps pour les bêtises, alors sors d'ici.
+      - Hasta tal punto que, a tal extremo que : conséquence d'une intensité extrême.
+        Es torpe a tal extremo que tiene que leerlo todo tres veces. Il est maladroit au point de devoir tout lire trois fois.
+      - Conséquence détachée après un point : `La quería. Tanto, que habría dado la vida por ella.`
+      - Indicatif pour la conséquence réelle, subjonctif si la principale est niée.
+        No será tan celoso que no la deje venir. Il ne sera pas jaloux au point de l'empêcher de venir.
+
+      ! `conque` s'écrit en un mot : `con que` (avec lequel) ou `con qué`
+      (avec quoi) sont d'autres mots.
+
+  - id: g2-l2
+    title: "Es de un patoso…, tenía una de trabajo… : l'intensité suspendue"
+    notes: |
+      L'oral expressif annonce une conséquence… et **ne la dit pas** : la
+      phrase reste en suspens, et l'intonation suffit à faire sentir le
+      degré extrême.
+
+      - De un + adjectif (+ que) : « d'un… ». L'article reste masculin singulier.
+        Es de un patoso que ni te imaginas. Il est d'une maladresse inimaginable.
+      - Una de + nom pluriel + que : « tellement de… », sans accord.
+        Tenía una de trabajo que no dormía. Il avait tellement de travail qu'il ne dormait pas.
+      - Si + futur ou conditionnel + que : affirmation exclamative.
+        ¡Si será tonto que se lo creyó! Il faut être bête pour l'avoir cru !
+      - Lo que + futur ou conditionnel, suspendu : hypothèse sur un degré.
+        ¡Lo que tardaría…! Qu'est-ce qu'il a dû mettre comme temps !
+      - Cada + nom + que : « de ces… ».
+        Tiene cada salida que… Il a de ces réparties…
+
+      ! Ces tournures appartiennent à l'**oral familier** : à l'écrit
+      soutenu, on revient à `tan… que`, `tanto… que`.
