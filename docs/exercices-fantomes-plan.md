@@ -1,7 +1,11 @@
-# Exercices fantômes : plan d'intégration (en cours)
+# Exercices fantômes : intégration dans Cartolang
 
 Référence : `C:\Users\Arthur\cartophilo\docs\exercices-fantomes.md` et
-`cartophilo/src/engine/treatises.ts`. Rien n'est encore codé dans Cartolang.
+`cartophilo/src/engine/treatises.ts`. **Intégré le 2026-10-09** : moteur dans
+`src/engine/ghosts.ts` (et `ghosts.test.ts`), notation dans
+`src/screens/SessionScreen.tsx`, routes `LessonRoute`, `StepRoute` et
+`ReviewRoute`, outils communs dans `src/screens/ghostSession.ts`, seau `links`
+et action `gradeLinks` dans `src/store/progressStore.ts`.
 
 ## Décisions de l'utilisateur (2026-10-08)
 
@@ -65,11 +69,31 @@ Référence : `C:\Users\Arthur\cartophilo\docs\exercices-fantomes.md` et
   `buildReviewSession`, `buildPracticeSession`, `consolidationEntries`,
   `lessonDifficulty`, `masteryOf`.
 
-## Prochaines étapes
+## Écarts avec la conception initiale
 
-1. `src/engine/ghosts.ts` et ses tests (reprendre la liste du §8 du document
-   Cartophilo).
-2. Store `links` et `gradeLinks`.
-3. `SessionScreen`, puis `LessonRoute`, `StepRoute`, `ReviewRoute`.
-4. Bibliothèque, puis suppression du code mort, puis vérification dans
-   l'aperçu.
+- Un élément à consolider pèse **une fois en tout** dans le tirage, et non une
+  fois par lien : sinon un mot déjà maîtrisé, à quatre liens, pesait plus
+  lourd qu'un mot entièrement à apprendre (défaut révélé par les tests).
+- Étapes d'unité : lot de 8 éléments (`STEP_ACTIVE_COUNT`), puisque l'étape
+  ne présente rien. Une leçon rejouée alors que tout y est acquis devient une
+  remise à niveau de 10 places.
+- La barre de progression d'une séance compte les places franchies (réussies,
+  présentées ou sautées) : une place ne dit pas d'avance ce qu'elle sera.
+
+## Vérification
+
+- Tests du moteur (`ghosts.test.ts`) :
+  - liens par nature, et maîtrise exigeant chacun d'eux ;
+  - lot de 4, présentations dans l'ordre, entrée immédiate d'un nouvel élément ;
+  - production après le sens, et lien manquant demandé d'abord ;
+  - jamais deux fois le même élément dans une manche ;
+  - consolidation sur deux jours, séance courante exclue ;
+  - remise à niveau sans notation ;
+  - héritage des cartes SM-2.
+- Aperçu, leçon « Saludos » de l'espagnol A1 :
+  - le rappel, puis 4 présentations dans l'ordre ;
+  - puis un QCM sur le sens, avec des leurres pris parmi les mots déjà
+    présentés, puis une manche sur le sens ;
+  - une association fausse a noté une erreur pour les deux éléments concernés,
+    une réussite pour les autres ;
+  - les cartes SM-2 sont créées en parallèle.
