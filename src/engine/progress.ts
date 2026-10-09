@@ -1,6 +1,5 @@
-import { itemsOfLesson, itemsOfUnit, lessonsOf } from '@/content/course'
+import { lessonsOf } from '@/content/course'
 import type { Course, Lesson, Unit } from '@/content/schema'
-import { cardStrength, type CardState } from './srs'
 
 /**
  * Règles de progression.
@@ -9,7 +8,7 @@ import { cardStrength, type CardState } from './srs'
  * qu'un plancher (0 ou 1) qui ne redescend jamais, même après un oubli
  * passager mesuré par ailleurs sur les cartes de révision. Ce n'est pas une
  * note : la maîtrise réelle, elle, se lit sur les anneaux de progression
- * (`masteryOf` et dérivés), qui restent l'indicateur fin de ce qui est
+ * (`linkMastery`, dans `ghosts.ts`), qui restent l'indicateur fin de ce qui est
  * vraiment su.
  *
  * Dans l'agencement `path`, réussir une leçon débloque la suivante.
@@ -80,49 +79,12 @@ export function nextLesson(path: readonly LessonNode[]): LessonNode | null {
 export interface Mastery {
   /** Nombre d'éléments de l'ensemble. */
   total: number
-  /** Éléments déjà rencontrés au moins une fois. */
+  /** Éléments maîtrisés : chacun de leurs liens réussi au moins une fois (voir `ghosts.ts`). */
   seen: number
-  /** Éléments installés durablement (intervalle d'au moins une semaine). */
+  /** Éléments acquis : maîtrisés, et réussis sur deux jours différents. */
   known: number
   /** Part maîtrisée, entre 0 et 1 — c'est ce que montrent les anneaux. */
   ratio: number
-}
-
-export function masteryOf(itemIds: readonly string[], cards: Record<string, CardState>): Mastery {
-  let seen = 0
-  let known = 0
-  for (const id of itemIds) {
-    const card = cards[id]
-    if (!card) continue
-    const strength = cardStrength(card)
-    if (strength !== 'new') seen += 1
-    if (strength === 'known' || strength === 'mastered') known += 1
-  }
-  const total = itemIds.length
-  return { total, seen, known, ratio: total === 0 ? 0 : known / total }
-}
-
-export function lessonMastery(lesson: Lesson, cards: Record<string, CardState>): Mastery {
-  return masteryOf(itemsOfLesson(lesson).map((item) => item.id), cards)
-}
-
-/** Part des éléments connus à partir de laquelle une session passe en production. */
-const DIFFICULTY_RATIO = 0.8
-
-/**
- * Difficulté de la prochaine session d'une leçon, déduite de ce qui est déjà
- * su : 0 découverte, 1 consolidation, 2 production (voir `buildLessonSession`).
- * Ce n'est pas une note affichée à l'apprenant — juste le réglage qui évite de
- * rejouer indéfiniment les exercices d'introduction d'une leçon déjà connue.
- */
-export function lessonDifficulty(lesson: Lesson, cards: Record<string, CardState>): number {
-  const mastery = lessonMastery(lesson, cards)
-  if (mastery.total === 0 || mastery.seen < mastery.total) return 0
-  return mastery.known / mastery.total >= DIFFICULTY_RATIO ? 2 : 1
-}
-
-export function unitMastery(unit: Unit, cards: Record<string, CardState>): Mastery {
-  return masteryOf(itemsOfUnit(unit).map((item) => item.id), cards)
 }
 
 /** Dernière leçon travaillée, pour proposer de reprendre où l'on s'est arrêté. */

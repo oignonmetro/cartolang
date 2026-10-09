@@ -1,13 +1,11 @@
 import { describe, expect, it } from 'vitest'
-import type { PathCourse, Vocab, VocabLesson } from '@/content/schema'
-import { createCard, type CardState } from './srs'
+import type { PathCourse, Vocab } from '@/content/schema'
 import {
   buildPath,
   bumpStreak,
   dayKey,
   displayedStreak,
   isUnitComplete,
-  lessonDifficulty,
   levelFromXp,
   nextLesson,
   xpFor,
@@ -89,41 +87,6 @@ describe('chemin', () => {
     const unit = COURSE.sections[0].units[0]
     expect(isUnitComplete(unit, { l1: at(1) })).toBe(false)
     expect(isUnitComplete(unit, { l1: at(1), l2: at(1) })).toBe(true)
-  })
-})
-
-describe('difficulté d’une leçon', () => {
-  const LESSON: VocabLesson = {
-    kind: 'vocab',
-    id: 'l',
-    title: 'L',
-    vocab: ['a', 'b', 'c', 'd', 'e'].map(vocab),
-  }
-
-  /** Carte sortie d'apprentissage, avec l'intervalle voulu (en jours). */
-  function seen(itemId: string, interval: number): CardState {
-    return { ...createCard(itemId, 0), interval, step: null, lastReviewed: 1 }
-  }
-
-  const cardsOf = (...entries: CardState[]) => Object.fromEntries(entries.map((card) => [card.itemId, card]))
-
-  it('reste en découverte tant qu’un élément n’a pas été vu', () => {
-    const partial = cardsOf(seen('a', 1), seen('b', 1), seen('c', 1), seen('d', 1))
-    expect(lessonDifficulty(LESSON, partial)).toBe(0)
-    // Une carte créée mais jamais répondue ne compte pas comme vue.
-    expect(lessonDifficulty(LESSON, { ...partial, e: createCard('e', 0) })).toBe(0)
-  })
-
-  it('passe en consolidation dès que tout a été vu, sans être encore su', () => {
-    const all = cardsOf(...['a', 'b', 'c', 'd', 'e'].map((id) => seen(id, 1)))
-    expect(lessonDifficulty(LESSON, all)).toBe(1)
-  })
-
-  it('passe en production quand 80 % des éléments tiennent au moins une semaine', () => {
-    const four = ['a', 'b', 'c', 'd'].map((id) => seen(id, 7))
-    expect(lessonDifficulty(LESSON, cardsOf(...four, seen('e', 1)))).toBe(2)
-    // Trois sur cinq restent sous le seuil de 80 %.
-    expect(lessonDifficulty(LESSON, cardsOf(...four.slice(0, 3), seen('d', 1), seen('e', 1)))).toBe(1)
   })
 })
 

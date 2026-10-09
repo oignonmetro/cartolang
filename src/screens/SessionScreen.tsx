@@ -1,7 +1,8 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
-import type { Exercise } from '@/engine/exercises'
+import type { Exercise, GhostExercise } from '@/engine/exercises'
 import { isListeningExercise, isPresentation, itemIdsOf } from '@/engine/exercises'
+import { linkResultsOf } from '@/engine/ghosts'
 import { ratingFromAnswer, type Rating } from '@/engine/srs'
 import { useCourse } from '@/content/CourseProvider'
 import { useProgress } from '@/store/progressStore'
@@ -50,6 +51,13 @@ interface SessionScreenProps {
    */
   kind: UnitNodeKind
   exercises: Exercise[]
+  /**
+   * Forme l'exercice d'une place réservée (`kind: 'ghost'`) au moment où elle
+   * arrive en tête de file, d'après la progression à cet instant ; `null`
+   * quand il n'y a plus rien à faire, et la place est sautée. Voir
+   * `engine/ghosts.ts`.
+   */
+  materialize?: (ghost: GhostExercise) => Exercise | null
   onQuit: () => void
   /** `peakTier` : le plus haut palier de série atteint, voir `useSessionHaptics`. */
   onFinish: (outcome: SessionOutcome, peakTier: number) => void
@@ -116,6 +124,7 @@ function SessionRunner({
   title,
   kind,
   exercises,
+  materialize,
   onQuit,
   onFinish,
   haptics,
@@ -124,6 +133,7 @@ function SessionRunner({
 }: SessionScreenProps & { haptics: SessionHaptics; combo: SessionCombo; peakTier: () => number }) {
   const { course } = useCourse()
   const gradeItem = useProgress((state) => state.gradeItem)
+  const gradeLinks = useProgress((state) => state.gradeLinks)
   const mutedUntil = useListeningMuteStore((state) => state.mutedUntil)
   const muteListening = useListeningMuteStore((state) => state.muteListening)
   const [queue, setQueue] = useState<Exercise[]>(exercises)
@@ -131,16 +141,37 @@ function SessionRunner({
   const [attempt, setAttempt] = useState<Attempt>({ seen: new Set(), correct: 0, total: 0 })
   const [confirmQuit, setConfirmQuit] = useState(false)
 
-  const current = queue[position]
+  // Ce qui a quitté la file pour de bon — réussi, présenté ou sauté —, pour la
+  // barre de progression : une place réservée ne dit pas d'avance si elle sera
+  // une présentation, un exercice noté, ou rien du tout.
+  const [cleared, setCleared] = useState<ReadonlySet<string>>(() => new Set())
+
+  // Une place réservée se forme la première fois qu'elle arrive en tête de
+  // file — après toutes les réponses précédentes, donc d'après la progression
+  // à jour —, puis reste la même tant qu'elle est à l'écran ou qu'elle revient
+  // après une erreur. L'exercice formé garde l'identifiant de la place : la
+  // file, le compte des premiers essais et le retour d'un exercice raté n'ont
+  // rien à savoir de plus.
+  const formed = useRef(new Map<string, Exercise | null>())
+  const queued = queue[position]
+  let current: Exercise | undefined = queued
+  if (queued?.kind === 'ghost') {
+    if (!formed.current.has(queued.id)) formed.current.set(queued.id, materialize?.(queued) ?? null)
+    current = formed.current.get(queued.id) ?? undefined
+  }
+  // Une place qui ne trouve plus rien à faire est sautée sans rien afficher.
+  const mustSkipGhost = queued !== undefined && current === undefined
   // Un exercice à l'oreille pendant la sourdine : ni pénalité ni note, il n'a
   // simplement pas eu lieu cette fois — voir `useListeningMuteStore`.
   const mustSkipListening = current !== undefined && isListeningExercise(current) && isListeningMuted(mutedUntil)
   const graded = useMemo(() => exercises.filter((exercise) => !isPresentation(exercise)).length, [exercises])
-  const progress = graded === 0 ? 1 : Math.min(1, attempt.seen.size / graded)
+  const progress = exercises.length === 0 ? 1 : Math.min(1, cleared.size / exercises.length)
 
   /** Avance dans la file, en réinsérant l'exercice raté un peu plus loin. */
   const advance = useCallback(
     (requeue: boolean) => {
+      const leaving = queue[position]
+      if (!requeue && leaving) setCleared((state) => new Set(state).add(leaving.id))
       setQueue((current_) => {
         if (!requeue) return current_
         const exercise = current_[position]
@@ -151,7 +182,7 @@ function SessionRunner({
       })
       setPosition((index) => index + 1)
     },
-    [position],
+    [position, queue],
   )
 
   const record = useCallback(
@@ -188,12 +219,15 @@ function SessionRunner({
   // d'un rendu suffirait à un `SpeakButton auto` à parler avant d'être
   // démonté, ce que la coupure existe justement pour éviter.
   useEffect(() => {
-    if (mustSkipListening) advance(false)
-  }, [mustSkipListening, advance])
+    if (mustSkipListening || mustSkipGhost) advance(false)
+  }, [mustSkipListening, mustSkipGhost, advance])
 
   const answer = useCallback(
     (exercise: Exercise, correct: boolean, rating?: Rating) => {
       const firstTry = !attempt.seen.has(exercise.id)
+      // Les liens d'abord : c'est la carte d'avant cette réponse qui dit si
+      // l'élément hérite d'un acquis antérieur (voir `gradeLinks`).
+      gradeLinks(course.id, linkResultsOf(exercise, correct, firstTry))
       for (const itemId of itemIdsOf(exercise)) {
         gradeItem(course.id, itemId, rating ?? ratingFromAnswer(correct, firstTry))
       }
@@ -209,13 +243,15 @@ function SessionRunner({
       // l'oublier est redevenu possible.
       advance(!correct && rating === undefined)
     },
-    [advance, attempt.seen, course.id, gradeItem, record],
+    [advance, attempt.seen, course.id, gradeItem, gradeLinks, record],
   )
 
   const answerMatch = useCallback(
     (exercise: Exercise, missedItemIds: string[]) => {
       const missed = new Set(missedItemIds)
       const firstTry = !attempt.seen.has(exercise.id)
+      // Une note par paire : chaque élément de la manche est noté pour lui-même.
+      gradeLinks(course.id, linkResultsOf(exercise, missed.size === 0, firstTry, missed))
       for (const itemId of itemIdsOf(exercise)) {
         gradeItem(course.id, itemId, missed.has(itemId) ? 'again' : ratingFromAnswer(true, firstTry))
       }
@@ -233,19 +269,19 @@ function SessionRunner({
       // Les paires sont toutes trouvées à la fin : inutile de rejouer la manche.
       advance(false)
     },
-    [advance, attempt.seen, course.id, gradeItem, haptics, record],
+    [advance, attempt.seen, course.id, gradeItem, gradeLinks, haptics, record],
   )
 
   // La file est vide : la session est terminée. Le drapeau évite que le rendu
   // suivant ne déclenche une seconde clôture.
   const finished = useRef(false)
   useEffect(() => {
-    if (current || finished.current) return
+    if (queued || finished.current) return
     finished.current = true
     const outcome = { correct: attempt.correct, total: attempt.total }
     haptics.finished(outcome)
     onFinish(outcome, peakTier())
-  }, [attempt.correct, attempt.total, current, haptics, onFinish, peakTier])
+  }, [attempt.correct, attempt.total, queued, haptics, onFinish, peakTier])
 
   // Quitter une session en cours de prononciation laisserait la voix courir
   // sur l'écran suivant, qui n'a plus rien à voir avec le mot.
@@ -283,7 +319,7 @@ function SessionRunner({
         {/* Une lecture seule n'a rien à compter : « 0/0 » ferait croire à un bug. */}
         {graded > 0 && (
           <span className="w-12 text-right text-sm font-extrabold text-ink-faint">
-            {attempt.seen.size}/{graded}
+            {cleared.size}/{exercises.length}
           </span>
         )}
         {/* Seul repère de ce qui vient de se passer : sans lui, les

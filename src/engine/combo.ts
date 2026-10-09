@@ -75,6 +75,9 @@ export function effortOf(exercise: Exercise): number {
     case 'rule':
     case 'intro':
     case 'flashcard':
+    // Une place réservée n'est jamais jouée telle quelle : c'est l'exercice
+    // formé à sa place qui compte.
+    case 'ghost':
       return 0
 
     // Reconnaître parmi des options proposées : la forme la plus assistée.

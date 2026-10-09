@@ -1,16 +1,17 @@
-import { useMemo, useState } from 'react'
+import { useCallback, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useCourse } from '@/content/CourseProvider'
-import { buildReviewSession } from '@/engine/exercises'
+import { itemsOfCourse } from '@/content/course'
+import type { GhostExercise } from '@/engine/exercises'
+import { ACTIVE_COUNT, ghostsFor, materializeGhost, type GhostScope } from '@/engine/ghosts'
 import type { SessionOutcome } from '@/engine/progress'
-import { dueCards, type CardState } from '@/engine/srs'
-import { canSpeakExercises } from '@/lib/speech'
+import { dueCards } from '@/engine/srs'
 import { EMPTY_CARDS, useProgress } from '@/store/progressStore'
+import { ghostOptionsFor, ghostStateOf } from './ghostSession'
 import { SessionScreen } from './SessionScreen'
 import { SessionResult } from './SessionResult'
 import { Button } from '@/components/Button'
 import { Mascot } from '@/components/Mascot'
-import type { PracticeItem } from '@/content/schema'
 
 /** Nombre maximal d'éléments par session de révision : on garde des sessions courtes. */
 const REVIEW_LIMIT = 15
@@ -27,14 +28,30 @@ export function ReviewRoute() {
   // confondues — mélanger vocabulaire, grammaire et conjugaison ancre mieux
   // que réviser chaque nature d'un bloc. `cards` est déjà restreint au cours
   // affiché.
-  const [entries] = useState<{ card: CardState; item: PracticeItem }[]>(() =>
-    dueCards(Object.values(cards), Date.now(), REVIEW_LIMIT).map((card) => ({
-      card,
-      item: itemsById.get(card.itemId)!.item,
-    })),
-  )
+  //
+  // Les échéances décident de *quels* éléments revoir ; ce que chaque place
+  // leur demande se décide à son ouverture, par le lien qui leur reste le plus
+  // à réussir (voir `engine/ghosts.ts`).
+  const [session] = useState(() => {
+    const due = dueCards(Object.values(cards), Date.now(), REVIEW_LIMIT).flatMap((card) => {
+      const location = itemsById.get(card.itemId)
+      return location ? [location.item] : []
+    })
+    const scope: GhostScope = { items: due, distractors: itemsOfCourse(course) }
+    return { seed: Date.now(), served: new Map<string, number>(), scope, exercises: ghostsFor(due.length) }
+  })
 
-  const exercises = useMemo(() => buildReviewSession(entries, undefined, canSpeakExercises()), [entries])
+  const materialize = useCallback(
+    (ghost: GhostExercise) =>
+      materializeGhost(
+        ghost,
+        session.scope,
+        ghostStateOf(course.id),
+        ghostOptionsFor(session.seed, session.served, { mode: 'review', allowIntro: false, activeCount: ACTIVE_COUNT }),
+      ),
+    [session, course.id],
+  )
+  const exercises = session.exercises
 
   if (finished) {
     return (
@@ -67,6 +84,7 @@ export function ReviewRoute() {
       title="Révision"
       kind="review"
       exercises={exercises}
+      materialize={materialize}
       onQuit={() => navigate('/', { replace: true })}
       onFinish={(outcome, peakTier) => setFinished({ outcome, peakTier, ...finishReview(outcome) })}
     />

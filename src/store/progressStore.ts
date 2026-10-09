@@ -12,6 +12,7 @@ import {
   type Streak,
 } from '@/engine/progress'
 import { createCard, DAY, review, type CardState, type Rating } from '@/engine/srs'
+import { applyLinkResult, type LinkProgress, type LinkResult } from '@/engine/ghosts'
 
 /**
  * État de l'apprenant.
@@ -59,6 +60,12 @@ export interface ProgressSnapshot {
   cards: CourseBucket<Record<string, CardState>>
   /** Étapes de parcours franchies : clé `unité:nœud` → nombre de passages. */
   steps: CourseBucket<Record<string, number>>
+  /**
+   * Maîtrise lien par lien de chaque élément (voir `engine/ghosts.ts`). Sans
+   * changement de format : une sauvegarde qui n'a pas ce champ le reçoit vide,
+   * et les éléments déjà appris y comptent par leur carte de révision.
+   */
+  links: CourseBucket<LinkProgress>
   xp: number
   xpByDay: Record<string, number>
   dailyGoal: number
@@ -108,12 +115,23 @@ export interface ProgressSnapshot {
 interface ProgressState extends ProgressSnapshot {
   /** Enregistre la réponse à un élément et met à jour sa carte de révision. */
   gradeItem: (courseId: string, itemId: string, rating: Rating, now?: number) => void
-  /** Clôt une session de leçon : plancher d'acquisition, XP, série. */
+  /**
+   * Enregistre des réponses lien par lien. À appeler avant `gradeItem` pour la
+   * même réponse : c'est l'état de la carte avant elle qui dit si l'élément
+   * hérite d'un acquis antérieur (voir `legacyOf`).
+   */
+  gradeLinks: (courseId: string, results: readonly LinkResult[]) => void
+  /**
+   * Clôt une session de leçon : plancher d'acquisition, XP, série. `mastered`
+   * dit si tous les éléments de la leçon sont maîtrisés ; c'est alors lui, et
+   * non le taux de réussite, qui décide de la réussite.
+   */
   finishLesson: (
     courseId: string,
     lessonId: string,
     outcome: SessionOutcome,
     now?: number,
+    mastered?: boolean,
   ) => { passed: boolean; xp: number }
   /** Clôt une session de révision : XP et série, sans toucher au chemin. */
   finishReview: (outcome: SessionOutcome, now?: number) => { xp: number }
@@ -158,11 +176,13 @@ interface ProgressState extends ProgressSnapshot {
 export const EMPTY_LESSON_PROGRESS: LessonProgressMap = {}
 export const EMPTY_CARDS: Record<string, CardState> = {}
 export const EMPTY_STEPS: Record<string, number> = {}
+export const EMPTY_LINKS: LinkProgress = {}
 
 const initial: ProgressSnapshot = {
   lessons: {},
   cards: {},
   steps: {},
+  links: {},
   xp: 0,
   xpByDay: {},
   dailyGoal: 30,
@@ -389,9 +409,18 @@ export const useProgress = create<ProgressState>()(
           return { cards: { ...state.cards, [courseId]: { ...bucket, [itemId]: review(card, rating, now) } } }
         }),
 
-      finishLesson: (courseId, lessonId, outcome, now = Date.now()) => {
+      gradeLinks: (courseId, results) =>
+        set((state) => {
+          if (results.length === 0) return {}
+          const bucket = { ...(state.links[courseId] ?? {}) }
+          const cards = state.cards[courseId] ?? {}
+          for (const result of results) bucket[result.id] = applyLinkResult(bucket[result.id], result, cards[result.id])
+          return { links: { ...state.links, [courseId]: bucket } }
+        }),
+
+      finishLesson: (courseId, lessonId, outcome, now = Date.now(), mastered) => {
         const state = get()
-        const passed = isPassed(outcome)
+        const passed = mastered ?? isPassed(outcome)
         const bucket = state.lessons[courseId] ?? {}
         const previous = bucket[lessonId]
         // Le plancher ne descend jamais : une fois réussie, une leçon reste
@@ -474,7 +503,7 @@ export const useProgress = create<ProgressState>()(
       setTheme: (theme) => set({ theme }),
 
       exportSave: () => {
-        const { lessons, cards, steps, xp, xpByDay, dailyGoal, streak, autoSpeak, sounds, haptics, targetedCorrection, theme } =
+        const { lessons, cards, steps, links, xp, xpByDay, dailyGoal, streak, autoSpeak, sounds, haptics, targetedCorrection, theme } =
           get()
         return JSON.stringify(
           {
@@ -483,6 +512,7 @@ export const useProgress = create<ProgressState>()(
             lessons,
             cards,
             steps,
+            links,
             xp,
             xpByDay,
             dailyGoal,
@@ -504,6 +534,7 @@ export const useProgress = create<ProgressState>()(
           lessons?: unknown
           cards?: unknown
           steps?: unknown
+          links?: unknown
           xp?: number
           xpByDay?: Record<string, number>
           dailyGoal?: number
@@ -553,6 +584,7 @@ export const useProgress = create<ProgressState>()(
           lessons,
           cards,
           steps: migrateAlphabetSteps(steps),
+          links: (parsed.links as ProgressSnapshot['links']) ?? {},
           xp: parsed.xp ?? 0,
           xpByDay: parsed.xpByDay ?? {},
           dailyGoal: parsed.dailyGoal ?? initial.dailyGoal,
@@ -614,6 +646,7 @@ export const useProgress = create<ProgressState>()(
         lessons,
         cards,
         steps,
+        links,
         xp,
         xpByDay,
         dailyGoal,
@@ -627,6 +660,7 @@ export const useProgress = create<ProgressState>()(
         lessons,
         cards,
         steps,
+        links,
         xp,
         xpByDay,
         dailyGoal,

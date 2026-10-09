@@ -1,7 +1,6 @@
-import type { ItemLocation } from '@/content/course'
 import { isReadingOnly, itemsOfUnit, lessonCountLabel } from '@/content/course'
-import type { Lesson, PracticeItem, Unit } from '@/content/schema'
-import { dueCards, type CardState } from './srs'
+import type { Lesson, Unit } from '@/content/schema'
+import type { CardState } from './srs'
 import { levelOf, type LessonProgressMap } from './progress'
 
 /**
@@ -139,26 +138,6 @@ export function currentDestination(unitId: string, path: readonly UnitPathNode[]
 }
 
 /**
- * Rang d'une leçon dans son unité : zéro pour la première.
- *
- * C'est la mesure d'avancement dont les manches d'association tirent leur
- * difficulté (voir `buildLessonSession`) : elles grandissent au fil de
- * l'unité, une leçon connaissant mieux son terrain que la précédente.
- *
- * Zéro pour une leçon étrangère à l'unité : c'est le plancher, donc le repli
- * le plus doux qu'un appel malformé puisse recevoir.
- */
-export function sectionRank(unit: Unit, lessonId: string): number {
-  const rank = unit.lessons.findIndex((lesson) => lesson.id === lessonId)
-  return rank === -1 ? 0 : rank
-}
-
-export interface ConsolidationEntry {
-  card: CardState
-  item: PracticeItem
-}
-
-/**
  * Solidité d'une carte : plus le nombre est bas, plus elle est fragile.
  *
  * Une carte encore en apprentissage vaut zéro — rien n'est acquis tant qu'elle
@@ -169,39 +148,4 @@ export interface ConsolidationEntry {
 export function solidity(card: CardState): number {
   const base = card.step === null ? Math.max(card.interval, 1) : 0
   return base / (1 + card.lapses)
-}
-
-/**
- * Éléments d'une étape de consolidation.
- *
- * D'abord ce qui est échu — c'est la révision espacée qui décide de l'urgence,
- * et ce sont naturellement les autres unités déjà travaillées qui remontent
- * ici avec le temps. Puis, pour compléter, les cartes les plus fragiles : au
- * tout début, quand rien d'extérieur n'est encore échu, une étape
- * d'entraînement porte donc sur l'unité en cours et ses points faibles, ce
- * qui est exactement ce qu'on veut à ce moment-là.
- */
-export function consolidationEntries(
-  cards: Record<string, CardState>,
-  itemsById: Map<string, ItemLocation>,
-  options: { scope: 'unit' | 'course'; unitItemIds: readonly string[]; now: number; limit: number },
-): ConsolidationEntry[] {
-  const inUnit = new Set(options.unitItemIds)
-
-  const pool = Object.values(cards).filter((card) => {
-    if (!itemsById.has(card.itemId)) return false
-    // Jamais répondu : il n'y a rien à consolider, seulement à découvrir.
-    if (card.lastReviewed === null) return false
-    return options.scope === 'course' || inUnit.has(card.itemId)
-  })
-
-  const due = dueCards(pool, options.now)
-  const dueIds = new Set(due.map((card) => card.itemId))
-  const rest = pool
-    .filter((card) => !dueIds.has(card.itemId))
-    .sort((a, b) => solidity(a) - solidity(b))
-
-  return [...due, ...rest]
-    .slice(0, options.limit)
-    .map((card) => ({ card, item: itemsById.get(card.itemId)!.item }))
 }

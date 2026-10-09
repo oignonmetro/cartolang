@@ -1,15 +1,27 @@
-import { useMemo, useState } from 'react'
+import { useCallback, useMemo, useState } from 'react'
 import { Navigate, useNavigate, useParams } from 'react-router-dom'
 import { useCourse } from '@/content/CourseProvider'
-import { buildLessonSession, lessonProgress } from '@/engine/exercises'
-import { seedFrom } from '@/engine/rng'
-import { findLesson, isReadingOnly } from '@/content/course'
-import { lessonDifficulty, type SessionOutcome } from '@/engine/progress'
-import { buildUnitPath, nextNodeAfter, sectionRank } from '@/engine/unitPath'
+import type { Exercise, GhostExercise } from '@/engine/exercises'
+import {
+  ACTIVE_COUNT,
+  ghostsFor,
+  hasLearnWork,
+  isPresented,
+  isValidated,
+  lessonGhostCount,
+  materializeGhost,
+  type GhostMode,
+} from '@/engine/ghosts'
+import { findLesson, isReadingOnly, itemsOfLesson } from '@/content/course'
+import type { SessionOutcome } from '@/engine/progress'
+import { buildUnitPath, nextNodeAfter } from '@/engine/unitPath'
 import { useProgress } from '@/store/progressStore'
-import { canSpeakExercises } from '@/lib/speech'
+import { canHearNow, distractorsFor, ghostOptionsFor, ghostStateOf } from './ghostSession'
 import { SessionScreen } from './SessionScreen'
 import { SessionResult } from './SessionResult'
+
+/** Places d'une leçon rejouée quand tout y est déjà acquis : une remise à niveau courte. */
+const PRACTICE_COUNT = 10
 
 interface Finished {
   outcome: SessionOutcome
@@ -36,34 +48,58 @@ function LessonSession({ lessonId }: { lessonId: string }) {
 
   const entry = useMemo(() => findLesson(course, lessonId), [course, lessonId])
 
-  // La difficulté suit ce qui est réellement su : rejouer une leçon déjà
-  // solide donne d'emblée de la production, la découvrir donne la
-  // présentation. Figée à l'ouverture pour que les réponses de la session en
-  // cours ne la fassent pas varier en cours de route.
-  const [level] = useState(() =>
-    entry ? lessonDifficulty(entry.lesson, useProgress.getState().cards[course.id] ?? {}) : 0,
-  )
-
-  // La graine change à chaque tentative pour que « Recommencer » rebatte les cartes.
+  // Chaque tentative est une nouvelle séance : nouvelle graine, donc nouvel
+  // identifiant de séance, ce qui compte pour la consolidation.
   const [attempt, setAttempt] = useState(0)
   const [finished, setFinished] = useState<Finished | null>(null)
 
-  const exercises = useMemo(() => {
-    if (!entry) return []
-    const cards = useProgress.getState().cards[course.id] ?? {}
-    return buildLessonSession(
-      entry.lesson,
-      level,
-      // L'avancement entre dans la graine : rouvrir une leçon un autre jour ne
-      // doit pas redonner la même session, exercice pour exercice.
-      seedFrom(entry.lesson.id, level, attempt, lessonProgress(entry.lesson, cards)),
-      cards,
-      canSpeakExercises(),
-      sectionRank(entry.unit, entry.lesson.id),
-    )
-  }, [entry, attempt, level, course.id])
+  const scope = useMemo(
+    () => (entry ? { items: itemsOfLesson(entry.lesson), distractors: distractorsFor(course, entry.unit) } : null),
+    [course, entry],
+  )
 
-  if (!entry) return <Navigate to="/" replace />
+  // Des places réservées, pas des exercices : chacune se forme au moment de
+  // l'ouvrir, d'après ce que les réponses précédentes ont appris (voir
+  // `engine/ghosts.ts`). Le rappel de cours, lui, ouvre la leçon tant qu'un de
+  // ses éléments reste à découvrir.
+  const session = useMemo(() => {
+    const seed = Date.now() + attempt
+    const served = new Map<string, number>()
+    if (!entry || !scope) return null
+    const state = ghostStateOf(course.id)
+    const base = ghostOptionsFor(seed, served, { mode: 'learn', allowIntro: true, activeCount: ACTIVE_COUNT })
+    const mode: GhostMode = hasLearnWork(scope, state, base) ? 'learn' : 'practice'
+    const { lesson } = entry
+    const readingOnly = isReadingOnly(lesson)
+    const discovering = readingOnly || scope.items.some((item) => !isPresented(state.progress[item.id], state.cards[item.id]))
+    const rule: Exercise[] =
+      lesson.notes && discovering
+        ? [{ kind: 'rule', id: `rule:${lesson.id}`, title: lesson.title, notes: lesson.notes, topic: lesson.kind }]
+        : []
+    const count = readingOnly ? 0 : mode === 'learn' ? lessonGhostCount(scope.items, state, base.canSpeak) : PRACTICE_COUNT
+    return { seed, served, mode, exercises: [...rule, ...ghostsFor(count)] }
+    // `attempt` relance une séance neuve.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [attempt, entry, scope, course.id])
+
+  const materialize = useCallback(
+    (ghost: GhostExercise) =>
+      session && scope
+        ? materializeGhost(
+            ghost,
+            scope,
+            ghostStateOf(course.id),
+            ghostOptionsFor(session.seed, session.served, {
+              mode: session.mode,
+              allowIntro: true,
+              activeCount: ACTIVE_COUNT,
+            }),
+          )
+        : null,
+    [session, scope, course.id],
+  )
+
+  if (!entry || !session || !scope) return <Navigate to="/" replace />
 
   const unit = entry.unit
   const backHome = () => navigate('/', { replace: true })
@@ -108,7 +144,8 @@ function LessonSession({ lessonId }: { lessonId: string }) {
       key={attempt}
       title={entry.lesson.title}
       kind="lesson"
-      exercises={exercises}
+      exercises={session.exercises}
+      materialize={materialize}
       onQuit={backHome}
       onFinish={(outcome, peakTier) => {
         if (isReadingOnly(entry.lesson)) {
@@ -131,7 +168,14 @@ function LessonSession({ lessonId }: { lessonId: string }) {
           )
           return
         }
-        const result = finishLesson(course.id, lessonId, outcome)
+        // La leçon est réussie quand chacun de ses éléments est maîtrisé, lien
+        // par lien ; l'oreille n'est exigée que si l'écoute est possible.
+        const state = ghostStateOf(course.id)
+        const hearing = canHearNow()
+        const mastered = scope.items.every((item) =>
+          isValidated(item, state.progress[item.id], state.cards[item.id], hearing),
+        )
+        const result = finishLesson(course.id, lessonId, outcome, undefined, mastered)
         setFinished({ outcome, peakTier, ...result })
       }}
     />

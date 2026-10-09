@@ -4,10 +4,12 @@ import { AnimatePresence, motion } from 'framer-motion'
 import type { LibraryCourse, Track, Unit } from '@/content/schema'
 import { countLabel, courseLabel, itemsOfUnit, unitLetters } from '@/content/course'
 import type { LessonProgressMap } from '@/engine/progress'
-import { dayKey, displayedStreak, levelFromXp, masteryOf, unitMastery } from '@/engine/progress'
+import { dayKey, displayedStreak, levelFromXp } from '@/engine/progress'
+import { linkMastery } from '@/engine/ghosts'
+import { canSpeakExercises } from '@/lib/speech'
 import { buildUnitPath, currentDestination } from '@/engine/unitPath'
 import { dueCards } from '@/engine/srs'
-import { EMPTY_CARDS, EMPTY_LESSON_PROGRESS, EMPTY_STEPS, useProgress } from '@/store/progressStore'
+import { EMPTY_CARDS, EMPTY_LESSON_PROGRESS, EMPTY_LINKS, EMPTY_STEPS, useProgress } from '@/store/progressStore'
 import { useCourse } from '@/content/CourseProvider'
 import { availableCourses } from '@/content/loader'
 import { ProgressRing } from '@/components/ProgressRing'
@@ -96,6 +98,7 @@ export function LibraryScreen({ course }: { course: LibraryCourse }) {
   const lessons = useProgress((state) => state.lessons[course.id] ?? EMPTY_LESSON_PROGRESS)
   const steps = useProgress((state) => state.steps[course.id] ?? EMPTY_STEPS)
   const cards = useProgress((state) => state.cards[course.id] ?? EMPTY_CARDS)
+  const links = useProgress((state) => state.links[course.id] ?? EMPTY_LINKS)
   const xp = useProgress((state) => state.xp)
   const streak = useProgress((state) => state.streak)
 
@@ -137,11 +140,14 @@ export function LibraryScreen({ course }: { course: LibraryCourse }) {
   const { level } = levelFromXp(xp)
   const currentStreak = displayedStreak(streak, dayKey(Date.now()))
 
-  const trackItemIds = useMemo(
-    () => track.units.flatMap((unit) => itemsOfUnit(unit).map((item) => item.id)),
-    [track],
+  // La maîtrise se lit lien par lien (voir `engine/ghosts.ts`) : l'anneau
+  // compte les éléments acquis, son arc clair ceux déjà maîtrisés.
+  const ghostState = useMemo(() => ({ progress: links, cards }), [links, cards])
+  const canSpeak = canSpeakExercises()
+  const trackMastery = useMemo(
+    () => linkMastery(track.units.flatMap(itemsOfUnit), ghostState, canSpeak),
+    [track, ghostState, canSpeak],
   )
-  const trackMastery = useMemo(() => masteryOf(trackItemIds, cards), [trackItemIds, cards])
 
   // Toutes pistes confondues : mélanger vocabulaire, grammaire et
   // conjugaison ancre mieux qu'une révision par nature d'exercice. `cards`
@@ -205,7 +211,7 @@ export function LibraryScreen({ course }: { course: LibraryCourse }) {
               key={unit.id}
               unit={unit}
               tone={tone}
-              mastery={unitMastery(unit, cards)}
+              mastery={linkMastery(itemsOfUnit(unit), ghostState, canSpeak)}
               done={doneNodes(unit, lessons, steps)}
               onOpen={() => openUnit(unit)}
             />
