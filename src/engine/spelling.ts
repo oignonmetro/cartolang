@@ -57,11 +57,36 @@ const FOLDS: Record<string, Fold> = {
   ary: foldDarija,
 }
 
+/**
+ * Langues dont la graphie se compare au signe près, et ne se tape pas.
+ *
+ * Le français appris par un francophone n'est pas une langue étrangère mais
+ * sa norme écrite : le code orthotypographique (`fr-typo`). Ce qu'il enseigne
+ * — majuscule, point d'abréviation, espace avant le deux-points, guillemets
+ * « » plutôt que " " — est justement ce que la comparaison ordinaire ignore
+ * (voir `normalizeForm`). Ces signes ne se tapent pas non plus sur un clavier
+ * ordinaire — espace insécable, tiret, apostrophe courbe —, à la différence
+ * des lettres russes, qu'un clavier russe donne : les formes s'y choisissent,
+ * elles ne se saisissent jamais.
+ */
+const EXACT = new Set(['fr'])
+
 let active: Fold = identity
+let exact = false
 
 /** Appelé au chargement d'un cours (voir `CourseProvider`). */
 export function setSpellingLanguage(learning: string): void {
   active = FOLDS[learning] ?? identity
+  exact = EXACT.has(learning)
+}
+
+/**
+ * La langue apprise se compare-t-elle au signe près (casse, ponctuation,
+ * espaces comprises) ? Vaut aussi : ses formes ne se tapent pas, elles se
+ * choisissent toujours parmi des options.
+ */
+export function isExactSpelling(): boolean {
+  return exact
 }
 
 /** Forme canonique d'une saisie déjà normalisée (casse, accents, ponctuation). */

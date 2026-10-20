@@ -1,0 +1,101 @@
+id: p2
+title: "Tirets, traits d'union, parenthèses"
+subtitle: "Les signes qui encadrent et qui lient"
+icon: wave
+color: teal
+
+lessons:
+  - id: p2-l1
+    title: "Tiret et trait d'union"
+    notes: |
+      Le **trait d'union** (-), court, lie des mots sans espace. Le **tiret** (–),
+      plus long, isole une incise : il est entouré d'espaces insécables du côté
+      du texte qu'il encadre.
+
+      - Incise au milieu de la phrase : un tiret qui ouvre, un tiret qui ferme.
+        Ce roman – mon préféré – est enfin traduit.
+      - Incise en fin de phrase : le tiret fermant disparaît devant le point.
+        Il est revenu – enfin.
+      - Trait d'union : dans l'inversion du sujet, avec le « t » euphonique.
+        Viendra-t-il demain ?
+
+      ! Le « t » euphonique n'est pas une élision : jamais d'apostrophe dans
+      « viendra-t-il ».
+    points:
+      - id: p2-incise
+        sentence: "Ce roman ___ est enfin traduit."
+        answer: "–\u00a0mon préféré\u00a0–"
+        options:
+          - "–\u00a0mon préféré\u00a0–"
+          - "-\u00a0mon préféré\u00a0-"
+          - "–mon préféré–"
+        explanation: "L'incise s'isole entre deux tirets, espacés du texte qu'ils encadrent."
+      - id: p2-incise-fin
+        sentence: "Il est revenu ___"
+        answer: "–\u00a0enfin."
+        options:
+          - "–\u00a0enfin."
+          - "–\u00a0enfin\u00a0–."
+        explanation: "En fin de phrase, le tiret fermant se fond dans le point."
+      - id: p2-t-euphonique
+        sentence: "___ demain\u00a0?"
+        answer: "Viendra-t-il"
+        options:
+          - "Viendra-t-il"
+          - "Viendra-t'il"
+          - "Viendra t-il"
+        explanation: "Le «\u00a0t\u00a0» euphonique s'encadre de deux traits d'union, sans apostrophe."
+      - id: p2-c-est-a-dire
+        sentence: "Il viendra jeudi, ___ dans trois jours."
+        answer: "c'est-à-dire"
+        options:
+          - "c'est-à-dire"
+          - "c'est à dire"
+          - "c'est-à dire"
+        explanation: "«\u00a0C'est-à-dire\u00a0» s'écrit avec deux traits d'union."
+  - id: p2-l2
+    title: "Parenthèses et crochets"
+    notes: |
+      Les parenthèses s'écrivent **collées** à ce qu'elles contiennent, et
+      séparées du reste par des espaces. Les crochets signalent une intervention
+      dans une citation, le plus souvent une coupure : […].
+
+      - Espaces : à l'extérieur des parenthèses, jamais à l'intérieur.
+        Le directeur (par intérim) a signé.
+      - Parenthèse dans la phrase : le point final vient après elle.
+        Il viendra demain (sans doute).
+      - Phrase entière entre parenthèses : le point reste à l'intérieur.
+        Nous partirons à l'aube. (Le trajet est long.)
+      - Coupure dans une citation : trois points entre crochets.
+        « Je […] refuse tout compromis. »
+    points:
+      - id: p2-parentheses
+        sentence: "Le directeur ___ a signé."
+        answer: "(par intérim)"
+        options:
+          - "(par intérim)"
+          - "( par intérim )"
+          - "(par intérim )"
+        explanation: "Aucune espace à l'intérieur des parenthèses."
+      - id: p2-parenthese-fin
+        sentence: "Il viendra demain ___"
+        answer: "(sans doute)."
+        options:
+          - "(sans doute)."
+          - "(sans doute.)"
+        explanation: "La parenthèse fait partie de la phrase\u00a0: le point final la suit."
+      - id: p2-phrase-parentheses
+        sentence: "Nous partirons à l'aube. ___"
+        answer: "(Le trajet est long.)"
+        options:
+          - "(Le trajet est long.)"
+          - "(Le trajet est long)."
+        explanation: "Une phrase entière entre parenthèses garde son point à l'intérieur."
+      - id: p2-coupure
+        sentence: "Il écrit\u00a0: «\u00a0Je ___ refuse tout compromis.\u00a0»"
+        answer: "[…]"
+        options:
+          - "[…]"
+          - "(…)"
+          - "…"
+        explanation: "Une coupure dans une citation se marque par des points de suspension entre crochets."

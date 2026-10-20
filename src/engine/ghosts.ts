@@ -14,6 +14,7 @@ import {
 } from './exercises'
 import type { Mastery } from './progress'
 import { createRng, sample, seedFrom, shuffle, type Rng } from './rng'
+import { isExactSpelling } from './spelling'
 import type { CardState } from './srs'
 
 /**
@@ -416,6 +417,20 @@ function vocabExercise(
 }
 
 function grammarExercise(point: GrammarPoint, link: LinkId, target: Target, options: GhostOptions, rng: Rng): Exercise | null {
+  // Une forme qui ne se tape pas (voir `isExactSpelling`) se reconnaît dans
+  // la phrase entière, puis se produit en la choisissant pour combler le trou.
+  if (isExactSpelling()) {
+    const choice = link === 'reconnaissance' ? grammarChoiceFor(point, 'translation', rng) : null
+    return (
+      choice ?? {
+        kind: 'grammar-gap',
+        id: `gap:bank:${point.id}`,
+        point,
+        cue: point.translation ? 'translation' : 'sentence',
+        bank: shuffle(point.options, rng),
+      }
+    )
+  }
   if (link === 'reconnaissance') {
     if (rng() < 0.5) {
       const choice = grammarChoiceFor(point, options.canHear && rng() < 0.2 ? 'audio' : 'translation', rng)

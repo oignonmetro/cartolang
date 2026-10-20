@@ -1,0 +1,154 @@
+id: p1
+title: "Les espaces de la ponctuation"
+subtitle: "Avant, après, ou pas du tout"
+icon: wave
+color: teal
+
+lessons:
+  - id: p1-l1
+    title: "Deux-points, point-virgule, ! et ?"
+    notes: |
+      En français, les signes **doubles** — ceux qui ont deux parties
+      superposées : `:` `;` `!` `?` — sont précédés d'une espace. Elle est
+      __insécable__ : elle ne laisse jamais le signe partir seul en début de ligne.
+
+      - Deux-points : une espace insécable avant, une espace après.
+        Il a tout prévu : la tente, le réchaud, les cartes.
+      - Point-virgule, ! et ? : une espace insécable avant, une espace après.
+        Les uns lisaient ; les autres dormaient. Quelle chance !
+
+      L'imprimé soigné met avant `;` `!` `?` une espace **fine**, plus étroite ;
+      l'insécable ordinaire en tient lieu partout ailleurs. Les traitements de
+      texte l'insèrent souvent d'eux-mêmes ; à la main, c'est Ctrl + Maj + Espace
+      dans Word.
+
+      ! L'anglais colle ces signes au mot (`Really?`) : c'est la faute la plus
+      fréquente sous l'influence des claviers et des logiciels anglophones.
+    points:
+      - id: p1-deux-points
+        sentence: "Il a tout ___ la tente, le réchaud et les cartes."
+        answer: "prévu\u00a0:"
+        options:
+          - "prévu\u00a0:"
+          - "prévu:"
+        explanation: "Le deux-points prend une espace insécable avant lui."
+      - id: p1-point-virgule
+        sentence: "Les uns ___ les autres dormaient."
+        answer: "lisaient\u00a0;"
+        options:
+          - "lisaient\u00a0;"
+          - "lisaient;"
+        explanation: "Le point-virgule est un signe double\u00a0: espace insécable avant."
+      - id: p1-exclamation
+        sentence: "___ Nous avons gagné."
+        answer: "Quelle chance\u00a0!"
+        options:
+          - "Quelle chance\u00a0!"
+          - "Quelle chance!"
+        explanation: "Le point d'exclamation est précédé d'une espace insécable."
+      - id: p1-interrogation
+        sentence: "___ Personne ne me l'a dit."
+        answer: "Qui vient ce soir\u00a0?"
+        options:
+          - "Qui vient ce soir\u00a0?"
+          - "Qui vient ce soir?"
+        explanation: "Le point d'interrogation est précédé d'une espace insécable."
+  - id: p1-l2
+    title: "Point, virgule, points de suspension"
+    notes: |
+      Les signes **simples** — point, virgule, points de suspension — se collent
+      au mot qui précède, et sont suivis d'une espace.
+
+      - Virgule et point : rien avant, une espace après.
+        Il pleuvait, nous sommes sortis.
+      - Points de suspension : un seul signe (…), collé au mot, jamais plus de trois points.
+        Je ne sais pas trop…
+
+      ! Une espace avant la virgule, ou aucune après, sont deux fautes
+      symétriques : « pleuvait , nous » et « pleuvait,nous ».
+    points:
+      - id: p1-virgule
+        sentence: "Il ___ sommes sortis."
+        answer: "pleuvait, nous"
+        options:
+          - "pleuvait, nous"
+          - "pleuvait , nous"
+          - "pleuvait,nous"
+        explanation: "La virgule se colle au mot qui précède, et une espace la suit."
+      - id: p1-virgule-apres
+        sentence: "Elle hésita ___ entra."
+        answer: "un instant, puis"
+        options:
+          - "un instant, puis"
+          - "un instant ,puis"
+          - "un instant,puis"
+        explanation: "Rien avant la virgule, une espace après."
+      - id: p1-point
+        sentence: "Il est parti ___"
+        answer: "hier."
+        options:
+          - "hier."
+          - "hier ."
+        explanation: "Le point final se colle au dernier mot."
+      - id: p1-suspension
+        sentence: "Je ne sais pas ___"
+        answer: "trop…"
+        options:
+          - "trop…"
+          - "trop …"
+          - "trop.."
+        explanation: "Les points de suspension se collent au mot, et ils sont toujours trois."
+  - id: p1-l3
+    title: "Les guillemets"
+    notes: |
+      Le français cite entre guillemets **« »**, dits français, séparés du texte
+      qu'ils encadrent par une espace insécable. Les guillemets droits (")
+      viennent de la machine à écrire : ils n'ont pas leur place dans un texte
+      soigné.
+
+      - Guillemets français : une espace insécable à l'intérieur de chaque guillemet.
+        Il a crié « Au revoir » et il est parti.
+      - Citation dans la citation : guillemets anglais “ ”, collés au texte.
+        Elle m'a écrit : « Il m'a répondu “jamais” sans un mot de plus. »
+      - Phrase complète après deux-points : le point final reste à l'intérieur.
+        Il a simplement dit : « Je viendrai. »
+      - Citation fondue dans la phrase : la ponctuation de la phrase vient après.
+        Il promet de « faire mieux ».
+    points:
+      - id: p1-guillemets
+        sentence: "Il a crié ___ et il est parti."
+        answer: "«\u00a0Au revoir\u00a0»"
+        options:
+          - "«\u00a0Au revoir\u00a0»"
+          - "\"Au revoir\""
+          - "«Au revoir»"
+        explanation: "Guillemets français, avec une espace insécable à l'intérieur."
+      - id: p1-second-rang
+        sentence: "Elle m'a écrit\u00a0: «\u00a0Il m'a répondu ___ sans un mot de plus.\u00a0»"
+        answer: "“jamais”"
+        options:
+          - "“jamais”"
+          - "«\u00a0jamais\u00a0»"
+          - "\"jamais\""
+        explanation: "À l'intérieur d'une citation, on passe aux guillemets anglais “ ”."
+      - id: p1-citation-complete
+        sentence: "Il a simplement dit\u00a0: ___"
+        answer: "«\u00a0Je viendrai.\u00a0»"
+        options:
+          - "«\u00a0Je viendrai.\u00a0»"
+          - "«\u00a0Je viendrai\u00a0»."
+        explanation: "Une phrase complète citée après deux-points garde son point à l'intérieur."
+      - id: p1-citation-fondue
+        sentence: "Il promet de ___"
+        answer: "«\u00a0faire mieux\u00a0»."
+        options:
+          - "«\u00a0faire mieux\u00a0»."
+          - "«\u00a0faire mieux.\u00a0»"
+        explanation: "Une citation fondue dans la phrase laisse le point final à la phrase, après le guillemet."
+      - id: p1-incise-citation
+        sentence: "___ a-t-il ajouté."
+        answer: "«\u00a0Rien ne presse\u00a0»,"
+        options:
+          - "«\u00a0Rien ne presse\u00a0»,"
+          - "«\u00a0Rien ne presse,\u00a0»"
+        explanation: "La virgule qui annonce l'incise appartient à la phrase\u00a0: elle suit le guillemet fermant."

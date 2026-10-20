@@ -1,0 +1,69 @@
+# Le code orthotypographique français, pour francophones.
+#
+# Règles tirées du Lexique des règles typographiques en usage à l'Imprimerie
+# nationale : espaces de la ponctuation, majuscules, abréviations, nombres.
+#
+# Un cours à part : la langue apprise est le français lui-même (`learning:
+# fr`), ce qui change trois choses dans le moteur (voir `isExactSpelling`,
+# src/engine/spelling.ts) :
+#
+#   - les formes se comparent au signe près — casse, ponctuation, espaces ;
+#   - elles ne se tapent jamais : espace insécable, guillemets « », tiret ou
+#     points de suspension n'existent pas sur un clavier ordinaire. Chaque
+#     point se joue en choix, phrase entière puis forme isolée, et la
+#     validation exige donc des options partout ;
+#   - le cours est muet : une espace ou une majuscule ne s'entendent pas.
+#
+# Les espaces insécables s'écrivent échappées dans les points d'exercice
+# (`\u00a0`). L'espace fine (U+202F), que l'imprimé met avant ; ! ? et entre
+# les milliers, n'y figure pas : trop étroite à l'écran pour départager deux
+# options, elle est enseignée dans les rappels et remplacée par l'insécable
+# ordinaire. Deux options qui ne diffèrent que par la nature d'un blanc
+# seraient indiscernables : la validation les refuse.
+#
+#   ponctuation  — p1 les espaces de la ponctuation, p2 tirets, traits
+#                  d'union, parenthèses
+#   majuscules   — m1 la majuscule, m2 institutions et lieux
+#   abréviations — a1 les abréviations, n1 les nombres
+
+id: fr-typo
+name: Français
+learning: fr
+known: fr
+flag: 🇫🇷
+level: Typo
+tagline: "Espaces, guillemets, majuscules, abréviations : le code orthotypographique."
+status: available
+layout: library
+version: 1
+
+tracks:
+  - id: ponctuation
+    title: Ponctuation
+    subtitle: Espaces, guillemets, tirets
+    kind: grammar
+    color: teal
+    icon: wave
+    units:
+      - p1
+      - p2
+
+  - id: majuscules
+    title: Majuscules
+    subtitle: Accents, institutions, titres
+    kind: grammar
+    color: violet
+    icon: people
+    units:
+      - m1
+      - m2
+
+  - id: abreviations
+    title: Abréviations et nombres
+    subtitle: Civilités, ordinaux, unités, heures
+    kind: grammar
+    color: coral
+    icon: book
+    units:
+      - a1
+      - n1

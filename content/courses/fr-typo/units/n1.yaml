@@ -1,0 +1,109 @@
+id: n1
+title: "Les nombres"
+subtitle: "Chiffres, unités, heures"
+icon: clock
+color: coral
+
+lessons:
+  - id: n1-l1
+    title: "Écrire un nombre"
+    notes: |
+      Un nombre se découpe par **tranches de trois chiffres**, séparées par une
+      espace insécable — fine dans l'imprimé —, ni point ni virgule, qui sont des usages anglais. La
+      **virgule** marque la décimale. Les années, elles, ne se découpent pas.
+
+      - Milliers : une espace insécable.
+        12 500 habitants
+      - Décimale : la virgule.
+        3,5 %
+      - Année : aucune espace.
+        en 2024
+      - En tête de phrase : le nombre s'écrit en toutes lettres.
+        Trois cents personnes sont venues.
+    points:
+      - id: n1-milliers
+        sentence: "La ville compte ___ habitants."
+        answer: "12\u00a0500"
+        options:
+          - "12\u00a0500"
+          - "12.500"
+          - "12,500"
+        explanation: "Les milliers se séparent par une espace insécable."
+      - id: n1-decimale
+        sentence: "Le taux atteint ___"
+        answer: "3,5\u00a0%."
+        options:
+          - "3,5\u00a0%."
+          - "3.5\u00a0%."
+          - "3,5%."
+        explanation: "Virgule décimale, et espace insécable avant le signe %."
+      - id: n1-annee
+        sentence: "Il est né en ___"
+        answer: "1984."
+        options:
+          - "1984."
+          - "1\u00a0984."
+        explanation: "Une année ne se découpe pas en tranches."
+      - id: n1-tete
+        sentence: "___ personnes sont venues."
+        answer: "Trois cents"
+        options:
+          - "Trois cents"
+          - "300"
+        explanation: "Un nombre en tête de phrase s'écrit en toutes lettres."
+  - id: n1-l2
+    title: "Heures, unités et dates"
+    notes: |
+      Une unité suit le nombre, **séparée par une espace insécable** : elle ne
+      prend jamais de « s », et garde son symbole officiel. L'heure s'écrit avec
+      « h », jamais avec le deux-points des horloges numériques.
+
+      - Heure : 14 h 30, avec des espaces insécables.
+        La réunion commence à 14 h 30.
+      - Unités et monnaies : espace insécable, symbole invariable, après le nombre.
+        5 km, 15 €, 30 °C
+      - Premier du mois : 1er ; les autres jours en chiffres simples.
+        le 1er mai, le 2 mai
+      - Souverains : chiffres romains, sans « e ».
+        Louis XIV
+    points:
+      - id: n1-heure
+        sentence: "La réunion commence à ___"
+        answer: "14\u00a0h\u00a030."
+        options:
+          - "14\u00a0h\u00a030."
+          - "14h30."
+          - "14:30."
+        explanation: "L'heure s'écrit avec «\u00a0h\u00a0» entre des espaces insécables."
+      - id: n1-km
+        sentence: "Le refuge est à ___ du village."
+        answer: "5\u00a0km"
+        options:
+          - "5\u00a0km"
+          - "5\u00a0kms"
+          - "5\u00a0Km"
+        explanation: "Un symbole d'unité est invariable et s'écrit en minuscule."
+      - id: n1-euro
+        sentence: "Ce livre coûte ___"
+        answer: "15\u00a0€."
+        options:
+          - "15\u00a0€."
+          - "€15."
+          - "15€."
+        explanation: "Le symbole monétaire suit le nombre, après une espace insécable."
+      - id: n1-premier-mai
+        sentence: "Rendez-vous le ___ mai."
+        answer: "1er"
+        options:
+          - "1er"
+          - "1"
+          - "1ier"
+        explanation: "Le premier jour du mois s'écrit «\u00a01er\u00a0»."
+      - id: n1-souverain
+        sentence: "Versailles fut agrandi sous ___"
+        answer: "Louis\u00a0XIV."
+        options:
+          - "Louis\u00a0XIV."
+          - "Louis\u00a014."
+          - "Louis\u00a0XIVe."
+        explanation: "Un nom de souverain prend un chiffre romain, sans «\u00a0e\u00a0»."

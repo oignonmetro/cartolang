@@ -1,0 +1,118 @@
+id: a1
+title: "Les abréviations"
+subtitle: "Civilités, ordinaux, renvois"
+icon: book
+color: coral
+
+lessons:
+  - id: a1-l1
+    title: "Monsieur, Madame, Docteur"
+    notes: |
+      Une abréviation prend un point quand elle **coupe** le mot avant sa fin
+      (M. pour monsieur) ; elle n'en prend pas quand elle **garde** sa dernière
+      lettre (Mme, Dr). Dans un texte imprimé, ces lettres finales se composent en
+      exposant.
+
+      - Monsieur, messieurs : M. et MM., jamais « Mr », abréviation anglaise.
+        M. Dupont, MM. Martin et Lefèvre
+      - Madame, docteur, maître : Mme, Dr, Me — sans point.
+        Mme Durand, le Dr Bernard
+      - En s'adressant à la personne : le titre s'écrit en toutes lettres.
+        Merci, monsieur.
+    points:
+      - id: a1-monsieur
+        sentence: "___ Dupont est arrivé."
+        answer: "M."
+        options:
+          - "M."
+          - "Mr"
+          - "Mr."
+        explanation: "«\u00a0M.\u00a0»\u00a0: «\u00a0Mr\u00a0» est l'abréviation anglaise."
+      - id: a1-madame
+        sentence: "___ Durand est arrivée."
+        answer: "Mme"
+        options:
+          - "Mme"
+          - "Mme."
+          - "Mad."
+        explanation: "«\u00a0Mme\u00a0» garde la dernière lettre du mot\u00a0: pas de point."
+      - id: a1-messieurs
+        sentence: "___ Martin et Lefèvre sont associés."
+        answer: "MM."
+        options:
+          - "MM."
+          - "M."
+          - "Mrs"
+        explanation: "Au pluriel, «\u00a0messieurs\u00a0» s'abrège «\u00a0MM.\u00a0»."
+      - id: a1-docteur
+        sentence: "Prenez rendez-vous chez le ___ Bernard."
+        answer: "Dr"
+        options:
+          - "Dr"
+          - "Dr."
+          - "Doc."
+        explanation: "«\u00a0Dr\u00a0» finit par la dernière lettre de «\u00a0docteur\u00a0»\u00a0: pas de point."
+      - id: a1-adresse
+        sentence: "Merci, ___"
+        answer: "monsieur."
+        options:
+          - "monsieur."
+          - "M."
+        explanation: "On n'abrège pas un titre quand on s'adresse à la personne."
+  - id: a1-l2
+    title: "Ordinaux, siècles et renvois"
+    notes: |
+      Les ordinaux s'abrègent avec la **dernière lettre** du mot, ou les deux
+      dernières : 1er, 1re, 2e. Les formes en « ème » ou « ère » sont fautives.
+      Les siècles s'écrivent en chiffres romains, en petites capitales dans un
+      texte imprimé.
+
+      - Premier, première, deuxième : 1er, 1re, 2e — jamais 1ère, 2ème ni 2nd.
+        le 2e arrondissement, la 1re place
+      - Siècle : chiffres romains et « e ».
+        au XIXe siècle
+      - Etc. : jamais suivi de points de suspension, qui feraient double emploi.
+        des pommes, des poires, etc.
+      - Page : p. pour une page, pp. pour plusieurs.
+        voir p. 12
+    points:
+      - id: a1-premiere
+        sentence: "Elle a terminé ___ de sa promotion."
+        answer: "1re"
+        options:
+          - "1re"
+          - "1ère"
+          - "1ere"
+        explanation: "«\u00a0Première\u00a0» s'abrège «\u00a01re\u00a0»."
+      - id: a1-deuxieme
+        sentence: "Il habite dans le ___ arrondissement."
+        answer: "2e"
+        options:
+          - "2e"
+          - "2ème"
+          - "2nd"
+        explanation: "«\u00a0Deuxième\u00a0» s'abrège «\u00a02e\u00a0»."
+      - id: a1-siecle
+        sentence: "Ce roman a été écrit au ___ siècle."
+        answer: "XIXe"
+        options:
+          - "XIXe"
+          - "XIXème"
+          - "19ème"
+        explanation: "Siècle en chiffres romains, suivi de «\u00a0e\u00a0»."
+      - id: a1-etc
+        sentence: "Il a acheté des pommes, des poires, ___"
+        answer: "etc."
+        options:
+          - "etc."
+          - "etc…"
+          - "etc..."
+        explanation: "«\u00a0Etc.\u00a0» veut déjà dire «\u00a0et le reste\u00a0»\u00a0: pas de points de suspension."
+      - id: a1-page
+        sentence: "Voir ___ 12 pour le détail."
+        answer: "p."
+        options:
+          - "p."
+          - "pp."
+          - "pg."
+        explanation: "«\u00a0p.\u00a0» pour une page, «\u00a0pp.\u00a0» pour plusieurs."

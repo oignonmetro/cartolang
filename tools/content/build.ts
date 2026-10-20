@@ -38,7 +38,7 @@ import { findVocabGap } from '../../src/content/text.ts'
 import { parseNotes } from '../../src/content/notes.ts'
 import { isReadingOnly, itemsOfCourse, itemsOfLesson, lessonsOf } from '../../src/content/course.ts'
 import { learningForm } from '../../src/engine/exercises.ts'
-import { setSpellingLanguage } from '../../src/engine/spelling.ts'
+import { isExactSpelling, setSpellingLanguage } from '../../src/engine/spelling.ts'
 import {
   alphabetGatingRemarks,
   conjugationVerbRemarks,
@@ -440,6 +440,24 @@ function checkGrammarLesson(lesson: GrammarLesson, problems: string[]) {
         problems.push(`point "${point.id}" : les options "${twin}" et "${option}" se confondent à la comparaison`)
       }
       folded.set(key, option)
+    }
+    if (isExactSpelling()) {
+      // Les formes ne se tapent pas (voir `isExactSpelling`) : sans options,
+      // le point ne pourrait se jouer qu'au clavier.
+      if (point.options.length < 2) {
+        problems.push(`point "${point.id}" : les formes de ce cours se choisissent, il faut au moins 2 options`)
+      }
+      // Une espace insécable et une espace ordinaire s'affichent pareil :
+      // deux options qui ne diffèrent que par là seraient indiscernables.
+      const seen = new Map<string, string>()
+      for (const option of point.options) {
+        const key = option.replace(/\s+/g, ' ').trim()
+        const twin = seen.get(key)
+        if (twin !== undefined && twin !== option) {
+          problems.push(`point "${point.id}" : les options "${twin}" et "${option}" ne diffèrent que par un blanc invisible`)
+        }
+        seen.set(key, option)
+      }
     }
     if (point.options.length === 1) {
       problems.push(`point "${point.id}" : une seule option proposée, il en faut au moins 2 ou aucune`)

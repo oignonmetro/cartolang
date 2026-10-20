@@ -1,7 +1,7 @@
 import { afterEach, describe, expect, it } from 'vitest'
 import type { Vocab } from '@/content/schema'
 import { isAnswerCorrect, matchesAnswer } from './exercises'
-import { foldDarija, setSpellingLanguage } from './spelling'
+import { foldDarija, isExactSpelling, setSpellingLanguage } from './spelling'
 
 const chokran: Vocab = { id: 'ary-chokran', term: 'chokran', translation: 'merci', alt: [] }
 
@@ -50,5 +50,25 @@ describe('repli des graphies selon le cours', () => {
   it("n'existe pas pour une langue qui n'en déclare pas", () => {
     setSpellingLanguage('en')
     expect(matchesAnswer('better', [], 'bettr')).toBe(false)
+  })
+})
+
+describe('orthotypographie : comparaison au signe près', () => {
+  afterEach(() => setSpellingLanguage('en'))
+
+  it('distingue casse, ponctuation et espaces quand le cours apprend le français', () => {
+    setSpellingLanguage('fr')
+    expect(isExactSpelling()).toBe(true)
+    expect(matchesAnswer('M.', [], 'M.')).toBe(true)
+    expect(matchesAnswer('M.', [], 'M')).toBe(false)
+    expect(matchesAnswer("l'Assemblée nationale", [], "l'assemblée nationale")).toBe(false)
+    expect(matchesAnswer('prévu :', [], 'prévu:')).toBe(false)
+    expect(matchesAnswer('12 500', [], '12,500')).toBe(false)
+  })
+
+  it('reste tolérante pour les autres langues', () => {
+    setSpellingLanguage('en')
+    expect(isExactSpelling()).toBe(false)
+    expect(matchesAnswer('M.', [], 'm')).toBe(true)
   })
 })

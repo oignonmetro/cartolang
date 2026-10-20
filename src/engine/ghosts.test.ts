@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest'
+import { afterEach, describe, expect, it } from 'vitest'
 import type { ConjugationVerb, GrammarPoint, PracticeItem, Vocab } from '@/content/schema'
 import type { Exercise, GhostExercise, LinkId } from './exercises'
 import {
@@ -18,6 +18,7 @@ import {
   type GhostState,
   type LinkProgress,
 } from './ghosts'
+import { setSpellingLanguage } from './spelling'
 import { createCard, type CardState } from './srs'
 
 function vocab(id: string, example = true): PracticeItem {
@@ -244,5 +245,40 @@ describe('séance et bibliothèque', () => {
   it('compte les maîtrisés et les acquis', () => {
     const progress: LinkProgress = { gat: done(...ALL), perr: { ...done(...ALL), days: 2 } }
     expect(linkMastery(WORDS, { progress, cards: {} }, false)).toMatchObject({ total: 8, seen: 2, known: 1 })
+  })
+})
+
+describe('formes qui ne se tapent pas', () => {
+  const point = (id: string): PracticeItem => {
+    const p: GrammarPoint = {
+      id,
+      sentence: 'Il a tout ___ la tente.',
+      answer: 'prévu :',
+      alt: [],
+      options: ['prévu :', 'prévu:'],
+    }
+    return { kind: 'grammar', id, point: p }
+  }
+  const POINTS = ['a', 'b', 'c', 'd'].map(point)
+  const scope: GhostScope = { items: POINTS, distractors: POINTS }
+  const recognized: GhostState = {
+    progress: Object.fromEntries(POINTS.map((item) => [item.id, done('reconnaissance')])),
+    cards: {},
+  }
+
+  afterEach(() => setSpellingLanguage('en'))
+
+  it('produit en choisissant, jamais au clavier', () => {
+    setSpellingLanguage('fr')
+    for (let seed = 1; seed <= 20; seed++) {
+      const exercise = form(1, recognized, { seed }, scope)
+      expect(exercise?.kind).toBe('grammar-gap')
+      if (exercise?.kind === 'grammar-gap') expect(exercise.bank).not.toBeNull()
+    }
+  })
+
+  it('passe au clavier dans une langue qui se tape', () => {
+    const exercise = form(1, recognized, {}, scope)
+    expect(exercise?.kind === 'grammar-gap' && exercise.bank).toBeNull()
   })
 })

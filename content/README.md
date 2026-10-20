@@ -243,6 +243,32 @@ sait pas lire la transcription), et elle n'est jamais affichée. Un mot sans
   translation: merci
 ```
 
+## Un cours sur le français écrit : l'orthotypographie
+
+Le cours `fr-typo` enseigne le code orthotypographique — espaces de la
+ponctuation, guillemets, majuscules, abréviations, nombres. Sa langue apprise
+est le français lui-même (`learning: fr`), ce qui change trois choses
+(`isExactSpelling`, `src/engine/spelling.ts`) :
+
+- **la comparaison se fait au signe près** : casse, ponctuation et espaces
+  comptent, alors qu'ailleurs on les ignore — « M. » et « M », « Nord » et
+  « nord » sont ici des réponses différentes ;
+- **rien ne se tape** : une espace insécable, des guillemets « », un tiret
+  ou des points de suspension ne se trouvent pas sur un clavier ordinaire,
+  contrairement aux lettres russes qu'un clavier russe donne. Chaque point
+  se reconnaît dans la phrase entière, puis se produit en choisissant la
+  forme qui comble le trou ; la validation exige donc au moins deux
+  `options` par point ;
+- **le cours est muet** : une espace ou une majuscule ne s'entendent pas.
+
+Dans le YAML, les espaces insécables des points s'écrivent échappées
+(`"prévu\u00a0:"`), pour rester visibles à la relecture. L'espace fine
+(`\u202f`) n'y figure pas : trop étroite à l'écran pour départager deux
+options, elle est enseignée dans les rappels. Pour la même raison, deux
+options qui ne diffèrent que par la nature d'un blanc font échouer la
+validation. Les autres écarts doivent se **voir** : présence ou absence
+d'une espace, d'un point, d'une majuscule.
+
 ## Ajouter une unité
 
 1. Créer `units/v5.yaml` — le nom du fichier doit être l'`id` de l'unité.

@@ -1,0 +1,137 @@
+id: m1
+title: "La majuscule"
+subtitle: "Ses accents, et là où elle ne va pas"
+icon: people
+color: violet
+
+lessons:
+  - id: m1-l1
+    title: "Les capitales gardent leurs accents"
+    notes: |
+      En français, l'accent a pleine valeur orthographique, **même sur une
+      capitale** : l'Imprimerie nationale, l'Académie et tous les dictionnaires
+      l'exigent. Son absence vient des machines à écrire, pas d'une règle.
+
+      - Accent et cédille : ils se maintiennent sur les capitales, en début de phrase comme en titre.
+        À demain. Ça suffit. L'État. ÉCOLE.
+
+      ! Sans accent, le sens peut basculer : « UN POLICIER TUE » ne dit pas la
+      même chose que « UN POLICIER TUÉ ».
+    points:
+      - id: m1-a-accent
+        sentence: "___ la fin du repas, il partit."
+        answer: "À"
+        options:
+          - "À"
+          - "A"
+        explanation: "La préposition «\u00a0à\u00a0» garde son accent en capitale."
+      - id: m1-etat
+        sentence: "___ doit garantir l'accès aux soins."
+        answer: "L'État"
+        options:
+          - "L'État"
+          - "L'Etat"
+          - "L'état"
+        explanation: "L'État, au sens politique, prend la majuscule et garde son accent."
+      - id: m1-ca
+        sentence: "___ ne change rien."
+        answer: "Ça"
+        options:
+          - "Ça"
+          - "Ca"
+        explanation: "La cédille se maintient sur la capitale."
+      - id: m1-titre
+        sentence: "Le panneau indiquait ___"
+        answer: "«\u00a0ÉCOLE\u00a0»."
+        options:
+          - "«\u00a0ÉCOLE\u00a0»."
+          - "«\u00a0ECOLE\u00a0»."
+        explanation: "Même en capitales, le mot s'écrit avec son accent."
+  - id: m1-l2
+    title: "Ce qui reste en minuscule"
+    notes: |
+      Le français met **moins** de majuscules que l'anglais. Les jours, les mois,
+      les langues et les adjectifs de nationalité s'écrivent en minuscule ; seul
+      le nom qui désigne les habitants prend la majuscule.
+
+      - Jours et mois : minuscule.
+        Nous partirons lundi 3 mars.
+      - Langue : minuscule.
+        Elle parle l'espagnol couramment.
+      - Habitants : le nom prend la majuscule, l'adjectif non.
+        Les Français ont voté. Le peuple français a voté.
+    points:
+      - id: m1-jour
+        sentence: "Nous partirons ___ 3 mars."
+        answer: "lundi"
+        options:
+          - "lundi"
+          - "Lundi"
+        explanation: "Les jours de la semaine s'écrivent en minuscule."
+      - id: m1-langue
+        sentence: "Elle parle ___ couramment."
+        answer: "l'espagnol"
+        options:
+          - "l'espagnol"
+          - "l'Espagnol"
+        explanation: "Le nom d'une langue s'écrit en minuscule."
+      - id: m1-habitants
+        sentence: "Les ___ ont voté dimanche."
+        answer: "Français"
+        options:
+          - "Français"
+          - "français"
+        explanation: "Le nom des habitants prend la majuscule."
+      - id: m1-adjectif
+        sentence: "Le peuple ___ a voté dimanche."
+        answer: "français"
+        options:
+          - "français"
+          - "Français"
+        explanation: "L'adjectif de nationalité reste en minuscule."
+  - id: m1-l3
+    title: "Les titres d'œuvres"
+    notes: |
+      Un titre d'œuvre prend toujours la majuscule à son **premier mot**. S'il
+      commence par un article défini, le premier nom la prend aussi, avec
+      l'adjectif qui le précède ; un titre symétrique la donne à ses deux
+      membres. Dans un texte imprimé, le titre se compose en *italique*.
+
+      - Premier mot autre qu'un article défini : une seule majuscule.
+        Une saison en enfer. À la recherche du temps perdu.
+      - Article défini en tête : majuscule aussi au premier nom.
+        Les Misérables.
+      - Titre symétrique : les deux membres sont traités de même.
+        Le Rouge et le Noir.
+    points:
+      - id: m1-rouge-noir
+        sentence: "Avez-vous lu ___ de Stendhal\u00a0?"
+        answer: "Le Rouge et le Noir"
+        options:
+          - "Le Rouge et le Noir"
+          - "Le rouge et le noir"
+          - "Le Rouge et le noir"
+        explanation: "Titre symétrique ouvert par un article défini\u00a0: les deux noms prennent la majuscule."
+      - id: m1-recherche
+        sentence: "___ compte sept volumes."
+        answer: "À la recherche du temps perdu"
+        options:
+          - "À la recherche du temps perdu"
+          - "À la Recherche du temps perdu"
+          - "A la recherche du temps perdu"
+        explanation: "Le titre commence par une préposition\u00a0: seul le premier mot prend la majuscule."
+      - id: m1-saison
+        sentence: "Rimbaud a publié ___ en 1873."
+        answer: "Une saison en enfer"
+        options:
+          - "Une saison en enfer"
+          - "Une Saison en enfer"
+          - "Une Saison en Enfer"
+        explanation: "Un article indéfini en tête\u00a0: seul le premier mot prend la majuscule."
+      - id: m1-miserables
+        sentence: "Hugo a mis vingt ans à écrire ___"
+        answer: "Les Misérables."
+        options:
+          - "Les Misérables."
+          - "Les misérables."
+        explanation: "Un article défini en tête\u00a0: le nom qui le suit prend aussi la majuscule."

@@ -2,7 +2,7 @@ import type { ConjugationForm, ConjugationVerb, GrammarPoint, Vocab } from '@/co
 import { GAP } from '@/content/schema'
 import { findVocabGap, type TermSplit } from '@/content/text'
 import { sample, shuffle, type Rng } from './rng'
-import { foldSpelling } from './spelling'
+import { foldSpelling, isExactSpelling } from './spelling'
 
 /**
  * Les exercices, et de quoi les construire un par un.
@@ -608,6 +608,9 @@ function collapse(value: string): string {
  * enseigne « to postpone » — soit exactement la distinction qu'on évalue.
  */
 export function normalizeForm(value: string): string {
+  // L'orthotypographie enseigne précisément ce que `normalizeCore` efface :
+  // seule la forme de Unicode est ramenée, et les blancs aux bords.
+  if (isExactSpelling()) return value.normalize('NFC').trim()
   return collapse(normalizeCore(value))
 }
 
