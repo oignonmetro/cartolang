@@ -1,7 +1,16 @@
 # Les signes de correction d'épreuve, pour francophones.
 #
 # D'après le mémento des signes de correction (norme NF Q 60-012, reprise
-# par le Lexique des règles typographiques de l'Imprimerie nationale).
+# par le Lexique des règles typographiques de l'Imprimerie nationale), vérifié
+# sur les planches de l'Office québécois de la langue française (Banque de
+# dépannage linguistique, « Signes utilisés en révision linguistique et en
+# correction d'épreuves ») : lambda pour ajouter, biffure fermée de deux
+# barres pour un mot, arcs pour joindre, trait en S pour faire suivre,
+# crochet chassant vers son côté ouvert.
+#
+# Écart connu entre les deux sources : pour centrer, le mémento français
+# trace [ ], l'OQLF ] [ (et réserve [ ] à la justification). Le cours suit
+# le mémento ; le # (espace) aussi, là où l'OQLF note ≠.
 #
 # Un signe ne s'écrit pas, il se trace : chaque carte porte son dessin en SVG
 # (`figure`), qui s'affiche à la place du terme ; `term` n'en est que la
@@ -26,7 +35,7 @@ level: Correction
 tagline: "Lire et tracer les signes de correction d'une épreuve."
 status: available
 layout: library
-version: 1
+version: 2
 
 tracks:
   - id: signes
