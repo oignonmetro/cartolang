@@ -243,32 +243,6 @@ sait pas lire la transcription), et elle n'est jamais affichée. Un mot sans
   translation: merci
 ```
 
-## Un cours sur le français écrit : l'orthotypographie
-
-Le cours `fr-typo` enseigne le code orthotypographique — espaces de la
-ponctuation, guillemets, majuscules, abréviations, nombres. Sa langue apprise
-est le français lui-même (`learning: fr`), ce qui change trois choses
-(`isExactSpelling`, `src/engine/spelling.ts`) :
-
-- **la comparaison se fait au signe près** : casse, ponctuation et espaces
-  comptent, alors qu'ailleurs on les ignore — « M. » et « M », « Nord » et
-  « nord » sont ici des réponses différentes ;
-- **rien ne se tape** : une espace insécable, des guillemets « », un tiret
-  ou des points de suspension ne se trouvent pas sur un clavier ordinaire,
-  contrairement aux lettres russes qu'un clavier russe donne. Chaque point
-  se reconnaît dans la phrase entière, puis se produit en choisissant la
-  forme qui comble le trou ; la validation exige donc au moins deux
-  `options` par point ;
-- **le cours est muet** : une espace ou une majuscule ne s'entendent pas.
-
-Dans le YAML, les espaces insécables des points s'écrivent échappées
-(`"prévu\u00a0:"`), pour rester visibles à la relecture. L'espace fine
-(`\u202f`) n'y figure pas : trop étroite à l'écran pour départager deux
-options, elle est enseignée dans les rappels. Pour la même raison, deux
-options qui ne diffèrent que par la nature d'un blanc font échouer la
-validation. Les autres écarts doivent se **voir** : présence ou absence
-d'une espace, d'un point, d'une majuscule.
-
 ## Des cartes qui se dessinent : les signes de correction
 
 Le cours `fr-correction` enseigne les signes de correction d'épreuve (norme
@@ -289,7 +263,13 @@ Une carte dessinée ne se tape jamais : on reconnaît d'abord ce que demande le
 signe (`sens`), puis on retrouve le signe d'après ce qu'il demande
 (`production`, un QCM dont les options sont des dessins). Le texte des figures
 prend `currentColor`, les marques `var(--color-coral)` : elles suivent le
-thème clair ou sombre. La validation refuse une figure qui ne serait pas un
+thème clair ou sombre.
+
+La langue apprise est le français lui-même (`learning: fr`), ce qui règle
+le moteur pour tout le cours (`isExactSpelling`, `src/engine/spelling.ts`) :
+rien ne s'y tape — un signe ne se trouve sur aucun clavier, contrairement aux
+lettres russes qu'un clavier russe donne —, les formes s'y comparent au signe
+près, et le cours est muet. La validation refuse une figure qui ne serait pas un
 unique `<svg>` avec `viewBox`, ou qui contiendrait script, lien ou ressource
 externe — elle est injectée telle quelle dans la page.
 

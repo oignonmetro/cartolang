@@ -53,7 +53,7 @@ describe('repli des graphies selon le cours', () => {
   })
 })
 
-describe('orthotypographie : comparaison au signe près', () => {
+describe('français écrit : comparaison au signe près', () => {
   afterEach(() => setSpellingLanguage('en'))
 
   it('distingue casse, ponctuation et espaces quand le cours apprend le français', () => {

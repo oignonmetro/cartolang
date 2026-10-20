@@ -41,8 +41,8 @@ const VOICES: Record<string, string | null> = {
   // la voix marocaine quand elle existe (Edge en propose), sinon une voix
   // arabe. Elle ne lit que l'écriture arabe — voir `SPOKEN_SCRIPTS`.
   ary: 'ar-MA',
-  // Le code orthotypographique ne s'entend pas : une espace, un guillemet,
-  // une majuscule ne changent rien à la voix. Le cours reste muet.
+  // Le français appris est sa norme écrite (voir `isExactSpelling`) : un signe
+  // de correction, une espace, une majuscule ne s'entendent pas. Muet.
   fr: null,
 }
 

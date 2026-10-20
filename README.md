@@ -17,7 +17,6 @@ Le moteur est générique : un cours n'est qu'un jeu de fichiers YAML.
 | | |
 |---|---|
 | Cours | B1, B2, C1 (`fr-en-b1/b2/c1`), écrits et jouables ; B2 par défaut. Le cours grand débutant `fr-en` est archivé |
-| Orthotypographie | `fr-typo` : le code orthotypographique français, joué entièrement en choix (rien ne se tape) |
 | Signes de correction | `fr-correction` : les signes de correction d'épreuve, dessinés en SVG, reconnus dans les deux sens |
 | Agencements | `library` — pistes en onglets, accès libre ; `path` — parcours guidé |
 | Vocabulaire | flashcard auto-évaluée, association de paires, phrase à trou, saisie clavier |

@@ -614,7 +614,7 @@ function collapse(value: string): string {
  * enseigne « to postpone » — soit exactement la distinction qu'on évalue.
  */
 export function normalizeForm(value: string): string {
-  // L'orthotypographie enseigne précisément ce que `normalizeCore` efface :
+  // La typographie enseigne précisément ce que `normalizeCore` efface :
   // seule la forme de Unicode est ramenée, et les blancs aux bords.
   if (isExactSpelling()) return value.normalize('NFC').trim()
   return collapse(normalizeCore(value))

@@ -61,13 +61,12 @@ const FOLDS: Record<string, Fold> = {
  * Langues dont la graphie se compare au signe près, et ne se tape pas.
  *
  * Le français appris par un francophone n'est pas une langue étrangère mais
- * sa norme écrite : le code orthotypographique (`fr-typo`). Ce qu'il enseigne
- * — majuscule, point d'abréviation, espace avant le deux-points, guillemets
- * « » plutôt que " " — est justement ce que la comparaison ordinaire ignore
- * (voir `normalizeForm`). Ces signes ne se tapent pas non plus sur un clavier
- * ordinaire — espace insécable, tiret, apostrophe courbe —, à la différence
- * des lettres russes, qu'un clavier russe donne : les formes s'y choisissent,
- * elles ne se saisissent jamais.
+ * sa norme écrite : les signes de correction d'épreuve (`fr-correction`), et
+ * plus largement la typographie, où majuscule, point ou espace sont l'objet
+ * même de la leçon — ce que la comparaison ordinaire ignore (voir
+ * `normalizeForm`). Rien de cela ne se tape sur un clavier ordinaire, à la
+ * différence des lettres russes, qu'un clavier russe donne : les formes s'y
+ * choisissent, elles ne se saisissent jamais.
  */
 const EXACT = new Set(['fr'])
 
