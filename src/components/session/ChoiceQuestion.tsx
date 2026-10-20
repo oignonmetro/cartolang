@@ -9,6 +9,7 @@ import { highlightDiffWords } from './highlightDiffWords'
 import { ListeningPrompt } from './ListeningPrompt'
 import { OptionList } from './OptionList'
 import { SpeakButton } from './SpeakButton'
+import { Figure, VocabTerm } from './VocabTerm'
 import { useSessionHaptics } from './useSessionHaptics'
 import { useSessionSounds } from './useSessionSounds'
 
@@ -48,10 +49,12 @@ export function ChoiceQuestion({
 
   const checked = picked !== null
   const correct = checked && normalizeAnswer(picked) === normalizeAnswer(answer)
+  const figures = exercise.figures
+  const prompt = vocab.figure ? (cue === 'term' ? 'Que demande ce signe ?' : 'Choisissez le signe') : PROMPTS[cue]
 
   return (
     <div className="flex flex-1 flex-col gap-6">
-      <p className="text-center text-sm font-bold uppercase tracking-wide text-ink-faint">{PROMPTS[cue]}</p>
+      <p className="text-center text-sm font-bold uppercase tracking-wide text-ink-faint">{prompt}</p>
 
       <div className="flex items-end justify-center gap-3">
         <Mascot mood={checked ? (correct ? 'happy' : 'disappointed') : 'idle'} size={64} />
@@ -67,7 +70,7 @@ export function ChoiceQuestion({
               lang={choicePromptIsLearningLanguage(cue) ? learningLanguage() : 'fr'}
               className="text-xl font-black break-words"
             >
-              {choicePrompt(vocab, cue)}
+              {cue === 'term' ? <VocabTerm vocab={vocab} className="w-64" /> : choicePrompt(vocab, cue)}
             </span>
           )}
         </div>
@@ -83,7 +86,11 @@ export function ChoiceQuestion({
           sounds.success(wasCorrect)
           haptics.answered(exercise, wasCorrect)
         }}
-        renderOption={highlightDiffWords(options)}
+        renderOption={
+          figures
+            ? (option) => (figures[option] ? <Figure svg={figures[option]} label={option} className="w-64" /> : option)
+            : highlightDiffWords(options)
+        }
       />
 
       <div className="mt-auto">

@@ -103,6 +103,18 @@ export const KIND_LABELS: Record<LessonKind, { one: string; many: string }> = {
   conjugation: { one: 'forme', many: 'formes' },
 }
 
+/** Une carte dessinée (`figure`) enseigne un signe de correction, pas un mot. */
+function signLabel(count: number): string {
+  return `${count} ${count > 1 ? 'signes' : 'signe'}`
+}
+
+/** `countLabel` pour une unité : « 8 signes » quand toutes ses cartes sont dessinées. */
+export function unitCountLabel(unit: Unit, count: number): string {
+  const items = itemsOfUnit(unit)
+  if (items.length > 0 && items.every((item) => item.kind === 'vocab' && item.vocab.figure)) return signLabel(count)
+  return countLabel(unit.kind, count)
+}
+
 export function countLabel(kind: LessonKind, count: number): string {
   const { one, many } = KIND_LABELS[kind]
   return `${count} ${count > 1 ? many : one}`
@@ -124,6 +136,7 @@ export function lessonCountLabel(lesson: Lesson): string {
   if (lesson.kind === 'vocab' && lesson.vocab.every((entry) => entry.pos === 'lettre')) {
     return `${items.length} ${items.length > 1 ? 'lettres' : 'lettre'}`
   }
+  if (lesson.kind === 'vocab' && lesson.vocab.every((entry) => entry.figure)) return signLabel(items.length)
   return countLabel(lesson.kind, items.length)
 }
 

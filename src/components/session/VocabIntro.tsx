@@ -5,6 +5,7 @@ import { Button } from '@/components/Button'
 import { Mascot } from '@/components/Mascot'
 import { speechFor } from '@/lib/speech'
 import { SpeakButton } from './SpeakButton'
+import { VocabTerm } from './VocabTerm'
 
 /**
  * Présentation d'un mot nouveau, avec auto-évaluation immédiate.
@@ -24,7 +25,7 @@ export function VocabIntro({ exercise, onRate }: { exercise: IntroExercise; onRa
           cours de russe enseigne l'alphabet. L'annoncer comme un « mot »
           sonnerait faux pendant toute une section. */}
       <p className="text-center text-sm font-bold uppercase tracking-wide text-ink-faint">
-        {vocab.pos === 'lettre' ? 'Nouvelle lettre' : 'Nouveau mot'}
+        {vocab.figure ? 'Nouveau signe' : vocab.pos === 'lettre' ? 'Nouvelle lettre' : 'Nouveau mot'}
       </p>
 
       {/* La carte et les boutons doivent rester collés l'un à l'autre, quelle
@@ -45,7 +46,9 @@ export function VocabIntro({ exercise, onRate }: { exercise: IntroExercise; onRa
           {/* Le mot et son haut-parleur restent sur la même ligne : c'est le
               mot qu'on écoute, pas l'écran. */}
           <div className="flex items-center justify-center gap-3">
-            <span className="text-4xl font-black break-words">{vocab.term}</span>
+            <span className="text-4xl font-black break-words">
+              <VocabTerm vocab={vocab} className="w-72" />
+            </span>
             <SpeakButton text={speechFor(vocab)} auto className="shrink-0" />
           </div>
           {vocab.pos && (

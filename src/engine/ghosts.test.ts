@@ -282,3 +282,23 @@ describe('formes qui ne se tapent pas', () => {
     expect(exercise?.kind === 'grammar-gap' && exercise.bank).toBeNull()
   })
 })
+
+describe('cartes dessinées', () => {
+  const SIGNS = ['a', 'b', 'c', 'd'].map((id): PracticeItem => {
+    const word: Vocab = { id, term: `signe ${id}`, translation: `action ${id}`, alt: [], figure: '<svg viewBox="0 0 1 1"></svg>' }
+    return { kind: 'vocab', id, vocab: word }
+  })
+  const scope: GhostScope = { items: SIGNS, distractors: SIGNS }
+
+  it('se produisent en choisissant le signe, jamais au clavier', () => {
+    const state: GhostState = { progress: Object.fromEntries(SIGNS.map((item) => [item.id, done('sens')])), cards: {} }
+    for (let seed = 1; seed <= 20; seed++) {
+      const exercise = form(1, state, { seed }, scope)
+      expect(exercise?.kind).toBe('choice')
+      if (exercise?.kind === 'choice') {
+        expect(exercise.cue).toBe('translation')
+        for (const option of exercise.options) expect(exercise.figures?.[option]).toBeDefined()
+      }
+    }
+  })
+})

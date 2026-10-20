@@ -2,6 +2,7 @@ import { useMemo } from 'react'
 import type { MatchExercise } from '@/engine/exercises'
 import { speechFor } from '@/lib/speech'
 import { PairBoard, type Pair } from './PairBoard'
+import { VocabTerm } from './VocabTerm'
 
 /**
  * Association de paires : relier chaque mot à sa traduction — ou, en
@@ -24,6 +25,7 @@ export function MatchPairs({
         left: vocab.term,
         right: vocab.translation,
         leftAudio: audio ? speechFor(vocab) : undefined,
+        leftView: vocab.figure ? <VocabTerm vocab={vocab} className="w-full" /> : undefined,
       })),
     [exercise, audio],
   )

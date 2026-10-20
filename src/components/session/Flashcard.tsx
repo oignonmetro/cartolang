@@ -5,6 +5,7 @@ import type { Rating } from '@/engine/srs'
 import { Button } from '@/components/Button'
 import { speechFor } from '@/lib/speech'
 import { SpeakButton } from './SpeakButton'
+import { VocabTerm } from './VocabTerm'
 
 /**
  * Flashcard avec auto-évaluation.
@@ -21,8 +22,9 @@ export function Flashcard({
 }) {
   const [revealed, setRevealed] = useState(false)
   const { vocab, direction } = exercise
-  const front = direction === 'to-known' ? vocab.term : vocab.translation
-  const back = direction === 'to-known' ? vocab.translation : vocab.term
+  const term = <VocabTerm vocab={vocab} className="w-56" />
+  const front = direction === 'to-known' ? term : vocab.translation
+  const back = direction === 'to-known' ? vocab.translation : term
 
   return (
     <div className="flex flex-1 flex-col gap-6">

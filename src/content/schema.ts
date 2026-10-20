@@ -73,6 +73,12 @@ export const vocabSchema = z.object({
   gap: z.string().min(1).optional(),
   speech: z.string().min(1).optional(),
   audio: z.string().optional(),
+  /**
+   * Dessin qui tient lieu de terme, en SVG : un signe de correction d'épreuve
+   * ne s'écrit pas, il se trace. `term` en devient la description, lue par
+   * les lecteurs d'écran ; le dessin s'affiche partout où le terme le serait.
+   */
+  figure: z.string().optional(),
 })
 
 /**

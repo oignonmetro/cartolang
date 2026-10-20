@@ -1,0 +1,41 @@
+# Les signes de correction d'épreuve, pour francophones.
+#
+# D'après le mémento des signes de correction (norme NF Q 60-012, reprise
+# par le Lexique des règles typographiques de l'Imprimerie nationale).
+#
+# Un signe ne s'écrit pas, il se trace : chaque carte porte son dessin en SVG
+# (`figure`), qui s'affiche à la place du terme ; `term` n'en est que la
+# description, pour les lecteurs d'écran. Rien ne se tape : on reconnaît ce
+# que demande un signe, puis on retrouve le signe d'après ce qu'il demande
+# (voir `vocabExercise`, src/engine/ghosts.ts). Le cours est muet.
+#
+# Les dessins sont produits par un script (lettres placées une à une pour que
+# les marques tombent juste) : chacun montre une ligne d'épreuve avec la
+# marque dans le texte, puis, après un filet, l'indication en marge.
+#
+#   l1 lettres et mots — changer, ajouter, supprimer, intervertir, annuler
+#   l2 caractères      — italique, capitales, gras, romain, bas de casse…
+#   l3 espaces et mise en page — blancs, ligature, alinéa, centrer, déplacer
+
+id: fr-correction
+name: Français
+learning: fr
+known: fr
+flag: 🇫🇷
+level: Correction
+tagline: "Lire et tracer les signes de correction d'une épreuve."
+status: available
+layout: library
+version: 1
+
+tracks:
+  - id: signes
+    title: Signes de correction
+    subtitle: Le texte et la marge
+    kind: vocab
+    color: teal
+    icon: book
+    units:
+      - l1
+      - l2
+      - l3

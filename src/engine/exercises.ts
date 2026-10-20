@@ -100,6 +100,8 @@ export interface ChoiceExercise {
   cue: ChoiceCue
   /** La bonne réponse et ses leurres, déjà mélangés. */
   options: string[]
+  /** Dessin de chaque option qui en a un (voir `Vocab.figure`), par option. */
+  figures?: Record<string, string>
 }
 
 /** La réponse attendue : le sens quand on montre le mot, la forme sinon. */
@@ -434,6 +436,8 @@ export function choiceFor(vocab: Vocab, cue: ChoiceCue, pool: readonly Vocab[], 
     rng,
   )
   const distractors: string[] = []
+  const figures: Record<string, string> = {}
+  if (cue !== 'term' && vocab.figure) figures[answer] = vocab.figure
   for (const item of candidates) {
     if (distractors.length >= CHOICE_SIZE - 1) break
     // Les leurres se prennent du même côté que la réponse : proposer des sens
@@ -443,6 +447,7 @@ export function choiceFor(vocab: Vocab, cue: ChoiceCue, pool: readonly Vocab[], 
     if (normalizeAnswer(word) === normalizeAnswer(answer)) continue
     if (distractors.some((seen) => normalizeAnswer(seen) === normalizeAnswer(word))) continue
     distractors.push(word)
+    if (cue !== 'term' && item.figure) figures[word] = item.figure
   }
   if (distractors.length === 0) return null
   return {
@@ -453,6 +458,7 @@ export function choiceFor(vocab: Vocab, cue: ChoiceCue, pool: readonly Vocab[], 
     vocab,
     cue,
     options: shuffle([answer, ...distractors], rng),
+    ...(Object.keys(figures).length > 0 ? { figures } : {}),
   }
 }
 

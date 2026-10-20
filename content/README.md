@@ -269,6 +269,30 @@ options qui ne diffèrent que par la nature d'un blanc font échouer la
 validation. Les autres écarts doivent se **voir** : présence ou absence
 d'une espace, d'un point, d'une majuscule.
 
+## Des cartes qui se dessinent : les signes de correction
+
+Le cours `fr-correction` enseigne les signes de correction d'épreuve (norme
+NF Q 60-012). Un signe ne s'écrit pas, il se trace : chaque carte porte son
+dessin en SVG dans **`figure`**, qui s'affiche partout à la place du terme
+(présentation, QCM, association). `term` n'en est plus que la description,
+lue par les lecteurs d'écran.
+
+```yaml
+- id: sig-italique
+  term: mot souligné d'un trait, « ital. » en marge
+  translation: composer en italique
+  hint: Un trait sous le mot ; en marge, « ital. ».
+  figure: "<svg xmlns=… viewBox=…>…</svg>"
+```
+
+Une carte dessinée ne se tape jamais : on reconnaît d'abord ce que demande le
+signe (`sens`), puis on retrouve le signe d'après ce qu'il demande
+(`production`, un QCM dont les options sont des dessins). Le texte des figures
+prend `currentColor`, les marques `var(--color-coral)` : elles suivent le
+thème clair ou sombre. La validation refuse une figure qui ne serait pas un
+unique `<svg>` avec `viewBox`, ou qui contiendrait script, lien ou ressource
+externe — elle est injectée telle quelle dans la page.
+
 ## Ajouter une unité
 
 1. Créer `units/v5.yaml` — le nom du fichier doit être l'`id` de l'unité.

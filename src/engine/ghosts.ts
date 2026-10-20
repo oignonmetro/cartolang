@@ -405,6 +405,14 @@ function vocabExercise(
   options: GhostOptions,
   rng: Rng,
 ): Exercise | null {
+  // Un terme qui ne se tape pas — un signe qui se dessine, une forme au signe
+  // près (voir `isExactSpelling`) — se produit en le choisissant à partir de
+  // son sens, après l'avoir reconnu.
+  if (isExactSpelling() || vocab.figure) {
+    if (link === 'oreille') return choiceFor(vocab, 'audio', pool, rng)
+    if (link === 'contexte') return clozeFor(vocab, pool, rng)
+    return choiceFor(vocab, link === 'sens' ? 'term' : 'translation', pool, rng)
+  }
   if (link === 'sens') {
     const cue: ChoiceCue = rng() < 0.5 ? 'term' : 'translation'
     return choiceFor(vocab, cue, pool, rng) ?? choiceFor(vocab, cue === 'term' ? 'translation' : 'term', pool, rng)

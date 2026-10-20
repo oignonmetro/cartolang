@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useMemo, useState, type ReactNode } from 'react'
 import { motion } from 'framer-motion'
 import { createRng, seedFrom, shuffle } from '@/engine/rng'
 import { speak } from '@/lib/speech'
@@ -24,6 +24,8 @@ export interface Pair {
    * disponible pour l'accessibilité (`aria-label`) même en mode audio.
    */
   leftAudio?: string
+  /** Rendu du jeton `left` à la place de son texte : le dessin d'un signe (voir `VocabTerm`). */
+  leftView?: ReactNode
 }
 
 type Side = 'left' | 'right'
@@ -34,6 +36,7 @@ interface Token {
   label: string
   side: Side
   audio?: string
+  view?: ReactNode
 }
 
 /**
@@ -251,7 +254,7 @@ function TokenButton({
           <span className="text-xs font-bold uppercase tracking-wide">Écouter</span>
         </span>
       ) : (
-        token.label
+        (token.view ?? token.label)
       )}
     </motion.button>
   )
@@ -266,6 +269,7 @@ function buildColumns(seed: string, pairs: readonly Pair[]): [Token[], Token[]] 
     label: pair.left,
     side: 'left' as const,
     audio: pair.leftAudio,
+    view: pair.leftView,
   }))
   const right = pairs.map((pair) => ({
     key: `right:${pair.id}`,

@@ -330,6 +330,18 @@ function checkVocabLesson(lesson: VocabLesson, problems: string[], learning: str
       )
     }
 
+    // Le dessin est injecté tel quel dans la page (voir `VocabTerm`) : il ne
+    // doit rien contenir d'exécutable, ni rien charger d'ailleurs.
+    if (vocab.figure !== undefined) {
+      const figure = vocab.figure.trim()
+      if (!figure.startsWith('<svg') || !figure.endsWith('</svg>') || !figure.includes('viewBox')) {
+        problems.push(`mot "${vocab.id}" : \`figure\` doit être un unique élément <svg> avec un viewBox`)
+      }
+      if (/<script|<foreignObject|\son\w+\s*=|href\s*=|url\(/i.test(figure)) {
+        problems.push(`mot "${vocab.id}" : \`figure\` ne doit contenir ni script, ni lien, ni ressource externe`)
+      }
+    }
+
     // L'infinitif anglais s'écrit avec « to » : la convention rend les cartes
     // comparables et guide la forme attendue à la saisie. Elle ne vaut que pour
     // l'anglais — l'infinitif russe (« есть ») ne porte aucune particule.
