@@ -5,6 +5,8 @@ import type { LessonProgressMap } from './progress'
 import {
   buildUnitPath,
   currentDestination,
+  FINAL_LIMIT,
+  finalItems,
   nextNodeAfter,
   solidity,
   stepKey,
@@ -196,5 +198,35 @@ describe('solidité d’une carte', () => {
     )
     expect(solidity(card('c', { step: 0 }))).toBe(0)
     expect(solidity(card('c', { interval: 10, lapses: 3, steady: 3 }))).toBe(solidity(card('d', { interval: 10, lapses: 0 })))
+  })
+})
+
+describe('séance finale', () => {
+  const items = ['a', 'b', 'c', 'd', 'e'].map((id) => ({ kind: 'vocab' as const, id, vocab: vocab(id) }))
+
+  function card(itemId: string, over: Partial<CardState>): CardState {
+    return { ...createCard(itemId, 0), step: null, interval: 3, lastReviewed: 0, ...over }
+  }
+
+  it('ne reprend que les éléments fragiles qui ont rechuté plusieurs fois, les plus fragiles d’abord', () => {
+    const cards = {
+      a: card('a', { lapses: 1 }),
+      b: card('b', { lapses: 2, lastLapse: 10 }),
+      c: card('c', { lapses: 3, steady: 3 }),
+      d: card('d', { lapses: 3 }),
+      e: card('e', { lapses: 2, lastLapse: 20 }),
+      ailleurs: card('ailleurs', { lapses: 5 }),
+    }
+    expect(finalItems(cards, items).map((item) => item.id)).toEqual(['d', 'e', 'b'])
+  })
+
+  it('plafonne la séance', () => {
+    const many = Array.from({ length: FINAL_LIMIT + 5 }, (_, index) => ({
+      kind: 'vocab' as const,
+      id: `w${index}`,
+      vocab: vocab(`w${index}`),
+    }))
+    const cards = Object.fromEntries(many.map((item) => [item.id, card(item.id, { lapses: 2 })]))
+    expect(finalItems(cards, many)).toHaveLength(FINAL_LIMIT)
   })
 })

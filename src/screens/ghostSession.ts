@@ -30,7 +30,7 @@ export function canHearNow(): boolean {
 export function ghostOptionsFor(
   seed: number,
   served: Map<string, number>,
-  rest: Pick<GhostOptions, 'mode' | 'allowIntro' | 'activeCount'> & { favorProduction?: boolean },
+  rest: Pick<GhostOptions, 'mode' | 'allowIntro' | 'activeCount' | 'favorProduction' | 'favorFragile'>,
 ): GhostOptions {
   return { ...rest, canSpeak: canSpeakExercises(), canHear: canHearNow(), seed, day: dayKey(seed), served }
 }

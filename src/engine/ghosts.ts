@@ -15,7 +15,7 @@ import {
 import type { Mastery } from './progress'
 import { createRng, sample, seedFrom, shuffle, type Rng } from './rng'
 import { isExactSpelling } from './spelling'
-import type { CardState } from './srs'
+import { isFragile, type CardState } from './srs'
 
 /**
  * Séances à places réservées (« exercices fantômes »), et maîtrise lien par
@@ -215,6 +215,14 @@ export interface GhostOptions {
   /** Pèse davantage sur la production (approfondissement). */
   favorProduction?: boolean
   /**
+   * Fait passer les éléments fragiles en premier (entraînement) : ceux dont
+   * la carte a rechuté sans que des révisions tardives aient encore confirmé
+   * leur maîtrise (voir `isFragile`). Ils reviennent même acquis, entrent
+   * d'abord dans le lot et pèsent plus lourd au tirage, d'autant plus qu'ils
+   * ont rechuté souvent.
+   */
+  favorFragile?: boolean
+  /**
    * Combien de fois chaque élément a déjà été servi dans la séance. Mis à jour
    * à chaque formation : un élément déjà beaucoup interrogé pèse moins, et la
    * séance se répartit au lieu de retomber sur le même.
@@ -243,6 +251,8 @@ export function ghostsFor(count: number): GhostExercise[] {
 
 /** Un élément consolidé revient pour être consolidé : un poids léger, mais jamais nul. */
 const REVIEW_WEIGHT = 1
+/** Rechutes au-delà desquelles un élément fragile ne pèse pas davantage. */
+const MAX_FRAGILE_BOOST = 3
 const BOARD_SIZE = 4
 const MIN_BOARD = 3
 
@@ -262,12 +272,20 @@ interface Target {
   record: ItemRecord | undefined
   card: CardState | undefined
   validated: boolean
+  /** Rechutes d'une carte encore fragile (voir `isFragile`) ; zéro sinon. */
+  fragility: number
 }
 
 function describe(item: PracticeItem, state: GhostState, canSpeak: boolean): Target {
   const record = state.progress[item.id]
   const card = state.cards[item.id]
-  return { item, record, card, validated: isValidated(item, record, card, canSpeak) }
+  const fragility = card && isFragile(card) ? card.lapses : 0
+  return { item, record, card, validated: isValidated(item, record, card, canSpeak), fragility }
+}
+
+/** Multiplicateur de poids d'un élément fragile, quand la séance les favorise. */
+function fragileBoost(target: Target, options: GhostOptions): number {
+  return options.favorFragile ? 1 + Math.min(target.fragility, MAX_FRAGILE_BOOST) : 1
 }
 
 /** Les liens qu'on peut faire travailler maintenant : prérequis atteint, oreille seulement si l'on entend. */
@@ -286,7 +304,7 @@ function need(target: Target, link: LinkId): number {
 function weightOf(target: Target, link: LinkId, options: GhostOptions): number {
   const base = target.validated ? REVIEW_WEIGHT : need(target, link)
   const favored = options.favorProduction && link === 'production' ? 2 : 1
-  return (base * favored) / (1 + (options.served.get(target.item.id) ?? 0))
+  return (base * favored * fragileBoost(target, options)) / (1 + (options.served.get(target.item.id) ?? 0))
 }
 
 /**
@@ -295,7 +313,9 @@ function weightOf(target: Target, link: LinkId, options: GhostOptions): number {
  * pèserait plus lourd qu'un mot qui reste entièrement à apprendre.
  */
 function itemWeight(target: Target, options: GhostOptions): number {
-  if (target.validated) return REVIEW_WEIGHT / (1 + (options.served.get(target.item.id) ?? 0))
+  if (target.validated) {
+    return (REVIEW_WEIGHT * fragileBoost(target, options)) / (1 + (options.served.get(target.item.id) ?? 0))
+  }
   return workableLinks(target, options).reduce((sum, link) => sum + weightOf(target, link, options), 0)
 }
 
@@ -327,10 +347,14 @@ function plan(scope: GhostScope, state: GhostState, options: GhostOptions, rng: 
     return presented.length > 0 ? { kind: 'targets', targets: presented, practice: false } : { kind: 'none' }
   }
 
-  // Le lot en cours, dans l'ordre d'arrivée : un élément nouveau y entre par sa
-  // présentation tant qu'il reste de la place.
+  // Le lot en cours, dans l'ordre d'arrivée — les plus fragiles d'abord quand
+  // la séance les favorise : un élément nouveau y entre par sa présentation
+  // tant qu'il reste de la place.
+  const ordered = options.favorFragile
+    ? [...described].sort((a, b) => b.fragility - a.fragility)
+    : described
   const lot: Target[] = []
-  for (const target of described) {
+  for (const target of ordered) {
     if (lot.length >= options.activeCount) break
     if (target.validated) continue
     if (isPresented(target.record, target.card)) {
@@ -345,11 +369,15 @@ function plan(scope: GhostScope, state: GhostState, options: GhostOptions, rng: 
     return { kind: 'intro', item: target.item }
   }
 
+  // À consolider : le maîtrisé pas encore acquis, et, quand la séance les
+  // favorise, le fragile même acquis — l'acquis dit qu'il a été su deux
+  // jours, la rechute qui a suivi, qu'il ne l'est plus forcément.
   const review = described.filter(
     (target) =>
       target.validated &&
       isPresented(target.record, target.card) &&
-      !isAcquired(target.item, target.record, target.card, options.canSpeak) &&
+      (!isAcquired(target.item, target.record, target.card, options.canSpeak) ||
+        (options.favorFragile && target.fragility > 0)) &&
       target.record?.session !== session,
   )
   const targets = [...lot, ...review]

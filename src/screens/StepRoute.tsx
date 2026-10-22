@@ -5,7 +5,7 @@ import { findUnit, itemsOfCourse, itemsOfUnit } from '@/content/course'
 import type { GhostExercise } from '@/engine/exercises'
 import { ghostsFor, hasLearnWork, hasPresented, materializeGhost, type GhostMode, type GhostScope } from '@/engine/ghosts'
 import type { SessionOutcome } from '@/engine/progress'
-import { buildUnitPath, nextNodeAfter, stepKey, type UnitStepKind } from '@/engine/unitPath'
+import { buildUnitPath, finalItems, nextNodeAfter, stepKey, type UnitStepKind } from '@/engine/unitPath'
 import { useProgress } from '@/store/progressStore'
 import { distractorsFor, ghostOptionsFor, ghostStateOf } from './ghostSession'
 import { SessionScreen } from './SessionScreen'
@@ -18,10 +18,11 @@ const STEP_ACTIVE_COUNT = 8
 
 /**
  * Places d'une étape : courtes, comme la révision, on préfère revenir
- * souvent. La séance finale, bilan de l'unité, s'allonge avec elle.
+ * souvent. La séance finale s'allonge avec le nombre d'éléments fragiles
+ * qu'elle reprend : deux places pour chacun.
  */
-function stepLength(kind: UnitStepKind, unitItems: number): number {
-  if (kind === 'final') return Math.min(25, Math.max(10, unitItems))
+function stepLength(kind: UnitStepKind, items: number): number {
+  if (kind === 'final') return Math.min(25, Math.max(8, 2 * items))
   return kind === 'workout' ? 12 : 10
 }
 
@@ -55,12 +56,18 @@ function StepSession({ unitId, stepId }: { unitId: string; stepId: string }) {
   // Seul l'entraînement sort de l'unité : c'est là qu'on va chercher ce qui a
   // été appris ailleurs et qui redemande du travail. Une étape ne présente
   // rien : elle ne fait travailler que ce que les leçons ont déjà présenté.
-  const scope = useMemo<GhostScope | null>(() => {
+  // La séance finale ne reprend que les éléments de l'unité qui ont rechuté
+  // plusieurs fois (voir `finalItems`), relevés à l'ouverture : les réponses
+  // données pendant la séance ne doivent pas en remanier la liste.
+  const [scope] = useState<GhostScope | null>(() => {
     if (!unit || !node || node.kind === 'lesson') return null
-    return node.kind === 'workout'
-      ? { items: itemsOfCourse(course), distractors: itemsOfCourse(course) }
-      : { items: itemsOfUnit(unit), distractors: distractorsFor(course, unit) }
-  }, [course, unit, node])
+    if (node.kind === 'workout') return { items: itemsOfCourse(course), distractors: itemsOfCourse(course) }
+    const items =
+      node.kind === 'final'
+        ? finalItems(useProgress.getState().cards[course.id] ?? {}, itemsOfUnit(unit))
+        : itemsOfUnit(unit)
+    return { items, distractors: distractorsFor(course, unit) }
+  })
 
   // Figé à l'ouverture : le mode et le nombre de places. Ce que chaque place
   // contiendra, lui, se décide au moment de l'ouvrir.
@@ -69,17 +76,23 @@ function StepSession({ unitId, stepId }: { unitId: string; stepId: string }) {
     const seed = Date.now()
     const served = new Map<string, number>()
     const state = ghostStateOf(course.id)
-    const options = { allowIntro: false, activeCount: STEP_ACTIVE_COUNT }
-    const learn = hasLearnWork(scope, state, ghostOptionsFor(seed, served, { mode: 'learn', ...options }))
-    const mode: GhostMode = learn ? 'learn' : 'practice'
+    // L'entraînement fait passer les éléments fragiles en premier.
+    const favorFragile = node.kind === 'workout'
+    const options = { allowIntro: false, activeCount: STEP_ACTIVE_COUNT, favorFragile }
+    // La séance finale reprend chacun de ses éléments, acquis ou non : c'est
+    // d'avoir rechuté qui les y a fait entrer.
+    const learn =
+      node.kind !== 'final' && hasLearnWork(scope, state, ghostOptionsFor(seed, served, { mode: 'learn', ...options }))
+    const mode: GhostMode = node.kind === 'final' ? 'review' : learn ? 'learn' : 'practice'
     return {
       seed,
       served,
       mode,
       // L'approfondissement pèse davantage sur la production.
       favorProduction: node.kind === 'drill',
+      favorFragile,
       empty: !hasPresented(scope, state),
-      exercises: ghostsFor(stepLength(node.kind, itemsOfUnit(unit).length)),
+      exercises: ghostsFor(stepLength(node.kind, scope.items.length)),
     }
   })
 
@@ -95,6 +108,7 @@ function StepSession({ unitId, stepId }: { unitId: string; stepId: string }) {
               allowIntro: false,
               activeCount: STEP_ACTIVE_COUNT,
               favorProduction: session.favorProduction,
+              favorFragile: session.favorFragile,
             }),
           )
         : null,
@@ -137,8 +151,9 @@ function StepSession({ unitId, stepId }: { unitId: string; stepId: string }) {
         <Mascot mood="think" size={130} />
         <h1 className="text-2xl font-black">Rien à travailler</h1>
         <p className="max-w-xs text-sm text-ink-soft">
-          Cette étape reprend ce que vous avez déjà rencontré. Faites d'abord les leçons qui la précèdent, ou
-          passez cette étape si elles ont été sautées.
+          {node.kind === 'final'
+            ? "Aucun élément de cette unité n'a rechuté plusieurs fois : il n'y a rien à reprendre dans ce bilan. Vous pouvez le valider."
+            : "Cette étape reprend ce que vous avez déjà rencontré. Faites d'abord les leçons qui la précèdent, ou passez cette étape si elles ont été sautées."}
         </p>
         <div className="flex gap-3">
           <Button tone="neutral" onClick={backHome}>
@@ -150,7 +165,7 @@ function StepSession({ unitId, stepId }: { unitId: string; stepId: string }) {
               backHome()
             }}
           >
-            Passer cette étape
+            {node.kind === 'final' ? 'Valider ce bilan' : 'Passer cette étape'}
           </Button>
         </div>
       </div>

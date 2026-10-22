@@ -210,6 +210,49 @@ describe('consolidation', () => {
   })
 })
 
+describe('éléments fragiles (entraînement)', () => {
+  /** Une carte qui a rechuté `lapses` fois, sans révision tardive réussie depuis. */
+  function fragile(id: string, lapses: number): CardState {
+    return { ...createCard(id, 0), step: null, interval: 3, lapses, steady: 0, lastReviewed: 0 }
+  }
+
+  it('reprend un élément fragile même acquis, et seulement quand la séance les favorise', () => {
+    const progress: LinkProgress = Object.fromEntries(WORDS.map((word) => [word.id, { ...done(...ALL), days: 2 }]))
+    const state: GhostState = { progress, cards: { tor: fragile('tor', 2) } }
+    expect(hasLearnWork(SCOPE, state, options())).toBe(false)
+    expect(hasLearnWork(SCOPE, state, options({ favorFragile: true }))).toBe(true)
+    expect(subjects(form(1, state, { favorFragile: true }))).toEqual(['tor'])
+  })
+
+  it('ne reprend plus un élément dont la maîtrise est confirmée', () => {
+    const progress: LinkProgress = Object.fromEntries(WORDS.map((word) => [word.id, { ...done(...ALL), days: 2 }]))
+    const confirmed = { ...fragile('tor', 2), steady: 3 }
+    expect(hasLearnWork(SCOPE, { progress, cards: { tor: confirmed } }, options({ favorFragile: true }))).toBe(false)
+  })
+
+  it('fait entrer les fragiles d’abord dans le lot', () => {
+    const progress: LinkProgress = Object.fromEntries(WORDS.map((word) => [word.id, { presented: true }]))
+    const state: GhostState = { progress, cards: { tor: fragile('tor', 1) } }
+    expect(subjects(form(1, state, { activeCount: 1 }))).toEqual(['gat'])
+    expect(subjects(form(1, state, { activeCount: 1, favorFragile: true }))).toEqual(['tor'])
+  })
+
+  it('fait peser davantage un élément fragile au tirage', () => {
+    const progress: LinkProgress = Object.fromEntries(WORDS.map((word) => [word.id, { ...done(...ALL), days: 1 }]))
+    const state: GhostState = { progress, cards: { tor: fragile('tor', 3) } }
+    const share = (favorFragile: boolean) => {
+      let hits = 0
+      for (let seed = 1; seed <= 400; seed++) {
+        if (subjects(form(1, state, { seed, favorFragile })).includes('tor')) hits += 1
+      }
+      return hits / 400
+    }
+    // Huit éléments : un sur huit sans faveur, quatre fois plus de poids avec.
+    expect(share(false)).toBeLessThan(0.2)
+    expect(share(true)).toBeGreaterThan(0.25)
+  })
+})
+
 describe('héritage des cartes de révision', () => {
   const item = WORDS[0]!
   const graduated = (interval: number): CardState => ({ ...createCard('gat', 0), step: null, interval })

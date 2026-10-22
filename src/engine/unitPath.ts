@@ -1,5 +1,5 @@
 import { isReadingOnly, itemsOfUnit, lessonCountLabel } from '@/content/course'
-import type { Lesson, Unit } from '@/content/schema'
+import type { Lesson, PracticeItem, Unit } from '@/content/schema'
 import { isFragile, type CardState } from './srs'
 import { levelOf, type LessonProgressMap } from './progress'
 
@@ -150,4 +150,36 @@ export function currentDestination(unitId: string, path: readonly UnitPathNode[]
 export function solidity(card: CardState): number {
   const base = card.step === null ? Math.max(card.interval, 1) : 0
   return base / (1 + (isFragile(card) ? card.lapses : 0))
+}
+
+/** Nombre de rechutes à partir duquel un élément entre dans la séance finale. */
+export const FINAL_MIN_LAPSES = 2
+/**
+ * Plafond de la séance finale. Les rechutes comptant dès l'apprentissage, une
+ * grande unité peut en accumuler beaucoup : au-delà, les moins fragiles
+ * attendent, et la révision espacée les reprendra de toute façon.
+ */
+export const FINAL_LIMIT = 20
+
+/**
+ * Éléments de la séance finale : seulement ceux de l'unité dont la carte a
+ * rechuté au moins `FINAL_MIN_LAPSES` fois (une seule erreur, ou aucune, ne
+ * suffit pas : ce qui a été su ou presque n'a pas besoin du bilan) et reste
+ * fragile (une maîtrise confirmée n'en a pas besoin non plus), `FINAL_LIMIT`
+ * au plus.
+ *
+ * Les plus fragiles passent en premier : le plus de rechutes d'abord, puis, à
+ * nombre égal, la rechute la plus récente. Une carte sans date de dernière
+ * rechute (enregistrée avant que `lastLapse` existe) vient après les autres à
+ * nombre égal.
+ */
+export function finalItems(cards: Record<string, CardState>, unitItems: readonly PracticeItem[]): PracticeItem[] {
+  return unitItems
+    .flatMap((item) => {
+      const card = cards[item.id]
+      return card && card.lapses >= FINAL_MIN_LAPSES && isFragile(card) ? [{ item, card }] : []
+    })
+    .sort((a, b) => b.card.lapses - a.card.lapses || (b.card.lastLapse ?? 0) - (a.card.lastLapse ?? 0))
+    .slice(0, FINAL_LIMIT)
+    .map(({ item }) => item)
 }
