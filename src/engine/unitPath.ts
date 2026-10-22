@@ -1,6 +1,6 @@
 import { isReadingOnly, itemsOfUnit, lessonCountLabel } from '@/content/course'
 import type { Lesson, Unit } from '@/content/schema'
-import type { CardState } from './srs'
+import { isFragile, type CardState } from './srs'
 import { levelOf, type LessonProgressMap } from './progress'
 
 /**
@@ -143,9 +143,11 @@ export function currentDestination(unitId: string, path: readonly UnitPathNode[]
  * Une carte encore en apprentissage vaut zéro — rien n'est acquis tant qu'elle
  * n'a pas gradué. Au-delà, c'est l'intervalle qui mesure la solidité, divisé
  * par les rechutes : un mot repris trois fois n'est pas au même niveau qu'un
- * mot su du premier coup, même intervalle affiché.
+ * mot su du premier coup, même intervalle affiché. Tant qu'elle est fragile
+ * seulement (voir `isFragile`) : une fois sa maîtrise confirmée par les
+ * révisions tardives, ses anciennes rechutes ne la retiennent plus.
  */
 export function solidity(card: CardState): number {
   const base = card.step === null ? Math.max(card.interval, 1) : 0
-  return base / (1 + card.lapses)
+  return base / (1 + (isFragile(card) ? card.lapses : 0))
 }

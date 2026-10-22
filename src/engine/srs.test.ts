@@ -1,5 +1,16 @@
 import { describe, expect, it } from 'vitest'
-import { createCard, DAY, dueCards, MINUTE, review, ratingFromAnswer, type CardState } from './srs'
+import {
+  CONFIRM_STREAK,
+  createCard,
+  DAY,
+  dueCards,
+  isFragile,
+  LAPSE_WINDOW,
+  MINUTE,
+  review,
+  ratingFromAnswer,
+  type CardState,
+} from './srs'
 
 const T0 = Date.UTC(2026, 0, 1, 8, 0, 0)
 
@@ -73,36 +84,24 @@ describe('phase de révision', () => {
     expect(next.interval).toBeGreaterThan(20)
   })
 
-  it('renvoie en apprentissage et compte une rechute sur « again »', () => {
+  it('réduit l’intervalle à une fraction du précédent et compte une rechute sur « again »', () => {
     const card = { ...graduate(createCard('hello', T0)), interval: 30 }
     const next = review(card, 'again', card.due)
-    expect(next.step).toBe(0)
-    expect(next.interval).toBe(0)
+    expect(next.step).toBeNull()
+    expect(next.interval).toBe(9)
+    expect(next.due).toBe(card.due + 9 * DAY)
     expect(next.lapses).toBe(1)
     expect(next.ease).toBeCloseTo(2.3, 5)
   })
 
   it('garde la facilité dans ses bornes', () => {
-    // Une rechute ne coûte de la facilité qu'une fois : la carte repasse
-    // ensuite en apprentissage, où l'ease n'est plus touché. On la fait donc
-    // ressortir en révision entre chaque échec.
     let card = { ...graduate(createCard('hello', T0)), interval: 5 }
-    for (let i = 0; i < 20; i++) {
-      card = review(card, 'again', card.due)
-      card = { ...graduate(card, card.due), ease: card.ease }
-    }
+    for (let i = 0; i < 20; i++) card = review(card, 'again', card.due)
     expect(card.ease).toBe(1.3)
 
     let easy = { ...graduate(createCard('world', T0)), interval: 5 }
     for (let i = 0; i < 20; i++) easy = review(easy, 'easy', easy.due)
     expect(easy.ease).toBe(2.8)
-  })
-
-  it('ne pénalise pas deux fois une carte déjà retombée en apprentissage', () => {
-    const lapsed = review({ ...graduate(createCard('hello', T0)), interval: 30 }, 'again', T0 + DAY)
-    const again = review(lapsed, 'again', lapsed.due)
-    expect(again.ease).toBe(lapsed.ease)
-    expect(again.lapses).toBe(1)
   })
 
   it('plafonne l’intervalle à un an', () => {
@@ -144,12 +143,12 @@ describe('révision anticipée', () => {
 
   it('compte quand même l’échec', () => {
     // Oublier un mot qu'on vient de voir est une information : la carte
-    // repart en apprentissage même si son échéance était encore loin.
+    // revient plus vite même si son échéance était encore loin.
     const card = { ...graduate(createCard('hello', T0)), interval: 30 }
     const next = review(card, 'again', card.due - 10 * DAY)
-    expect(next.step).toBe(0)
+    expect(next.step).toBeNull()
     expect(next.lapses).toBe(1)
-    expect(next.interval).toBe(0)
+    expect(next.interval).toBe(9)
   })
 
   it('reprend sa progression une fois l’échéance atteinte', () => {
@@ -195,5 +194,81 @@ describe('notation automatique', () => {
     expect(ratingFromAnswer(true, true)).toBe('good')
     expect(ratingFromAnswer(true, false)).toBe('hard')
     expect(ratingFromAnswer(false, true)).toBe('again')
+  })
+})
+
+describe('fragilité et révision tardive', () => {
+  it('ne compte pas l’échec au tout premier essai d’une carte neuve', () => {
+    const failed = review(createCard('hello', T0), 'again', T0)
+    expect(failed.lapses).toBe(0)
+    expect(isFragile(failed)).toBe(false)
+  })
+
+  it('garde la trace d’une carte ratée encore pendant l’apprentissage', () => {
+    // Régression : ratée trois fois dans sa première leçon puis réussie, une
+    // carte sortait de l'apprentissage dans le même état qu'une carte sue du
+    // premier coup, sa fragilité oubliée.
+    let card = createCard('hello', T0)
+    for (let i = 0; i < 3; i++) card = review(card, 'again', T0 + i * MINUTE)
+    card = review(card, 'hard', T0 + 4 * MINUTE)
+    card = review(card, 'good', T0 + DAY)
+    card = review(card, 'good', T0 + DAY + 10 * MINUTE)
+    expect(card.step).toBeNull()
+    expect(card.lapses).toBe(1)
+    expect(card.ease).toBeCloseTo(2.3, 5)
+    expect(isFragile(card)).toBe(true)
+  })
+
+  it('ne compte qu’une rechute pour plusieurs échecs dans la même séance', () => {
+    const card = { ...graduate(createCard('hello', T0)), interval: 10 }
+    const at = card.due
+    let next = review(card, 'again', at)
+    next = review(next, 'again', at + 2 * MINUTE)
+    next = review(next, 'again', at + 4 * MINUTE)
+    expect(next.lapses).toBe(1)
+    expect(next.ease).toBeCloseTo(2.3, 5)
+    expect(next.interval).toBe(3)
+    expect(next.due).toBe(at + 3 * DAY)
+  })
+
+  it('compte une nouvelle rechute dans une séance ultérieure', () => {
+    const card = { ...graduate(createCard('hello', T0)), interval: 10 }
+    const first = review(card, 'again', card.due)
+    const second = review(first, 'again', card.due + LAPSE_WINDOW)
+    expect(second.lapses).toBe(2)
+  })
+
+  it('ne prend pas la reprise réussie dans la séance pour une maîtrise', () => {
+    const card = { ...graduate(createCard('hello', T0)), interval: 10 }
+    const failed = review(card, 'again', card.due)
+    const retried = review(failed, 'hard', card.due + 2 * MINUTE)
+    expect(retried.steady).toBe(0)
+    expect(isFragile(retried)).toBe(true)
+  })
+
+  it('juge la maîtrise durable après plusieurs révisions tardives réussies, et rend une part de la facilité', () => {
+    let card: CardState = { ...graduate(createCard('hello', T0)), interval: 10 }
+    card = review(card, 'again', card.due)
+    expect(card.ease).toBeCloseTo(2.3, 5)
+    for (let i = 1; i < CONFIRM_STREAK; i++) {
+      card = review(card, 'good', card.due)
+      expect(isFragile(card)).toBe(true)
+    }
+    card = review(card, 'good', card.due)
+    expect(isFragile(card)).toBe(false)
+    expect(card.ease).toBeCloseTo(2.4, 5)
+    // Une nouvelle rechute la rend de nouveau fragile.
+    card = review(card, 'again', card.due)
+    expect(isFragile(card)).toBe(true)
+    expect(card.lapses).toBe(2)
+  })
+
+  it('ne fait jamais baisser la facilité en confirmant la maîtrise', () => {
+    let card: CardState = { ...graduate(createCard('hello', T0)), interval: 10, ease: 2.8 }
+    card = review(card, 'again', card.due)
+    card = review(card, 'easy', card.due)
+    const before = card.ease
+    for (let i = 1; i < CONFIRM_STREAK; i++) card = review(card, 'good', card.due)
+    expect(card.ease).toBeGreaterThanOrEqual(before)
   })
 })

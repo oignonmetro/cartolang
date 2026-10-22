@@ -195,5 +195,6 @@ describe('solidité d’une carte', () => {
       solidity(card('b', { interval: 10, lapses: 3 })),
     )
     expect(solidity(card('c', { step: 0 }))).toBe(0)
+    expect(solidity(card('c', { interval: 10, lapses: 3, steady: 3 }))).toBe(solidity(card('d', { interval: 10, lapses: 0 })))
   })
 })
